@@ -37,9 +37,13 @@
     "proved": "digital regression, verified deploy release, one Stage 1G cold boot autoload"
   },
   "public_repository_name": "current-sensing-protection-ip-pynq-z2",
-  "public_repository_remote_status": "NOT_CREATED",
+  "public_repository_remote": "https://github.com/zsr112/current-sensing-protection-ip-pynq-z2",
+  "public_repository_remote_status": "CREATED_PRIVATE",
   "public_snapshot_status": "LOCAL_GENERATED_STABLE_SNAPSHOT",
+  "publication_status": "PRIVATE_REVIEW",
   "pynq_version": "3.1.1",
+  "remote_registered_at_utc": "2026-07-29T19:03:37Z",
+  "remote_visibility": "PRIVATE",
   "release_source_commit": "e0f8dfdf481d91edd35b50848c86fa0c484e513d",
   "release_source_tree": "99ad1db325caed406d23e5966abb1f7305010641",
   "target_board": "PYNQ-Z2"

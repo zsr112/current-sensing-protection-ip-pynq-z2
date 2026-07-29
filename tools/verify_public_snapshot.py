@@ -25,6 +25,8 @@ BOARD_COMMIT = "1a365d5139f963ac4d8f92158dcd2928e86ccf36"
 BOARD_TREE = "244cba11579c7fdc39353391ac35a78ede20ec97"
 BIT_SHA256 = "f7dd0823e577cfee2aecfa3bf0a48e80d11108bdb12967e567ca64dc2e8ecfab"
 HWH_SHA256 = "c97138493f8c4c568790a75bcc77551ad1f24952f6eb28c4238e6bda975b1e29"
+PUBLIC_REMOTE = "https://github.com/zsr112/current-sensing-protection-ip-pynq-z2"
+ORIGIN_URL = PUBLIC_REMOTE + ".git"
 
 PERSISTENT_RUNTIME_SHA256 = {
     "deploy/pynq/runtime/load_current_release.py":
@@ -216,7 +218,10 @@ def check_provenance(errors: list[str]) -> None:
         "hwh_sha256": HWH_SHA256,
         "target_board": "PYNQ-Z2",
         "pynq_version": "3.1.1",
-        "public_repository_remote_status": "NOT_CREATED",
+        "public_repository_remote": PUBLIC_REMOTE,
+        "public_repository_remote_status": "CREATED_PRIVATE",
+        "remote_visibility": "PRIVATE",
+        "publication_status": "PRIVATE_REVIEW",
     }
     for key, value in expected.items():
         if data.get(key) != value:
@@ -233,6 +238,7 @@ def check_provenance(errors: list[str]) -> None:
         "included_categories",
         "excluded_categories",
         "deferred_standard_files",
+        "remote_registered_at_utc",
     ):
         if key not in data:
             errors.append(f"provenance field missing: {key}")
@@ -432,6 +438,14 @@ def check_readme_and_scope(errors: list[str]) -> None:
     scope = (ROOT / "PUBLIC_SNAPSHOT_SCOPE.md").read_text(encoding="utf-8")
     if "These files are deferred for a later public-governance step." not in scope:
         errors.append("deferred standard-file statement missing from scope")
+    for path_name, text in (
+        ("README.md", readme),
+        ("PUBLIC_SNAPSHOT_SCOPE.md", scope),
+    ):
+        if PUBLIC_REMOTE not in text:
+            errors.append(f"private remote URL missing from {path_name}")
+        if "Private" not in text or "explicit owner" not in text:
+            errors.append(f"private review constraint missing from {path_name}")
     proof = (
         readme
         + (ROOT / "docs" / "clear_recovery_semantics.md").read_text(encoding="utf-8")
@@ -468,8 +482,25 @@ def check_git_remote(errors: list[str]) -> int:
         errors.append(f"cannot inspect public Git remotes: {completed.stderr.strip()}")
         return -1
     remotes = [line for line in completed.stdout.splitlines() if line.strip()]
-    if remotes:
-        errors.append(f"public Git remote must be absent: {remotes}")
+    if remotes != ["origin"]:
+        errors.append(f"public Git remotes mismatch: expected=['origin'] actual={remotes}")
+        return len(remotes)
+    for args, label in (
+        (["git", "-C", str(ROOT), "remote", "get-url", "origin"], "fetch"),
+        (["git", "-C", str(ROOT), "remote", "get-url", "--push", "origin"], "push"),
+    ):
+        completed = subprocess.run(
+            args,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        actual = completed.stdout.strip()
+        if completed.returncode != 0 or actual != ORIGIN_URL:
+            errors.append(
+                f"public origin {label} URL mismatch: "
+                f"expected={ORIGIN_URL!r} actual={actual!r}"
+            )
     return len(remotes)
 
 

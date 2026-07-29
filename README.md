@@ -1,6 +1,6 @@
 # Current-Sensing Protection IP for PYNQ-Z2
 
-Public project snapshot for technical demonstration, reproducibility evaluation, and PYNQ-Z2 deployment.
+Stable project snapshot prepared for technical demonstration, reproducibility evaluation, and PYNQ-Z2 deployment. Its GitHub repository is currently Private and available only to authorized accounts.
 
 ## Project Overview
 
@@ -65,9 +65,13 @@ This snapshot does not prove repeated cold boots, power-cycle behavior, soak, po
 
 The engineering repository is the sole development authority. This public repository does not independently maintain feature changes; updates must be generated or synchronised from the development repository. Development repository: https://github.com/zsr112/current-sensing-protection-ip.git
 
+## Private Review Status
+
+The snapshot is registered at https://github.com/zsr112/current-sensing-protection-ip-pynq-z2 with Private visibility. This first push is for private review only. The repository must not be changed to Public without explicit owner publication approval.
+
 ## Provenance
 
-Source content is anchored to development commit 309a84bff651f73891309e02e1d02fc1f54bd3e6. The deploy subtree is anchored to release source e0f8dfdf481d91edd35b50848c86fa0c484e513d, while its persistent board runtime is anchored to 1a365d5139f963ac4d8f92158dcd2928e86ccf36. Public repository remote: not created in this local snapshot step.
+Source content is anchored to development commit 309a84bff651f73891309e02e1d02fc1f54bd3e6. The deploy subtree is anchored to release source e0f8dfdf481d91edd35b50848c86fa0c484e513d, while its persistent board runtime is anchored to 1a365d5139f963ac4d8f92158dcd2928e86ccf36. Registering the Private remote does not create a new functional source or board-validation authority.
 
 ## Known Limitations
 

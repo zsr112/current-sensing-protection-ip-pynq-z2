@@ -2,7 +2,7 @@
 
 ## Role
 
-This repository is a stable local public snapshot for project demonstration, source review, simulation reproduction, Vivado reconstruction, and PYNQ-Z2 deployment. The engineering repository remains the sole development authority.
+This repository is a stable public snapshot prepared for project demonstration, source review, simulation reproduction, Vivado reconstruction, and PYNQ-Z2 deployment. Its GitHub remote is currently Private, and the engineering repository remains the sole development authority.
 
 ## Included Categories
 
@@ -27,6 +27,15 @@ NO_SUITABLE_PUBLIC_ASSET_SELECTED. No existing image was both necessary for this
 ## Duplicate Policy
 
 No non-empty exact duplicate group is accepted. Deploy is the only deployment runtime and BIT/HWH authority. PYNQ source outside deploy is included only when its bytes differ and it serves source-level understanding or tests.
+
+## Private Review Status
+
+- Repository: https://github.com/zsr112/current-sensing-protection-ip-pynq-z2
+- Remote status: CREATED_PRIVATE
+- Visibility: PRIVATE
+- Publication status: PRIVATE_REVIEW
+
+Only authorized accounts can currently access the GitHub repository. The first push is for private review, and changing visibility to Public requires explicit owner approval.
 
 ## Deferred Governance Files
 
