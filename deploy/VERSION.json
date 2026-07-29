@@ -1,0 +1,35 @@
+{
+  "bit_sha256": "f7dd0823e577cfee2aecfa3bf0a48e80d11108bdb12967e567ca64dc2e8ecfab",
+  "board_validated_runtime_commit": "1a365d5139f963ac4d8f92158dcd2928e86ccf36",
+  "board_validated_runtime_tree": "244cba11579c7fdc39353391ac35a78ede20ec97",
+  "engineering_source_commit": "e0f8dfdf481d91edd35b50848c86fa0c484e513d",
+  "engineering_source_tree": "99ad1db325caed406d23e5966abb1f7305010641",
+  "generated_at_utc": "2026-07-29T14:22:06Z",
+  "hwh_sha256": "c97138493f8c4c568790a75bcc77551ad1f24952f6eb28c4238e6bda975b1e29",
+  "proof_boundary": {
+    "not_proved": [
+      "repeated cold boots",
+      "power-cycle",
+      "soak",
+      "power-stage load",
+      "board fault injection, clear, or recovery",
+      "EMI, thermal, or electrical safety",
+      "a new Vivado implementation",
+      "a new BIT or HWH"
+    ],
+    "proved": [
+      "one real PYNQ-Z2 cold-boot autoload",
+      "Overlay and device discovery",
+      "read-only MMIO/GPIO checks",
+      "one worker and one attempt",
+      "no retry"
+    ]
+  },
+  "pynq_version": "3.1.1",
+  "release_builder_version": "1.0",
+  "release_id": "current-sensing-protection-ip-e0f8dfdf481d-pynq-z2",
+  "release_manifest_sha256": "RECORDED_IN_EXTERNAL_BUILD_RECEIPT",
+  "release_manifest_sha256_resolution": "SHA-256 of MANIFEST_SHA256.tsv is recorded in the external build receipt to avoid a cryptographic self-reference through VERSION.json.",
+  "release_status": "CURRENT_USE_AND_DELIVERY",
+  "target_board": "PYNQ-Z2"
+}

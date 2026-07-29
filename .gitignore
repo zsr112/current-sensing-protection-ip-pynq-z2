@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.vvp
+*.vcd
+*.tmp
+*.temp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+sim/build/
+sim/waves/
