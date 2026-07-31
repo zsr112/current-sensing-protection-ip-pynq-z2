@@ -11,5 +11,8 @@
 - [PYNQ-Z2 deployment guide](pynq_deployment_guide.md)
 - [Verification status](verification_status.md)
 - [Proof boundary](proof_boundary.md)
+- [Stage 1 board functional closure](../verification/stage1_board_functional_closure.md)
 
-Implementation truth remains in the copied rtl source and the complete deploy release. The development source remote is https://github.com/zsr112/current-sensing-protection-ip.git. No public remote is configured in this local snapshot.
+Implementation truth remains in the copied RTL source and the complete deploy release. The development
+source remote is https://github.com/zsr112/current-sensing-protection-ip.git. This delivery repository is
+registered at https://github.com/zsr112/current-sensing-protection-ip-pynq-z2 with Private visibility.

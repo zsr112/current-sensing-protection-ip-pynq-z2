@@ -11,7 +11,8 @@ This repository is a stable public snapshot prepared for project demonstration, 
 - Portable Vivado project, packaging, block-design, controlled-stimulus, debug, and constraint inputs.
 - Non-duplicated PYNQ interface source and host-side tests.
 - The complete verified 22-file deployment release under deploy.
-- Public technical documents, provenance, inventories, and verification summaries.
+- Public technical documents, provenance, inventories, and verification summaries, including the bounded
+  Stage 1 board functional closure status.
 
 ## Excluded Categories
 
@@ -19,6 +20,8 @@ This repository is a stable public snapshot prepared for project demonstration, 
 - Historical and accepted evidence archives, computer audits, inventories, and handoff packages.
 - PYNQ operating-system images, third-party manuals, internal reports, presentations, and credentials.
 - Temporary simulation output, duplicate BIT/HWH files, and duplicate snapshot archives.
+- Raw board receipts, ILA CSV/metadata/Vivado logs, formal analyzer logs, evidence tarballs, and data-layer
+  history. Only their accepted identities and bounded conclusions are published here.
 
 ## Assets
 

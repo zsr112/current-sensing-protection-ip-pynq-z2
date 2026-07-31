@@ -55,11 +55,31 @@ The direct deployment authority is deploy. Begin with [deploy quick start](deplo
 
 ## Verification Status
 
-The canonical digital regression passes 10 of 10 testbenches. The included deploy release self-verifies. Stage 1G proves one real PYNQ-Z2 cold boot autoload with Overlay load, discovery, read-only MMIO/GPIO checks, one worker, one attempt, and no retry. See [verification status](docs/verification_status.md).
+The canonical digital regression passes 10 of 10 testbenches. The included deploy release self-verifies.
+Stage 1G proves one real PYNQ-Z2 cold boot autoload with Overlay load, discovery, read-only MMIO/GPIO checks,
+one worker, one attempt, and no retry.
+
+The later bounded Stage 1 board functional closure is also `PASS`:
+
+- Accepted execution:
+  `STAGE1-BOARD-FUNCTIONAL-CLOSURE-ATTEMPT06-RERUN02-20250506T201111Z`
+- Analyzer terminal class: `STAGE1_BOARD_FAULT_CLEAR_RECOVERY_FUNCTIONAL_CLOSURE_PASS`
+- CH1-only, CH2-only, and differential fault response: `PASS`
+- Live-fault clear rejection and source-removal latch/code retention: `PASS`
+- Clear recovery, internal PWM shutdown, post-recovery PWM pass-through, and final state restoration: `PASS`
+- ILA capture set: `8/8 PASS`
+
+See [verification status](docs/verification_status.md) and the
+[board functional closure summary](verification/stage1_board_functional_closure.md).
 
 ## Proof Boundary
 
-This snapshot does not prove repeated cold boots, power-cycle behavior, soak, power-stage load, board fault injection or clear/recovery, EMI, thermal behavior, electrical safety, a new Vivado implementation, or newly generated BIT/HWH. See [proof boundary](docs/proof_boundary.md).
+The Stage 1G evidence alone does not prove repeated cold boots, power-cycle behavior, or soak. The later board
+functional closure proves only the PYNQ-Z2 low-voltage internal digital fault/clear/recovery and ILA scope.
+This validation does not represent a pass for a real power stage, external drive chain, load, thermal
+behavior, EMI, or production safety. It also does not prove external ADC/AFE, calibrated current,
+external-pin PWM, gate-driver behavior, motor behavior, electrical safety, production reliability, or
+system/aviation certification. See [proof boundary](docs/proof_boundary.md).
 
 ## Development Repository Relationship
 
@@ -71,7 +91,13 @@ The snapshot is registered at https://github.com/zsr112/current-sensing-protecti
 
 ## Provenance
 
-Source content is anchored to development commit 309a84bff651f73891309e02e1d02fc1f54bd3e6. The deploy subtree is anchored to release source e0f8dfdf481d91edd35b50848c86fa0c484e513d, while its persistent board runtime is anchored to 1a365d5139f963ac4d8f92158dcd2928e86ccf36. Registering the Private remote does not create a new functional source or board-validation authority.
+The original snapshot payload is anchored to development commit
+309a84bff651f73891309e02e1d02fc1f54bd3e6. The board-closeout status is synchronized from final engineering
+`main` commit 68ef6d99d6b523447b39be004e85fa10558a03af, tree
+5e44f26f443edea4a7a4401bca1530133cc25da2. The deploy subtree remains anchored to release source
+e0f8dfdf481d91edd35b50848c86fa0c484e513d, while its persistent board runtime remains anchored to
+1a365d5139f963ac4d8f92158dcd2928e86ccf36. This status sync does not create a new deployment payload,
+hardware build, or board execution.
 
 ## Known Limitations
 

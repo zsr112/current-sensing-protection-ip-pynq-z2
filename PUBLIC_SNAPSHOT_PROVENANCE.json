@@ -2,6 +2,48 @@
   "bit_sha256": "f7dd0823e577cfee2aecfa3bf0a48e80d11108bdb12967e567ca64dc2e8ecfab",
   "board_validated_runtime_commit": "1a365d5139f963ac4d8f92158dcd2928e86ccf36",
   "board_validated_runtime_tree": "244cba11579c7fdc39353391ac35a78ede20ec97",
+  "board_functional_closure": {
+    "accepted_execution_id": "STAGE1-BOARD-FUNCTIONAL-CLOSURE-ATTEMPT06-RERUN02-20250506T201111Z",
+    "analysis_sha256": "66bf897bc44327726cfd69d3d36abb9069f6035683e61667bd4ce367396d7076",
+    "analyzer_terminal_class": "STAGE1_BOARD_FAULT_CLEAR_RECOVERY_FUNCTIONAL_CLOSURE_PASS",
+    "archive_sha256": "0f558dad6335b46cace732fe59caf5734dd87a7b62e9a772a16cfebc3bc3962a",
+    "artifacts": {
+      "bit_sha256": "f7dd0823e577cfee2aecfa3bf0a48e80d11108bdb12967e567ca64dc2e8ecfab",
+      "hwh_sha256": "c97138493f8c4c568790a75bcc77551ad1f24952f6eb28c4238e6bda975b1e29",
+      "ltx_sha256": "5cf63856626892ff0483a90eef7531f1c100caabd53b27b49e4d9ca7e06af274"
+    },
+    "board_result_sha256": "1fa7c73de68459a4d9c89d812b2f6d85fd6293bb4dcb3b167e8685f351285677",
+    "board_sequence_terminal_class": "STAGE1_BOARD_MMIO_SEQUENCE_PASS_AWAITING_ILA",
+    "board_wall_clock_trust": "UNTRUSTED",
+    "canonical_inventory_sha256": "14f55b6205a5d0ea888eea2c3973f8497a6aef7dff940c82f54078c67be29b98",
+    "captures": [
+      "normal_pwm",
+      "ch1_trip",
+      "live_clear_rejected",
+      "source_removed_preclear",
+      "clear_recovery",
+      "post_recovery_pwm",
+      "ch2_trip",
+      "differential_trip"
+    ],
+    "data_authority": "accepted/stage1-board-functional-closure/rerun02",
+    "engineering_main_commit": "68ef6d99d6b523447b39be004e85fa10558a03af",
+    "engineering_main_tree": "5e44f26f443edea4a7a4401bca1530133cc25da2",
+    "evidence_closeout_id": "STAGE1-BOARD-FUNCTIONAL-CLOSURE-ATTEMPT06-RERUN02-20250506T201111Z-EVIDENCE-CLOSEOUT-20260730T233831322Z",
+    "monotonic_ordering": "AUTHORITATIVE_FOR_SEQUENCE",
+    "operation_counts": {
+      "automatic_retries": 0,
+      "gpio_writes": 7,
+      "overlay_downloads": 1,
+      "power_cycles": 0,
+      "protection_writes": 13,
+      "reboots": 0,
+      "ssh_operations": 0
+    },
+    "proof_boundary": "PYNQ-Z2 low-voltage internal digital fault/clear/recovery behavior and the accepted eight-capture ILA evidence loop only",
+    "receipt_archive_sha256": "c00c5f525a38c70d941908dc157b757a1141f5c5aad0b780c49be537063d046a",
+    "stage1_functional_closure": "PASS"
+  },
   "deferred_standard_files": [
     "LICENSE",
     "CHANGELOG.md",
@@ -29,7 +71,8 @@
     "path-parameterized Vivado 2024.1 project, IP, BD, stimulus, and debug Tcl",
     "PYNQ software interface source and host-side tests",
     "complete verified 22-file deployment release",
-    "public technical documentation and verification summaries"
+    "public technical documentation and verification summaries",
+    "bounded Stage 1 board functional closure status and cryptographic evidence identities"
   ],
   "local_repository_path": "D:\\GitHub\\current-sensing-protection-ip-pynq-z2",
   "proof_boundary": {
