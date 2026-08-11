@@ -25,7 +25,9 @@ EXPECTED_LIVE_RUNNER = "fpga/vivado/build/runtime/runner/stage1e_production_viva
 EXPECTED_LIVE_RUNNER_SHA256 = "5da3f9ee6f3c6ef9069e9e8074f9f22213b797646d143bbc913021cbbd52c2ad"
 EXPECTED_HWH_SHA256 = "3daba403062492d5ab177cf3e0825782e0960c8cfad072eb09b8cb19fa5e61c1"
 EXPECTED_GAP = "STAGE3_PRODUCTION_SOURCE_PHYSICAL_SCALING_AND_CALIBRATION"
-EXPECTED_TRANSITION = "PROJECT_POST_STAGE2_CLOSEOUT_AND_DELIVERY_SYNC"
+EXPECTED_DELIVERY_STATE = "PUBLISHED_STAGE2_DELIVERY"
+EXPECTED_TRANSITION = "READY_FOR_STAGE3_ENTRY"
+EXPECTED_NEXT_ACTION = "OWNER_AUTHORIZED_STAGE3_ENTRY"
 
 MANIFEST_FIELDS = [
     "relative_path",
@@ -452,10 +454,18 @@ def main() -> int:
         fail("remaining project gap count mismatch")
     if provenance["project_remaining_open_gap"] != EXPECTED_GAP:
         fail("remaining project gap identity mismatch")
+    if provenance["delivery_state"] != EXPECTED_DELIVERY_STATE:
+        fail("delivery state mismatch")
+    if provenance["stage2_complete"] is not True or provenance["stage3_started"] is not False:
+        fail("Stage2 or Stage3 lifecycle state mismatch")
+    if provenance["project_post_stage2_closeout_and_delivery_sync"] != "COMPLETE":
+        fail("post-Stage2 closeout and delivery sync state mismatch")
     if provenance["current_transition"] != EXPECTED_TRANSITION:
         fail("current transition mismatch")
-    if not provenance["current_transition_review_pending"] or not provenance["delivery_main_promotion_pending"]:
+    if provenance["current_transition_review_pending"] is not False or provenance["delivery_main_promotion_pending"] is not False:
         fail("pending transition state mismatch")
+    if provenance["next_action"] != EXPECTED_NEXT_ACTION:
+        fail("next action mismatch")
 
     register_map = json.loads((ROOT / "spec" / "register_map.json").read_text(encoding="utf-8"))
     canonical_payload = (

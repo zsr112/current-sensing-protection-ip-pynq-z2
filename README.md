@@ -1,13 +1,19 @@
 # Current-Sensing Protection IP for PYNQ-Z2
 
-This repository is the reviewed Stage2 delivery candidate for the PYNQ-Z2 digital current-protection prototype. The engineering repository remains the sole development authority.
+This repository is the reviewed and published Stage2 delivery for the PYNQ-Z2 digital current-protection prototype. The engineering repository remains the sole development authority.
 
 ## Delivery State
 
 ```text
+DELIVERY_STATE=PUBLISHED_STAGE2_DELIVERY
 STAGE1_COMPLETE=YES
 STAGE2_COMPLETE=YES
 STAGE3_STARTED=NO
+PROJECT_POST_STAGE2_CLOSEOUT_AND_DELIVERY_SYNC=COMPLETE
+CURRENT_TRANSITION=READY_FOR_STAGE3_ENTRY
+CURRENT_TRANSITION_REVIEW_PENDING=NO
+DELIVERY_MAIN_PROMOTION_PENDING=NO
+NEXT_ACTION=OWNER_AUTHORIZED_STAGE3_ENTRY
 PUBLIC_ABI=1.1
 PROTECTION_IP_BASE=0x43C00000
 GPIO_BASE=0x41200000
