@@ -10,7 +10,7 @@
 #   probe generation.
 #
 # Run later from Vivado 2024.1 only after review, for example:
-# vivado -mode batch -source <repo-root>/vivado/tcl/<script-name>.tcl
+# Run in Vivado 2024.1 batch mode from this repository root.
 #
 # This script intentionally does not call:
 # - launch_runs
@@ -35,10 +35,18 @@
 # First controlled BD run note:
 # - Vivado 2024.1 reported unsupported IP xilinx.com:ip:axi_interconnect:1.7.
 # - This revision uses SmartConnect instead.
+#
+# PROFILE=SAFE_INERT
+# PROFILE_CLASS=SAFE_INERT
+# PRODUCTION_AUTHORITY=YES
+# FUNCTIONAL_ADC_STIMULUS=NO
+# READY_AWARE_PRODUCER=NO
+# This script constructs and checks the base topology with an inert valid
+# default. It does not generate ADC transactions or fault stimulus.
 
 set expected_version_pattern {*Vivado v2024.1*}
 if {![info exists ::env(PROTECTION_IP_VIVADO_BUILD_ROOT)] || $::env(PROTECTION_IP_VIVADO_BUILD_ROOT) eq ""} {
-    error "Set PROTECTION_IP_VIVADO_BUILD_ROOT to an external Vivado build directory."
+    error "Set PROTECTION_IP_VIVADO_BUILD_ROOT to the external build root used by the project-creation Tcl."
 }
 set public_build_root [file normalize $::env(PROTECTION_IP_VIVADO_BUILD_ROOT)]
 set project_path [file join $public_build_root vivado_work pynq_z2_stage1_boardpart current_protection_ip_pynq_z2_stage1_boardpart.xpr]
@@ -46,14 +54,28 @@ set expected_part xc7z020clg400-1
 set expected_board_part tul.com.tw:pynq-z2:part0:1.0
 
 set ip_repo_path [file join $public_build_root ip_repo]
-set protection_vlnv zsr112.local:protection:protection_ip_axi_lite:0.1
+set protection_vlnv zsr112.local:protection:protection_ip_axi_lite:0.3
 set bd_name protection_system
 set planned_base_addr 0x43C00000
 set planned_range 0x1000
 
-set sample_valid_const 1
+set stage2d_profile SAFE_INERT
+set stage2d_profile_class SAFE_INERT
+set stage2d_production_authority 1
+set stage2d_functional_adc_stimulus 0
+set stage2d_ready_aware_producer 0
+set sample_valid_const 0
 set i_ch1_const 1024
 set i_ch2_const 1024
+
+if {$stage2d_profile ne {SAFE_INERT} ||
+    $stage2d_profile_class ne {SAFE_INERT} ||
+    !$stage2d_production_authority ||
+    $stage2d_functional_adc_stimulus ||
+    $stage2d_ready_aware_producer ||
+    $sample_valid_const != 0} {
+    error {Stage 2D base BD must remain the production SAFE_INERT profile.}
+}
 
 proc require_ipdef {pattern label} {
     set defs [get_ipdefs -all -quiet $pattern]
@@ -205,9 +227,11 @@ require_bd_pin proc_sys_reset_0/peripheral_aresetn
 require_bd_intf_pin protection_ip_axi_lite_0/S_AXI
 require_bd_pin protection_ip_axi_lite_0/ACLK
 require_bd_pin protection_ip_axi_lite_0/ARESETN
-require_bd_pin protection_ip_axi_lite_0/sample_valid
-require_bd_pin protection_ip_axi_lite_0/i_ch1
-require_bd_pin protection_ip_axi_lite_0/i_ch2
+require_bd_pin protection_ip_axi_lite_0/adc_src_clk
+require_bd_pin protection_ip_axi_lite_0/adc_sample_valid
+require_bd_pin protection_ip_axi_lite_0/adc_sample_ready
+require_bd_pin protection_ip_axi_lite_0/adc_sample_ch1
+require_bd_pin protection_ip_axi_lite_0/adc_sample_ch2
 
 set_property -dict [list CONFIG.NUM_MI {1} CONFIG.NUM_SI {1}] $smartconnect
 set_property -dict [list CONFIG.CONST_WIDTH {1} CONFIG.CONST_VAL $sample_valid_const] $c_sample_valid
@@ -220,6 +244,7 @@ connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins process
 connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins smartconnect_0/aclk]
 connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
 connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins protection_ip_axi_lite_0/ACLK]
+connect_bd_net [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins protection_ip_axi_lite_0/adc_src_clk]
 
 # Reset: PS FCLK_RESET0_N is active-low. After connection, Vivado should
 # propagate proc_sys_reset_0/ext_reset_in to active-low and
@@ -234,11 +259,12 @@ connect_bd_net [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins pr
 connect_bd_intf_net [get_bd_intf_pins processing_system7_0/M_AXI_GP0] [get_bd_intf_pins smartconnect_0/S00_AXI]
 connect_bd_intf_net [get_bd_intf_pins smartconnect_0/M00_AXI] [get_bd_intf_pins protection_ip_axi_lite_0/S_AXI]
 
-# First-pass safe digital stimulus. These constants do not represent real ADC
-# or AFE input and are only for early BD/MMIO plumbing.
-connect_bd_net [get_bd_pins sample_valid_const/dout] [get_bd_pins protection_ip_axi_lite_0/sample_valid]
-connect_bd_net [get_bd_pins i_ch1_const/dout] [get_bd_pins protection_ip_axi_lite_0/i_ch1]
-connect_bd_net [get_bd_pins i_ch2_const/dout] [get_bd_pins protection_ip_axi_lite_0/i_ch2]
+# First-pass safe-inert digital plumbing. With adc_sample_valid fixed low,
+# these channel constants cannot create a source transaction. They do not
+# represent functional ADC/fault stimulus or real ADC/AFE input.
+connect_bd_net [get_bd_pins sample_valid_const/dout] [get_bd_pins protection_ip_axi_lite_0/adc_sample_valid]
+connect_bd_net [get_bd_pins i_ch1_const/dout] [get_bd_pins protection_ip_axi_lite_0/adc_sample_ch1]
+connect_bd_net [get_bd_pins i_ch2_const/dout] [get_bd_pins protection_ip_axi_lite_0/adc_sample_ch2]
 
 # Outputs intentionally remain internal in this first-pass BD. Do not connect
 # pwm_out to real pins, a gate driver, or a power stage at this stage. Add ILA
@@ -278,7 +304,12 @@ puts "IP repo path: $ip_repo_path"
 puts "Protection IP VLNV: $protection_vlnv"
 puts "AXI fabric: smartconnect_0"
 puts "Planned address: base=$planned_base_addr range=$planned_range"
-puts "Stimulus constants: sample_valid=1 i_ch1=12'h400 i_ch2=12'h400"
+puts "PROFILE=$stage2d_profile"
+puts "PROFILE_CLASS=$stage2d_profile_class"
+puts "PRODUCTION_AUTHORITY=YES"
+puts "FUNCTIONAL_ADC_STIMULUS=NO"
+puts "READY_AWARE_PRODUCER=NO"
+puts "ADC placeholder: adc_src_clk=FCLK_CLK0 valid=0 ch1=12'h400 ch2=12'h400; no source transaction is generated"
 puts "PS7 board automation: DDR and FIXED_IO are expected to be externalized by the PYNQ-Z2 board preset."
 puts "Reset policy: FCLK_RESET0_N drives proc_sys_reset ext_reset_in with C_EXT_RESET_HIGH=0; peripheral_aresetn drives SmartConnect/protection active-low resets."
 puts "First BD run finding: axi_interconnect:1.7 was unsupported in this Vivado 2024.1 flow; this script uses SmartConnect."

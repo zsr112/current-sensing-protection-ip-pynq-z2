@@ -1,13 +1,11 @@
-__pycache__/
-*.pyc
-*.pyo
-*.vvp
-*.vcd
-*.tmp
-*.temp
-*.bak
-*.swp
-.DS_Store
-Thumbs.db
+# Local build and runtime outputs
 sim/build/
 sim/waves/
+vivado_work/
+ip_repo/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.Xil/
+vivado*.jou
+vivado*.log

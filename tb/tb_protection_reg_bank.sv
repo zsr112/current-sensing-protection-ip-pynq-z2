@@ -1,15 +1,17 @@
 `timescale 1ns/1ps
+`include "protection_register_map.svh"
+
 module tb_protection_reg_bank;
-  localparam [7:0] REG_CTRL       = 8'h00;
-  localparam [7:0] REG_STATUS     = 8'h04;
-  localparam [7:0] REG_FAULT_CODE = 8'h08;
-  localparam [7:0] REG_I_CH1      = 8'h0C;
-  localparam [7:0] REG_I_CH2      = 8'h10;
-  localparam [7:0] REG_TH_OC1     = 8'h14;
-  localparam [7:0] REG_TH_OC2     = 8'h18;
-  localparam [7:0] REG_TH_DIFF    = 8'h1C;
-  localparam [7:0] REG_PWM_PERIOD = 8'h20;
-  localparam [7:0] REG_PWM_DUTY   = 8'h24;
+  localparam [7:0] REG_CTRL       = `REG_CTRL;
+  localparam [7:0] REG_STATUS     = `REG_STATUS;
+  localparam [7:0] REG_FAULT_CODE = `REG_FAULT_CODE;
+  localparam [7:0] REG_I_CH1      = `REG_I_CH1;
+  localparam [7:0] REG_I_CH2      = `REG_I_CH2;
+  localparam [7:0] REG_TH_OC1     = `REG_TH_OC1;
+  localparam [7:0] REG_TH_OC2     = `REG_TH_OC2;
+  localparam [7:0] REG_TH_DIFF    = `REG_TH_DIFF;
+  localparam [7:0] REG_PWM_PERIOD = `REG_PWM_PERIOD;
+  localparam [7:0] REG_PWM_DUTY   = `REG_PWM_DUTY;
 
   reg clk = 0, rst_n = 0, wr_en = 0, rd_en = 0;
   reg [7:0] addr = 0;
@@ -91,22 +93,27 @@ module tb_protection_reg_bank;
     @(posedge clk);
     #1;
 
-    check_outputs("reset defaults", 1'b0, 12'd3000, 12'd3000, 12'd200, 16'd1000, 16'd500);
-    check_read("CTRL reset", REG_CTRL, 32'h0000_0000);
-    check_read("STATUS reset", REG_STATUS, 32'h0000_0000);
-    check_read("FAULT_CODE reset", REG_FAULT_CODE, 32'h0000_0000);
+    check_outputs("reset defaults", 1'b0,
+                  `TH_OC1_THRESHOLD_CH1_RESET,
+                  `TH_OC2_THRESHOLD_CH2_RESET,
+                  `TH_DIFF_THRESHOLD_RESET,
+                  `PWM_PERIOD_VALUE_RESET,
+                  `PWM_DUTY_VALUE_RESET);
+    check_read("CTRL reset", REG_CTRL, `REG_CTRL_RESET);
+    check_read("STATUS reset", REG_STATUS, `REG_STATUS_RESET);
+    check_read("FAULT_CODE reset", REG_FAULT_CODE, `REG_FAULT_CODE_RESET);
     check_read("I_CH1 monitor", REG_I_CH1, 32'd111);
     check_read("I_CH2 monitor", REG_I_CH2, 32'd222);
-    check_read("TH_OC1 reset", REG_TH_OC1, 32'd3000);
-    check_read("TH_OC2 reset", REG_TH_OC2, 32'd3000);
-    check_read("TH_DIFF reset", REG_TH_DIFF, 32'd200);
-    check_read("PWM_PERIOD reset", REG_PWM_PERIOD, 32'd1000);
-    check_read("PWM_DUTY reset", REG_PWM_DUTY, 32'd500);
+    check_read("TH_OC1 reset", REG_TH_OC1, `REG_TH_OC1_RESET);
+    check_read("TH_OC2 reset", REG_TH_OC2, `REG_TH_OC2_RESET);
+    check_read("TH_DIFF reset", REG_TH_DIFF, `REG_TH_DIFF_RESET);
+    check_read("PWM_PERIOD reset", REG_PWM_PERIOD, `REG_PWM_PERIOD_RESET);
+    check_read("PWM_DUTY reset", REG_PWM_DUTY, `REG_PWM_DUTY_RESET);
 
     $display("REG_BANK contract: rd_data is combinational decode; rd_en does not gate readback");
-    check_comb_read_no_rd_en("CTRL reset with rd_en low", REG_CTRL, 32'h0000_0000);
-    check_comb_read_no_rd_en("TH_OC1 reset with rd_en low", REG_TH_OC1, 32'd3000);
-    check_comb_read_no_rd_en("TH_OC2 reset with rd_en low", REG_TH_OC2, 32'd3000);
+    check_comb_read_no_rd_en("CTRL reset with rd_en low", REG_CTRL, `REG_CTRL_RESET);
+    check_comb_read_no_rd_en("TH_OC1 reset with rd_en low", REG_TH_OC1, `REG_TH_OC1_RESET);
+    check_comb_read_no_rd_en("TH_OC2 reset with rd_en low", REG_TH_OC2, `REG_TH_OC2_RESET);
     check_comb_read_no_rd_en("unknown address with rd_en low", 8'hFC, 32'h0000_0000);
 
     fault_valid_in = 1'b1;

@@ -14,10 +14,15 @@
 #   evidence and explicitly choosing to mutate the external Stage 2A BD.
 # - This script does not run downstream build, hardware export, or programming
 #   artifact generation commands.
+#
+# CURRENT_ADC_SRC_CLK_EQUALS_ACLK=YES
+# ACLK_ILA_READY_OBSERVATION_VALID_ONLY_WHILE_CLOCKS_IDENTICAL=YES
+# DISTINCT_ADC_CLOCK_REQUIRES_SOURCE_CLOCK_ILA_OR_SYNCHRONIZED_OBSERVATION=YES
+# DIRECT_ASYNC_READY_OBSERVATION_AS_CDC_PROOF=FORBIDDEN
 
 set expected_version_pattern {*Vivado v2024.1*}
 if {![info exists ::env(PROTECTION_IP_VIVADO_BUILD_ROOT)] || $::env(PROTECTION_IP_VIVADO_BUILD_ROOT) eq ""} {
-    error "Set PROTECTION_IP_VIVADO_BUILD_ROOT to an external Vivado build directory."
+    error "Set PROTECTION_IP_VIVADO_BUILD_ROOT to the external build root used by the project-creation Tcl."
 }
 set public_build_root [file normalize $::env(PROTECTION_IP_VIVADO_BUILD_ROOT)]
 set project_path [file join $public_build_root vivado_work pynq_z2_stage1_boardpart current_protection_ip_pynq_z2_stage1_boardpart.xpr]
@@ -173,9 +178,9 @@ if {$resetn_polarity ne "ACTIVE_LOW"} {
 
 set scalar_probe_specs [list \
     [list protection_ip_axi_lite_0/ARESETN 1] \
-    [list protection_ip_axi_lite_0/sample_valid 1] \
-    [list protection_ip_axi_lite_0/i_ch1 12] \
-    [list protection_ip_axi_lite_0/i_ch2 12] \
+    [list protection_ip_axi_lite_0/adc_sample_valid 1] \
+    [list protection_ip_axi_lite_0/adc_sample_ch1 12] \
+    [list protection_ip_axi_lite_0/adc_sample_ch2 12] \
     [list protection_ip_axi_lite_0/pwm_raw 1] \
     [list protection_ip_axi_lite_0/pwm_out 1] \
     [list protection_ip_axi_lite_0/fault_valid 1] \
@@ -183,6 +188,7 @@ set scalar_probe_specs [list \
     [list protection_ip_axi_lite_0/fault_code 8] \
     [list protection_ip_axi_lite_0/fault_code_latched 8] \
     [list protection_ip_axi_lite_0/fsm_state 4] \
+    [list protection_ip_axi_lite_0/adc_sample_ready 1] \
 ]
 
 foreach spec $scalar_probe_specs {
@@ -243,7 +249,7 @@ save_bd_design
 puts "Stage 2B debug draft applied."
 puts "Debug core: $system_ila_name is a mixed System ILA for protection AXI-Lite and scalar probes."
 puts "AXI monitor: SLOT_0_AXI attached to protection_ip_axi_lite_0/S_AXI."
-puts "Scalar probes: protection reset, sample inputs, PWM/fault outputs, fault codes, and fsm_state."
+puts "Scalar probes: protection reset, ADC valid/data/ready, PWM/fault outputs, fault codes, and fsm_state."
 puts "Observation only: later AXI GPIO/stimulus IP or real sampling hardware is still needed for broader validation."
 
 close_project

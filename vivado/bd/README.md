@@ -1,3 +1,3 @@
 # Block Design
 
-Block-design reconstruction Tcl is stored in ../tcl. Generated BD files are intentionally excluded.
+Run the reviewed project, IP packaging, and block-design Tcl entrypoints in order. The base block design is SAFE_INERT and stops before implementation or export.

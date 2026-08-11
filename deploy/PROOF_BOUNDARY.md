@@ -1,21 +1,7 @@
 # Proof Boundary
 
-## Proved
+The release proves exact physical-source/final-main tree equivalence, immutable B1 artifact identity, current
+runtime/software source identity, ABI 1.1 binding, and offline HWH metadata compatibility.
 
-- One real PYNQ-Z2 cold-boot autoload.
-- Overlay and device discovery.
-- Read-only MMIO/GPIO checks.
-- One worker and one attempt.
-- No retry.
-
-## Not Proved
-
-- Repeated cold boots, power-cycle or soak.
-- Power-stage load.
-- Board fault injection, clear or recovery.
-- EMI, thermal or electrical safety.
-- A new Vivado implementation.
-- A new BIT or HWH.
-
-Not proved does not mean failed. Release management and self-validation tools are offline-reviewed utilities;
-they do not extend the archived board proof.
+It does not prove Overlay loading, MMIO, ILA capture, persistent deployment, analog scaling, or power-stage use.
+Those are separate physical execution boundaries.

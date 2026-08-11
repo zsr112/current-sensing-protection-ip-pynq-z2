@@ -1,0 +1,78 @@
+{
+  "artifact_manifest": {
+    "bytes": 5678,
+    "design_identity": "protection_system",
+    "project_identity": "s1e_141afca0c385",
+    "sha256": "e14c914d143ae722f67a64c3c3d8fad2504903e7e5de90fbbef98785ec70fdf3"
+  },
+  "artifacts": {
+    "bit": {
+      "bytes": 4045685,
+      "delivery_policy": "DEPLOY_REQUIRED",
+      "role": "BITSTREAM",
+      "sha256": "b84478e51a2608e5f5818bfd79cc33f30bc16c02f1a136fe0aa99f2c54a022e0"
+    },
+    "hwh": {
+      "bytes": 465005,
+      "delivery_policy": "DEPLOY_REQUIRED",
+      "role": "HWH",
+      "sha256": "3daba403062492d5ab177cf3e0825782e0960c8cfad072eb09b8cb19fa5e61c1"
+    },
+    "ltx": {
+      "bytes": 83653,
+      "delivery_policy": "PROVENANCE_ONLY_REQUIRED",
+      "role": "LTX",
+      "sha256": "81313b391b63e38f1b8dcaa4e1c4da4b021de6f57d1e4be2dfec5485c4c449b2"
+    },
+    "xsa": {
+      "bytes": 780574,
+      "delivery_policy": "PROVENANCE_ONLY_REQUIRED",
+      "role": "XSA",
+      "sha256": "dd9cf5eec4d40c813500b31f34474d8e309d6d01d73b7d727c51d627cc8281c8"
+    }
+  },
+  "engineering_main_commit": "7ad1681f5c49128ec2f10b13d6a41e7be0de62f4",
+  "engineering_main_tree": "d5de93f366ecd4f15e5371e110b8ffc701336783",
+  "expected_ip": {
+    "axi_gpio_stage1d_0": {
+      "addr_range": 65536,
+      "phys_addr": 1092616192
+    },
+    "protection_ip_axi_lite_0": {
+      "addr_range": 4096,
+      "phys_addr": 1136656384
+    }
+  },
+  "implementation_profile": "SAFE_INERT",
+  "persistent_deployment_claim": "NOT_CLAIMED",
+  "physical_artifact_execution_id": "S2IB-RECLOSE-B1-20260810T1838Z-75e5251",
+  "physical_artifact_request_identity": "141afca0c3859f1caef4ea9c17c131d701f1798ab19f248fcaaf0589490a99e2",
+  "physical_artifact_source_commit": "75e5251cd4878a44f5b77d34dc6da160178102a8",
+  "physical_artifact_source_tree": "d5de93f366ecd4f15e5371e110b8ffc701336783",
+  "physical_authority_receipt_sha256": "3ed22967633baac2722fb4b58d962a76cd9fb444f51959a45c3495f0b3ac132e",
+  "register_map_abi": {
+    "canonical_sha256": "36dcf0aa703dd63cf2b280b698b9b03b6ffd0ab93840af8c492cca63cdb7bef1",
+    "major": 1,
+    "minor": 1,
+    "schema_version": "1.1.0"
+  },
+  "runtime_sources": {
+    "pynq/runtime/generated/protection_register_map.py": {
+      "bytes": 43433,
+      "sha256": "3ae20e1428aabc76e9ac2f0aef100a61da190e753935df9735f4b276c5a11023",
+      "source_relative_path": "sw/generated/protection_register_map.py"
+    },
+    "pynq/runtime/protection_ip_interface.py": {
+      "bytes": 17947,
+      "sha256": "9bfb0a7d39ad67ab8f95eadc853c6da76e5ff76beba907647e209cb24e546ff9",
+      "source_relative_path": "sw/protection_ip_interface.py"
+    },
+    "pynq/runtime/stage2i_current_release.py": {
+      "bytes": 17491,
+      "sha256": "68f9d958126638219a261d22ba5823afce6a7fc0c5bc9b8508db14ee55467e35",
+      "source_relative_path": "fpga/pynq/deployment/stage1g/stage2i_current_release.py"
+    }
+  },
+  "schema_version": "stage2i-current-release-authority-v1",
+  "tree_equivalence": "PASS"
+}

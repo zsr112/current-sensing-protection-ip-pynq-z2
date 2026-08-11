@@ -1,3 +1,3 @@
 # Packaged IP
 
-IP-packaging Tcl is stored in ../tcl. Generated IP repositories are intentionally excluded.
+Run `vivado/tcl/package_protection_ip_stage2_axi_lite.tcl` after setting the external build root. Generated IP output belongs outside this repository.

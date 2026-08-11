@@ -39,6 +39,34 @@
 # - The compatibility wrapper translates explicit lifecycle context and
 #   delegates project and BD operations to their authoritative adapters.
 
+# Stage2I current-use entrypoint. The caller must already have the exact
+# protection_system BD open and must provide an explicit profile mutation
+# context. The mutation module delegates to the shared production runner, so
+# this compatibility filename does not become a second implementation.
+if {[info exists ::stage2i_profile_mutation_context]} {
+    set stage2i_mutation_module [file normalize [file join \
+        [file dirname [file normalize [info script]]] \
+        build mutation stage1d_controlled_stimulus.tcl]]
+    if {![file isfile $stage2i_mutation_module]} {
+        error "Stage2I controlled-stimulus module is missing: \
+$stage2i_mutation_module"
+    }
+    source $stage2i_mutation_module
+    set stage2i_mutation_result \
+        [::stage1d_controlled_stimulus::apply_current_profile \
+            $::stage2i_profile_mutation_context]
+    if {[dict get $stage2i_mutation_result status] ne {PASS}} {
+        error "Stage2I controlled-stimulus mutation did not pass: \
+$stage2i_mutation_result"
+    }
+    puts "STAGE2I_CONTROLLED_STIMULUS_MUTATION_PASS"
+    puts "IMPLEMENTATION_PROFILE=[dict get \
+        $stage2i_mutation_result implementation_profile]"
+    puts "MUTATION_AUTHORITY=[dict get \
+        $stage2i_mutation_result mutation_authority]"
+    return
+}
+
 set expected_version_pattern {*Vivado v2024.1*}
 set stage1d_source_baseline 2efeb7efaf5b97ca7850f61f1001224c00efd111
 set expected_bd_name protection_system
@@ -47,7 +75,7 @@ set ps_name processing_system7_0
 set reset_name proc_sys_reset_0
 set smartconnect_name smartconnect_0
 set protection_name protection_ip_axi_lite_0
-set protection_vlnv zsr112.local:protection:protection_ip_axi_lite:0.1
+set protection_vlnv zsr112.local:protection:protection_ip_axi_lite:0.3
 # Catalog identities verified with Vivado 2024.1, Vivado build 5076996,
 # and IP build 5075265.
 set axi_gpio_vlnv xilinx.com:ip:axi_gpio:2.0
@@ -163,6 +191,10 @@ set stage1d_compatibility_status [catch {
         reset_name $reset_name \
         safe_gpio_default $safe_gpio_default \
         sample_valid_const_name $sample_valid_const_name \
+        stimulus_profile SAFE_INERT_EXPLICIT \
+        stimulus_profile_class SAFE_INERT \
+        source_acceptance_claimed 0 \
+        fault_stimulus_claimed 0 \
         slice_ch1_name $slice_ch1_name \
         slice_ch2_name $slice_ch2_name \
         smartconnect_name $smartconnect_name \
