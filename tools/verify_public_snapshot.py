@@ -8,17 +8,22 @@ import os
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path, PurePosixPath
 
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "PUBLIC_SNAPSHOT_MANIFEST.tsv"
 DERIVATION = ROOT / "PUBLIC_SNAPSHOT_DERIVATION.tsv"
+RECONSTRUCTION_AUTHORITY = ROOT / "VIVADO_RECONSTRUCTION_AUTHORITY.json"
 EXPECTED_ENGINEERING_COMMIT = "9c5e6f6ac7dc311f12755c8b1713433d35e39bff"
 EXPECTED_ENGINEERING_TREE = "b1cfec1b073770c03bad9fa5b298b0bd1f3923c3"
 EXPECTED_STAGE2_SHA256 = "4916cdd574955c15e1d6eaa29b7760243fdfc47e19d06c68573c460ed484f1c0"
 EXPECTED_REGISTER_MAP_SHA256 = "36dcf0aa703dd63cf2b280b698b9b03b6ffd0ab93840af8c492cca63cdb7bef1"
-EXPECTED_DERIVATION_ID = "VIVADO_PUBLIC_PATH_ADAPTATION_V1"
+EXPECTED_DERIVATION_ID = "STAGE2_B1_PUBLIC_RECONSTRUCTION_ADAPTER_V1"
+EXPECTED_LIVE_RUNNER = "fpga/vivado/build/runtime/runner/stage1e_production_vivado_runner_v2.tcl"
+EXPECTED_LIVE_RUNNER_SHA256 = "5da3f9ee6f3c6ef9069e9e8074f9f22213b797646d143bbc913021cbbd52c2ad"
+EXPECTED_HWH_SHA256 = "3daba403062492d5ab177cf3e0825782e0960c8cfad072eb09b8cb19fa5e61c1"
 EXPECTED_GAP = "STAGE3_PRODUCTION_SOURCE_PHYSICAL_SCALING_AND_CALIBRATION"
 EXPECTED_TRANSITION = "PROJECT_POST_STAGE2_CLOSEOUT_AND_DELIVERY_SYNC"
 
@@ -42,19 +47,38 @@ DERIVATION_FIELDS = [
 ]
 SOURCE_MODES = {"EXACT_COPY", "DERIVED", "CANONICAL_RELEASE_COPY", "GENERATED"}
 SUPPORTED_VIVADO_TCL = {
-    "vivado/tcl/create_pynq_z2_project_stage1_boardpart.tcl",
-    "vivado/tcl/package_protection_ip_stage2_axi_lite.tcl",
-    "vivado/tcl/create_pynq_z2_stage2_bd.tcl",
     "vivado/tcl/generated/protection_register_map_ipxact.tcl",
+    "vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl",
 }
 REQUIRED_VIVADO_INPUTS = SUPPORTED_VIVADO_TCL | {
     "vivado/constraints/stage2d_async_adc_atomic_cdc.xdc",
     "vivado/constraints/stage2e_transaction_observability_cdc.xdc",
+    "VIVADO_RECONSTRUCTION_AUTHORITY.json",
 }
 UNSUPPORTED_VIVADO_ENTRYPOINTS = {
     "vivado/tcl/add_pynq_z2_stage1d_controlled_stimulus.tcl",
-    "vivado/tcl/create_pynq_z2_project_preboard.tcl",
     "vivado/tcl/add_pynq_z2_stage2b_debug.tcl",
+    "vivado/tcl/create_pynq_z2_project_preboard.tcl",
+    "vivado/tcl/create_pynq_z2_project_stage1_boardpart.tcl",
+    "vivado/tcl/create_pynq_z2_stage2_bd.tcl",
+    "vivado/tcl/package_protection_ip_stage2_axi_lite.tcl",
+}
+REQUIRED_B1_CELLS = {
+    "axi_gpio_stage1d_0",
+    "dcm_locked_const",
+    "proc_sys_reset_0",
+    "processing_system7_0",
+    "protection_ip_axi_lite_0",
+    "sample_valid_const",
+    "smartconnect_0",
+    "system_ila_stage2b_0",
+    "xlslice_stage1d_ch1",
+    "xlslice_stage1d_ch2",
+}
+HISTORICAL_ONLY_UPSTREAM = {
+    "fpga/vivado/create_pynq_z2_project_stage1_boardpart.tcl",
+    "fpga/vivado/create_pynq_z2_stage2_bd.tcl",
+    "fpga/vivado/package_protection_ip_stage2_axi_lite.tcl",
 }
 
 
@@ -151,7 +175,11 @@ def validate_provenance(rows: list[dict[str, str]]) -> tuple[int, int]:
             fail(f"derived delivery path is absent from manifest: {delivery_path}")
         if manifest_row["source_mode"] != "DERIVED":
             fail(f"derivation path is not declared DERIVED: {delivery_path}")
-        if manifest_row["source_authority"] != "DERIVED_FROM_ACCEPTED_ENGINEERING_COMMIT":
+        if source_path != EXPECTED_LIVE_RUNNER:
+            fail(f"derived Vivado adapter is not bound to the live runner: {delivery_path}")
+        if row["engineering_source_sha256"] != EXPECTED_LIVE_RUNNER_SHA256:
+            fail(f"live runner hash mismatch: {delivery_path}")
+        if manifest_row["source_authority"] != "DERIVED_FROM_CURRENT_ENGINEERING_PRODUCTION_AUTHORITY":
             fail(f"derived authority mismatch: {delivery_path}")
         if manifest_row["source_relative_path_or_identity"] != source_path:
             fail(f"derived source path mismatch: {delivery_path}")
@@ -190,6 +218,7 @@ def validate_provenance(rows: list[dict[str, str]]) -> tuple[int, int]:
             if authority in {
                 "ACCEPTED_ENGINEERING_COMMIT",
                 "DERIVED_FROM_ACCEPTED_ENGINEERING_COMMIT",
+                "DERIVED_FROM_CURRENT_ENGINEERING_PRODUCTION_AUTHORITY",
                 "CANONICAL_STAGE2_CURRENT_RELEASE",
             }:
                 fail(f"generated row claims a source-copy authority: {relative}")
@@ -207,35 +236,214 @@ def validate_vivado_surface() -> None:
     }
     if actual_tcl != SUPPORTED_VIVADO_TCL:
         fail(f"unsupported or missing Vivado Tcl: actual={sorted(actual_tcl)}")
-    if any((ROOT / path).exists() for path in UNSUPPORTED_VIVADO_ENTRYPOINTS):
-        fail("unsupported legacy Vivado entrypoint is present")
+    present_unsupported = sorted(path for path in UNSUPPORTED_VIVADO_ENTRYPOINTS if (ROOT / path).exists())
+    if present_unsupported:
+        fail(f"unsupported legacy Vivado entrypoint is present: {present_unsupported}")
     missing = sorted(path for path in REQUIRED_VIVADO_INPUTS if not (ROOT / path).is_file())
     if missing:
         fail(f"required Vivado inputs are missing: {missing}")
     forbidden_commands = re.compile(
         r"(?m)^\s*(launch_runs|synth_design|opt_design|place_design|route_design|write_bitstream|write_hw_platform|export_hardware|open_hw_manager|program_hw_devices)\b"
     )
-    for relative in sorted(SUPPORTED_VIVADO_TCL):
-        if "/generated/" in relative:
-            continue
-        text = (ROOT / relative).read_text(encoding="utf-8")
-        if "PROTECTION_IP_VIVADO_BUILD_ROOT" not in text:
-            fail(f"Vivado entrypoint lacks external build-root contract: {relative}")
-        code = "\n".join(line for line in text.splitlines() if not line.lstrip().startswith("#"))
-        if forbidden_commands.search(code):
-            fail(f"forbidden Vivado build action is present: {relative}")
+    relative = "vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl"
+    text = (ROOT / relative).read_text(encoding="utf-8")
+    required_markers = {
+        "PROTECTION_IP_VIVADO_BUILD_ROOT",
+        "STAGE2_B1_PUBLIC_RECONSTRUCTION_ADAPTER_V1",
+        EXPECTED_LIVE_RUNNER,
+        EXPECTED_LIVE_RUNNER_SHA256,
+        "generate_target all",
+        "make_wrapper -files",
+        "set_property top protection_system_wrapper",
+        "CONFIG.CONST_VAL {0}",
+        "0x43C00000",
+        "0x41200000",
+        "system_ila_stage2b_0/probe11",
+    }
+    missing_markers = sorted(marker for marker in required_markers if marker not in text)
+    if missing_markers:
+        fail(f"Vivado adapter contract is incomplete: {missing_markers}")
+    code = "\n".join(line for line in text.splitlines() if not line.lstrip().startswith("#"))
+    if forbidden_commands.search(code):
+        fail(f"forbidden Vivado build action is present: {relative}")
+
+
+def module_parameters(module: ET.Element) -> dict[str, str]:
+    return {
+        element.attrib["NAME"]: element.attrib["VALUE"]
+        for element in module.findall("./PARAMETERS/PARAMETER")
+    }
+
+
+def port_connections(module: ET.Element, port_name: str) -> set[tuple[str, str]]:
+    port = module.find(f"./PORTS/PORT[@NAME='{port_name}']")
+    if port is None:
+        fail(f"accepted HWH port is missing: {module.attrib.get('INSTANCE')}/{port_name}")
+    return {
+        (connection.attrib["INSTANCE"], connection.attrib["PORT"])
+        for connection in port.findall("./CONNECTIONS/CONNECTION")
+    }
+
+
+def validate_accepted_hwh(authority: dict[str, object]) -> None:
+    hwh = ROOT / "deploy" / "pynq" / "artifacts" / "protection_system.hwh"
+    if sha256(hwh) != EXPECTED_HWH_SHA256:
+        fail("accepted B1 HWH identity mismatch")
+    tree = ET.parse(hwh)
+    root = tree.getroot()
+    system = root.find("./SYSTEMINFO")
+    if system is None or system.attrib.get("NAME") != "protection_system":
+        fail("accepted HWH design identity mismatch")
+    modules = {
+        module.attrib["INSTANCE"]: module
+        for module in root.findall("./MODULES/MODULE")
+    }
+    if set(modules) != REQUIRED_B1_CELLS:
+        fail(f"accepted HWH B1 cell inventory mismatch: {sorted(modules)}")
+    if any(name.startswith("stage2i_b2_") or "stage2i_b2_source" in name for name in modules):
+        fail("accepted HWH contains a B2-only module")
+
+    memranges = {
+        item.attrib["INSTANCE"]: (item.attrib["BASEVALUE"], item.attrib["HIGHVALUE"])
+        for item in root.findall("./MODULES/MODULE/MEMORYMAP/MEMRANGE")
+    }
+    expected_memranges = {
+        "axi_gpio_stage1d_0": ("0x41200000", "0x4120FFFF"),
+        "protection_ip_axi_lite_0": ("0x43C00000", "0x43C00FFF"),
+    }
+    if memranges != expected_memranges:
+        fail(f"accepted HWH address map mismatch: {memranges}")
+
+    sample = modules["sample_valid_const"]
+    if int(module_parameters(sample).get("CONST_VAL", "-1"), 0) != 0:
+        fail("accepted HWH sample_valid constant is not zero")
+    if port_connections(sample, "dout") != {
+        ("protection_ip_axi_lite_0", "adc_sample_valid"),
+        ("system_ila_stage2b_0", "probe1"),
+    }:
+        fail("accepted HWH sample_valid topology mismatch")
+    if port_connections(modules["axi_gpio_stage1d_0"], "gpio_io_o") != {
+        ("xlslice_stage1d_ch1", "Din"),
+        ("xlslice_stage1d_ch2", "Din"),
+    }:
+        fail("accepted HWH GPIO sample bus topology mismatch")
+    if port_connections(modules["xlslice_stage1d_ch1"], "Dout") != {
+        ("protection_ip_axi_lite_0", "adc_sample_ch1"),
+        ("system_ila_stage2b_0", "probe2"),
+    }:
+        fail("accepted HWH channel-1 topology mismatch")
+    if port_connections(modules["xlslice_stage1d_ch2"], "Dout") != {
+        ("protection_ip_axi_lite_0", "adc_sample_ch2"),
+        ("system_ila_stage2b_0", "probe3"),
+    }:
+        fail("accepted HWH channel-2 topology mismatch")
+    if port_connections(modules["protection_ip_axi_lite_0"], "adc_sample_ready") != {
+        ("system_ila_stage2b_0", "probe11")
+    }:
+        fail("accepted HWH destination ready-probe topology mismatch")
+
+    accepted = authority["accepted_B1_HWH"]
+    if accepted != {
+        "relative_path": "deploy/pynq/artifacts/protection_system.hwh",
+        "sha256": EXPECTED_HWH_SHA256,
+    }:
+        fail("reconstruction authority accepted-HWH binding mismatch")
+
+
+def validate_reconstruction_authority() -> dict[str, object]:
+    if not RECONSTRUCTION_AUTHORITY.is_file():
+        fail("Vivado reconstruction authority is missing")
+    authority = json.loads(RECONSTRUCTION_AUTHORITY.read_text(encoding="utf-8"))
+    if authority.get("schema_version") != "vivado-reconstruction-authority-v1":
+        fail("Vivado reconstruction authority schema mismatch")
+    if authority.get("delivery_reconstruction_profile") != "SAFE_INERT":
+        fail("public reconstruction profile is not SAFE_INERT")
+    if authority.get("engineering_commit") != EXPECTED_ENGINEERING_COMMIT:
+        fail("reconstruction engineering commit mismatch")
+    if authority.get("engineering_tree") != EXPECTED_ENGINEERING_TREE:
+        fail("reconstruction engineering tree mismatch")
+    if authority.get("live_engineering_authority_path") != EXPECTED_LIVE_RUNNER:
+        fail("current live Vivado runner identity is missing")
+    if authority.get("live_engineering_authority_sha256") != EXPECTED_LIVE_RUNNER_SHA256:
+        fail("current live Vivado runner hash is missing")
+    if authority.get("live_engineering_authority_classification") != "CURRENT_PRODUCTION_AUTHORITY":
+        fail("public Vivado source authority is not classified current")
+    if authority.get("live_engineering_authority_path") in set(authority.get("historical_only_upstream_paths", [])):
+        fail("public Vivado production authority is marked HISTORICAL_ONLY")
+    if set(authority.get("historical_only_upstream_paths", [])) != HISTORICAL_ONLY_UPSTREAM:
+        fail("historical standalone Vivado classification is incomplete")
+    if authority.get("derivation_id") != EXPECTED_DERIVATION_ID:
+        fail("public Vivado derivation identifier mismatch")
+    if authority.get("derivation_classification") != "DERIVED_FROM_CURRENT_ENGINEERING_PRODUCTION_AUTHORITY":
+        fail("public adapter derivation classification mismatch")
+    if authority.get("new_parallel_production_authority") is not False:
+        fail("delivery claims a parallel production authority")
+    if authority.get("supported_public_entrypoints_derived_from_historical_only_authority") != 0:
+        fail("a supported public entrypoint derives from HISTORICAL_ONLY authority")
+    if authority.get("supported_public_entrypoint") != "vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl":
+        fail("supported public Vivado entrypoint mismatch")
+    if authority.get("required_bd") != "protection_system" or authority.get("required_top") != "protection_system_wrapper":
+        fail("required BD or wrapper identity mismatch")
+    if set(authority.get("required_cell_inventory", [])) != REQUIRED_B1_CELLS:
+        fail("required B1 topology fingerprint is incomplete")
+
+    addresses = authority.get("required_address_map")
+    if addresses != {
+        "axi_gpio_stage1d_0": {"base": "0x41200000", "range": "0x00010000"},
+        "protection_ip_axi_lite_0": {"base": "0x43C00000", "range": "0x00001000"},
+    }:
+        fail("required public reconstruction address map is incomplete")
+    safe = authority.get("safe_inert_contract")
+    if safe != {
+        "B2_source_domain_ILA_allowed": False,
+        "B2_synthetic_producer_allowed": False,
+        "functional_ADC_stimulus": False,
+        "sample_valid_constant": 0,
+    }:
+        fail("SAFE_INERT and B2 exclusion contract mismatch")
+    wrapper = authority.get("wrapper_closure")
+    if wrapper != {
+        "bd_output_products_generated": True,
+        "bd_wrapper_generated": True,
+        "project_top_set": True,
+    }:
+        fail("wrapper/output-product closure is incomplete")
+    packaging = authority.get("packaging_portability")
+    if packaging != {
+        "absolute_include_dependency_count": 0,
+        "absolute_source_reference_count": 0,
+        "generated_profile_header_duplicate_count": 0,
+        "generated_register_header_duplicate_count": 0,
+        "implementation_constraint_duplicate_count": 0,
+        "implementation_constraint_scope": "xilinx_implementation_only",
+        "include_dependency": "src",
+        "include_dependency_relative": True,
+        "prior_warning_signatures_allowed": [],
+    }:
+        fail("packaged generated-header portability rules are incomplete")
+    validate_accepted_hwh(authority)
+    return authority
 
 
 def main() -> int:
     rows = read_tsv(MANIFEST, MANIFEST_FIELDS)
     exact_count, derived_count = validate_provenance(rows)
     validate_vivado_surface()
+    validate_reconstruction_authority()
 
     provenance = json.loads((ROOT / "PUBLIC_SNAPSHOT_PROVENANCE.json").read_text(encoding="utf-8"))
     if provenance["engineering_source_commit"] != EXPECTED_ENGINEERING_COMMIT:
         fail("engineering source commit mismatch")
     if provenance["engineering_source_tree"] != EXPECTED_ENGINEERING_TREE:
         fail("engineering source tree mismatch")
+    if provenance["live_engineering_vivado_authority_path"] != EXPECTED_LIVE_RUNNER:
+        fail("snapshot provenance live runner path mismatch")
+    if provenance["live_engineering_vivado_authority_sha256"] != EXPECTED_LIVE_RUNNER_SHA256:
+        fail("snapshot provenance live runner hash mismatch")
+    if provenance["delivery_vivado_reconstruction_derivation_id"] != EXPECTED_DERIVATION_ID:
+        fail("snapshot provenance derivation identifier mismatch")
+    if provenance["delivery_vivado_reconstruction_authority"] != RECONSTRUCTION_AUTHORITY.name:
+        fail("snapshot provenance reconstruction authority mismatch")
     if provenance["stage2_canonical_package_sha256"] != EXPECTED_STAGE2_SHA256:
         fail("Stage2 package binding mismatch")
     if provenance["production_profile"] != "SAFE_INERT" or provenance["public_abi"] != "1.1":
@@ -337,6 +545,11 @@ def main() -> int:
         "derived_rows_without_upstream_sha": 0,
         "derived_rows": derived_count,
         "derivation_authority": "PASS",
+        "current_engineering_vivado_production_authority": "STAGE1E_PRODUCTION_VIVADO_RUNNER_V2",
+        "public_reconstruction_derivation": EXPECTED_DERIVATION_ID,
+        "public_reconstruction_b1_structural_fingerprint": "PASS",
+        "public_reconstruction_address_map": "PASS",
+        "packaged_generated_header_portability_contract": "PASS",
         "unsupported_legacy_vivado_entrypoint_count": 0,
         "required_vivado_input_dependency_closure": "PASS",
         "project_gap_and_transition_semantics": "PASS",

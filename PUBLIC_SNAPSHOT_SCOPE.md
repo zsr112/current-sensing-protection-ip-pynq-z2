@@ -2,7 +2,7 @@
 
 This repository is a user/advisor-facing delivery snapshot, not a second engineering-development authority.
 
-Included: current RTL, ten canonical offline testbenches, portable Vivado reconstruction inputs, the ABI 1.1 JSON authority, the accepted SAFE_INERT release, concise usage documentation, and bounded validation status.
+Included: current RTL, ten canonical offline testbenches, a compact runner-v2-derived Vivado B1 structural reconstruction adapter and authority record, the ABI 1.1 JSON authority, the accepted SAFE_INERT release, concise usage documentation, and bounded validation status.
 
 Excluded: raw ILA captures, audit ledgers, review ZIPs, failed candidates, generated Vivado workspaces, internal verification campaigns, machine-local paths, credentials, and Stage3 implementation.
 

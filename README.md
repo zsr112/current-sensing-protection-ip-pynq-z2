@@ -21,7 +21,7 @@ The included production release is `current-sensing-protection-ip-7ad1681f5c49-p
 - Start with [deploy/QUICK_START.md](deploy/QUICK_START.md) for the accepted SAFE_INERT release.
 - Run `python tools/verify_public_snapshot.py` for the complete delivery check.
 - Run `bash sim/run_iverilog.sh all` for the ten canonical RTL tests when Icarus Verilog is installed.
-- Follow [docs/vivado_build_guide.md](docs/vivado_build_guide.md) for an external Vivado 2024.1 reconstruction workspace.
+- Follow [docs/vivado_build_guide.md](docs/vivado_build_guide.md) for the compact Vivado 2024.1 B1 structural reconstruction adapter.
 - Inspect [spec/register_map.json](spec/register_map.json) for the single register-map source authority and [deploy/docs/register_map.md](deploy/docs/register_map.md) for its rendered user reference.
 
 ## Scope
@@ -39,3 +39,5 @@ Stage3 has not started. Production hardware selection, analog integration, physi
 ## Authority
 
 The engineering source is fixed at commit `9c5e6f6ac7dc311f12755c8b1713433d35e39bff`, tree `b1cfec1b073770c03bad9fa5b298b0bd1f3923c3`, tag `stage2-digital-protection-engineering-closure-v1`. The canonical Stage2 package SHA-256 is `4916cdd574955c15e1d6eaa29b7760243fdfc47e19d06c68573c460ed484f1c0`. See [PUBLIC_SNAPSHOT_PROVENANCE.json](PUBLIC_SNAPSHOT_PROVENANCE.json).
+
+The supported public Vivado entrypoint is a delivery adapter derived from the current engineering production runner, not from the historical standalone project, package, or BD scripts. It reconstructs the accepted B1 `SAFE_INERT` structure and wrapper only. The accepted BIT/HWH pair remains the reviewed programming authority; newly reconstructed output is unvalidated until separately synthesized, implemented, and validated.
