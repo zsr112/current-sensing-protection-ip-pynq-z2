@@ -12,7 +12,7 @@
 #
 # Run later from a Vivado 2024.1 command shell after review, for example:
 # vivado -mode batch -source vivado/tcl/package_protection_ip_stage2_axi_lite.tcl
-# Set PROTECTION_IP_PACKAGING_ROOT to override the default sibling output tree.
+# Set PROTECTION_IP_VIVADO_BUILD_ROOT to an external empty writable build root.
 #
 # This script intentionally does not call:
 # - create_bd_design
@@ -105,15 +105,11 @@ set script_dir [file dirname $script_path]
 set repo_root [file normalize [file join $script_dir ../..]]
 set rtl_dir [file join $repo_root rtl]
 set register_map_ipxact [file join $script_dir generated protection_register_map_ipxact.tcl]
-if {[info exists ::env(PROTECTION_IP_PACKAGING_ROOT)] &&
-        [string trim $::env(PROTECTION_IP_PACKAGING_ROOT)] ne {}} {
-    set packaging_root [file normalize $::env(PROTECTION_IP_PACKAGING_ROOT)]
-} elseif {[info exists ::env(PROTECTION_IP_VIVADO_BUILD_ROOT)] &&
-        [string trim $::env(PROTECTION_IP_VIVADO_BUILD_ROOT)] ne {}} {
-    set packaging_root [file normalize $::env(PROTECTION_IP_VIVADO_BUILD_ROOT)]
-} else {
+if {![info exists ::env(PROTECTION_IP_VIVADO_BUILD_ROOT)] ||
+        [string trim $::env(PROTECTION_IP_VIVADO_BUILD_ROOT)] eq {}} {
     error "Set PROTECTION_IP_VIVADO_BUILD_ROOT to an external writable build root."
 }
+set packaging_root [file normalize $::env(PROTECTION_IP_VIVADO_BUILD_ROOT)]
 set ip_repo_root [file join $packaging_root ip_repo]
 set ip_output_dir [file join $ip_repo_root $ip_name]
 set tmp_work_root [file join $packaging_root vivado_work]

@@ -268,7 +268,7 @@ connect_bd_net [get_bd_pins i_ch2_const/dout] [get_bd_pins protection_ip_axi_lit
 
 # Outputs intentionally remain internal in this first-pass BD. Do not connect
 # pwm_out to real pins, a gate driver, or a power stage at this stage. Add ILA
-# probes in a later Stage 2B debug Tcl after the minimal BD is reviewed.
+# debug probes are outside this supported public reconstruction route.
 
 assign_bd_address \
     -target_address_space [get_bd_addr_spaces processing_system7_0/Data] \
