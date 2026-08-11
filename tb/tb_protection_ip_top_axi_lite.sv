@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 `include "fault_defs.vh"
+`include "protection_register_map.svh"
 
 module tb_protection_ip_top_axi_lite;
   localparam [3:0] ST_NORMAL = 4'd0;
@@ -15,16 +16,16 @@ module tb_protection_ip_top_axi_lite;
   localparam [3:0] REC_EXPECT_E5 = 4'd7;
   localparam [3:0] REC_DONE = 4'd8;
 
-  localparam REG_CTRL       = 8'h00;
-  localparam REG_STATUS     = 8'h04;
-  localparam REG_FAULT_CODE = 8'h08;
-  localparam REG_I_CH1      = 8'h0C;
-  localparam REG_I_CH2      = 8'h10;
-  localparam REG_TH_OC1     = 8'h14;
-  localparam REG_TH_OC2     = 8'h18;
-  localparam REG_TH_DIFF    = 8'h1C;
-  localparam REG_PWM_PERIOD = 8'h20;
-  localparam REG_PWM_DUTY   = 8'h24;
+  localparam REG_CTRL       = `REG_CTRL;
+  localparam REG_STATUS     = `REG_STATUS;
+  localparam REG_FAULT_CODE = `REG_FAULT_CODE;
+  localparam REG_I_CH1      = `REG_I_CH1;
+  localparam REG_I_CH2      = `REG_I_CH2;
+  localparam REG_TH_OC1     = `REG_TH_OC1;
+  localparam REG_TH_OC2     = `REG_TH_OC2;
+  localparam REG_TH_DIFF    = `REG_TH_DIFF;
+  localparam REG_PWM_PERIOD = `REG_PWM_PERIOD;
+  localparam REG_PWM_DUTY   = `REG_PWM_DUTY;
 
   reg ACLK = 1'b0;
   reg ARESETN = 1'b0;
@@ -136,7 +137,7 @@ module tb_protection_ip_top_axi_lite;
       if (S_AXI_BVALID && S_AXI_BREADY)
         target_b_count <= target_b_count + 1;
       if (dut.reg_wr_en) begin
-        if (dut.reg_write_addr == REG_CTRL && dut.reg_wdata == target_monitor_data)
+        if (dut.reg_addr == REG_CTRL && dut.reg_wdata == target_monitor_data)
           target_reg_wr_count <= target_reg_wr_count + 1;
         else
           target_unexpected_write_count <= target_unexpected_write_count + 1;
@@ -856,6 +857,7 @@ module tb_protection_ip_top_axi_lite;
       @(posedge ACLK); #1;
       @(negedge ACLK);
       sample_valid = 1'b0;
+      @(posedge ACLK); #1;
     end
   endtask
 
@@ -863,7 +865,9 @@ module tb_protection_ip_top_axi_lite;
     integer guard;
     begin
       guard = 0;
-      while (fault_valid) begin
+      while (dut.u_reg_controlled_top.u_core.accepted_sample_valid ||
+             dut.u_reg_controlled_top.u_core.sample_decision_valid ||
+             fault_valid) begin
         @(posedge ACLK); #1;
         guard = guard + 1;
         if (guard > 12)
@@ -919,9 +923,7 @@ module tb_protection_ip_top_axi_lite;
   task automatic q_axi_make_overcurrent(input string qid);
     integer guard;
     begin
-      @(negedge ACLK);
-      i_ch1 = 12'd2500;
-      i_ch2 = 12'd2500;
+      q_axi_sample(12'd2500, 12'd2500);
       guard = 0;
       while (!fault_latched) begin
         @(posedge ACLK); #1;
@@ -936,9 +938,7 @@ module tb_protection_ip_top_axi_lite;
 
   task automatic q_axi_remove_overcurrent(input string qid);
     begin
-      @(negedge ACLK);
-      i_ch1 = 12'd500;
-      i_ch2 = 12'd510;
+      q_axi_sample(12'd500, 12'd510);
       q_axi_wait_live_low(qid);
     end
   endtask
@@ -1000,9 +1000,10 @@ module tb_protection_ip_top_axi_lite;
   task automatic run_axi_lite_persistent_sensor_stuck_clear_only;
     integer n;
     integer guard;
+    reg [7:0] history_before_clear;
     begin
-      $display("[10D-G] START AXI-Lite persistent sensor-stuck clear-only no-false-recovery");
-      $display("Q-SIM-01 reuses and minimally enhances the formal 10D-G persistent task");
+      $display("[10D-G] START AXI-Lite persistent sensor-stuck invalid-clear stale-event suppression");
+      $display("Q-SIM-01 updates the formal 10D-G task to the Stage 2B transaction contract");
 
       @(negedge ACLK);
       ARESETN = 1'b0;
@@ -1041,42 +1042,46 @@ module tb_protection_ip_top_axi_lite;
         end
       end
 
-      check_true("10D-G persistent stuck fault_valid before clear-only", fault_valid == 1'b1);
+      q_axi_wait_live_low("Q-SIM-01 [10D-G]");
+      check_true("10D-G invalid gap clears live transaction event", fault_valid == 1'b0);
       check_true("10D-G persistent stuck fault_latched before clear-only", fault_latched == 1'b1);
       check_equal("10D-G persistent stuck latched code before clear-only", {24'd0, fault_code_latched}, {24'd0, `FAULT_SENSOR_STUCK});
       axi_read(REG_STATUS, rd_value);
-      check_equal("10D-G persistent stuck STATUS before clear-only", rd_value, 32'h0000_0003);
+      check_equal("10D-G retained latch STATUS before clear-only", rd_value, 32'h0000_0002);
       axi_read(REG_FAULT_CODE, rd_value);
       check_equal("10D-G persistent stuck FAULT_CODE before clear-only", rd_value, 32'h0000_0005);
 
+      history_before_clear = dut.u_reg_controlled_top.u_core.u_health.stuck_cnt;
       q_axi_arm_target("Q-SIM-01 [10D-G]", 32'h0000_0002, 1'b0, 1'b1);
       axi_write(REG_CTRL, 32'h0000_0002);
-
-      for (n = 0; n < 4; n = n + 1) begin
-        @(negedge ACLK);
-        i_ch1 = 12'd500;
-        i_ch2 = 12'd500;
-        sample_valid = 1'b1;
-        @(negedge ACLK);
-        sample_valid = 1'b0;
-        #1;
-      end
-
+      @(posedge ACLK); #1;
+      if (dut.u_reg_controlled_top.u_core.u_health.stuck_cnt !== history_before_clear ||
+          !dut.u_reg_controlled_top.u_core.sensor_stuck_flag || fault_valid ||
+          !fault_latched || fault_code_latched !== `FAULT_SENSOR_STUCK ||
+          fsm_state !== ST_RESET_WAIT || !dut.u_reg_controlled_top.u_core.u_fsm.pwm_disable ||
+          pwm_out !== 1'b0)
+        $fatal(1, "10D-G clear changed retained health state or E0 protection");
+      wait_cycles(9);
       q_axi_disarm_and_check("Q-SIM-01 [10D-G]");
 
-      check_true("10D-G clear-only must not drop live stuck fault_valid", fault_valid == 1'b1);
-      check_true("10D-G clear-only must not drop live stuck fault_latched", fault_latched == 1'b1);
-      check_equal("10D-G clear-only must keep live stuck code", {24'd0, fault_code_latched}, {24'd0, `FAULT_SENSOR_STUCK});
+      if (dut.u_reg_controlled_top.u_core.u_health.stuck_cnt !== history_before_clear ||
+          !dut.u_reg_controlled_top.u_core.sensor_stuck_flag || fault_valid || fault_latched ||
+          fault_code_latched !== `FAULT_NONE || fsm_state !== ST_NORMAL ||
+          dut.u_reg_controlled_top.u_core.u_fsm.pwm_disable || pwm_out !== 1'b0)
+        $fatal(1, "10D-G stale retained health state retriggered protection");
+      check_true("10D-G retained health flag is not a live event", fault_valid == 1'b0);
+      check_true("10D-G invalid clear releases stale latch", fault_latched == 1'b0);
+      check_equal("10D-G invalid clear removes old code", {24'd0, fault_code_latched}, {24'd0, `FAULT_NONE});
       axi_read(REG_STATUS, rd_value);
-      check_equal("10D-G live stuck STATUS after clear-only", rd_value, 32'h0000_0003);
+      check_equal("10D-G clear STATUS after stale suppression", rd_value, 32'h0000_0000);
       axi_read(REG_FAULT_CODE, rd_value);
-      check_equal("10D-G live stuck FAULT_CODE after clear-only", rd_value, 32'h0000_0005);
+      check_equal("10D-G FAULT_CODE after stale suppression", rd_value, 32'h0000_0000);
 
       @(negedge ACLK);
       sample_valid = 1'b0;
       i_ch1 = 12'd500;
       i_ch2 = 12'd500;
-      $display("[10D-G] PASS AXI-Lite persistent sensor-stuck clear-only no-false-recovery");
+      $display("[10D-G] PASS AXI-Lite invalid-clear stale-event suppression");
     end
   endtask
 
@@ -1156,6 +1161,29 @@ module tb_protection_ip_top_axi_lite;
     axi_read(REG_FAULT_CODE, rd_value);
     check_equal("reset fault_code", rd_value, 32'h0000_0000);
     check_true("fault_latched should reset low", fault_latched == 1'b0);
+
+    axi_read(`REG_REGISTER_MAP_VERSION, rd_value);
+    check_equal("legacy path version discovery", rd_value, 32'h0000_0000);
+    axi_read(`REG_CAPABILITIES_0, rd_value);
+    check_equal("legacy path capabilities 0", rd_value, 32'h0000_0000);
+    axi_read(`REG_CAPABILITIES_1, rd_value);
+    check_equal("legacy path capabilities 1", rd_value, 32'h0000_0000);
+    axi_read(`REG_POLICY_STATUS, rd_value);
+    check_equal("legacy path policy status", rd_value, 32'h0000_0000);
+    axi_read(`REG_FIRST_FAULT_BITMAP, rd_value);
+    check_equal("legacy path first bitmap", rd_value, 32'h0000_0000);
+    axi_read(`REG_LIVE_FAULT_BITMAP, rd_value);
+    check_equal("legacy path live bitmap", rd_value, 32'h0000_0000);
+    axi_read(`REG_FAULT_SEEN_BITMAP, rd_value);
+    check_equal("legacy path seen bitmap", rd_value, 32'h0000_0000);
+    axi_read(`REG_POLICY_EVALUATION_SEQUENCE, rd_value);
+    check_equal("legacy path policy identity", rd_value, 32'h0000_0000);
+    axi_write_strb(`REG_REGISTER_MAP_VERSION, 32'hFFFF_FFFF, 4'hF);
+    axi_write_strb(`REG_POLICY_STATUS, 32'hFFFF_FFFF, 4'hF);
+    axi_read(`REG_REGISTER_MAP_VERSION, rd_value);
+    check_equal("legacy path discovery write ignored", rd_value, 32'h0000_0000);
+    axi_read(`REG_POLICY_STATUS, rd_value);
+    check_equal("legacy path policy write ignored", rd_value, 32'h0000_0000);
 
     $display("AXI contract: nonzero WSTRB writes the addressed register as a full word; WSTRB=0 does not write");
     $display("AXI contract: unmapped addresses return OKAY; writes are ignored and reads return zero");
@@ -1239,9 +1267,12 @@ module tb_protection_ip_top_axi_lite;
 
     axi_write(REG_TH_OC1, 32'd1000);
     axi_write(REG_TH_OC2, 32'd1000);
+    q_axi_sample(12'd1500, 12'd1500);
     wait_cycles(8);
     check_true("AXI low threshold should latch fault on same current", fault_latched == 1'b1);
     check_equal("overcurrent fault code", {24'd0, fault_code_latched}, {24'd0, `FAULT_OVERCURRENT});
+    @(negedge ACLK);
+    sample_valid = 1'b1;
     axi_write(REG_CTRL, 32'h0000_0003);
     wait_cycles(6);
     check_true("AXI clear_fault must not release protection while current is still over threshold", fault_latched == 1'b1);
@@ -1249,8 +1280,10 @@ module tb_protection_ip_top_axi_lite;
     measure_pwm(16, high_count, rise_count);
     check_equal("PWM must remain forced low when AXI clear_fault is issued during active fault", high_count, 32'd0);
 
-    i_ch1 = 12'd500;
-    i_ch2 = 12'd510;
+    @(negedge ACLK);
+    sample_valid = 1'b0;
+    q_axi_sample(12'd500, 12'd510);
+    q_axi_wait_live_low("AXI active fault removal");
     axi_write(REG_CTRL, 32'h0000_0003);
     wait_cycles(10);
     check_true("clear_fault should recover before readback scenario", fault_latched == 1'b0);
@@ -1274,6 +1307,7 @@ module tb_protection_ip_top_axi_lite;
 
     i_ch1 = 12'd2600;
     i_ch2 = 12'd2600;
+    q_axi_sample(12'd2600, 12'd2600);
     wait_cycles(8);
     check_true("overcurrent should latch through AXI wrapper", fault_latched == 1'b1);
     axi_read(REG_STATUS, rd_value);

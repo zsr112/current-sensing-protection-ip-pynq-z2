@@ -13,7 +13,10 @@ module sensor_health_monitor #(
     input  wire [CNT_WIDTH-1:0]  th_persist,
     output reg  sensor_open_flag,
     output reg  sensor_sat_flag,
-    output reg  sensor_stuck_flag
+    output reg  sensor_stuck_flag,
+    output reg  sensor_open_event,
+    output reg  sensor_sat_event,
+    output reg  sensor_stuck_event
 );
     reg [DATA_WIDTH-1:0] prev_ch1, prev_ch2;
     reg [CNT_WIDTH-1:0] open_cnt, sat_cnt, stuck_cnt;
@@ -44,22 +47,38 @@ module sensor_health_monitor #(
             sensor_open_flag  <= 1'b0;
             sensor_sat_flag   <= 1'b0;
             sensor_stuck_flag <= 1'b0;
-        end else if (sample_valid) begin
-            prev_ch1 <= i_ch1;
-            prev_ch2 <= i_ch2;
+            sensor_open_event  <= 1'b0;
+            sensor_sat_event   <= 1'b0;
+            sensor_stuck_event <= 1'b0;
+        end else begin
+            sensor_open_event  <= 1'b0;
+            sensor_sat_event   <= 1'b0;
+            sensor_stuck_event <= 1'b0;
 
-            if (ch1_open || ch2_open) open_cnt <= inc_sat(open_cnt);
-            else open_cnt <= {CNT_WIDTH{1'b0}};
+            if (sample_valid) begin
+                prev_ch1 <= i_ch1;
+                prev_ch2 <= i_ch2;
 
-            if (ch1_sat || ch2_sat) sat_cnt <= inc_sat(sat_cnt);
-            else sat_cnt <= {CNT_WIDTH{1'b0}};
+                if (ch1_open || ch2_open) open_cnt <= inc_sat(open_cnt);
+                else open_cnt <= {CNT_WIDTH{1'b0}};
 
-            if (both_stable) stuck_cnt <= inc_sat(stuck_cnt);
-            else stuck_cnt <= {CNT_WIDTH{1'b0}};
+                if (ch1_sat || ch2_sat) sat_cnt <= inc_sat(sat_cnt);
+                else sat_cnt <= {CNT_WIDTH{1'b0}};
 
-            sensor_open_flag  <= (open_cnt  >= th_persist);
-            sensor_sat_flag   <= (sat_cnt   >= th_persist);
-            sensor_stuck_flag <= (stuck_cnt >= th_persist);
+                if (both_stable) stuck_cnt <= inc_sat(stuck_cnt);
+                else stuck_cnt <= {CNT_WIDTH{1'b0}};
+
+                sensor_open_flag  <= (open_cnt  >= th_persist);
+                sensor_sat_flag   <= (sat_cnt   >= th_persist);
+                sensor_stuck_flag <= (stuck_cnt >= th_persist);
+
+                sensor_open_event <= (ch1_open || ch2_open) &&
+                                     (open_cnt >= th_persist);
+                sensor_sat_event <= (ch1_sat || ch2_sat) &&
+                                    (sat_cnt >= th_persist);
+                sensor_stuck_event <= both_stable &&
+                                      (stuck_cnt >= th_persist);
+            end
         end
     end
 endmodule

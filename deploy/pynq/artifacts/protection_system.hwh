@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Jul 25 15:03:30 2026" VIVADOVERSION="2024.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Aug 11 02:38:35 2026" VIVADOVERSION="2024.1">
 
   <SYSTEMINFO ARCH="zynq" BOARD="tul.com.tw:pynq-z2:part0:1.0" DEVICE="7z020" NAME="protection_system" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -1619,6 +1619,7 @@
             <CONNECTION INSTANCE="smartconnect_0" PORT="aclk"/>
             <CONNECTION INSTANCE="proc_sys_reset_0" PORT="slowest_sync_clk"/>
             <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="ACLK"/>
+            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="adc_src_clk"/>
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="clk"/>
             <CONNECTION INSTANCE="axi_gpio_stage1d_0" PORT="s_axi_aclk"/>
           </CONNECTIONS>
@@ -1982,17 +1983,1326 @@
         <PERIPHERAL INSTANCE="protection_ip_axi_lite_0"/>
       </PERIPHERALS>
     </MODULE>
-    <MODULE COREREVISION="1" FULLNAME="/protection_ip_axi_lite_0" HWVERSION="0.1" INSTANCE="protection_ip_axi_lite_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="protection_ip_axi_lite" VLNV="zsr112.local:protection:protection_ip_axi_lite:0.1">
+    <MODULE COREREVISION="1" FULLNAME="/protection_ip_axi_lite_0" HWVERSION="0.3" INSTANCE="protection_ip_axi_lite_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="protection_ip_axi_lite" VLNV="zsr112.local:protection:protection_ip_axi_lite:0.3">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
-        <ADDRESSBLOCK ACCESS="" INTERFACE="S_AXI" NAME="reg0" RANGE="0x1000" USAGE="register"/>
+        <ADDRESSBLOCK ACCESS="" INTERFACE="S_AXI" NAME="reg0" RANGE="0x1000" USAGE="register">
+          <REGISTERS>
+            <REGISTER NAME="CTRL">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Controls the demo PWM and submits the one-ACLK fault-clear request."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x00"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="PWM_ENABLE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Enables the low-voltage demo PWM carrier before protection gating."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="CLEAR_FAULT_PULSE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Submits a clear request to the Stage 2G request/evaluation fence; it is not unconditional recovery."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToSet"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="30"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="STATUS">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Registered Stage 2G evaluation status and the public compatibility latch."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x04"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="FAULT_VALID">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Registered fault-evaluation result, asserted only when evaluation-valid and the evaluated bitmap is nonzero."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="FAULT_LATCHED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Public compatibility latch for an accepted fault episode."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="30"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="FAULT_CODE">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Stage 2G public first-cause compatibility code."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x08"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="FAULT_CODE_LATCHED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Latched first-cause compatibility code from the frozen fault taxonomy."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                  <ENUMERATEDVALUES>
+                    <ENUMERATEDVALUE>
+                      <NAME>NONE</NAME>
+                      <VALUE>0x00</VALUE>
+                      <USAGE>read</USAGE>
+                    </ENUMERATEDVALUE>
+                    <ENUMERATEDVALUE>
+                      <NAME>OVERCURRENT</NAME>
+                      <VALUE>0x01</VALUE>
+                      <USAGE>read</USAGE>
+                    </ENUMERATEDVALUE>
+                    <ENUMERATEDVALUE>
+                      <NAME>SENSOR_MISMATCH</NAME>
+                      <VALUE>0x02</VALUE>
+                      <USAGE>read</USAGE>
+                    </ENUMERATEDVALUE>
+                    <ENUMERATEDVALUE>
+                      <NAME>SENSOR_OPEN</NAME>
+                      <VALUE>0x03</VALUE>
+                      <USAGE>read</USAGE>
+                    </ENUMERATEDVALUE>
+                    <ENUMERATEDVALUE>
+                      <NAME>SENSOR_SATURATION</NAME>
+                      <VALUE>0x04</VALUE>
+                      <USAGE>read</USAGE>
+                    </ENUMERATEDVALUE>
+                    <ENUMERATEDVALUE>
+                      <NAME>SENSOR_STUCK</NAME>
+                      <VALUE>0x05</VALUE>
+                      <USAGE>read</USAGE>
+                    </ENUMERATEDVALUE>
+                    <ENUMERATEDVALUE>
+                      <NAME>OC_WITH_ANY_SENSOR</NAME>
+                      <VALUE>0x06</VALUE>
+                      <USAGE>read</USAGE>
+                    </ENUMERATEDVALUE>
+                  </ENUMERATEDVALUES>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="24"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="I_CH1">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Latest atomic destination-FIFO delivery registered in ACLK for channel 1."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x0C"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="I_CH1_MON">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Raw channel-1 monitor from the latest atomic destination delivery."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="12"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="20"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="I_CH2">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Latest atomic destination-FIFO delivery registered in ACLK for channel 2."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x10"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="I_CH2_MON">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Raw channel-2 monitor from the latest atomic destination delivery."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="12"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="20"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="TH_OC1">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Channel-1 overcurrent threshold; equality is not a fault."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x14"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="THRESHOLD_CH1">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel-1 overcurrent threshold."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="12"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="20"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="TH_OC2">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Channel-2 overcurrent threshold; equality is not a fault."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x18"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="THRESHOLD_CH2">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel-2 overcurrent threshold."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="12"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="20"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="TH_DIFF">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Channel differential threshold; equality is not a fault."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x1C"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="DIFF_THRESHOLD">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Absolute channel-difference threshold."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="12"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="12"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="20"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="PWM_PERIOD">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Low-voltage demo PWM counter period."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x20"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="PWM_PERIOD">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Demo PWM counter period; zero holds the raw PWM low."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="16"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="16"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="PWM_DUTY">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Low-voltage demo PWM high-time count."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x24"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="PWM_DUTY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Demo PWM high-time count, clamped to the period by the PWM implementation."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="16"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="16"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_CAPABILITY">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Stage 2E transaction-observability version and consistency contract."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x28"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="OBSERVABILITY_VERSION">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Observability interface version."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+                <FIELD NAME="SEQUENCE_WIDTH">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Internal transaction sequence width."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="6"/>
+                </FIELD>
+                <FIELD NAME="COUNTER_WIDTH">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Diagnostic counter width."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="14"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="14"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="6"/>
+                </FIELD>
+                <FIELD NAME="COUNTERS_RESET_ONLY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Counters clear only on reset."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="20"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="20"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="STICKY_STATUS_W1C">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sticky status uses W1C semantics."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="21"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="21"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SOURCE_TELEMETRY_EVENTUALLY_CONSISTENT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Source telemetry is eventually consistent across independent Gray-counter CDC paths."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="22"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="22"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="ATOMIC_MULTI_REGISTER_SNAPSHOT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Atomic multi-register snapshot support."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="23"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="23"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="STAGE2E_MAGIC">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Stage 2E capability magic byte."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="24"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="24"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_STATUS_W1C">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Sticky transaction-integrity causes and their read-only aggregate; a new cause wins over a same-cycle clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x2C"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="BACKPRESSURE_SEEN">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="At least one legal source backpressure cycle occurred."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SOURCE_PROTOCOL_VIOLATION">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="A stalled producer withdrew valid or replaced its payload."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SOURCE_DROP_SEEN">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="A pending source transaction was dropped or replaced by a producer violation."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="FIFO_OVERFLOW_ATTEMPT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="An illegal internal write-enable while full occurred."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="FIFO_UNDERFLOW_ATTEMPT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="An illegal internal read-enable while empty occurred."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="DUPLICATE_DELIVERY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="A duplicate internal transaction identity was delivered."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SEQUENCE_GAP">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="A forward sequence gap occurred."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="REORDER_OR_STALE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="A backward, stale, or first-nonzero sequence mismatch occurred."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="7"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="7"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="COUNTER_SATURATED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="At least one diagnostic counter saturated."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-write"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE="oneToClear"/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="ANY_ERROR">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Read-only OR of post-clear causes 1 through 8; legal backpressure is excluded."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="9"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="9"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="10"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="10"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="22"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_SOURCE_ACCEPT_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of source ready/valid acceptances; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x30"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Source acceptance count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_DESTINATION_DELIVERY_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of accepted atomic raw CDC destination deliveries to Stage 2B; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x34"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Destination delivery count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_BACKPRESSURE_CYCLE_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of legal source cycles with valid and not ready; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x38"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Backpressure-cycle count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_SOURCE_PROTOCOL_VIOLATION_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of stalled episodes with withdrawal or payload replacement; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x3C"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Source protocol violation count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_SOURCE_DROP_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of pending source transactions dropped or replaced by a producer violation; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x40"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Source drop count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_FIFO_OVERFLOW_ATTEMPT_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of illegal internal write-enable while full attempts; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x44"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="FIFO overflow-attempt count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of illegal internal read-enable while empty attempts; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x48"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="FIFO underflow-attempt count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_DUPLICATE_DELIVERY_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of duplicate internal transaction identities; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x4C"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Duplicate-delivery count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_SEQUENCE_GAP_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of forward sequence-gap events; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x50"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sequence-gap count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_REORDER_OR_STALE_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of backward, stale, or first-nonzero sequence mismatches; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x54"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reorder-or-stale count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_AGGREGATE_ERROR_COUNT">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Saturating count of aggregate error occurrences; legal backpressure is excluded; reset-only clear."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x58"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="COUNT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Aggregate-error count."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_LAST_SOURCE_SEQUENCE">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Last source-accepted internal sequence identity, zero-extended to 32 bits."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x5C"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="SEQUENCE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Last source-accepted sequence in the implemented width, zero-extended to 32 bits."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="OBS_LAST_DESTINATION_SEQUENCE">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Last destination-delivered internal sequence identity, zero-extended to 32 bits."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x60"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="SEQUENCE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Last destination-delivered sequence in the implemented width, zero-extended to 32 bits."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="REGISTER_MAP_VERSION">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Explicit register-map ABI version word for the connected Stage 2G production path."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x80"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="MAGIC">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Explicit register-map discovery magic."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="16"/>
+                </FIELD>
+                <FIELD NAME="ABI_MAJOR">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Supported ABI major version."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+                <FIELD NAME="ABI_MINOR">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Supported ABI minor version."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="CAPABILITIES_0">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Usable public feature advertisements for explicit ABI 1.1."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x84"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="ARMED_READY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="The explicit ARMED readiness level is usable."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="FAULT_BITMAPS">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="All three public fault bitmap registers are usable."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="CLEAR_LEVEL_STATUS">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Stable clear and post-clear pending levels are usable."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="STAGE2G_POLICY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="The connected Stage 2G policy contract is usable."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="NORMALIZED_TELEMETRY_RESERVED_ZERO">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved zero because normalized telemetry is not public in ABI 1.1."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="STAGE2E_TRANSACTION_OBSERVABILITY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="The frozen Stage 2E transaction observability block is usable."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="POLICY_EVALUATION_IDENTITY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="The diagnostic last-retirement identity is usable."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED_ZERO">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved zero for ABI minor 1."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="7"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="7"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="25"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="CAPABILITIES_1">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Fault bitmap and policy identity width metadata."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0x88"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="FAULT_BITMAP_WIDTH">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Advertised public fault bitmap width."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+                <FIELD NAME="IMPLEMENTED_SEQUENCE_WIDTH">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Implemented policy identity source width."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="8"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+                <FIELD NAME="MIN_SEQUENCE_WIDTH">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Minimum supported sequence width."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="16"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+                <FIELD NAME="MAX_SEQUENCE_WIDTH">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Maximum supported sequence width."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="24"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="24"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="8"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="POLICY_STATUS">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Same-cycle Stage 2G policy state and clear protocol levels."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0xA0"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="ARMED_READY">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="One exactly when the Stage 2G controller is ARMED."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="FAULT_LATCHED_STATE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="One exactly when the Stage 2G controller is FAULT_LATCHED."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESET_WAIT_STATE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="One exactly when the Stage 2G controller is RESET_WAIT."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="CLEAR_PENDING">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Exact Stage 2G clear request pending level."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="POST_CLEAR_RECOVERY_PENDING">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Exact Stage 2G post-clear recovery pending level."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="27"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="FIRST_FAULT_BITMAP">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Complete first clean cause set for the active internal fault episode."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0xA4"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="CH1_OVERCURRENT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel 1 overcurrent was in the first clean cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="CH2_OVERCURRENT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel 2 overcurrent was in the first clean cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_MISMATCH_OR_DIFFERENTIAL">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Mismatch or differential was in the first clean cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_OPEN">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor open was in the first clean cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_SATURATION">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor saturation was in the first clean cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_STUCK">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor stuck was in the first clean cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="26"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="LIVE_FAULT_BITMAP">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Latest clean eligible cause set for the active internal fault episode."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0xA8"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="CH1_OVERCURRENT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel 1 overcurrent is in the live cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="CH2_OVERCURRENT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel 2 overcurrent is in the live cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_MISMATCH_OR_DIFFERENTIAL">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Mismatch or differential is in the live cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_OPEN">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor open is in the live cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_SATURATION">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor saturation is in the live cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_STUCK">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor stuck is in the live cause set."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="26"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="FAULT_SEEN_BITMAP">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Monotonic OR of clean eligible cause sets during the active internal fault episode."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0xAC"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="CH1_OVERCURRENT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel 1 overcurrent has been seen in the episode."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="CH2_OVERCURRENT">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Channel 2 overcurrent has been seen in the episode."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="1"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_MISMATCH_OR_DIFFERENTIAL">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Mismatch or differential has been seen in the episode."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="2"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_OPEN">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor open has been seen in the episode."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="3"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_SATURATION">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor saturation has been seen in the episode."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="4"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="SENSOR_STUCK">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Sensor stuck has been seen in the episode."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="5"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="1"/>
+                </FIELD>
+                <FIELD NAME="RESERVED">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Reserved."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="6"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="26"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+            <REGISTER NAME="POLICY_EVALUATION_SEQUENCE">
+              <PROPERTY NAME="DESCRIPTION" VALUE="Diagnostic identity of the latest valid policy retirement, held across idle cycles."/>
+              <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0xB0"/>
+              <PROPERTY NAME="SIZE" VALUE="32"/>
+              <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+              <PROPERTY NAME="IS_ENABLED" VALUE="true"/>
+              <FIELDS>
+                <FIELD NAME="SEQUENCE">
+                  <PROPERTY NAME="DESCRIPTION" VALUE="Zero-extended sequence of the latest clean or nonclean valid policy retirement."/>
+                  <PROPERTY NAME="ADDRESS_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="ACCESS" VALUE="read-only"/>
+                  <PROPERTY NAME="MODIFIED_READ_VALUES" VALUE=""/>
+                  <PROPERTY NAME="WRITE_CONSTRAINT" VALUE="0"/>
+                  <PROPERTY NAME="READ_ACTION" VALUE=""/>
+                  <PROPERTY NAME="BIT_OFFSET" VALUE="0"/>
+                  <PROPERTY NAME="BIT_WIDTH" VALUE="32"/>
+                </FIELD>
+              </FIELDS>
+            </REGISTER>
+          </REGISTERS>
+        </ADDRESSBLOCK>
       </ADDRESSBLOCKS>
       <PARAMETERS>
+        <PARAMETER NAME="ADC_FIFO_ADDR_WIDTH" VALUE="3"/>
         <PARAMETER NAME="AXI_ADDR_WIDTH" VALUE="8"/>
         <PARAMETER NAME="AXI_DATA_WIDTH" VALUE="32"/>
         <PARAMETER NAME="CNT_WIDTH" VALUE="16"/>
         <PARAMETER NAME="DATA_WIDTH" VALUE="12"/>
         <PARAMETER NAME="HEALTH_CNT_WIDTH" VALUE="8"/>
+        <PARAMETER NAME="OBS_SEQUENCE_WIDTH" VALUE="32"/>
         <PARAMETER NAME="Component_Name" VALUE="protection_system_protection_ip_axi_lite_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
         <PARAMETER NAME="C_BASEADDR" VALUE="0x43C00000"/>
@@ -2094,6 +3404,31 @@
             <CONNECTION INSTANCE="smartconnect_0" PORT="M00_AXI_wvalid"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" LEFT="11" NAME="adc_sample_ch1" RIGHT="0" SIGIS="undef" SIGNAME="xlslice_stage1d_ch1_Dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlslice_stage1d_ch1" PORT="Dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="11" NAME="adc_sample_ch2" RIGHT="0" SIGIS="undef" SIGNAME="xlslice_stage1d_ch2_Dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="xlslice_stage1d_ch2" PORT="Dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="adc_sample_ready" SIGIS="undef" SIGNAME="protection_ip_axi_lite_0_adc_sample_ready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe11"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="adc_sample_valid" SIGIS="undef" SIGNAME="sample_valid_const_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="sample_valid_const" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="adc_src_clk" SIGIS="clk" SIGNAME="processing_system7_0_FCLK_CLK0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="processing_system7_0" PORT="FCLK_CLK0"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" LEFT="7" NAME="fault_code" RIGHT="0" SIGIS="undef" SIGNAME="protection_ip_axi_lite_0_fault_code">
           <CONNECTIONS>
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe8"/>
@@ -2119,16 +3454,6 @@
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe10"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="11" NAME="i_ch1" RIGHT="0" SIGIS="undef" SIGNAME="xlslice_stage1d_ch1_Dout">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="xlslice_stage1d_ch1" PORT="Dout"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="11" NAME="i_ch2" RIGHT="0" SIGIS="undef" SIGNAME="xlslice_stage1d_ch2_Dout">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="xlslice_stage1d_ch2" PORT="Dout"/>
-          </CONNECTIONS>
-        </PORT>
         <PORT DIR="O" NAME="pwm_out" SIGIS="undef" SIGNAME="protection_ip_axi_lite_0_pwm_out">
           <CONNECTIONS>
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe5"/>
@@ -2137,11 +3462,6 @@
         <PORT DIR="O" NAME="pwm_raw" SIGIS="undef" SIGNAME="protection_ip_axi_lite_0_pwm_raw">
           <CONNECTIONS>
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe4"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="sample_valid" SIGIS="undef" SIGNAME="sample_valid_const_dout">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="sample_valid_const" PORT="dout"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -2211,7 +3531,7 @@
       <PORTS>
         <PORT DIR="O" LEFT="0" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="sample_valid_const_dout">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="sample_valid"/>
+            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="adc_sample_valid"/>
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe1"/>
           </CONNECTIONS>
         </PORT>
@@ -2802,7 +4122,7 @@
         <PARAMETER NAME="C_INPUT_PIPE_STAGES" VALUE="0"/>
         <PARAMETER NAME="C_MON_TYPE" VALUE="MIX"/>
         <PARAMETER NAME="C_NUM_MONITOR_SLOTS" VALUE="1"/>
-        <PARAMETER NAME="C_NUM_OF_PROBES" VALUE="11"/>
+        <PARAMETER NAME="C_NUM_OF_PROBES" VALUE="12"/>
         <PARAMETER NAME="C_PROBE0_MU_CNT" VALUE="1"/>
         <PARAMETER NAME="C_PROBE0_TYPE" VALUE="0"/>
         <PARAMETER NAME="C_PROBE0_WIDTH" VALUE="1"/>
@@ -6702,6 +8022,11 @@
             <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="fsm_state"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="I" LEFT="0" NAME="probe11" RIGHT="0" SIGIS="undef" SIGNAME="protection_ip_axi_lite_0_adc_sample_ready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="adc_sample_ready"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="I" NAME="resetn" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
           <CONNECTIONS>
             <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
@@ -6783,7 +8108,7 @@
         </PORT>
         <PORT DIR="O" LEFT="11" NAME="Dout" RIGHT="0" SIGIS="undef" SIGNAME="xlslice_stage1d_ch1_Dout">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="i_ch1"/>
+            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="adc_sample_ch1"/>
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe2"/>
           </CONNECTIONS>
         </PORT>
@@ -6808,7 +8133,7 @@
         </PORT>
         <PORT DIR="O" LEFT="11" NAME="Dout" RIGHT="0" SIGIS="undef" SIGNAME="xlslice_stage1d_ch2_Dout">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="i_ch2"/>
+            <CONNECTION INSTANCE="protection_ip_axi_lite_0" PORT="adc_sample_ch2"/>
             <CONNECTION INSTANCE="system_ila_stage2b_0" PORT="probe3"/>
           </CONNECTIONS>
         </PORT>

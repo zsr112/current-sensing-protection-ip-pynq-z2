@@ -1,23 +1,17 @@
-# Vivado Build Guide
+# Vivado Structural Reconstruction Guide
 
-## Supported Baseline
+Use Vivado 2024.1 with the PYNQ-Z2 board files installed. Set `PROTECTION_IP_VIVADO_BUILD_ROOT` to a fresh external empty short path.
 
-The reconstruction inputs target Vivado 2024.1, PYNQ-Z2 board part tul.com.tw:pynq-z2:part0:1.0, and device xc7z020clg400-1.
+From the repository root, run the single supported entrypoint:
 
-## External Build Root
+```text
+vivado -mode batch -source vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl
+```
 
-Set PROTECTION_IP_VIVADO_BUILD_ROOT to an empty external path represented here as <vivado-path>. Generated projects and IP output must remain outside <repo-root>.
+This compact delivery adapter is derived from the current engineering production authority at `fpga/vivado/build/runtime/runner/stage1e_production_vivado_runner_v2.tcl`, bound to engineering commit `9c5e6f6ac7dc311f12755c8b1713433d35e39bff`. The older standalone project, package, and BD scripts are classified `HISTORICAL_ONLY` upstream and are not delivered as supported entrypoints.
 
-## Reconstruction Order
+The adapter packages the IP with relative generated-header dependencies and implementation-only CDC constraints, creates and validates the accepted B1 `SAFE_INERT` topology, generates block-design output products and `protection_system_wrapper`, and sets that wrapper as project top. It does not run synthesis, implementation, routing, bitstream generation, XSA export, Hardware Manager, or board actions.
 
-1. Run vivado/tcl/create_pynq_z2_project_stage1_boardpart.tcl.
-2. Run vivado/tcl/package_protection_ip_stage2_axi_lite.tcl.
-3. Run vivado/tcl/create_pynq_z2_stage2_bd.tcl.
-4. Review and, when appropriate, run the controlled-stimulus and Stage 2B debug Tcl inputs.
-5. Perform synthesis, implementation, bitstream generation, and hardware export only as a separately controlled operation.
+The structural contract is recorded in `VIVADO_RECONSTRUCTION_AUTHORITY.json`. It includes protection IP at `0x43C00000`, AXI GPIO at `0x41200000`, GPIO-driven channel slices, `adc_sample_valid=0`, destination System ILA probe 11 for `adc_sample_ready`, and no B2 producer or source-domain ILA.
 
-The Tcl copies retain the development-source build logic while replacing machine-local roots with PROTECTION_IP_VIVADO_BUILD_ROOT. The XDC is a reviewed pre-board placeholder and does not assign physical user pins.
-
-## Artifact Meaning
-
-A fresh build creates new, unvalidated artifacts. It does not reproduce the accepted artifact identity by assertion and does not inherit Stage 1G board proof. The accepted direct-deployment BIT/HWH pair remains only under deploy/pynq/artifacts.
+A fresh reconstruction does not inherit the accepted physical proof and is not expected to reproduce accepted physical artifact bytes. The reviewed programming authority remains the accepted BIT/HWH pair under `deploy/pynq/artifacts/`. Any fresh output remains unvalidated until separately synthesized, implemented, and validated under an approved engineering flow.

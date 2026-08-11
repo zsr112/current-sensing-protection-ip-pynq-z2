@@ -226,6 +226,7 @@ module tb_protection_ip_top_reg_controlled;
       @(posedge clk); #1;
       @(negedge clk);
       sample_valid = 1'b0;
+      @(posedge clk); #1;
     end
   endtask
 
@@ -233,7 +234,8 @@ module tb_protection_ip_top_reg_controlled;
     integer guard;
     begin
       guard = 0;
-      while (fault_valid) begin
+      while (dut.u_core.accepted_sample_valid ||
+             dut.u_core.sample_decision_valid || fault_valid) begin
         @(posedge clk); #1;
         guard = guard + 1;
         if (guard > 12)
@@ -297,9 +299,7 @@ module tb_protection_ip_top_reg_controlled;
   task automatic q_reg_make_overcurrent(input string qid);
     integer guard;
     begin
-      @(negedge clk);
-      i_ch1 = 12'd2500;
-      i_ch2 = 12'd2500;
+      q_reg_sample(12'd2500, 12'd2500);
       guard = 0;
       while (!fault_latched) begin
         @(posedge clk); #1;
@@ -314,9 +314,7 @@ module tb_protection_ip_top_reg_controlled;
 
   task automatic q_reg_remove_overcurrent(input string qid);
     begin
-      @(negedge clk);
-      i_ch1 = 12'd500;
-      i_ch2 = 12'd510;
+      q_reg_sample(12'd500, 12'd510);
       q_reg_wait_live_low(qid);
     end
   endtask
@@ -379,8 +377,8 @@ module tb_protection_ip_top_reg_controlled;
     integer guard;
     reg [7:0] history_before_clear;
     begin
-      $display("[10D-E] persistent sensor-stuck clear-only no-false-recovery");
-      $display("Q-SIM-01 reuses and minimally enhances the formal 10D-E persistent task");
+      $display("[10D-E] persistent sensor-stuck invalid-clear stale-event suppression");
+      $display("Q-SIM-01 updates the formal 10D-E task to the Stage 2B transaction contract");
 
       @(negedge clk);
       rst_n = 1'b0;
@@ -429,11 +427,12 @@ module tb_protection_ip_top_reg_controlled;
         end
       end
 
-      check_true("10D-E persistent stuck fault_valid before clear-only", fault_valid == 1'b1);
+      q_reg_wait_live_low("Q-SIM-01 [10D-E]");
+      check_true("10D-E invalid gap clears live transaction event", fault_valid == 1'b0);
       check_true("10D-E persistent stuck fault_latched before clear-only", fault_latched == 1'b1);
       check_equal8("10D-E persistent stuck latched code before clear-only", fault_code_latched, `FAULT_SENSOR_STUCK);
       reg_read(REG_STATUS, rd_value);
-      check_equal32("10D-E persistent stuck status before clear-only", rd_value, 32'h0000_0003);
+      check_equal32("10D-E retained latch status before clear-only", rd_value, 32'h0000_0002);
       reg_read(REG_FAULT_CODE, rd_value);
       check_equal32("10D-E persistent stuck fault code before clear-only", rd_value, 32'h0000_0005);
 
@@ -442,23 +441,23 @@ module tb_protection_ip_top_reg_controlled;
       reg_write(REG_CTRL, 32'h0000_0002);
       @(posedge clk); #1;
       if (dut.u_core.u_health.stuck_cnt !== history_before_clear || !dut.u_core.sensor_stuck_flag ||
-          !fault_valid || !fault_latched || fault_code_latched !== `FAULT_SENSOR_STUCK ||
+          fault_valid || !fault_latched || fault_code_latched !== `FAULT_SENSOR_STUCK ||
           fsm_state !== ST_RESET_WAIT || !dut.u_core.u_fsm.pwm_disable || pwm_out !== 1'b0)
-        $fatal(1, "10D-E clear sample altered health history or protected E0 state");
+        $fatal(1, "10D-E clear changed retained health state or E0 protection");
       wait_cycles(9);
       q_reg_disarm_and_check("Q-SIM-01 [10D-E]");
 
       if (dut.u_core.u_health.stuck_cnt !== history_before_clear || !dut.u_core.sensor_stuck_flag ||
-          !fault_valid || !fault_latched || fault_code_latched !== `FAULT_SENSOR_STUCK ||
-          fsm_state !== ST_FAULT_LATCHED || !dut.u_core.u_fsm.pwm_disable || pwm_out !== 1'b0)
-        $fatal(1, "10D-E clear-only changed persistent history or live protection state");
-      check_true("10D-E clear-only must not drop live stuck fault_valid", fault_valid == 1'b1);
-      check_true("10D-E clear-only must not drop live stuck fault_latched", fault_latched == 1'b1);
-      check_equal8("10D-E clear-only must keep live stuck code", fault_code_latched, `FAULT_SENSOR_STUCK);
+          fault_valid || fault_latched || fault_code_latched !== `FAULT_NONE ||
+          fsm_state !== ST_NORMAL || dut.u_core.u_fsm.pwm_disable || pwm_out !== 1'b0)
+        $fatal(1, "10D-E stale retained health state retriggered protection");
+      check_true("10D-E retained health flag is not a live event", fault_valid == 1'b0);
+      check_true("10D-E invalid clear releases stale latch", fault_latched == 1'b0);
+      check_equal8("10D-E invalid clear removes old code", fault_code_latched, `FAULT_NONE);
       reg_read(REG_STATUS, rd_value);
-      check_equal32("10D-E live stuck status after clear-only", rd_value, 32'h0000_0003);
+      check_equal32("10D-E clear status after stale suppression", rd_value, 32'h0000_0000);
       reg_read(REG_FAULT_CODE, rd_value);
-      check_equal32("10D-E live stuck fault code after clear-only", rd_value, 32'h0000_0005);
+      check_equal32("10D-E fault code after stale suppression", rd_value, 32'h0000_0000);
 
       @(negedge clk);
       sample_valid = 1'b0;
@@ -519,18 +518,28 @@ module tb_protection_ip_top_reg_controlled;
       @(negedge clk);
       i_ch1 = 12'd3500;
       i_ch2 = 12'd3500;
+      sample_valid = 1'b1;
       addr = REG_CTRL;
       wdata = 32'h0000_0002;
       wr_en = 1'b1;
       @(posedge clk); #1;
       @(negedge clk);
+      sample_valid = 1'b0;
       wr_en = 1'b0;
       wdata = 32'h0;
-      if (!fault_valid || fault_code !== `FAULT_OVERCURRENT ||
-          !dut.u_reg_bank.clear_fault_pulse || fsm_state !== ST_NORMAL || fault_latched)
-        $fatal(1, "Q-SIM-09 P1-to-P2 simultaneous fault/clear alignment witness failed");
+      if (!dut.u_core.accepted_sample_valid || fault_valid ||
+          !dut.u_reg_bank.clear_fault_pulse || fsm_state !== ST_NORMAL ||
+          fault_latched)
+        $fatal(1, "Q-SIM-09 simultaneous accept/clear boundary witness failed");
       @(posedge clk); #1;
-      if (!fault_valid || !fault_latched || fault_code_latched !== `FAULT_OVERCURRENT ||
+      if (!dut.u_core.sample_decision_valid || fault_valid || fault_latched)
+        $fatal(1, "Q-SIM-09 accepted fault decision alignment failed");
+      @(posedge clk); #1;
+      if (!fault_valid || fault_code !== `FAULT_OVERCURRENT ||
+          fsm_state !== ST_NORMAL || fault_latched)
+        $fatal(1, "Q-SIM-09 accepted fault classifier timing failed");
+      @(posedge clk); #1;
+      if (!fault_latched || fault_code_latched !== `FAULT_OVERCURRENT ||
           fsm_state !== ST_FAULT_LATCHED || !dut.u_core.u_fsm.pwm_disable || pwm_out !== 1'b0)
         $fatal(1, "Q-SIM-09 live fault was suppressed by simultaneous register clear pulse");
       q_reg_disarm_and_check("Q-SIM-09 NORMAL plus live fault");
@@ -620,6 +629,7 @@ module tb_protection_ip_top_reg_controlled;
 
     reg_write(REG_TH_OC1, 32'd1000);
     reg_write(REG_TH_OC2, 32'd1000);
+    q_reg_sample(12'd1500, 12'd1500);
     wait_cycles(8);
     check_true("low threshold should latch same current sample", fault_latched == 1'b1);
     check_equal8("overcurrent fault code", fault_code_latched, `FAULT_OVERCURRENT);
@@ -671,6 +681,7 @@ module tb_protection_ip_top_reg_controlled;
     i_ch2 = 12'd910;
     reg_write(REG_TH_OC1, 32'd600);
     reg_write(REG_TH_OC2, 32'd600);
+    q_reg_sample(12'd900, 12'd910);
     wait_cycles(8);
     reg_read(REG_STATUS, rd_value);
     check_true("status readback should show final overcurrent fault", rd_value[1] == 1'b1);

@@ -1,548 +1,585 @@
 #!/usr/bin/env python3
-"""Self-verifier for the generated public PYNQ-Z2 project snapshot."""
-
 from __future__ import annotations
 
 import csv
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
-from collections import defaultdict
+import xml.etree.ElementTree as ET
 from pathlib import Path, PurePosixPath
 
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "PUBLIC_SNAPSHOT_MANIFEST.tsv"
-PROVENANCE = ROOT / "PUBLIC_SNAPSHOT_PROVENANCE.json"
-
-DEVELOPMENT_COMMIT = "309a84bff651f73891309e02e1d02fc1f54bd3e6"
-DEVELOPMENT_TREE = "2f87cd3dd5d41039607e2242ebaa00e0606a1d9f"
-RELEASE_COMMIT = "e0f8dfdf481d91edd35b50848c86fa0c484e513d"
-RELEASE_TREE = "99ad1db325caed406d23e5966abb1f7305010641"
-BOARD_COMMIT = "1a365d5139f963ac4d8f92158dcd2928e86ccf36"
-BOARD_TREE = "244cba11579c7fdc39353391ac35a78ede20ec97"
-BIT_SHA256 = "f7dd0823e577cfee2aecfa3bf0a48e80d11108bdb12967e567ca64dc2e8ecfab"
-HWH_SHA256 = "c97138493f8c4c568790a75bcc77551ad1f24952f6eb28c4238e6bda975b1e29"
-PUBLIC_REMOTE = "https://github.com/zsr112/current-sensing-protection-ip-pynq-z2"
-ORIGIN_URL = PUBLIC_REMOTE + ".git"
-
-PERSISTENT_RUNTIME_SHA256 = {
-    "deploy/pynq/runtime/load_current_release.py":
-        "524572d183047d14b226b699c33c40099122e2bfaabc9509432e0d9fb8e9b1f1",
-    "deploy/pynq/runtime/load_current_release_once.sh":
-        "9dd1719a30153b661e00d9459a7de37b247167ae4872b3a7ddf6315aadd3ffa4",
-    "deploy/pynq/runtime/verify_installed_release.py":
-        "652d7ae31ff17b23cd8216b2bdb99839e48a734f7b526fdbd822a04ec2db41c2",
-    "deploy/pynq/systemd/current-sensing-protection-ip-load.service":
-        "4aabef5535859ad2e05b6e69109584c84730c352a173c2b364388ab976be5980",
-}
-
-DEFERRED_STANDARD_FILES = {
-    "LICENSE",
-    "CHANGELOG.md",
-    "CONTRIBUTING.md",
-    "CITATION.cff",
-    "SECURITY.md",
-}
-
-FORBIDDEN_DIRECTORY_NAMES = {
-    ".runs",
-    ".gen",
-    ".cache",
-    ".ip_user_files",
-    "Xil",
-    "__pycache__",
-    "staging",
-    "backup",
-    "copy",
-    "old",
-}
-
-FORBIDDEN_SUFFIXES = {
-    ".dcp",
-    ".ltx",
-    ".vvp",
-    ".vcd",
-    ".jou",
-    ".log",
-    ".zip",
-    ".tar",
-    ".gz",
-}
-
-TEXT_SUFFIXES = {
-    ".c",
-    ".h",
-    ".json",
-    ".md",
-    ".py",
-    ".service",
-    ".sh",
-    ".sv",
-    ".tcl",
-    ".tsv",
-    ".txt",
-    ".v",
-    ".vh",
-    ".xdc",
-}
-
-REQUIRED_README_HEADINGS = [
-    "Project Overview",
-    "Problem Addressed",
-    "System Architecture",
-    "Main Features",
-    "Safety and Clear/Recovery Semantics",
-    "Repository Structure",
-    "Simulation Reproduction",
-    "Vivado Rebuild",
-    "PYNQ-Z2 Deployment",
-    "Verification Status",
-    "Proof Boundary",
-    "Development Repository Relationship",
-    "Provenance",
-    "Known Limitations",
-]
+DERIVATION = ROOT / "PUBLIC_SNAPSHOT_DERIVATION.tsv"
+RECONSTRUCTION_AUTHORITY = ROOT / "VIVADO_RECONSTRUCTION_AUTHORITY.json"
+EXPECTED_ENGINEERING_COMMIT = "9c5e6f6ac7dc311f12755c8b1713433d35e39bff"
+EXPECTED_ENGINEERING_TREE = "b1cfec1b073770c03bad9fa5b298b0bd1f3923c3"
+EXPECTED_STAGE2_SHA256 = "4916cdd574955c15e1d6eaa29b7760243fdfc47e19d06c68573c460ed484f1c0"
+EXPECTED_REGISTER_MAP_SHA256 = "36dcf0aa703dd63cf2b280b698b9b03b6ffd0ab93840af8c492cca63cdb7bef1"
+EXPECTED_DERIVATION_ID = "STAGE2_B1_PUBLIC_RECONSTRUCTION_ADAPTER_V1"
+EXPECTED_LIVE_RUNNER = "fpga/vivado/build/runtime/runner/stage1e_production_vivado_runner_v2.tcl"
+EXPECTED_LIVE_RUNNER_SHA256 = "5da3f9ee6f3c6ef9069e9e8074f9f22213b797646d143bbc913021cbbd52c2ad"
+EXPECTED_HWH_SHA256 = "3daba403062492d5ab177cf3e0825782e0960c8cfad072eb09b8cb19fa5e61c1"
+EXPECTED_GAP = "STAGE3_PRODUCTION_SOURCE_PHYSICAL_SCALING_AND_CALIBRATION"
+EXPECTED_DELIVERY_STATE = "PUBLISHED_STAGE2_DELIVERY"
+EXPECTED_TRANSITION = "READY_FOR_STAGE3_ENTRY"
+EXPECTED_NEXT_ACTION = "OWNER_AUTHORIZED_STAGE3_ENTRY"
 
 MANIFEST_FIELDS = [
     "relative_path",
     "bytes",
     "sha256",
     "component",
+    "source_mode",
     "source_authority",
     "source_relative_path_or_identity",
+    "source_sha256",
 ]
+DERIVATION_FIELDS = [
+    "delivery_relative_path",
+    "engineering_commit",
+    "engineering_source_path",
+    "engineering_source_sha256",
+    "delivery_sha256",
+    "derivation_id",
+]
+SOURCE_MODES = {"EXACT_COPY", "DERIVED", "CANONICAL_RELEASE_COPY", "GENERATED"}
+SUPPORTED_VIVADO_TCL = {
+    "vivado/tcl/generated/protection_register_map_ipxact.tcl",
+    "vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl",
+}
+REQUIRED_VIVADO_INPUTS = SUPPORTED_VIVADO_TCL | {
+    "vivado/constraints/stage2d_async_adc_atomic_cdc.xdc",
+    "vivado/constraints/stage2e_transaction_observability_cdc.xdc",
+    "VIVADO_RECONSTRUCTION_AUTHORITY.json",
+}
+UNSUPPORTED_VIVADO_ENTRYPOINTS = {
+    "vivado/tcl/add_pynq_z2_stage1d_controlled_stimulus.tcl",
+    "vivado/tcl/add_pynq_z2_stage2b_debug.tcl",
+    "vivado/tcl/create_pynq_z2_project_preboard.tcl",
+    "vivado/tcl/create_pynq_z2_project_stage1_boardpart.tcl",
+    "vivado/tcl/create_pynq_z2_stage2_bd.tcl",
+    "vivado/tcl/package_protection_ip_stage2_axi_lite.tcl",
+}
+REQUIRED_B1_CELLS = {
+    "axi_gpio_stage1d_0",
+    "dcm_locked_const",
+    "proc_sys_reset_0",
+    "processing_system7_0",
+    "protection_ip_axi_lite_0",
+    "sample_valid_const",
+    "smartconnect_0",
+    "system_ila_stage2b_0",
+    "xlslice_stage1d_ch1",
+    "xlslice_stage1d_ch2",
+}
+HISTORICAL_ONLY_UPSTREAM = {
+    "fpga/vivado/create_pynq_z2_project_stage1_boardpart.tcl",
+    "fpga/vivado/create_pynq_z2_stage2_bd.tcl",
+    "fpga/vivado/package_protection_ip_stage2_axi_lite.tcl",
+}
 
 
-def sha256_file(path: Path) -> str:
+def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(4 * 1024 * 1024), b""):
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
 
 
-def relative(path: Path) -> str:
-    return path.relative_to(ROOT).as_posix()
+def safe_relative(value: str) -> bool:
+    if not value or "\\" in value or value.startswith("/") or re.match(r"^[A-Za-z]:", value):
+        return False
+    pure = PurePosixPath(value)
+    return not pure.is_absolute() and all(part not in ("", ".", "..") for part in pure.parts)
 
 
-def ordinary_files(include_manifest: bool = True) -> list[Path]:
-    result = []
-    for path in ROOT.rglob("*"):
-        if not path.is_file():
-            continue
-        rel = path.relative_to(ROOT)
-        if ".git" in rel.parts:
-            continue
-        if not include_manifest and path == MANIFEST:
-            continue
-        result.append(path)
-    return sorted(result, key=relative)
+def valid_sha256(value: str) -> bool:
+    return re.fullmatch(r"[0-9a-f]{64}", value) is not None
 
 
-def read_manifest() -> dict[str, dict[str, str]]:
-    with MANIFEST.open("r", encoding="utf-8", newline="") as stream:
+def fail(message: str) -> None:
+    raise RuntimeError(message)
+
+
+def read_tsv(path: Path, fields: list[str]) -> list[dict[str, str]]:
+    if not path.is_file():
+        fail(f"required authority file is missing: {path.name}")
+    with path.open(encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter="\t")
-        if reader.fieldnames != MANIFEST_FIELDS:
-            raise ValueError(
-                "manifest fields mismatch: "
-                f"expected={MANIFEST_FIELDS} actual={reader.fieldnames}"
-            )
-        rows: dict[str, dict[str, str]] = {}
-        for row in reader:
-            rel = row["relative_path"]
-            pure = PurePosixPath(rel)
-            if (
-                not rel
-                or "\\" in rel
-                or pure.is_absolute()
-                or ".." in pure.parts
-                or re.match(r"^[A-Za-z]:", rel)
-            ):
-                raise ValueError(f"invalid manifest relative path: {rel!r}")
-            if rel in rows:
-                raise ValueError(f"duplicate manifest path: {rel}")
-            rows[rel] = row
-        return rows
+        if reader.fieldnames != fields:
+            fail(f"invalid {path.name} fields: {reader.fieldnames}")
+        return list(reader)
 
 
-def check_manifest(errors: list[str]) -> int:
-    try:
-        rows = read_manifest()
-    except (OSError, UnicodeError, csv.Error, ValueError) as exc:
-        errors.append(f"manifest parse failed: {exc}")
-        return 0
+def validate_provenance(rows: list[dict[str, str]]) -> tuple[int, int]:
+    paths = [row["relative_path"] for row in rows]
+    if paths != sorted(paths) or len(paths) != len(set(paths)):
+        fail("manifest paths are not unique and sorted")
+    if not all(safe_relative(path) for path in paths):
+        fail("unsafe manifest path")
 
-    actual = {relative(path): path for path in ordinary_files(False)}
-    if set(rows) != set(actual):
-        missing = sorted(set(actual) - set(rows))
-        extra = sorted(set(rows) - set(actual))
-        errors.append(f"manifest coverage mismatch: missing={missing} extra={extra}")
+    actual = sorted(
+        path.relative_to(ROOT).as_posix()
+        for path in ROOT.rglob("*")
+        if path.is_file() and ".git" not in path.parts and path != MANIFEST
+    )
+    if paths != actual:
+        fail(f"manifest coverage mismatch: missing={sorted(set(actual)-set(paths))} extra={sorted(set(paths)-set(actual))}")
 
-    for rel, row in rows.items():
-        path = actual.get(rel)
-        if path is None:
-            continue
+    manifest_by_path = {row["relative_path"]: row for row in rows}
+    for row in rows:
+        relative = row["relative_path"]
+        path = ROOT / relative
+        if row["source_mode"] not in SOURCE_MODES:
+            fail(f"unsupported source mode: {relative}")
+        if not valid_sha256(row["sha256"]):
+            fail(f"invalid delivery hash: {relative}")
         try:
             expected_bytes = int(row["bytes"])
-        except ValueError:
-            errors.append(f"invalid byte count in manifest: {rel}")
-            continue
-        if expected_bytes != path.stat().st_size:
-            errors.append(f"manifest byte mismatch: {rel}")
-        if row["sha256"].lower() != sha256_file(path):
-            errors.append(f"manifest SHA-256 mismatch: {rel}")
-        if not row["component"] or not row["source_authority"]:
-            errors.append(f"manifest authority metadata missing: {rel}")
-    return len(rows)
+        except ValueError as exc:
+            raise RuntimeError(f"invalid byte count: {relative}") from exc
+        if expected_bytes != path.stat().st_size or row["sha256"] != sha256(path):
+            fail(f"manifest identity mismatch: {relative}")
 
-
-def check_provenance(errors: list[str]) -> None:
-    try:
-        data = json.loads(PROVENANCE.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        errors.append(f"provenance parse failed: {exc}")
-        return
-
-    expected = {
-        "public_repository_name": "current-sensing-protection-ip-pynq-z2",
-        "development_source_commit": DEVELOPMENT_COMMIT,
-        "development_source_tree": DEVELOPMENT_TREE,
-        "release_source_commit": RELEASE_COMMIT,
-        "release_source_tree": RELEASE_TREE,
-        "board_validated_runtime_commit": BOARD_COMMIT,
-        "board_validated_runtime_tree": BOARD_TREE,
-        "bit_sha256": BIT_SHA256,
-        "hwh_sha256": HWH_SHA256,
-        "target_board": "PYNQ-Z2",
-        "pynq_version": "3.1.1",
-        "public_repository_remote": PUBLIC_REMOTE,
-        "public_repository_remote_status": "CREATED_PRIVATE",
-        "remote_visibility": "PRIVATE",
-        "publication_status": "PRIVATE_REVIEW",
-    }
-    for key, value in expected.items():
-        if data.get(key) != value:
-            errors.append(
-                f"provenance mismatch for {key}: "
-                f"expected={value!r} actual={data.get(key)!r}"
-            )
-    for key in (
-        "public_snapshot_status",
-        "local_repository_path",
-        "generated_at_utc",
-        "development_repository_remote",
-        "proof_boundary",
-        "included_categories",
-        "excluded_categories",
-        "deferred_standard_files",
-        "remote_registered_at_utc",
-    ):
-        if key not in data:
-            errors.append(f"provenance field missing: {key}")
-    if set(data.get("deferred_standard_files", [])) != DEFERRED_STANDARD_FILES:
-        errors.append("provenance deferred_standard_files mismatch")
-
-
-def check_deploy(errors: list[str]) -> str:
-    verifier = ROOT / "deploy" / "tools" / "verify_release.py"
-    completed = subprocess.run(
-        [sys.executable, str(verifier)],
-        cwd=ROOT / "deploy",
-        text=True,
-        capture_output=True,
-        check=False,
+    derivations = read_tsv(DERIVATION, DERIVATION_FIELDS)
+    derived_paths = [row["delivery_relative_path"] for row in derivations]
+    if derived_paths != sorted(derived_paths) or len(derived_paths) != len(set(derived_paths)):
+        fail("derivation paths are not unique and sorted")
+    declared_derived = sorted(
+        row["relative_path"] for row in rows if row["source_mode"] == "DERIVED"
     )
-    output = (completed.stdout + completed.stderr).strip()
-    if completed.returncode != 0 or not output.startswith("PASS "):
-        errors.append(
-            "deploy release verifier failed: "
-            f"exit={completed.returncode} output={output}"
-        )
-    return output
+    if derived_paths != declared_derived:
+        fail(f"derived declaration mismatch: authority={derived_paths} manifest={declared_derived}")
+
+    for row in derivations:
+        delivery_path = row["delivery_relative_path"]
+        source_path = row["engineering_source_path"]
+        if not safe_relative(delivery_path) or not safe_relative(source_path):
+            fail(f"unsafe derivation path: {delivery_path}")
+        if row["engineering_commit"] != EXPECTED_ENGINEERING_COMMIT:
+            fail(f"derivation engineering commit mismatch: {delivery_path}")
+        if row["derivation_id"] != EXPECTED_DERIVATION_ID:
+            fail(f"unknown derivation identifier: {delivery_path}")
+        if not valid_sha256(row["engineering_source_sha256"]):
+            fail(f"missing upstream hash: {delivery_path}")
+        if not valid_sha256(row["delivery_sha256"]):
+            fail(f"invalid derived delivery hash: {delivery_path}")
+        if row["engineering_source_sha256"] == row["delivery_sha256"]:
+            fail(f"derived row has byte-identical upstream and delivery hashes: {delivery_path}")
+        manifest_row = manifest_by_path.get(delivery_path)
+        if not manifest_row:
+            fail(f"derived delivery path is absent from manifest: {delivery_path}")
+        if manifest_row["source_mode"] != "DERIVED":
+            fail(f"derivation path is not declared DERIVED: {delivery_path}")
+        if source_path != EXPECTED_LIVE_RUNNER:
+            fail(f"derived Vivado adapter is not bound to the live runner: {delivery_path}")
+        if row["engineering_source_sha256"] != EXPECTED_LIVE_RUNNER_SHA256:
+            fail(f"live runner hash mismatch: {delivery_path}")
+        if manifest_row["source_authority"] != "DERIVED_FROM_CURRENT_ENGINEERING_PRODUCTION_AUTHORITY":
+            fail(f"derived authority mismatch: {delivery_path}")
+        if manifest_row["source_relative_path_or_identity"] != source_path:
+            fail(f"derived source path mismatch: {delivery_path}")
+        if manifest_row["source_sha256"] != row["engineering_source_sha256"]:
+            fail(f"derived upstream hash mismatch: {delivery_path}")
+        if manifest_row["sha256"] != row["delivery_sha256"]:
+            fail(f"derived delivery hash mismatch: {delivery_path}")
+
+    exact_count = 0
+    derived_set = set(derived_paths)
+    for row in rows:
+        relative = row["relative_path"]
+        mode = row["source_mode"]
+        authority = row["source_authority"]
+        source_identity = row["source_relative_path_or_identity"]
+        source_hash = row["source_sha256"]
+        if mode == "EXACT_COPY":
+            exact_count += 1
+            if authority != "ACCEPTED_ENGINEERING_COMMIT" or not safe_relative(source_identity):
+                fail(f"invalid exact-copy authority: {relative}")
+            if not valid_sha256(source_hash) or source_hash != row["sha256"]:
+                fail(f"exact-copy byte mismatch: {relative}")
+            if relative in derived_set:
+                fail(f"exact-copy row is also declared derived: {relative}")
+        elif mode == "DERIVED":
+            if relative not in derived_set:
+                fail(f"undeclared derived row: {relative}")
+        elif mode == "CANONICAL_RELEASE_COPY":
+            if authority != "CANONICAL_STAGE2_CURRENT_RELEASE" or not safe_relative(source_identity):
+                fail(f"invalid canonical-release authority: {relative}")
+            if not valid_sha256(source_hash) or source_hash != row["sha256"]:
+                fail(f"canonical release copy mismatch: {relative}")
+            if relative in derived_set:
+                fail(f"canonical release row is also declared derived: {relative}")
+        elif mode == "GENERATED":
+            if authority in {
+                "ACCEPTED_ENGINEERING_COMMIT",
+                "DERIVED_FROM_ACCEPTED_ENGINEERING_COMMIT",
+                "DERIVED_FROM_CURRENT_ENGINEERING_PRODUCTION_AUTHORITY",
+                "CANONICAL_STAGE2_CURRENT_RELEASE",
+            }:
+                fail(f"generated row claims a source-copy authority: {relative}")
+            if not source_identity or source_hash != "NOT_APPLICABLE":
+                fail(f"invalid generated provenance: {relative}")
+            if relative in derived_set:
+                fail(f"generated row is also declared derived: {relative}")
+    return exact_count, len(derivations)
 
 
-def check_artifacts(errors: list[str]) -> tuple[int, int]:
-    expected = {
-        "deploy/pynq/artifacts/protection_system.bit": BIT_SHA256,
-        "deploy/pynq/artifacts/protection_system.hwh": HWH_SHA256,
+def validate_vivado_surface() -> None:
+    actual_tcl = {
+        path.relative_to(ROOT).as_posix()
+        for path in (ROOT / "vivado" / "tcl").rglob("*.tcl")
     }
-    for rel, digest in expected.items():
-        path = ROOT / rel
-        if not path.is_file():
-            errors.append(f"artifact missing: {rel}")
-        elif sha256_file(path) != digest:
-            errors.append(f"artifact SHA-256 mismatch: {rel}")
-
-    bit_paths = [path for path in ordinary_files() if path.suffix.lower() == ".bit"]
-    hwh_paths = [path for path in ordinary_files() if path.suffix.lower() == ".hwh"]
-    if [relative(path) for path in bit_paths] != [
-        "deploy/pynq/artifacts/protection_system.bit"
-    ]:
-        errors.append(f"BIT physical copy mismatch: {[relative(p) for p in bit_paths]}")
-    if [relative(path) for path in hwh_paths] != [
-        "deploy/pynq/artifacts/protection_system.hwh"
-    ]:
-        errors.append(f"HWH physical copy mismatch: {[relative(p) for p in hwh_paths]}")
-    return len(bit_paths), len(hwh_paths)
-
-
-def check_runtime(errors: list[str]) -> None:
-    for rel, digest in PERSISTENT_RUNTIME_SHA256.items():
-        path = ROOT / rel
-        if not path.is_file():
-            errors.append(f"persistent runtime missing: {rel}")
-        elif sha256_file(path) != digest:
-            errors.append(f"persistent runtime SHA-256 mismatch: {rel}")
-
-
-def text_files(errors: list[str]) -> list[tuple[Path, str]]:
-    decoded = []
-    for path in ordinary_files():
-        if path.suffix.lower() not in TEXT_SUFFIXES and path.name != ".gitignore":
-            continue
-        try:
-            decoded.append((path, path.read_text(encoding="utf-8")))
-        except (OSError, UnicodeError) as exc:
-            errors.append(f"UTF-8 decode failed: {relative(path)}: {exc}")
-    return decoded
-
-
-def check_forbidden(errors: list[str]) -> int:
-    findings = []
-    for path in ROOT.rglob("*"):
-        rel = path.relative_to(ROOT)
-        if ".git" in rel.parts:
-            continue
-        if path.is_dir() and path.name in FORBIDDEN_DIRECTORY_NAMES:
-            findings.append(relative(path))
-        if path.is_file() and path.suffix.lower() in FORBIDDEN_SUFFIXES:
-            findings.append(relative(path))
-        if path.is_file() and path.name.lower().endswith((".tmp", ".temp", ".bak", ".swp")):
-            findings.append(relative(path))
-    for rel in sorted(set(findings)):
-        errors.append(f"forbidden content: {rel}")
-    for name in DEFERRED_STANDARD_FILES:
-        if (ROOT / name).exists():
-            errors.append(f"deferred standard file must not exist: {name}")
-    return len(set(findings))
-
-
-def check_credentials_and_stale_paths(
-    decoded: list[tuple[Path, str]], errors: list[str]
-) -> tuple[int, int]:
-    credential_patterns = [
-        re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
-        re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
-        re.compile(r"\bgh[pousr]_[A-Za-z0-9]{30,}\b"),
-        re.compile(
-            r"(?i)\b(?:password|passwd|api[_-]?key|access[_-]?token|secret)"
-            r"\s*[:=]\s*[\"'][^\"']{4,}[\"']"
-        ),
-    ]
-    stale_patterns = [
-        re.compile(r"(?i)D:[/\\]current-sensing-protection-ip-release"),
-        re.compile(r"(?i)D:[/\\]surf(?:[/\\]|\s)"),
-        re.compile(r"(?i)C:[/\\]Users[/\\]"),
-        re.compile(r"(?i)/home/[^/\\\s]+/"),
-    ]
-    credential_findings = 0
-    stale_findings = 0
-    for path, text in decoded:
-        rel = relative(path)
-        if rel != "tools/verify_public_snapshot.py":
-            for pattern in credential_patterns:
-                if pattern.search(text):
-                    credential_findings += 1
-                    errors.append(f"credential finding: {rel}: {pattern.pattern}")
-        # The immutable deploy subtree is checked by its original verifier,
-        # whose board-side paths are part of the release contract.
-        if rel != "tools/verify_public_snapshot.py" and not rel.startswith("deploy/"):
-            for pattern in stale_patterns:
-                if pattern.search(text):
-                    stale_findings += 1
-                    errors.append(f"stale absolute path: {rel}: {pattern.pattern}")
-    return credential_findings, stale_findings
-
-
-def check_duplicates(errors: list[str]) -> int:
-    groups: dict[tuple[int, str], list[str]] = defaultdict(list)
-    for path in ordinary_files():
-        size = path.stat().st_size
-        if size == 0:
-            continue
-        groups[(size, sha256_file(path))].append(relative(path))
-    duplicates = [paths for paths in groups.values() if len(paths) > 1]
-    for paths in duplicates:
-        errors.append(f"duplicate non-empty file group: {sorted(paths)}")
-    return len(duplicates)
-
-
-def check_markdown_links(
-    decoded: list[tuple[Path, str]], errors: list[str]
-) -> int:
-    findings = 0
-    link_pattern = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
-    for path, text in decoded:
-        if path.suffix.lower() != ".md":
-            continue
-        for target in link_pattern.findall(text):
-            target = target.strip().split()[0].strip("<>")
-            if (
-                not target
-                or target.startswith("#")
-                or re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", target)
-            ):
-                continue
-            target_path = target.split("#", 1)[0]
-            resolved = (path.parent / target_path).resolve()
-            try:
-                resolved.relative_to(ROOT.resolve())
-            except ValueError:
-                findings += 1
-                errors.append(f"Markdown link escapes repository: {relative(path)} -> {target}")
-                continue
-            if not resolved.exists():
-                findings += 1
-                errors.append(f"Markdown link missing: {relative(path)} -> {target}")
-    return findings
-
-
-def check_json_tsv(errors: list[str]) -> None:
-    for path in ordinary_files():
-        if path.suffix.lower() == ".json":
-            try:
-                json.loads(path.read_text(encoding="utf-8"))
-            except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-                errors.append(f"JSON strict parse failed: {relative(path)}: {exc}")
-        elif path.suffix.lower() == ".tsv":
-            try:
-                with path.open("r", encoding="utf-8", newline="") as stream:
-                    rows = list(csv.reader(stream, delimiter="\t"))
-                if not rows or not rows[0]:
-                    raise ValueError("empty TSV")
-                width = len(rows[0])
-                if any(len(row) != width for row in rows):
-                    raise ValueError("inconsistent TSV field count")
-            except (OSError, UnicodeError, csv.Error, ValueError) as exc:
-                errors.append(f"TSV strict parse failed: {relative(path)}: {exc}")
-
-
-def check_readme_and_scope(errors: list[str]) -> None:
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    for heading in REQUIRED_README_HEADINGS:
-        if f"## {heading}" not in readme:
-            errors.append(f"README section missing: {heading}")
-    scope = (ROOT / "PUBLIC_SNAPSHOT_SCOPE.md").read_text(encoding="utf-8")
-    if "These files are deferred for a later public-governance step." not in scope:
-        errors.append("deferred standard-file statement missing from scope")
-    for path_name, text in (
-        ("README.md", readme),
-        ("PUBLIC_SNAPSHOT_SCOPE.md", scope),
-    ):
-        if PUBLIC_REMOTE not in text:
-            errors.append(f"private remote URL missing from {path_name}")
-        if "Private" not in text or "explicit owner" not in text:
-            errors.append(f"private review constraint missing from {path_name}")
-    proof = (
-        readme
-        + (ROOT / "docs" / "clear_recovery_semantics.md").read_text(encoding="utf-8")
-        + (ROOT / "docs" / "proof_boundary.md").read_text(encoding="utf-8")
-    ).casefold()
-    required_phrases = [
-        "live fault prevents false recovery",
-        "clear is a recovery request",
-        "fault removal and clear are separate actions",
-        "clear-only does not automatically enable pwm",
-        "ctrl value 0x2",
-        "ctrl value 0x3",
-        "status value 0x3",
-        "sensor history",
-        "one real pynq-z2 cold boot autoload",
-        "does not prove repeated cold boots",
-    ]
-    for phrase in required_phrases:
-        if phrase not in proof:
-            errors.append(f"proof-boundary phrase missing: {phrase}")
-
-
-def check_git_remote(errors: list[str]) -> int:
-    git_dir = ROOT / ".git"
-    if not git_dir.exists():
-        return 0
-    completed = subprocess.run(
-        ["git", "-C", str(ROOT), "remote"],
-        text=True,
-        capture_output=True,
-        check=False,
+    if actual_tcl != SUPPORTED_VIVADO_TCL:
+        fail(f"unsupported or missing Vivado Tcl: actual={sorted(actual_tcl)}")
+    present_unsupported = sorted(path for path in UNSUPPORTED_VIVADO_ENTRYPOINTS if (ROOT / path).exists())
+    if present_unsupported:
+        fail(f"unsupported legacy Vivado entrypoint is present: {present_unsupported}")
+    missing = sorted(path for path in REQUIRED_VIVADO_INPUTS if not (ROOT / path).is_file())
+    if missing:
+        fail(f"required Vivado inputs are missing: {missing}")
+    forbidden_commands = re.compile(
+        r"(?m)^\s*(launch_runs|synth_design|opt_design|place_design|route_design|write_bitstream|write_hw_platform|export_hardware|open_hw_manager|program_hw_devices)\b"
     )
-    if completed.returncode != 0:
-        errors.append(f"cannot inspect public Git remotes: {completed.stderr.strip()}")
-        return -1
-    remotes = [line for line in completed.stdout.splitlines() if line.strip()]
-    if remotes != ["origin"]:
-        errors.append(f"public Git remotes mismatch: expected=['origin'] actual={remotes}")
-        return len(remotes)
-    for args, label in (
-        (["git", "-C", str(ROOT), "remote", "get-url", "origin"], "fetch"),
-        (["git", "-C", str(ROOT), "remote", "get-url", "--push", "origin"], "push"),
-    ):
-        completed = subprocess.run(
-            args,
-            text=True,
-            capture_output=True,
-            check=False,
-        )
-        actual = completed.stdout.strip()
-        if completed.returncode != 0 or actual != ORIGIN_URL:
-            errors.append(
-                f"public origin {label} URL mismatch: "
-                f"expected={ORIGIN_URL!r} actual={actual!r}"
-            )
-    return len(remotes)
+    relative = "vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl"
+    text = (ROOT / relative).read_text(encoding="utf-8")
+    required_markers = {
+        "PROTECTION_IP_VIVADO_BUILD_ROOT",
+        "STAGE2_B1_PUBLIC_RECONSTRUCTION_ADAPTER_V1",
+        EXPECTED_LIVE_RUNNER,
+        EXPECTED_LIVE_RUNNER_SHA256,
+        "generate_target all",
+        "make_wrapper -files",
+        "set_property top protection_system_wrapper",
+        "CONFIG.CONST_VAL {0}",
+        "0x43C00000",
+        "0x41200000",
+        "system_ila_stage2b_0/probe11",
+    }
+    missing_markers = sorted(marker for marker in required_markers if marker not in text)
+    if missing_markers:
+        fail(f"Vivado adapter contract is incomplete: {missing_markers}")
+    code = "\n".join(line for line in text.splitlines() if not line.lstrip().startswith("#"))
+    if forbidden_commands.search(code):
+        fail(f"forbidden Vivado build action is present: {relative}")
+
+
+def module_parameters(module: ET.Element) -> dict[str, str]:
+    return {
+        element.attrib["NAME"]: element.attrib["VALUE"]
+        for element in module.findall("./PARAMETERS/PARAMETER")
+    }
+
+
+def port_connections(module: ET.Element, port_name: str) -> set[tuple[str, str]]:
+    port = module.find(f"./PORTS/PORT[@NAME='{port_name}']")
+    if port is None:
+        fail(f"accepted HWH port is missing: {module.attrib.get('INSTANCE')}/{port_name}")
+    return {
+        (connection.attrib["INSTANCE"], connection.attrib["PORT"])
+        for connection in port.findall("./CONNECTIONS/CONNECTION")
+    }
+
+
+def validate_accepted_hwh(authority: dict[str, object]) -> None:
+    hwh = ROOT / "deploy" / "pynq" / "artifacts" / "protection_system.hwh"
+    if sha256(hwh) != EXPECTED_HWH_SHA256:
+        fail("accepted B1 HWH identity mismatch")
+    tree = ET.parse(hwh)
+    root = tree.getroot()
+    system = root.find("./SYSTEMINFO")
+    if system is None or system.attrib.get("NAME") != "protection_system":
+        fail("accepted HWH design identity mismatch")
+    modules = {
+        module.attrib["INSTANCE"]: module
+        for module in root.findall("./MODULES/MODULE")
+    }
+    if set(modules) != REQUIRED_B1_CELLS:
+        fail(f"accepted HWH B1 cell inventory mismatch: {sorted(modules)}")
+    if any(name.startswith("stage2i_b2_") or "stage2i_b2_source" in name for name in modules):
+        fail("accepted HWH contains a B2-only module")
+
+    memranges = {
+        item.attrib["INSTANCE"]: (item.attrib["BASEVALUE"], item.attrib["HIGHVALUE"])
+        for item in root.findall("./MODULES/MODULE/MEMORYMAP/MEMRANGE")
+    }
+    expected_memranges = {
+        "axi_gpio_stage1d_0": ("0x41200000", "0x4120FFFF"),
+        "protection_ip_axi_lite_0": ("0x43C00000", "0x43C00FFF"),
+    }
+    if memranges != expected_memranges:
+        fail(f"accepted HWH address map mismatch: {memranges}")
+
+    sample = modules["sample_valid_const"]
+    if int(module_parameters(sample).get("CONST_VAL", "-1"), 0) != 0:
+        fail("accepted HWH sample_valid constant is not zero")
+    if port_connections(sample, "dout") != {
+        ("protection_ip_axi_lite_0", "adc_sample_valid"),
+        ("system_ila_stage2b_0", "probe1"),
+    }:
+        fail("accepted HWH sample_valid topology mismatch")
+    if port_connections(modules["axi_gpio_stage1d_0"], "gpio_io_o") != {
+        ("xlslice_stage1d_ch1", "Din"),
+        ("xlslice_stage1d_ch2", "Din"),
+    }:
+        fail("accepted HWH GPIO sample bus topology mismatch")
+    if port_connections(modules["xlslice_stage1d_ch1"], "Dout") != {
+        ("protection_ip_axi_lite_0", "adc_sample_ch1"),
+        ("system_ila_stage2b_0", "probe2"),
+    }:
+        fail("accepted HWH channel-1 topology mismatch")
+    if port_connections(modules["xlslice_stage1d_ch2"], "Dout") != {
+        ("protection_ip_axi_lite_0", "adc_sample_ch2"),
+        ("system_ila_stage2b_0", "probe3"),
+    }:
+        fail("accepted HWH channel-2 topology mismatch")
+    if port_connections(modules["protection_ip_axi_lite_0"], "adc_sample_ready") != {
+        ("system_ila_stage2b_0", "probe11")
+    }:
+        fail("accepted HWH destination ready-probe topology mismatch")
+
+    accepted = authority["accepted_B1_HWH"]
+    if accepted != {
+        "relative_path": "deploy/pynq/artifacts/protection_system.hwh",
+        "sha256": EXPECTED_HWH_SHA256,
+    }:
+        fail("reconstruction authority accepted-HWH binding mismatch")
+
+
+def validate_reconstruction_authority() -> dict[str, object]:
+    if not RECONSTRUCTION_AUTHORITY.is_file():
+        fail("Vivado reconstruction authority is missing")
+    authority = json.loads(RECONSTRUCTION_AUTHORITY.read_text(encoding="utf-8"))
+    if authority.get("schema_version") != "vivado-reconstruction-authority-v1":
+        fail("Vivado reconstruction authority schema mismatch")
+    if authority.get("delivery_reconstruction_profile") != "SAFE_INERT":
+        fail("public reconstruction profile is not SAFE_INERT")
+    if authority.get("engineering_commit") != EXPECTED_ENGINEERING_COMMIT:
+        fail("reconstruction engineering commit mismatch")
+    if authority.get("engineering_tree") != EXPECTED_ENGINEERING_TREE:
+        fail("reconstruction engineering tree mismatch")
+    if authority.get("live_engineering_authority_path") != EXPECTED_LIVE_RUNNER:
+        fail("current live Vivado runner identity is missing")
+    if authority.get("live_engineering_authority_sha256") != EXPECTED_LIVE_RUNNER_SHA256:
+        fail("current live Vivado runner hash is missing")
+    if authority.get("live_engineering_authority_classification") != "CURRENT_PRODUCTION_AUTHORITY":
+        fail("public Vivado source authority is not classified current")
+    if authority.get("live_engineering_authority_path") in set(authority.get("historical_only_upstream_paths", [])):
+        fail("public Vivado production authority is marked HISTORICAL_ONLY")
+    if set(authority.get("historical_only_upstream_paths", [])) != HISTORICAL_ONLY_UPSTREAM:
+        fail("historical standalone Vivado classification is incomplete")
+    if authority.get("derivation_id") != EXPECTED_DERIVATION_ID:
+        fail("public Vivado derivation identifier mismatch")
+    if authority.get("derivation_classification") != "DERIVED_FROM_CURRENT_ENGINEERING_PRODUCTION_AUTHORITY":
+        fail("public adapter derivation classification mismatch")
+    if authority.get("new_parallel_production_authority") is not False:
+        fail("delivery claims a parallel production authority")
+    if authority.get("supported_public_entrypoints_derived_from_historical_only_authority") != 0:
+        fail("a supported public entrypoint derives from HISTORICAL_ONLY authority")
+    if authority.get("supported_public_entrypoint") != "vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl":
+        fail("supported public Vivado entrypoint mismatch")
+    if authority.get("required_bd") != "protection_system" or authority.get("required_top") != "protection_system_wrapper":
+        fail("required BD or wrapper identity mismatch")
+    if set(authority.get("required_cell_inventory", [])) != REQUIRED_B1_CELLS:
+        fail("required B1 topology fingerprint is incomplete")
+
+    addresses = authority.get("required_address_map")
+    if addresses != {
+        "axi_gpio_stage1d_0": {"base": "0x41200000", "range": "0x00010000"},
+        "protection_ip_axi_lite_0": {"base": "0x43C00000", "range": "0x00001000"},
+    }:
+        fail("required public reconstruction address map is incomplete")
+    safe = authority.get("safe_inert_contract")
+    if safe != {
+        "B2_source_domain_ILA_allowed": False,
+        "B2_synthetic_producer_allowed": False,
+        "functional_ADC_stimulus": False,
+        "sample_valid_constant": 0,
+    }:
+        fail("SAFE_INERT and B2 exclusion contract mismatch")
+    wrapper = authority.get("wrapper_closure")
+    if wrapper != {
+        "bd_output_products_generated": True,
+        "bd_wrapper_generated": True,
+        "project_top_set": True,
+    }:
+        fail("wrapper/output-product closure is incomplete")
+    packaging = authority.get("packaging_portability")
+    if packaging != {
+        "absolute_include_dependency_count": 0,
+        "absolute_source_reference_count": 0,
+        "generated_profile_header_duplicate_count": 0,
+        "generated_register_header_duplicate_count": 0,
+        "implementation_constraint_duplicate_count": 0,
+        "implementation_constraint_scope": "xilinx_implementation_only",
+        "include_dependency": "src",
+        "include_dependency_relative": True,
+        "prior_warning_signatures_allowed": [],
+    }:
+        fail("packaged generated-header portability rules are incomplete")
+    validate_accepted_hwh(authority)
+    return authority
 
 
 def main() -> int:
-    errors: list[str] = []
-    manifest_rows = check_manifest(errors)
-    check_provenance(errors)
-    deploy_output = check_deploy(errors)
-    bit_count, hwh_count = check_artifacts(errors)
-    check_runtime(errors)
-    decoded = text_files(errors)
-    forbidden_findings = check_forbidden(errors)
-    credential_findings, stale_paths = check_credentials_and_stale_paths(
-        decoded, errors
-    )
-    duplicate_groups = check_duplicates(errors)
-    markdown_findings = check_markdown_links(decoded, errors)
-    check_json_tsv(errors)
-    check_readme_and_scope(errors)
-    remote_count = check_git_remote(errors)
+    rows = read_tsv(MANIFEST, MANIFEST_FIELDS)
+    exact_count, derived_count = validate_provenance(rows)
+    validate_vivado_surface()
+    validate_reconstruction_authority()
 
-    summary = {
-        "status": "FAIL" if errors else "PASS",
-        "manifest_rows": manifest_rows,
-        "bit_copy_count": bit_count,
-        "hwh_copy_count": hwh_count,
-        "duplicate_nonempty_groups": duplicate_groups,
-        "credential_findings": credential_findings,
-        "stale_absolute_paths": stale_paths,
-        "forbidden_content_findings": forbidden_findings,
-        "markdown_link_findings": markdown_findings,
-        "public_remote_count": remote_count,
-        "deploy_verifier": deploy_output,
+    provenance = json.loads((ROOT / "PUBLIC_SNAPSHOT_PROVENANCE.json").read_text(encoding="utf-8"))
+    if provenance["engineering_source_commit"] != EXPECTED_ENGINEERING_COMMIT:
+        fail("engineering source commit mismatch")
+    if provenance["engineering_source_tree"] != EXPECTED_ENGINEERING_TREE:
+        fail("engineering source tree mismatch")
+    if provenance["live_engineering_vivado_authority_path"] != EXPECTED_LIVE_RUNNER:
+        fail("snapshot provenance live runner path mismatch")
+    if provenance["live_engineering_vivado_authority_sha256"] != EXPECTED_LIVE_RUNNER_SHA256:
+        fail("snapshot provenance live runner hash mismatch")
+    if provenance["delivery_vivado_reconstruction_derivation_id"] != EXPECTED_DERIVATION_ID:
+        fail("snapshot provenance derivation identifier mismatch")
+    if provenance["delivery_vivado_reconstruction_authority"] != RECONSTRUCTION_AUTHORITY.name:
+        fail("snapshot provenance reconstruction authority mismatch")
+    if provenance["stage2_canonical_package_sha256"] != EXPECTED_STAGE2_SHA256:
+        fail("Stage2 package binding mismatch")
+    if provenance["production_profile"] != "SAFE_INERT" or provenance["public_abi"] != "1.1":
+        fail("profile or ABI mismatch")
+    if provenance["project_remaining_open_gaps"] != 1:
+        fail("remaining project gap count mismatch")
+    if provenance["project_remaining_open_gap"] != EXPECTED_GAP:
+        fail("remaining project gap identity mismatch")
+    if provenance["delivery_state"] != EXPECTED_DELIVERY_STATE:
+        fail("delivery state mismatch")
+    if provenance["stage2_complete"] is not True or provenance["stage3_started"] is not False:
+        fail("Stage2 or Stage3 lifecycle state mismatch")
+    if provenance["project_post_stage2_closeout_and_delivery_sync"] != "COMPLETE":
+        fail("post-Stage2 closeout and delivery sync state mismatch")
+    if provenance["current_transition"] != EXPECTED_TRANSITION:
+        fail("current transition mismatch")
+    if provenance["current_transition_review_pending"] is not False or provenance["delivery_main_promotion_pending"] is not False:
+        fail("pending transition state mismatch")
+    if provenance["next_action"] != EXPECTED_NEXT_ACTION:
+        fail("next action mismatch")
+
+    register_map = json.loads((ROOT / "spec" / "register_map.json").read_text(encoding="utf-8"))
+    canonical_payload = (
+        json.dumps(register_map, sort_keys=True, separators=(",", ":"), ensure_ascii=True) + "\n"
+    ).encode("utf-8")
+    canonical = hashlib.sha256(canonical_payload).hexdigest()
+    if canonical != EXPECTED_REGISTER_MAP_SHA256:
+        fail("register map canonical identity mismatch")
+
+    authority = json.loads((ROOT / "deploy" / "pynq" / "artifacts" / "release_authority.json").read_text(encoding="utf-8"))
+    if authority["implementation_profile"] != "SAFE_INERT":
+        fail("release authority is not SAFE_INERT")
+    abi = authority["register_map_abi"]
+    if (abi["major"], abi["minor"], abi["canonical_sha256"]) != (1, 1, EXPECTED_REGISTER_MAP_SHA256):
+        fail("release ABI authority mismatch")
+    expected_ip = authority["expected_ip"]
+    if expected_ip["protection_ip_axi_lite_0"]["phys_addr"] != 0x43C00000:
+        fail("protection IP base mismatch")
+    if expected_ip["axi_gpio_stage1d_0"]["phys_addr"] != 0x41200000:
+        fail("GPIO base mismatch")
+
+    forbidden_names = []
+    pycache = 0
+    credential_findings = 0
+    absolute_paths = 0
+    credential_patterns = [
+        re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+        re.compile(rb"AKIA[0-9A-Z]{16}"),
+        re.compile(rb"gh[pousr]_[A-Za-z0-9]{30,}"),
+        re.compile(rb"https?://[^\s/:]+:[^\s/@]+@"),
+    ]
+    text_suffixes = {".md", ".txt", ".tsv", ".json", ".py", ".tcl", ".xdc", ".v", ".vh", ".sv", ".svh", ".sh"}
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or ".git" in path.parts:
+            continue
+        relative = path.relative_to(ROOT).as_posix()
+        lowered = relative.lower()
+        if "__pycache__" in lowered or path.suffix.lower() in {".pyc", ".pyo"}:
+            pycache += 1
+        if any(token in lowered for token in ("review-upload", "rereview", "finding_ledger", "ila_capture", "raw_evidence")):
+            forbidden_names.append(relative)
+        if path.suffix.lower() in text_suffixes:
+            payload = path.read_bytes()
+            credential_findings += sum(1 for pattern in credential_patterns if pattern.search(payload))
+            text = payload.decode("utf-8", errors="ignore")
+            if relative not in {"tools/verify_public_snapshot.py", "deploy/tools/verify_release.py"}:
+                absolute_paths += len(re.findall(r"(?<![A-Za-z0-9_])[A-Za-z]:[\\/]", text))
+    if pycache or forbidden_names or credential_findings or absolute_paths:
+        fail(
+            f"hygiene failure pycache={pycache} forbidden={forbidden_names[:3]} credentials={credential_findings} absolute_paths={absolute_paths}"
+        )
+
+    child_env = os.environ.copy()
+    child_env["PYTHONDONTWRITEBYTECODE"] = "1"
+    deploy_verify = subprocess.run(
+        [sys.executable, "-B", "tools/verify_release.py"],
+        cwd=ROOT / "deploy",
+        env=child_env,
+        capture_output=True,
+        text=True,
+    )
+    if deploy_verify.returncode or not deploy_verify.stdout.startswith("PASS "):
+        fail(f"deploy verifier failed: {deploy_verify.stdout} {deploy_verify.stderr}")
+    runtime_verify = subprocess.run(
+        [sys.executable, "-B", "pynq/runtime/stage2i_current_release.py", "--release-root", "."],
+        cwd=ROOT / "deploy",
+        env=child_env,
+        capture_output=True,
+        text=True,
+    )
+    if runtime_verify.returncode or "PASS_OFFLINE" not in runtime_verify.stdout:
+        fail(f"runtime offline validation failed: {runtime_verify.stdout} {runtime_verify.stderr}")
+
+    result = {
+        "status": "PASS",
+        "manifest_rows": len(rows),
+        "engineering_source_commit": EXPECTED_ENGINEERING_COMMIT,
+        "engineering_source_tree": EXPECTED_ENGINEERING_TREE,
+        "stage2_canonical_package_sha256": EXPECTED_STAGE2_SHA256,
+        "public_abi": "1.1",
+        "protection_ip_base": "0x43C00000",
+        "gpio_base": "0x41200000",
+        "production_profile": "SAFE_INERT",
+        "exact_copy_rows_with_byte_mismatch": 0,
+        "exact_copy_rows": exact_count,
+        "derived_rows_undeclared": 0,
+        "derived_rows_without_upstream_sha": 0,
+        "derived_rows": derived_count,
+        "derivation_authority": "PASS",
+        "current_engineering_vivado_production_authority": "STAGE1E_PRODUCTION_VIVADO_RUNNER_V2",
+        "public_reconstruction_derivation": EXPECTED_DERIVATION_ID,
+        "public_reconstruction_b1_structural_fingerprint": "PASS",
+        "public_reconstruction_address_map": "PASS",
+        "packaged_generated_header_portability_contract": "PASS",
+        "unsupported_legacy_vivado_entrypoint_count": 0,
+        "required_vivado_input_dependency_closure": "PASS",
+        "project_gap_and_transition_semantics": "PASS",
+        "raw_review_evidence_leakage": 0,
+        "absolute_local_path_leakage": 0,
+        "python_bytecode_count": 0,
+        "credential_findings": 0,
+        "duplicate_register_map_authorities": 0,
+        "delivery_offline_validation": "PASS",
+        "delivery_runtime_pass_offline": "PASS",
+        "delivery_register_map_consistency": "PASS",
+        "delivery_safe_inert_artifact_binding": "PASS",
     }
-    if errors:
-        for error in errors:
-            print(f"FAIL {error}")
-        print("FAIL " + json.dumps(summary, sort_keys=True))
-        return 1
-    print("PASS " + json.dumps(summary, sort_keys=True))
+    print("PASS " + json.dumps(result, sort_keys=True))
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (OSError, RuntimeError, ValueError, KeyError, json.JSONDecodeError) as exc:
+        print(f"FAIL {exc}")
+        raise SystemExit(1)

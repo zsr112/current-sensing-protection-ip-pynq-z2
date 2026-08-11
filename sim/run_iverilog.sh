@@ -23,11 +23,13 @@ if ! command -v vvp >/dev/null 2>&1; then
 fi
 
 COMMON_RTL=(
+  "$RTL_DIR/reset_release_sync.v"
   "$RTL_DIR/pwm_gen.v"
   "$RTL_DIR/pwm_gate.v"
   "$RTL_DIR/current_compare_dual.v"
   "$RTL_DIR/moving_avg_filter.v"
   "$RTL_DIR/sensor_health_monitor.v"
+  "$RTL_DIR/transaction_destination_observer.v"
   "$RTL_DIR/fault_classifier.v"
   "$RTL_DIR/protection_fsm.v"
   "$RTL_DIR/protection_core_top.v"
@@ -84,7 +86,7 @@ for tb in "${SELECTED[@]}"; do
   log_file="$BUILD_DIR/$tb.log"
 
   echo "[RUN] $tb"
-  if iverilog -g2012 -I "$RTL_DIR" -o "$vvp_file" "${COMMON_RTL[@]}" "$TB_DIR/$tb.sv" >"$log_file" 2>&1; then
+  if iverilog -g2012 -I "$RTL_DIR" -I "$TB_DIR/generated" -o "$vvp_file" "${COMMON_RTL[@]}" "$TB_DIR/$tb.sv" >"$log_file" 2>&1; then
     if (cd "$REPO_ROOT" && vvp "$vvp_file" >>"$log_file" 2>&1); then
       if grep -Eq "(ALL TESTS PASSED| PASS)" "$log_file"; then
         echo "[PASS] $tb"

@@ -1,0 +1,79 @@
+{
+  "accepted_B1_HWH": {
+    "relative_path": "deploy/pynq/artifacts/protection_system.hwh",
+    "sha256": "3daba403062492d5ab177cf3e0825782e0960c8cfad072eb09b8cb19fa5e61c1"
+  },
+  "delivery_reconstruction_profile": "SAFE_INERT",
+  "derivation_classification": "DERIVED_FROM_CURRENT_ENGINEERING_PRODUCTION_AUTHORITY",
+  "derivation_id": "STAGE2_B1_PUBLIC_RECONSTRUCTION_ADAPTER_V1",
+  "engineering_commit": "9c5e6f6ac7dc311f12755c8b1713433d35e39bff",
+  "engineering_tree": "b1cfec1b073770c03bad9fa5b298b0bd1f3923c3",
+  "historical_only_upstream_paths": [
+    "fpga/vivado/create_pynq_z2_project_stage1_boardpart.tcl",
+    "fpga/vivado/create_pynq_z2_stage2_bd.tcl",
+    "fpga/vivado/package_protection_ip_stage2_axi_lite.tcl"
+  ],
+  "live_engineering_authority_classification": "CURRENT_PRODUCTION_AUTHORITY",
+  "live_engineering_authority_path": "fpga/vivado/build/runtime/runner/stage1e_production_vivado_runner_v2.tcl",
+  "live_engineering_authority_sha256": "5da3f9ee6f3c6ef9069e9e8074f9f22213b797646d143bbc913021cbbd52c2ad",
+  "new_parallel_production_authority": false,
+  "packaging_portability": {
+    "absolute_include_dependency_count": 0,
+    "absolute_source_reference_count": 0,
+    "generated_profile_header_duplicate_count": 0,
+    "generated_register_header_duplicate_count": 0,
+    "implementation_constraint_duplicate_count": 0,
+    "implementation_constraint_scope": "xilinx_implementation_only",
+    "include_dependency": "src",
+    "include_dependency_relative": true,
+    "prior_warning_signatures_allowed": []
+  },
+  "required_address_map": {
+    "axi_gpio_stage1d_0": {
+      "base": "0x41200000",
+      "range": "0x00010000"
+    },
+    "protection_ip_axi_lite_0": {
+      "base": "0x43C00000",
+      "range": "0x00001000"
+    }
+  },
+  "required_bd": "protection_system",
+  "required_cell_inventory": [
+    "axi_gpio_stage1d_0",
+    "dcm_locked_const",
+    "proc_sys_reset_0",
+    "processing_system7_0",
+    "protection_ip_axi_lite_0",
+    "sample_valid_const",
+    "smartconnect_0",
+    "system_ila_stage2b_0",
+    "xlslice_stage1d_ch1",
+    "xlslice_stage1d_ch2"
+  ],
+  "required_connections": {
+    "adc_sample_ch1_source": "xlslice_stage1d_ch1/Dout",
+    "adc_sample_ch2_source": "xlslice_stage1d_ch2/Dout",
+    "adc_sample_ready_destination_probe": "system_ila_stage2b_0/probe11",
+    "adc_sample_valid_source": "sample_valid_const/dout",
+    "gpio_sample_bus_sinks": [
+      "xlslice_stage1d_ch1/Din",
+      "xlslice_stage1d_ch2/Din"
+    ]
+  },
+  "required_top": "protection_system_wrapper",
+  "safe_inert_contract": {
+    "B2_source_domain_ILA_allowed": false,
+    "B2_synthetic_producer_allowed": false,
+    "functional_ADC_stimulus": false,
+    "sample_valid_constant": 0
+  },
+  "schema_version": "vivado-reconstruction-authority-v1",
+  "supported_public_entrypoint": "vivado/tcl/reconstruct_stage2_b1_safe_inert.tcl",
+  "supported_public_entrypoints_derived_from_historical_only_authority": 0,
+  "wrapper_closure": {
+    "bd_output_products_generated": true,
+    "bd_wrapper_generated": true,
+    "project_top_set": true
+  }
+}

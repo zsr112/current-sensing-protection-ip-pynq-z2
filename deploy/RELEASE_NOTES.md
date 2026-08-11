@@ -1,15 +1,11 @@
 # Release Notes
 
-Release ID: `current-sensing-protection-ip-e0f8dfdf481d-pynq-z2`.
+Release ID: `current-sensing-protection-ip-7ad1681f5c49-pynq-z2-stage2i`.
 
-Engineering source: `e0f8dfdf481d91edd35b50848c86fa0c484e513d` (tree `99ad1db325caed406d23e5966abb1f7305010641`). Board runtime anchor: `1a365d5139f963ac4d8f92158dcd2928e86ccf36` (tree `244cba11579c7fdc39353391ac35a78ede20ec97`).
+Engineering main commit: `7ad1681f5c49128ec2f10b13d6a41e7be0de62f4` (tree `d5de93f366ecd4f15e5371e110b8ffc701336783`). Physical artifact source commit: `75e5251cd4878a44f5b77d34dc6da160178102a8` (tree `d5de93f366ecd4f15e5371e110b8ffc701336783`), execution `S2IB-RECLOSE-B1-20260810T1838Z-75e5251`. The two trees are equal.
 
-Included: one accepted BIT/HWH pair, four byte-identical Stage 1G persistent runtime files, systemd unit,
-install/status/uninstall helpers, read-only observation example, register/recovery documentation, provenance,
-manifest, and self-verifier.
+Included: SAFE_INERT BIT/HWH, external physical authority record, one-shot current runtime, current software
+interface, generated ABI 1.1 map, read-only example, documentation, provenance, manifest, and self-verifier.
 
-Excluded: RTL/testbench source sets, Vivado workspace/runs/reports, DCP/LTX, evidence, board logs, archives,
-handoffs, inventory, audits, PYNQ OS image, source packages, credentials, caches, screenshots and history.
-
-This release does not claim commercial, production, airworthiness or power-level readiness. The engineering
-source commit was not rerun on the board and no new Vivado implementation, BIT or HWH was generated.
+Excluded: LTX/XSA deployment copies, systemd/reboot payload, Vivado workspaces, board evidence, credentials,
+historical Stage1 runtime, and physical-board execution claims.

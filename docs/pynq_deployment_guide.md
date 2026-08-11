@@ -1,19 +1,5 @@
-# PYNQ-Z2 Deployment Guide
+# PYNQ-Z2 Deployment
 
-## Direct Deployment
+Use the complete release under `deploy/`. Run its self-verifier before programming, then use the one-shot runtime described by `deploy/QUICK_START.md`.
 
-deploy is the sole deployment authority. It is the complete verified release and preserves the original internal paths, manifest, VERSION, provenance, verifier, artifacts, installers, runtime, service unit, documents, and example.
-
-Run the release verifier before use:
-
-    python deploy/tools/verify_release.py
-
-Then follow deploy/QUICK_START.md. Deployment and service operations should be performed only by an operator who understands the board and system boundary.
-
-## Source Interface
-
-pynq/source/protection_ip_interface.py provides a small MMIO-facing interface and a safe recovery sequence. Its host-side contract tests do not access a board:
-
-    python -m unittest discover -s pynq/source/tests -p "test_*.py" -v
-
-This source is not a duplicate of the persistent runtime in deploy.
+The release does not install a persistent systemd service and does not claim reboot persistence. It validates ABI 1.1, HWH address metadata, and the SAFE_INERT artifact binding offline before board use.

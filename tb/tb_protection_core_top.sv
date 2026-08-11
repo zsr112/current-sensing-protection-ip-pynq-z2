@@ -111,6 +111,7 @@ module tb_protection_core_top;
       sample_valid = 1'b1;
       @(negedge clk);
       sample_valid = 1'b0;
+      @(posedge clk);
       #1;
     end
   endtask
@@ -363,7 +364,7 @@ module tb_protection_core_top;
       sample(12'd500, 12'd510);
       sample(12'd500, 12'd510);
       wait_for_latch(qid, `FAULT_SENSOR_STUCK);
-      if (!stuck_f || !fault_valid || state !== ST_FAULT_LATCHED || !dut.u_fsm.pwm_disable)
+      if (!stuck_f || state !== ST_FAULT_LATCHED || !dut.u_fsm.pwm_disable)
         $fatal(1, "%s public-input stuck setup was incomplete", qid);
     end
   endtask
@@ -395,12 +396,16 @@ module tb_protection_core_top;
   endtask
 
   task automatic q_remove_overcurrent_source(input string qid);
+    integer guard;
     begin
-      @(negedge clk);
-      i1 = 12'd500;
-      i2 = 12'd510;
-      sample_valid = 1'b0;
-      q_wait_live_low(qid);
+      drive_current(12'd500, 12'd510, 1'b1);
+      guard = 0;
+      while (dut.accepted_sample_valid || dut.sample_decision_valid || fault_valid) begin
+        @(posedge clk); #1;
+        guard = guard + 1;
+        if (guard > 12)
+          $fatal(1, "%s timeout draining accepted safe transaction", qid);
+      end
       if (code_latched !== `FAULT_OVERCURRENT || state !== ST_FAULT_LATCHED)
         $fatal(1, "%s overcurrent source removal did not retain latch/code", qid);
     end
@@ -493,18 +498,27 @@ module tb_protection_core_top;
 
   task automatic run_qsim05_core_reassertion;
     begin
-      $display("Q-SIM-05 core-input reassertion at early, candidate-final, and post-completion boundaries");
+      $display("Q-SIM-05 accepted-transaction reassertion at early, candidate-final, and post-completion boundaries");
 
       q_make_overcurrent_fault("Q-SIM-05 early");
       @(negedge clk); pwm_enable = 1'b0;
       q_remove_overcurrent_source("Q-SIM-05 early");
-      @(negedge clk); clear_fault = 1'b1;
+      @(negedge clk);
+      i1 = 12'd1300;
+      i2 = 12'd1320;
+      sample_valid = 1'b1;
+      clear_fault = 1'b1;
       @(posedge clk); #1;
-      @(negedge clk); clear_fault = 1'b0;
+      if (state !== ST_RESET_WAIT || !fault_latched)
+        $fatal(1, "Q-SIM-05 early E0 clear/accept mismatch");
+      @(negedge clk);
+      sample_valid = 1'b0;
+      clear_fault = 1'b0;
       @(posedge clk); #1;
-      @(negedge clk); i1 = 12'd1300; i2 = 12'd1320;
       @(posedge clk); #1;
-      if (!fault_valid || state !== ST_RESET_WAIT || !fault_latched || !dut.u_fsm.pwm_disable)
+      if (!fault_valid || state !== ST_RESET_WAIT ||
+          dut.u_fsm.reset_wait_cnt !== 16'd2 || !fault_latched ||
+          !dut.u_fsm.pwm_disable)
         $fatal(1, "Q-SIM-05 early reassertion pipeline visibility mismatch");
       @(posedge clk); #1;
       if (state !== ST_FAULT_LATCHED || !fault_latched || code_latched !== `FAULT_OVERCURRENT || !dut.u_fsm.pwm_disable || pwm_out !== 1'b0)
@@ -515,12 +529,17 @@ module tb_protection_core_top;
       q_remove_overcurrent_source("Q-SIM-05 candidate-final");
       @(negedge clk); clear_fault = 1'b1;
       @(posedge clk); #1;
-      @(negedge clk); clear_fault = 1'b0;
-      repeat (2) @(posedge clk);
-      #1;
-      @(negedge clk); i1 = 12'd1300; i2 = 12'd1320;
+      @(negedge clk);
+      clear_fault = 1'b0;
+      sample_valid = 1'b1;
+      i1 = 12'd1300;
+      i2 = 12'd1320;
       @(posedge clk); #1;
-      if (!fault_valid || dut.u_fsm.reset_wait_cnt !== 16'd3 || state !== ST_RESET_WAIT || !dut.u_fsm.pwm_disable)
+      @(negedge clk); sample_valid = 1'b0;
+      @(posedge clk); #1;
+      @(posedge clk); #1;
+      if (!fault_valid || dut.u_fsm.reset_wait_cnt !== 16'd3 ||
+          state !== ST_RESET_WAIT || !dut.u_fsm.pwm_disable)
         $fatal(1, "Q-SIM-05 candidate-final pipeline setup mismatch");
       @(posedge clk); #1;
       if (state !== ST_FAULT_LATCHED || !fault_latched || !dut.u_fsm.pwm_disable || pwm_out !== 1'b0)
@@ -532,11 +551,17 @@ module tb_protection_core_top;
       @(negedge clk); clear_fault = 1'b1;
       @(posedge clk); #1;
       @(negedge clk); clear_fault = 1'b0;
-      repeat (3) @(posedge clk);
-      #1;
-      @(negedge clk); i1 = 12'd1300; i2 = 12'd1320;
       @(posedge clk); #1;
-      if (!fault_valid || state !== ST_NORMAL || fault_latched || !dut.u_fsm.pwm_disable || pwm_out !== 1'b0)
+      @(negedge clk);
+      sample_valid = 1'b1;
+      i1 = 12'd1300;
+      i2 = 12'd1320;
+      @(posedge clk); #1;
+      @(negedge clk); sample_valid = 1'b0;
+      @(posedge clk); #1;
+      @(posedge clk); #1;
+      if (!fault_valid || state !== ST_NORMAL || fault_latched ||
+          !dut.u_fsm.pwm_disable || pwm_out !== 1'b0)
         $fatal(1, "Q-SIM-05 post-completion E4 boundary mismatch");
       @(posedge clk); #1;
       if (state !== ST_FAULT_LATCHED || !fault_latched || !dut.u_fsm.pwm_disable || pwm_out !== 1'b0)
@@ -555,14 +580,16 @@ module tb_protection_core_top;
       sample_valid = 1'b0;
       clear_fault = 1'b1;
       @(posedge clk); #1;
-      if (oc_any || open_f || sat_f || stuck_f || fault_valid || code !== `FAULT_NONE ||
+      if (!oc_any || dut.accepted_sample_pair !== {12'd1300, 12'd1320} ||
+          open_f || sat_f || stuck_f || fault_valid || code !== `FAULT_NONE ||
           clear_fault !== 1'b1 || state !== ST_RESET_WAIT || !fault_latched ||
           code_latched !== `FAULT_OVERCURRENT || dut.u_fsm.reset_wait_cnt !== 16'd0 ||
           !dut.u_fsm.pwm_disable || pwm_out !== 1'b0)
         $fatal(1, "Q-SIM-15 source transition was incorrectly counted on E0");
       @(negedge clk); clear_fault = 1'b0;
       @(posedge clk); #1;
-      if (oc_any || open_f || sat_f || stuck_f || fault_valid || code !== `FAULT_NONE || clear_fault ||
+      if (!oc_any || dut.accepted_sample_pair !== {12'd1300, 12'd1320} ||
+          open_f || sat_f || stuck_f || fault_valid || code !== `FAULT_NONE || clear_fault ||
           dut.u_fsm.reset_wait_cnt !== 16'd1 || state !== ST_RESET_WAIT || !fault_latched ||
           code_latched !== `FAULT_OVERCURRENT || !dut.u_fsm.pwm_disable || pwm_out !== 1'b0)
         $fatal(1, "Q-SIM-15 first eligible edge did not follow actual registered live-low visibility");
@@ -599,7 +626,7 @@ module tb_protection_core_top;
   initial begin
     reset_core();
 
-    $display("CORE_MATRIX contract: comparator faults are not gated by sample_valid; sensor health counters update only on sample_valid");
+    $display("CORE_MATRIX contract: comparator and sensor health consume one accepted sample transaction");
     $display("CORE_MATRIX contract: FSM latches the first visible fault_code until clear/reset");
 
     measure_pwm(32, high_count, rise_count);
@@ -608,16 +635,18 @@ module tb_protection_core_top;
 
     inject_overcurrent_and_measure_latency(latency_cycles);
     $display("PL_RESPONSE_LATENCY_CYCLES=%0d", latency_cycles);
-    if (latency_cycles < 1 || latency_cycles > 3) $fatal(1,"unexpected PL response latency: %0d", latency_cycles);
+    if (latency_cycles != 4) $fatal(1,"unexpected Stage 2B response edge count: %0d", latency_cycles);
     if (!fault_latched || code_latched !== `FAULT_OVERCURRENT) $fatal(1,"overcurrent did not latch");
     if (pwm_out !== 1'b0) $fatal(1,"pwm_out must be gated low after fault");
 
     @(negedge clk);
+    sample_valid = 1'b1;
     clear_fault = 1'b1;
     @(posedge clk);
     #1;
     if (!fault_latched || pwm_out !== 1'b0) $fatal(1,"clear_fault must not recover while overcurrent persists");
     @(negedge clk);
+    sample_valid = 1'b0;
     clear_fault = 1'b0;
     repeat(3) @(posedge clk);
     #1;
@@ -677,7 +706,7 @@ module tb_protection_core_top;
     reset_core();
     configure_nominal();
     drive_current(12'd1300, 12'd1320, 1'b0);
-    wait_for_latch("overcurrent path latches even with sample_valid low", `FAULT_OVERCURRENT);
+    check_no_latch("invalid overcurrent sample is suppressed", 8);
 
     reset_core();
     configure_health_fast_no_combo();
@@ -712,10 +741,16 @@ module tb_protection_core_top;
     configure_nominal();
     drive_current(12'd1300, 12'd1320, 1'b1);
     wait_for_latch("active clear setup", `FAULT_OVERCURRENT);
-    pulse_clear();
+    @(negedge clk);
+    sample_valid = 1'b1;
+    clear_fault = 1'b1;
+    @(negedge clk);
+    clear_fault = 1'b0;
     wait_cycles(6);
     if (!fault_latched || code_latched !== `FAULT_OVERCURRENT || pwm_out !== 1'b0)
       $fatal(1, "clear_fault while active fault incorrectly released protection");
+    @(negedge clk);
+    sample_valid = 1'b0;
     clear_after_safe("clear fault after active source removed");
 
     reset_core();

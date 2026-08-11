@@ -1,104 +1,49 @@
 # Current-Sensing Protection IP for PYNQ-Z2
 
-Stable project snapshot prepared for technical demonstration, reproducibility evaluation, and PYNQ-Z2 deployment. Its GitHub repository is currently Private and available only to authorized accounts.
+This repository is the reviewed and published Stage2 delivery for the PYNQ-Z2 digital current-protection prototype. The engineering repository remains the sole development authority.
 
-## Project Overview
+## Delivery State
 
-This repository is the current stable public snapshot of an FPGA/Zynq current-sensing protection prototype. It contains the readable RTL, canonical simulation suite, portable Vivado reconstruction inputs, PYNQ software source, and the complete verified deployment release.
+```text
+DELIVERY_STATE=PUBLISHED_STAGE2_DELIVERY
+STAGE1_COMPLETE=YES
+STAGE2_COMPLETE=YES
+STAGE3_STARTED=NO
+PROJECT_POST_STAGE2_CLOSEOUT_AND_DELIVERY_SYNC=COMPLETE
+CURRENT_TRANSITION=READY_FOR_STAGE3_ENTRY
+CURRENT_TRANSITION_REVIEW_PENDING=NO
+DELIVERY_MAIN_PROMOTION_PENDING=NO
+NEXT_ACTION=OWNER_AUTHORIZED_STAGE3_ENTRY
+PUBLIC_ABI=1.1
+PROTECTION_IP_BASE=0x43C00000
+GPIO_BASE=0x41200000
+PRODUCTION_PROFILE=SAFE_INERT
+```
 
-## Problem Addressed
+The included production release is `current-sensing-protection-ip-7ad1681f5c49-pynq-z2-stage2i`. Its BIT/HWH pair, runtime, ABI metadata, and offline verifier are bound to the accepted Stage2 authority.
 
-The design converts synchronous digital current samples into deterministic over-current, channel-mismatch, and sensor-health decisions. It classifies the primary fault, latches the first fault, and forces a demonstration PWM output low without relying on processing-system software in the real-time protection path.
+## Use
 
-## System Architecture
+- Start with [deploy/QUICK_START.md](deploy/QUICK_START.md) for the accepted SAFE_INERT release.
+- Run `python tools/verify_public_snapshot.py` for the complete delivery check.
+- Run `bash sim/run_iverilog.sh all` for the ten canonical RTL tests when Icarus Verilog is installed.
+- Follow [docs/vivado_build_guide.md](docs/vivado_build_guide.md) for the compact Vivado 2024.1 B1 structural reconstruction adapter.
+- Inspect [spec/register_map.json](spec/register_map.json) for the single register-map source authority and [deploy/docs/register_map.md](deploy/docs/register_map.md) for its rendered user reference.
 
-The main chain is digital current input and sample model, over-current and differential comparison, sensor health, fault classification, fault latch and recovery FSM, PWM safety gate, AXI-Lite registers, Vivado IP and block design, then PYNQ Overlay, MMIO, and autoload. See [architecture](docs/architecture.md).
+## Scope
 
-## Main Features
+Stage2 closes the digital protection architecture, ABI 1.1, implementation, SAFE_INERT production artifacts, and bounded PYNQ-Z2 digital board validation. The delivery does not claim a real ADC/AFE signal chain, physical current scaling, calibration, a power stage, or production safety.
 
-- Dual-channel strict-greater-than over-current and mismatch comparison.
-- Open, saturation, and stuck sensor-health monitoring.
-- Fixed-priority fault classification and first-fault latching.
-- Fault-aware clear and reset-wait behavior.
-- Safe-low protection gating of the low-voltage demonstration PWM.
-- Shared register bank behind direct and AXI-Lite wrappers.
-- Ten canonical self-checking Icarus testbenches.
+```text
+REAL_ANALOG_ADC_SIGNAL_CHAIN_VALIDATED=NO
+PHYSICAL_CURRENT_SCALING_VALIDATED=NO
+CURRENT_MEASUREMENT_CALIBRATION_CLOSED=NO
+```
 
-## Safety and Clear/Recovery Semantics
+Stage3 has not started. Production hardware selection, analog integration, physical scaling, and calibration remain Stage3 work.
 
-Live fault prevents false recovery. Clear is a recovery request, not an unconditional unlock. Fault removal and clear are separate actions. Clear-only does not automatically enable PWM. CTRL value 0x2 requests clear with PWM disabled; CTRL value 0x3 combines enable and clear and is not the safe recovery sequence. STATUS value 0x3 means both live and latched fault bits are set. Sensor history is not blindly cleared by a software request. See [clear and recovery semantics](docs/clear_recovery_semantics.md).
+## Authority
 
-## Repository Structure
+The engineering source is fixed at commit `9c5e6f6ac7dc311f12755c8b1713433d35e39bff`, tree `b1cfec1b073770c03bad9fa5b298b0bd1f3923c3`, tag `stage2-digital-protection-engineering-closure-v1`. The canonical Stage2 package SHA-256 is `4916cdd574955c15e1d6eaa29b7760243fdfc47e19d06c68573c460ed484f1c0`. See [PUBLIC_SNAPSHOT_PROVENANCE.json](PUBLIC_SNAPSHOT_PROVENANCE.json).
 
-- rtl contains stable design source.
-- tb and sim contain the canonical simulation flow.
-- vivado contains portable reconstruction inputs, not generated workspaces.
-- pynq contains non-duplicated software source and tests.
-- deploy is the complete verified direct-deployment release.
-- docs and verification describe behavior, provenance, evidence, and limits.
-
-## Simulation Reproduction
-
-Install Icarus Verilog and run:
-
-    bash sim/run_iverilog.sh all
-
-The expected canonical summary is PASS=10 FAIL=0. See [simulation guide](docs/simulation_guide.md).
-
-## Vivado Rebuild
-
-Use Vivado 2024.1, install the PYNQ-Z2 board files, set PROTECTION_IP_VIVADO_BUILD_ROOT to an external empty build root, and follow [the Vivado build guide](docs/vivado_build_guide.md). Rebuilding creates new artifacts; it does not inherit the accepted BIT/HWH proof.
-
-## PYNQ-Z2 Deployment
-
-The direct deployment authority is deploy. Begin with [deploy quick start](deploy/QUICK_START.md) and [PYNQ deployment guide](docs/pynq_deployment_guide.md). The public software source under pynq/source is not a second copy of the persistent deployment runtime.
-
-## Verification Status
-
-The canonical digital regression passes 10 of 10 testbenches. The included deploy release self-verifies.
-Stage 1G proves one real PYNQ-Z2 cold boot autoload with Overlay load, discovery, read-only MMIO/GPIO checks,
-one worker, one attempt, and no retry.
-
-The later bounded Stage 1 board functional closure is also `PASS`:
-
-- Accepted execution:
-  `STAGE1-BOARD-FUNCTIONAL-CLOSURE-ATTEMPT06-RERUN02-20250506T201111Z`
-- Analyzer terminal class: `STAGE1_BOARD_FAULT_CLEAR_RECOVERY_FUNCTIONAL_CLOSURE_PASS`
-- CH1-only, CH2-only, and differential fault response: `PASS`
-- Live-fault clear rejection and source-removal latch/code retention: `PASS`
-- Clear recovery, internal PWM shutdown, post-recovery PWM pass-through, and final state restoration: `PASS`
-- ILA capture set: `8/8 PASS`
-
-See [verification status](docs/verification_status.md) and the
-[board functional closure summary](verification/stage1_board_functional_closure.md).
-
-## Proof Boundary
-
-The Stage 1G evidence alone does not prove repeated cold boots, power-cycle behavior, or soak. The later board
-functional closure proves only the PYNQ-Z2 low-voltage internal digital fault/clear/recovery and ILA scope.
-This validation does not represent a pass for a real power stage, external drive chain, load, thermal
-behavior, EMI, or production safety. It also does not prove external ADC/AFE, calibrated current,
-external-pin PWM, gate-driver behavior, motor behavior, electrical safety, production reliability, or
-system/aviation certification. See [proof boundary](docs/proof_boundary.md).
-
-## Development Repository Relationship
-
-The engineering repository is the sole development authority. This public repository does not independently maintain feature changes; updates must be generated or synchronised from the development repository. Development repository: https://github.com/zsr112/current-sensing-protection-ip.git
-
-## Private Review Status
-
-The snapshot is registered at https://github.com/zsr112/current-sensing-protection-ip-pynq-z2 with Private visibility. This first push is for private review only. The repository must not be changed to Public without explicit owner publication approval.
-
-## Provenance
-
-The original snapshot payload is anchored to development commit
-309a84bff651f73891309e02e1d02fc1f54bd3e6. The board-closeout status is synchronized from final engineering
-`main` commit 68ef6d99d6b523447b39be004e85fa10558a03af, tree
-5e44f26f443edea4a7a4401bca1530133cc25da2. The deploy subtree remains anchored to release source
-e0f8dfdf481d91edd35b50848c86fa0c484e513d, while its persistent board runtime remains anchored to
-1a365d5139f963ac4d8f92158dcd2928e86ccf36. This status sync does not create a new deployment payload,
-hardware build, or board execution.
-
-## Known Limitations
-
-This is an engineering, research, and teaching prototype. Inputs are digital sample codes, not a complete ADC/AFE chain. The PWM is a low-voltage demonstration carrier, not a complete motor controller or certified protection output. No usage or redistribution permission should be inferred from the absence of a license.
+The supported public Vivado entrypoint is a delivery adapter derived from the current engineering production runner, not from the historical standalone project, package, or BD scripts. It reconstructs the accepted B1 `SAFE_INERT` structure and wrapper only. The accepted BIT/HWH pair remains the reviewed programming authority; newly reconstructed output is unvalidated until separately synthesized, implemented, and validated.
