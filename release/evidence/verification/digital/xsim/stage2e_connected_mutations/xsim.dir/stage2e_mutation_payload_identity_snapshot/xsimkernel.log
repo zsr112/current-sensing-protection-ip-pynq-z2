@@ -1,0 +1,7 @@
+Running: xsim.dir/stage2e_mutation_payload_identity_snapshot/xsimk.exe -runall -simmode gui -wdb stage2e_mutation_payload_identity_snapshot.wdb -simrunnum 0 -socket 49304
+Design successfully loaded
+Design Loading Memory Usage: 10908 KB (Peak: 10908 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11444 KB (Peak: 11444 KB)
+Simulation CPU Usage: 15 ms

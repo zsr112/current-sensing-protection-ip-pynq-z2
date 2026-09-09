@@ -1,0 +1,4 @@
+FAIL cycle=86 bitmap_matrix_retriggered_first_event
+STAGE2G_POLICY_MATRIX=FAIL_1
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_policy_matrix.sv:489: 
+       Time: 1771000  Scope: tb_stage2g_policy_matrix

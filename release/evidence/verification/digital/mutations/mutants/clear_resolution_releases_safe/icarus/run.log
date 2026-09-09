@@ -1,0 +1,7 @@
+FAIL cycle=107 unsafe_output_outside_armed
+FAIL cycle=108 clear_healthy_safe actual=0 expected=1
+FAIL cycle=120 unsafe_output_outside_armed
+FAIL cycle=121 same_edge_resolution_safe actual=0 expected=1
+STAGE2G_POLICY_MATRIX=FAIL_4
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_policy_matrix.sv:489: 
+       Time: 1771000  Scope: tb_stage2g_policy_matrix

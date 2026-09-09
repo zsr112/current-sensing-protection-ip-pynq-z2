@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_PATH>" into library work
+INFO: [VRFC 10-311] analyzing module adc_sample_code_normalizer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2f/tb_stage2f_mutation.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stage2f_mutation

@@ -1,0 +1,7 @@
+Running: xsim.dir/stage2e_mutation_gap_snapshot/xsimk.exe -runall -simmode gui -wdb stage2e_mutation_gap_snapshot.wdb -simrunnum 0 -socket 49312
+Design successfully loaded
+Design Loading Memory Usage: 10928 KB (Peak: 10928 KB)
+Design Loading CPU Usage: 46 ms
+Simulation completed
+Simulation Memory Usage: 11460 KB (Peak: 11460 KB)
+Simulation CPU Usage: 46 ms

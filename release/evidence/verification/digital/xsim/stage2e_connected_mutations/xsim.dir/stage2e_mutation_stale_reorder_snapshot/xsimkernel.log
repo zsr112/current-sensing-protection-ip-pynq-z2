@@ -1,0 +1,7 @@
+Running: xsim.dir/stage2e_mutation_stale_reorder_snapshot/xsimk.exe -runall -simmode gui -wdb stage2e_mutation_stale_reorder_snapshot.wdb -simrunnum 0 -socket 49314
+Design successfully loaded
+Design Loading Memory Usage: 10920 KB (Peak: 10920 KB)
+Design Loading CPU Usage: 30 ms
+Simulation completed
+Simulation Memory Usage: 11448 KB (Peak: 11448 KB)
+Simulation CPU Usage: 30 ms

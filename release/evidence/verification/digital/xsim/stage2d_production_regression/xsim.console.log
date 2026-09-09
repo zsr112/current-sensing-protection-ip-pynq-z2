@@ -1,0 +1,25 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed Sep  9 04:07:03 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/stage2d_production_regression_snapshot/xsim_script.tcl
+# xsim {stage2d_production_regression_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+WRAPPER_READY time=21000
+WRAPPER_ACCEPT time=35000 payload=123486
+WRAPPER_DELIVERY time=75000 payload=123486
+WRAPPER_ACCEPT time=119000 payload=321684
+WRAPPER_ACCEPT time=259000 payload=4561f3
+WRAPPER_DELIVERY time=295000 payload=4561f3
+PRODUCTION_WRAPPER_INTEGRATION=PASS
+PRODUCTION_WRAPPER_RESET_EPOCH=PASS
+ALL TESTS PASSED: tb_stage2d_production_wrapper
+$finish called at time : 335 ns : File "<EXTERNAL_SOURCE>/tb/stage2d/tb_stage2d_production_wrapper.sv" Line 154
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 04:07:05 2026...

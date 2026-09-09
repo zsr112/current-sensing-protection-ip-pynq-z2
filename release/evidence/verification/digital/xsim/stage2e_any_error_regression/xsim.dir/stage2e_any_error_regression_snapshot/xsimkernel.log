@@ -1,0 +1,7 @@
+Running: xsim.dir/stage2e_any_error_regression_snapshot/xsimk.exe -runall -simmode gui -wdb stage2e_any_error_regression_snapshot.wdb -simrunnum 0 -socket 57554
+Design successfully loaded
+Design Loading Memory Usage: 10840 KB (Peak: 10840 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11324 KB (Peak: 11324 KB)
+Simulation CPU Usage: 15 ms

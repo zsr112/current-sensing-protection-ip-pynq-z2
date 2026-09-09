@@ -1,0 +1,111 @@
+{
+  "execution_id": "S1E-B2-BOARD-20260909-R4",
+  "files": {
+    "OFFLINE_VALIDATION.json": {
+      "bytes": 2087,
+      "sha256": "af4583633ed746551bab3d93c278fbf38a040ec01fc1d78b56d54879a434ad8e"
+    },
+    "artifacts/protection_system.bit": {
+      "bytes": 4045685,
+      "sha256": "2ef091e6550ba01d00cd677d9b9676fc38f3cdd4380d9925244fb705342ec518"
+    },
+    "artifacts/protection_system.hwh": {
+      "bytes": 690403,
+      "sha256": "0b011b48829ef1e29c917a83ecdbe1e96c012dd86fda4ac7cf4d5abcc4ee71fc"
+    },
+    "artifacts/protection_system.ltx": {
+      "bytes": 92913,
+      "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+    },
+    "host/stage1_board_ila_binding_preflight.tcl": {
+      "bytes": 2163,
+      "sha256": "4ff1fcb7b95cebaabd312b30329f68113c138ebde9aa3ce77e60b5976de5f066"
+    },
+    "host/stage1_board_ila_capture.tcl": {
+      "bytes": 9614,
+      "sha256": "2adf416b1886571e25bb8eee587a8103a2a61c79e93eaacf6c62b140829e25db"
+    },
+    "host/stage1_board_ila_capture_configuration.tcl": {
+      "bytes": 12920,
+      "sha256": "59d38f872bf2afbdc4a4e6d911cd7decfd22474e208e9c9e8f16a5d9fca01cae"
+    },
+    "host/stage1_board_ila_capture_configuration_preflight.tcl": {
+      "bytes": 3838,
+      "sha256": "4a3f84c0e0a68c995ac8e32fc9c72c77022e370f5d672828bbeb4967c127a7a3"
+    },
+    "host/stage1_board_ila_common.tcl": {
+      "bytes": 13080,
+      "sha256": "216a305975a5427f6f688f80fe1642fead4d852b46cdbf5d2d0d6e482170a4bd"
+    },
+    "host/stage2_board_capture_pair.tcl": {
+      "bytes": 5629,
+      "sha256": "948ec7a9aea408b020ec042118f7c9393ad3aa7af35ad21bdaee6cfcc226bde1"
+    },
+    "host/stage2_board_session_host.py": {
+      "bytes": 14875,
+      "sha256": "423729150fb8251bfb6a7f95bbf189d2b800d605079ac1744043cf2cab04c3d4"
+    },
+    "provenance/artifact-manifest.tsv": {
+      "bytes": 6461,
+      "sha256": "e40b66b101c356822ca443f7b144274fa3863d6156ecb210c2b6286a858407e0"
+    },
+    "provenance/rebuilt_evidence.json": {
+      "bytes": 2383,
+      "sha256": "91a65241a6315cfcaf09b70f1b31a99bd3c9f0e19c2111f6ba189365bf880d6d"
+    },
+    "provenance/source_inputs.json": {
+      "bytes": 168129,
+      "sha256": "ffb7fbce8fc3a1b3bbf1c14a0607d7cf86c9427add0d354568564a1f5afb8933"
+    },
+    "runtime/generated/protection_register_map.py": {
+      "bytes": 43433,
+      "sha256": "3ae20e1428aabc76e9ac2f0aef100a61da190e753935df9735f4b276c5a11023"
+    },
+    "runtime/protection_ip_interface.py": {
+      "bytes": 17947,
+      "sha256": "9bfb0a7d39ad67ab8f95eadc853c6da76e5ff76beba907647e209cb24e546ff9"
+    },
+    "runtime/stage1_board_evidence_analyzer.py": {
+      "bytes": 18428,
+      "sha256": "8947eac845aefbd33e426113cd40daa370b586d49bb27489a4637d25d89aca5f"
+    },
+    "runtime/stage1_board_functional_validation.py": {
+      "bytes": 24205,
+      "sha256": "b653074ae14acff8b287977d3b283137898a2538e3b9efcc05725146dc94c606"
+    },
+    "runtime/stage2_board_session.py": {
+      "bytes": 15120,
+      "sha256": "52db193f08a66114f9029bef9648c1f78b55998f5041f50755ad71fa67f6e7f7"
+    },
+    "runtime/stage2c10b_a_controlled_prefunctional_probe_candidate.py": {
+      "bytes": 3687,
+      "sha256": "9a6a25e2469823fadbad5fab0f318063807b0bb990a4a70acf8a8c89133ce1d8"
+    },
+    "runtime/stage2c9e_b_pynq_mmio_register_smoke.py": {
+      "bytes": 4266,
+      "sha256": "f4563109fc5e0cf87278ced3b6e84b9969a0dbd1dd67b2d0fd7df9b521705bee"
+    },
+    "runtime/stage2c9f_b_controlled_expanded_mmio_idempotent_rw.py": {
+      "bytes": 4816,
+      "sha256": "2b39e770864eef72f9ec427a4f47d45fe19a1132175dd9c2add1797a08187662"
+    },
+    "runtime/stage2c9g_b_read_only_semantic_status_observation.py": {
+      "bytes": 3986,
+      "sha256": "726b0fe7cd40cd04d4a8e5a9298a535fd761ca9317a521fa2149928e34ab0389"
+    },
+    "runtime/stage2i_board_runtime.py": {
+      "bytes": 25087,
+      "sha256": "52c6f29c671e13d57fb483b2e4c8289834e9fc4fbb7967664cc71bef5a516833"
+    },
+    "stage2i_board_profile.json": {
+      "bytes": 3866,
+      "sha256": "fcb81633c4c34fa46a66b1e5120db537a98d42ea90ec8ca251ddf05f78a910d1"
+    }
+  },
+  "physical_execution_id": "S1E-B2-REBUILT-WINDOWS-20260909T000000Z",
+  "physical_source_commit": "3cf68b27c7e30c1ac3729bd9f3b79598531d0be2",
+  "physical_source_tree": "338bbcc360c82f2ce9b4e6747bc98a60e72ffd26",
+  "schema": "stage2-board-session-package-v1",
+  "tooling_commit": "9ba3d7a1730e68f8c751d0b4095021aa2d380230",
+  "tooling_tree": "76eccacbb508248ca1f61d44903659eee0926b37"
+}

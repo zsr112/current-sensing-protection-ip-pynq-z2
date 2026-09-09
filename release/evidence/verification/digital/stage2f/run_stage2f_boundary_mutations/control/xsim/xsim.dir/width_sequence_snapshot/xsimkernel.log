@@ -1,0 +1,7 @@
+Running: xsim.dir/width_sequence_snapshot/xsimk.exe -runall -simmode gui -wdb width_sequence_snapshot.wdb -simrunnum 0 -socket 50983
+Design successfully loaded
+Design Loading Memory Usage: 11652 KB (Peak: 11652 KB)
+Design Loading CPU Usage: 46 ms
+Simulation completed
+Simulation Memory Usage: 12560 KB (Peak: 12560 KB)
+Simulation CPU Usage: 46 ms

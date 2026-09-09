@@ -1,0 +1,7 @@
+Running: xsim.dir/policy_matrix_snapshot/xsimk.exe -runall -simmode gui -wdb policy_matrix_snapshot.wdb -simrunnum 0 -socket 59190
+Design successfully loaded
+Design Loading Memory Usage: 10840 KB (Peak: 10840 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11356 KB (Peak: 11356 KB)
+Simulation CPU Usage: 15 ms

@@ -1,0 +1,1 @@
+"work.tb_stage2e_mutation_pulse_cdc" -s "stage2e_mutation_pulse_cdc_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\xsim\stage2e_connected_mutations\pulse_cdc.xelab.log" 

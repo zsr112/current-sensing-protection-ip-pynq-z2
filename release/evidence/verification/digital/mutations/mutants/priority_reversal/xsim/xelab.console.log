@@ -1,0 +1,16 @@
+Vivado Simulator v2024.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: <EXTERNAL_PATH> work.tb_stage2g_policy_matrix -s mutation_snapshot --timescale 1ns/1ps --log <EXTERNAL_VERIFICATION>\digital\mutations\mutants\priority_reversal\xsim\xelab.log 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3645] port 'public_fault_latched_compat' remains unconnected for this instance [<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_policy_matrix.sv:108]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.stage2g_fault_evaluation_pipelin...
+Compiling module work.stage2g_fault_episode_controller...
+Compiling module work.tb_stage2g_policy_matrix
+Built simulation snapshot mutation_snapshot

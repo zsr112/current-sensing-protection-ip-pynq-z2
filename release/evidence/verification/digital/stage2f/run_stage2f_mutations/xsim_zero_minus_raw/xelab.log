@@ -1,0 +1,17 @@
+Vivado Simulator v2024.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: <EXTERNAL_PATH> work.tb_stage2f_mutation -s mutation_snapshot --timescale 1ns/1ps --log <EXTERNAL_VERIFICATION>\digital\stage2f\run_stage2f_mutations\xsim_zero_minus_raw\xelab.log 
+Multi-threading is on. Using 30 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module work.adc_sample_code_normalizer(PROFI...
+Compiling module work.adc_sample_code_normalizer(PROFI...
+Compiling module work.adc_sample_code_normalizer(PROFI...
+Compiling module work.adc_sample_code_normalizer_defau...
+Compiling module work.tb_stage2f_mutation
+Built simulation snapshot mutation_snapshot

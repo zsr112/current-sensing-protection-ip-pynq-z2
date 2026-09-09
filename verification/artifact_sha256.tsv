@@ -1,3 +1,0 @@
-artifact	bytes	sha256	role
-deploy/pynq/artifacts/protection_system.bit	4045685	b84478e51a2608e5f5818bfd79cc33f30bc16c02f1a136fe0aa99f2c54a022e0	accepted_stage2_release
-deploy/pynq/artifacts/protection_system.hwh	465005	3daba403062492d5ab177cf3e0825782e0960c8cfad072eb09b8cb19fa5e61c1	accepted_stage2_release

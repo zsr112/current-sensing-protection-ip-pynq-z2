@@ -1,0 +1,2 @@
+<EXTERNAL_SOURCE>\tb\stage2e\tb_stage2e_transaction_error_observability.sv:639: vvp.tgt sorry: procedural continuous assignments are not yet fully supported. The RHS of this assignment will only be evaluated once, at the time the assignment statement is executed.
+<EXTERNAL_SOURCE>\tb\stage2e\tb_stage2e_transaction_error_observability.sv:640: vvp.tgt sorry: procedural continuous assignments are not yet fully supported. The RHS of this assignment will only be evaluated once, at the time the assignment statement is executed.

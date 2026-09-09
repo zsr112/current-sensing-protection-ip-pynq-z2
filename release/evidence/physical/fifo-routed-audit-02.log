@@ -1,0 +1,80 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Wed Sep  9 02:14:19 2026
+# Process ID: 19332
+# Current directory: <EXTERNAL_PHYSICAL>
+# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SOURCE>\tools\board_validation\stage2_fifo_routed_audit.tcl -log <EXTERNAL_PHYSICAL>\fifo-routed-audit-02.log -journal <EXTERNAL_PHYSICAL>\fifo-routed-audit-02.jou -tclargs <EXTERNAL_PHYSICAL>\vivado-workspace\project\s1e_db55e3ba5e92.runs\impl_1\protection_system_wrapper_routed.dcp <EXTERNAL_PHYSICAL>\fifo-routed-audit-02
+# Log file: <EXTERNAL_PHYSICAL>/fifo-routed-audit-02.log
+# Journal file: <EXTERNAL_PHYSICAL>\fifo-routed-audit-02.jou
+# Running On        :illusion
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 9 7945HX with Radeon Graphics        
+# CPU Frequency     :2495 MHz
+# CPU Physical cores:16
+# CPU Logical cores :32
+# Host memory       :16844 MB
+# Swap memory       :13958 MB
+# Total Virtual     :30803 MB
+# Available Virtual :12131 MB
+#-----------------------------------------------------------
+source {<EXTERNAL_SOURCE>\tools\board_validation\stage2_fifo_routed_audit.tcl} -notrace
+Command: open_checkpoint {<EXTERNAL_PHYSICAL>\vivado-workspace\project\s1e_db55e3ba5e92.runs\impl_1\protection_system_wrapper_routed.dcp}
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 391.867 ; gain = 4.293
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Device 21-9227] Part: xc7z020clg400-1 does not have CEAM library.
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.179 . Memory (MB): peak = 1073.156 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 850 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 1210.141 ; gain = 1.840
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1832.953 ; gain = 0.000
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1832.953 ; gain = 0.000
+Read PlaceDB: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.414 . Memory (MB): peak = 1832.953 ; gain = 0.000
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1832.953 ; gain = 0.000
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.091 . Memory (MB): peak = 1840.297 ; gain = 7.344
+Read Physdb Files: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.540 . Memory (MB): peak = 1840.297 ; gain = 7.344
+Restored from archive | CPU: 2.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.573 . Memory (MB): peak = 1840.297 ; gain = 9.316
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1840.297 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 242 instances were transformed.
+  CFGLUT5 => CFGLUT5 (SRL16E, SRLC32E): 236 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 6 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
+open_checkpoint: Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1844.969 ; gain = 1468.285
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 4 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 4 -nworst 1 -delay_type max -sort_by slack.
+INFO: [Timing 38-433] Consider using Xilinx recommended XPM_CDC modules to avoid Critical severities
+INFO: [Timing 38-314] The report_cdc command only analyzes and reports clock domain crossing paths where clocks have been defined on both source and destination sides. Ports with no input delay constraint are skipped. Please run check_timing to verify there are no missing clock definitions in your design, nor any unconstrained input port.
+FIFO_ROUTED_AUDIT=PASS
+PAYLOAD_PATHS_CHECKED=456
+GRAY_PATHS_CHECKED=8
+ASYNC_REG_STAGES_CHECKED=16
+CONSTRAINT_CHANGES=0
+WAIVERS_CREATED=0
+INFO: [Common 17-206] Exiting Vivado at Wed Sep  9 02:14:42 2026...

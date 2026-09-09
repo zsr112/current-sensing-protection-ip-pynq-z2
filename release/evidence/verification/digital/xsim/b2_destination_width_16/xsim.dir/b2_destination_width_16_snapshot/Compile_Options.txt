@@ -1,0 +1,1 @@
+"work.tb_stage2h_b2_destination_sequence_16" -s "b2_destination_width_16_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\xsim\b2_destination_width_16\xelab.log" 

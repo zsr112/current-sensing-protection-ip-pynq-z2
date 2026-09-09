@@ -1,0 +1,73 @@
+{
+  "identity": {
+    "artifact_identities": {
+      "bit": {
+        "bytes": 4045685,
+        "delivery_policy": "PACKAGE_REQUIRED",
+        "package_path": "artifacts/protection_system.bit",
+        "role": "BITSTREAM",
+        "sha256": "2ef091e6550ba01d00cd677d9b9676fc38f3cdd4380d9925244fb705342ec518"
+      },
+      "hwh": {
+        "bytes": 690403,
+        "delivery_policy": "PACKAGE_REQUIRED",
+        "package_path": "artifacts/protection_system.hwh",
+        "role": "HWH",
+        "sha256": "0b011b48829ef1e29c917a83ecdbe1e96c012dd86fda4ac7cf4d5abcc4ee71fc"
+      },
+      "ltx": {
+        "bytes": 92913,
+        "delivery_policy": "PACKAGE_REQUIRED",
+        "package_path": "artifacts/protection_system.ltx",
+        "role": "LTX",
+        "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+      },
+      "xsa": {
+        "bytes": 857418,
+        "delivery_policy": "PROVENANCE_ONLY_REQUIRED",
+        "package_path": null,
+        "role": "XSA",
+        "sha256": "e80324278450b0e1bccc713931d229adb025d9a1f30549029a77aab5eb010adf"
+      }
+    },
+    "board_model": "PYNQ-Z2",
+    "board_model_basis": "OPERATOR_DECLARATION; JTAG die checked separately",
+    "board_time_trusted": false,
+    "board_time_utc": "2025-05-07T14:24:25.714983+00:00",
+    "chronology_authority": "HOST_UTC_AND_ORDERED_ACTION_INDEX",
+    "effective_uid": 0,
+    "execution_id": "S1E-B2-BOARD-20260909-R4",
+    "hostname": "pynq",
+    "kernel": "Linux-6.6.10-xilinx-v2024.1-g3c0eca68c652-armv7l-with-glibc2.35",
+    "os_release": {
+      "BUG_REPORT_URL": "https://www.pynq.io",
+      "HOME_URL": "https://www.pynq.io/",
+      "ID": "pynqlinux",
+      "ID_LIKE": "ubuntu",
+      "NAME": "PynqLinux",
+      "PRETTY_NAME": "PynqLinux, based on Ubuntu 22.04",
+      "PRIVACY_POLICY_URL": "https://www.pynq.io",
+      "SUPPORT_URL": "https://discuss.pynq.io/",
+      "UBUNTU_CODENAME": "jammy",
+      "VERSION": "3.0 (Carlisle)",
+      "VERSION_CODENAME": "Carlisle",
+      "VERSION_ID": "3.0"
+    },
+    "package_manifest": {
+      "bytes": 4466,
+      "sha256": "041981de2f65d28e9eefa01bd2f7768a535b26887e723238b4e1b3d2bf09e0b8"
+    },
+    "physical_execution_id": "S1E-B2-REBUILT-WINDOWS-20260909T000000Z",
+    "pynq_version": "3.1.1",
+    "python_executable": "/usr/local/share/pynq-venv/bin/python3",
+    "python_version": "3.10.4",
+    "source_commit": "3cf68b27c7e30c1ac3729bd9f3b79598531d0be2",
+    "source_tree": "338bbcc360c82f2ce9b4e6747bc98a60e72ffd26",
+    "ssh_user": "xilinx"
+  },
+  "representation": "EXTRACTED_FROM_ORIGINAL_HTTP_RESPONSE",
+  "source": {
+    "bytes": 5105,
+    "sha256": "51f1171fc55ec696a818e714b01138d0bb11d1ac33d59b5d11a25dc3c4aad30c"
+  }
+}

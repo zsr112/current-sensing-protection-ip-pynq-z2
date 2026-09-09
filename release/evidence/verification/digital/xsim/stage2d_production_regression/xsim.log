@@ -1,0 +1,39 @@
+#-----------------------------------------------------------
+# xsim v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Wed Sep  9 04:07:03 2026
+# Process ID: 13124
+# Current directory: <EXTERNAL_VERIFICATION>/digital/xsim/stage2d_production_regression
+# Command line: xsim.exe -log <EXTERNAL_VERIFICATION>\digital\xsim\stage2d_production_regression\xsim.log -mode tcl -source {xsim.dir/stage2d_production_regression_snapshot/xsim_script.tcl}
+# Log file: <EXTERNAL_VERIFICATION>/digital/xsim/stage2d_production_regression/xsim.log
+# Journal file: <EXTERNAL_VERIFICATION>/digital/xsim/stage2d_production_regression\xsim.jou
+# Running On        :illusion
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 9 7945HX with Radeon Graphics        
+# CPU Frequency     :2495 MHz
+# CPU Physical cores:16
+# CPU Logical cores :32
+# Host memory       :16844 MB
+# Swap memory       :13958 MB
+# Total Virtual     :30803 MB
+# Available Virtual :12507 MB
+#-----------------------------------------------------------
+source xsim.dir/stage2d_production_regression_snapshot/xsim_script.tcl
+# xsim {stage2d_production_regression_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+WRAPPER_READY time=21000
+WRAPPER_ACCEPT time=35000 payload=123486
+WRAPPER_DELIVERY time=75000 payload=123486
+WRAPPER_ACCEPT time=119000 payload=321684
+WRAPPER_ACCEPT time=259000 payload=4561f3
+WRAPPER_DELIVERY time=295000 payload=4561f3
+PRODUCTION_WRAPPER_INTEGRATION=PASS
+PRODUCTION_WRAPPER_RESET_EPOCH=PASS
+ALL TESTS PASSED: tb_stage2d_production_wrapper
+$finish called at time : 335 ns : File "<EXTERNAL_SOURCE>/tb/stage2d/tb_stage2d_production_wrapper.sv" Line 154
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 04:07:05 2026...

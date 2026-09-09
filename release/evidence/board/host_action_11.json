@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-08T19:32:06.594458+00:00",
+  "host_start_utc": "2026-09-08T19:32:06.439243+00:00",
+  "request": {
+    "action": "sample_source_removal/prepare",
+    "execution_id": "S1E-B2-BOARD-20260909-R4"
+  },
+  "response_sha256": "6ed0d56994685dd95ffb07024eb999eab2eca90e5ed9d5d35a32c715c581986f"
+}

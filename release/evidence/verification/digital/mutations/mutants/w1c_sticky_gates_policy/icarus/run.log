@@ -1,0 +1,45 @@
+STATE MISMATCH healthy clear enters RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: healthy clear enters RESET_WAIT
+ABI READ MISMATCH post-clear recovery policy address=0xa0 actual=0x00000002 expected=0x00000014
+STAGE2G PRODUCTION FAILED: post-clear recovery policy
+ABI READ MISMATCH post-clear first bitmap cleared address=0xa4 actual=0x00000003 expected=0x00000000
+STAGE2G PRODUCTION FAILED: post-clear first bitmap cleared
+ABI READ MISMATCH post-clear live bitmap cleared address=0xa8 actual=0x00000004 expected=0x00000000
+STAGE2G PRODUCTION FAILED: post-clear live bitmap cleared
+ABI READ MISMATCH post-clear seen bitmap cleared address=0xac actual=0x00000007 expected=0x00000000
+STAGE2G PRODUCTION FAILED: post-clear seen bitmap cleared
+STATE MISMATCH no-sample post-clear remains RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: no-sample post-clear remains RESET_WAIT
+STATE MISMATCH nonclean post-clear remains RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: nonclean post-clear remains RESET_WAIT
+ABI READ MISMATCH nonclean post-clear policy address=0xa0 actual=0x00000002 expected=0x00000014
+STAGE2G PRODUCTION FAILED: nonclean post-clear policy
+ABI READ MISMATCH nonclean post-clear first remains zero address=0xa4 actual=0x00000003 expected=0x00000000
+STAGE2G PRODUCTION FAILED: nonclean post-clear first remains zero
+ABI READ MISMATCH nonclean post-clear live remains zero address=0xa8 actual=0x00000004 expected=0x00000000
+STAGE2G PRODUCTION FAILED: nonclean post-clear live remains zero
+ABI READ MISMATCH nonclean post-clear seen remains zero address=0xac actual=0x00000007 expected=0x00000000
+STAGE2G PRODUCTION FAILED: nonclean post-clear seen remains zero
+STATE MISMATCH PWM re-enable remains RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: PWM re-enable remains RESET_WAIT
+STATE MISMATCH later healthy evaluation arms production actual=1 expected=0
+STAGE2G PRODUCTION FAILED: later healthy evaluation arms production
+ABI READ MISMATCH later healthy ARMED_READY address=0xa0 actual=0x00000002 expected=0x00000001
+STAGE2G PRODUCTION FAILED: later healthy ARMED_READY
+STAGE2G PRODUCTION FAILED: later healthy did not clear AXI compatibility status
+STAGE2G PRODUCTION FAILED: production PWM activity did not resume after ARMED
+STATE MISMATCH second clear enters RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: second clear enters RESET_WAIT
+ABI READ MISMATCH second post-clear is not ready address=0xa0 actual=0x00000002 expected=0x00000014
+STAGE2G PRODUCTION FAILED: second post-clear is not ready
+ABI READ MISMATCH replacement fault first bitmap address=0xa4 actual=0x00000003 expected=0x00000004
+STAGE2G PRODUCTION FAILED: replacement fault first bitmap
+ABI READ MISMATCH replacement fault seen bitmap address=0xac actual=0x00000007 expected=0x00000004
+STAGE2G PRODUCTION FAILED: replacement fault seen bitmap
+STAGE2G PRODUCTION FAILED: new pre-arm fault did not replace public code
+STATE MISMATCH new-fault clear enters RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: new-fault clear enters RESET_WAIT
+STAGE2G PRODUCTION FAILED: pre-reset compatibility state was not retained
+STAGE2G_PRODUCTION_PATH=FAIL_23
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_production_path.sv:718: 
+       Time: 17086000  Scope: tb_stage2g_production_path

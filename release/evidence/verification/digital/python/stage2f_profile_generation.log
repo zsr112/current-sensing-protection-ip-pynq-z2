@@ -1,0 +1,4 @@
+STAGE2F_PROFILE_GENERATION=PASS
+PROFILE=<EXTERNAL_SOURCE>\spec\stage2f_adc_source_profile_unconfigured.json
+OUTPUT=<EXTERNAL_SOURCE>\rtl\generated\stage2f_adc_source_profile.svh
+MODE=CHECK

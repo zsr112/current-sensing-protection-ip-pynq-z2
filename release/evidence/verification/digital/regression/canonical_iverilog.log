@@ -1,0 +1,21 @@
+[RUN] tb_pwm_gen
+[PASS] tb_pwm_gen
+[RUN] tb_current_compare_dual
+[PASS] tb_current_compare_dual
+[RUN] tb_moving_avg_filter
+[PASS] tb_moving_avg_filter
+[RUN] tb_sensor_health_monitor
+[PASS] tb_sensor_health_monitor
+[RUN] tb_fault_classifier
+[PASS] tb_fault_classifier
+[RUN] tb_protection_fsm
+[PASS] tb_protection_fsm
+[RUN] tb_protection_core_top
+[PASS] tb_protection_core_top
+[RUN] tb_protection_reg_bank
+[PASS] tb_protection_reg_bank
+[RUN] tb_protection_ip_top_reg_controlled
+[PASS] tb_protection_ip_top_reg_controlled
+[RUN] tb_protection_ip_top_axi_lite
+[PASS] tb_protection_ip_top_axi_lite
+SUMMARY: PASS=10 FAIL=0

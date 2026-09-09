@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Wed Sep  9 03:32:42 2026
+# Process ID: 11908
+# Current directory: <EXTERNAL_BOARD>/recovered_pwm
+# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\recovered_pwm\vivado.log -journal <EXTERNAL_BOARD>\recovered_pwm\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\recovered_pwm source_accept destination_armed S1E-B2-BOARD-20260909-R4
+# Log file: <EXTERNAL_BOARD>/recovered_pwm/vivado.log
+# Journal file: <EXTERNAL_BOARD>\recovered_pwm\vivado.jou
+# Running On        :illusion
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 9 7945HX with Radeon Graphics        
+# CPU Frequency     :2495 MHz
+# CPU Physical cores:16
+# CPU Logical cores :32
+# Host memory       :16844 MB
+# Swap memory       :13958 MB
+# Total Virtual     :30803 MB
+# Available Virtual :12372 MB
+#-----------------------------------------------------------
+source {<EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl} -notrace

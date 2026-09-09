@@ -1,0 +1,7 @@
+Running: xsim.dir/b2_destination_width_32_snapshot/xsimk.exe -runall -simmode gui -wdb b2_destination_width_32_snapshot.wdb -simrunnum 0 -socket 63669
+Design successfully loaded
+Design Loading Memory Usage: 10988 KB (Peak: 10988 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11568 KB (Peak: 11568 KB)
+Simulation CPU Usage: 15 ms

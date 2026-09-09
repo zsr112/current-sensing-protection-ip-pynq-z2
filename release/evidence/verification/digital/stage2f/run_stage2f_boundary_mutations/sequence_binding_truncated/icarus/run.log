@@ -1,0 +1,4 @@
+WIDTH SEQUENCE BOUNDARY FAIL: 24-bit sequence exact
+WIDTH SEQUENCE BOUNDARY FAIL: 32-bit sequence exact
+FATAL: <EXTERNAL_SOURCE>\tb\stage2f\tb_stage2f_width_sequence_boundary.sv:270: width/sequence failures=2
+       Time: 120000  Scope: tb_stage2f_width_sequence_boundary

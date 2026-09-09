@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-08T19:31:31.807073+00:00",
+  "host_start_utc": "2026-09-08T19:31:31.772764+00:00",
+  "request": {
+    "action": "differential_fault/prepare",
+    "execution_id": "S1E-B2-BOARD-20260909-R4"
+  },
+  "response_sha256": "03f32db36686db23c7db3f794f878fbbe096a7070233999eae17a8d17144f9e2"
+}

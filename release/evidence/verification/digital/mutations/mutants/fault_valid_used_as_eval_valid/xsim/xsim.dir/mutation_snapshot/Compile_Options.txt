@@ -1,0 +1,1 @@
+"work.tb_stage2g_policy_matrix" -s "mutation_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\mutations\mutants\fault_valid_used_as_eval_valid\xsim\xelab.log" 

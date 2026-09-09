@@ -1,0 +1,19 @@
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module current_compare_dual declared here: <EXTERNAL_SOURCE>\rtl\current_compare_dual.v:1
+       :   -- module destination_sequence_integrity_tracker declared here: <EXTERNAL_SOURCE>\rtl\transaction_destination_observer.v:44
+       :   -- module fault_classifier declared here: <EXTERNAL_SOURCE>\rtl\fault_classifier.v:3
+       :   -- module protection_core_top declared here: <EXTERNAL_SOURCE>\rtl\protection_core_top.v:1
+       :   -- module protection_fsm declared here: <EXTERNAL_SOURCE>\rtl\protection_fsm.v:3
+       :   -- module protection_ip_top_reg_controlled declared here: <EXTERNAL_SOURCE>\rtl\protection_ip_top_reg_controlled.v:1
+       :   -- module protection_reg_bank declared here: <EXTERNAL_SOURCE>\rtl\protection_reg_bank.v:3
+       :   -- module pwm_gate declared here: <EXTERNAL_SOURCE>\rtl\pwm_gate.v:1
+       :   -- module pwm_gen declared here: <EXTERNAL_SOURCE>\rtl\pwm_gen.v:1
+       :   -- module sensor_health_monitor declared here: <EXTERNAL_SOURCE>\rtl\sensor_health_monitor.v:1
+       :   -- module stage2e_transaction_sequence_classifier declared here: <EXTERNAL_SOURCE>\rtl\transaction_destination_observer.v:5
+       :   -- module stage2g_fault_episode_controller declared here: <EXTERNAL_SOURCE>\rtl\protection_fsm.v:84
+       :   -- module stage2g_fault_evaluation_pipeline declared here: <EXTERNAL_SOURCE>\rtl\fault_classifier.v:43
+       :   -- module stage2g_protection_core declared here: <EXTERNAL_SOURCE>\rtl\protection_core_top.v:136
+       :   -- module stage2g_protection_ip_reg_controlled declared here: <EXTERNAL_SOURCE>\rtl\protection_ip_top_reg_controlled.v:160
+       :   -- module transaction_destination_observer declared here: <EXTERNAL_SOURCE>\rtl\transaction_destination_observer.v:104

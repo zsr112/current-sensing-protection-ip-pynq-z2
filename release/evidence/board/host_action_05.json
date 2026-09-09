@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-08T19:31:14.397867+00:00",
+  "host_start_utc": "2026-09-08T19:31:14.323829+00:00",
+  "request": {
+    "action": "ch2_overcurrent/prepare",
+    "execution_id": "S1E-B2-BOARD-20260909-R4"
+  },
+  "response_sha256": "2ceaaaff21ecf944f03274916946207dbc8947f4ca9bb9a190599b229070c846"
+}

@@ -1,0 +1,4 @@
+WIDTH SEQUENCE BOUNDARY FAIL: 8-bit unsupported normalization is not tied low
+WIDTH SEQUENCE BOUNDARY FAIL: 16-bit unsupported normalization is not tied low
+FATAL: <EXTERNAL_SOURCE>\tb\stage2f\tb_stage2f_width_sequence_boundary.sv:270: width/sequence failures=2
+       Time: 120000  Scope: tb_stage2f_width_sequence_boundary

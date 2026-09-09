@@ -1,0 +1,206 @@
+{
+  "overlay": {
+    "clock_mhz": {
+      "fclk0": 100.0,
+      "fclk1": 125.0
+    },
+    "identity": {
+      "artifact_identities": {
+        "bit": {
+          "bytes": 4045685,
+          "delivery_policy": "PACKAGE_REQUIRED",
+          "package_path": "artifacts/protection_system.bit",
+          "role": "BITSTREAM",
+          "sha256": "2ef091e6550ba01d00cd677d9b9676fc38f3cdd4380d9925244fb705342ec518"
+        },
+        "hwh": {
+          "bytes": 690403,
+          "delivery_policy": "PACKAGE_REQUIRED",
+          "package_path": "artifacts/protection_system.hwh",
+          "role": "HWH",
+          "sha256": "0b011b48829ef1e29c917a83ecdbe1e96c012dd86fda4ac7cf4d5abcc4ee71fc"
+        },
+        "ltx": {
+          "bytes": 92913,
+          "delivery_policy": "PACKAGE_REQUIRED",
+          "package_path": "artifacts/protection_system.ltx",
+          "role": "LTX",
+          "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+        },
+        "xsa": {
+          "bytes": 857418,
+          "delivery_policy": "PROVENANCE_ONLY_REQUIRED",
+          "package_path": null,
+          "role": "XSA",
+          "sha256": "e80324278450b0e1bccc713931d229adb025d9a1f30549029a77aab5eb010adf"
+        }
+      },
+      "board_model": "PYNQ-Z2",
+      "board_model_basis": "OPERATOR_DECLARATION; JTAG die checked separately",
+      "board_time_trusted": false,
+      "board_time_utc": "2025-05-07T14:24:25.714983+00:00",
+      "chronology_authority": "HOST_UTC_AND_ORDERED_ACTION_INDEX",
+      "effective_uid": 0,
+      "execution_id": "S1E-B2-BOARD-20260909-R4",
+      "hostname": "pynq",
+      "kernel": "Linux-6.6.10-xilinx-v2024.1-g3c0eca68c652-armv7l-with-glibc2.35",
+      "os_release": {
+        "BUG_REPORT_URL": "https://www.pynq.io",
+        "HOME_URL": "https://www.pynq.io/",
+        "ID": "pynqlinux",
+        "ID_LIKE": "ubuntu",
+        "NAME": "PynqLinux",
+        "PRETTY_NAME": "PynqLinux, based on Ubuntu 22.04",
+        "PRIVACY_POLICY_URL": "https://www.pynq.io",
+        "SUPPORT_URL": "https://discuss.pynq.io/",
+        "UBUNTU_CODENAME": "jammy",
+        "VERSION": "3.0 (Carlisle)",
+        "VERSION_CODENAME": "Carlisle",
+        "VERSION_ID": "3.0"
+      },
+      "package_manifest": {
+        "bytes": 4466,
+        "sha256": "041981de2f65d28e9eefa01bd2f7768a535b26887e723238b4e1b3d2bf09e0b8"
+      },
+      "physical_execution_id": "S1E-B2-REBUILT-WINDOWS-20260909T000000Z",
+      "pynq_version": "3.1.1",
+      "python_executable": "/usr/local/share/pynq-venv/bin/python3",
+      "python_version": "3.10.4",
+      "source_commit": "3cf68b27c7e30c1ac3729bd9f3b79598531d0be2",
+      "source_tree": "338bbcc360c82f2ce9b4e6747bc98a60e72ffd26",
+      "ssh_user": "xilinx"
+    },
+    "ip_map": {
+      "axi_gpio_stage1d_0": {
+        "addr_range": 65536,
+        "phys_addr": 1092616192
+      },
+      "protection_ip_axi_lite_0": {
+        "addr_range": 4096,
+        "phys_addr": 1136656384
+      }
+    },
+    "loaded": true,
+    "pynq_version": "3.1.1",
+    "registers": {
+      "CAPABILITIES_0": 111,
+      "CAPABILITIES_1": 537927686,
+      "CTRL": 0,
+      "FAULT_CODE": 0,
+      "FAULT_SEEN_BITMAP": 0,
+      "FIRST_FAULT_BITMAP": 0,
+      "I_CH1": 0,
+      "I_CH2": 0,
+      "LIVE_FAULT_BITMAP": 0,
+      "OBS_AGGREGATE_ERROR_COUNT": 0,
+      "OBS_BACKPRESSURE_CYCLE_COUNT": 0,
+      "OBS_CAPABILITY": 3799523329,
+      "OBS_DESTINATION_DELIVERY_COUNT": 0,
+      "OBS_DUPLICATE_DELIVERY_COUNT": 0,
+      "OBS_FIFO_OVERFLOW_ATTEMPT_COUNT": 0,
+      "OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT": 0,
+      "OBS_LAST_DESTINATION_SEQUENCE": 0,
+      "OBS_LAST_SOURCE_SEQUENCE": 0,
+      "OBS_REORDER_OR_STALE_COUNT": 0,
+      "OBS_SEQUENCE_GAP_COUNT": 0,
+      "OBS_SOURCE_ACCEPT_COUNT": 0,
+      "OBS_SOURCE_DROP_COUNT": 0,
+      "OBS_SOURCE_PROTOCOL_VIOLATION_COUNT": 0,
+      "OBS_STATUS_W1C": 0,
+      "POLICY_EVALUATION_SEQUENCE": 0,
+      "POLICY_STATUS": 4,
+      "PWM_DUTY": 500,
+      "PWM_PERIOD": 1000,
+      "REGISTER_MAP_VERSION": 1380778241,
+      "STATUS": 0,
+      "TH_DIFF": 200,
+      "TH_OC1": 3000,
+      "TH_OC2": 3000
+    },
+    "state": {
+      "capabilities": {
+        "armed_ready": "PRESENT",
+        "clear_level_status": "PRESENT",
+        "fault_bitmap_width": 6,
+        "fault_bitmaps": "PRESENT",
+        "implemented_sequence_width": 32,
+        "maximum_sequence_width": 32,
+        "minimum_sequence_width": 16,
+        "normalized_telemetry": "ABSENT",
+        "policy_evaluation_identity": "PRESENT",
+        "raw_capabilities_0": 111,
+        "raw_capabilities_1": 537927686,
+        "stage2e_transaction_observability": "PRESENT",
+        "stage2g_policy": "PRESENT",
+        "version": {
+          "magic": 21069,
+          "major": 1,
+          "minor": 1,
+          "raw_value": 1380778241
+        }
+      },
+      "fault_seen_bitmap": {
+        "advertised_width": 6,
+        "known_flags": 0,
+        "raw_value": 0,
+        "unknown_mask": 0
+      },
+      "first_fault_bitmap": {
+        "advertised_width": 6,
+        "known_flags": 0,
+        "raw_value": 0,
+        "unknown_mask": 0
+      },
+      "live_fault_bitmap": {
+        "advertised_width": 6,
+        "known_flags": 0,
+        "raw_value": 0,
+        "unknown_mask": 0
+      },
+      "observability": {
+        "aggregate_error_count": 0,
+        "backpressure_cycle_count": 0,
+        "capability": 3799523329,
+        "destination_delivery_count": 0,
+        "duplicate_delivery_count": 0,
+        "fifo_overflow_attempt_count": 0,
+        "fifo_underflow_attempt_count": 0,
+        "last_destination_sequence": 0,
+        "last_source_sequence": 0,
+        "reorder_or_stale_count": 0,
+        "sequence_gap_count": 0,
+        "source_accept_count": 0,
+        "source_drop_count": 0,
+        "source_protocol_violation_count": 0,
+        "status": 0
+      },
+      "policy_evaluation_sequence": 0,
+      "policy_status": {
+        "armed_ready": false,
+        "clear_pending": false,
+        "fault_latched_state": false,
+        "post_clear_recovery_pending": false,
+        "raw_value": 4,
+        "reset_wait_state": true
+      },
+      "register_map_version": {
+        "magic": 21069,
+        "major": 1,
+        "minor": 1,
+        "raw_value": 1380778241
+      },
+      "status": {
+        "ctrl": 0,
+        "fault_code": 0,
+        "i_ch1": 0,
+        "i_ch2": 0,
+        "status": 0
+      }
+    }
+  },
+  "representation": "EXTRACTED_FROM_ORIGINAL_HTTP_RESPONSE",
+  "source": {
+    "bytes": 5105,
+    "sha256": "51f1171fc55ec696a818e714b01138d0bb11d1ac33d59b5d11a25dc3c4aad30c"
+  }
+}

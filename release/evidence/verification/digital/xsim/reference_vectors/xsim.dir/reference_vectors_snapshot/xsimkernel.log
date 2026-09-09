@@ -1,0 +1,7 @@
+Running: xsim.dir/reference_vectors_snapshot/xsimk.exe -runall -simmode gui -testplusarg VECTORS -wdb reference_vectors_snapshot.wdb -simrunnum 0 -socket 63650
+Design successfully loaded
+Design Loading Memory Usage: 10836 KB (Peak: 10836 KB)
+Design Loading CPU Usage: 62 ms
+Simulation completed
+Simulation Memory Usage: 12712 KB (Peak: 12712 KB)
+Simulation CPU Usage: 343 ms

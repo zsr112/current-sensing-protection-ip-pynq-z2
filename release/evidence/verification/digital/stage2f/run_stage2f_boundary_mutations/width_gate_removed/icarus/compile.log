@@ -1,0 +1,6 @@
+<EXTERNAL_VERIFICATION>\digital\stage2f\run_stage2f_boundary_mutations\width_gate_removed\rtl\adc_sample_code_normalizer.sv:63: error: Unknown module type: STAGE2F_PARAMETER_ERROR_RAW_WIDTH_MUST_BE_12
+<EXTERNAL_VERIFICATION>\digital\stage2f\run_stage2f_boundary_mutations\width_gate_removed\rtl\adc_sample_code_normalizer.sv:63: error: Unknown module type: STAGE2F_PARAMETER_ERROR_RAW_WIDTH_MUST_BE_12
+2 error(s) during elaboration.
+*** These modules were missing:
+        STAGE2F_PARAMETER_ERROR_RAW_WIDTH_MUST_BE_12 referenced 2 times.
+***

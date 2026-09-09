@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-08T19:30:37.132598+00:00",
+  "host_start_utc": "2026-09-08T19:30:37.050219+00:00",
+  "request": {
+    "action": "normal_pwm/prepare",
+    "execution_id": "S1E-B2-BOARD-20260909-R4"
+  },
+  "response_sha256": "4b73dee05cf33cf952372b9ec23c608f7ae97f64f738baea7ff51db8510d23d2"
+}

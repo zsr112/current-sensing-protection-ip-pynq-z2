@@ -1,0 +1,20 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed Sep  9 04:04:53 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/stage2e_mutation_episode_recount_snapshot/xsim_script.tcl
+# xsim {stage2e_mutation_episode_recount_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+MUTATION_ID=04_STALL_EPISODE_RECOUNTED
+MUTATION_CHANGED_BEHAVIOR=PROTOCOL_MONITOR_ADDS_SECOND_COUNT_PER_EPISODE
+MUTATION_EXPECTED_REJECTION=STALL_EPISODE_RECOUNTED
+STAGE2E CHECK FAILED: STALL_EPISODE_RECOUNTED
+$finish called at time : 56 ns : File "<EXTERNAL_SOURCE>/tb/stage2e/stage2e_transaction_observability_checker.sv" Line 8
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 04:04:55 2026...

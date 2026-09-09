@@ -1,0 +1,11 @@
+Q-SIM-09 clear in NORMAL matrix
+Q-SIM-04 clear while live, source visible safe next cycle
+Q-SIM-13 current RTL parameter-boundary characterization N=1/2/4
+Q-SIM-12 exact provisional RESET_WAIT_CYCLES=4 E0-E5 characterization
+Q-SIM-07 repeated one-cycle clear pauses but does not reset progress
+Q-SIM-08 bounded held-high clear freezes wait progress
+Q-SIM-06 current RTL Policy B characterization only
+Q-SIM-05 early, candidate-final, and post-completion reassertion boundaries
+ENH FSM asynchronous reset dominance in LATCHED and active RESET_WAIT
+tb_protection_fsm PASS
+<EXTERNAL_SOURCE>\tb\tb_protection_fsm.sv:430: $finish called at 1306000 (1ps)

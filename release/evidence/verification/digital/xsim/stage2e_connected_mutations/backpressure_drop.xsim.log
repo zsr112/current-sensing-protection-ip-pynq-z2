@@ -1,0 +1,34 @@
+#-----------------------------------------------------------
+# xsim v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Wed Sep  9 04:04:34 2026
+# Process ID: 25816
+# Current directory: <EXTERNAL_VERIFICATION>/digital/xsim/stage2e_connected_mutations
+# Command line: xsim.exe -log <EXTERNAL_VERIFICATION>\digital\xsim\stage2e_connected_mutations\backpressure_drop.xsim.log -mode tcl -source {xsim.dir/stage2e_mutation_backpressure_drop_snapshot/xsim_script.tcl}
+# Log file: <EXTERNAL_VERIFICATION>/digital/xsim/stage2e_connected_mutations/backpressure_drop.xsim.log
+# Journal file: <EXTERNAL_VERIFICATION>/digital/xsim/stage2e_connected_mutations\xsim.jou
+# Running On        :illusion
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 9 7945HX with Radeon Graphics        
+# CPU Frequency     :2495 MHz
+# CPU Physical cores:16
+# CPU Logical cores :32
+# Host memory       :16844 MB
+# Swap memory       :13958 MB
+# Total Virtual     :30803 MB
+# Available Virtual :12587 MB
+#-----------------------------------------------------------
+source xsim.dir/stage2e_mutation_backpressure_drop_snapshot/xsim_script.tcl
+# xsim {stage2e_mutation_backpressure_drop_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+MUTATION_ID=01_BACKPRESSURE_COUNTED_AS_DROP
+MUTATION_CHANGED_BEHAVIOR=DROP_OUTPUT_ADDS_BACKPRESSURE_COUNT
+MUTATION_EXPECTED_REJECTION=BACKPRESSURE_MISCLASSIFIED_AS_DROP
+STAGE2E CHECK FAILED: BACKPRESSURE_MISCLASSIFIED_AS_DROP
+$finish called at time : 36 ns : File "<EXTERNAL_SOURCE>/tb/stage2e/stage2e_transaction_observability_checker.sv" Line 8
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 04:04:36 2026...

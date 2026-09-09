@@ -1,0 +1,14 @@
+FAIL cycle=28 evaluation_code actual=00000002 expected=00000003
+FAIL cycle=36 evaluation_code actual=00000002 expected=00000004
+FAIL cycle=40 evaluation_code actual=00000003 expected=00000004
+FAIL cycle=44 evaluation_code actual=00000002 expected=00000004
+FAIL cycle=52 evaluation_code actual=00000002 expected=00000005
+FAIL cycle=56 evaluation_code actual=00000005 expected=00000003
+FAIL cycle=60 evaluation_code actual=00000002 expected=00000003
+FAIL cycle=64 evaluation_code actual=00000005 expected=00000004
+FAIL cycle=68 evaluation_code actual=00000002 expected=00000004
+FAIL cycle=72 evaluation_code actual=00000005 expected=00000004
+FAIL cycle=76 evaluation_code actual=00000002 expected=00000004
+STAGE2G_POLICY_MATRIX=FAIL_11
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_policy_matrix.sv:489: 
+       Time: 1771000  Scope: tb_stage2g_policy_matrix

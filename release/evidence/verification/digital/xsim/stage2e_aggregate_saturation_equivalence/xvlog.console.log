@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/transaction_destination_observer.v" into library work
+INFO: [VRFC 10-311] analyzing module stage2e_transaction_sequence_classifier
+INFO: [VRFC 10-311] analyzing module destination_sequence_integrity_tracker
+INFO: [VRFC 10-311] analyzing module transaction_destination_observer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2e/tb_stage2e_aggregate_saturation_equivalence.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stage2e_aggregate_saturation_equivalence

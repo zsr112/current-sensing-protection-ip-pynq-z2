@@ -1,0 +1,93 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed Sep  9 04:01:12 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/mutation_snapshot/xsim_script.tcl
+# xsim {mutation_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+FAIL cycle=18 evaluation_bitmap actual=00000001 expected=00000002
+FAIL cycle=19 evaluation_bitmap actual=00000001 expected=00000003
+FAIL cycle=20 evaluation_bitmap actual=00000001 expected=00000004
+FAIL cycle=21 evaluation_bitmap actual=00000001 expected=00000005
+FAIL cycle=22 evaluation_bitmap actual=00000001 expected=00000006
+FAIL cycle=23 evaluation_bitmap actual=00000001 expected=00000007
+FAIL cycle=24 evaluation_bitmap actual=00000001 expected=00000008
+FAIL cycle=25 evaluation_bitmap actual=00000001 expected=00000009
+FAIL cycle=26 evaluation_bitmap actual=00000001 expected=0000000a
+FAIL cycle=27 evaluation_bitmap actual=00000001 expected=0000000b
+FAIL cycle=28 evaluation_bitmap actual=00000001 expected=0000000c
+FAIL cycle=29 evaluation_bitmap actual=00000001 expected=0000000d
+FAIL cycle=30 evaluation_bitmap actual=00000001 expected=0000000e
+FAIL cycle=31 evaluation_bitmap actual=00000001 expected=0000000f
+FAIL cycle=32 evaluation_bitmap actual=00000001 expected=00000010
+FAIL cycle=33 evaluation_bitmap actual=00000001 expected=00000011
+FAIL cycle=34 evaluation_bitmap actual=00000001 expected=00000012
+FAIL cycle=35 evaluation_bitmap actual=00000001 expected=00000013
+FAIL cycle=36 evaluation_bitmap actual=00000001 expected=00000014
+FAIL cycle=37 evaluation_bitmap actual=00000001 expected=00000015
+FAIL cycle=38 evaluation_bitmap actual=00000001 expected=00000016
+FAIL cycle=39 evaluation_bitmap actual=00000001 expected=00000017
+FAIL cycle=40 evaluation_bitmap actual=00000001 expected=00000018
+FAIL cycle=41 evaluation_bitmap actual=00000001 expected=00000019
+FAIL cycle=42 evaluation_bitmap actual=00000001 expected=0000001a
+FAIL cycle=43 evaluation_bitmap actual=00000001 expected=0000001b
+FAIL cycle=44 evaluation_bitmap actual=00000001 expected=0000001c
+FAIL cycle=45 evaluation_bitmap actual=00000001 expected=0000001d
+FAIL cycle=46 evaluation_bitmap actual=00000001 expected=0000001e
+FAIL cycle=47 evaluation_bitmap actual=00000001 expected=0000001f
+FAIL cycle=48 evaluation_bitmap actual=00000001 expected=00000020
+FAIL cycle=49 evaluation_bitmap actual=00000001 expected=00000021
+FAIL cycle=50 evaluation_bitmap actual=00000001 expected=00000022
+FAIL cycle=51 evaluation_bitmap actual=00000001 expected=00000023
+FAIL cycle=52 evaluation_bitmap actual=00000001 expected=00000024
+FAIL cycle=53 evaluation_bitmap actual=00000001 expected=00000025
+FAIL cycle=54 evaluation_bitmap actual=00000001 expected=00000026
+FAIL cycle=55 evaluation_bitmap actual=00000001 expected=00000027
+FAIL cycle=56 evaluation_bitmap actual=00000001 expected=00000028
+FAIL cycle=57 evaluation_bitmap actual=00000001 expected=00000029
+FAIL cycle=58 evaluation_bitmap actual=00000001 expected=0000002a
+FAIL cycle=59 evaluation_bitmap actual=00000001 expected=0000002b
+FAIL cycle=60 evaluation_bitmap actual=00000001 expected=0000002c
+FAIL cycle=61 evaluation_bitmap actual=00000001 expected=0000002d
+FAIL cycle=62 evaluation_bitmap actual=00000001 expected=0000002e
+FAIL cycle=63 evaluation_bitmap actual=00000001 expected=0000002f
+FAIL cycle=64 evaluation_bitmap actual=00000001 expected=00000030
+FAIL cycle=65 evaluation_bitmap actual=00000001 expected=00000031
+FAIL cycle=66 evaluation_bitmap actual=00000001 expected=00000032
+FAIL cycle=67 evaluation_bitmap actual=00000001 expected=00000033
+FAIL cycle=68 evaluation_bitmap actual=00000001 expected=00000034
+FAIL cycle=69 evaluation_bitmap actual=00000001 expected=00000035
+FAIL cycle=70 evaluation_bitmap actual=00000001 expected=00000036
+FAIL cycle=71 evaluation_bitmap actual=00000001 expected=00000037
+FAIL cycle=72 evaluation_bitmap actual=00000001 expected=00000038
+FAIL cycle=73 evaluation_bitmap actual=00000001 expected=00000039
+FAIL cycle=74 evaluation_bitmap actual=00000001 expected=0000003a
+FAIL cycle=75 evaluation_bitmap actual=00000001 expected=0000003b
+FAIL cycle=76 evaluation_bitmap actual=00000001 expected=0000003c
+FAIL cycle=77 evaluation_bitmap actual=00000001 expected=0000003d
+FAIL cycle=78 evaluation_bitmap actual=00000001 expected=0000003e
+FAIL cycle=79 evaluation_bitmap actual=00000001 expected=0000003f
+FAIL cycle=86 seen_bitmap_or actual=00000001 expected=0000003f
+FAIL cycle=86 live_bitmap_latest actual=00000001 expected=0000003f
+FAIL cycle=96 evaluation_bitmap actual=00000001 expected=00000002
+FAIL cycle=114 evaluation_bitmap actual=00000001 expected=00000020
+FAIL cycle=116 post_recovery_first actual=00000001 expected=00000020
+FAIL cycle=127 evaluation_bitmap actual=00000001 expected=00000002
+FAIL cycle=128 evaluation_bitmap actual=00000001 expected=00000004
+FAIL cycle=135 wrap_latest_bitmap actual=00000001 expected=00000004
+STAGE2G_POLICY_MATRIX=FAIL_70
+STAGE2G_POLICY_MATRIX=PASS
+BITMAP_COMBINATIONS=PASS_64_OF_64
+PRIORITY_CODE_MATRIX=PASS_64_OF_64
+II1_ALIGNMENT=PASS
+CLEAR_FENCE_MATRIX=PASS
+RESET_PIPELINE_FLUSH_MATRIX=PASS
+$finish called at time : 1771 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_policy_matrix.sv" Line 497
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 04:01:14 2026...

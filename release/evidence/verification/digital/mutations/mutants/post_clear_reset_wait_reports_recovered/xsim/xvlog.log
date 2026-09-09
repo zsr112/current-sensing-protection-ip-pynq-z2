@@ -1,0 +1,51 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/reset_release_sync.v" into library work
+INFO: [VRFC 10-311] analyzing module reset_release_sync
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/async_fifo_gray.v" into library work
+INFO: [VRFC 10-311] analyzing module async_fifo_gray
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/transaction_source_observer.v" into library work
+INFO: [VRFC 10-311] analyzing module transaction_source_observer
+INFO: [VRFC 10-311] analyzing module stage2g_transaction_source_observer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/adc_sample_cdc_bridge.v" into library work
+INFO: [VRFC 10-311] analyzing module adc_sample_cdc_bridge
+INFO: [VRFC 10-311] analyzing module stage2g_adc_sample_cdc_bridge
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/adc_sample_code_normalizer.sv" into library work
+INFO: [VRFC 10-311] analyzing module adc_sample_code_normalizer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/source_observability_cdc.v" into library work
+INFO: [VRFC 10-311] analyzing module source_observability_cdc
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/transaction_destination_observer.v" into library work
+INFO: [VRFC 10-311] analyzing module stage2e_transaction_sequence_classifier
+INFO: [VRFC 10-311] analyzing module destination_sequence_integrity_tracker
+INFO: [VRFC 10-311] analyzing module transaction_destination_observer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/current_compare_dual.v" into library work
+INFO: [VRFC 10-311] analyzing module current_compare_dual
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/sensor_health_monitor.v" into library work
+INFO: [VRFC 10-311] analyzing module sensor_health_monitor
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/fault_classifier.v" into library work
+INFO: [VRFC 10-311] analyzing module fault_classifier
+INFO: [VRFC 10-311] analyzing module stage2g_fault_evaluation_pipeline
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_VERIFICATION>/digital/mutations/mutants/post_clear_reset_wait_reports_recovered/source/protection_fsm.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_fsm
+INFO: [VRFC 10-311] analyzing module stage2g_fault_episode_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/pwm_gen.v" into library work
+INFO: [VRFC 10-311] analyzing module pwm_gen
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/pwm_gate.v" into library work
+INFO: [VRFC 10-311] analyzing module pwm_gate
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_core_top.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_core_top
+INFO: [VRFC 10-311] analyzing module stage2g_protection_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_reg_bank.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_reg_bank
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_ip_top_reg_controlled.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_ip_top_reg_controlled
+INFO: [VRFC 10-311] analyzing module stage2g_protection_ip_reg_controlled
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_ip_top_axi_lite.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_axi_lite_register_transport
+INFO: [VRFC 10-311] analyzing module protection_ip_top_axi_lite
+INFO: [VRFC 10-311] analyzing module stage2g_protection_ip_axi_lite
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_ip_top_async_adc_axi_lite.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_ip_top_async_adc_axi_lite
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_production_path.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stage2g_production_path
+INFO: [VRFC 10-311] analyzing module tb_stage2h_abi_1_1_width16
+INFO: [VRFC 10-311] analyzing module tb_stage2h_abi_1_1_width24
+INFO: [VRFC 10-311] analyzing module tb_stage2h_abi_1_1_width32
