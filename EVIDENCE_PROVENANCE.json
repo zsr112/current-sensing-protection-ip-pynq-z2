@@ -1,9 +1,9 @@
 {
   "policy": "Raw artifacts and ILA bytes are unchanged. Portable report representations have separate original and delivered hashes. Complete source inputs remain ordinary files in their original directory relationships.",
   "publication_origin": {
-    "branch": "codex/self-contained-delivery-20260909",
-    "commit": "ee88b750592bd149d3a51a2a6ca78a0a60e65a8d",
-    "tree": "989914180912d336b9563eab478d2772881f19d4"
+    "branch": "release-preparation",
+    "commit": "4ced35c15bb11f063680af59409a010a938f5fbe",
+    "tree": "cf46c8f807375f67345c6f3d6575bf0a1958018d"
   },
   "publication_tools": {
     "deploy/load.py": {
@@ -36,8 +36,8 @@
     },
     "tools/build_self_contained_release.py": {
       "identity": {
-        "bytes": 12370,
-        "sha256": "bdb5ca0611e40d6e54596cab50212ab43f77ea5413ae3defc8642984e7f1eeae"
+        "bytes": 12576,
+        "sha256": "00e07a427dcffa20a3218dcaf0c8b136a4fb3fb0da226701238a440de33f68d9"
       },
       "source_path": "tools/build_self_contained_release.py"
     },

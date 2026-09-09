@@ -10,11 +10,11 @@
     },
     "EVIDENCE_ANNEX.json": {
       "bytes": 2231,
-      "sha256": "553cc76433f72005c3eedd7e5473f11982a9126ba853d596d12877d0baf36f79"
+      "sha256": "6e1b6d29ba6e1e8caff9b4b08e5b11c9231f9e6de1e61511373d799f390d0888"
     },
     "EVIDENCE_PROVENANCE.json": {
-      "bytes": 773300,
-      "sha256": "d9b904984f887dd6931015e36095589a1f4fa5ada011e1f718d6057bb98dfc82"
+      "bytes": 773281,
+      "sha256": "17a54b9589843765949caeee8f4c07b8b1058cc234d84ee0771b7636b0603c64"
     },
     "README.md": {
       "bytes": 4628,
@@ -25,8 +25,8 @@
       "sha256": "83d8b3c25681230806102fc8572ea68112e2cded808dd048d1d52370526c32f1"
     },
     "VERSION.json": {
-      "bytes": 5642,
-      "sha256": "76c128b57cf5bdebfdb742a28941dfc3c6b1cce0f6d34805a5da2a850f6c58c2"
+      "bytes": 5623,
+      "sha256": "99d4f747494a7a38ce02d08dd72dd18c4ddd55051a8aec0fed8bc20ca9923819"
     },
     "config/self_contained_source.json": {
       "bytes": 4045,
@@ -34,7 +34,7 @@
     },
     "deploy/DEPLOY_MANIFEST.json": {
       "bytes": 1466,
-      "sha256": "b822e8c4afe6f551a377d2119c3ecd05750b46694da662f5eec0da09fc728f73"
+      "sha256": "95222b01f7b269c52d1f04cdd481dec9fbf018c432ac938ba9f23a3601b50c4f"
     },
     "deploy/artifacts/protection_system.bit": {
       "bytes": 4045685,
@@ -6689,8 +6689,8 @@
       "sha256": "90807d1c6e3e5c69f32083e42f4346557a4c1db84fa56964613d167f5b8b5879"
     },
     "tools/build_self_contained_release.py": {
-      "bytes": 12370,
-      "sha256": "bdb5ca0611e40d6e54596cab50212ab43f77ea5413ae3defc8642984e7f1eeae"
+      "bytes": 12576,
+      "sha256": "00e07a427dcffa20a3218dcaf0c8b136a4fb3fb0da226701238a440de33f68d9"
     },
     "tools/build_stage2f_audit_review.py": {
       "bytes": 48026,
@@ -6901,6 +6901,6 @@
       "sha256": "d2177f22fc06f7e0165640300377ee71a3ebab241bc0ea7572c9c07023eb98ac"
     }
   },
-  "release_id": "stage2-self-contained-v2r1",
+  "release_id": "stage2-self-contained-v2r2",
   "schema": "csip-self-contained-release-v2"
 }

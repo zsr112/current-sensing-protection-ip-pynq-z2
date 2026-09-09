@@ -140,6 +140,9 @@ def build(args):
         publication_tools[destination] = {'source_path': relative, 'identity': identity(target)}
     publication_origin = optional_git_identity(ROOT)
     if publication_origin is not None:
+        publication_origin = {key: value for key, value in publication_origin.items() if key != 'branch'}
+        publication_origin['branch'] = 'release-preparation'
+    if publication_origin is not None:
         for relative, _ in publication_files:
             committed = subprocess.check_output(['git', '-C', str(ROOT), 'show', 'HEAD:' + relative])
             require(committed == (ROOT / relative).read_bytes(), 'Publication tool is not committed: ' + relative)

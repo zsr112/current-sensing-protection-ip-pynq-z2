@@ -8,11 +8,11 @@
   "formal_acceptance": "NOT_FORMALLY_ACCEPTED",
   "physical_execution_id": "CSIP-SC-V2-SELECTED-001",
   "publication_origin": {
-    "branch": "codex/self-contained-delivery-20260909",
-    "commit": "ee88b750592bd149d3a51a2a6ca78a0a60e65a8d",
-    "tree": "989914180912d336b9563eab478d2772881f19d4"
+    "branch": "release-preparation",
+    "commit": "4ced35c15bb11f063680af59409a010a938f5fbe",
+    "tree": "cf46c8f807375f67345c6f3d6575bf0a1958018d"
   },
-  "release_id": "stage2-self-contained-v2r1",
+  "release_id": "stage2-self-contained-v2r2",
   "schema": "csip-self-contained-release-v2",
   "source_manifest": {
     "bytes": 78847,
