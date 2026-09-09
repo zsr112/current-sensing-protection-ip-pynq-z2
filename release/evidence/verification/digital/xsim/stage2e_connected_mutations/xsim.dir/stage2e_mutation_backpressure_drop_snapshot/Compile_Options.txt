@@ -1,1 +1,0 @@
-"work.tb_stage2e_mutation_backpressure_drop" -s "stage2e_mutation_backpressure_drop_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\xsim\stage2e_connected_mutations\backpressure_drop.xelab.log" 

@@ -1,0 +1,684 @@
+schema_version stage1e-reconstruction-profile-schema-v1
+profile_identity {
+    schema_version stage1e-build-profile-identity-v1
+    profile_id stage1e_reconstruction_profile_v1
+    profile_version v1
+    stage STAGE1E
+    scope_id STAGE1E_RECONSTRUCTION_AND_BUILD
+    configuration_role SYNTHESIS_READY_EXECUTION_CONFIGURATION
+    active_phase PHASE2_SYNTHESIS
+    supersedes_intended_role stage1e_controller_skeleton
+    historical_profile_semantics_unchanged 1
+}
+profile_state {
+    schema_version stage1e-reconstruction-profile-state-v1
+    definition_status IMPLEMENTED
+    selection_status NOT_SELECTED_BY_HISTORICAL_SKELETON
+    execution_mode CONTROLLED_RECONSTRUCTION_AND_SYNTHESIS
+    declaration_grants_execution_permission 0
+    vivado_execution_enabled_by_declaration 0
+    synthesis_execution_enabled 1
+    implementation_execution_enabled 0
+    artifact_operations_enabled 0
+    board_access_enabled 0
+}
+capability_model {
+    schema_version stage1e-progressive-capability-model-v1
+    authorization_default DENY
+    declaration_is_permission 0
+    grants_are_per_capability 1
+    progressive_enablement_supported 1
+    cumulative_phase_model 1
+    active_phase PHASE2_SYNTHESIS
+    supported_capabilities {
+        IP_PACKAGING
+        PROJECT_RECONSTRUCTION
+        BD_GENERATION
+        WRAPPER_GENERATION
+        SYNTHESIS
+        IMPLEMENTATION
+        ARTIFACT_COLLECTION
+        ARTIFACT_PUBLICATION
+    }
+    phase_order {
+        PHASE1_RECONSTRUCTION
+        PHASE2_SYNTHESIS
+        PHASE3_IMPLEMENTATION
+        PHASE4_ARTIFACT_CLOSURE
+    }
+    phases {
+        PHASE1_RECONSTRUCTION {
+            phase_number 1
+            activation_state ACTIVE_PREREQUISITE
+            enabled_capabilities {
+                IP_PACKAGING
+                PROJECT_RECONSTRUCTION
+                BD_GENERATION
+                WRAPPER_GENERATION
+            }
+            disabled_capabilities {
+                SYNTHESIS
+                IMPLEMENTATION
+                ARTIFACT_COLLECTION
+                ARTIFACT_PUBLICATION
+            }
+            predecessor_gate FROZEN_INPUTS_VALID_ENVIRONMENT_FRESH_WORKSPACE
+        }
+        PHASE2_SYNTHESIS {
+            phase_number 2
+            activation_state ACTIVE
+            enabled_capabilities {
+                IP_PACKAGING
+                PROJECT_RECONSTRUCTION
+                BD_GENERATION
+                WRAPPER_GENERATION
+                SYNTHESIS
+            }
+            disabled_capabilities {
+                IMPLEMENTATION
+                ARTIFACT_COLLECTION
+                ARTIFACT_PUBLICATION
+            }
+            adds_capabilities {
+                SYNTHESIS
+            }
+            predecessor_gate ACCEPTED_BUILD_TARGET_IDENTITY
+        }
+        PHASE3_IMPLEMENTATION {
+            phase_number 3
+            activation_state DISABLED_PENDING_SEPARATE_AUTHORIZATION
+            adds_capabilities {
+                IMPLEMENTATION
+            }
+            predecessor_gate ACCEPTED_SYNTHESIS_RESULT_IDENTITY
+        }
+        PHASE4_ARTIFACT_CLOSURE {
+            phase_number 4
+            activation_state DISABLED_PENDING_SEPARATE_AUTHORIZATION
+            adds_capabilities {
+                ARTIFACT_COLLECTION
+                ARTIFACT_PUBLICATION
+            }
+            predecessor_gate ACCEPTED_IMPLEMENTATION_AND_REPORT_REVIEWS
+        }
+    }
+    capabilities {
+        IP_PACKAGING {
+            capability_flag ip_packaging_enabled
+            phase PHASE1_RECONSTRUCTION
+            profile_enabled 1
+            explicit_execution_grant_required 1
+        }
+        PROJECT_RECONSTRUCTION {
+            capability_flag project_reconstruction_enabled
+            phase PHASE1_RECONSTRUCTION
+            profile_enabled 1
+            explicit_execution_grant_required 1
+        }
+        BD_GENERATION {
+            capability_flag bd_generation_enabled
+            phase PHASE1_RECONSTRUCTION
+            profile_enabled 1
+            explicit_execution_grant_required 1
+        }
+        WRAPPER_GENERATION {
+            capability_flag wrapper_generation_enabled
+            phase PHASE1_RECONSTRUCTION
+            profile_enabled 1
+            explicit_execution_grant_required 1
+        }
+        SYNTHESIS {
+            capability_flag synthesis_enabled
+            phase PHASE2_SYNTHESIS
+            profile_enabled 1
+            explicit_execution_grant_required 1
+        }
+        IMPLEMENTATION {
+            capability_flag implementation_enabled
+            phase PHASE3_IMPLEMENTATION
+            profile_enabled 0
+            explicit_execution_grant_required 1
+        }
+        ARTIFACT_COLLECTION {
+            capability_flag artifact_collection_enabled
+            phase PHASE4_ARTIFACT_CLOSURE
+            profile_enabled 0
+            explicit_execution_grant_required 1
+        }
+        ARTIFACT_PUBLICATION {
+            capability_flag publication_enabled
+            phase PHASE4_ARTIFACT_CLOSURE
+            profile_enabled 0
+            explicit_execution_grant_required 1
+        }
+    }
+}
+adapter_inventory {
+    schema_version stage1e-adapter-inventory-v1
+    inventory_version v1
+    source_binding_policy {
+        schema_version stage1e-adapter-source-binding-policy-v1
+        hash_algorithm SHA256
+        source_sha256_required 1
+        binding_time EXECUTION_AUTHORIZATION
+        version_mismatch_action BLOCK
+    }
+    operation_order {
+        stage1e_ip_packaging
+        vivado_project::create
+        bd_flow::create
+        stage1e_base_design
+        stage1e_debug_design
+        stage1e_mutation_bridge
+        stage1e_build_target
+        stage1e_synthesis
+    }
+    adapters {
+        stage1e_ip_packaging {
+            work_package WP-B
+            capability IP_PACKAGING
+            phase IP_PACKAGING
+            source_path fpga/vivado/build/adapters/stage1e_ip_packaging.tcl
+            interface stage1e::ip_packaging::run
+            implementation_command ::stage1e::ip_packaging::run
+            adapter_version v1
+            context_schema_version stage1e-ip-packaging-context-v1
+            result_schema_version stage1e-ip-packaging-result-v1
+            produced_identity_schema_versions {
+                stage1e-package-identity-v1
+                stage1e-ip-repo-identity-v1
+            }
+        }
+        vivado_project::create {
+            work_package WP-B
+            capability PROJECT_RECONSTRUCTION
+            phase PROJECT_RECONSTRUCTION
+            source_path fpga/vivado/build/lib/vivado_project.tcl
+            interface vivado_project::create
+            implementation_command ::stage1d::vivado_project::create
+            adapter_version v1
+            context_schema_version stage1e-vivado-project-create-context-v1
+            result_schema_version stage1e-vivado-project-create-result-v1
+            produced_identity_schema_versions {
+                stage1e-project-identity-v1
+            }
+        }
+        bd_flow::create {
+            work_package WP-B
+            capability BD_GENERATION
+            phase BD_GENERATION
+            source_path fpga/vivado/build/lib/bd_flow.tcl
+            interface bd_flow::create
+            implementation_command ::stage1d::bd_flow::create
+            adapter_version v1
+            context_schema_version stage1e-bd-create-context-v1
+            result_schema_version stage1e-bd-create-result-v1
+            produced_identity_schema_versions {
+                stage1e-bd-identity-v1
+            }
+        }
+        stage1e_base_design {
+            work_package WP-B
+            capability BD_GENERATION
+            phase BD_GENERATION
+            source_path fpga/vivado/build/adapters/stage1e_base_design.tcl
+            interface stage1e::base_design::apply
+            implementation_command ::stage1e::base_design::apply
+            adapter_version v1
+            context_schema_version stage1e-base-design-context-v1
+            result_schema_version stage1e-base-design-result-v1
+            produced_identity_schema_versions {
+                stage1e-base-design-identity-v1
+            }
+        }
+        stage1e_debug_design {
+            work_package WP-B
+            capability BD_GENERATION
+            phase BD_GENERATION
+            source_path fpga/vivado/build/adapters/stage1e_debug_design.tcl
+            interface stage1e::debug_design::apply
+            implementation_command ::stage1e::debug_design::apply
+            adapter_version v1
+            context_schema_version stage1e-debug-design-context-v1
+            result_schema_version stage1e-debug-design-result-v1
+            produced_identity_schema_versions {
+                stage1e-debug-design-identity-v1
+            }
+        }
+        stage1e_mutation_bridge {
+            work_package WP-B
+            capability BD_GENERATION
+            phase MUTATION_EXECUTE
+            source_path fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl
+            interface stage1e::mutation_bridge::apply
+            implementation_command ::stage1e::mutation_bridge::apply
+            adapter_version v1
+            context_schema_version stage1e-mutation-bridge-context-v1
+            result_schema_version stage1e-mutation-bridge-result-v1
+            produced_identity_schema_versions {
+                stage1e-controlled-mutation-identity-v1
+            }
+        }
+        stage1e_build_target {
+            work_package WP-B
+            capability WRAPPER_GENERATION
+            phase WRAPPER_GENERATION
+            source_path fpga/vivado/build/adapters/stage1e_build_target.tcl
+            interface stage1e::build_target::prepare
+            implementation_command ::stage1e::build_target::prepare
+            adapter_version v1
+            context_schema_version stage1e-build-target-context-v1
+            result_schema_version stage1e-build-target-result-v1
+            produced_identity_schema_versions {
+                stage1e-build-target-identity-v1
+            }
+        }
+        stage1e_synthesis {
+            work_package WP-C
+            capability SYNTHESIS
+            phase SYNTHESIS
+            source_path fpga/vivado/build/adapters/stage1e_synthesis.tcl
+            interface stage1e::synthesis::run
+            implementation_command ::stage1e::synthesis::run
+            adapter_version v1
+            context_schema_version stage1e-synthesis-context-v1
+            result_schema_version stage1e-synthesis-result-v1
+            produced_identity_schema_versions {
+                stage1e-synthesis-result-identity-v1
+            }
+        }
+    }
+}
+identity_binding {
+    schema_version stage1e-profile-identity-binding-v1
+    source {
+        schema_version stage1e-profile-source-binding-v1
+        source_inventory_reference {
+            base_config_path fpga/vivado/build/config/stage1d_build_config.dict
+            base_section source_verification
+            extension_config_path fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+            extension_section source_verification
+            profile_path fpga/vivado/build/config/stage1e_reconstruction_profile_v1.dict
+        }
+        profile_required_paths {
+            fpga/vivado/build/config/stage1e_reconstruction_profile_v1.dict
+            fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+            fpga/vivado/build/stage1e_artifact_build.tcl
+            fpga/vivado/build/stage1e_phase2_synthesis_build.tcl
+            fpga/vivado/build/controller/stage1e_phase2_controller.tcl
+            fpga/vivado/build/adapters/stage1e_ip_packaging.tcl
+            fpga/vivado/build/lib/vivado_project.tcl
+            fpga/vivado/build/lib/bd_flow.tcl
+            fpga/vivado/build/adapters/stage1e_base_design.tcl
+            fpga/vivado/build/adapters/stage1e_debug_design.tcl
+            fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl
+            fpga/vivado/build/adapters/stage1e_build_target.tcl
+            fpga/vivado/build/adapters/stage1e_synthesis.tcl
+            fpga/vivado/build/tests/stage1e_reconstruction_profile_tests.tcl
+            fpga/vivado/build/tests/stage1e_phase2_controller_tests.tcl
+            fpga/vivado/build/tests/stage1e_synthesis_adapter_tests.tcl
+            docs/design/stage1e_artifact_closure_acceptance.md
+            docs/design/stage1e_reconstruction_profile_definition.md
+            docs/design/stage1e_synthesis_pipeline_contract.md
+            docs/design/stage1e_controlled_synthesis_execution_plan.md
+            docs/design/stage1e_phase2_constraint_policy.md
+        }
+        inventory_hash_policy {
+            algorithm SHA256
+            canonicalization REPOSITORY_RELATIVE_SORTED_PATH_AND_FILE_SHA256
+            required_at_authorization 1
+            clean_git_worktree_required 1
+            git_commit_required 1
+            git_tree_required 1
+            untracked_build_input_action BLOCK
+        }
+        generated_input_policy PROHIBITED_UNLESS_SAME_EXECUTION_OUTPUT
+    }
+    controller {
+        schema_version stage1e-controller-identity-policy-v1
+        controller_source_path fpga/vivado/build/stage1e_phase2_synthesis_build.tcl
+        controller_api_version STAGE1E-PHASE2-SYNTHESIS-BUILD-v1
+        controller_source_hash_algorithm SHA256
+        supporting_source_inventory_hash_required 1
+        exact_source_bytes_binding_required 1
+        binding_time EXECUTION_AUTHORIZATION
+    }
+    environment {
+        schema_version stage1e-environment-identity-policy-v1
+        vivado_identity {
+            version {Vivado v2024.1}
+            sw_build 5076996
+            ip_build 5075265
+            match_policy EXACT
+        }
+        fpga_part xc7z020clg400-1
+        board_part tul.com.tw:pynq-z2:part0:1.0
+        ip_identity_policy {
+            resolution UNIQUE_EXACT_VLNV
+            packaged_ip_same_execution_required 1
+            component_metadata_hash_required 1
+            package_hash_required 1
+            historical_package_substitution_action BLOCK
+        }
+        expected_ip_identities {
+            processing_system7 xilinx.com:ip:processing_system7:5.5
+            smartconnect xilinx.com:ip:smartconnect:1.0
+            protection zsr112.local:protection:protection_ip_axi_lite:0.3
+            reset xilinx.com:ip:proc_sys_reset:5.0
+            constant xilinx.com:ip:xlconstant:1.1
+            system_ila xilinx.com:ip:system_ila:1.1
+        }
+    }
+    workspace {
+        schema_version stage1e-external-workspace-policy-v1
+        external_workspace_required 1
+        fresh_execution_workspace_required 1
+        execution_id_binding_required 1
+        repository_overlap_allowed 0
+        historical_build_products_allowed 0
+        mixed_execution_outputs_allowed 0
+        generated_state_areas {
+            ip_packaging
+            ip_repo
+            project
+            runs
+            reports
+            logs
+            execution_state
+            candidate_artifacts
+        }
+        stale_state_action BLOCK
+    }
+    evidence {
+        schema_version stage1e-execution-evidence-policy-v1
+        structured_phase_evidence_required 1
+        execution_identity_required 1
+        source_identity_required 1
+        configuration_identity_required 1
+        environment_identity_required 1
+        workspace_identity_required 1
+        operation_authorization_required 1
+        result_identity_required 1
+        warnings_and_errors_required 1
+        cleanup_result_required 1
+        logs_and_reports_hash_algorithm SHA256
+        persist_failure_evidence 1
+        continuation_decision_owner controller_core
+    }
+}
+authorization_policy {
+    schema_version stage1e-capability-authorization-policy-v1
+    authorization_default DENY
+    profile_declaration_is_permission 0
+    authorization_issuer controller_core
+    authorization_status_required AUTHORIZED
+    capability_grant_mode EXPLICIT_PER_CAPABILITY
+    execution_identity_match REQUIRED_EXACT
+    source_identity_match REQUIRED_EXACT
+    configuration_identity_match REQUIRED_EXACT
+    environment_identity_match REQUIRED_EXACT
+    workspace_identity_match REQUIRED_EXACT
+    wildcard_grants_allowed 0
+    adapter_self_authorization_allowed 0
+    implicit_successor_authorization_allowed 0
+    continuation_owner controller_core
+    required_grant_fields {
+        status
+        authority
+        execution_id
+        operation
+        phase
+        capability
+        capability_enabled
+    }
+}
+build_policy {
+    schema_version stage1e-build-policy-v1
+    synthesis {
+        schema_version stage1e-synthesis-policy-v1
+        policy_status REVIEWED_READY
+        capability SYNTHESIS
+        capability_enabled 1
+        first_run_policy CLEAN_NON_INCREMENTAL
+        run_name synth_1
+        strategy {Vivado Synthesis Defaults}
+        directives {
+            STEPS.SYNTH_DESIGN.ARGS.DIRECTIVE Default
+        }
+        seed_policy {
+            mode NOT_APPLICABLE
+            rationale {Vivado synthesis exposes no accepted deterministic seed control for this flow.}
+        }
+        job_policy {
+            mode LOCAL
+            jobs 2
+            dispatch_timeout_seconds 300
+            dispatch_poll_interval_milliseconds 1000
+            wait_timeout_minutes 60
+            pre_synthesis_budget_minutes 45
+            shutdown_grace_minutes 10
+            launcher_timeout_minutes 120
+        }
+        incremental_synthesis_policy {
+            enabled 0
+            checkpoint {}
+            imported_checkpoint_allowed 0
+        }
+        run_policy {
+            fileset sources_1
+            top_module protection_system_wrapper
+            allowed_initial_statuses {{Not started}}
+            accepted_terminal_statuses {{synth_design Complete!}}
+            stale_run_action BLOCK
+            retry_policy NEW_EXECUTION_ONLY
+        }
+        output_policy {
+            output_directory_role synthesis_run
+            output_directory_template project/current_protection_ip_pynq_z2_stage1e.runs/synth_1
+            run_log_relative_path runme.log
+            report_directory_role reports/synthesis
+            repository_output_allowed 0
+        }
+        report_policy {
+            synthesis_report stage1e_synthesis.rpt
+            utilization_report stage1e_synthesis_utilization.rpt
+            message_report stage1e_synthesis_messages.rpt
+            sha256_required 1
+        }
+        warning_policy {
+            schema_version stage1e-synthesis-warning-policy-v1
+            policy_id stage1e_vivado_2024_1_retry19_warning_dispositions_v1
+            policy_status REVIEWED_ACCEPTED
+            review_evidence docs/status/stage1e_first_controlled_synthesis_execution_retry19.md
+            unknown_disposition REJECTED
+            dispositions {
+                {Synth 8-7071} {
+                    identifier {Synth 8-7071}
+                    classification ACCEPTED
+                    acceptance_state ACCEPTED
+                    severity WARNING
+                    observed_count 8
+                    min_count 1
+                    max_count 8
+                    review_authority STAGE1E_SYNTHESIS_WARNING_REVIEW
+                    vivado_identity {
+                        version 2024.1
+                        sw_build 5076996
+                        ip_build 5075265
+                    }
+                    configuration_identity {
+                        profile_id stage1e_reconstruction_profile_v1
+                        phase PHASE2_SYNTHESIS
+                        configuration_schema stage1e-phase2-synthesis-config-v1
+                        configuration_path fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+                    }
+                    evidence_reference docs/status/stage1e_first_controlled_synthesis_execution_retry19.md
+                    rationale {Retry #19 observed exactly eight unused optional generated-wrapper ports: four proc_sys_reset outputs, two PS7 USB control outputs, and two SmartConnect AXI protection outputs. The functional reset and AXI paths are independently identity- and readback-validated; a count above eight remains blocking.}
+                }
+                {Synth 8-7023} {
+                    identifier {Synth 8-7023}
+                    classification ACCEPTED
+                    acceptance_state ACCEPTED
+                    severity WARNING
+                    observed_count 3
+                    min_count 1
+                    max_count 3
+                    review_authority STAGE1E_SYNTHESIS_WARNING_REVIEW
+                    vivado_identity {
+                        version 2024.1
+                        sw_build 5076996
+                        ip_build 5075265
+                    }
+                    configuration_identity {
+                        profile_id stage1e_reconstruction_profile_v1
+                        phase PHASE2_SYNTHESIS
+                        configuration_schema stage1e-phase2-synthesis-config-v1
+                        configuration_path fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+                    }
+                    evidence_reference docs/status/stage1e_first_controlled_synthesis_execution_retry19.md
+                    rationale {Retry #19 reported three generated-wrapper instances with omitted connections, corresponding exactly to the optional proc_sys_reset, PS7 USB control, and SmartConnect AXI protection ports covered by Synth 8-7071. A fourth affected instance remains blocking.}
+                }
+                {Synth 8-4446} {
+                    identifier {Synth 8-4446}
+                    classification ACCEPTED
+                    acceptance_state ACCEPTED
+                    severity WARNING
+                    observed_count 1
+                    min_count 1
+                    max_count 1
+                    review_authority STAGE1E_SYNTHESIS_WARNING_REVIEW
+                    vivado_identity {
+                        version 2024.1
+                        sw_build 5076996
+                        ip_build 5075265
+                    }
+                    configuration_identity {
+                        profile_id stage1e_reconstruction_profile_v1
+                        phase PHASE2_SYNTHESIS
+                        configuration_schema stage1e-phase2-synthesis-config-v1
+                        configuration_path fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+                    }
+                    evidence_reference docs/status/stage1e_first_controlled_synthesis_execution_retry19.md
+                    rationale {Retry #19 reported one System ILA observer instance with all functional outputs unused. The debug adapter independently validates the ILA identity, probe inventory, widths, and connections, and functional design behavior does not consume an ILA output; any additional instance remains blocking.}
+                }
+                {Synth 8-7129} {
+                    identifier {Synth 8-7129}
+                    classification ACCEPTED
+                    acceptance_state ACCEPTED
+                    severity WARNING
+                    observed_count 48
+                    min_count 1
+                    max_count 48
+                    review_authority STAGE1E_SYNTHESIS_WARNING_REVIEW
+                    vivado_identity {
+                        version 2024.1
+                        sw_build 5076996
+                        ip_build 5075265
+                    }
+                    configuration_identity {
+                        profile_id stage1e_reconstruction_profile_v1
+                        phase PHASE2_SYNTHESIS
+                        configuration_schema stage1e-phase2-synthesis-config-v1
+                        configuration_path fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+                    }
+                    evidence_reference docs/status/stage1e_first_controlled_synthesis_execution_retry19.md
+                    rationale {Retry #19 reported 48 elaboration records for the deliberately unused complementary halves of two 24-to-12-bit XL Slice paths. The mutation bridge validates 24-bit inputs, the 11:0 and 23:12 selections, and both 12-bit outputs; a count above 48 remains blocking.}
+                }
+                {Synth 8-7080} {
+                    identifier {Synth 8-7080}
+                    classification ACCEPTED
+                    acceptance_state ACCEPTED
+                    severity WARNING
+                    observed_count 1
+                    min_count 1
+                    max_count 1
+                    review_authority STAGE1E_SYNTHESIS_WARNING_REVIEW
+                    vivado_identity {
+                        version 2024.1
+                        sw_build 5076996
+                        ip_build 5075265
+                    }
+                    configuration_identity {
+                        profile_id stage1e_reconstruction_profile_v1
+                        phase PHASE2_SYNTHESIS
+                        configuration_schema stage1e-phase2-synthesis-config-v1
+                        configuration_path fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+                    }
+                    evidence_reference docs/status/stage1e_first_controlled_synthesis_execution_retry19.md
+                    rationale {Retry #19 emitted one tool scheduling notice because the design did not meet parallel synthesis criteria. The frozen job policy remains two local jobs and synthesis completed successfully; more than one occurrence remains blocking.}
+                }
+            }
+        }
+        activation_requirements {
+            strategy_frozen
+            directives_frozen
+            seed_policy_frozen
+            job_policy_frozen
+            constraint_policy_accepted
+            warning_policy_accepted
+            explicit_synthesis_grant
+        }
+    }
+}
+constraint_policy {
+    schema_version stage1e-constraint-policy-v1
+    policy_status REVIEWED_ACCEPTED
+    policy_id stage1e_internal_only_no_user_xdc_v1
+    policy_reference docs/design/stage1e_phase2_constraint_policy.md
+    unknown_constraint_state_action BLOCK
+    build_pass_with_unknown_constraint_state 0
+    xdc_inventory_reference {
+        schema_version stage1e-xdc-inventory-reference-v1
+        accepted_inventory_status ACCEPTED_EMPTY_USER_XDC_INVENTORY
+        accepted_paths {}
+        explicitly_rejected_paths {
+            fpga/constraints/pynq_z2_preboard_draft.xdc
+        }
+        source_controlled_paths_only 1
+        exact_inventory_hash_required 1
+        generated_and_ip_xdc_inventory_required 1
+    }
+    clock_policy {
+        status REVIEWED
+        primary_clock_source processing_system7_0/FCLK_CLK0
+        primary_clock_frequency_hz 100000000
+        primary_clock_provenance ZYNQ_PS7_BOARD_AUTOMATION_AND_BD_PARAMETER
+        primary_clock_definitions_required 1
+        generated_clock_policy_required 1
+        clock_coverage_evidence_required 1
+        unknown_clock_state_action BLOCK
+    }
+    reset_policy {
+        status REVIEWED
+        asynchronous_source processing_system7_0/FCLK_RESET0_N
+        synchronization_owner proc_sys_reset_0
+        peripheral_reset proc_sys_reset_0/peripheral_aresetn
+        active_polarity ACTIVE_LOW
+        reset_constraint_inventory_required 1
+        reset_timing_policy_required 1
+        unknown_reset_state_action BLOCK
+    }
+    generated_clock_policy {
+        status REVIEWED
+        expected_generated_clocks {}
+        unexpected_generated_clock_action BLOCK
+        generated_clock_provenance_required 1
+    }
+    timing_exception_policy {
+        status REVIEWED_EMPTY
+        accepted_exceptions {}
+        explicit_inventory_required 1
+        exact_scope_required 1
+        rationale_required 1
+        review_required 1
+        unknown_exception_action BLOCK
+    }
+    unconstrained_path_handling {
+        status REVIEW_REQUIRED_AT_SYNTHESIS
+        report_required 1
+        endpoint_inventory_required 1
+        accepted_unknown_count 0
+        accepted_unconstrained_endpoint_count 0
+        unknown_or_unreviewed_action BLOCK
+    }
+}

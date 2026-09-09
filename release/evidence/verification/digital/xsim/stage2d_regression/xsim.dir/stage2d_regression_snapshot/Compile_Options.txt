@@ -1,1 +1,0 @@
-"work.tb_stage2d_async_adc_atomic_cdc" -s "stage2d_regression_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\xsim\stage2d_regression\xelab.log" 

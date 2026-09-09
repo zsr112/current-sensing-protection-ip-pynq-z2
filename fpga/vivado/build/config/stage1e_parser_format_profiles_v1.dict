@@ -1,0 +1,111 @@
+schema_version stage1e-parser-format-profiles-contract-v1
+contract_state FIXTURE_PROFILE_ONLY
+qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+parser_interface stage1e-production-evidence-parser-interface-v1
+common_header STAGE1E_EVIDENCE_FIXTURE_V1
+common_end_marker END_STAGE1E_EVIDENCE_FIXTURE_V1
+encoding UTF-8
+line_endings LF
+locale INVARIANT
+numeric_contract CANONICAL_DECIMAL_INTEGER_BASE_UNITS
+profiles {
+    stage1e-fixture-timing-summary-profile-v1 {
+        ordinal 1 role TIMING_SUMMARY record_kinds {TIMING}
+        signature PROFILE|stage1e-fixture-timing-summary-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-timing-path-groups-profile-v1 {
+        ordinal 2 role TIMING_PATH_GROUPS record_kinds {TIMING}
+        signature PROFILE|stage1e-fixture-timing-path-groups-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-clock-interaction-profile-v1 {
+        ordinal 3 role CLOCK_INTERACTION record_kinds {CLOCK_CDC}
+        signature PROFILE|stage1e-fixture-clock-interaction-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-clocks-profile-v1 {
+        ordinal 4 role CLOCKS_GENERATED_CLOCKS record_kinds {CLOCK_CDC}
+        signature PROFILE|stage1e-fixture-clocks-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-constraint-coverage-profile-v1 {
+        ordinal 5 role CONSTRAINT_COVERAGE record_kinds {TIMING EXCEPTION}
+        signature PROFILE|stage1e-fixture-constraint-coverage-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-check-timing-profile-v1 {
+        ordinal 6 role CHECK_TIMING record_kinds {TIMING MESSAGE}
+        signature PROFILE|stage1e-fixture-check-timing-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-timing-exception-profile-v1 {
+        ordinal 7 role TIMING_EXCEPTION_SOURCE record_kinds {EXCEPTION}
+        signature PROFILE|stage1e-fixture-timing-exception-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-bus-skew-profile-v1 {
+        ordinal 8 role CONDITIONAL_BUS_SKEW record_kinds {TIMING}
+        signature PROFILE|stage1e-fixture-bus-skew-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-utilization-profile-v1 {
+        ordinal 9 role UTILIZATION record_kinds {UTILIZATION}
+        signature PROFILE|stage1e-fixture-utilization-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-drc-profile-v1 {
+        ordinal 10 role DRC record_kinds {DRC}
+        signature PROFILE|stage1e-fixture-drc-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-methodology-profile-v1 {
+        ordinal 11 role METHODOLOGY record_kinds {METHODOLOGY}
+        signature PROFILE|stage1e-fixture-methodology-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-cdc-profile-v1 {
+        ordinal 12 role CDC record_kinds {CLOCK_CDC}
+        signature PROFILE|stage1e-fixture-cdc-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-message-profile-v1 {
+        ordinal 13 role MESSAGE_SOURCE record_kinds {MESSAGE}
+        signature PROFILE|stage1e-fixture-message-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-journal-profile-v1 {
+        ordinal 14 role VIVADO_JOURNAL record_kinds {JOURNAL}
+        signature PROFILE|stage1e-fixture-journal-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    stage1e-fixture-native-log-profile-v1 {
+        ordinal 15 role VIVADO_NATIVE_LOG record_kinds {MESSAGE}
+        signature PROFILE|stage1e-fixture-native-log-profile-v1
+        qualification_state FIXTURE_PROFILE_ONLY
+        vivado_qualification VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+}
+terminal_states {
+    COMPLETE PARTIAL UNSUPPORTED_FORMAT CONFLICT TRUNCATED_INPUT
+    UNKNOWN_IDENTIFIER UNKNOWN_NUMERIC
+}
+profile_match {
+    zero_matches UNSUPPORTED_FORMAT one_match SELECTED
+    multiple_matches CONFLICT directory_discovery PROHIBITED
+    wildcard_discovery PROHIBITED newest_file_selection PROHIBITED
+}

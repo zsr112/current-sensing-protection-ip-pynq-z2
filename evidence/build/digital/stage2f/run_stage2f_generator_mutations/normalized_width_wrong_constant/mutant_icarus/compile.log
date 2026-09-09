@@ -1,0 +1,5 @@
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_generator_mutations\normalized_width_wrong_constant\rtl\adc_sample_code_normalizer.sv:67: error: Unknown module type: STAGE2F_PARAMETER_ERROR_NORMALIZED_WIDTH_MUST_BE_13
+1 error(s) during elaboration.
+*** These modules were missing:
+        STAGE2F_PARAMETER_ERROR_NORMALIZED_WIDTH_MUST_BE_13 referenced 1 times.
+***

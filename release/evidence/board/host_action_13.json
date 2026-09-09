@@ -1,9 +1,0 @@
-{
-  "host_end_utc": "2026-09-08T19:32:23.787437+00:00",
-  "host_start_utc": "2026-09-08T19:32:23.753594+00:00",
-  "request": {
-    "action": "clear_recovery/prepare",
-    "execution_id": "S1E-B2-BOARD-20260909-R4"
-  },
-  "response_sha256": "c926b1790a8176f590ca9e065f6f758040455bf77b88be371d291d8c0ac02cc8"
-}

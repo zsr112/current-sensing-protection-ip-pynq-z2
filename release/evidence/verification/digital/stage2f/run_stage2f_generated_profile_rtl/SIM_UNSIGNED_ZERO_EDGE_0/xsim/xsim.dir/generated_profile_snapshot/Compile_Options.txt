@@ -1,1 +1,0 @@
-"work.tb_stage2f_generated_profile_vectors" -s "generated_profile_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\stage2f\run_stage2f_generated_profile_rtl\SIM_UNSIGNED_ZERO_EDGE_0\xsim\xelab.log" 

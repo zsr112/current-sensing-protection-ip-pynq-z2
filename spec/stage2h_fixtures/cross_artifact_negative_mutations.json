@@ -1,0 +1,292 @@
+{
+  "fixture_schema_version": "stage2h-register-map-cross-artifact-negative-mutations-v8",
+  "mutations": [
+    {
+      "id": "RTL_PYTHON_OFFSET_MISMATCH",
+      "artifact": "sw/protection_ip_interface.py",
+      "old": "REG_STATUS = 0x04",
+      "new": "REG_STATUS = 0x08",
+      "expected_error": "Python offset map differs from current ABI"
+    },
+    {
+      "id": "RTL_C_HEADER_OFFSET_MISMATCH",
+      "artifact": "sw/ps_register_demo/protection_ip_regs.h",
+      "old": "PROTECTION_REG_STATUS      0x04u",
+      "new": "PROTECTION_REG_STATUS      0x08u",
+      "expected_error": "C header offset map differs from current ABI"
+    },
+    {
+      "id": "RTL_TCL_OFFSET_MISMATCH",
+      "artifact": "fpga/vivado/package_protection_ip_stage2_axi_lite.tcl",
+      "old": "# - 0x04 STATUS      RO",
+      "new": "# - 0x08 STATUS      RO",
+      "expected_error": "Tcl register comment offset map differs from current ABI"
+    },
+    {
+      "id": "RTL_IPXACT_RESET_MISMATCH",
+      "artifact": "virtual:ipxact",
+      "old": "TH_OC1_RESET=3000",
+      "new": "TH_OC1_RESET=2999",
+      "expected_error": "IP-XACT reset differs from current ABI"
+    },
+    {
+      "id": "DOCUMENTATION_DRIFT",
+      "artifact": "docs/implementation/register_map.md",
+      "old": "| `0x14` | `TH_OC1` | RW | `3000` |",
+      "new": "| `0x14` | `TH_OC1` | RW | `2999` |",
+      "expected_error": "documentation register table differs from current ABI"
+    },
+    {
+      "id": "TESTBENCH_CONSTANT_DRIFT",
+      "artifact": "tb/stage2e/tb_stage2e_axi_register_contract.sv",
+      "old": "check_read(8'h28, 32'hE278_2001);",
+      "new": "check_read(8'h28, 32'hE278_2002);",
+      "expected_error": "testbench capability constant differs from current ABI"
+    },
+    {
+      "id": "GENERATED_HEADER_HAND_EDIT",
+      "artifact": "virtual:generated",
+      "old": "SPEC_SHA256=expected",
+      "new": "SPEC_SHA256=hand-edited",
+      "expected_error": "generated artifact bytes differ from regeneration"
+    },
+    {
+      "id": "GENERATOR_NONDETERMINISM",
+      "artifact": "virtual:generator",
+      "old": "GENERATED_AT=absent",
+      "new": "GENERATED_AT=current-time",
+      "expected_error": "generator output is non-deterministic"
+    },
+    {
+      "id": "CROSS_VERSION_AST_FALSE_MISMATCH",
+      "artifact": "virtual:ast-default-dump",
+      "old": "9758193b2b840d1addd256e94bc24d4f28ccaa1882e74dc02edf63d41484a9dc",
+      "new": "f13f939ff8a3132ac598bedcbaa82e8a939b62f52ecff28251797a95b5234304",
+      "expected_error": "legacy interpreter-default AST hashes differ for unchanged source"
+    },
+    {
+      "id": "SCHEMA_DOCUMENT_DECISION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "REGISTER_MAP_SINGLE_SOURCE_AUTHORITY=spec/register_map.json",
+      "new": "REGISTER_MAP_SINGLE_SOURCE_AUTHORITY=rtl/protection_reg_bank.v",
+      "expected_error": "architecture decision differs from machine contract"
+    },
+    {
+      "id": "VERIFICATION_PLAN_ADDRESS_DRIFT",
+      "artifact": "docs/verification/stage2h_register_map_convergence_verification_plan.md",
+      "old": "PROPOSED_ADDRESS_BLOCK=0x80..0xB0",
+      "new": "PROPOSED_ADDRESS_BLOCK=0x64..0x80",
+      "expected_error": "verification plan allocation differs from machine contract"
+    },
+    {
+      "id": "CAPABILITY_BITMAP_WIDTH_DRIFT",
+      "artifact": "virtual:software-generated",
+      "old": "FAULT_BITMAP_WIDTH=6",
+      "new": "FAULT_BITMAP_WIDTH=5",
+      "expected_error": "software capability width differs from register-map spec"
+    },
+    {
+      "id": "RECOVERY_API_SOURCE_CHANGED",
+      "artifact": "sw/protection_ip_interface.py",
+      "old": "def recovery_is_verified(snapshot):",
+      "new": "def startup_ready(snapshot):",
+      "expected_error": "recovery_is_verified source/API fingerprint changed"
+    },
+    {
+      "id": "PACKAGING_REGISTER_OBJECT_CLAIM_DRIFT",
+      "artifact": "fpga/vivado/package_protection_ip_stage2_axi_lite.tcl",
+      "old": "set ip_xact_register_objects NOT_IMPLEMENTED",
+      "new": "set ip_xact_register_objects PASS",
+      "expected_error": "audit scope falsely claims IP-XACT register objects implemented"
+    },
+    {
+      "id": "HANDWRITTEN_W1C_PRIORITY_DRIFT",
+      "artifact": "virtual:behavior-w1c",
+      "old": "SAME_CYCLE_EVENT_WINS_OVER_CLEAR",
+      "new": "CLEAR_WINS_OVER_EVENT",
+      "expected_error": "handwritten W1C priority differs from spec"
+    },
+    {
+      "id": "HANDWRITTEN_W1P_WIDTH_DRIFT",
+      "artifact": "virtual:behavior-w1p",
+      "old": "ONE_ACLK",
+      "new": "TWO_ACLK",
+      "expected_error": "handwritten W1P width differs from spec"
+    },
+    {
+      "id": "GENERATED_CONSTANTS_FRESH_CONFORMANCE_MISSING",
+      "artifact": "virtual:conformance",
+      "old": "CONSTANTS=FRESH;CONFORMANCE=PRESENT",
+      "new": "CONSTANTS=FRESH;CONFORMANCE=MISSING",
+      "expected_error": "generated constants are fresh but behavior conformance is missing"
+    },
+    {
+      "id": "MANUAL_TEST_EXPECTATION",
+      "artifact": "virtual:test-expectation",
+      "old": "EXPECTED_VALUE=SPEC_DERIVED",
+      "new": "EXPECTED_VALUE=MANUAL_LITERAL",
+      "expected_error": "manual test expectation is not derived from spec"
+    },
+    {
+      "id": "HARDCODED_WINDOWS_PY_LAUNCHER",
+      "artifact": "tools/stage2h_register_map_convergence_audit.py",
+      "old": "default=os.environ.get(\"STAGE2H_PYTHON_OLD\")",
+      "new": "default=\"py -3.12\"",
+      "expected_error": "hard-coded platform Python launcher"
+    },
+    {
+      "id": "LINUX_SOURCE_ARCHIVE_REPLAY_FAILURE",
+      "artifact": "virtual:source-archive-replay",
+      "old": "LINUX_OR_WSL=PASS",
+      "new": "LINUX_OR_WSL=FAIL",
+      "expected_error": "Linux or WSL source-archive replay failed"
+    },
+    {
+      "id": "HARDCODED_ABI_CONTRADICTION_COUNT_IN_CHECKER",
+      "artifact": "tools/stage2h_register_map_convergence_audit.py",
+      "old": "def derive_abi_defect_counts",
+      "new": "HARDCODED_CONTRADICTION_COUNT = 3\n\ndef derive_abi_defect_counts",
+      "expected_error": "checker hard-codes ABI contradiction count"
+    },
+    {
+      "id": "FIFO_MONITORS_DOCUMENTED_AS_LIVE_INPUT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "latest atomic destination-FIFO delivery",
+      "new": "current live input",
+      "expected_error": "FIFO monitors documented as current live input"
+    },
+    {
+      "id": "BITMAP_AND_COMPATIBILITY_LIFETIMES_EQUATED",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "bitmap lifetime is distinct from the public compatibility-latch lifetime",
+      "new": "bitmap lifetime equals the public compatibility-latch lifetime",
+      "expected_error": "bitmap lifetime equated to compatibility-latch lifetime"
+    },
+    {
+      "id": "SOURCE_ARCHIVE_FULL_AUDIT_REQUIRES_GIT",
+      "artifact": "tools/tests/test_stage2h_register_map_convergence_audit.py",
+      "old": "check_git_scope=False",
+      "new": "check_git_scope=True",
+      "expected_error": "source-archive unit test requires Git scope"
+    },
+    {
+      "id": "WSL_PATH_CONVERSION_USES_HOST_RESOLVE",
+      "artifact": "tools/build_stage2h_register_map_review.py",
+      "old": "PureWindowsPath(str(path))",
+      "new": "PureWindowsPath(path.resolve())",
+      "expected_error": "Windows path conversion depends on host Path.resolve"
+    },
+    {
+      "id": "LINUX_EXTRACTED_SOURCE_STAGE2H_UNIT_FAILURE",
+      "artifact": "virtual:source-archive-stage2h-units",
+      "old": "LINUX_OR_WSL=PASS",
+      "new": "LINUX_OR_WSL=FAIL",
+      "expected_error": "Linux extracted-source Stage 2H unit tests failed"
+    },
+    {
+      "id": "POLICY_IDENTITY_DOCUMENTED_AS_SNAPSHOT_TOKEN",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "diagnostic last-retirement identity is not a snapshot token",
+      "new": "diagnostic last-retirement identity is a clean snapshot token",
+      "expected_error": "policy evaluation identity documented as snapshot token"
+    },
+    {
+      "id": "PUBLIC_CURRENT_MONITOR_RESET_DOCUMENTED_LIVE",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "PUBLIC_I_CH1_RESET=0",
+      "new": "PUBLIC_I_CH1_RESET=LIVE_INPUT",
+      "expected_error": "public current monitor reset documented as LIVE_INPUT"
+    },
+    {
+      "id": "GENERIC_WRAPPER_RESET_OVERRIDES_PUBLIC_ABI",
+      "artifact": "virtual:current-monitor-reset",
+      "old": "GENERIC_WRAPPER_OVERRIDE=NO",
+      "new": "GENERIC_WRAPPER_OVERRIDE=YES",
+      "expected_error": "generic wrapper reset overrides production public reset"
+    },
+    {
+      "id": "SELECTED_REGISTER_COUNT_DOCUMENTATION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "SELECTED_ABI_1_1_REGISTER_COUNT=8",
+      "new": "SELECTED_ABI_1_1_REGISTER_COUNT=7",
+      "expected_error": "selected register count documentation differs"
+    },
+    {
+      "id": "DEFERRED_CLEAR_EVENT_DOCUMENTATION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "CLEAR_EVENT_STATUS_ABI_1_1_STATUS=DEFERRED_NOT_SELECTED",
+      "new": "CLEAR_EVENT_STATUS_ABI_1_1_STATUS=SELECTED",
+      "expected_error": "deferred CLEAR_EVENT_STATUS documentation differs"
+    },
+    {
+      "id": "CAPABILITY_DEPENDENCY_DOCUMENTATION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "CAPABILITY_DEPENDENCY_COVERAGE=DERIVED_PASS_7_OF_7",
+      "new": "CAPABILITY_DEPENDENCY_COVERAGE=DERIVED_PASS_6_OF_7",
+      "expected_error": "capability dependency documentation differs"
+    },
+    {
+      "id": "SELECTED_BIT_COVERAGE_VERIFICATION_DRIFT",
+      "artifact": "docs/verification/stage2h_register_map_convergence_verification_plan.md",
+      "old": "SELECTED_ABI_1_1_BIT_COVERAGE=DERIVED_PASS_256_OF_256",
+      "new": "SELECTED_ABI_1_1_BIT_COVERAGE=DERIVED_PASS_255_OF_256",
+      "expected_error": "selected bit coverage verification differs"
+    },
+    {
+      "id": "HIGHER_MINOR_POLICY_VERIFICATION_DRIFT",
+      "artifact": "docs/verification/stage2h_register_map_convergence_verification_plan.md",
+      "old": "HIGHER_COMPATIBLE_MINOR_POLICY=APPROVED",
+      "new": "HIGHER_COMPATIBLE_MINOR_POLICY=ENABLE_UNKNOWN_FEATURES",
+      "expected_error": "higher compatible minor verification policy differs"
+    },
+    {
+      "id": "CAPABILITY_AUTHORITY_DOCUMENTATION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "CAPABILITY_DEPENDENCY_AUTHORITY=capability_dependency_matrix",
+      "new": "CAPABILITY_DEPENDENCY_AUTHORITY=selected_field_annotations",
+      "expected_error": "capability authority documentation differs"
+    },
+    {
+      "id": "REGISTER_RESET_AUTHORITY_VERIFICATION_DRIFT",
+      "artifact": "docs/verification/stage2h_register_map_convergence_verification_plan.md",
+      "old": "REGISTER_RESET_AUTHORITY=DERIVED_FROM_FIELD_RESETS",
+      "new": "REGISTER_RESET_AUTHORITY=MANUAL_REGISTER_SCALAR",
+      "expected_error": "register reset authority verification differs"
+    },
+    {
+      "id": "FIRST_PRINCIPLES_SCOPE_DOCUMENTATION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "FIRST_PRINCIPLES_SCOPE_REVIEW=PASS",
+      "new": "FIRST_PRINCIPLES_SCOPE_REVIEW=FAIL",
+      "expected_error": "first-principles scope documentation differs"
+    },
+    {
+      "id": "FINITE_CONFORMANCE_APPROACH_DOCUMENTATION_DRIFT",
+      "artifact": "docs/verification/stage2h_register_map_convergence_verification_plan.md",
+      "old": "CONFORMANCE_APPROACH=FINITE_PROJECT_SPECIFIC_TEMPLATES",
+      "new": "CONFORMANCE_APPROACH=GENERIC_DSL",
+      "expected_error": "finite conformance approach documentation differs"
+    },
+    {
+      "id": "LIGHTWEIGHT_RTL_BINDING_APPROACH_DOCUMENTATION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "RTL_SOURCE_BINDING_APPROACH=LIGHTWEIGHT_EXPLICIT_BINDINGS_PLUS_COMPILE_SIM_CHECKS",
+      "new": "RTL_SOURCE_BINDING_APPROACH=FULL_RTL_DECLARATION_GRAPH",
+      "expected_error": "RTL source binding approach documentation differs"
+    },
+    {
+      "id": "UNKNOWN_FAULT_COMPATIBILITY_DOCUMENTATION_DRIFT",
+      "artifact": "docs/verification/stage2h_register_map_convergence_verification_plan.md",
+      "old": "UNKNOWN_FAULT_CAUSE_FORWARD_COMPATIBILITY=APPROVED",
+      "new": "UNKNOWN_FAULT_CAUSE_FORWARD_COMPATIBILITY=DROP_UNKNOWN",
+      "expected_error": "unknown fault cause compatibility documentation differs"
+    },
+    {
+      "id": "POLICY_IDENTITY_HOLD_DOCUMENTATION_DRIFT",
+      "artifact": "docs/architecture/stage2h_single_source_register_map_tradeoff.md",
+      "old": "POLICY_IDENTITY_HOLDS_DURING_IDLE=YES",
+      "new": "POLICY_IDENTITY_HOLDS_DURING_IDLE=NO",
+      "expected_error": "policy identity idle-hold documentation differs"
+    }
+  ]
+}

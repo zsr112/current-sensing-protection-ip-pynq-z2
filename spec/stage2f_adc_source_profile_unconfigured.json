@@ -1,0 +1,14 @@
+{
+  "schema_version": "stage2f-adc-source-profile-v1",
+  "profile_state": "UNCONFIGURED",
+  "raw_width": 12,
+  "encoding": "UNKNOWN",
+  "zero_code": null,
+  "channel_polarity": {
+    "channel_1": "UNKNOWN",
+    "channel_2": "UNKNOWN"
+  },
+  "profile_identity": "UNCONFIGURED",
+  "physical_unit_status": "UNKNOWN",
+  "production_selection": false
+}

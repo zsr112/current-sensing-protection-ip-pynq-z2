@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "stage2g-current-behavior-matrix-v2",
+  "source_commit": "94b400ad3a713f4fdaf7b0e347c40baeab28a924",
+  "classification_vocabulary": [
+    "EXPLICITLY_IMPLEMENTED",
+    "IMPLICIT_BY_PRIORITY",
+    "UNSPECIFIED",
+    "AMBIGUOUS",
+    "UNTESTED",
+    "CONTRADICTORY"
+  ],
+  "scenarios": [
+    {
+      "id": "POWER_ON_RESET",
+      "stimulus": "rst_n/local_rst_n asserted",
+      "observed_behavior": "protection_fsm resets to ST_NORMAL with fault_latched=0, fault_code_latched=FAULT_NONE, pwm_disable=0; pwm_gen separately drives pwm_raw low while reset is asserted",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "AMBIGUOUS"],
+      "evidence": ["rtl/protection_fsm.v:22-29", "rtl/pwm_gen.v:15-18"],
+      "target_gap": "Reset release must enter safe RESET_WAIT rather than an immediately armed conceptual state."
+    },
+    {
+      "id": "RESET_WAIT_ENTRY",
+      "stimulus": "clear_fault observed in ST_FAULT_LATCHED",
+      "observed_behavior": "state changes to ST_RESET_WAIT, counter clears, latch and pwm_disable remain asserted; this is the only current RESET_WAIT entry",
+      "classification": ["EXPLICITLY_IMPLEMENTED"],
+      "evidence": ["rtl/protection_fsm.v:44-51", "tb/tb_protection_fsm.sv:121-143"],
+      "target_gap": "Reset assertion and legal clear must both enter the sample-qualified target RESET_WAIT."
+    },
+    {
+      "id": "RESET_WAIT_EXIT",
+      "stimulus": "fault_valid=0 and clear_fault=0 for RESET_WAIT_CYCLES clock edges",
+      "observed_behavior": "counter advances on every clock, not every accepted sample; exit clears latch/code on the terminal edge and pwm_disable releases on the following registered edge",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_fsm.v:53-69", "tb/tb_protection_fsm.sv:147-180"],
+      "target_gap": "Exit must require one eligible healthy raw evaluation and hold safe until registered arming."
+    },
+    {
+      "id": "FIRST_RAW_TRANSACTION",
+      "stimulus": "first accepted sample_valid destination delivery after local reset release",
+      "observed_behavior": "sample_accept_event is rst_n && sample_valid; first accepted pair enters the pipeline immediately on the first eligible clock edge",
+      "classification": ["EXPLICITLY_IMPLEMENTED"],
+      "evidence": ["rtl/protection_core_top.v:59-81", "tb/stage2b/tb_stage2b_unified_sample_acceptance.sv:402-434"],
+      "target_gap": "The first transaction must be explicitly tied to RESET_WAIT qualification and reset flush."
+    },
+    {
+      "id": "FAULT_ON_FIRST_RAW_TRANSACTION",
+      "stimulus": "first accepted raw pair evaluates nonzero protection indicators",
+      "observed_behavior": "comparator/health pipeline produces registered fault_valid/code and ST_NORMAL latches the code; current response is a fixed implementation pipeline, not a named episode event",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "AMBIGUOUS"],
+      "evidence": ["rtl/protection_core_top.v:102-122", "rtl/protection_fsm.v:31-41", "tb/stage2b/tb_stage2b_unified_sample_acceptance.sv:443-459"],
+      "target_gap": "Capture first code and full bitmap once per episode, including a fault during RESET_WAIT."
+    },
+    {
+      "id": "NO_TRANSACTION_AFTER_RESET",
+      "stimulus": "no accepted raw transaction after reset release",
+      "observed_behavior": "FSM remains ST_NORMAL and does not wait for a sample; if pwm_enable is asserted, pwm_gen may run after reset even though no healthy transaction has been observed",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "AMBIGUOUS", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_fsm.v:31-35", "rtl/pwm_gen.v:19-29", "tb/stage2b/tb_stage2b_unified_sample_acceptance.sv:194-207"],
+      "target_gap": "Remain in safe RESET_WAIT indefinitely until one eligible healthy raw evaluation."
+    },
+    {
+      "id": "PERSISTENT_FAULT",
+      "stimulus": "same physical cause remains present across accepted transactions",
+      "observed_behavior": "fault_valid can be asserted on each qualifying transaction, while ST_FAULT_LATCHED keeps protection disabled; no explicit one-event-per-episode suppression exists",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "UNSPECIFIED"],
+      "evidence": ["rtl/fault_classifier.v:15-35", "rtl/protection_fsm.v:44-51", "tb/tb_protection_core_top.sv:724-735"],
+      "target_gap": "Persistent fault must not retrigger first-cause event within an episode."
+    },
+    {
+      "id": "FAULT_SOURCE_REMOVAL",
+      "stimulus": "later accepted raw evaluation is healthy",
+      "observed_behavior": "fault_valid/code return to the classifier's no-fault output after pipeline drain, but fault_latched and latched code remain asserted",
+      "classification": ["EXPLICITLY_IMPLEMENTED"],
+      "evidence": ["rtl/fault_classifier.v:20-35", "rtl/protection_fsm.v:44-46", "tb/tb_protection_core_top.sv:106-117"],
+      "target_gap": "Source removal must update live bitmap but never clear the latch or end the episode without legal clear."
+    },
+    {
+      "id": "CLEAR_WITH_LIVE_FAULT",
+      "stimulus": "clear_fault asserted while fault_valid is high or the source remains faulting",
+      "observed_behavior": "ST_FAULT_LATCHED unconditionally enters ST_RESET_WAIT on clear; a later registered fault can re-latch, so rejection is an emergent pipeline effect rather than an explicit acceptance predicate",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "CONTRADICTORY", "AMBIGUOUS"],
+      "evidence": ["rtl/protection_fsm.v:44-51", "tb/tb_protection_fsm.sv:121-143", "docs/implementation/register_map.md:142-154"],
+      "target_gap": "Clear must be explicitly rejected while live_fault_bitmap is nonzero or invalid."
+    },
+    {
+      "id": "CLEAR_AFTER_SOURCE_REMOVAL",
+      "stimulus": "healthy accepted evaluation followed by clear_fault",
+      "observed_behavior": "clear enters cycle-counted RESET_WAIT; no sample is required for progress and the latch clears on the terminal count",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_fsm.v:47-69", "tb/tb_protection_core_top.sv:173-218"],
+      "target_gap": "Legal clear must require a valid healthy observation and return to sample-qualified RESET_WAIT."
+    },
+    {
+      "id": "FAULT_AND_CLEAR_SAME_CYCLE",
+      "stimulus": "fault_valid and clear_fault asserted together",
+      "observed_behavior": "in ST_RESET_WAIT fault_valid is tested before clear/progress; in ST_FAULT_LATCHED the clear branch is unconditional, so priority depends on current state",
+      "classification": ["IMPLICIT_BY_PRIORITY", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_fsm.v:44-69", "tb/tb_protection_fsm.sv:101-118"],
+      "target_gap": "Freeze one state-independent FAULT > CLEAR policy."
+    },
+    {
+      "id": "SECOND_FAULT_AFTER_FIRST",
+      "stimulus": "a later cause appears after an initial fault",
+      "observed_behavior": "while ST_FAULT_LATCHED, later fault_valid does not overwrite code; during ST_RESET_WAIT, fault_valid overwrites fault_code_latched; after recovery, a new fault can latch",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_fsm.v:44-60", "tb/tb_protection_fsm.sv:347-405"],
+      "target_gap": "First cause must be immutable across the entire episode, including recovery qualification."
+    },
+    {
+      "id": "SIMULTANEOUS_FAULTS",
+      "stimulus": "multiple raw causes asserted on one evaluated transaction",
+      "observed_behavior": "fault_classifier emits one code using executable priority; remaining causes are not observable through the code or status",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "IMPLICIT_BY_PRIORITY"],
+      "evidence": ["rtl/fault_classifier.v:20-35", "rtl/fault_defs.vh:5-11", "tb/tb_fault_classifier.sv:89-103"],
+      "target_gap": "Preserve all primitive causes in first/live/seen internal bitmaps while retaining deterministic code priority."
+    },
+    {
+      "id": "RESET_DURING_ACTIVE_FAULT",
+      "stimulus": "rst_n/local_rst_n asserted while protection is latched",
+      "observed_behavior": "asynchronous reset clears FSM, classifier, health history, and PWM state; after release the FSM is immediately ST_NORMAL rather than RESET_WAIT",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "AMBIGUOUS"],
+      "evidence": ["rtl/protection_fsm.v:22-29", "rtl/fault_classifier.v:15-19", "tb/tb_protection_fsm.sv:241-284"],
+      "target_gap": "Reset must dominate and restart a safe sample-qualified episode boundary."
+    },
+    {
+      "id": "RESET_DURING_RECOVERY",
+      "stimulus": "reset asserted while ST_RESET_WAIT and counter has progress",
+      "observed_behavior": "asynchronous reset discards counter/latch/code and returns ST_NORMAL; stale recovery progress does not revive",
+      "classification": ["EXPLICITLY_IMPLEMENTED"],
+      "evidence": ["rtl/protection_fsm.v:22-29", "tb/tb_protection_fsm.sv:262-284"],
+      "target_gap": "Discard recovery progress and restart RESET_WAIT, with pending raw/normalized transactions flushed."
+    },
+    {
+      "id": "POST_CLEAR_FIRST_TRANSACTION",
+      "stimulus": "first accepted raw transaction after clear-driven RESET_WAIT",
+      "observed_behavior": "transaction pipeline continues while FSM waits on a clock counter; a fault can re-latch on any recovery edge, and a healthy/no-sample path can complete solely by elapsed clocks",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "AMBIGUOUS"],
+      "evidence": ["rtl/protection_core_top.v:63-83", "rtl/protection_fsm.v:53-69", "tb/tb_protection_core_top.sv:327-401"],
+      "target_gap": "Define the first post-clear eligible evaluation as the new episode qualification boundary."
+    },
+    {
+      "id": "FAULT_VALID_NOT_EVALUATION_VALID",
+      "stimulus": "a healthy evaluated transaction retires, followed by an ACLK edge with no retiring transaction",
+      "observed_behavior": "fault_classifier registers fault_valid=0 and FAULT_NONE for both situations; no separate valid distinguishes a completed healthy evaluation from pipeline idle",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "CONTRADICTORY"],
+      "evidence": ["rtl/fault_classifier.v:15-35", "rtl/protection_core_top.v:102-122"],
+      "target_gap": "Add fault_eval_valid so zero bitmap is an explicit healthy evaluation and never infer health from fault_valid=0."
+    },
+    {
+      "id": "PIPELINE_LATENCY_OFFSETS",
+      "stimulus": "one atomic raw CDC destination delivery enters the protection core",
+      "observed_behavior": "the pair is captured at edge offset 0, comparator and health decisions are captured at offset 1, classifier fault presence/code registers at offset 2, and the FSM consumes those registered outputs at offset 3; a new pair may enter every ACLK",
+      "classification": ["EXPLICITLY_IMPLEMENTED"],
+      "evidence": ["rtl/protection_core_top.v:59-83", "rtl/protection_core_top.v:102-122", "rtl/fault_classifier.v:15-35"],
+      "target_gap": "Carry valid, sequence, bitmap, code, and integrity through the same fixed three-edge II=1 path."
+    },
+    {
+      "id": "CLEAR_ON_EVALUATION_RETIREMENT_EDGE",
+      "stimulus": "clear_fault is captured in ST_FAULT_LATCHED on an edge where registered fault_valid/code are also available",
+      "observed_behavior": "the latched-state clear branch does not inspect fault_valid and unconditionally enters ST_RESET_WAIT, so there is no request boundary or ownership rule for the evaluation on that edge",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "AMBIGUOUS", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_fsm.v:44-51"],
+      "target_gap": "Treat the same-edge retirement as earlier than the new request and resolve only with the first retirement on a strictly later edge."
+    },
+    {
+      "id": "CLEAR_BETWEEN_DELIVERY_AND_RETIREMENT",
+      "stimulus": "clear_fault arrives after an accepted raw destination delivery but before that transaction reaches the FSM",
+      "observed_behavior": "clear can enter ST_RESET_WAIT before the three-edge raw result is consumed; a later fault_valid can then re-latch and overwrite the recovery code, but no explicit fence associates it with the request",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "AMBIGUOUS", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_core_top.v:63-83", "rtl/protection_fsm.v:44-60"],
+      "target_gap": "Resolve the pending clear with that transaction when it retires after the request, regardless of its earlier destination-delivery edge."
+    },
+    {
+      "id": "CONTINUOUS_II1_CLEAR_REQUEST",
+      "stimulus": "one evaluated transaction is delivered every ACLK while software issues clear",
+      "observed_behavior": "the current FSM has no clear_pending state and no retirement fence; it immediately enters a cycle-counted RESET_WAIT, where repeated fault_valid activity can re-latch and healthy activity is indistinguishable from idle",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "UNSPECIFIED", "CONTRADICTORY"],
+      "evidence": ["rtl/protection_fsm.v:44-69", "rtl/fault_classifier.v:15-35"],
+      "target_gap": "Guarantee bounded clear resolution on the next retirement edge without requiring a globally empty pipeline."
+    },
+    {
+      "id": "RESET_FLUSH_PENDING_EVALUATION",
+      "stimulus": "reset asserts with captured or decision-stage raw work pending",
+      "observed_behavior": "asynchronous reset clears accepted_sample_valid, sample_decision_valid, classifier outputs, and FSM state, so current pipeline state is discarded; there is still no explicit completion-valid identity to assert against after reset",
+      "classification": ["EXPLICITLY_IMPLEMENTED", "UNTESTED"],
+      "evidence": ["rtl/protection_core_top.v:63-70", "rtl/fault_classifier.v:15-19", "rtl/protection_fsm.v:22-29"],
+      "target_gap": "Reset must invalidate every future fault_eval valid stage so no pre-reset sequence retires post-reset."
+    }
+  ]
+}

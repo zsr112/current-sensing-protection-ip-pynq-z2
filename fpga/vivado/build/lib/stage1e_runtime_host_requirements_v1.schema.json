@@ -1,0 +1,99 @@
+{
+  "$schema": "stage1e-schema-subset-v1",
+  "$id": "stage1e-runtime-host-requirements-v1",
+  "title": "Stage 1E runtime HOST requirements foundation v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "contract_state",
+    "supported_platform",
+    "process_provider_interface",
+    "launcher_interface",
+    "observer_interface",
+    "containment_mode",
+    "job_kill_on_close",
+    "job_breakaway_policy",
+    "child_handle_inheritance_policy",
+    "job_topology_evidence",
+    "execution_process_limit_policy",
+    "required_process_evidence",
+    "maximum_processes",
+    "environment_name_comparison",
+    "environment_inheritance_policy",
+    "required_environment_names",
+    "prohibited_environment_names",
+    "foundation_path_checks",
+    "advanced_path_hardening_state",
+    "graceful_termination_modes",
+    "authority_boundary"
+  ],
+  "additionalProperties": false,
+  "x-stage1e-canonical-order": [
+    "schema_version",
+    "contract_state",
+    "supported_platform",
+    "process_provider_interface",
+    "launcher_interface",
+    "observer_interface",
+    "containment_mode",
+    "job_kill_on_close",
+    "job_breakaway_policy",
+    "child_handle_inheritance_policy",
+    "job_topology_evidence",
+    "execution_process_limit_policy",
+    "required_process_evidence",
+    "maximum_processes",
+    "environment_name_comparison",
+    "environment_inheritance_policy",
+    "required_environment_names",
+    "prohibited_environment_names",
+    "foundation_path_checks",
+    "advanced_path_hardening_state",
+    "graceful_termination_modes",
+    "authority_boundary"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "stage1e-runtime-host-requirements-v1"},
+    "contract_state": {"type": "string", "const": "FOUNDATION_ONLY_REVIEW_REQUIRED"},
+    "supported_platform": {"type": "string", "const": "WINDOWS"},
+    "process_provider_interface": {"type": "string", "const": "stage1e-windows-process-control-interface-v1"},
+    "launcher_interface": {"type": "string", "const": "stage1e-production-runtime-launcher-interface-v1"},
+    "observer_interface": {"type": "string", "const": "stage1e-production-host-observer-interface-v1"},
+    "containment_mode": {"type": "string", "const": "JOB_OBJECT_ASSIGN_BEFORE_RESUME"},
+    "job_kill_on_close": {"type": "boolean", "const": true},
+    "job_breakaway_policy": {"type": "string", "const": "PROHIBITED"},
+    "child_handle_inheritance_policy": {"type": "string", "const": "STARTUPINFOEX_EXACT_STDIO_ALLOW_LIST"},
+    "job_topology_evidence": {"type": "string", "const": "COMPLETION_PORT_PLUS_SNAPSHOT_RECONCILIATION"},
+    "execution_process_limit_policy": {"type": "string", "const": "SUM_EXPECTED_TOPOLOGY_MAXIMUM_COUNT"},
+    "required_process_evidence": {
+      "type": "array",
+      "items": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+      "const": ["PID", "CREATION_TIME", "CANONICAL_IMAGE", "EXPECTED_IMAGE_COMPARISON", "PARENT_RELATIONSHIP", "JOB_MEMBERSHIP", "DIRECT_OBSERVATION_HANDLE", "TERMINAL_EXIT_STATE"]
+    },
+    "maximum_processes": {"type": "integer", "minimum": 1, "maximum": 32},
+    "environment_name_comparison": {"type": "string", "const": "ORDINAL_IGNORE_CASE"},
+    "environment_inheritance_policy": {"type": "string", "const": "EXPLICIT_ALLOW_LIST_ONLY"},
+    "required_environment_names": {
+      "type": "array",
+      "items": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+      "const": ["SystemRoot", "TEMP", "TMP", "STAGE1E_CACHE_ROOT", "STAGE1E_ENCODING", "STAGE1E_LOCALE", "TZ"]
+    },
+    "prohibited_environment_names": {
+      "type": "array",
+      "items": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+      "const": ["PATH", "PATHEXT", "PSModulePath", "TCL_LIBRARY", "TCLLIBPATH", "XILINX_VIVADO"]
+    },
+    "foundation_path_checks": {
+      "type": "array",
+      "items": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+      "const": ["LITERAL_ABSOLUTE_PATH", "STRUCTURED_COMPONENT_CONTAINMENT", "EXISTING_REPARSE_POINT_REJECTION", "ROLE_ROOT_SEPARATION"]
+    },
+    "advanced_path_hardening_state": {"type": "string", "const": "DEFERRED_FUTURE_HOST_CONTRACT"},
+    "graceful_termination_modes": {
+      "type": "array",
+      "items": {"type": "string", "enum": ["WINDOW_CLOSE", "NONE"]},
+      "const": ["WINDOW_CLOSE", "NONE"]
+    },
+    "authority_boundary": {"$ref": "stage1e-runtime-host-common-v1#/$defs/authority_boundary"}
+  }
+}

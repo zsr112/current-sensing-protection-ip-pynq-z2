@@ -1,1 +1,0 @@
-"work.tb_stage2d_production_wrapper" -s "stage2d_production_regression_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\xsim\stage2d_production_regression\xelab.log" 

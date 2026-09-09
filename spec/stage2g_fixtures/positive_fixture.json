@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "fixture_version": "stage2g-positive-fixture-v2",
+  "contract_path": "spec/stage2g_fixtures/positive_contract.json",
+  "expected": "PASS",
+  "mutations": []
+}

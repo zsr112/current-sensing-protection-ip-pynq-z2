@@ -1,0 +1,164 @@
+{
+  "schema_version": "stage3-reference-analog-profile-v1",
+  "profile_id": "PYNQ_Z2_PMOD_AD1_DUAL_INA240_REFERENCE_V1",
+  "profile_status": "REFERENCE_ONLY_NON_AUTHORITATIVE",
+  "roles": [
+    "REFERENCE_CANDIDATE",
+    "ENGINEERING_COMPARISON_BASELINE"
+  ],
+  "production_selection": false,
+  "physical_accuracy_claim": false,
+  "board_calibration_claim": false,
+  "stage2_dependency": false,
+  "final_hardware_selection_constrained": false,
+  "purchase_authorized": false,
+  "production_profile_freeze": false,
+  "final_hardware_selection_gate": "STAGE3_ARCHITECTURE_AND_HARDWARE_REVIEW",
+  "REFERENCE_BIDIRECTIONAL_NEGATIVE_OVERCURRENT_SUPPORTED_BY_CURRENT_RAW_PATH": "NO",
+  "REFERENCE_PROFILE_IS_END_TO_END_PROTECTION_COMPATIBLE": "NO",
+  "REFERENCE_PROFILE_REQUIRES_FUTURE_PROTECTION_DOMAIN_DECISION": "YES",
+  "protection_compatibility": {
+    "reference_bidirectional_negative_overcurrent_supported_by_current_raw_path": false,
+    "reference_profile_is_end_to_end_protection_compatible": false,
+    "reference_profile_requires_future_protection_domain_decision": true,
+    "current_raw_path_limitation": "POSITIVE_RISING_CODE_ONLY_UPPER_THRESHOLD",
+    "future_protection_domain_alternatives": [
+      "UNIDIRECTIONAL_RISING_CODE_SOURCE",
+      "DUAL_UPPER_LOWER_RAW_THRESHOLDS",
+      "ABSOLUTE_SIGNED_MAGNITUDE_PROTECTION",
+      "DIRECTIONAL_SIGNED_THRESHOLDS",
+      "INDEPENDENT_ANALOG_COMPARATOR_OR_HARDWARE_FAULT_OUTPUT"
+    ],
+    "future_stage4_end_to_end_validation_requirements": [
+      "selected production source profile bound to hardware identity",
+      "positive and negative overcurrent detection regression",
+      "raw protection domain or versioned replacement safety contract",
+      "analog fault output and isolation review where applicable",
+      "calibrated physical transfer and acceptance evidence"
+    ]
+  },
+  "hardware": {
+    "host": "PYNQ-Z2",
+    "adc_module": "Digilent Pmod AD1",
+    "adc_device": "DUAL_AD7476A",
+    "adc_channels": "2_SIMULTANEOUS",
+    "adc_resolution_bits": 12,
+    "adc_output_coding": "STRAIGHT_NATURAL_BINARY",
+    "adc_input_range": "0_TO_VDD",
+    "adc_nominal_throughput": "UP_TO_1_MSPS_PER_CHANNEL",
+    "digital_interface": "SHARED_CS_SHARED_SCLK_TWO_SERIAL_DATA_OUTPUTS",
+    "adc_reference_type": "VDD_RATIOMETRIC_NOT_PRECISION_EXTERNAL_REFERENCE",
+    "vdd_scale_error_policy": "SUPPLY_VARIATION_CONTRIBUTES_DIRECTLY_UNLESS_MEASURED_OR_CALIBRATED",
+    "current_sense_afe": "DUAL_SHUNT_PLUS_INA240",
+    "bidirectional_bias": "NOMINAL_MIDSCALE_REFERENCE"
+  },
+  "illustrative_electrical_example": {
+    "current_range": "PLUS_MINUS_5_A",
+    "shunt": "5_MILLIOHM_FOUR_TERMINAL",
+    "amplifier": "INA240A2_GAIN_50",
+    "adc_supply_reference": "3.3_V_NOMINAL",
+    "zero_current_bias": "1.65_V_NOMINAL",
+    "output_range": "0.4_TO_2.9_V_NOMINAL",
+    "nominal_current_per_lsb": "APPROX_3.22_MA",
+    "illustrative_only": true,
+    "calibrated": false,
+    "production_selected": false,
+    "physical_accuracy_evidence": false
+  },
+  "integration_boundaries": {
+    "low_voltage_current_limited_lab_reference_only": true,
+    "separate_electrical_safety_review_required": true,
+    "dma_mandatory_for_protection_path": false,
+    "python_in_realtime_fault_path": false,
+    "atomic_stage2d_cdc_replaced": false
+  },
+  "public_reference_projects": [
+    {
+      "id": "DIGILENT_VIVADO_LIBRARY_PMODAD1",
+      "owner_type": "OFFICIAL_VENDOR",
+      "classification": "OFFICIAL_IMPLEMENTATION_REFERENCE",
+      "hardware_authority": false,
+      "dma_required_for_protection_path": false,
+      "complete_fpga_implementation": false,
+      "source_pin_status": "VENDOR_REPOSITORY_REFERENCE",
+      "url": "https://github.com/Digilent/vivado-library/tree/master/ip/Pmods/PmodAD1_v1_0"
+    },
+    {
+      "id": "ADI_AD7476A_PMOD_FPGA_REFERENCE_PAGE",
+      "owner_type": "OFFICIAL_VENDOR",
+      "classification": "OFFICIAL_IMPLEMENTATION_REFERENCE",
+      "hardware_authority": false,
+      "dma_required_for_protection_path": false,
+      "complete_fpga_implementation": false,
+      "source_pin_status": "OFFICIAL_PAGE_REFERENCE_NO_REPOSITORY_COMMIT_PIN",
+      "url": "https://wiki.analog.com/resources/fpga/xilinx/pmod/ad7476a"
+    },
+    {
+      "id": "ADI_AD7476A_PMOD_XPS_OR_IPCORE_ARTIFACT",
+      "owner_type": "OFFICIAL_VENDOR",
+      "classification": "OFFICIAL_IMPLEMENTATION_REFERENCE",
+      "hardware_authority": false,
+      "dma_required_for_protection_path": false,
+      "complete_fpga_implementation": false,
+      "source_pin_status": "NO_STABLE_AD7476A_PMOD_ARTIFACT_PIN_LOCATED",
+      "url": "https://github.com/analogdevicesinc/hdl/tree/ccd4e2868e0b959998f36af60eba11db89e58f65"
+    },
+    {
+      "id": "ADI_AD7476A_PMOD_LINUX_DEVICE_TREE",
+      "owner_type": "OFFICIAL_VENDOR",
+      "classification": "OFFICIAL_SOFTWARE_INTEGRATION_REFERENCE",
+      "hardware_authority": false,
+      "dma_required_for_protection_path": false,
+      "complete_fpga_implementation": false,
+      "source_pin_status": "PINNED_LINUX_DEVICE_TREE_COMMIT_ONLY",
+      "url": "https://github.com/analogdevicesinc/linux/commit/2c5b84b20a6a8a1c1b29248a5790d4bc6475a2d2"
+    },
+    {
+      "id": "AMILASHANAKA_PYNQ_PMOD_AD1",
+      "owner_type": "COMMUNITY",
+      "classification": "COMMUNITY_INTEGRATION_REFERENCE",
+      "hardware_authority": false,
+      "dma_required_for_protection_path": false,
+      "complete_fpga_implementation": false,
+      "source_pin_status": "COMMUNITY_REPOSITORY_PIN",
+      "url": "https://github.com/amilashanaka/PYNQ_PMOD_AD1/tree/5951b0f41f1d73cf94f594feca6601173aa0b580"
+    },
+    {
+      "id": "RICCARDONICOLAIDIS_SAMPLER_PMOD_AD1",
+      "owner_type": "COMMUNITY",
+      "classification": "COMMUNITY_EXPERIMENT_ONLY",
+      "hardware_authority": false,
+      "dma_required_for_protection_path": false,
+      "complete_fpga_implementation": false,
+      "source_pin_status": "COMMUNITY_REPOSITORY_PIN",
+      "url": "https://github.com/riccardonicolaidis/Sampler_Pmod_AD1/tree/98a47be9b8448bcc1b5a40da25e2c09b2582d0b9"
+    },
+    {
+      "id": "AMILASHANAKA_PMOD_AD1_DMA",
+      "owner_type": "COMMUNITY",
+      "classification": "COMMUNITY_INTEGRATION_REFERENCE",
+      "hardware_authority": false,
+      "dma_required_for_protection_path": false,
+      "complete_fpga_implementation": false,
+      "source_pin_status": "COMMUNITY_REPOSITORY_PIN",
+      "url": "https://github.com/amilashanaka/PMOD_AD1_DMA/tree/761cee9ee9f5a13af50e26a615989569e43878ec"
+    }
+  ],
+  "official_interface_authorities": [
+    {
+      "subject": "PMOD_AD1_INTERFACE_AND_POPULATED_DEVICES",
+      "classification": "OFFICIAL_INTERFACE_AUTHORITY",
+      "url": "https://digilent.com/reference/pmod/pmodad1/reference-manual"
+    },
+    {
+      "subject": "AD7476A_ELECTRICAL_AND_CONVERSION_BEHAVIOR",
+      "classification": "OFFICIAL_INTERFACE_AUTHORITY",
+      "url": "https://www.analog.com/media/en/technical-documentation/data-sheets/AD7476A_7477A_7478A.pdf"
+    },
+    {
+      "subject": "INA240_ELECTRICAL_BEHAVIOR",
+      "classification": "OFFICIAL_INTERFACE_AUTHORITY",
+      "url": "https://www.ti.com/lit/ds/symlink/ina240.pdf"
+    }
+  ]
+}

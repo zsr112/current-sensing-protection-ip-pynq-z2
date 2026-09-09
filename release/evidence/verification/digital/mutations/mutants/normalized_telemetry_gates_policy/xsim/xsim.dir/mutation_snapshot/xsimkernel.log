@@ -1,7 +1,0 @@
-Running: xsim.dir/mutation_snapshot/xsimk.exe -runall -simmode gui -wdb mutation_snapshot.wdb -simrunnum 0 -socket 57099
-Design successfully loaded
-Design Loading Memory Usage: 10992 KB (Peak: 10992 KB)
-Design Loading CPU Usage: 31 ms
-Simulation completed
-Simulation Memory Usage: 13064 KB (Peak: 13064 KB)
-Simulation CPU Usage: 31 ms

@@ -1,0 +1,128 @@
+schema_version stage1e-phase3-implementation-framework-v2
+framework_state FOUNDATION_ONLY_NOT_AUTHORIZED
+boundary {
+    implementation_execution_authorized 0
+    qualification_execution_authorized 0
+    authorization_creation_authorized 0
+    production_runtime_dispatch_available 0
+    mock_runtime_dispatch_available 1
+    artifact_authority NONE
+    board_authority NONE
+}
+runtime_contract {
+    schema_version stage1e-controlled-runtime-contract-v1
+    runtime_root fpga/vivado/build/runtime
+    launcher_mode MOCK_ONLY
+    runner_mode MOCK_ONLY
+    collector_mode MOCK_ONLY
+    parser_disposition_authority NONE
+    identity_authority SCHEMA_AND_SERIALIZATION_ONLY
+    observer_mode MOCK_ONLY
+    production_activation_state NOT_IMPLEMENTED
+}
+identity_schemas {
+    runtime_backend_identity stage1e-runtime-backend-identity-v1
+    implementation_policy_identity stage1e-implementation-policy-identity-v2
+    implementation_configuration_identity stage1e-implementation-configuration-identity-v2
+    execution_identity CREATED_BY_FUTURE_QUALIFICATION_ONLY
+    qualification_identity CREATED_BY_FUTURE_Q0_Q5_ONLY
+    authorization_identity CREATED_BY_SEPARATE_FUTURE_TASK_ONLY
+}
+operation_contract {
+    allowed_operations {
+        opt_design
+        place_design
+        route_design
+        implementation_reports
+    }
+    forbidden_operations {
+        phys_opt_design
+        power_opt_design
+        write_bitstream
+        write_hw_platform
+        write_xsa
+        export_hardware
+        artifact_collection
+        artifact_publication
+        open_hw_manager
+        connect_hw_server
+        program_hw_devices
+        board_access
+    }
+    effective_step_graph {
+        opt_design {
+            configured_state ENABLED
+            authorized 1
+            sequence 1
+            directive Default
+            predecessor synthesis
+            invocation_policy REQUIRED
+        }
+        place_design {
+            configured_state ENABLED
+            authorized 1
+            sequence 2
+            directive Default
+            predecessor opt_design
+            invocation_policy REQUIRED
+        }
+        phys_opt_design {
+            configured_state DISABLED
+            authorized 0
+            sequence 0
+            directive NONE
+            predecessor place_design
+            invocation_policy PROHIBITED
+        }
+        route_design {
+            configured_state ENABLED
+            authorized 1
+            sequence 3
+            directive Default
+            predecessor place_design
+            invocation_policy REQUIRED
+        }
+        implementation_reports {
+            configured_state ENABLED
+            authorized 1
+            sequence 4
+            directive READ_ONLY
+            predecessor route_design
+            invocation_policy REQUIRED
+        }
+    }
+    effective_graph_readback_required 1
+    configured_to_effective_mismatch_action BLOCK
+}
+validation_contract {
+    static_tests_required 1
+    schema_tests_required 1
+    negative_tests_required 1
+    mock_runtime_tests_required 1
+    provenance_tests_required 1
+    vivado_invocation_allowed 0
+}
+source_roles {
+    FRAMEWORK_V2 fpga/vivado/build/config/stage1e_phase3_implementation_framework_v2.dict
+    RUNTIME_README fpga/vivado/build/runtime/README.md
+    RUNTIME_IDENTITY fpga/vivado/build/runtime/identity/stage1e_runtime_identity.tcl
+    RUNTIME_SCHEMA fpga/vivado/build/lib/stage1e_runtime_schema.tcl
+    RUNTIME_LAUNCHER fpga/vivado/build/runtime/launcher/stage1e_runtime_launcher.psm1
+    RUNTIME_RUNNER fpga/vivado/build/runtime/runner/stage1e_runtime_runner.tcl
+    RUNTIME_COLLECTOR fpga/vivado/build/runtime/collector/stage1e_runtime_collector.tcl
+    RUNTIME_PARSER fpga/vivado/build/runtime/parser/stage1e_runtime_parser.tcl
+    RUNTIME_OBSERVER fpga/vivado/build/runtime/observer/stage1e_runtime_observer.tcl
+    CONTROLLER_V2 fpga/vivado/build/controller/stage1e_phase3_implementation_controller_v2.tcl
+    ADAPTER_V2 fpga/vivado/build/adapters/stage1e_implementation_v2.tcl
+    CONFIGURATION_V2 fpga/vivado/build/config/stage1e_implementation_configuration_v2.dict
+    WARNING_POLICY_V2 fpga/vivado/build/config/stage1e_implementation_warning_policy_v2.dict
+    IMPLEMENTATION_POLICY_V2 docs/design/stage1e_implementation_policy_v2.md
+    TEST_SUPPORT fpga/vivado/build/tests/stage1e_runtime_test_support.tcl
+    STATIC_TESTS fpga/vivado/build/tests/stage1e_runtime_static_tests.tcl
+    SCHEMA_TESTS fpga/vivado/build/tests/stage1e_runtime_schema_tests.tcl
+    NEGATIVE_TESTS fpga/vivado/build/tests/stage1e_runtime_negative_tests.tcl
+    MOCK_TESTS fpga/vivado/build/tests/stage1e_runtime_mock_tests.tcl
+    PROVENANCE_TESTS fpga/vivado/build/tests/stage1e_runtime_provenance_tests.tcl
+    LAUNCHER_MOCK_TESTS fpga/vivado/build/tests/stage1e_runtime_launcher_mock_tests.ps1
+    REGRESSION_DRIVER fpga/vivado/build/tests/stage1e_runtime_regression_tests.ps1
+}

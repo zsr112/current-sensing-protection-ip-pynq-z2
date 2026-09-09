@@ -1,0 +1,170 @@
+schema_version stage1e-build-config-v2
+build_profile stage1e_controller_skeleton
+build_profile_identity {
+    schema_version stage1e-build-profile-identity-v1
+    profile_id stage1e_controller_skeleton
+    stage STAGE1E
+    work_package WP-A
+    scope_id STAGE1E_WP_A_CONTROLLER_SKELETON
+}
+skeleton_scope {
+    schema_version stage1e-skeleton-scope-v1
+    scope_id STAGE1E_WP_A_CONTROLLER_SKELETON
+    stage STAGE1E
+    work_package WP-A
+    execution_mode READINESS_ONLY
+    terminal_state BUILD_CONTROLLER_READY
+    build_execution_permitted 0
+}
+controller_version STAGE1E-BUILD-CTRL-v1.1
+controller_api_version STAGE1E-CONTROLLER-API-v1
+execution_id_schema_version v1
+phase_evidence_schema_version v1
+manifest_schema_version stage1e-artifact-manifest-v1
+source_inventory_reference {
+    schema_version v1
+    path fpga/vivado/build/config/stage1d_build_config.dict
+    source_section source_verification
+    environment_section environment
+}
+source_inventory_extensions {
+    schema_version stage1e-source-inventory-extension-v1
+    extension_mechanism APPEND_ONLY
+    required_paths {
+        fpga/vivado/build/config/stage1e_build_config.dict
+        fpga/vivado/build/stage1e_artifact_build.tcl
+        fpga/vivado/build/adapters/stage1e_ip_packaging.tcl
+        fpga/vivado/build/adapters/stage1e_base_design.tcl
+        fpga/vivado/build/adapters/stage1e_debug_design.tcl
+        fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl
+        fpga/vivado/build/adapters/stage1e_build_target.tcl
+        fpga/vivado/build/tests/stage1e_controller_skeleton_tests.tcl
+        fpga/vivado/build/tests/stage1e_ip_packaging_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_project_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_bd_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_base_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_debug_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_mutation_bridge_tests.tcl
+        fpga/vivado/build/tests/stage1e_build_target_adapter_tests.tcl
+        docs/design/stage1e_artifact_closure_acceptance.md
+        docs/design/stage1e_wpb_adapter_interface.md
+    }
+    tcl_paths {
+        fpga/vivado/build/stage1e_artifact_build.tcl
+        fpga/vivado/build/adapters/stage1e_ip_packaging.tcl
+        fpga/vivado/build/adapters/stage1e_base_design.tcl
+        fpga/vivado/build/adapters/stage1e_debug_design.tcl
+        fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl
+        fpga/vivado/build/adapters/stage1e_build_target.tcl
+        fpga/vivado/build/tests/stage1e_controller_skeleton_tests.tcl
+        fpga/vivado/build/tests/stage1e_ip_packaging_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_project_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_bd_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_base_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_debug_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_mutation_bridge_tests.tcl
+        fpga/vivado/build/tests/stage1e_build_target_adapter_tests.tcl
+    }
+    controller_source_paths {
+        fpga/vivado/build/stage1e_artifact_build.tcl
+    }
+    expected_controller_source_sha256 5704b5b7feb763139c429aba2e30b8d6bf4473374da0ade487c452f574b0957f
+}
+build_phases {
+    schema_version stage1e-readiness-phase-model-v1
+    phase_order {
+        INPUT_READY
+        SOURCE_VALIDATED
+        ENVIRONMENT_VALIDATED
+        WORKSPACE_READY
+        BUILD_CONTROLLER_READY
+    }
+}
+disabled_capabilities {
+    schema_version stage1e-disabled-capabilities-v1
+    flags {
+        ip_packaging_enabled 0
+        project_reconstruction_enabled 0
+        bd_generation_enabled 0
+        wrapper_generation_enabled 0
+        synthesis_enabled 0
+        implementation_enabled 0
+        artifact_generation_enabled 0
+        artifact_collection_enabled 0
+        publication_enabled 0
+        vivado_invocation_enabled 0
+        board_access_enabled 0
+    }
+}
+future_phase_boundaries {
+    schema_version stage1e-future-phase-boundaries-v1
+    default_transition_policy DENY
+    phase_capability_map {
+        IP_PACKAGING ip_packaging_enabled
+        PROJECT_RECONSTRUCTION project_reconstruction_enabled
+        BD_GENERATION bd_generation_enabled
+        WRAPPER_GENERATION wrapper_generation_enabled
+        SYNTHESIS synthesis_enabled
+        IMPLEMENTATION implementation_enabled
+        ARTIFACT_COLLECTION artifact_collection_enabled
+        PUBLICATION publication_enabled
+    }
+}
+artifact_roles {
+    schema_version stage1e-artifact-role-placeholders-v1
+    placeholders {
+        bit {
+            extension .bit
+            future_acceptance REQUIRED
+            placeholder 1
+            generation_enabled 0
+            collection_enabled 0
+            publication_enabled 0
+        }
+        hwh {
+            extension .hwh
+            future_acceptance REQUIRED
+            placeholder 1
+            generation_enabled 0
+            collection_enabled 0
+            publication_enabled 0
+        }
+        xsa {
+            extension .xsa
+            future_acceptance REQUIRED
+            placeholder 1
+            generation_enabled 0
+            collection_enabled 0
+            publication_enabled 0
+        }
+        ltx {
+            extension .ltx
+            future_acceptance CONDITIONAL_DEBUG
+            placeholder 1
+            generation_enabled 0
+            collection_enabled 0
+            publication_enabled 0
+        }
+    }
+}
+workspace_policy {
+    ownership_schema_version v1
+    require_external_workspace 1
+    require_separate_artifact_storage 1
+    require_fresh_execution_workspace 1
+    phase_evidence_relative_path execution_state/stage1e_phase_evidence.dict
+    stale_vivado_markers {
+        .Xil
+        *.xpr
+        *.runs
+        *.cache
+        *.gen
+        *.srcs
+        *.sim
+        ip_user_files
+    }
+}
+acceptance_policy_reference {
+    schema_version stage1e-artifact-closure-acceptance-v1
+    path docs/design/stage1e_artifact_closure_acceptance.md
+}

@@ -1,9 +1,0 @@
-{
-  "host_end_utc": "2026-09-08T19:32:41.083938+00:00",
-  "host_start_utc": "2026-09-08T19:32:41.020570+00:00",
-  "request": {
-    "action": "recovered_pwm/prepare",
-    "execution_id": "S1E-B2-BOARD-20260909-R4"
-  },
-  "response_sha256": "77a1c5a46ec402057af5f9861707d10801b95e43db34dc3d9c68cf69cfa61bff"
-}

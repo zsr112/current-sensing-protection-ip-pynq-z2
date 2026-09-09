@@ -1,0 +1,32 @@
+{
+  "$id": "stage1e-terminal-result-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "terminal_result_identity", "execution_id", "request_identity", "execution_contract_identity", "implementation_profile", "run_kind", "terminal_status", "failure_code", "reason", "source_state", "process_state", "process_exit_code", "vivado_result_state", "GUI_PROJECT_PATH", "SYNTH_RUN_AVAILABLE", "IMPL_RUN_AVAILABLE", "PROJECT_SAFE_TO_OPEN", "acceptance_state", "finding_decision_identity"],
+  "x-stage1e-canonical-order": ["schema_version", "terminal_result_identity", "execution_id", "request_identity", "execution_contract_identity", "implementation_profile", "run_kind", "terminal_status", "failure_code", "reason", "source_state", "process_state", "process_exit_code", "vivado_result_state", "GUI_PROJECT_PATH", "SYNTH_RUN_AVAILABLE", "IMPL_RUN_AVAILABLE", "PROJECT_SAFE_TO_OPEN", "acceptance_state", "finding_decision_identity"],
+  "definitions": {
+    "sha256": {"type": "string", "x-stage1e-format": "sha256"}
+  },
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["stage1e-terminal-result-v1"]},
+    "terminal_result_identity": {"$ref": "stage1e-terminal-result-v1#/definitions/sha256"},
+    "execution_id": {"type": "string", "x-stage1e-format": "token"},
+    "request_identity": {"$ref": "stage1e-terminal-result-v1#/definitions/sha256"},
+    "execution_contract_identity": {"$ref": "stage1e-terminal-result-v1#/definitions/sha256"},
+    "implementation_profile": {"type": "string", "enum": ["SAFE_INERT", "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS"]},
+    "run_kind": {"type": "string", "enum": ["ENGINEERING", "FORMAL"]},
+    "terminal_status": {"type": "string", "x-stage1e-format": "token"},
+    "failure_code": {"type": "string", "x-stage1e-format": "token"},
+    "reason": {"type": "string", "x-stage1e-format": "message"},
+    "source_state": {"type": "string", "x-stage1e-format": "token"},
+    "process_state": {"type": "string", "x-stage1e-format": "token"},
+    "process_exit_code": {"type": "string", "x-stage1e-format": "message"},
+    "vivado_result_state": {"type": "string", "x-stage1e-format": "token"},
+    "GUI_PROJECT_PATH": {"type": "string", "x-stage1e-format": "message"},
+    "SYNTH_RUN_AVAILABLE": {"type": "boolean"},
+    "IMPL_RUN_AVAILABLE": {"type": "boolean"},
+    "PROJECT_SAFE_TO_OPEN": {"type": "boolean"},
+    "acceptance_state": {"type": "string", "x-stage1e-format": "token"},
+    "finding_decision_identity": {"type": "string", "x-stage1e-format": "message"}
+  }
+}

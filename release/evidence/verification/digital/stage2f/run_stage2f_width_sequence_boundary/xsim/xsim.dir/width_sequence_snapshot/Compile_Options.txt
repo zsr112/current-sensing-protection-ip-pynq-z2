@@ -1,1 +1,0 @@
-"work.tb_stage2f_width_sequence_boundary" -s "width_sequence_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\stage2f\run_stage2f_width_sequence_boundary\xsim\xelab.log" 

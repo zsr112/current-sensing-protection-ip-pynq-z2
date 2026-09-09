@@ -1,6 +1,1 @@
-release/** -text
-release/**/*.csv binary
-release/**/*.bit binary
-release/**/*.hwh binary
-release/**/*.ltx binary
-
+* -text

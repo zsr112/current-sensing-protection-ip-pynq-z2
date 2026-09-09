@@ -1,0 +1,271 @@
+{
+  "schema_version": "STAGE2H_B_RTL_ARCHITECTURE_CONTRACT_V1",
+  "contract_id": "STAGE2H_B1_RTL_ARCHITECTURE_MODULE_BOUNDARY_AUDIT",
+  "status": "AUDIT_COMPLETE_B2_NOT_STARTED",
+  "baseline": {
+    "main_commit": "601b0a07f3eb580b75c0f3b865cb6a910f706429",
+    "parent_freeze_tag": "stage2h-a2-2-abi-1-1-register-software-interface-v1",
+    "production_top": "protection_ip_top_async_adc_axi_lite",
+    "public_abi": "1.1",
+    "external_packaged_ports_change_required": false,
+    "public_abi_change_required": false
+  },
+  "frozen_behavior": {
+    "sample_event_authority": "ATOMIC_RAW_CDC_DESTINATION_DELIVERY_EVENT",
+    "fault_input_authority": "RAW_PROTECTION_EVALUATION",
+    "normalized_telemetry_gates_fault_policy": false,
+    "fault_eval_sequence_width": "OBS_SEQUENCE_WIDTH",
+    "supported_sequence_widths": "16_TO_32",
+    "b2_verification_sequence_widths": [16, 24, 32],
+    "supported_sequence_width_range": {"minimum": 16, "maximum": 32},
+    "fault_evaluation_latency_aclk": 3,
+    "clear_protocol": "REQUEST_EVALUATION_FENCED",
+    "public_recovery_complete": "LATER_CLEAN_HEALTHY_EVALUATION_ENTERING_ARMED",
+    "legacy_compatibility_path_supported": true,
+    "stage2g_is_abi_1_1_production_path": true
+  },
+  "decisions": {
+    "shared_axi_lite_transport": {
+      "decision": "APPROVED",
+      "authority_id": "AUTH_AXI_TRANSPORT",
+      "target_module": "protection_axi_lite_register_transport",
+      "target_source": "rtl/protection_ip_top_axi_lite.v",
+      "register_side_contract": ["wr_en", "rd_en", "addr", "wdata", "wstrb", "rdata"],
+      "reset_ownership": "EXISTING_LEGACY_AND_STAGE2G_WRAPPERS_RETAIN_RESET_RELEASE_SYNC_AND_FEED_LOCAL_RESET_TO_SHARED_TRANSPORT",
+      "whole_module_token_similarity_percent": 97.0588,
+      "transport_region_token_similarity_percent": 100.0,
+      "transport_region_tokens_each": 745,
+      "binding_impact": "NO_BINDING_CHANGE",
+      "build_source_list_impact": "NONE_MODULE_COLOCATED_IN_EXISTING_SOURCE"
+    },
+    "single_destination_sequence_state_authority": {
+      "decision": "APPROVED",
+      "authority_id": "AUTH_DESTINATION_SEQUENCE_STATE",
+      "target_module": "destination_sequence_integrity_tracker",
+      "target_source": "rtl/transaction_destination_observer.v",
+      "state_owner": "destination_sequence_integrity_tracker",
+      "input_transaction_boundary": ["adc_dst_local_rst_n", "dst_sample_valid", "dst_sample_sequence"],
+      "owned_state": ["expected_sequence", "has_last_delivery", "last_destination_sequence"],
+      "classification_outputs": [
+        "expected_delivery",
+        "duplicate_delivery",
+        "stale_first_delivery",
+        "sequence_gap",
+        "reorder_or_stale",
+        "sequence_delta",
+        "last_destination_sequence"
+      ],
+      "counter_owner": "transaction_destination_observer",
+      "fault_policy_owner": "stage2g_fault_episode_controller_via_stage2g_protection_core",
+      "policy_consumes_telemetry_counters_or_sticky_state": false,
+      "reset_semantics": "ASYNCHRONOUS_ASSERT_SHARED_LOCAL_RESET_EXPECTED_ZERO_NO_LAST_LAST_ZERO",
+      "sequence_width_semantics": "MODULO_2_POW_SEQUENCE_WIDTH_FOR_WIDTHS_16_TO_32",
+      "behavior": {
+        "clean": "EXPECTED_AND_ADVANCE",
+        "first_zero": "EXPECTED_AND_ADVANCE_TO_ONE",
+        "first_nonzero": "STALE_FIRST_AND_REORDER_STALE_RETAIN_EXPECTED_ZERO",
+        "duplicate": "DUPLICATE_RETAIN_EXPECTED",
+        "gap": "FORWARD_GAP_DIRTY_RESYNC_TO_DELIVERED_PLUS_ONE",
+        "stale_or_reorder": "DIRTY_RETAIN_EXPECTED",
+        "wrap": "NORMAL_MODULO_EQUALITY_AND_ADDITION"
+      },
+      "binding_impact": "NO_BINDING_CHANGE",
+      "build_source_list_impact": "NONE_MODULE_COLOCATED_IN_EXISTING_SOURCE"
+    },
+    "single_source_protocol_state_authority": {
+      "decision": "APPROVED",
+      "authority_id": "AUTH_SOURCE_OFFER_PROTOCOL_STATE",
+      "state_owner": "transaction_source_observer",
+      "target_source": "rtl/transaction_source_observer.v",
+      "owned_state": ["stall_pending", "stall_violation_recorded", "stall_payload_snapshot"],
+      "new_output": "transaction_integrity_clean",
+      "removed_production_state_owner": "stage2g_source_integrity_tracker",
+      "diagnostic_counter_owner": "transaction_source_observer",
+      "policy_consumes_telemetry_counters_or_sticky_state": false,
+      "constraint_sensitive_hierarchy_preserved": "u_adc_sample_cdc_bridge/u_source_observer",
+      "binding_impact": "NO_BINDING_CHANGE",
+      "build_source_list_impact": "NONE"
+    },
+    "aclk_reset_authority": {
+      "decision": "KEEP_CURRENT",
+      "owner": "LEGACY_OR_STAGE2G_AXI_WRAPPER_RESET_RELEASE_SYNC",
+      "production_local_reset_output": "stage2g_protection_ip_axi_lite.local_resetn",
+      "release_semantics": "ASYNCHRONOUS_ASSERT_TWO_ACLK_EDGE_SYNCHRONOUS_RELEASE",
+      "production_aclk_local_reset_count": 1,
+      "move_to_production_top_benefit_proven": false,
+      "binding_impact": "NO_BINDING_CHANGE"
+    },
+    "full_stage2g_file_split_in_b": {
+      "decision": "NO_DEFER_TO_STAGE2H_C",
+      "reason": "FILE_LAYOUT_AND_SOURCE_LIST_CHURN_DO_NOT_REMOVE_PRODUCTION_MUTABLE_STATE"
+    },
+    "adc_cdc_bridge_dedup_in_b": {
+      "decision": "DEFERRED",
+      "authority_id": "AUTH_ADC_CDC_WRAPPER_ASSEMBLY",
+      "whole_body_token_similarity_percent": 93.2345,
+      "common_transport_token_similarity_percent": 100.0,
+      "reason": "FIFO_AUTHORITY_IS_ALREADY_SHARED_AND_WRAPPER_DEDUP_WOULD_TOUCH_PAYLOAD_LAYOUT_KEEP_HIERARCHY_CONSTRAINTS_AND_MATURE_COMPATIBILITY_TESTS_FOR_LOW_NET_VALUE"
+    }
+  },
+  "b2_recommended_changes": [
+    {
+      "id": "B2_CHANGE_1_SHARED_AXI_LITE_TRANSPORT",
+      "files": ["rtl/protection_ip_top_axi_lite.v"],
+      "modules_affected": ["protection_ip_top_axi_lite", "stage2g_protection_ip_axi_lite"],
+      "new_module": "protection_axi_lite_register_transport",
+      "removed_duplicate_state_or_logic": [
+        "one wr_state implementation",
+        "one rd_state implementation",
+        "one AW/W hold implementation",
+        "one B/R response hold implementation",
+        "one register request generation implementation"
+      ],
+      "frozen_behavior_preserved": [
+        "external ports",
+        "OKAY responses",
+        "conservative write-over-read arbitration",
+        "AW-before-W and W-before-AW behavior",
+        "WSTRB zero/nonzero behavior",
+        "undefined address behavior",
+        "local reset release semantics"
+      ],
+      "verification_required": [
+        "existing legacy AXI stress suite",
+        "Stage2G wrapper transport parity",
+        "reset with partial and outstanding transactions"
+      ],
+      "verification_not_required": [
+        "new smoke-only suite",
+        "register allocation or ABI regeneration",
+        "synthesis implementation timing bitstream or board work"
+      ],
+      "stage2h_a_rtl_binding_impact": "NO_BINDING_CHANGE",
+      "build_source_list_impact": "NONE",
+      "risk": "MEDIUM"
+    },
+    {
+      "id": "B2_CHANGE_2_SINGLE_DESTINATION_SEQUENCE_STATE",
+      "files": [
+        "rtl/transaction_destination_observer.v",
+        "rtl/protection_ip_top_async_adc_axi_lite.v",
+        "rtl/protection_ip_top_axi_lite.v",
+        "rtl/protection_ip_top_reg_controlled.v",
+        "rtl/protection_core_top.v"
+      ],
+      "modules_affected": [
+        "transaction_destination_observer",
+        "stage2g_protection_core",
+        "stage2g_protection_ip_reg_controlled",
+        "stage2g_protection_ip_axi_lite",
+        "protection_ip_top_async_adc_axi_lite"
+      ],
+      "new_module": "destination_sequence_integrity_tracker",
+      "removed_duplicate_state_or_logic": [
+        "expected_sample_sequence",
+        "has_last_sample_delivery",
+        "last_sample_sequence",
+        "stage2g_protection_core sequence classifier instance",
+        "stage2g_protection_core sequence state update logic"
+      ],
+      "frozen_behavior_preserved": [
+        "16 to 32 bit modulo sequence semantics",
+        "first nonzero duplicate gap stale and wrap behavior",
+        "accepted atomic raw CDC destination-delivery authority",
+        "source AND destination integrity",
+        "three ACLK evaluation latency",
+        "clear fence and RESET_WAIT recovery"
+      ],
+      "verification_required": [
+        "16 24 and 32 bit directed sequence matrix",
+        "wrap and cross-wrap errors",
+        "clear fence and RESET_WAIT qualification",
+        "policy and observability classification agreement",
+        "evaluation latency preservation"
+      ],
+      "verification_not_required": [
+        "register allocation version or capability work",
+        "unrelated normalization proof",
+        "synthesis implementation timing bitstream or board work"
+      ],
+      "stage2h_a_rtl_binding_impact": "NO_BINDING_CHANGE",
+      "build_source_list_impact": "NONE",
+      "risk": "MEDIUM_HIGH"
+    },
+    {
+      "id": "B2_CHANGE_3_SINGLE_SOURCE_PROTOCOL_STATE",
+      "files": ["rtl/transaction_source_observer.v", "rtl/adc_sample_cdc_bridge.v"],
+      "modules_affected": ["transaction_source_observer", "stage2g_adc_sample_cdc_bridge"],
+      "new_module": null,
+      "removed_duplicate_state_or_logic": [
+        "stage2g_source_integrity_tracker.stall_pending",
+        "stage2g_source_integrity_tracker.violation_recorded",
+        "stage2g_source_integrity_tracker.stall_payload_snapshot",
+        "duplicate source offer update logic"
+      ],
+      "frozen_behavior_preserved": [
+        "source sequence and counters",
+        "Gray CDC hierarchy and values",
+        "FIFO source integrity payload bit",
+        "dirty accepted offer policy exclusion",
+        "legacy bridge behavior"
+      ],
+      "verification_required": [
+        "clean and stalled accepted offers",
+        "payload mutation and valid withdrawal",
+        "reset during stalled offer",
+        "diagnostic and policy source integrity agreement",
+        "existing Stage2D and Stage2E source CDC tests"
+      ],
+      "verification_not_required": [
+        "FIFO pointer redesign",
+        "XDC hierarchy change",
+        "register map work",
+        "synthesis implementation timing bitstream or board work"
+      ],
+      "stage2h_a_rtl_binding_impact": "NO_BINDING_CHANGE",
+      "build_source_list_impact": "NONE",
+      "risk": "MEDIUM"
+    }
+  ],
+  "defer_to_stage2h_c": [
+    "FULL_STAGE2G_FILE_SPLIT",
+    "WHOLE_RTL_DIRECTORY_REORGANIZATION",
+    "UNINSTANTIATED_SOURCE_LIST_CLEANUP",
+    "BROAD_MODULE_AND_FILE_NAMING_CONVERGENCE"
+  ],
+  "rejected_overengineering": [
+    "SYSTEMVERILOG_INTERFACE_BASED_PORT_BUNDLING",
+    "GENERIC_CONFIG_STATUS_BUS",
+    "GENERIC_PIPELINE_ABSTRACTION",
+    "GENERIC_TRANSACTION_FRAMEWORK",
+    "FULL_RTL_MODULE_RENAMING",
+    "REMOVING_STAGE2G_NAMES",
+    "LEGACY_STAGE2G_CORE_UNIFICATION",
+    "LEGACY_STAGE2G_FSM_UNIFICATION",
+    "LEGACY_STAGE2G_CLASSIFIER_UNIFICATION"
+  ],
+  "no_change_required": [
+    "PACKAGED_EXTERNAL_TOP_AND_PORTS",
+    "PUBLIC_ABI_1_1_AND_REGISTER_MAP",
+    "REGISTER_BANK_BEHAVIOR",
+    "RAW_VERSUS_NORMALIZED_POLICY_BOUNDARY",
+    "FAULT_EVALUATION_PIPELINE_LATENCY",
+    "FAULT_EPISODE_AND_CLEAR_PROTOCOL",
+    "PWM_GENERATOR_AND_GATE",
+    "ASYNC_FIFO_GRAY_IMPLEMENTATION",
+    "STAGE2D_AND_STAGE2E_CDC_XDC_AUTHORITIES"
+  ],
+  "scope_review": {
+    "functional_rtl_modified_in_b1": false,
+    "generated_register_artifacts_modified": false,
+    "runtime_software_modified": false,
+    "public_abi_modified": false,
+    "stage2h_b2_started": false,
+    "synthesis_or_implementation_run": false,
+    "timing_bitstream_or_board_work": false,
+    "generic_rtl_framework_added": false,
+    "minimum_sufficient_assurance": "PASS",
+    "no_overengineering": "PASS",
+    "first_principles_scope_review": "PASS"
+  }
+}

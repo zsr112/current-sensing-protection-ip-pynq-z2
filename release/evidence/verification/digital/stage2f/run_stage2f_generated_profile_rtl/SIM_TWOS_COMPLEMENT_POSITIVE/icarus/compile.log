@@ -1,4 +1,0 @@
-warning: Some design elements have no explicit time unit and/or
-       : time precision. This may cause confusing timing results.
-       : Affected design elements are:
-       :   -- module adc_sample_code_normalizer declared here: <EXTERNAL_VERIFICATION>\digital\stage2f\run_stage2f_generated_profile_rtl\SIM_TWOS_COMPLEMENT_POSITIVE\rtl\adc_sample_code_normalizer.sv:5

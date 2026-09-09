@@ -1,0 +1,25 @@
+schema_version stage1e-runtime-external-capability-contract-v1
+unknown_capability_action BLOCK
+capabilities {
+    {ordinal 1 capability_key POWERSHELL_5_1_AST domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 2 capability_key POWERSHELL_MODULE_SYSTEM domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 3 capability_key DOTNET_BCL_COLLECTIONS domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 4 capability_key DOTNET_BCL_TEXT domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 5 capability_key DOTNET_BCL_FILESYSTEM domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 6 capability_key DOTNET_BCL_CRYPTOGRAPHY domain HOST_POWERSHELL owner HASH_PROVIDER observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 7 capability_key DOTNET_BCL_PROCESS_TIME domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 8 capability_key WINDOWS_PROCESS_CONTROL_API domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 9 capability_key WINDOWS_WINDOW_CONTROL_API domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 10 capability_key HOST_ENVIRONMENT domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 11 capability_key HOST_FILESYSTEM_SEMANTICS domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 12 capability_key HOST_MONOTONIC_CLOCK domain HOST_POWERSHELL owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 13 capability_key STANDALONE_TCL_8_6 domain {VIVADO_TCL HOST_POSTPROCESS_TCL} owner HOST observation_owner HOST_OBSERVER requirement REQUIRED_FOR_SAFE_LOAD_ONLY}
+    {ordinal 14 capability_key TCL_BINARY_IO domain {VIVADO_TCL HOST_POSTPROCESS_TCL} owner HOST observation_owner HOST_OBSERVER requirement REQUIRED}
+    {ordinal 15 capability_key VIVADO_2024_1_QUERY_SURFACE domain VIVADO_TCL owner HOST observation_owner VIVADO_CAPABILITY_OBSERVER requirement QUALIFICATION_REQUIRED}
+    {ordinal 16 capability_key VIVADO_2024_1_CONTROL_SURFACE domain VIVADO_TCL owner FRAMEWORK observation_owner VIVADO_CAPABILITY_OBSERVER requirement QUALIFICATION_REQUIRED}
+    {ordinal 17 capability_key VIVADO_2024_1_REPORT_SURFACE domain VIVADO_TCL owner REPORT observation_owner VIVADO_CAPABILITY_OBSERVER requirement QUALIFICATION_REQUIRED}
+    {ordinal 18 capability_key VIVADO_LICENSE_CAPABILITY domain VIVADO_TCL owner HOST observation_owner VIVADO_CAPABILITY_OBSERVER requirement QUALIFICATION_REQUIRED}
+    {ordinal 19 capability_key VIVADO_DEVICE_DATABASE domain VIVADO_TCL owner HOST observation_owner VIVADO_CAPABILITY_OBSERVER requirement QUALIFICATION_REQUIRED}
+    {ordinal 20 capability_key VIVADO_BOARD_DATABASE domain VIVADO_TCL owner HOST observation_owner VIVADO_CAPABILITY_OBSERVER requirement QUALIFICATION_REQUIRED}
+    {ordinal 21 capability_key HOST_POWERSHELL_GET_FILE_HASH_VERIFIER domain HOST_POWERSHELL owner HASH_PROVIDER observation_owner HOST_OBSERVER requirement BOOTSTRAP_TEST_ONLY}
+}

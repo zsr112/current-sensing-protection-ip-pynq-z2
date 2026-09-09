@@ -1,0 +1,113 @@
+{
+  "$id": "stage1e-run2-finding-disposition-decision-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_type", "decision_state", "acceptance_authority", "activation_source", "activation_effect", "reviewer", "reviewed_candidate", "historical_evidence", "review_bundles", "group_contract", "mismatch_action"],
+  "x-stage1e-canonical-order": ["schema_version", "record_type", "decision_state", "acceptance_authority", "activation_source", "activation_effect", "reviewer", "reviewed_candidate", "historical_evidence", "review_bundles", "group_contract", "mismatch_action"],
+  "definitions": {
+    "sha256": {"type": "string", "x-stage1e-format": "sha256"},
+    "git_identity_or_pending": {
+      "oneOf": [
+        {"type": "string", "enum": ["NOT_YET_BOUND"]},
+        {"type": "string", "minLength": 40, "maxLength": 40}
+      ]
+    },
+    "activation_source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["activation_commit", "activation_tree"],
+      "x-stage1e-canonical-order": ["activation_commit", "activation_tree"],
+      "properties": {
+        "activation_commit": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/git_identity_or_pending"},
+        "activation_tree": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/git_identity_or_pending"}
+      }
+    },
+    "token": {"type": "string", "minLength": 1, "x-stage1e-format": "token"},
+    "reviewer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "role"], "x-stage1e-canonical-order": ["name", "role"],
+      "properties": {"name": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/token"}, "role": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/token"}}
+    },
+    "reviewed_candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256", "source_commit", "source_tree"], "x-stage1e-canonical-order": ["path", "sha256", "source_commit", "source_tree"],
+      "properties": {
+        "path": {"type": "string", "x-stage1e-format": "canonical-reference"},
+        "sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"},
+        "source_commit": {"type": "string", "minLength": 40, "maxLength": 40},
+        "source_tree": {"type": "string", "minLength": 40, "maxLength": 40}
+      }
+    },
+    "historical_evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["run2_hc_report_sha256", "findings_report_sha256", "rtstat10_report_sha256", "codex_review_report_sha256"],
+      "x-stage1e-canonical-order": ["run2_hc_report_sha256", "findings_report_sha256", "rtstat10_report_sha256", "codex_review_report_sha256"],
+      "properties": {
+        "run2_hc_report_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"},
+        "findings_report_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"},
+        "rtstat10_report_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"},
+        "codex_review_report_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"}
+      }
+    },
+    "review_bundles": {
+      "type": "object", "additionalProperties": false,
+      "required": ["run2_hc_sha256", "findings_sha256", "rtstat10_sha256", "codex_review_sha256"],
+      "x-stage1e-canonical-order": ["run2_hc_sha256", "findings_sha256", "rtstat10_sha256", "codex_review_sha256"],
+      "properties": {
+        "run2_hc_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"},
+        "findings_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"},
+        "rtstat10_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"},
+        "codex_review_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"}
+      }
+    },
+    "ownership_counts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["debug_hub", "smartconnect_unused_internal", "system_ila_unused_internal", "custom_project_logic"],
+      "x-stage1e-canonical-order": ["debug_hub", "smartconnect_unused_internal", "system_ila_unused_internal", "custom_project_logic"],
+      "properties": {
+        "debug_hub": {"type": "integer", "minimum": 0}, "smartconnect_unused_internal": {"type": "integer", "minimum": 0}, "system_ila_unused_internal": {"type": "integer", "minimum": 0}, "custom_project_logic": {"type": "integer", "minimum": 0}
+      }
+    },
+    "safety_counts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["functional_protection_net_count", "functional_axi_net_count", "functional_clock_net_count", "functional_reset_net_count", "required_debug_probe_net_count", "generated_nonfunctional_no_load_net_count"],
+      "x-stage1e-canonical-order": ["functional_protection_net_count", "functional_axi_net_count", "functional_clock_net_count", "functional_reset_net_count", "required_debug_probe_net_count", "generated_nonfunctional_no_load_net_count"],
+      "properties": {
+        "functional_protection_net_count": {"type": "integer", "minimum": 0}, "functional_axi_net_count": {"type": "integer", "minimum": 0}, "functional_clock_net_count": {"type": "integer", "minimum": 0}, "functional_reset_net_count": {"type": "integer", "minimum": 0}, "required_debug_probe_net_count": {"type": "integer", "minimum": 0}, "generated_nonfunctional_no_load_net_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "rtstat10": {
+      "type": "object", "additionalProperties": false,
+      "required": ["member_count", "membership_sha256", "ownership_class_counts", "functional_safety_counts"],
+      "x-stage1e-canonical-order": ["member_count", "membership_sha256", "ownership_class_counts", "functional_safety_counts"],
+      "properties": {
+        "member_count": {"type": "integer", "minimum": 0}, "membership_sha256": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/sha256"}, "ownership_class_counts": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/ownership_counts"}, "functional_safety_counts": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/safety_counts"}
+      }
+    },
+    "group_contract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primary_accepted_group_ids", "conditional_group_ids", "supplemental_accepted_group_ids", "blocking_group_ids", "rtstat10"],
+      "x-stage1e-canonical-order": ["primary_accepted_group_ids", "conditional_group_ids", "supplemental_accepted_group_ids", "blocking_group_ids", "rtstat10"],
+      "properties": {
+        "primary_accepted_group_ids": {"type": "array", "items": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/token"}},
+        "conditional_group_ids": {"type": "array", "items": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/token"}},
+        "supplemental_accepted_group_ids": {"type": "array", "items": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/token"}},
+        "blocking_group_ids": {"type": "array", "items": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/token"}},
+        "rtstat10": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/rtstat10"}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["stage1e-run2-finding-disposition-decision-v1"]},
+    "record_type": {"type": "string", "enum": ["FINDING_DISPOSITION_DECISION"]},
+    "decision_state": {"type": "string", "enum": ["PROPOSED_PENDING_HUMAN_ACCEPTANCE", "ACCEPTED_HUMAN_DECISION"]},
+    "acceptance_authority": {"type": "string", "enum": ["NONE", "NAMED_HUMAN_AUTHORITY"]},
+    "activation_source": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/activation_source"},
+    "activation_effect": {"type": "string", "enum": ["NONE", "PERMIT_POLICY_COMPARISON_ONLY"]},
+    "reviewer": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/reviewer"},
+    "reviewed_candidate": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/reviewed_candidate"},
+    "historical_evidence": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/historical_evidence"},
+    "review_bundles": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/review_bundles"},
+    "group_contract": {"$ref": "stage1e-run2-finding-disposition-decision-v1#/definitions/group_contract"},
+    "mismatch_action": {"type": "string", "enum": ["BLOCK"]}
+  }
+}

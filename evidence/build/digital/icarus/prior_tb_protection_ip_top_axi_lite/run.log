@@ -1,0 +1,16 @@
+VCD info: dumpfile <EXTERNAL_BUILD>/digital/icarus/prior_tb_protection_ip_top_axi_lite/waves/tb_protection_ip_top_axi_lite.vcd opened for output.
+AXI contract: nonzero WSTRB writes the addressed register as a full word; WSTRB=0 does not write
+AXI contract: unmapped addresses return OKAY; writes are ignored and reads return zero
+SCENARIO 7 PASS: AXI read/write near-overlap conservative arbitration
+AXI reset stress: write/read in-flight reset scenarios
+[10D-G] START AXI-Lite persistent sensor-stuck invalid-clear stale-event suppression
+Q-SIM-01 updates the formal 10D-G task to the Stage 2B transaction contract
+[10D-G] PASS AXI-Lite invalid-clear stale-event suppression
+Q-SIM-09 AXI transport enhancement: full-width clear in safe NORMAL
+Q-SIM-03/Q-SIM-10/Q-SIM-14 same-cycle AW/W full-width clear-only recovery
+Q-SIM-03/Q-SIM-10/Q-SIM-14 same-cycle current implementation characterization: two moving valid samples drive visible stuck-source removal
+Q-SIM-14 Q-SIM-14 AW-before-W independent AW/W channel arrival characterization
+Q-SIM-14 Q-SIM-14 W-before-AW independent AW/W channel arrival characterization
+Q-SIM-11 AXI CTRL=0x3 compatibility characterization only
+ALL TESTS PASSED: tb_protection_ip_top_axi_lite
+<EXTERNAL_SOURCE>\tb\tb_protection_ip_top_axi_lite.sv:1446: $finish called at 18966000 (1ps)

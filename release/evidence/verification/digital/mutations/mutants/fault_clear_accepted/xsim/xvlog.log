@@ -1,8 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/fault_classifier.v" into library work
-INFO: [VRFC 10-311] analyzing module fault_classifier
-INFO: [VRFC 10-311] analyzing module stage2g_fault_evaluation_pipeline
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_VERIFICATION>/digital/mutations/mutants/fault_clear_accepted/source/protection_fsm.v" into library work
-INFO: [VRFC 10-311] analyzing module protection_fsm
-INFO: [VRFC 10-311] analyzing module stage2g_fault_episode_controller
-INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_policy_matrix.sv" into library work
-INFO: [VRFC 10-311] analyzing module tb_stage2g_policy_matrix

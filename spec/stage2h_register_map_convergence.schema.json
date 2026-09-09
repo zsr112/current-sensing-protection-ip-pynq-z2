@@ -1,0 +1,2547 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zsr112.local/schemas/stage2h-register-map-convergence-audit-v8.json",
+  "title": "Stage 2H-A1 register-map public-ABI final architecture closure audit contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "contract_schema_version",
+    "audit_id",
+    "scope",
+    "stage2h_a1_handoff",
+    "audit_live_source_boundary",
+    "first_principles_scope_review",
+    "frozen_authorities",
+    "current_state",
+    "authorities",
+    "current_abi",
+    "selected_single_source",
+    "generated_artifact_topology",
+    "access_taxonomy",
+    "behavior_source_contract",
+    "access_taxonomy_enablement",
+    "public_current_monitor_contract",
+    "capability_dependency_authority_contract",
+    "fault_taxonomy",
+    "behavior_binding_matrix",
+    "snapshot_semantics",
+    "policy_snapshot_contract",
+    "selected_abi_1_1_registers",
+    "deferred_register_candidates",
+    "register_value_expression_contract",
+    "selected_register_aggregate_contract",
+    "stage2h_rtl_source_bindings",
+    "policy_evaluation_identity_storage_contract",
+    "dynamic_value_source_contract",
+    "bitmap_lifetime_contract",
+    "episode_bitmap_transition_rules",
+    "cross_field_invariants",
+    "unknown_fault_cause_forward_compatibility",
+    "allocation_alternatives",
+    "capability_version_policy",
+    "capability_dependency_matrix",
+    "capability_metadata_constraints",
+    "legacy_capability_discovery",
+    "compatibility_rules",
+    "generator_architecture",
+    "generated_conformance_architecture",
+    "conformance_scenario_definitions",
+    "drift_checks",
+    "ast_fingerprint_policy",
+    "tooling_replay_policy",
+    "software_capability_object_contract",
+    "software_api_plan",
+    "implementation_deferrals",
+    "non_claims",
+    "open_owner_decisions",
+    "decisions"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://zsr112.local/schemas/stage2h-register-map-convergence-audit-v8.json"
+    },
+    "contract_schema_version": {
+      "const": "stage2h-register-map-convergence-audit-v8"
+    },
+    "audit_id": {
+      "const": "STAGE2H_A1_REGISTER_MAP_PUBLIC_ABI_FINAL_ARCHITECTURE_CLOSURE_AUDIT_V8"
+    },
+    "scope": { "$ref": "#/$defs/scope" },
+    "stage2h_a1_handoff": { "$ref": "#/$defs/stage2hA1Handoff" },
+    "audit_live_source_boundary": { "$ref": "#/$defs/auditLiveSourceBoundary" },
+    "first_principles_scope_review": { "$ref": "#/$defs/firstPrinciplesScopeReview" },
+    "frozen_authorities": { "$ref": "#/$defs/frozenAuthorities" },
+    "current_state": { "$ref": "#/$defs/currentState" },
+    "authorities": { "$ref": "#/$defs/authorities" },
+    "current_abi": { "$ref": "#/$defs/currentAbi" },
+    "selected_single_source": { "$ref": "#/$defs/selectedSingleSource" },
+    "generated_artifact_topology": { "$ref": "#/$defs/generatedArtifactTopology" },
+    "access_taxonomy": {
+      "type": "array",
+      "minItems": 8,
+      "items": { "$ref": "#/$defs/accessType" }
+    },
+    "behavior_source_contract": { "$ref": "#/$defs/behaviorSourceContract" },
+    "access_taxonomy_enablement": { "$ref": "#/$defs/accessTaxonomyEnablement" },
+    "public_current_monitor_contract": { "$ref": "#/$defs/publicCurrentMonitorContract" },
+    "capability_dependency_authority_contract": { "$ref": "#/$defs/capabilityDependencyAuthorityContract" },
+    "fault_taxonomy": { "$ref": "#/$defs/faultTaxonomy" },
+    "behavior_binding_matrix": { "$ref": "#/$defs/behaviorBindingMatrix" },
+    "snapshot_semantics": { "$ref": "#/$defs/snapshotSemantics" },
+    "policy_snapshot_contract": { "$ref": "#/$defs/policySnapshotContract" },
+    "selected_abi_1_1_registers": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/selectedRegister" }
+    },
+    "deferred_register_candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/deferredRegisterCandidate" }
+    },
+    "register_value_expression_contract": { "$ref": "#/$defs/registerValueExpressionContract" },
+    "selected_register_aggregate_contract": { "$ref": "#/$defs/selectedRegisterAggregateContract" },
+    "stage2h_rtl_source_bindings": { "$ref": "#/$defs/stage2hRtlSourceBindings" },
+    "policy_evaluation_identity_storage_contract": { "$ref": "#/$defs/policyIdentityStorageContract" },
+    "dynamic_value_source_contract": { "$ref": "#/$defs/dynamicValueSourceContract" },
+    "bitmap_lifetime_contract": { "$ref": "#/$defs/bitmapLifetimeContract" },
+    "episode_bitmap_transition_rules": { "$ref": "#/$defs/episodeBitmapTransitionRules" },
+    "cross_field_invariants": { "$ref": "#/$defs/crossFieldInvariants" },
+    "unknown_fault_cause_forward_compatibility": { "$ref": "#/$defs/unknownFaultCauseForwardCompatibility" },
+    "allocation_alternatives": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/allocationAlternative" }
+    },
+    "capability_version_policy": { "$ref": "#/$defs/capabilityPolicy" },
+    "capability_dependency_matrix": { "$ref": "#/$defs/capabilityDependencyMatrix" },
+    "capability_metadata_constraints": { "$ref": "#/$defs/capabilityMetadataConstraints" },
+    "legacy_capability_discovery": { "$ref": "#/$defs/legacyCapabilityDiscovery" },
+    "compatibility_rules": { "$ref": "#/$defs/compatibilityRules" },
+    "generator_architecture": { "$ref": "#/$defs/generatorArchitecture" },
+    "generated_conformance_architecture": { "$ref": "#/$defs/generatedConformanceArchitecture" },
+    "conformance_scenario_definitions": { "$ref": "#/$defs/conformanceScenarioDefinitions" },
+    "drift_checks": {
+      "type": "array",
+      "minItems": 15,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "ast_fingerprint_policy": { "$ref": "#/$defs/astPolicy" },
+    "tooling_replay_policy": { "$ref": "#/$defs/toolingReplayPolicy" },
+    "software_capability_object_contract": { "$ref": "#/$defs/softwareCapabilityObjectContract" },
+    "software_api_plan": {
+      "type": "array",
+      "minItems": 14,
+      "items": { "$ref": "#/$defs/apiPlan" }
+    },
+    "implementation_deferrals": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "non_claims": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "open_owner_decisions": {
+      "type": "array",
+      "maxItems": 0
+    },
+    "decisions": {
+      "type": "array",
+      "minItems": 54,
+      "items": { "$ref": "#/$defs/decision" }
+    }
+  },
+  "$defs": {
+    "decisionStatus": {
+      "enum": [
+        "APPROVED",
+        "PROPOSED_NOT_IMPLEMENTED",
+        "DEFERRED",
+        "OWNER_DECISION_REQUIRED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "hexOffset": {
+      "type": "string",
+      "pattern": "^0x[0-9A-F]{2}$"
+    },
+    "bitRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["msb", "lsb"],
+      "properties": {
+        "msb": { "type": "integer", "minimum": 0, "maximum": 31 },
+        "lsb": { "type": "integer", "minimum": 0, "maximum": 31 }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audit_only",
+        "implementation_started",
+        "new_axi_offsets_implemented",
+        "functional_rtl_changed",
+        "software_runtime_changed",
+        "ipxact_register_objects_changed",
+        "packaged_external_ports_changed",
+        "synthesis_or_hardware_action"
+      ],
+      "properties": {
+        "audit_only": { "const": true },
+        "implementation_started": { "const": false },
+        "new_axi_offsets_implemented": { "const": false },
+        "functional_rtl_changed": { "const": false },
+        "software_runtime_changed": { "const": false },
+        "ipxact_register_objects_changed": { "const": false },
+        "packaged_external_ports_changed": { "const": false },
+        "synthesis_or_hardware_action": { "const": false }
+      }
+    },
+    "stage2hA1Handoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_substage",
+        "stage2h_a1_implementation_started",
+        "stage2h_a_complete",
+        "stage2h_complete",
+        "next_after_stage2h_a1",
+        "stage2h_b",
+        "stage2h_b_status",
+        "stage2h_c",
+        "stage2h_c_status",
+        "stage2h_d",
+        "stage2h_d_status",
+        "stage2i",
+        "stage2i_status"
+      ],
+      "properties": {
+        "current_substage": { "const": "STAGE2H_A1_REGISTER_MAP_AND_PUBLIC_ABI_ARCHITECTURE" },
+        "stage2h_a1_implementation_started": { "const": false },
+        "stage2h_a_complete": { "const": false },
+        "stage2h_complete": { "const": false },
+        "next_after_stage2h_a1": { "const": "STAGE2H_A2_REGISTER_MAP_AND_PUBLIC_ABI_IMPLEMENTATION" },
+        "stage2h_b": { "const": "RTL_ARCHITECTURE_AND_MODULE_BOUNDARY_CONVERGENCE" },
+        "stage2h_b_status": { "const": "NOT_STARTED" },
+        "stage2h_c": { "const": "BUILD_GENERATION_VERIFICATION_AND_REPOSITORY_CONVERGENCE" },
+        "stage2h_c_status": { "const": "NOT_STARTED" },
+        "stage2h_d": { "const": "INTEGRATED_REGRESSION_COVERAGE_AND_RELEASE_CLOSURE" },
+        "stage2h_d_status": { "const": "NOT_STARTED" },
+        "stage2i": { "const": "SYNTHESIS_IMPLEMENTATION_TIMING_AND_DIGITAL_BOARD_CLOSURE" },
+        "stage2i_status": { "const": "NOT_STARTED" }
+      }
+    },
+    "auditLiveSourceBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage2h_a1_audit_contract",
+        "future_live_register_map_source",
+        "audit_contract_is_future_live_register_map_source",
+        "future_live_source_scope",
+        "audit_only_history_copied_to_live_source"
+      ],
+      "properties": {
+        "stage2h_a1_audit_contract": { "const": "spec/stage2h_register_map_convergence.json" },
+        "future_live_register_map_source": { "const": "spec/register_map.json" },
+        "audit_contract_is_future_live_register_map_source": { "const": false },
+        "future_live_source_scope": { "const": "PUBLIC_ABI_GENERATION_AND_VALIDATION_ONLY" },
+        "audit_only_history_copied_to_live_source": { "const": false }
+      }
+    },
+    "scopeMechanismReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "failure_prevented", "simpler_existing_gate", "complexity_effect", "stage2h_required"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "failure_prevented": { "type": "string", "minLength": 1 },
+        "simpler_existing_gate": { "type": "string", "minLength": 1 },
+        "complexity_effect": { "type": "string", "minLength": 1 },
+        "stage2h_required": { "const": true }
+      }
+    },
+    "rejectedMechanismReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "decision"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "decision": { "enum": ["REJECTED_OVERENGINEERING", "DEFERRED_NOT_REQUIRED"] }
+      }
+    },
+    "firstPrinciplesScopeReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "new_generic_framework_added",
+        "audit_scope_expansion",
+        "overengineered_generic_dsl_added",
+        "general_verilog_semantic_parser_added",
+        "full_rtl_declaration_graph_added",
+        "conformance_approach",
+        "rtl_source_binding_approach",
+        "long_term_complexity_reduced",
+        "approved_mechanisms",
+        "rejected_mechanisms"
+      ],
+      "properties": {
+        "status": { "const": "PASS" },
+        "new_generic_framework_added": { "const": false },
+        "audit_scope_expansion": { "const": false },
+        "overengineered_generic_dsl_added": { "const": false },
+        "general_verilog_semantic_parser_added": { "const": false },
+        "full_rtl_declaration_graph_added": { "const": false },
+        "conformance_approach": { "const": "FINITE_PROJECT_SPECIFIC_TEMPLATES" },
+        "rtl_source_binding_approach": { "const": "LIGHTWEIGHT_EXPLICIT_BINDINGS_PLUS_COMPILE_SIM_CHECKS" },
+        "long_term_complexity_reduced": { "const": true },
+        "approved_mechanisms": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/scopeMechanismReview" } },
+        "rejected_mechanisms": { "type": "array", "minItems": 5, "items": { "$ref": "#/$defs/rejectedMechanismReview" } }
+      }
+    },
+    "frozenAuthorities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage2g_sample_event_authority",
+        "stage2g_fault_input_authority",
+        "normalized_telemetry_gates_fault_policy",
+        "fault_eval_sequence_width",
+        "supported_sequence_widths",
+        "fault_evaluation_latency_aclk",
+        "clear_protocol",
+        "public_recovery_complete",
+        "software_recovery_api_semantics_preserved"
+      ],
+      "properties": {
+        "stage2g_sample_event_authority": { "const": "ATOMIC_RAW_CDC_DESTINATION_DELIVERY_EVENT" },
+        "stage2g_fault_input_authority": { "const": "RAW_PROTECTION_EVALUATION" },
+        "normalized_telemetry_gates_fault_policy": { "const": false },
+        "fault_eval_sequence_width": { "const": "OBS_SEQUENCE_WIDTH" },
+        "supported_sequence_widths": { "const": "16_TO_32" },
+        "fault_evaluation_latency_aclk": { "const": 3 },
+        "clear_protocol": { "const": "REQUEST_EVALUATION_FENCED" },
+        "public_recovery_complete": {
+          "const": "LATER_CLEAN_HEALTHY_EVALUATION_ENTERING_ARMED"
+        },
+        "software_recovery_api_semantics_preserved": { "const": true }
+      }
+    },
+    "currentState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_commit",
+        "base_branch",
+        "stage2g_tag",
+        "physical_scaling_status",
+        "remaining_contract_gaps",
+        "stage2_complete",
+        "register_map_convergence_closed"
+      ],
+      "properties": {
+        "base_commit": {
+          "const": "c38df7cfc7a9fae28cb9ddc70fd16994e7e4b794"
+        },
+        "base_branch": { "const": "main" },
+        "stage2g_tag": { "const": "stage2g-reset-wait-first-fault-policy-v1" },
+        "physical_scaling_status": { "const": "BLOCKED_EXTERNAL_HARDWARE_FACTS" },
+        "remaining_contract_gaps": { "const": 1 },
+        "stage2_complete": { "const": false },
+        "register_map_convergence_closed": { "const": false }
+      }
+    },
+    "authorityOccurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "symbol",
+        "coverage",
+        "clock_reset_domain",
+        "producer",
+        "consumer",
+        "provenance",
+        "claimed_role",
+        "actual_role",
+        "tests",
+        "drift_risk"
+      ],
+      "properties": {
+        "file": { "type": "string", "minLength": 1 },
+        "symbol": { "type": "string", "minLength": 1 },
+        "coverage": { "type": "string", "minLength": 1 },
+        "clock_reset_domain": { "type": "string", "minLength": 1 },
+        "producer": { "type": "string", "minLength": 1 },
+        "consumer": { "type": "string", "minLength": 1 },
+        "provenance": { "enum": ["MANUAL", "DERIVED", "GENERATED", "HISTORICAL"] },
+        "claimed_role": {
+          "enum": ["AUTHORITATIVE", "GENERATED", "VALIDATION_ONLY", "HISTORICAL"]
+        },
+        "actual_role": {
+          "enum": ["AUTHORITATIVE", "GENERATED", "VALIDATION_ONLY", "HISTORICAL"]
+        },
+        "tests": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "drift_risk": { "enum": ["LOW", "MEDIUM", "HIGH", "VERY_HIGH"] }
+      }
+    },
+    "authorities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actual_authority",
+        "claimed_authority_surfaces",
+        "duplicate_register_authorities",
+        "manual_definition_nodes",
+        "occurrences",
+        "inspected_absences"
+      ],
+      "properties": {
+        "actual_authority": { "const": "rtl/protection_reg_bank.v:behavior" },
+        "claimed_authority_surfaces": {
+          "const": ["RTL", "DOCUMENTATION", "C_HEADER", "PYTHON"]
+        },
+        "duplicate_register_authorities": { "const": 4 },
+        "manual_definition_nodes": { "type": "integer", "minimum": 10 },
+        "occurrences": {
+          "type": "array",
+          "minItems": 12,
+          "items": { "$ref": "#/$defs/authorityOccurrence" }
+        },
+        "inspected_absences": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "abiField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "bits",
+        "access",
+        "reset",
+        "write_behavior",
+        "read_behavior",
+        "side_effects",
+        "clock_domain_semantics",
+        "software_api_owner",
+        "compatibility_status"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "bits": { "$ref": "#/$defs/bitRange" },
+        "access": {
+          "enum": ["RO", "RW", "WO", "W1C", "W1S", "W1P", "RC", "RSVD"]
+        },
+        "reset": { "type": ["integer", "string"] },
+        "write_behavior": { "type": "string", "minLength": 1 },
+        "read_behavior": { "type": "string", "minLength": 1 },
+        "side_effects": { "type": "string", "minLength": 1 },
+        "clock_domain_semantics": { "type": "string", "minLength": 1 },
+        "software_api_owner": { "type": "string", "minLength": 1 },
+        "enum_ref": { "const": "fault_taxonomy.fault_codes" },
+        "compatibility_status": {
+          "enum": [
+            "FROZEN_COMPATIBLE",
+            "DEPRECATED_BUT_SUPPORTED",
+            "RESERVED",
+            "AMBIGUOUS",
+            "CONTRADICTORY",
+            "UNTESTED"
+          ]
+        }
+      }
+    },
+    "abiRegister": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "offset",
+        "name",
+        "width",
+        "register_access",
+        "reset",
+        "clock_reset_domain",
+        "fields"
+      ],
+      "properties": {
+        "offset": { "$ref": "#/$defs/hexOffset" },
+        "name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "width": { "const": 32 },
+        "register_access": { "type": "string", "minLength": 1 },
+        "reset": { "type": ["integer", "string"] },
+        "clock_reset_domain": { "type": "string", "minLength": 1 },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/abiField" }
+        }
+      }
+    },
+    "abiDefect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "classification",
+        "source",
+        "claim_or_gap",
+        "frozen_behavior",
+        "remediation_owner",
+        "documentation_target"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "classification": {
+          "enum": [
+            "DOCUMENTATION_VS_RTL_CONTRADICTION",
+            "UNDOCUMENTED_FROZEN_ABI_BEHAVIOR",
+            "HISTORICAL_ONLY_DIFFERENCE"
+          ]
+        },
+        "source": { "type": "string", "minLength": 1 },
+        "claim_or_gap": { "type": "string", "minLength": 1 },
+        "frozen_behavior": { "type": "string", "minLength": 1 },
+        "remediation_owner": { "type": "string", "minLength": 1 },
+        "documentation_target": { "type": "string", "minLength": 1 }
+      }
+    },
+    "currentAbi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "addressing",
+        "data_width",
+        "address_width",
+        "occupied_range",
+        "register_count",
+        "defect_count_policy",
+        "defects",
+        "undefined_access",
+        "legacy_write_strobe_extension",
+        "registers"
+      ],
+      "properties": {
+        "addressing": { "const": "BYTE_ADDRESSED_ALIGNED_32_BIT_WORDS" },
+        "data_width": { "const": 32 },
+        "address_width": { "const": 8 },
+        "occupied_range": { "const": "0x00..0x60" },
+        "register_count": { "const": 25 },
+        "defect_count_policy": { "const": "DERIVED_FROM_DEFECT_CLASSIFICATIONS" },
+        "defects": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/abiDefect" }
+        },
+        "undefined_access": {
+          "const": "READ_ZERO_OKAY_WRITE_NO_EFFECT_OKAY_LOW_8_BIT_ALIAS_APPLIES"
+        },
+        "legacy_write_strobe_extension": {
+          "const": "CTRL_THRESHOLDS_AND_PWM_IGNORE_WSTRB_AFTER_ACCEPTED_WRITE"
+        },
+        "registers": {
+          "type": "array",
+          "minItems": 25,
+          "maxItems": 25,
+          "items": { "$ref": "#/$defs/abiRegister" }
+        }
+      }
+    },
+    "generatedArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "purpose"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "purpose": { "type": "string", "minLength": 1 }
+      }
+    },
+    "selectedSingleSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_status",
+        "authority_path",
+        "format",
+        "activation",
+        "schema_path",
+        "schema_versioning",
+        "ownership",
+        "generated_artifacts",
+        "hand_edit_generated_artifacts",
+        "deterministic_generation",
+        "generator_version_recorded"
+      ],
+      "properties": {
+        "decision_status": { "$ref": "#/$defs/decisionStatus" },
+        "authority_path": { "const": "spec/register_map.json" },
+        "format": { "const": "STRICT_JSON" },
+        "activation": { "const": "PROPOSED_NOT_IMPLEMENTED" },
+        "schema_path": { "const": "spec/register_map.schema.json" },
+        "schema_versioning": { "const": "MAJOR_VERSIONED" },
+        "ownership": {
+          "type": "array",
+          "minItems": 21,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "generated_artifacts": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/generatedArtifact" }
+        },
+        "hand_edit_generated_artifacts": { "const": "FORBIDDEN" },
+        "deterministic_generation": { "const": "REQUIRED" },
+        "generator_version_recorded": { "const": true }
+      }
+    },
+    "generatedArtifactTopology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority",
+        "master_list_ref",
+        "validation_approach",
+        "unowned_generated_artifacts",
+        "legacy_rtl_fault_defs",
+        "legacy_c_header"
+      ],
+      "properties": {
+        "authority": { "const": "ONE_MASTER_LIST" },
+        "master_list_ref": { "const": "selected_single_source.generated_artifacts" },
+        "validation_approach": { "const": "FIXED_PROJECT_SPECIFIC_TABLE" },
+        "unowned_generated_artifacts": { "const": "FORBIDDEN" },
+        "legacy_rtl_fault_defs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "compatibility_plan", "master_artifact", "legacy_names_preserved", "independent_manual_values_after_convergence"],
+          "properties": {
+            "path": { "const": "rtl/fault_defs.vh" },
+            "compatibility_plan": { "const": "STABLE_VALUE_FREE_SHIM_INCLUDES_MASTER_RTL_ARTIFACT" },
+            "master_artifact": { "const": "rtl/generated/protection_register_map.vh" },
+            "legacy_names_preserved": { "const": true },
+            "independent_manual_values_after_convergence": { "const": false }
+          }
+        },
+        "legacy_c_header": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "master_generated_artifact", "legacy_names_preserved"],
+          "properties": {
+            "path": { "const": "sw/ps_register_demo/protection_ip_regs.h" },
+            "master_generated_artifact": { "const": true },
+            "legacy_names_preserved": { "const": true }
+          }
+        }
+      }
+    },
+    "accessType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "write_behavior",
+        "read_behavior",
+        "reset_behavior",
+        "side_effects",
+        "partial_write_behavior",
+        "wstrb_behavior",
+        "software_behavior",
+        "verification",
+        "ipxact_representation"
+      ],
+      "properties": {
+        "type": {
+          "enum": ["RO", "RW", "WO", "W1C", "W1S", "W1P", "RC", "RSVD"]
+        },
+        "write_behavior": { "type": "string", "minLength": 1 },
+        "read_behavior": { "type": "string", "minLength": 1 },
+        "reset_behavior": { "type": "string", "minLength": 1 },
+        "side_effects": { "type": "string", "minLength": 1 },
+        "partial_write_behavior": { "type": "string", "minLength": 1 },
+        "wstrb_behavior": { "type": "string", "minLength": 1 },
+        "software_behavior": { "type": "string", "minLength": 1 },
+        "verification": { "type": "string", "minLength": 1 },
+        "ipxact_representation": { "type": "string", "minLength": 1 }
+      }
+    },
+    "behaviorDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "read_semantics",
+        "write_semantics",
+        "wstrb_policy",
+        "event_priority",
+        "pulse_width"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "RO_STATIC",
+            "RO_REGISTERED_VOLATILE",
+            "RW_STROBED",
+            "RW_LEGACY_IGNORE_WSTRB",
+            "W1C_EVENT_WINS",
+            "W1P_ONE_ACLK",
+            "RSVD_ZERO_IGNORE",
+            "UNKNOWN_ZERO_OKAY",
+            "ADDRESS_LOW8_ALIAS"
+          ]
+        },
+        "read_semantics": { "type": "string", "minLength": 1 },
+        "write_semantics": { "type": "string", "minLength": 1 },
+        "wstrb_policy": { "type": "string", "minLength": 1 },
+        "event_priority": { "type": "string", "minLength": 1 },
+        "pulse_width": { "type": "string", "minLength": 1 }
+      }
+    },
+    "behaviorBindingContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "every_public_field_has_one_behavior_id",
+        "every_behavior_id_has_rtl_binding",
+        "every_binding_has_spec_generated_tests",
+        "binding_manifest_owner",
+        "rtl_binding_rule",
+        "untracked_handwritten_semantics"
+      ],
+      "properties": {
+        "every_public_field_has_one_behavior_id": { "const": true },
+        "every_behavior_id_has_rtl_binding": { "const": true },
+        "every_binding_has_spec_generated_tests": { "const": true },
+        "binding_manifest_owner": { "const": "spec/register_map.json" },
+        "rtl_binding_rule": { "const": "HANDWRITTEN_RTL_REFERENCES_GENERATED_BINDING_IDS_AND_SIDE_EFFECT_IDS" },
+        "untracked_handwritten_semantics": { "const": "FORBIDDEN" }
+      }
+    },
+    "behaviorSourceContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "register_map_source_owns_behavior_semantics",
+        "handwritten_rtl_is_untracked_authority",
+        "extension_policy",
+        "owned_properties",
+        "behavior_vocabulary",
+        "binding_contract"
+      ],
+      "properties": {
+        "register_map_source_owns_behavior_semantics": { "const": true },
+        "handwritten_rtl_is_untracked_authority": { "const": false },
+        "extension_policy": { "const": "REGISTER_MAP_SCHEMA_MAJOR_VERSION_REQUIRED" },
+        "owned_properties": {
+          "type": "array",
+          "minItems": 21,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "behavior_vocabulary": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": { "$ref": "#/$defs/behaviorDefinition" }
+        },
+        "binding_contract": { "$ref": "#/$defs/behaviorBindingContract" }
+      }
+    },
+    "accessBehaviorMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["RO", "RW", "W1C", "W1P", "RSVD"],
+      "properties": {
+        "RO": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "RW": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "W1C": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "W1P": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "RSVD": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "accessTaxonomyEnablement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy",
+        "enabled_access_types",
+        "defined_taxonomy_not_enabled_for_abi_1_1",
+        "enabled_behavior_ids",
+        "defined_behavior_ids_not_enabled_for_abi_1_1",
+        "access_to_enabled_behavior_ids",
+        "disabled_use_policy"
+      ],
+      "properties": {
+        "policy": { "const": "OPTION_B_DEFINED_TAXONOMY_NOT_ENABLED_FOR_ABI_1_1" },
+        "enabled_access_types": { "const": ["RO", "RW", "W1C", "W1P", "RSVD"] },
+        "defined_taxonomy_not_enabled_for_abi_1_1": { "const": ["WO", "W1S", "RC"] },
+        "enabled_behavior_ids": {
+          "type": "array",
+          "minItems": 8,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "defined_behavior_ids_not_enabled_for_abi_1_1": { "const": ["RW_STROBED"] },
+        "access_to_enabled_behavior_ids": { "$ref": "#/$defs/accessBehaviorMap" },
+        "disabled_use_policy": { "const": "SCHEMA_AND_SEMANTIC_REJECTION" }
+      }
+    },
+    "publicCurrentMonitorContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "public_i_ch1_reset",
+        "public_i_ch2_reset",
+        "public_i_ch1_i_ch2_source",
+        "public_i_ch1_i_ch2_volatility",
+        "public_i_ch1_i_ch2_software_pair_atomic",
+        "generic_direct_input_wrapper_reset_semantics",
+        "generic_wrapper_may_override_public_reset",
+        "ipxact_reset_plan"
+      ],
+      "properties": {
+        "public_i_ch1_reset": { "const": 0 },
+        "public_i_ch2_reset": { "const": 0 },
+        "public_i_ch1_i_ch2_source": { "const": "LATEST_ATOMIC_DESTINATION_FIFO_DELIVERY" },
+        "public_i_ch1_i_ch2_volatility": { "const": "REGISTERED_ACLK_VOLATILE" },
+        "public_i_ch1_i_ch2_software_pair_atomic": { "const": false },
+        "generic_direct_input_wrapper_reset_semantics": { "const": "INTERNAL_VARIANT_NOT_PUBLIC_ABI_AUTHORITY" },
+        "generic_wrapper_may_override_public_reset": { "const": false },
+        "ipxact_reset_plan": { "const": "I_CH1_AND_I_CH2_RESET_VALUE_0_FROM_PUBLIC_PRODUCTION_ABI" }
+      }
+    },
+    "capabilityDependencyAuthorityContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability_dependency_authority",
+        "field_capability_annotations",
+        "software_api_capability_gates",
+        "conformance_dependencies",
+        "independently_editable_dependency_descriptions"
+      ],
+      "properties": {
+        "capability_dependency_authority": { "const": "capability_dependency_matrix" },
+        "field_capability_annotations": { "const": "VALIDATED_REFERENCES_TO_AUTHORITY" },
+        "software_api_capability_gates": { "const": "VALIDATED_REFERENCES_TO_AUTHORITY" },
+        "conformance_dependencies": { "const": "EXACT_BINDING_EDGES_NOT_GLOBAL_NAME_PRESENCE" },
+        "independently_editable_dependency_descriptions": { "const": "FORBIDDEN" }
+      }
+    },
+    "faultCodeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_name", "value", "legacy_aliases", "software_name", "rtl_name", "c_name", "systemverilog_name", "ipxact_name", "description", "compatibility_status"],
+      "properties": {
+        "canonical_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "value": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "legacy_aliases": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" } },
+        "software_name": { "type": "string", "pattern": "^[a-z][a-z0-9_]+$" },
+        "rtl_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "c_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "systemverilog_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "ipxact_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "description": { "type": "string", "minLength": 1 },
+        "compatibility_status": { "const": "FROZEN_COMPATIBLE" }
+      }
+    },
+    "faultCauseEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_name", "bit", "mask", "software_name", "rtl_name", "c_name", "systemverilog_name", "ipxact_name", "description", "compatibility_status"],
+      "properties": {
+        "canonical_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "bit": { "type": "integer", "minimum": 0, "maximum": 31 },
+        "mask": { "type": "string", "pattern": "^0x[0-9A-F]{8}$" },
+        "software_name": { "type": "string", "pattern": "^[a-z][a-z0-9_]+$" },
+        "rtl_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "c_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "systemverilog_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "ipxact_name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "description": { "type": "string", "minLength": 1 },
+        "compatibility_status": { "const": "ADDITIVE_ABI_1_1" }
+      }
+    },
+    "faultProjectionPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "causes", "groups"],
+      "properties": {
+        "kind": { "enum": ["ALL_OF_ANY_GROUPS", "ANY_OF", "NONE_OF"] },
+        "causes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" } },
+        "groups": {
+          "type": "array",
+          "items": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" } }
+        }
+      }
+    },
+    "faultProjectionEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "predicate"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "predicate": { "$ref": "#/$defs/faultProjectionPredicate" }
+      }
+    },
+    "faultTaxonomyConsumer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "artifact"],
+      "properties": {
+        "kind": { "enum": ["RTL_VERILOG_INCLUDE", "PYTHON_INTENUM_INTFLAG", "C_CONSTANTS_ENUMS", "SYSTEMVERILOG_CONSTANTS", "IP_XACT_FIELD_ENUM_METADATA", "REGISTER_DOCUMENTATION", "CONFORMANCE_VECTORS"] },
+        "artifact": { "type": "string", "minLength": 1 }
+      }
+    },
+    "faultTaxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "authority", "fault_code_width", "fault_codes", "fault_code_binding", "fault_bitmap_width", "fault_bitmap_valid_mask", "fault_bitmap_reserved_mask", "fault_causes", "compatibility_projection", "extension_policy", "consumer_plan"],
+      "properties": {
+        "schema_version": { "const": "FAULT_TAXONOMY_V1" },
+        "authority": { "const": "SOLE_FUTURE_FAULT_CODE_AND_BITMAP_AUTHORITY" },
+        "fault_code_width": { "const": 8 },
+        "fault_codes": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/faultCodeEntry" } },
+        "fault_code_binding": {
+          "type": "object", "additionalProperties": false,
+          "required": ["target", "enum_ref", "projection_ref"],
+          "properties": {
+            "target": { "const": "FAULT_CODE.fault_code_latched" },
+            "enum_ref": { "const": "fault_taxonomy.fault_codes" },
+            "projection_ref": { "const": "fault_taxonomy.compatibility_projection" }
+          }
+        },
+        "fault_bitmap_width": { "const": 6 },
+        "fault_bitmap_valid_mask": { "const": "0x0000003F" },
+        "fault_bitmap_reserved_mask": { "const": "0xFFFFFFC0" },
+        "fault_causes": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "$ref": "#/$defs/faultCauseEntry" } },
+        "compatibility_projection": {
+          "type": "object", "additionalProperties": false,
+          "required": ["kind", "output_enum_ref", "priority", "complete_bitmap_retains_simultaneous_causes"],
+          "properties": {
+            "kind": { "const": "PRIORITY_PREDICATE_PROJECTION" },
+            "output_enum_ref": { "const": "fault_taxonomy.fault_codes" },
+            "priority": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/faultProjectionEntry" } },
+            "complete_bitmap_retains_simultaneous_causes": { "const": true }
+          }
+        },
+        "extension_policy": {
+          "type": "object", "additionalProperties": false,
+          "required": ["new_cause_in_reserved_range", "renumber_existing_cause", "change_fault_code_value_or_projection"],
+          "properties": {
+            "new_cause_in_reserved_range": { "const": "ADDITIVE_ABI_MINOR_PLUS_CAPABILITY_AND_WIDTH_UPDATE" },
+            "renumber_existing_cause": { "const": "ABI_MAJOR_CHANGE" },
+            "change_fault_code_value_or_projection": { "const": "ABI_MAJOR_CHANGE_UNLESS_SEPARATELY_VERSIONED_COMPATIBILITY_CODE" }
+          }
+        },
+        "consumer_plan": {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "generated_consumers", "handwritten_duplicates_after_convergence", "legacy_alias_plan"],
+          "properties": {
+            "status": { "const": "APPROVED" },
+            "generated_consumers": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/faultTaxonomyConsumer" } },
+            "handwritten_duplicates_after_convergence": { "const": "FORBIDDEN" },
+            "legacy_alias_plan": { "const": "GENERATED_LEGACY_INCLUDE_PATHS_AND_NAMES_PRESERVED" }
+          }
+        }
+      }
+    },
+    "behaviorBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "register",
+        "field_or_global_policy",
+        "behavior_id",
+        "rtl_binding_id",
+        "side_effect_id",
+        "generated_conformance_family",
+        "implementation_status"
+      ],
+      "properties": {
+        "scope": { "enum": ["CURRENT_ABI", "ABI_1_1_SELECTED", "GLOBAL_POLICY"] },
+        "register": { "type": "string", "minLength": 1 },
+        "field_or_global_policy": { "type": "string", "minLength": 1 },
+        "behavior_id": { "type": "string", "minLength": 1 },
+        "rtl_binding_id": { "type": "string", "pattern": "^RTL_[A-Z0-9_]+$" },
+        "side_effect_id": { "type": "string", "minLength": 1 },
+        "generated_conformance_family": { "type": "string", "pattern": "^CF_[A-Z0-9_]+$" },
+        "implementation_status": {
+          "enum": ["FROZEN_IMPLEMENTED", "PROPOSED_NOT_IMPLEMENTED"]
+        }
+      }
+    },
+    "behaviorBindingMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverage_authority", "global_policy_targets", "bindings"],
+      "properties": {
+        "coverage_authority": { "const": "DERIVED_FROM_BINDING_RECORDS" },
+        "global_policy_targets": { "const": ["UNKNOWN_ADDRESS", "ADDRESS_APERTURE"] },
+        "bindings": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/behaviorBinding" }
+        }
+      }
+    },
+    "snapshotGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "classification", "coherence", "notes"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "classification": {
+          "enum": [
+            "SINGLE_BIT_SYNCHRONIZED",
+            "GRAY_COUNTER_SYNCHRONIZED",
+            "ATOMIC_FIFO_DERIVED",
+            "REGISTERED_ACLK_STATUS",
+            "MULTI_FIELD_SNAPSHOT",
+            "STICKY_HISTORY",
+            "PULSE_EVENT"
+          ]
+        },
+        "coherence": {
+          "enum": [
+            "INDEPENDENTLY_COHERENT",
+            "SAME_CYCLE_COHERENT",
+            "SNAPSHOT_ON_READ",
+            "SNAPSHOT_ON_COMMAND",
+            "EVENTUALLY_CONSISTENT"
+          ]
+        },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "snapshotSemantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["atomic_multi_register_snapshot", "groups", "future_policy"],
+      "properties": {
+        "atomic_multi_register_snapshot": { "const": false },
+        "groups": {
+          "type": "array",
+          "minItems": 12,
+          "items": { "$ref": "#/$defs/snapshotGroup" }
+        },
+        "future_policy": {
+          "const": "INDEPENDENTLY_COHERENT_NO_ATOMIC_OR_SEQUENCE_BRACKETED_CLAIM"
+        }
+      }
+    },
+    "snapshotSequenceLimitations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "duplicate_identity_can_prove_coherence",
+        "stale_identity_can_prove_coherence",
+        "clear_pending_can_change_without_identity_change",
+        "reset_returns_identity_to_zero",
+        "reset_to_zero_can_prove_coherence",
+        "source_sequence_can_restart",
+        "source_restart_can_prove_coherence"
+      ],
+      "properties": {
+        "duplicate_identity_can_prove_coherence": { "const": false },
+        "stale_identity_can_prove_coherence": { "const": false },
+        "clear_pending_can_change_without_identity_change": { "const": true },
+        "reset_returns_identity_to_zero": { "const": true },
+        "reset_to_zero_can_prove_coherence": { "const": false },
+        "source_sequence_can_restart": { "const": true },
+        "source_restart_can_prove_coherence": { "const": false }
+      }
+    },
+    "snapshotOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "decision", "hardware_cost", "software_contract"],
+      "properties": {
+        "id": {
+          "enum": [
+            "OPTION_A_DEDICATED_POLICY_UPDATE_EPOCH",
+            "OPTION_B_HARDWARE_SNAPSHOT_ON_COMMAND",
+            "OPTION_C_DEFER_CROSS_WORD_SNAPSHOT"
+          ]
+        },
+        "decision": { "enum": ["SELECTED", "NOT_SELECTED"] },
+        "hardware_cost": { "type": "string", "minLength": 1 },
+        "software_contract": { "type": "string", "minLength": 1 }
+      }
+    },
+    "futureUpdateEpochRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["must_not_reuse_delivered_sample_sequence", "must_change_on"],
+      "properties": {
+        "must_not_reuse_delivered_sample_sequence": { "const": true },
+        "must_change_on": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "policySnapshotContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_evaluation_sequence_role",
+        "policy_evaluation_sequence_is_snapshot_token",
+        "read_policy_snapshot_api",
+        "policy_multi_register_coherence",
+        "policy_snapshot_overclaim",
+        "selected_option",
+        "sequence_limitations",
+        "options",
+        "future_update_epoch_requirements"
+      ],
+      "properties": {
+        "policy_evaluation_sequence_role": { "const": "DIAGNOSTIC_LAST_RETIREMENT_IDENTITY" },
+        "policy_evaluation_sequence_is_snapshot_token": { "const": false },
+        "read_policy_snapshot_api": { "const": "DEFERRED" },
+        "policy_multi_register_coherence": { "const": "INDEPENDENTLY_COHERENT_NO_ATOMIC_OR_SEQUENCE_BRACKETED_CLAIM" },
+        "policy_snapshot_overclaim": { "const": false },
+        "selected_option": { "const": "OPTION_C_DEFER_CROSS_WORD_SNAPSHOT" },
+        "sequence_limitations": { "$ref": "#/$defs/snapshotSequenceLimitations" },
+        "options": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/snapshotOption" }
+        },
+        "future_update_epoch_requirements": { "$ref": "#/$defs/futureUpdateEpochRequirements" }
+      }
+    },
+    "integerLiteral": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "parameterReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "const": "parameter" },
+        "name": { "const": "OBS_SEQUENCE_WIDTH" }
+      }
+    },
+    "dynamicStaticValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "const": "dynamic" }
+      }
+    },
+    "selectedResetValue": {
+      "oneOf": [
+        { "$ref": "#/$defs/integerLiteral" },
+        { "$ref": "#/$defs/parameterReference" }
+      ]
+    },
+    "selectedStaticValue": {
+      "oneOf": [
+        { "$ref": "#/$defs/integerLiteral" },
+        { "$ref": "#/$defs/parameterReference" },
+        { "$ref": "#/$defs/dynamicStaticValue" }
+      ]
+    },
+    "selectedField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "offset",
+        "bits",
+        "access",
+        "static_value",
+        "reset",
+        "read_semantics",
+        "write_semantics",
+        "behavior_id",
+        "rtl_binding_id",
+        "side_effect_id",
+        "generated_conformance_family",
+        "capability_gate_ref",
+        "software_name",
+        "rtl_name",
+        "ipxact_name",
+        "implementation_status"
+      ],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "offset": { "$ref": "#/$defs/hexOffset" },
+        "bits": { "$ref": "#/$defs/bitRange" },
+        "access": { "enum": ["RO", "RW", "WO", "W1C", "W1S", "W1P", "RC", "RSVD"] },
+        "static_value": { "$ref": "#/$defs/selectedStaticValue" },
+        "reset": { "$ref": "#/$defs/selectedResetValue" },
+        "read_semantics": { "type": "string", "minLength": 1 },
+        "write_semantics": { "type": "string", "minLength": 1 },
+        "behavior_id": { "type": "string", "minLength": 1 },
+        "rtl_binding_id": { "type": "string", "pattern": "^RTL_[A-Z0-9_]+$" },
+        "side_effect_id": { "type": "string", "minLength": 1 },
+        "generated_conformance_family": { "type": "string", "pattern": "^CF_[A-Z0-9_]+$" },
+        "capability_gate_ref": { "type": "string", "pattern": "^FIELD_[A-Z0-9_]+$" },
+        "dynamic_value_source_ref": { "type": "string", "pattern": "^DVS_[A-Z0-9_]+$" },
+        "fault_cause_ref": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "software_name": { "type": "string", "minLength": 1 },
+        "rtl_name": { "type": "string", "minLength": 1 },
+        "ipxact_name": { "type": "string", "minLength": 1 },
+        "implementation_status": { "const": "PROPOSED_NOT_IMPLEMENTED" }
+      }
+    },
+    "selectedRegister": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["offset", "name", "width", "register_access", "derived_reset", "derived_static_value", "implementation_status", "fields"],
+      "properties": {
+        "offset": { "$ref": "#/$defs/hexOffset" },
+        "name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "width": { "const": 32 },
+        "register_access": { "const": "RO" },
+        "derived_reset": { "const": true },
+        "derived_static_value": { "const": true },
+        "implementation_status": { "const": "PROPOSED_NOT_IMPLEMENTED" },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/selectedField" }
+        }
+      }
+    },
+    "parameterDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value_width_bits", "minimum", "maximum", "configured_default"],
+      "properties": {
+        "name": { "const": "OBS_SEQUENCE_WIDTH" },
+        "value_width_bits": { "const": 8 },
+        "minimum": { "const": 16 },
+        "maximum": { "const": 32 },
+        "configured_default": { "const": 32 }
+      }
+    },
+    "expressionRendering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verilog", "python", "tcl_ipxact", "documentation", "testbench"],
+      "properties": {
+        "verilog": { "const": "PARAMETER_NAME_IN_FIELD_SLICE_WITH_WIDTH_CHECK" },
+        "python": { "const": "PARAMETER_NAME_WITH_RANGE_VALIDATION" },
+        "tcl_ipxact": { "const": "PARAMETER_REFERENCE_PLUS_RESOLVED_RESET_FOR_SELECTED_CONFIGURATION" },
+        "documentation": { "const": "PARAMETER_NAME_RANGE_AND_CONFIGURED_DEFAULT" },
+        "testbench": { "const": "PARAMETERIZED_EXPECTATION_AND_16_24_32_MATRIX" }
+      }
+    },
+    "registerValueExpressionContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_expression_nodes",
+        "integer_width_bits",
+        "integer_signedness",
+        "overflow_behavior",
+        "canonical_serialization",
+        "parameters",
+        "rendering",
+        "unknown_expression_kind",
+        "unknown_parameter_name"
+      ],
+      "properties": {
+        "allowed_expression_nodes": { "const": ["INTEGER_LITERAL", "PARAMETER_REFERENCE", "DYNAMIC_STATIC_VALUE"] },
+        "integer_width_bits": { "const": 32 },
+        "integer_signedness": { "const": "UNSIGNED" },
+        "overflow_behavior": { "const": "REJECT_FIELD_OR_REGISTER_OVERFLOW" },
+        "canonical_serialization": { "const": "STRICT_JSON_SORTED_KEYS_NO_PROSE_EXPRESSIONS" },
+        "parameters": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/parameterDefinition" }
+        },
+        "rendering": { "$ref": "#/$defs/expressionRendering" },
+        "unknown_expression_kind": { "const": "REJECT" },
+        "unknown_parameter_name": { "const": "REJECT" }
+      }
+    },
+    "aggregateExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["register", "default_reset_hex", "default_static_hex"],
+      "properties": {
+        "register": {
+          "enum": [
+            "REGISTER_MAP_VERSION",
+            "CAPABILITIES_0",
+            "CAPABILITIES_1",
+            "POLICY_STATUS",
+            "FIRST_FAULT_BITMAP",
+            "LIVE_FAULT_BITMAP",
+            "FAULT_SEEN_BITMAP",
+            "POLICY_EVALUATION_SEQUENCE"
+          ]
+        },
+        "default_reset_hex": { "type": "string", "pattern": "^0x[0-9A-F]{8}$" },
+        "default_static_hex": {
+          "oneOf": [
+            { "type": "string", "pattern": "^0x[0-9A-F]{8}$" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "selectedRegisterAggregateContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "register_reset_authority",
+        "register_static_value_authority",
+        "manual_register_reset_duplication",
+        "expectation_authority",
+        "default_parameter_values",
+        "register_expectations",
+        "derived_consumers"
+      ],
+      "properties": {
+        "register_reset_authority": { "const": "DERIVED_FROM_FIELD_RESETS" },
+        "register_static_value_authority": { "const": "DERIVED_FROM_FIELD_STATIC_VALUES" },
+        "manual_register_reset_duplication": { "const": "FORBIDDEN" },
+        "expectation_authority": { "const": "REPORT_ONLY_RECOMPUTED_BY_AUDIT" },
+        "default_parameter_values": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["OBS_SEQUENCE_WIDTH"],
+          "properties": {
+            "OBS_SEQUENCE_WIDTH": { "type": "integer", "minimum": 16, "maximum": 32 }
+          }
+        },
+        "register_expectations": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/aggregateExpectation" }
+        },
+        "derived_consumers": { "const": ["IP_XACT_RESET", "GENERATED_DOCUMENTATION_WORD", "CONFORMANCE_DEFAULT"] }
+      }
+    },
+    "sourceWidthBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "bits", "parameter", "contract_parameter"],
+      "properties": {
+        "kind": { "enum": ["LITERAL", "PARAMETER"] },
+        "bits": { "type": ["integer", "null"], "minimum": 1, "maximum": 32 },
+        "parameter": { "type": ["string", "null"] },
+        "contract_parameter": { "type": ["string", "null"] }
+      }
+    },
+    "sourceStateEncoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ST_ARMED", "ST_FAULT_LATCHED", "ST_RESET_WAIT"],
+      "properties": {
+        "ST_ARMED": { "const": "4'd0" },
+        "ST_FAULT_LATCHED": { "const": "4'd1" },
+        "ST_RESET_WAIT": { "const": "4'd2" }
+      }
+    },
+    "sourceConnection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "module", "instance", "port", "net"],
+      "properties": {
+        "file": { "const": "rtl/protection_core_top.v" },
+        "module": { "const": "stage2g_protection_core" },
+        "instance": { "enum": ["u_fsm", "u_classifier"] },
+        "port": { "type": "string", "pattern": "^[a-z][a-z0-9_]+$" },
+        "net": { "type": "string", "pattern": "^[a-z][a-z0-9_]+$" }
+      }
+    },
+    "rtlSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "file", "module", "signal", "direction", "width", "clock_domain_ref", "reset_domain_ref", "state_encoding", "connection"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^SRC_[A-Z0-9_]+$" },
+        "file": { "type": "string", "pattern": "^rtl/[A-Za-z0-9_]+\\.v$" },
+        "module": { "enum": ["stage2g_fault_episode_controller", "stage2g_fault_evaluation_pipeline"] },
+        "signal": { "type": "string", "pattern": "^[a-z][a-z0-9_]+$" },
+        "direction": { "const": "OUTPUT_REG" },
+        "width": { "$ref": "#/$defs/sourceWidthBinding" },
+        "clock_domain_ref": { "const": "ACLK" },
+        "reset_domain_ref": { "const": "LOCAL_ACTIVE_LOW_RESET" },
+        "state_encoding": { "oneOf": [{ "$ref": "#/$defs/sourceStateEncoding" }, { "type": "null" }] },
+        "connection": { "$ref": "#/$defs/sourceConnection" }
+      }
+    },
+    "stage2hRtlSourceBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "authority", "implementation_status", "checker",
+        "compile_elaboration_gate", "targeted_simulation_gate",
+        "general_verilog_semantic_parser", "full_rtl_declaration_graph",
+        "source_fingerprint_policy", "clock_domain", "reset_domain", "bindings"
+      ],
+      "properties": {
+        "schema_version": { "const": "STAGE2H_SOURCE_BINDINGS_V1" },
+        "authority": { "const": "LIGHTWEIGHT_EXPLICIT_STAGE2H_BINDINGS" },
+        "implementation_status": { "const": "CURRENT_STAGE2G_RTL_DECLARATIONS_FUTURE_STAGE2H_CONSUMERS_NOT_IMPLEMENTED" },
+        "checker": { "const": "PROJECT_SPECIFIC_DECLARATION_CONNECTION_AND_WIDTH_CHECKS" },
+        "compile_elaboration_gate": { "const": "EXISTING_STAGE2G_CURRENT_TREE_ICARUS" },
+        "targeted_simulation_gate": { "const": "EXISTING_STAGE2G_DIRECTED_POLICY_AND_SEQUENCE_TESTS" },
+        "general_verilog_semantic_parser": { "const": "REJECTED_OVERENGINEERING" },
+        "full_rtl_declaration_graph": { "const": "REJECTED_OVERENGINEERING" },
+        "source_fingerprint_policy": { "const": "DEFERRED_NOT_REQUIRED_COMMITTED_RTL_PLUS_DECLARATION_CHECK_IS_AUTHORITY" },
+        "clock_domain": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "port", "edge"],
+          "properties": { "id": { "const": "ACLK" }, "port": { "const": "clk" }, "edge": { "const": "POSEDGE" } }
+        },
+        "reset_domain": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "port", "assertion"],
+          "properties": { "id": { "const": "LOCAL_ACTIVE_LOW_RESET" }, "port": { "const": "rst_n" }, "assertion": { "const": "ASYNCHRONOUS_NEGEDGE" } }
+        },
+        "bindings": { "type": "array", "minItems": 10, "maxItems": 10, "items": { "$ref": "#/$defs/rtlSourceBinding" } }
+      }
+    },
+    "policyIdentityVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "reset", "valid", "integrity_clean", "sequence", "expected_identity"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^IDENTITY_[A-Z0-9_]+$" },
+        "reset": { "type": "boolean" },
+        "valid": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "integrity_clean": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "sequence": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "expected_identity": { "type": "integer", "minimum": 0, "maximum": 4294967295 }
+      }
+    },
+    "policyIdentityStorageContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status", "implementation_status", "field_ref", "storage_kind",
+        "data_source_binding_ref", "valid_source_binding_ref", "capture_when",
+        "capture_polarity", "hold_when_invalid", "reset_value", "source_width_ref",
+        "destination_width", "transform_rule", "integrity_clean_required",
+        "captures_nonclean_valid_retirement", "role", "is_snapshot_token",
+        "directed_vectors"
+      ],
+      "properties": {
+        "status": { "const": "APPROVED" },
+        "implementation_status": { "const": "PROPOSED_NOT_IMPLEMENTED" },
+        "field_ref": { "const": "POLICY_EVALUATION_SEQUENCE.SEQUENCE" },
+        "storage_kind": { "const": "REGISTERED_EVENT_CAPTURE" },
+        "data_source_binding_ref": { "const": "SRC_FAULT_EVAL_SEQUENCE" },
+        "valid_source_binding_ref": { "const": "SRC_FAULT_EVAL_VALID" },
+        "capture_when": { "const": "VALID_SIGNAL_EQUALS_1" },
+        "capture_polarity": { "const": "ACTIVE_HIGH_SYNCHRONOUS" },
+        "hold_when_invalid": { "const": true },
+        "reset_value": { "const": 0 },
+        "source_width_ref": { "const": "SRC_FAULT_EVAL_SEQUENCE.width" },
+        "destination_width": { "const": 32 },
+        "transform_rule": { "const": "ZERO_EXTEND" },
+        "integrity_clean_required": { "const": false },
+        "captures_nonclean_valid_retirement": { "const": true },
+        "role": { "const": "DIAGNOSTIC_LAST_RETIREMENT_IDENTITY" },
+        "is_snapshot_token": { "const": false },
+        "directed_vectors": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/policyIdentityVector" } }
+      }
+    },
+    "dynamicValueSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "target", "kind", "destination_width", "rtl_binding_id", "transform_rule"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^DVS_[A-Z0-9_]+$" },
+        "target": { "type": "string", "pattern": "^[A-Z0-9_]+\\.[A-Z0-9_]+$" },
+        "kind": { "enum": ["SIGNAL", "STATE_EQUALS", "MASK_SIGNAL_BY_WIDTH", "REGISTERED_EVENT_CAPTURE"] },
+        "source_binding_ref": { "type": "string", "pattern": "^SRC_[A-Z0-9_]+$" },
+        "state_ref": { "type": "string", "pattern": "^SRC_[A-Z0-9_]+\\.ST_[A-Z0-9_]+$" },
+        "data_source_binding_ref": { "type": "string", "pattern": "^SRC_[A-Z0-9_]+$" },
+        "valid_source_binding_ref": { "type": "string", "pattern": "^SRC_[A-Z0-9_]+$" },
+        "source_width_ref": { "type": "string", "pattern": "^SRC_[A-Z0-9_]+\\.width$" },
+        "destination_width": { "type": "integer", "minimum": 1, "maximum": 32 },
+        "source_bit": { "type": "integer", "minimum": 0, "maximum": 31 },
+        "mask": { "type": "string", "pattern": "^0x[0-9A-F]{8}$" },
+        "width_parameter": { "type": "string" },
+        "capture_polarity": { "const": "ACTIVE_HIGH_SYNCHRONOUS" },
+        "hold_when_invalid": { "const": true },
+        "reset_value": { "const": 0 },
+        "clock_domain_ref": { "const": "ACLK" },
+        "reset_domain_ref": { "const": "LOCAL_ACTIVE_LOW_RESET" },
+        "capture_boundary": { "const": "ACLK_POLICY_RETIREMENT_CAPTURE" },
+        "rtl_binding_id": { "type": "string", "pattern": "^RTL_[A-Z0-9_]+$" },
+        "transform_rule": { "enum": ["IDENTITY", "BOOLEAN_COMPARE", "MASK_VALID_THEN_SELECT_BIT_ZERO_EXTEND_REGISTER", "ZERO_EXTEND"] }
+      }
+    },
+    "dynamicValueSourceContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "authority", "approach", "allowed_source_kinds",
+        "source_binding_authority", "known_parameters", "known_transforms",
+        "unknown_source_kind", "unknown_source_binding", "unknown_state",
+        "unknown_transform", "unknown_parameter", "sources",
+        "current_abi_migration_plan"
+      ],
+      "properties": {
+        "schema_version": { "const": "DYNAMIC_VALUE_SOURCE_V2" },
+        "authority": { "const": "SOLE_TYPED_DYNAMIC_FIELD_SOURCE_AUTHORITY" },
+        "approach": { "const": "FOUR_PROJECT_SPECIFIC_SOURCE_KINDS" },
+        "allowed_source_kinds": { "const": ["SIGNAL", "STATE_EQUALS", "MASK_SIGNAL_BY_WIDTH", "REGISTERED_EVENT_CAPTURE"] },
+        "source_binding_authority": { "const": "stage2h_rtl_source_bindings" },
+        "known_parameters": { "const": ["FAULT_BITMAP_WIDTH", "OBS_SEQUENCE_WIDTH"] },
+        "known_transforms": { "const": ["IDENTITY", "BOOLEAN_COMPARE", "MASK_VALID_THEN_SELECT_BIT_ZERO_EXTEND_REGISTER", "ZERO_EXTEND"] },
+        "unknown_source_kind": { "const": "REJECT" },
+        "unknown_source_binding": { "const": "REJECT" },
+        "unknown_state": { "const": "REJECT" },
+        "unknown_transform": { "const": "REJECT" },
+        "unknown_parameter": { "const": "REJECT" },
+        "sources": { "type": "array", "minItems": 24, "maxItems": 24, "items": { "$ref": "#/$defs/dynamicValueSource" } },
+        "current_abi_migration_plan": {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "scope", "require_typed_source_before_generator_convergence", "opaque_bindings_permitted_after_convergence", "fault_code_binding_ref"],
+          "properties": {
+            "status": { "const": "EXPLICIT_IMPLEMENTATION_PHASE_PLAN" },
+            "scope": { "const": "CURRENT_ABI_DYNAMIC_FIELDS" },
+            "require_typed_source_before_generator_convergence": { "const": true },
+            "opaque_bindings_permitted_after_convergence": { "const": false },
+            "fault_code_binding_ref": { "const": "fault_taxonomy.fault_code_binding" }
+          }
+        }
+      }
+    },
+    "invariantPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "equals"],
+      "properties": {
+        "field": { "type": "string", "pattern": "^[A-Z0-9_]+\\.[A-Z0-9_]+$" },
+        "equals": { "type": "integer", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "policyStatusInvariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "fields", "antecedent", "consequent_all", "consequent_none", "conformance_family"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "kind": { "enum": ["EXACTLY_ONE", "IMPLIES"] },
+        "fields": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z0-9_]+\\.[A-Z0-9_]+$" } },
+        "antecedent": { "oneOf": [{ "$ref": "#/$defs/invariantPredicate" }, { "type": "null" }] },
+        "consequent_all": { "type": "array", "items": { "$ref": "#/$defs/invariantPredicate" } },
+        "consequent_none": { "type": "array", "items": { "$ref": "#/$defs/invariantPredicate" } },
+        "conformance_family": { "const": "CF_POLICY_STATUS_LEVEL" }
+      }
+    },
+    "bitmapInvariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "condition", "targets", "mask", "episode_scope", "update_rule", "conformance_family"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "kind": { "enum": ["MASK_ZERO", "IMPLIES_ALL_ZERO", "TEMPORAL_IMMUTABLE", "TEMPORAL_MONOTONIC_OR"] },
+        "condition": { "oneOf": [{ "$ref": "#/$defs/invariantPredicate" }, { "type": "null" }] },
+        "targets": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["FIRST_FAULT_BITMAP", "LIVE_FAULT_BITMAP", "FAULT_SEEN_BITMAP"] } },
+        "mask": { "type": "string", "pattern": "^0x[0-9A-F]{8}$" },
+        "episode_scope": { "enum": ["ALWAYS", "OUTSIDE_ACTIVE_INTERNAL_EPISODE", "ACTIVE_INTERNAL_EPISODE"] },
+        "update_rule": { "enum": ["BITS_ABOVE_FAULT_BITMAP_WIDTH_EQUAL_ZERO", "ALL_TARGETS_EQUAL_ZERO", "CAPTURE_ON_EPISODE_START_ONLY", "NEXT_EQUALS_PREVIOUS_OR_FAULT_EVAL_BITMAP_ON_INTEGRITY_CLEAN_VALID_RETIREMENT"] },
+        "conformance_family": { "const": "CF_EPISODE_BITMAP" }
+      }
+    },
+    "crossFieldInvariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluation_boundary", "software_atomic_snapshot_claim", "policy_status_invariants", "bitmap_invariants"],
+      "properties": {
+        "evaluation_boundary": { "const": "COMMON_STAGE2G_POLICY_ACLK_EDGE" },
+        "software_atomic_snapshot_claim": { "const": false },
+        "policy_status_invariants": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "$ref": "#/$defs/policyStatusInvariant" } },
+        "bitmap_invariants": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "$ref": "#/$defs/bitmapInvariant" } }
+      }
+    },
+    "episodeBitmapEventSources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valid_source_ref", "integrity_clean_source_ref", "bitmap_source_ref"],
+      "properties": {
+        "valid_source_ref": { "const": "SRC_FAULT_EVAL_VALID" },
+        "integrity_clean_source_ref": { "const": "SRC_FAULT_EVAL_INTEGRITY_CLEAN" },
+        "bitmap_source_ref": { "const": "SRC_FAULT_EVAL_BITMAP" }
+      }
+    },
+    "episodeBitmapTransitionRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "target_register", "initialize_on_episode_start", "update_during_active_episode", "hold_when_no_valid_retirement", "hold_when_nonclean_retirement", "clear_on"],
+      "properties": {
+        "id": { "enum": ["FIRST_FAULT_BITMAP_TRANSITION", "LIVE_FAULT_BITMAP_TRANSITION", "FAULT_SEEN_BITMAP_TRANSITION"] },
+        "target_register": { "enum": ["FIRST_FAULT_BITMAP", "LIVE_FAULT_BITMAP", "FAULT_SEEN_BITMAP"] },
+        "initialize_on_episode_start": { "const": "CAPTURE_FAULT_EVAL_BITMAP_ON_VALID_INTEGRITY_CLEAN_EPISODE_START" },
+        "update_during_active_episode": { "enum": ["HOLD", "REPLACE_WITH_FAULT_EVAL_BITMAP_ON_EACH_VALID_INTEGRITY_CLEAN_RETIREMENT", "PREVIOUS_OR_FAULT_EVAL_BITMAP_ON_EACH_VALID_INTEGRITY_CLEAN_RETIREMENT"] },
+        "hold_when_no_valid_retirement": { "const": true },
+        "hold_when_nonclean_retirement": { "const": true },
+        "clear_on": { "const": ["RESET", "EPISODE_END"] }
+      }
+    },
+    "episodeBitmapTransitionRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "status", "implementation_status", "event_sources", "rules"],
+      "properties": {
+        "schema_version": { "const": "EPISODE_BITMAP_TRANSITIONS_V1" },
+        "status": { "const": "APPROVED" },
+        "implementation_status": { "const": "CURRENT_STAGE2G_BEHAVIOR_FUTURE_STAGE2H_PUBLIC_BINDING_NOT_IMPLEMENTED" },
+        "event_sources": { "$ref": "#/$defs/episodeBitmapEventSources" },
+        "rules": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/episodeBitmapTransitionRule" } }
+      }
+    },
+    "advertisedWidthRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "maximum"],
+      "properties": { "minimum": { "const": 6 }, "maximum": { "const": 32 } }
+    },
+    "faultBitmapApiReturnShape": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type_name", "members"],
+      "properties": {
+        "type_name": { "const": "FaultBitmapValue" },
+        "members": { "const": ["raw_value", "known_flags", "unknown_mask", "advertised_width"] }
+      }
+    },
+    "faultBitmapArithmetic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["advertised_mask", "known_mask", "known_flags", "unknown_mask", "above_advertised_mask"],
+      "properties": {
+        "advertised_mask": { "const": "LOW_ADVERTISED_WIDTH_BITS" },
+        "known_mask": { "const": "LOW_KNOWN_TAXONOMY_WIDTH_BITS" },
+        "known_flags": { "const": "RAW_VALUE_AND_KNOWN_MASK" },
+        "unknown_mask": { "const": "RAW_VALUE_AND_ADVERTISED_MASK_AND_NOT_KNOWN_MASK" },
+        "above_advertised_mask": { "const": "RAW_VALUE_AND_NOT_ADVERTISED_MASK" }
+      }
+    },
+    "faultBitmapCompatibilityVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "raw_value", "advertised_width", "expected_known_flags", "expected_unknown_mask", "expected_above_advertised_mask", "expected_valid"],
+      "properties": {
+        "id": { "enum": ["KNOWN_ONLY_WIDTH_6", "UNKNOWN_BIT_6_WIDTH_7", "ABOVE_WIDTH_BIT_REJECTED"] },
+        "raw_value": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "advertised_width": { "type": "integer", "minimum": 6, "maximum": 32 },
+        "expected_known_flags": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "expected_unknown_mask": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "expected_above_advertised_mask": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "expected_valid": { "type": "boolean" }
+      }
+    },
+    "unknownFaultCauseForwardCompatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "status", "implementation_status", "known_taxonomy_width_ref", "raw_transport_width", "advertised_width_range", "api_return_shape", "arithmetic", "unknown_bits_within_advertised_width", "known_flags_decode", "bits_above_advertised_width", "unknown_name_policy", "directed_vectors"],
+      "properties": {
+        "schema_version": { "const": "FAULT_BITMAP_FORWARD_COMPATIBILITY_V1" },
+        "status": { "const": "APPROVED" },
+        "implementation_status": { "const": "PROPOSED_NOT_IMPLEMENTED" },
+        "known_taxonomy_width_ref": { "const": "fault_taxonomy.fault_bitmap_width" },
+        "raw_transport_width": { "const": 32 },
+        "advertised_width_range": { "$ref": "#/$defs/advertisedWidthRange" },
+        "api_return_shape": { "$ref": "#/$defs/faultBitmapApiReturnShape" },
+        "arithmetic": { "$ref": "#/$defs/faultBitmapArithmetic" },
+        "unknown_bits_within_advertised_width": { "const": "PRESERVE" },
+        "known_flags_decode": { "const": "NORMAL" },
+        "bits_above_advertised_width": { "const": "REQUIRE_ZERO" },
+        "unknown_name_policy": { "const": "DO_NOT_INVENT_NAMES" },
+        "directed_vectors": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/faultBitmapCompatibilityVector" } }
+      }
+    },
+    "deferredCandidateField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "bits", "access", "reset", "decision", "semantics"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "bits": { "$ref": "#/$defs/bitRange" },
+        "access": { "enum": ["RO", "RW", "WO", "W1C", "W1S", "W1P", "RC", "RSVD"] },
+        "reset": { "type": ["integer", "string"] },
+        "decision": { "const": "DEFERRED" },
+        "semantics": { "type": "string", "minLength": 1 }
+      }
+    },
+    "deferredRegisterCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "allocation_status", "candidate_range", "implementation_status", "counted_as_selected_abi_1_1", "fields"],
+      "properties": {
+        "name": { "const": "CLEAR_EVENT_STATUS" },
+        "allocation_status": { "const": "UNALLOCATED_DEFERRED" },
+        "candidate_range": { "type": "string", "minLength": 1 },
+        "implementation_status": { "const": "DEFERRED_NOT_SELECTED" },
+        "counted_as_selected_abi_1_1": { "const": false },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/deferredCandidateField" }
+        }
+      }
+    },
+    "bitmapMixedState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "legacy_fault_code",
+        "first_fault_bitmap",
+        "live_fault_bitmap",
+        "fault_seen_bitmap",
+        "post_clear_recovery_pending"
+      ],
+      "properties": {
+        "legacy_fault_code": { "const": "PRIOR_FIRST_CAUSE_MAY_REMAIN_NONZERO" },
+        "first_fault_bitmap": { "const": 0 },
+        "live_fault_bitmap": { "const": 0 },
+        "fault_seen_bitmap": { "const": 0 },
+        "post_clear_recovery_pending": { "const": 1 }
+      }
+    },
+    "bitmapLifetimeContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "first_live_seen_bitmap_lifetime",
+        "post_clear_reset_wait_bitmaps",
+        "public_compatibility_fault_code_may_remain_nonzero",
+        "post_clear_recovery_pending",
+        "mixed_state_example",
+        "software_contract"
+      ],
+      "properties": {
+        "first_live_seen_bitmap_lifetime": { "const": "ACTIVE_INTERNAL_EPISODE" },
+        "post_clear_reset_wait_bitmaps": { "const": "ZERO" },
+        "public_compatibility_fault_code_may_remain_nonzero": { "const": true },
+        "post_clear_recovery_pending": { "const": 1 },
+        "mixed_state_example": { "$ref": "#/$defs/bitmapMixedState" },
+        "software_contract": { "type": "string", "minLength": 1 }
+      }
+    },
+    "allocationRegister": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["offset", "name", "status"],
+      "properties": {
+        "offset": { "$ref": "#/$defs/hexOffset" },
+        "name": { "type": "string", "minLength": 1 },
+        "status": { "const": "PROPOSED_NOT_IMPLEMENTED" }
+      }
+    },
+    "allocationAlternative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "range", "selected", "registers", "reserved_ranges", "rationale"],
+      "properties": {
+        "id": { "enum": ["COMPACT_ADDITIVE", "CAPABILITY_PLUS_OBSERVABILITY"] },
+        "name": { "type": "string", "minLength": 1 },
+        "range": { "type": "string", "minLength": 1 },
+        "selected": { "type": "boolean" },
+        "registers": {
+          "type": "array",
+          "minItems": 7,
+          "items": { "$ref": "#/$defs/allocationRegister" }
+        },
+        "reserved_ranges": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "capabilityId": {
+      "enum": [
+        "ARMED_READY",
+        "FAULT_BITMAPS",
+        "CLEAR_LEVEL_STATUS",
+        "STAGE2G_POLICY",
+        "NORMALIZED_TELEMETRY",
+        "STAGE2E_TRANSACTION_OBSERVABILITY",
+        "POLICY_EVALUATION_IDENTITY"
+      ]
+    },
+    "publicCapabilityBit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bit", "name", "dependency_ref"],
+      "properties": {
+        "bit": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "name": { "$ref": "#/$defs/capabilityId" },
+        "dependency_ref": { "type": "string", "pattern": "^CAPABILITY_[A-Z0-9_]+$" }
+      }
+    },
+    "capabilityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "zero_version_word",
+        "nonzero_bad_magic",
+        "unsupported_major",
+        "bad_magic_is_legacy",
+        "first_explicit_version",
+        "supported_abi_majors",
+        "version_magic",
+        "version_layout",
+        "decision_tree",
+        "capability_registers",
+        "feature_bits",
+        "width_register_layout",
+        "capability_bit_means_public_software_usable_feature",
+        "normalized_telemetry_capability_bit",
+        "git_identity_mandatory",
+        "spec_hash_fragment"
+      ],
+      "properties": {
+        "zero_version_word": { "const": "NO_EXPLICIT_DISCOVERY" },
+        "nonzero_bad_magic": { "const": "REJECT_INCOMPATIBLE" },
+        "unsupported_major": { "const": "REJECT_INCOMPATIBLE" },
+        "bad_magic_is_legacy": { "const": false },
+        "first_explicit_version": { "const": "1.1" },
+        "supported_abi_majors": { "const": [1] },
+        "version_magic": { "const": "0x524D" },
+        "version_layout": { "type": "string", "minLength": 1 },
+        "decision_tree": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "capability_registers": { "const": ["REGISTER_MAP_VERSION", "CAPABILITIES_0", "CAPABILITIES_1"] },
+        "feature_bits": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": { "$ref": "#/$defs/publicCapabilityBit" }
+        },
+        "width_register_layout": { "type": "string", "minLength": 1 },
+        "capability_bit_means_public_software_usable_feature": { "const": true },
+        "normalized_telemetry_capability_bit": { "const": "RESERVED_ZERO" },
+        "git_identity_mandatory": { "const": false },
+        "spec_hash_fragment": { "const": "RESERVED_FOR_LATER" }
+      }
+    },
+    "capabilityIdList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/capabilityId" }
+    },
+    "capabilityGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "all_of", "any_of", "none_of"],
+      "properties": {
+        "kind": { "enum": ["FEATURE", "BASE_DISCOVERY", "PRESERVED_LEGACY", "DEFERRED"] },
+        "all_of": { "$ref": "#/$defs/capabilityIdList" },
+        "any_of": { "$ref": "#/$defs/capabilityIdList" },
+        "none_of": { "$ref": "#/$defs/capabilityIdList" }
+      }
+    },
+    "gateGrammar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_kinds",
+        "capability_ids",
+        "set_semantics",
+        "feature_all_of_empty",
+        "all_of_none_of_intersection",
+        "free_form_operators"
+      ],
+      "properties": {
+        "allowed_kinds": { "const": ["FEATURE", "BASE_DISCOVERY", "PRESERVED_LEGACY", "DEFERRED"] },
+        "capability_ids": { "const": ["ARMED_READY", "FAULT_BITMAPS", "CLEAR_LEVEL_STATUS", "STAGE2G_POLICY", "NORMALIZED_TELEMETRY", "STAGE2E_TRANSACTION_OBSERVABILITY", "POLICY_EVALUATION_IDENTITY"] },
+        "set_semantics": { "const": "CANONICAL_LEXICOGRAPHIC_UNIQUE_IDS" },
+        "feature_all_of_empty": { "const": "FORBIDDEN" },
+        "all_of_none_of_intersection": { "const": "FORBIDDEN" },
+        "free_form_operators": { "const": "FORBIDDEN" }
+      }
+    },
+    "fieldGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "target", "gate"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^FIELD_[A-Z0-9_]+$" },
+        "target": { "type": "string", "pattern": "^[A-Za-z0-9_]+\\.[A-Za-z0-9_]+$" },
+        "gate": { "$ref": "#/$defs/capabilityGate" }
+      }
+    },
+    "apiGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "api", "gate"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^API_[A-Z0-9_]+$" },
+        "api": { "type": "string", "pattern": "^[a-z][a-z0-9_]+\\(\\)$" },
+        "gate": { "$ref": "#/$defs/capabilityGate" }
+      }
+    },
+    "exactFieldEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "rtl_binding_id", "conformance_family"],
+      "properties": {
+        "target": { "type": "string", "pattern": "^[A-Za-z0-9_]+\\.[A-Za-z0-9_]+$" },
+        "rtl_binding_id": { "type": "string", "pattern": "^RTL_[A-Z0-9_]+$" },
+        "conformance_family": { "type": "string", "pattern": "^CF_[A-Z0-9_]+$" }
+      }
+    },
+    "capabilityDependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "bit",
+        "capability_field",
+        "required_field_edges",
+        "required_api_gate_refs",
+        "required_metadata_constraints",
+        "software_visible_meaning",
+        "implementation_evidence",
+        "legacy_state",
+        "absent_behavior",
+        "advertisement_value",
+        "advertisement_gate"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^CAPABILITY_[A-Z0-9_]+$" },
+        "name": { "$ref": "#/$defs/capabilityId" },
+        "bit": { "type": "integer", "minimum": 0, "maximum": 6 },
+        "capability_field": { "type": "string", "pattern": "^CAPABILITIES_0\\.[A-Z0-9_]+$" },
+        "required_field_edges": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/exactFieldEdge" }
+        },
+        "required_api_gate_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^API_[A-Z0-9_]+$" }
+        },
+        "required_metadata_constraints": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" }
+        },
+        "software_visible_meaning": { "type": "string", "minLength": 1 },
+        "implementation_evidence": { "type": "string", "minLength": 1 },
+        "legacy_state": { "type": "string", "minLength": 1 },
+        "absent_behavior": { "type": "string", "minLength": 1 },
+        "advertisement_value": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "advertisement_gate": { "type": "string", "minLength": 1 }
+      }
+    },
+    "equivalenceGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "members"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "members": { "$ref": "#/$defs/capabilityIdList" }
+      }
+    },
+    "implicationEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "requires"],
+      "properties": {
+        "from": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "requires": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" }
+      }
+    },
+    "capabilityVectorValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ARMED_READY", "FAULT_BITMAPS", "CLEAR_LEVEL_STATUS", "STAGE2G_POLICY", "NORMALIZED_TELEMETRY", "STAGE2E_TRANSACTION_OBSERVABILITY", "POLICY_EVALUATION_IDENTITY"],
+      "properties": {
+        "ARMED_READY": { "type": "boolean" },
+        "FAULT_BITMAPS": { "type": "boolean" },
+        "CLEAR_LEVEL_STATUS": { "type": "boolean" },
+        "STAGE2G_POLICY": { "type": "boolean" },
+        "NORMALIZED_TELEMETRY": { "type": "boolean" },
+        "STAGE2E_TRANSACTION_OBSERVABILITY": { "type": "boolean" },
+        "POLICY_EVALUATION_IDENTITY": { "type": "boolean" }
+      }
+    },
+    "capabilityValidationVector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "values"],
+      "properties": {
+        "id": { "enum": ["ABI_1_1_DEFAULT", "FAULT_BITMAPS_MINIMAL", "POLICY_IDENTITY_MINIMAL", "NO_ADDITIVE_FEATURES"] },
+        "values": { "$ref": "#/$defs/capabilityVectorValues" }
+      }
+    },
+    "capabilityImplicationGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cycle_authority", "equivalence_groups", "implications", "forbidden_capabilities", "independent_capabilities", "validation_vectors"],
+      "properties": {
+        "cycle_authority": { "const": "COLLAPSED_EQUIVALENCE_DAG" },
+        "equivalence_groups": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/equivalenceGroup" }
+        },
+        "implications": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/implicationEdge" }
+        },
+        "forbidden_capabilities": { "$ref": "#/$defs/capabilityIdList" },
+        "independent_capabilities": { "$ref": "#/$defs/capabilityIdList" },
+        "validation_vectors": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/capabilityValidationVector" }
+        }
+      }
+    },
+    "capabilityDependencyMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverage_authority", "gate_grammar", "field_gates", "api_gates", "implication_graph", "capabilities"],
+      "properties": {
+        "coverage_authority": { "const": "SOLE_EDITABLE_CAPABILITY_DEPENDENCY_AUTHORITY" },
+        "gate_grammar": { "$ref": "#/$defs/gateGrammar" },
+        "field_gates": {
+          "type": "array",
+          "minItems": 43,
+          "maxItems": 43,
+          "items": { "$ref": "#/$defs/fieldGate" }
+        },
+        "api_gates": {
+          "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
+          "items": { "$ref": "#/$defs/apiGate" }
+        },
+        "implication_graph": { "$ref": "#/$defs/capabilityImplicationGraph" },
+        "capabilities": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": { "$ref": "#/$defs/capabilityDependency" }
+        }
+      }
+    },
+    "metadataRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "minimum", "maximum"],
+      "properties": {
+        "field": { "type": "string", "minLength": 1 },
+        "minimum": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "maximum": { "type": "integer", "minimum": 1, "maximum": 32 }
+      }
+    },
+    "metadataRequiredValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "required_value"],
+      "properties": {
+        "field": { "type": "string", "minLength": 1 },
+        "required_value": { "type": "integer", "minimum": 0, "maximum": 32 }
+      }
+    },
+    "capabilityMetadataConstraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "constraint_ids",
+        "fault_bitmap_width",
+        "implemented_sequence_width",
+        "minimum_sequence_width",
+        "maximum_sequence_width",
+        "width_ordering",
+        "normalized_telemetry",
+        "reserved_capabilities_0",
+        "reserved_zero_policy",
+        "supported_major_higher_minor",
+        "unknown_capability_bits",
+        "known_feature_gate",
+        "malformed_explicit_capability_metadata"
+      ],
+      "properties": {
+        "constraint_ids": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "fault_bitmap_width": { "$ref": "#/$defs/metadataRange" },
+        "implemented_sequence_width": { "$ref": "#/$defs/metadataRange" },
+        "minimum_sequence_width": { "$ref": "#/$defs/metadataRequiredValue" },
+        "maximum_sequence_width": { "$ref": "#/$defs/metadataRequiredValue" },
+        "width_ordering": { "const": "MIN_LE_IMPLEMENTED_LE_MAX" },
+        "normalized_telemetry": { "$ref": "#/$defs/metadataRequiredValue" },
+        "reserved_capabilities_0": { "$ref": "#/$defs/metadataRequiredValue" },
+        "reserved_zero_policy": { "const": "ABI_MINOR_1_REQUIRES_ZERO_HIGHER_MINOR_NEWLY_DEFINED_UNKNOWN_BITS_ARE_IGNORED" },
+        "supported_major_higher_minor": { "const": "ACCEPT_KNOWN_PREFIX_IGNORE_UNKNOWN_CAPABILITY_BITS_USE_ONLY_VALIDATED_KNOWN_FEATURES" },
+        "unknown_capability_bits": { "const": "IGNORE" },
+        "known_feature_gate": { "const": "BIT_SET_AND_ALL_REGISTER_FIELD_BINDING_CONFORMANCE_API_AND_METADATA_DEPENDENCIES_VALID" },
+        "malformed_explicit_capability_metadata": { "const": "REJECT_INCOMPATIBLE" }
+      }
+    },
+    "stage2eValidity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "magic_bits_31_24",
+        "observability_version_bits_7_0",
+        "atomic_snapshot_bit_23",
+        "eventually_consistent_bit_22",
+        "sticky_w1c_bit_21",
+        "counters_reset_only_bit_20",
+        "counter_width_bits_19_14",
+        "sequence_width_bits_13_8"
+      ],
+      "properties": {
+        "magic_bits_31_24": { "const": "0xE2" },
+        "observability_version_bits_7_0": { "const": 1 },
+        "atomic_snapshot_bit_23": { "const": 0 },
+        "eventually_consistent_bit_22": { "const": 1 },
+        "sticky_w1c_bit_21": { "const": 1 },
+        "counters_reset_only_bit_20": { "const": 1 },
+        "counter_width_bits_19_14": { "const": 32 },
+        "sequence_width_bits_13_8": { "const": "PRESERVE_DISCOVERED_16_TO_32" }
+      }
+    },
+    "validStage2eResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "explicit_discovery",
+        "abi_version_known",
+        "stage2e_transaction_observability",
+        "sequence_width",
+        "stage2g_policy",
+        "normalized_telemetry",
+        "all_other_additive_features"
+      ],
+      "properties": {
+        "explicit_discovery": { "const": false },
+        "abi_version_known": { "const": false },
+        "stage2e_transaction_observability": { "const": "PRESENT" },
+        "sequence_width": { "const": "PRESENT_DISCOVERED_VALUE" },
+        "stage2g_policy": { "const": "UNKNOWN" },
+        "normalized_telemetry": { "const": "NOT_PUBLICLY_EXPOSED" },
+        "all_other_additive_features": { "const": "UNKNOWN" }
+      }
+    },
+    "legacyCapabilityDiscovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability_model",
+        "historical_pre_stage2e_hardware_supported_by_new_software",
+        "trigger",
+        "probe_register",
+        "probe_offset",
+        "stage2e_validity",
+        "valid_stage2e_result",
+        "zero_obs_capability_result",
+        "bad_nonzero_obs_capability_result",
+        "stage2g_policy",
+        "fail_closed_condition",
+        "all_capabilities_false_fallback"
+      ],
+      "properties": {
+        "capability_model": { "const": ["PRESENT", "ABSENT", "UNKNOWN"] },
+        "historical_pre_stage2e_hardware_supported_by_new_software": { "const": false },
+        "trigger": { "const": "REGISTER_MAP_VERSION_EQUALS_ZERO" },
+        "probe_register": { "const": "OBS_CAPABILITY" },
+        "probe_offset": { "const": "0x28" },
+        "stage2e_validity": { "$ref": "#/$defs/stage2eValidity" },
+        "valid_stage2e_result": { "$ref": "#/$defs/validStage2eResult" },
+        "zero_obs_capability_result": { "const": "INCOMPATIBLE_UNSUPPORTED_PRE_STAGE2E_OR_UNIDENTIFIED_HARDWARE" },
+        "bad_nonzero_obs_capability_result": { "const": "REJECT_INCOMPATIBLE_OR_WRONG_DEVICE" },
+        "stage2g_policy": { "const": "UNKNOWN_WITHOUT_EXPLICIT_FROZEN_SIGNATURE" },
+        "fail_closed_condition": { "type": "string", "minLength": 1 },
+        "all_capabilities_false_fallback": { "const": "FORBIDDEN" }
+      }
+    },
+    "compatibilityRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "existing_offsets_unchanged",
+        "existing_semantics_unchanged",
+        "old_software_continues",
+        "unknown_registers_ignored",
+        "major_increment_rules",
+        "minor_increment_rules",
+        "constant_naming_stability",
+        "deprecation_policy",
+        "reserved_bit_write_rule",
+        "legacy_discovery"
+      ],
+      "properties": {
+        "existing_offsets_unchanged": { "const": true },
+        "existing_semantics_unchanged": { "const": true },
+        "old_software_continues": { "const": true },
+        "unknown_registers_ignored": { "const": true },
+        "major_increment_rules": {
+          "type": "array",
+          "minItems": 5,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "minor_increment_rules": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "constant_naming_stability": { "type": "string", "minLength": 1 },
+        "deprecation_policy": { "type": "string", "minLength": 1 },
+        "reserved_bit_write_rule": { "const": "SOFTWARE_WRITES_ZERO_HARDWARE_IGNORES" },
+        "legacy_discovery": { "const": "ZERO_VERSION_PROBES_OBS_CAPABILITY_BAD_NONZERO_VERSION_MAGIC_REJECTED" }
+      }
+    },
+    "generatorArchitecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation_status",
+        "input_spec",
+        "schema_validation",
+        "semantic_validation",
+        "canonical_ordering",
+        "output_encoding",
+        "generated_headers",
+        "spec_hash",
+        "output_hashes",
+        "incremental_behavior",
+        "failure_behavior",
+        "rtl_strategy",
+        "ci_drift_check",
+        "behavior_binding_validation",
+        "conformance_coverage_validation"
+      ],
+      "properties": {
+        "implementation_status": { "const": "PROPOSED_NOT_IMPLEMENTED" },
+        "input_spec": { "const": "spec/register_map.json" },
+        "schema_validation": { "const": "STRICT_DRAFT_2020_12_DUPLICATE_KEYS_REJECTED" },
+        "semantic_validation": { "type": "string", "minLength": 1 },
+        "canonical_ordering": { "const": "OFFSET_ASCENDING_FIELD_LSB_ASCENDING_NAME_TIEBREAK" },
+        "output_encoding": { "const": "UTF8_LF_FINAL_NEWLINE_NO_TIMESTAMPS_NO_ABSOLUTE_PATHS" },
+        "generated_headers": { "type": "string", "minLength": 1 },
+        "spec_hash": { "const": "SHA256_CANONICAL_JSON" },
+        "output_hashes": { "const": "RECORDED_IN_COMPATIBILITY_MANIFEST" },
+        "incremental_behavior": { "const": "NO_REWRITE_WHEN_BYTES_IDENTICAL" },
+        "failure_behavior": { "const": "ATOMIC_STAGING_NO_PARTIAL_OUTPUT" },
+        "rtl_strategy": { "const": "GENERATED_PACKAGE_INCLUDE_PLUS_HANDWRITTEN_BEHAVIOR" },
+        "ci_drift_check": { "const": "REGENERATE_TEMP_COMPARE_BYTE_FOR_BYTE" },
+        "behavior_binding_validation": { "const": "FAIL_UNCONSUMED_BEHAVIOR_ID_OR_UNDECLARED_RTL_BINDING" },
+        "conformance_coverage_validation": { "const": "FAIL_SPEC_FIELD_WITHOUT_SPEC_DERIVED_VECTOR" }
+      }
+    },
+    "conformanceInvariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "every_public_field_has_one_behavior_id",
+        "every_behavior_id_has_rtl_binding",
+        "every_binding_has_spec_generated_tests"
+      ],
+      "properties": {
+        "every_public_field_has_one_behavior_id": { "const": true },
+        "every_behavior_id_has_rtl_binding": { "const": true },
+        "every_binding_has_spec_generated_tests": { "const": true }
+      }
+    },
+    "generatedConformanceArchitecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_status", "implementation_status", "input_spec",
+        "generated_artifact", "approach", "generic_runner",
+        "generic_runner_status", "manual_directed_tests",
+        "manual_expected_values", "derived_expectations",
+        "required_invariants", "generator_failures",
+        "constants_only_freshness_is_sufficient"
+      ],
+      "properties": {
+        "decision_status": { "const": "APPROVED" },
+        "implementation_status": { "const": "PROPOSED_NOT_IMPLEMENTED" },
+        "input_spec": { "const": "spec/register_map.json" },
+        "generated_artifact": { "const": "spec/generated/protection_register_map_conformance.json" },
+        "approach": { "const": "FINITE_PROJECT_SPECIFIC_TEMPLATES" },
+        "generic_runner": { "const": "REJECTED_OVERENGINEERING" },
+        "generic_runner_status": { "const": "NOT_REQUIRED" },
+        "manual_directed_tests": { "const": "ALLOWED_WHEN_CONSTANTS_AND_EXPECTATIONS_DERIVE_FROM_REGISTER_MAP_AUTHORITY" },
+        "manual_expected_values": { "const": "ALLOWED_ONLY_WHEN_DERIVED_FROM_REGISTER_MAP_AUTHORITY" },
+        "derived_expectations": { "type": "array", "minItems": 9, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "required_invariants": { "$ref": "#/$defs/conformanceInvariants" },
+        "generator_failures": { "type": "array", "minItems": 4, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "constants_only_freshness_is_sufficient": { "const": false }
+      }
+    },
+    "finiteTemplateDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["template_id", "scope", "deterministic_vectors", "authority_inputs"],
+      "properties": {
+        "template_id": { "enum": ["RO_STATIC", "RO_STATE_DECODE", "RO_LEVEL", "RO_BITMAP", "RO_EVENT_CAPTURE", "FAULT_PROJECTION", "FAULT_FORWARD_COMPATIBILITY"] },
+        "scope": { "enum": ["SELECTED_FIELDS", "PROJECT_CONTRACT"] },
+        "deterministic_vectors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z0-9_]+$" } },
+        "authority_inputs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z0-9_]+$" } }
+      }
+    },
+    "selectedFieldTemplateGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["template_id", "field_refs"],
+      "properties": {
+        "template_id": { "enum": ["RO_STATIC", "RO_STATE_DECODE", "RO_LEVEL", "RO_BITMAP", "RO_EVENT_CAPTURE"] },
+        "field_refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z0-9_]+\\.[A-Z0-9_]+$" } }
+      }
+    },
+    "selectedFamilyRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family_id", "template_ids"],
+      "properties": {
+        "family_id": { "type": "string", "pattern": "^CF_[A-Z0-9_]+$" },
+        "template_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["RO_STATIC", "RO_STATE_DECODE", "RO_LEVEL", "RO_BITMAP", "RO_EVENT_CAPTURE", "FAULT_PROJECTION"] } }
+      }
+    },
+    "projectContractBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["template_id", "authority_ref"],
+      "properties": {
+        "template_id": { "enum": ["FAULT_PROJECTION", "FAULT_FORWARD_COMPATIBILITY"] },
+        "authority_ref": { "enum": ["fault_taxonomy.compatibility_projection", "unknown_fault_cause_forward_compatibility"] }
+      }
+    },
+    "conformanceScenarioDefinitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "authority", "generated_artifact", "approach",
+        "generic_dsl", "template_definitions", "selected_field_groups",
+        "selected_family_routes", "legacy_directed_family_ids",
+        "project_contract_bindings", "opaque_targets_or_values",
+        "future_generated_artifact_derives_templates"
+      ],
+      "properties": {
+        "schema_version": { "const": "FINITE_CONFORMANCE_TEMPLATES_V1" },
+        "authority": { "const": "FINITE_PROJECT_SPECIFIC_TEMPLATES_FROM_REGISTER_MAP_AUTHORITY" },
+        "generated_artifact": { "const": "spec/generated/protection_register_map_conformance.json" },
+        "approach": { "const": "FINITE_PROJECT_SPECIFIC_TEMPLATES" },
+        "generic_dsl": { "const": "REJECTED_OVERENGINEERING" },
+        "template_definitions": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/finiteTemplateDefinition" } },
+        "selected_field_groups": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/selectedFieldTemplateGroup" } },
+        "selected_family_routes": { "type": "array", "minItems": 7, "maxItems": 7, "items": { "$ref": "#/$defs/selectedFamilyRoute" } },
+        "legacy_directed_family_ids": { "type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": { "type": "string", "pattern": "^CF_[A-Z0-9_]+$" } },
+        "project_contract_bindings": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/projectContractBinding" } },
+        "opaque_targets_or_values": { "const": "NOT_PRESENT" },
+        "future_generated_artifact_derives_templates": { "const": true }
+      }
+    },
+    "astMigration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "legacy_schema",
+        "legacy_sha256",
+        "legacy_python",
+        "new_schema",
+        "new_sha256",
+        "classification"
+      ],
+      "properties": {
+        "legacy_schema": { "const": "stage2g-frozen-base-fingerprints-v1" },
+        "legacy_sha256": { "pattern": "^[0-9a-f]{64}$" },
+        "legacy_python": { "type": "string", "minLength": 1 },
+        "new_schema": { "const": "stage2h-python-semantic-ast-v1" },
+        "new_sha256": { "pattern": "^[0-9a-f]{64}$" },
+        "classification": { "const": "RECORDED_SCHEMA_MIGRATION_NO_SEMANTIC_CHANGE" }
+      }
+    },
+    "astPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority",
+        "interpreter_default_ast_dump_authority",
+        "serializer_schema",
+        "canonical_algorithm",
+        "unknown_node_behavior",
+        "authoritative_hash",
+        "diagnostic_source_hash",
+        "whitespace_comment_policy",
+        "local_variable_rename_policy",
+        "supported_python",
+        "validated_python",
+        "cross_version_requirement",
+        "migration",
+        "failure_classification"
+      ],
+      "properties": {
+        "authority": { "const": "CANONICAL_REPOSITORY_OWNED_REPRESENTATION" },
+        "interpreter_default_ast_dump_authority": { "const": false },
+        "serializer_schema": { "const": "stage2h-python-semantic-ast-v1" },
+        "canonical_algorithm": { "type": "string", "minLength": 1 },
+        "unknown_node_behavior": { "const": "FAIL_CLOSED_SCHEMA_MIGRATION_REQUIRED" },
+        "authoritative_hash": { "pattern": "^[0-9a-f]{64}$" },
+        "diagnostic_source_hash": { "pattern": "^[0-9a-f]{64}$" },
+        "whitespace_comment_policy": { "const": "CANONICAL_MATCH_SOURCE_HASH_DIAGNOSTIC_CHANGE" },
+        "local_variable_rename_policy": { "const": "SEMANTICALLY_SIGNIFICANT_MISMATCH" },
+        "supported_python": { "const": "CPYTHON_3_11_THROUGH_3_14" },
+        "validated_python": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "cross_version_requirement": { "const": "ONE_3_13_PLUS_AND_ONE_OLDER_SUPPORTED" },
+        "migration": { "$ref": "#/$defs/astMigration" },
+        "failure_classification": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "toolingReplayPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_tests_depend_on_external_launcher_names",
+        "interpreter_command_sources",
+        "platform_launcher_hardcoded",
+        "command_parser",
+        "missing_interpreter_behavior",
+        "unit_test_integration_behavior",
+        "archive_unit_test_git_scope_check",
+        "real_checkout_git_scope_test",
+        "windows_to_wsl_path_conversion",
+        "archive_stage2h_unit_tests_required",
+        "source_archive_replay_tool",
+        "source_archive_unit_tests",
+        "required_platforms",
+        "integration_requirement",
+        "recorded_interpreter_identity",
+        "repository_fallback"
+      ],
+      "properties": {
+        "unit_tests_depend_on_external_launcher_names": { "const": false },
+        "interpreter_command_sources": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "platform_launcher_hardcoded": { "const": false },
+        "command_parser": { "const": "shlex with platform-aware tokenization" },
+        "missing_interpreter_behavior": { "const": "NAMED_CROSS_VERSION_INTERPRETER_UNAVAILABLE_GATE_FAILURE" },
+        "unit_test_integration_behavior": { "const": "EXPLICIT_SKIP_WITHOUT_EXTERNAL_INTERPRETERS" },
+        "archive_unit_test_git_scope_check": { "const": false },
+        "real_checkout_git_scope_test": { "const": "REQUIRED_WITH_ARCHIVE_SKIP" },
+        "windows_to_wsl_path_conversion": { "const": "PURE_WINDOWS_PATH_DIRECT_NO_HOST_RESOLVE" },
+        "archive_stage2h_unit_tests_required": { "const": true },
+        "source_archive_replay_tool": { "const": "tools/replay_stage2h_source_archive.py" },
+        "source_archive_unit_tests": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "required_platforms": { "const": ["WINDOWS", "LINUX_OR_WSL"] },
+        "integration_requirement": { "const": "TWO_EXPLICIT_SUPPORTED_INTERPRETERS_PER_PLATFORM" },
+        "recorded_interpreter_identity": { "const": ["executable", "full version"] },
+        "repository_fallback": { "const": "FORBIDDEN" }
+      }
+    },
+    "softwareCapabilityObjectContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type_name",
+        "explicit_discovery",
+        "abi_version_known",
+        "abi_major",
+        "abi_minor",
+        "per_feature_state",
+        "legacy_obs_capability_raw",
+        "legacy_obs_capability_valid",
+        "legacy_sequence_width",
+        "incompatibility_reason",
+        "unknown_feature_access"
+      ],
+      "properties": {
+        "type_name": { "const": "RegisterMapCapabilities" },
+        "explicit_discovery": { "const": "BOOLEAN" },
+        "abi_version_known": { "const": "BOOLEAN" },
+        "abi_major": { "const": "OPTIONAL_INTEGER" },
+        "abi_minor": { "const": "OPTIONAL_INTEGER" },
+        "per_feature_state": { "const": ["PRESENT", "ABSENT", "UNKNOWN"] },
+        "legacy_obs_capability_raw": { "const": "OPTIONAL_UINT32" },
+        "legacy_obs_capability_valid": { "const": "BOOLEAN" },
+        "legacy_sequence_width": { "const": "OPTIONAL_PRESENT_VALUE" },
+        "incompatibility_reason": { "const": "OPTIONAL_TYPED_REASON" },
+        "unknown_feature_access": { "const": "RAISE_INDETERMINATE_REGISTER_MAP_FEATURE" }
+      }
+    },
+    "apiPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["api", "decision", "capability_gate_ref", "absent_behavior", "semantics"],
+      "properties": {
+        "api": { "type": "string", "minLength": 1 },
+        "decision": { "enum": ["ADD", "DEFER", "NOT_APPLICABLE", "PRESERVE"] },
+        "capability_gate_ref": { "type": "string", "pattern": "^API_[A-Z0-9_]+$" },
+        "absent_behavior": { "type": "string", "minLength": 1 },
+        "semantics": { "type": "string", "minLength": 1 }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "value", "rationale"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "status": { "$ref": "#/$defs/decisionStatus" },
+        "value": { "type": ["string", "number", "boolean"] },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

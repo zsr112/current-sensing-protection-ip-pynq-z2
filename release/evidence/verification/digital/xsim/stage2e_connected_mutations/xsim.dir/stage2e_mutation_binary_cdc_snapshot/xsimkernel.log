@@ -1,7 +1,0 @@
-Running: xsim.dir/stage2e_mutation_binary_cdc_snapshot/xsimk.exe -runall -simmode gui -wdb stage2e_mutation_binary_cdc_snapshot.wdb -simrunnum 0 -socket 49317
-Design successfully loaded
-Design Loading Memory Usage: 10896 KB (Peak: 10896 KB)
-Design Loading CPU Usage: 46 ms
-Simulation completed
-Simulation Memory Usage: 11420 KB (Peak: 11420 KB)
-Simulation CPU Usage: 46 ms

@@ -1,0 +1,2 @@
+tb_current_compare_dual PASS
+<EXTERNAL_SOURCE>\tb\tb_current_compare_dual.sv:46: $finish called at 8000 (1ps)

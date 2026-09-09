@@ -1,7 +1,0 @@
-Running: xsim.dir/cdc_event_authority_snapshot/xsimk.exe -runall -simmode gui -wdb cdc_event_authority_snapshot.wdb -simrunnum 0 -socket 63660
-Design successfully loaded
-Design Loading Memory Usage: 15524 KB (Peak: 15524 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 16152 KB (Peak: 16152 KB)
-Simulation CPU Usage: 15 ms

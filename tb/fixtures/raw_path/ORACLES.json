@@ -1,0 +1,17 @@
+{
+  "schema": "csip-frozen-regression-oracles-v1",
+  "files": {
+    "3399e4fdc28f9d4c66cf90cb5c1dc1e386eda6ae": {
+      "path": "tb/fixtures/raw_path/3399e4fdc28f9d4c66cf90cb5c1dc1e386eda6ae.v",
+      "source_path": "rtl/protection_ip_top_async_adc_axi_lite.v",
+      "git_blob": "30e0244b992f755066994b28f22f822224b04e9e",
+      "sha256": "fb1a99de646ffc671ab7db60065d1b4da00bb397b0099e7fd7f051f034a1126f"
+    },
+    "cde94b6cee8bd4423e7cf0e03b35a9596a666dd4": {
+      "path": "tb/fixtures/raw_path/cde94b6cee8bd4423e7cf0e03b35a9596a666dd4.v",
+      "source_path": "rtl/protection_ip_top_async_adc_axi_lite.v",
+      "git_blob": "6fb4a686effb6ac33f9f25d2906a317a3a5fcc83",
+      "sha256": "a544599cd74ea884c63dd5a2af04a0a0c11d80cda23190fd9cb92b403eabce69"
+    }
+  }
+}

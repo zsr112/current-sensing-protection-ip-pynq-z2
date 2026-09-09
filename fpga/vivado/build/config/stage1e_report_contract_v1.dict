@@ -1,0 +1,373 @@
+schema_version stage1e-production-report-contract-v1
+contract_state PRODUCTION_CANDIDATE_REVIEW_REQUIRED
+vivado_version 2024.1
+qualification_state ACTUAL_VIVADO_REPORT_COMMANDS_NOT_QUALIFIED
+role_order {
+    IMPLEMENTATION_RUN_STEP_STATUS
+    EFFECTIVE_GRAPH_READBACK
+    VIVADO_NATIVE_LOG
+    VIVADO_JOURNAL
+    HOST_PROCESS_EVIDENCE
+    FORBIDDEN_OPERATION_SCAN
+    DOWNSTREAM_OUTPUT_SCAN
+    TIMING_SUMMARY
+    TIMING_PATH_GROUPS
+    CLOCK_INTERACTION
+    CLOCKS_GENERATED_CLOCKS
+    CONSTRAINT_COVERAGE
+    CHECK_TIMING
+    TIMING_EXCEPTION_SOURCE
+    CONDITIONAL_BUS_SKEW
+    UTILIZATION
+    DRC
+    METHODOLOGY
+    CDC
+    MESSAGE_SOURCE
+}
+role_fields {
+    ordinal acquisition_owner requirement_state command_facade_role
+    command_name ordered_options valid_entry_modes valid_design_states
+    output_path_role zero_byte_rule format_profile
+    continuation_dependencies parser_outputs missing_failure_action
+    identity_state_requirement authority_boundary condition_owner
+    qualification_state
+}
+roles {
+    IMPLEMENTATION_RUN_STEP_STATUS {
+        ordinal 1 acquisition_owner RUNNER_OBSERVER
+        requirement_state ADOPTED_REQUIRED command_facade_role NONE
+        command_name NONE ordered_options {}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {ANY_CURRENT_C_HANDOFF_STATE}
+        output_path_role ADOPTED_OPERATION_LEDGER zero_byte_rule NOT_APPLICABLE
+        format_profile STRUCTURAL_C_OPERATION_LEDGER_V1
+        continuation_dependencies {}
+        parser_outputs {EVIDENCE_SET_INVENTORY}
+        missing_failure_action EVIDENCE_INCOMPLETE
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state STRUCTURAL_CONTRACT_CURRENT
+    }
+    EFFECTIVE_GRAPH_READBACK {
+        ordinal 2 acquisition_owner VIVADO_CAPABILITY_OBSERVER
+        requirement_state ADOPTED_REQUIRED command_facade_role NONE
+        command_name NONE ordered_options {}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {ANY_CURRENT_C_HANDOFF_STATE}
+        output_path_role ADOPTED_EFFECTIVE_GRAPH zero_byte_rule NOT_APPLICABLE
+        format_profile STRUCTURAL_C_OBSERVER_SNAPSHOT_V1
+        continuation_dependencies {}
+        parser_outputs {EVIDENCE_SET_INVENTORY}
+        missing_failure_action EVIDENCE_INCOMPLETE
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state STRUCTURAL_CONTRACT_CURRENT
+    }
+    VIVADO_NATIVE_LOG {
+        ordinal 3 acquisition_owner HOST_VIVADO_PRODUCER
+        requirement_state ADOPTED_REQUIRED command_facade_role NONE
+        command_name NONE ordered_options {}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {ANY_CURRENT_C_HANDOFF_STATE}
+        output_path_role ADOPTED_VIVADO_LOG zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-native-log-profile-v1
+        continuation_dependencies {}
+        parser_outputs {MESSAGE_INVENTORY}
+        missing_failure_action EVIDENCE_INCOMPLETE
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    VIVADO_JOURNAL {
+        ordinal 4 acquisition_owner HOST_VIVADO_PRODUCER
+        requirement_state ADOPTED_REQUIRED command_facade_role NONE
+        command_name NONE ordered_options {}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {ANY_CURRENT_C_HANDOFF_STATE}
+        output_path_role ADOPTED_VIVADO_JOURNAL zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-journal-profile-v1
+        continuation_dependencies {}
+        parser_outputs {FORBIDDEN_OPERATION_SCAN}
+        missing_failure_action EVIDENCE_INCOMPLETE
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    HOST_PROCESS_EVIDENCE {
+        ordinal 5 acquisition_owner HOST_PLANE
+        requirement_state ADOPTED_REQUIRED command_facade_role NONE
+        command_name NONE ordered_options {}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {ANY_CURRENT_C_HANDOFF_STATE}
+        output_path_role ADOPTED_HOST_COMPONENT_RESULT
+        zero_byte_rule NOT_APPLICABLE
+        format_profile STRUCTURAL_HOST_COMPONENT_RESULT_V1
+        continuation_dependencies {}
+        parser_outputs {EVIDENCE_SET_INVENTORY}
+        missing_failure_action EXPLICIT_DISCONNECTED_STATE_ALLOWED
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state STRUCTURAL_CONTRACT_CURRENT
+    }
+    FORBIDDEN_OPERATION_SCAN {
+        ordinal 6 acquisition_owner EVIDENCE_CONTROLLER_SCANNER
+        requirement_state ADOPTED_REQUIRED command_facade_role NONE
+        command_name NONE ordered_options {}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {ANY_CURRENT_C_HANDOFF_STATE}
+        output_path_role ADOPTED_FORBIDDEN_OPERATION_SCAN
+        zero_byte_rule NOT_APPLICABLE
+        format_profile STRUCTURAL_FORBIDDEN_OPERATION_SCAN_V1
+        continuation_dependencies {}
+        parser_outputs {EVIDENCE_SET_INVENTORY}
+        missing_failure_action EVIDENCE_INCOMPLETE
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state STRUCTURAL_CONTRACT_CURRENT
+    }
+    DOWNSTREAM_OUTPUT_SCAN {
+        ordinal 7 acquisition_owner HOST_CONTROLLER_SCANNER
+        requirement_state ADOPTED_REQUIRED command_facade_role NONE
+        command_name NONE ordered_options {}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {ANY_CURRENT_C_HANDOFF_STATE}
+        output_path_role ADOPTED_DOWNSTREAM_OUTPUT_SCAN
+        zero_byte_rule NOT_APPLICABLE
+        format_profile STRUCTURAL_DOWNSTREAM_OUTPUT_SCAN_V1
+        continuation_dependencies {}
+        parser_outputs {EVIDENCE_SET_INVENTORY}
+        missing_failure_action EVIDENCE_INCOMPLETE
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state STRUCTURAL_CONTRACT_CURRENT
+    }
+    TIMING_SUMMARY {
+        ordinal 8 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role TIMING_SUMMARY
+        command_name report_timing_summary
+        ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_TIMING_SUMMARY zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-timing-summary-profile-v1
+        continuation_dependencies {}
+        parser_outputs {TIMING_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    TIMING_PATH_GROUPS {
+        ordinal 9 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role TIMING_PATH_GROUPS command_name report_timing
+        ordered_options {-max_paths 100 -sort_by group -file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_TIMING_PATH_GROUPS zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-timing-path-groups-profile-v1
+        continuation_dependencies {}
+        parser_outputs {TIMING_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    CLOCK_INTERACTION {
+        ordinal 10 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role CLOCK_INTERACTION
+        command_name report_clock_interaction
+        ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_CLOCK_INTERACTION zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-clock-interaction-profile-v1
+        continuation_dependencies {}
+        parser_outputs {CLOCK_CDC_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    CLOCKS_GENERATED_CLOCKS {
+        ordinal 11 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role CLOCKS_GENERATED_CLOCKS
+        command_name report_clocks ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_CLOCKS zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-clocks-profile-v1
+        continuation_dependencies {}
+        parser_outputs {CLOCK_CDC_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    CONSTRAINT_COVERAGE {
+        ordinal 12 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role CONSTRAINT_COVERAGE
+        command_name report_exceptions
+        ordered_options {-coverage -file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_CONSTRAINT_COVERAGE zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-constraint-coverage-profile-v1
+        continuation_dependencies {}
+        parser_outputs {TIMING_INVENTORY TIMING_EXCEPTION_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    CHECK_TIMING {
+        ordinal 13 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role CHECK_TIMING command_name check_timing
+        ordered_options {-verbose -file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_CHECK_TIMING zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-check-timing-profile-v1
+        continuation_dependencies {}
+        parser_outputs {TIMING_INVENTORY MESSAGE_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    TIMING_EXCEPTION_SOURCE {
+        ordinal 14 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role TIMING_EXCEPTION_SOURCE
+        command_name report_exceptions
+        ordered_options {-all -file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_TIMING_EXCEPTIONS zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-timing-exception-profile-v1
+        continuation_dependencies {}
+        parser_outputs {TIMING_EXCEPTION_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    CONDITIONAL_BUS_SKEW {
+        ordinal 15 acquisition_owner COLLECTOR requirement_state CONDITIONAL
+        command_facade_role CONDITIONAL_BUS_SKEW command_name report_bus_skew
+        ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_BUS_SKEW zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-bus-skew-profile-v1
+        continuation_dependencies {}
+        parser_outputs {TIMING_INVENTORY}
+        missing_failure_action EVIDENCE_INCOMPLETE
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE
+        condition_owner CONTROLLER_CONFIGURATION_INPUT
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    UTILIZATION {
+        ordinal 16 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role UTILIZATION command_name report_utilization
+        ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {OPENED_ROUTED_IMPL_1 QUALIFIED_FAILURE_SAFE_VIEW}
+        output_path_role REPORT_UTILIZATION zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-utilization-profile-v1
+        continuation_dependencies {}
+        parser_outputs {UTILIZATION_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    DRC {
+        ordinal 17 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role DRC command_name report_drc
+        ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {OPENED_ROUTED_IMPL_1 QUALIFIED_FAILURE_SAFE_VIEW}
+        output_path_role REPORT_DRC zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-drc-profile-v1
+        continuation_dependencies {}
+        parser_outputs {DRC_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    METHODOLOGY {
+        ordinal 18 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role METHODOLOGY command_name report_methodology
+        ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {OPENED_ROUTED_IMPL_1 QUALIFIED_FAILURE_SAFE_VIEW}
+        output_path_role REPORT_METHODOLOGY zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-methodology-profile-v1
+        continuation_dependencies {}
+        parser_outputs {METHODOLOGY_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    CDC {
+        ordinal 19 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role CDC command_name report_cdc
+        ordered_options {-details -file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING}
+        valid_design_states {OPENED_ROUTED_IMPL_1}
+        output_path_role REPORT_CDC zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-cdc-profile-v1
+        continuation_dependencies {CLOCKS_GENERATED_CLOCKS}
+        parser_outputs {CLOCK_CDC_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+    MESSAGE_SOURCE {
+        ordinal 20 acquisition_owner COLLECTOR requirement_state REQUIRED
+        command_facade_role MESSAGE_SOURCE command_name report_route_status
+        ordered_options {-file EXACT_OUTPUT_PATH}
+        valid_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+        valid_design_states {OPENED_ROUTED_IMPL_1 QUALIFIED_FAILURE_SAFE_VIEW}
+        output_path_role REPORT_MESSAGE_SOURCE zero_byte_rule PROHIBITED
+        format_profile stage1e-fixture-message-profile-v1
+        continuation_dependencies {}
+        parser_outputs {MESSAGE_INVENTORY}
+        missing_failure_action COLLECTION
+        identity_state_requirement PENDING_IDENTITY_PROVIDER
+        authority_boundary NONE condition_owner NOT_APPLICABLE
+        qualification_state VIVADO_2024_1_FORMAT_QUALIFICATION_REQUIRED
+    }
+}
+conditional_roles {
+    CONDITIONAL_BUS_SKEW {
+        owner CONTROLLER_CONFIGURATION_INPUT
+        states {REQUIRED NOT_REQUIRED CONDITION_UNKNOWN}
+        unknown_action BLOCK
+        collector_inference PROHIBITED
+        parser_inference PROHIBITED
+    }
+}
+attempt_states {
+    NOT_ATTEMPTED STARTED COLLECTED FAILED MISSING BLOCKED
+    UNAVAILABLE_FOR_STATE INTERRUPTED
+}
+continuation_policy {
+    default_retry PROHIBITED
+    same_role_retry PROHIBITED
+    ordinary_failure CONTINUE_INDEPENDENT_SAFE_ROLES
+    integrity_loss STOP_ALL_REMAINING
+    path_containment_loss STOP_ALL_REMAINING
+    deadline_expiry STOP_ALL_REMAINING
+    forbidden_operation STOP_ALL_REMAINING
+    forbidden_boundary STOP_ALL_REMAINING
+}
+authority_boundary {
+    finding_disposition NONE engineering_acceptance NONE
+    implementation_result_candidate NONE identity_issue NONE
+    implementation_mutation NONE artifact NONE publication NONE
+    hardware_manager NONE board NONE
+}

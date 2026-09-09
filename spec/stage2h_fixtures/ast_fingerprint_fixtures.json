@@ -1,0 +1,42 @@
+{
+  "fixture_schema_version": "stage2h-python-semantic-ast-fixtures-v3",
+  "target_function": "recovery_is_verified",
+  "external_launcher_dependency": false,
+  "fixtures": [
+    {
+      "id": "BASELINE",
+      "expect": "BASELINE",
+      "source": "def recovery_is_verified(snapshot):\n    fault_mask = STATUS_FAULT_VALID | STATUS_FAULT_LATCHED\n    return ((snapshot.status & fault_mask) == 0 and snapshot.fault_code == FAULT_NONE and (snapshot.ctrl & CTRL_PWM_ENABLE) == 0)\n"
+    },
+    {
+      "id": "WHITESPACE_COMMENT_ONLY",
+      "expect": "MATCH",
+      "source": "# comment-only change\ndef recovery_is_verified( snapshot ):\n    fault_mask=STATUS_FAULT_VALID|STATUS_FAULT_LATCHED  # same expression\n    return (\n        (snapshot.status & fault_mask) == 0\n        and snapshot.fault_code == FAULT_NONE\n        and (snapshot.ctrl & CTRL_PWM_ENABLE) == 0\n    )\n"
+    },
+    {
+      "id": "RENAMED_LOCAL_VARIABLE",
+      "expect": "MISMATCH",
+      "source": "def recovery_is_verified(snapshot):\n    combined_fault_mask = STATUS_FAULT_VALID | STATUS_FAULT_LATCHED\n    return ((snapshot.status & combined_fault_mask) == 0 and snapshot.fault_code == FAULT_NONE and (snapshot.ctrl & CTRL_PWM_ENABLE) == 0)\n"
+    },
+    {
+      "id": "CHANGED_CONSTANT",
+      "expect": "MISMATCH",
+      "source": "def recovery_is_verified(snapshot):\n    fault_mask = STATUS_FAULT_VALID | STATUS_FAULT_LATCHED\n    return ((snapshot.status & fault_mask) == 1 and snapshot.fault_code == FAULT_NONE and (snapshot.ctrl & CTRL_PWM_ENABLE) == 0)\n"
+    },
+    {
+      "id": "CHANGED_OPERATOR",
+      "expect": "MISMATCH",
+      "source": "def recovery_is_verified(snapshot):\n    fault_mask = STATUS_FAULT_VALID ^ STATUS_FAULT_LATCHED\n    return ((snapshot.status & fault_mask) == 0 and snapshot.fault_code == FAULT_NONE and (snapshot.ctrl & CTRL_PWM_ENABLE) == 0)\n"
+    },
+    {
+      "id": "CHANGED_CALL",
+      "expect": "MISMATCH",
+      "source": "def recovery_is_verified(snapshot):\n    fault_mask = STATUS_FAULT_VALID | STATUS_FAULT_LATCHED\n    return bool((snapshot.status & fault_mask) == 0 and snapshot.fault_code == FAULT_NONE and (snapshot.ctrl & CTRL_PWM_ENABLE) == 0)\n"
+    },
+    {
+      "id": "REDEFINED_AS_STARTUP_READY",
+      "expect": "MISMATCH",
+      "source": "def recovery_is_verified(snapshot):\n    return snapshot.armed_ready\n"
+    }
+  ]
+}

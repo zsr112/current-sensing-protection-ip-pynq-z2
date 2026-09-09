@@ -1,0 +1,15 @@
+CORE_MATRIX contract: comparator and sensor health consume one accepted sample transaction
+CORE_MATRIX contract: FSM latches the first visible fault_code until clear/reset
+PL_RESPONSE_LATENCY_CYCLES=4
+Q-SIM-02 source removed, no clear
+Q-SIM-02 current implementation characterization: two moving valid samples drive visible stuck-source removal
+Q-SIM-03/Q-SIM-10 moving-source recovery with clear-only and PWM disabled
+Q-SIM-03/Q-SIM-10 current implementation characterization: two moving valid samples drive visible stuck-source removal
+Q-SIM-04 clear while live, then remove the moving-source fault
+Q-SIM-04 current implementation characterization: two moving valid samples drive visible stuck-source removal
+Q-SIM-05 accepted-transaction reassertion at early, candidate-final, and post-completion boundaries
+Q-SIM-15 simultaneous source transition and direct clear alignment
+Q-SIM-16 RTL reset path versus moving-source recovery plus clear
+Q-SIM-16 normal recovery current implementation characterization: two moving valid samples drive visible stuck-source removal
+tb_protection_core_top PASS
+<EXTERNAL_SOURCE>\tb\tb_protection_core_top.sv:782: $finish called at 7696000 (1ps)

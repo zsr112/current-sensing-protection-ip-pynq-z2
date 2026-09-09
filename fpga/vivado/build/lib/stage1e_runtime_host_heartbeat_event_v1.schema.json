@@ -1,0 +1,22 @@
+{
+  "$schema": "stage1e-schema-subset-v1",
+  "$id": "stage1e-runtime-host-heartbeat-event-v1",
+  "title": "Stage 1E non-authoritative host heartbeat event v1",
+  "type": "object",
+  "required": ["schema_version", "execution_id", "attempt_id", "sequence", "emitter_role", "emitter_pid", "event_class", "phase", "emitter_time_utc", "telemetry_authority", "authority_boundary"],
+  "additionalProperties": false,
+  "x-stage1e-canonical-order": ["schema_version", "execution_id", "attempt_id", "sequence", "emitter_role", "emitter_pid", "event_class", "phase", "emitter_time_utc", "telemetry_authority", "authority_boundary"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "stage1e-runtime-host-heartbeat-event-v1"},
+    "execution_id": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+    "attempt_id": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+    "sequence": {"type": "integer", "minimum": 1, "maximum": 2147483647},
+    "emitter_role": {"type": "string", "const": "ROOT_PROCESS"},
+    "emitter_pid": {"type": "integer", "minimum": 1, "maximum": 4294967295},
+    "event_class": {"type": "string", "enum": ["STARTUP", "HEARTBEAT", "PHASE_TRANSITION", "SHUTDOWN"]},
+    "phase": {"type": "string", "enum": ["HOST_FIXTURE", "VIVADO_PREFLIGHT", "OPT_DESIGN", "PLACE_DESIGN", "ROUTE_DESIGN", "REPORT_COLLECTION", "TERMINAL"]},
+    "emitter_time_utc": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+    "telemetry_authority": {"type": "string", "const": "NONE"},
+    "authority_boundary": {"$ref": "stage1e-runtime-host-common-v1#/$defs/authority_boundary"}
+  }
+}

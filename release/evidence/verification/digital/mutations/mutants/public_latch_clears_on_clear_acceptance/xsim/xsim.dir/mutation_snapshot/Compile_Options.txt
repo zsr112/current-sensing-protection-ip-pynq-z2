@@ -1,1 +1,0 @@
-"work.tb_stage2g_production_path" -s "mutation_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\mutations\mutants\public_latch_clears_on_clear_acceptance\xsim\xelab.log" 

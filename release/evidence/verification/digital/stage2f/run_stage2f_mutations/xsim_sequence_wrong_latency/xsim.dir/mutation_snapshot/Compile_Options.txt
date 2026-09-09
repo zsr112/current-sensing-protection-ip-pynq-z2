@@ -1,1 +1,0 @@
-"work.tb_stage2f_mutation" -s "mutation_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\stage2f\run_stage2f_mutations\xsim_sequence_wrong_latency\xelab.log" 

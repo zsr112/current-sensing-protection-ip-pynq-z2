@@ -1,0 +1,124 @@
+{
+  "schema_version": "stage2f-closure-boundary-v2",
+  "frozen_gap": "ADC_ENCODING_AND_PHYSICAL_SCALING",
+  "remaining_contract_gaps": 2,
+  "digital_foundation_scope": "EXPLICIT_ENCODING_AND_SIGNED_CODE_NORMALIZATION",
+  "physical_closure_scope": "SOURCE_SPECIFIC_CODE_TO_CURRENT_SCALING_AND_CALIBRATION_AUTHORITY",
+  "digital_foundation_closes_frozen_stage2f_gap": false,
+  "physical_scaling_status": "BLOCKED_EXTERNAL_HARDWARE_FACTS",
+  "physical_closure_prerequisite": "APPROVED_ADC_AFE_SENSOR_PROFILE_OR_OWNER_APPROVED_SCOPE_CHANGE",
+  "stage2_digital_foundation_requires_production_adc_selection": false,
+  "stage2_digital_foundation_can_freeze_with_unconfigured_production_profile": true,
+  "stage2_validation_profiles_may_select_explicit_encodings": true,
+  "stage2_validation_profile_is_production_selection": false,
+  "production_source_selection_owner": "STAGE3",
+  "production_normalized_telemetry_while_unconfigured": "UNAVAILABLE",
+  "STAGE2_DIGITAL_FOUNDATION_REQUIRES_PRODUCTION_ADC_SELECTION": "NO",
+  "STAGE2_DIGITAL_FOUNDATION_CAN_FREEZE_WITH_UNCONFIGURED_PRODUCTION_PROFILE": "YES",
+  "STAGE2_VALIDATION_PROFILES_MAY_SELECT_EXPLICIT_ENCODINGS": "YES",
+  "STAGE2_VALIDATION_PROFILE_IS_PRODUCTION_SELECTION": "NO",
+  "PRODUCTION_SOURCE_SELECTION_OWNER": "STAGE3",
+  "PRODUCTION_NORMALIZED_TELEMETRY_WHILE_UNCONFIGURED": "UNAVAILABLE",
+  "SUPPORTED_ENCODING_CAPABILITY_IMPLEMENTED": "FUTURE_STAGE2F_D",
+  "PRODUCTION_PROFILE": "UNCONFIGURED",
+  "NON_PRODUCTION_SIMULATION_PROFILES": "SUPPORTED",
+  "CONTROLLED_DIGITAL_BOARD_VALIDATION_PROFILE": "ALLOWED_NON_PRODUCTION",
+  "RAW_PROTECTION_PATH_ACTIVE_AND_UNCHANGED": "YES",
+  "NORMALIZED_VALID_WHEN_UNCONFIGURED": "NO",
+  "subclaims": [
+    {
+      "id": "DF-CAPABILITY-001",
+      "part": "DIGITAL_FOUNDATION",
+      "owner": "STAGE2",
+      "claim": "The digital implementation supports the allowed encoding profiles, produces exact signed code counts, preserves raw compatibility, and fails closed when the production profile is unconfigured.",
+      "current_state": "TARGET_CAPABILITY_CONTRACT_ONLY",
+      "closure_state": "OPEN",
+      "production_adc_selection_required": false,
+      "evidence_required": [
+        "reviewed RTL",
+        "independent integer reference model",
+        "Icarus and XSim tests for all allowed encodings",
+        "zero-code and polarity boundary tests",
+        "non-production controlled validation profiles",
+        "unconfigured fail-closed tests",
+        "raw protection invariance",
+        "sequence and channel atomicity",
+        "fixed implementation-derived latency",
+        "II=1 and no-drop scoreboard",
+        "later Vivado timing result"
+      ]
+    },
+    {
+      "id": "DF-COMPATIBILITY-001",
+      "part": "DIGITAL_FOUNDATION",
+      "owner": "STAGE2",
+      "claim": "Raw protection, raw readback, thresholds, atomic transaction identity, and the unchanged safety path remain compatible while production is unconfigured.",
+      "current_state": "REPOSITORY_BEHAVIOR_FROZEN",
+      "closure_state": "OPEN_PENDING_IMPLEMENTATION_REGRESSION",
+      "production_adc_selection_required": false,
+      "evidence_required": [
+        "bit-for-bit raw protection regression",
+        "Stage 2D and Stage 2E source, CDC, reset, sequence, and observability closure",
+        "proof that normalized validity and flags do not gate fault policy"
+      ]
+    },
+    {
+      "id": "DF-THROUGHPUT-001",
+      "part": "DIGITAL_FOUNDATION",
+      "owner": "STAGE2",
+      "claim": "The selected digital capability accepts one transaction per ACLK with fixed, data-independent latency and initiation interval one.",
+      "current_state": "IMPLEMENTATION_NOT_SELECTED",
+      "closure_state": "OPEN",
+      "production_adc_selection_required": false,
+      "evidence_required": [
+        "implementation-derived fixed latency published in capability metadata",
+        "initiation interval one proven in Icarus and XSim",
+        "no-backpressure and no-drop sequence scoreboard",
+        "authorized Vivado timing result"
+      ]
+    },
+    {
+      "id": "PS-SELECTION-001",
+      "part": "PRODUCTION_SOURCE_SELECTION",
+      "owner": "STAGE3",
+      "claim": "The real production ADC/AFE/sensor encoding, nominal zero, polarity, and physical transfer are selected and bound to approved hardware.",
+      "current_state": "OPEN_BLOCKED_EXTERNAL_HARDWARE_FACTS",
+      "closure_state": "OPEN_BLOCKED",
+      "production_adc_selection_required": true,
+      "evidence_required": [
+        "owner-approved production ADC/AFE/sensor profile",
+        "approved schematics, BOM identities, connector mapping, and safety limits",
+        "component datasheets tied to selected production parts",
+        "Stage 3 architecture and hardware review acceptance"
+      ]
+    },
+    {
+      "id": "PC-SCALE-001",
+      "part": "PHYSICAL_CLOSURE",
+      "owner": "STAGE3",
+      "claim": "A source-specific code-to-current transfer function has production authority.",
+      "current_state": "UNSUPPORTED",
+      "closure_state": "OPEN_BLOCKED",
+      "production_adc_selection_required": true,
+      "evidence_required": [
+        "approved nominal transfer function with units and bounded tolerances",
+        "reference-voltage or supply measurement policy",
+        "temperature and channel-matching error budget"
+      ]
+    },
+    {
+      "id": "PC-CALIBRATION-001",
+      "part": "PHYSICAL_CLOSURE",
+      "owner": "STAGE3",
+      "claim": "Board-specific calibration and physical accuracy are traceable.",
+      "current_state": "NOT_AVAILABLE",
+      "closure_state": "OPEN_BLOCKED",
+      "production_adc_selection_required": true,
+      "evidence_required": [
+        "approved calibration procedure and traceable instruments",
+        "board-identity-bound calibration record",
+        "measured uncertainty, drift, repeatability, and acceptance evidence"
+      ]
+    }
+  ]
+}

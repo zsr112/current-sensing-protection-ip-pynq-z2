@@ -1,0 +1,435 @@
+schema_version stage1e-vivado-runtime-record-contract-v1
+contract_state FOUNDATION_IMPLEMENTED_REVIEW_REQUIRED
+interface_versions {
+    common stage1e-vivado-runtime-common-interface-v1
+    controller stage1e-production-vivado-controller-interface-v1
+    adapter stage1e-production-vivado-adapter-interface-v1
+    observer stage1e-production-vivado-observer-interface-v1
+    runner stage1e-production-vivado-runner-interface-v1
+    session stage1e-production-vivado-session-interface-v1
+    receipt_schema stage1e-vivado-authorization-consumption-receipt-v1
+}
+records {
+    session_context {
+        semantic_owner SESSION_ASSEMBLY
+        fields {
+            schema_version session_id host_process_reference
+            current_workspace_path assembly_scope_state closure_scope
+            source_binding_state
+            runtime_binding_state policy_binding_state
+            configuration_binding_state qualification_availability
+            qualification_binding_state environment_binding_state
+            workspace_binding_state synthesis_binding_state
+            dependency_closure_state command_contract_state
+            property_map_state allowed_operation_contract_identity
+            forbidden_operation_contract_identity report_contract_reference
+        }
+    }
+    assembly_inventory_entry {
+        semantic_owner SESSION_ASSEMBLY
+        fields {
+            ordinal role path interface_version
+        }
+    }
+    assembly_inventory {
+        semantic_owner SESSION_ASSEMBLY
+        fields {
+            schema_version assembly_validation_state
+            dependency_closure_state closure_scope session_module_path
+            module_root build_root entries
+        }
+    }
+    controller_request {
+        semantic_owner ADAPTER
+        fields {
+            schema_version source_schema_version request_identity
+            sealed_request_path request_state execution_id attempt_id
+            source_identity runtime_backend_identity policy_identity
+            configuration_identity qualification_identity
+            environment_identity workspace_identity
+            synthesis_result_identity dependency_closure_identity
+            interface_contracts authorization implementation_contract
+            launch_contract evidence_contract timeout_contract
+            authority_boundary session_context record_contract_version
+            command_contract_version property_map_version
+        }
+    }
+    controller_state {
+        semantic_owner CONTROLLER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            current_state transition_history decision_ordinal
+            continuation_decision authorization_effect
+            authorization_receipt_reference first_failure
+            secondary_failures candidate_effect assembly_validation_state
+            dependency_closure_state closure_scope
+        }
+    }
+    controller_transition {
+        semantic_owner CONTROLLER
+        fields {
+            ordinal from_state to_state decision reason_code
+            decision_reference failure_reference
+        }
+    }
+    controller_decision {
+        semantic_owner CONTROLLER
+        fields {
+            schema_version decision_reference request_identity execution_id
+            attempt_id decision_ordinal current_state operation decision
+            reason_code authorization_receipt_reference snapshot_reference
+            failure_reference assembly_validation_state
+            dependency_closure_state closure_scope
+        }
+    }
+    authorization_consumption_result {
+        semantic_owner CONTROLLER
+        fields {
+            schema_version controller_state receipt receipt_reference
+            publication_receipt decision
+        }
+    }
+    tool_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            version_state version build_state software_build ip_build_state
+            ip_build cwd_state cwd current_project_state current_project
+            current_run_state current_run current_design_state current_design
+        }
+    }
+    license_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            command_available query_state feature status
+            implementation_feature_available qualification_state
+        }
+    }
+    object_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            ordinal role selector query_state cardinality
+            expected_cardinality objects comparison
+        }
+    }
+    property_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            ordinal key object_selector property_name expected_type
+            normalization_rule raw_state raw_value normalized_state
+            normalized_value expected_value comparison unavailable_action
+            qualification_state
+        }
+    }
+    command_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            ordinal role command_name owner permission availability
+            qualification_state
+        }
+    }
+    operation_node_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            configured_state authorized sequence directive predecessor
+            invocation_policy observed_state observed_status
+            invocation_marker pre_hook post_hook comparison
+        }
+    }
+    run_relationship {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            implementation_run implementation_cardinality synthesis_run
+            synthesis_cardinality predecessor_observed refresh_state
+            freshness_state current_run_query_state current_run_cardinality
+            current_run_observed current_run_expected_state
+            current_run_comparison current_design_state route_open_state
+            comparison
+        }
+    }
+    forbidden_operation_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            schema_version result physical_optimization_state
+            direct_implementation_state mixed_mechanism_state
+            extra_operation_state downstream_command_state
+            downstream_output_state coverage_state failure_references
+        }
+    }
+    downstream_boundary_observation {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            bitstream_xsa artifact publication hardware_manager
+            board_access result
+        }
+    }
+    observer_snapshot {
+        semantic_owner VIVADO_CAPABILITY_OBSERVER
+        fields {
+            schema_version snapshot_reference request_identity execution_id
+            attempt_id workspace_identity session_id phase
+            observation_ordinal command_contract_version
+            property_map_version tool_observation license_observation
+            object_observations property_observations command_observations
+            configured_graph observed_graph run_relationship
+            forbidden_operation_observation
+            downstream_boundary_observation overall_state blocking_reasons
+        }
+    }
+    native_state {
+        semantic_owner RUNNER
+        fields {
+            observation_state run_status step_status current_run
+            current_design
+        }
+    }
+    runner_phase_request {
+        semantic_owner ADAPTER
+        fields {
+            schema_version controller_request request_identity execution_id
+            attempt_id workspace_identity session_id sequence
+            logical_operation exact_predecessor target_step run_name jobs
+            controller_decision authorization_receipt_path
+            authorization_receipt_identity prior_snapshot_reference
+            prior_snapshot operation_ledger timeout_seconds timeout_state
+            command_contract_version property_map_version authority_boundary
+        }
+    }
+    operation_ledger_entry {
+        semantic_owner RUNNER
+        fields {
+            sequence logical_operation exact_predecessor target_step
+            controller_decision_reference authorization_receipt_reference
+            phase_status scheduler_mechanism run_name start_observation
+            end_observation native_state_before native_state_after
+            timeout_state observer_snapshot_references
+            forbidden_operation_result failure_references launch_attempts
+            wait_attempts open_attempts retry_count
+        }
+    }
+    operation_ledger {
+        semantic_owner RUNNER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity session_id dispatch_mechanism
+            authorization_receipt_reference entries immutable_state
+            retry_count mixed_mechanism_state terminal_state
+        }
+    }
+    runner_phase_result {
+        semantic_owner RUNNER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity session_id sequence logical_operation
+            target_step phase_status scheduler_mechanism launch_state
+            wait_state timeout_state start_observation end_observation
+            observer_snapshot operation_ledger forbidden_operation_result
+            first_failure secondary_failures authorization_effect retry_count
+            candidate_effect
+        }
+    }
+    collector_handoff {
+        semantic_owner RUNNER
+        fields {
+            schema_version handoff_reference mode request_identity
+            execution_id attempt_id workspace_identity session_id run_name
+            routed_design_state route_phase_state failed_phase
+            current_design_state post_route_snapshot_reference
+            operation_ledger authorization_receipt_reference
+            report_contract_reference evidence_root downstream_authority
+            handoff_state failure_references
+        }
+    }
+    vivado_component_result {
+        semantic_owner CONTROLLER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity session_id terminal_status controller_state
+            authorization_effect operation_ledger
+            capability_snapshot_references collector_handoff first_failure
+            secondary_failures evidence_completeness candidate_effect
+            process_effect process_effect_owner
+            collector_state parser_state dependency_closure_state
+            qualification_state public_runtime_path_state
+            backend_capability_state backend_review_state authority_boundary
+        }
+    }
+    session_result {
+        semantic_owner SESSION_ASSEMBLY
+        fields {
+            schema_version terminal_status controller_state
+            authorization_receipt operation_ledger collector_handoff
+            snapshots component_result candidate_effect
+        }
+    }
+    failure_record {
+        semantic_owner FIRST_DETECTOR
+        fields {
+            terminal_status failure_category failure_code failure_component
+            failure_phase first_failure_ordinal authorization_effect
+            process_effect process_effect_owner evidence_state
+            retry_disposition candidate_effect message
+            causal_evidence_references
+        }
+    }
+    receipt {
+        semantic_owner CONTROLLER
+        fields {
+            schema_version receipt_identity receipt_state request_identity
+            sealed_request_path execution_id attempt_id
+            authorization_identity capability issue_state
+            prior_consumption_state consumption_state consumption_ordinal
+            source_identity runtime_backend_identity policy_identity
+            configuration_identity qualification_identity
+            environment_identity workspace_identity
+            synthesis_result_identity allowed_operation_contract_identity
+            forbidden_operation_contract_identity
+            pre_consume_snapshot_reference controller_decision_reference
+            consumption_owner reuse_policy receipt_path publication_mode
+            overwrite_policy authorization_effect
+            qualification_decision_authority authorization_issue_authority
+            engineering_acceptance_authority artifact_authority
+            publication_authority hardware_manager_authority board_authority
+            candidate_effect
+        }
+    }
+    runtime_authority_boundary {
+        semantic_owner CONTRACT
+        fields {
+            qualification_decision authorization_issue
+            authorization_consumption engineering_acceptance
+            bitstream_xsa_generation artifact_collection publication
+            hardware_manager board_access
+        }
+    }
+}
+enums {
+    snapshot_points {
+        TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+    }
+    controller_states {
+        REQUEST_VALIDATED PRT02C_ASSEMBLY_VALIDATED TOOL_PREFLIGHT_OBSERVED
+        PRE_CONSUME_OBSERVED AUTHORIZATION_CONSUMED_ONCE OPT_PERMITTED
+        OPT_COMPLETED PLACE_PERMITTED PLACE_COMPLETED ROUTE_PERMITTED
+        ROUTE_COMPLETED COLLECTOR_HANDOFF_READY
+        VIVADO_COMPONENT_BLOCKED_AT_COLLECTOR FAILED BLOCKED
+    }
+    controller_decisions {PROCEED STOP BLOCK}
+    phase_statuses {NOT_RUN STARTED COMPLETED FAILED BLOCKED}
+    logical_operations {
+        opt_design place_design route_design implementation_reports
+    }
+    handoff_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+    observation_states {CLEAR BLOCKED UNKNOWN}
+    comparisons {MATCH MISMATCH UNKNOWN NOT_APPLICABLE}
+    availability_states {AVAILABLE UNAVAILABLE AMBIGUOUS}
+    assembly_validation_states {
+        NOT_EVALUATED PRT02C_FIXED_ASSEMBLY_VALIDATED
+    }
+    forbidden_marker_states {CLEAR DETECTED UNKNOWN}
+    downstream_evidence_states {ABSENT DETECTED UNKNOWN}
+    current_run_expected_states {NONE_REQUIRED IMPL_1_REQUIRED}
+    process_effect_states {STATE_UNKNOWN}
+    process_effect_owners {HOST_RESULT_NOT_CONNECTED}
+    authorization_effects {
+        NOT_TOUCHED CONSUMED_ONCE CONSUMPTION_FAILED STATE_UNKNOWN
+    }
+}
+controller_state_machine {
+    REQUEST_VALIDATED {PRT02C_ASSEMBLY_VALIDATED BLOCKED FAILED}
+    PRT02C_ASSEMBLY_VALIDATED {TOOL_PREFLIGHT_OBSERVED BLOCKED FAILED}
+    TOOL_PREFLIGHT_OBSERVED {PRE_CONSUME_OBSERVED BLOCKED FAILED}
+    PRE_CONSUME_OBSERVED {AUTHORIZATION_CONSUMED_ONCE BLOCKED FAILED}
+    AUTHORIZATION_CONSUMED_ONCE {OPT_PERMITTED BLOCKED FAILED}
+    OPT_PERMITTED {OPT_COMPLETED BLOCKED FAILED}
+    OPT_COMPLETED {PLACE_PERMITTED BLOCKED FAILED}
+    PLACE_PERMITTED {PLACE_COMPLETED BLOCKED FAILED}
+    PLACE_COMPLETED {ROUTE_PERMITTED BLOCKED FAILED}
+    ROUTE_PERMITTED {ROUTE_COMPLETED BLOCKED FAILED}
+    ROUTE_COMPLETED {COLLECTOR_HANDOFF_READY BLOCKED FAILED}
+    COLLECTOR_HANDOFF_READY {
+        VIVADO_COMPONENT_BLOCKED_AT_COLLECTOR BLOCKED FAILED
+    }
+    VIVADO_COMPONENT_BLOCKED_AT_COLLECTOR {}
+    FAILED {}
+    BLOCKED {}
+}
+assembly_boundary {
+    assembly_validation_state PRT02C_FIXED_ASSEMBLY_VALIDATED
+    dependency_closure_state NOT_PROVEN
+    closure_scope PRT02C_DIRECT_ASSEMBLY_ONLY
+    ordered_roles {
+        COMMON_CONTRACT ADAPTER CONTROLLER VIVADO_CAPABILITY_OBSERVER RUNNER
+        SESSION_ASSEMBLY
+    }
+}
+operation_contract {
+    dispatch_mechanism STAGED_PROJECT_MODE_IMPL_1
+    implementation_run impl_1
+    synthesis_run synth_1
+    project_name current_protection_ip_pynq_z2_stage1e
+    sources_fileset sources_1
+    jobs 2
+    operation_order {
+        opt_design place_design route_design implementation_reports
+    }
+    runner_operations {opt_design place_design route_design}
+    target_steps {opt_design place_design route_design}
+    predecessors {
+        opt_design synthesis
+        place_design opt_design
+        route_design place_design
+        implementation_reports route_design
+    }
+    retry_policy PROHIBITED
+    replay_policy PROHIBITED
+    alternate_mechanism_policy PROHIBITED
+}
+phys_opt_contract {
+    configured_state DISABLED
+    authorized 0
+    sequence 0
+    directive NONE
+    predecessor place_design
+    invocation_policy PROHIBITED
+    required_snapshot_points {
+        TOOL_PREFLIGHT PRE_CONSUME POST_PLACE POST_ROUTE TERMINAL
+    }
+    enabled_action BLOCK
+    invoked_action BLOCK
+    missing_action BLOCK
+    unknown_action BLOCK
+    stale_action BLOCK
+    unreadable_action BLOCK
+    conflicting_action BLOCK
+    runtime_repair PROHIBITED
+}
+collector_boundary {
+    implementation_state NOT_IMPLEMENTED
+    normal_mode ROUTED_REPORTING
+    failure_mode FAILURE_EVIDENCE_ONLY
+    terminal_status BLOCKED
+    failure_category DEPENDENCY_CLOSURE
+    failure_code PRODUCTION_COLLECTOR_NOT_IMPLEMENTED
+    failure_phase REPORT_COLLECTION
+    candidate_effect NOT_CREATED
+}
+authority_boundary {
+    qualification_decision NONE
+    authorization_issue NONE
+    authorization_consumption CONTROLLER_ONLY
+    engineering_acceptance NONE
+    bitstream_xsa_generation NONE
+    artifact_collection NONE
+    publication NONE
+    hardware_manager NONE
+    board_access NONE
+}
+qualification_boundary {
+    vivado_version 2024.1
+    command_property_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    parser_state NOT_IMPLEMENTED
+    dependency_closure_state NOT_PROVEN
+    public_runtime_path_state DISCONNECTED
+    backend_capability_state MOCK_ONLY
+    backend_review_state REVIEW_REQUIRED
+}

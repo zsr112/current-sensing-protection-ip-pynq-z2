@@ -1,0 +1,152 @@
+{
+  "$id": "stage1e-execution-request-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_identity", "run_kind", "execution_id", "source", "vivado", "hardware", "paths", "build_target", "implementation_profile", "execution_contract_identity", "finding_decision_identity", "timeout_seconds", "retain_project"],
+  "x-stage1e-canonical-order": ["schema_version", "request_identity", "run_kind", "execution_id", "source", "vivado", "hardware", "paths", "build_target", "implementation_profile", "execution_contract_identity", "finding_decision_identity", "timeout_seconds", "retain_project"],
+  "definitions": {
+    "sha256": {
+      "type": "string",
+      "x-stage1e-format": "sha256"
+    },
+    "git_identity": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 40
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository_root", "expected_commit", "expected_tree"],
+      "x-stage1e-canonical-order": ["repository_root", "expected_commit", "expected_tree"],
+      "properties": {
+        "repository_root": {
+          "type": "string",
+          "x-stage1e-format": "canonical-absolute-path"
+        },
+        "expected_commit": {
+          "$ref": "stage1e-execution-request-v1#/definitions/git_identity"
+        },
+        "expected_tree": {
+          "$ref": "stage1e-execution-request-v1#/definitions/git_identity"
+        }
+      }
+    },
+    "vivado": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executable", "expected_version", "expected_build"],
+      "x-stage1e-canonical-order": ["executable", "expected_version", "expected_build"],
+      "properties": {
+        "executable": {
+          "type": "string",
+          "x-stage1e-format": "canonical-absolute-path"
+        },
+        "expected_version": {
+          "type": "string",
+          "enum": ["2024.1"]
+        },
+        "expected_build": {
+          "type": "string",
+          "enum": ["5076996"]
+        }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["part", "board_part"],
+      "x-stage1e-canonical-order": ["part", "board_part"],
+      "properties": {
+        "part": {
+          "type": "string",
+          "enum": ["xc7z020clg400-1"]
+        },
+        "board_part": {
+          "type": "string",
+          "enum": ["tul.com.tw:pynq-z2:part0:1.0"]
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workspace_root", "output_root"],
+      "x-stage1e-canonical-order": ["workspace_root", "output_root"],
+      "properties": {
+        "workspace_root": {
+          "type": "string",
+          "x-stage1e-format": "canonical-absolute-path"
+        },
+        "output_root": {
+          "type": "string",
+          "x-stage1e-format": "canonical-absolute-path"
+        }
+      }
+    },
+    "finding_decision_identity": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["NONE"]
+        },
+        {
+          "$ref": "stage1e-execution-request-v1#/definitions/sha256"
+        }
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["stage1e-execution-request-v1"]
+    },
+    "request_identity": {
+      "$ref": "stage1e-execution-request-v1#/definitions/sha256"
+    },
+    "run_kind": {
+      "type": "string",
+      "enum": ["ENGINEERING", "FORMAL"]
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "x-stage1e-format": "token"
+    },
+    "source": {
+      "$ref": "stage1e-execution-request-v1#/definitions/source"
+    },
+    "vivado": {
+      "$ref": "stage1e-execution-request-v1#/definitions/vivado"
+    },
+    "hardware": {
+      "$ref": "stage1e-execution-request-v1#/definitions/hardware"
+    },
+    "paths": {
+      "$ref": "stage1e-execution-request-v1#/definitions/paths"
+    },
+    "build_target": {
+      "type": "string",
+      "enum": ["IMPLEMENTATION", "ARTIFACTS"]
+    },
+    "implementation_profile": {
+      "type": "string",
+      "enum": ["SAFE_INERT", "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS"]
+    },
+    "execution_contract_identity": {
+      "$ref": "stage1e-execution-request-v1#/definitions/sha256"
+    },
+    "finding_decision_identity": {
+      "$ref": "stage1e-execution-request-v1#/definitions/finding_decision_identity"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 86400
+    },
+    "retain_project": {
+      "type": "boolean"
+    }
+  }
+}

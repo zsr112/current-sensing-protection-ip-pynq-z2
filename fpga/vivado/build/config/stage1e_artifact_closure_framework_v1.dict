@@ -1,0 +1,338 @@
+schema_version stage1e-artifact-closure-framework-v1
+framework_identity {
+    framework_id stage1e_artifact_closure_framework_v1
+    framework_status PREPARATION_ONLY
+    baseline_git_commit 7da1c78274e13744360295fb1663779665865172
+    reference_synthesis_result_identity 106a9e990a92852a996b8bfe01b64e6ecfdb12c3cfec6196aac296166622f508
+    target protection_system_wrapper
+    part xc7z020clg400-1
+    board_part tul.com.tw:pynq-z2:part0:1.0
+    vivado_version 2024.1
+    software_build 5076996
+    ip_build 5075265
+    hash_algorithm SHA256
+}
+authorization_boundary {
+    schema_version stage1e-artifact-closure-authorization-boundary-v1
+    preparation_only 1
+    declaration_is_permission 0
+    implementation_execution_authorized 0
+    artifact_collection_authorized 0
+    artifact_publication_authorized 0
+    board_access_authorized 0
+    missing_or_unknown_identity_action BLOCK
+}
+qualification_contract {
+    schema_version qualification_identity_v1
+    gate_order {Q0 Q1 Q2 Q3 Q4 Q5}
+    gates {
+        Q0 {
+            name PLAN_AND_CONTRACT_REVIEW
+            required_status PASS
+            blocking_on_nonpass 1
+        }
+        Q1 {
+            name SOURCE_FREEZE
+            required_status PASS
+            blocking_on_nonpass 1
+        }
+        Q2 {
+            name VIVADO_CAPABILITY_QUALIFICATION
+            required_status PASS
+            blocking_on_nonpass 1
+        }
+        Q3 {
+            name WORKSPACE_ACCEPTANCE
+            required_status PASS
+            blocking_on_nonpass 1
+        }
+        Q4 {
+            name SYNTHESIS_PREDECESSOR_ACCEPTANCE
+            required_status PASS
+            blocking_on_nonpass 1
+        }
+        Q5 {
+            name IMPLEMENTATION_AUTHORIZATION_PREPARATION
+            required_status PASS
+            blocking_on_nonpass 1
+        }
+    }
+    required_fields {
+        schema_version
+        identity_sha256
+        execution_identity
+        workspace_identity
+        environment_identity
+        source_identity
+        synthesis_result_identity
+        gate_results
+        evidence_identity
+        decision
+    }
+    identity_fields {
+        schema_version
+        execution_identity
+        workspace_identity
+        environment_identity
+        source_identity
+        synthesis_result_identity
+        gate_results
+        evidence_identity
+        decision
+    }
+    hash_rules {
+        algorithm SHA256
+        encoding UTF-8
+        canonicalization ORDERED_FIELD_NAME_AND_TCL_LIST_VALUE
+    }
+    missing_identity_action BLOCK
+    stale_identity_action BLOCK
+    mismatch_action BLOCK
+    unknown_identity_action BLOCK
+}
+implementation_authorization_contract {
+    schema_version stage1e-implementation-authorization-binding-v1
+    required_fields {
+        schema_version
+        identity_sha256
+        authorization_identity
+        status
+        capability
+        consume_state
+        qualification_identity
+        execution_identity
+        workspace_identity
+        environment_identity
+        source_identity
+        synthesis_result_identity
+    }
+    identity_fields {
+        schema_version
+        authorization_identity
+        status
+        capability
+        consume_state
+        qualification_identity
+        execution_identity
+        workspace_identity
+        environment_identity
+        source_identity
+        synthesis_result_identity
+    }
+    required_status AUTHORIZED
+    required_capability IMPLEMENTATION
+    required_consume_state UNCONSUMED
+    wildcard_bindings_allowed 0
+    missing_or_mismatch_action BLOCK
+}
+implementation_result_contract {
+    schema_version stage1e-implementation-result-identity-v1
+    required_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        source_identity
+        synthesis_result_identity
+        implementation_run_identity
+        implementation_policy_identity
+        timing_report_identity
+        utilization_report_identity
+        drc_identity
+        methodology_identity
+        checkpoint_identity
+        acceptance_state
+    }
+    identity_fields {
+        schema_version
+        execution_id
+        source_identity
+        synthesis_result_identity
+        implementation_run_identity
+        implementation_policy_identity
+        timing_report_identity
+        utilization_report_identity
+        drc_identity
+        methodology_identity
+        checkpoint_identity
+        acceptance_state
+    }
+    hash_rules {
+        algorithm SHA256
+        encoding UTF-8
+        canonicalization ORDERED_FIELD_NAME_AND_TCL_LIST_VALUE
+    }
+    required_acceptance_state CANDIDATE
+    predecessor_schema stage1e-synthesis-result-identity-v1
+    run_schema stage1e-implementation-run-identity-v1
+    missing_identity_action BLOCK
+    mismatch_action BLOCK
+    unknown_identity_action BLOCK
+}
+artifact_candidate_contract {
+    schema_version stage1e-artifact-candidate-identity-v1
+    required_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        implementation_result_identity
+        implementation_run_identity
+        artifact_roles
+        producer_phase
+        source_identity
+        environment_identity
+        workspace_identity
+        manifest_identity
+        provenance_bindings
+        identity_state
+    }
+    identity_fields {
+        schema_version
+        execution_id
+        implementation_result_identity
+        implementation_run_identity
+        artifact_roles
+        producer_phase
+        source_identity
+        environment_identity
+        workspace_identity
+        manifest_identity
+        provenance_bindings
+        identity_state
+    }
+    required_artifact_roles {
+        FPGA_CONFIGURATION
+        HARDWARE_HANDOFF_METADATA
+        HARDWARE_PLATFORM
+        DEBUG_PROBES
+        SYNTHESIS_REPORT
+        IMPLEMENTATION_REPORT
+        TIMING_REPORT
+        UTILIZATION_REPORT
+        DRC_REPORT
+        METHODOLOGY_REPORT
+        BUILD_LOG
+        EXECUTION_MANIFEST
+        SHA256_MANIFEST
+    }
+    required_role_fields {
+        logical_role
+        producer_phase
+        origin_path
+        relative_destination
+        size
+        sha256
+        execution_id
+        collection_state
+    }
+    allowed_role_producer_phases {
+        PHASE2_SYNTHESIS
+        PHASE3_IMPLEMENTATION
+        PHASE4_ARTIFACT_CLOSURE
+    }
+    required_provenance_fields {
+        execution_id
+        source_identity
+        environment_identity
+        workspace_identity
+        synthesis_result_identity
+        implementation_result_identity
+        implementation_run_identity
+    }
+    required_producer_phase PHASE4_ARTIFACT_CLOSURE
+    manifest_schema stage1e-artifact-candidate-manifest-v1
+    identity_state NON_ACCEPTED_CANDIDATE
+    hash_rules {
+        algorithm SHA256
+        encoding UTF-8
+        canonicalization ORDERED_FIELD_NAME_AND_TCL_LIST_VALUE
+        every_role_sha256_required 1
+        hash_recalculation_required 1
+        manifest_coverage_required 1
+    }
+    historical_artifact_action BLOCK
+    previous_retry_output_action BLOCK
+    mixed_execution_action BLOCK
+    missing_identity_action BLOCK
+    mismatch_action BLOCK
+    unknown_identity_action BLOCK
+}
+artifact_acceptance_contract {
+    schema_version stage1e-artifact-acceptance-result-v1
+    required_fields {
+        schema_version
+        artifact_candidate_identity
+        manifest_verification
+        hash_verification
+        atomic_publication
+        artifact_set_digest
+        stage1e_artifact_closure_decision
+    }
+    required_results {
+        manifest_verification PASS
+        hash_verification PASS
+        atomic_publication PASS
+        stage1e_artifact_closure_decision PASS
+    }
+    missing_or_nonpass_action BLOCK
+}
+identity_chain {
+    schema_version stage1e-artifact-identity-chain-v1
+    order {
+        implementation_result_identity
+        artifact_candidate_identity
+        artifact_set_digest
+    }
+    implementation_to_candidate_binding REQUIRED_EXACT
+    candidate_to_digest_binding REQUIRED_EXACT
+    same_execution_provenance_required 1
+    candidate_identity_means_acceptance 0
+    historical_substitution_allowed 0
+}
+provenance_guard {
+    schema_version stage1e-framework-provenance-guard-v1
+    algorithm SHA256
+    canonicalization REPOSITORY_RELATIVE_PATH_AND_FILE_SHA256
+    sources {
+        docs/design/stage1f_runtime_qualification_plan.md {
+            role QUALIFICATION_POLICY
+            sha256 458c8abb8447e837a6006ff429478250941a3f9cfc75e00f88b8e77ad7e64ef0
+        }
+        docs/design/stage1e_implementation_policy_v1.md {
+            role IMPLEMENTATION_POLICY
+            sha256 64ed95036832c5757417cbb1d27dd7a515b7589ccc36b27a7d1c325105144a3c
+        }
+        docs/design/stage1e_artifact_closure_acceptance.md {
+            role ARTIFACT_ACCEPTANCE_POLICY
+            sha256 e83f92881bd25f2df4bd93dc1c10f85891f7bb40af32b0c7d0a3be5dcdf282bc
+        }
+        docs/status/stage1e_completion_report.md {
+            role SYNTHESIS_COMPLETION_REFERENCE
+            sha256 315b020815686e1e540ad1c07faa7d892fff7f9e127fcc5a51953f97d1ab2ea9
+        }
+        fpga/vivado/build/lib/stage1e_artifact_closure_schema.tcl {
+            role SCHEMA_VALIDATOR
+            sha256 f54177dc258d30015fadb8b2dc1c51231ede14140733fbc4881c888a36a128c8
+        }
+        fpga/vivado/build/tests/stage1e_artifact_closure_framework_tests.tcl {
+            role VALIDATION_SUITE
+            sha256 d7b31bd7aa0b6f8a93313a8895f43f63c76cac60eca7e22c3cbbe3dc24a71189
+        }
+    }
+    missing_action BLOCK
+    mismatch_action BLOCK
+}
+validation_contract {
+    schema_version stage1e-artifact-closure-validation-contract-v1
+    required_suites {
+        SCHEMA_CORRECTNESS
+        IDENTITY_COMPLETENESS
+        PROVENANCE_BINDING
+        FAIL_CLOSED_BEHAVIOR
+        POLICY_CONTRACT
+        PROVENANCE_GUARD
+    }
+    unknown_or_missing_identity_action BLOCK
+    vivado_invocation_allowed 0
+    implementation_allowed 0
+    artifact_generation_allowed 0
+}

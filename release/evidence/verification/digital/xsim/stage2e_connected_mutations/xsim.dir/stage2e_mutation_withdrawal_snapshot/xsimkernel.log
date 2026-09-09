@@ -1,7 +1,0 @@
-Running: xsim.dir/stage2e_mutation_withdrawal_snapshot/xsimk.exe -runall -simmode gui -wdb stage2e_mutation_withdrawal_snapshot.wdb -simrunnum 0 -socket 53713
-Design successfully loaded
-Design Loading Memory Usage: 10924 KB (Peak: 10924 KB)
-Design Loading CPU Usage: 77 ms
-Simulation completed
-Simulation Memory Usage: 11456 KB (Peak: 11456 KB)
-Simulation CPU Usage: 77 ms

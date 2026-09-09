@@ -1,0 +1,12 @@
+Property      Type    Read-only  Value
+CHECK         string  true       PDCN-1569
+CLASS         string  true       drc_violation
+DESCRIPTION   string  true       Used physical LUT pin 'A5' of cell dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.id_state[0]_i_1 (pin dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.id_state[0]_i_1/I0) is not included in the LUT equation: 'O6=(A6+~A6)*((A2))'. If this cell is a user instantiated LUT in the design, please remove connectivity to the pin or change the equation and/or INIT string of the LUT to prevent this issue. If the cell is inferred or IP created LUT, please regenerate the IP and/or resynthesize the design to attempt to correct the issue.
+FULLNAME      string  true       LUT equation term check
+ID            int     true       3
+IS_READ_ONLY  bool    true       0
+IS_WAIVED     bool    true       0
+NAME          string  true       PDCN-1569#3
+OBJECT_TYPES  string  true       cell pin
+SEVERITY      string  true       Warning
+WAIVER        string  true       

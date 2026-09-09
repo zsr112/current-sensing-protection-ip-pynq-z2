@@ -1,0 +1,181 @@
+schema_version stage1e-implementation-configuration-contract-v3
+configuration_state CANDIDATE_HUMAN_REVIEW_REQUIRED_NOT_FROZEN
+identity_contract {
+    identity_schema stage1e-implementation-configuration-identity-v3
+    actual_identity_state COMMIT_REQUIRED_BEFORE_IDENTITY_FINALIZATION
+    runtime_backend_identity_schema stage1e-runtime-backend-identity-v2
+    implementation_policy_identity_schema stage1e-implementation-policy-identity-v3
+    warning_policy_identity_schema stage1e-warning-policy-identity-v3
+    concrete_binding_state NOT_CREATED
+    missing_stale_or_mismatched_action BLOCK
+}
+tool_configuration {
+    vivado_version 2024.1
+    target protection_system_wrapper
+    top protection_system_wrapper
+    part xc7z020clg400-1
+    board_part tul.com.tw:pynq-z2:part0:1.0
+    run_name impl_1
+    strategy Vivado_Implementation_Defaults
+    jobs 2
+    opt_directive Default
+    place_directive Default
+    route_directive Default
+    phys_opt_state DISABLED
+    incremental_policy DISABLED
+    imported_checkpoint_policy PROHIBITED
+    fallback_policy PROHIBITED
+    seed_policy TOOL_DEFAULT_RECORDED_BY_READBACK
+}
+operation_order {
+    opt_design
+    place_design
+    route_design
+    implementation_reports
+}
+effective_step_graph {
+    opt_design {
+        configured_state ENABLED
+        authorized 1
+        sequence 1
+        directive Default
+        predecessor synthesis
+        invocation_policy REQUIRED
+    }
+    place_design {
+        configured_state ENABLED
+        authorized 1
+        sequence 2
+        directive Default
+        predecessor opt_design
+        invocation_policy REQUIRED
+    }
+    phys_opt_design {
+        configured_state DISABLED
+        authorized 0
+        sequence 0
+        directive NONE
+        predecessor place_design
+        invocation_policy PROHIBITED
+        readback_required 1
+        zero_invocation_required 1
+        missing_unknown_enabled_or_invoked_action BLOCK
+    }
+    route_design {
+        configured_state ENABLED
+        authorized 1
+        sequence 3
+        directive Default
+        predecessor place_design
+        invocation_policy REQUIRED
+    }
+    implementation_reports {
+        configured_state ENABLED
+        authorized 1
+        sequence 4
+        directive READ_ONLY
+        predecessor route_design
+        invocation_policy REQUIRED
+    }
+}
+runtime_interface_bindings {
+    runtime_backend_identity stage1e-runtime-backend-identity-v2
+    runtime_backend_schema_interface stage1e-runtime-backend-identity-schema-interface-v2
+    policy stage1e-implementation-policy-v3
+    warning_policy stage1e-implementation-warning-policy-v3
+    entry_point_interface stage1e-production-runtime-entry-point-contract-v1
+    entry_point_implementation stage1e-production-runtime-entrypoint-implementation-v2
+    report_contract stage1e-production-report-contract-v1
+    message_contract stage1e-production-message-contract-v1
+    host_contract stage1e-host-boundary-contract-interface-v1
+    dependency_closure stage1e-runtime-dependency-closure-interface-v1
+    activation_graph stage1e-prt03-activation-graph-interface-v1
+}
+readback_contract {
+    configured_graph_record_required 1
+    effective_graph_record_required 1
+    directive_readback_required 1
+    property_readback_required 1
+    hook_readback_required 1
+    incremental_readback_required 1
+    imported_checkpoint_readback_required 1
+    invocation_ledger_required 1
+    final_tool_bound_readback_required 1
+    configured_to_effective_match_required 1
+    no_fallback_required 1
+    mismatch_action BLOCK
+}
+report_contract {
+    accepted_report_contract_path fpga/vivado/build/config/stage1e_report_contract_v1.dict
+    accepted_report_contract_version stage1e-production-report-contract-v1
+    report_role_order {
+        IMPLEMENTATION_RUN_STEP_STATUS
+        EFFECTIVE_GRAPH_READBACK
+        VIVADO_NATIVE_LOG
+        VIVADO_JOURNAL
+        HOST_PROCESS_EVIDENCE
+        FORBIDDEN_OPERATION_SCAN
+        DOWNSTREAM_OUTPUT_SCAN
+        TIMING_SUMMARY
+        TIMING_PATH_GROUPS
+        CLOCK_INTERACTION
+        CLOCKS_GENERATED_CLOCKS
+        CONSTRAINT_COVERAGE
+        CHECK_TIMING
+        TIMING_EXCEPTION_SOURCE
+        CONDITIONAL_BUS_SKEW
+        UTILIZATION
+        DRC
+        METHODOLOGY
+        CDC
+        MESSAGE_SOURCE
+    }
+    parsed_inventory_requirements {
+        EVIDENCE_SET_INVENTORY
+        MESSAGE_INVENTORY
+        TIMING_INVENTORY
+        CLOCK_CDC_INVENTORY
+        TIMING_EXCEPTION_INVENTORY
+        UTILIZATION_INVENTORY
+        DRC_INVENTORY
+        METHODOLOGY_INVENTORY
+    }
+    evidence_ledger_requirements {
+        OPERATION_LEDGER
+        REPORT_ATTEMPT_LEDGER
+    }
+    report_ledger_required 1
+    producer_session_binding_required 1
+    current_execution_binding_required 1
+    byte_count_and_sha256_required 1
+    failed_attempts_preserved 1
+    missing_report_action BLOCK
+    report_waiver_authority NONE
+}
+qualification_contract {
+    q0_q5_required 1
+    qualification_owner EXTERNAL_QUALIFICATION_IDENTITY
+    current_qualification_state NOT_AVAILABLE
+    authority_path_available 1
+    q1_output SOURCE_FREEZE_REVIEW_RECORD
+    q1_runtime_review_effect REVIEW_REQUIRED
+    q1_current_reviewed_effect NOT_ISSUED
+    q2_q4_input TOOL_WORKSPACE_SYNTHESIS_EVIDENCE
+    q5_live_input FINAL_TOOL_BOUND_LIVE_CLOSURE
+    q5_runtime_output CURRENT_REVIEWED_RECORD
+    q5_qualification_output QUALIFICATION_IDENTITY
+    q5_terminal_output QUALIFIED_NOT_AUTHORIZED
+    final_live_closure_required 1
+    current_production_dispatch BLOCKED
+}
+boundary {
+    implementation_authorized 0
+    qualification_execution_authorized 0
+    configuration_frozen 0
+    runtime_dispatch_authority NONE
+    qualification_authority NONE
+    authorization_creation_authority NONE
+    artifact_authority NONE
+    publication_authority NONE
+    board_authority NONE
+}

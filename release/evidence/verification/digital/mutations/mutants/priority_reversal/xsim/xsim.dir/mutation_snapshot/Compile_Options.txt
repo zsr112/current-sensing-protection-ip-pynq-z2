@@ -1,1 +1,0 @@
-"work.tb_stage2g_policy_matrix" -s "mutation_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\mutations\mutants\priority_reversal\xsim\xelab.log" 

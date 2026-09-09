@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_BUILD>/digital/stage2f/run_stage2f_generator_mutations/normalized_width_wrong_constant/rtl/adc_sample_code_normalizer.sv" into library work
+INFO: [VRFC 10-311] analyzing module adc_sample_code_normalizer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2f/tb_stage2f_generated_profile_vectors.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stage2f_generated_profile_vectors

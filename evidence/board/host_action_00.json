@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-09T09:21:02.026675+00:00",
+  "host_start_utc": "2026-09-09T09:20:48.214125+00:00",
+  "request": {
+    "action": "load",
+    "execution_id": "CSIP-SC-V2-BOARD-002"
+  },
+  "response_sha256": "53ee4e708365e8b6b95c48a18ee4b5101bc2cc93bc7dc2d9c62c83606c8f1e3a"
+}

@@ -1,1 +1,0 @@
-"work.tb_stage2i_b_cdc_event_authority" -s "cdc_event_authority_snapshot" --timescale "1ns/1ps" --log "<EXTERNAL_VERIFICATION>\digital\xsim\cdc_event_authority\xelab.log" 

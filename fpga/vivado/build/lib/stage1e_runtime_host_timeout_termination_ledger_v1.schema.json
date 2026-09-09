@@ -1,0 +1,60 @@
+{
+  "$schema": "stage1e-schema-subset-v1",
+  "$id": "stage1e-runtime-host-timeout-termination-ledger-v1",
+  "title": "Stage 1E append-only timeout and termination ledger v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ledger_state",
+    "request_identity",
+    "execution_id",
+    "attempt_id",
+    "first_failure_ordinal",
+    "events",
+    "terminal_termination_state",
+    "authority_boundary"
+  ],
+  "additionalProperties": false,
+  "x-stage1e-canonical-order": [
+    "schema_version",
+    "ledger_state",
+    "request_identity",
+    "execution_id",
+    "attempt_id",
+    "first_failure_ordinal",
+    "events",
+    "terminal_termination_state",
+    "authority_boundary"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "stage1e-runtime-host-timeout-termination-ledger-v1"},
+    "ledger_state": {"type": "string", "const": "APPEND_ONLY_TERMINAL"},
+    "request_identity": {"$ref": "stage1e-runtime-host-common-v1#/$defs/sha256"},
+    "execution_id": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+    "attempt_id": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+    "first_failure_ordinal": {"$ref": "stage1e-runtime-host-common-v1#/$defs/ordinal_or_none"},
+    "events": {"type": "array", "items": {"$ref": "#/$defs/timeout_termination_event"}, "minItems": 1, "maxItems": 4096},
+    "terminal_termination_state": {"type": "string", "enum": ["NOT_REQUIRED", "NATURAL_EXIT", "GRACEFUL_EXIT", "FORCED_EXIT", "INCOMPLETE", "UNKNOWN"]},
+    "authority_boundary": {"$ref": "stage1e-runtime-host-common-v1#/$defs/authority_boundary"}
+  },
+  "$defs": {
+    "timeout_termination_event": {
+      "type": "object",
+      "required": ["schema_version", "ordinal", "event_type", "deadline_kind", "configured_budget_ms", "start_elapsed_ms", "event_elapsed_ms", "outcome", "is_first_failure", "message"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["schema_version", "ordinal", "event_type", "deadline_kind", "configured_budget_ms", "start_elapsed_ms", "event_elapsed_ms", "outcome", "is_first_failure", "message"],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-runtime-host-timeout-termination-event-v1"},
+        "ordinal": {"type": "integer", "minimum": 1, "maximum": 2147483647},
+        "event_type": {"type": "string", "enum": ["DEADLINE_ARMED", "DEADLINE_CANCELLED", "DEADLINE_EXPIRED", "GRACEFUL_TERMINATION_REQUESTED", "GRACEFUL_TERMINATION_UNAVAILABLE", "GRACEFUL_WAIT_COMPLETED", "FORCED_TERMINATION_REQUESTED", "FORCED_TERMINATION_COMPLETED", "TERMINAL_WAIT_COMPLETED"]},
+        "deadline_kind": {"type": "string", "enum": ["STARTUP", "CHILD_DISCOVERY", "HEARTBEAT_SILENCE", "GRACEFUL_TERMINATION", "TERMINAL_OBSERVATION", "TOTAL_LIFETIME", "NONE"]},
+        "configured_budget_ms": {"type": "integer", "minimum": 0, "maximum": 604800000},
+        "start_elapsed_ms": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "event_elapsed_ms": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "outcome": {"type": "string", "enum": ["ARMED", "CANCELLED", "EXPIRED", "REQUESTED", "SUCCEEDED", "FAILED", "UNAVAILABLE", "NO_PROCESSES"]},
+        "is_first_failure": {"type": "boolean"},
+        "message": {"$ref": "stage1e-runtime-host-common-v1#/$defs/message"}
+      }
+    }
+  }
+}

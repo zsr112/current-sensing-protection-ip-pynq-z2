@@ -1,0 +1,208 @@
+schema_version v1
+build_profile stage1d_phase2_verification
+controller_version STAGE1D-BUILD-CTRL-v1.1
+controller_api_version STAGE1D-CONTROLLER-API-v1
+execution_id_schema_version v1
+phase_evidence_schema_version v1
+decision_schema_version v1
+manifest_schema_version v1
+phase_limit WORKSPACE_READY
+allowed_final_decisions {PASS FAIL BLOCKED}
+lifecycle {
+    project_relative_path pynq_z2_stage1_boardpart/current_protection_ip_pynq_z2_stage1_boardpart.xpr
+    bd_name protection_system
+}
+mutation_context {
+    axi_gpio_vlnv xilinx.com:ip:axi_gpio:2.0
+    expected_protection_base 0x43C00000
+    expected_protection_range 0x00001000
+    gpio_name axi_gpio_stage1d_0
+    gpio_width 24
+    i_ch1_const_name i_ch1_const
+    i_ch2_const_name i_ch2_const
+    ila_name system_ila_stage2b_0
+    planned_gpio_base 0x41200000
+    planned_gpio_range 0x00010000
+    protection_name protection_ip_axi_lite_0
+    protection_vlnv zsr112.local:protection:protection_ip_axi_lite:0.3
+    ps_name processing_system7_0
+    reset_name proc_sys_reset_0
+    safe_gpio_default 0x00400400
+    sample_valid_const_name sample_valid_const
+    stimulus_profile SAFE_INERT_EXPLICIT
+    stimulus_profile_class SAFE_INERT
+    source_acceptance_claimed 0
+    fault_stimulus_claimed 0
+    slice_ch1_name xlslice_stage1d_ch1
+    slice_ch2_name xlslice_stage1d_ch2
+    smartconnect_name smartconnect_0
+    stage1d_source_baseline 2efeb7efaf5b97ca7850f61f1001224c00efd111
+    xlslice_vlnv xilinx.com:ip:xlslice:1.0
+}
+source_verification {
+    required_paths {
+        rtl/adc_sample_cdc_bridge.v
+        rtl/adc_sample_code_normalizer.sv
+        rtl/async_fifo_gray.v
+        rtl/source_observability_cdc.v
+        rtl/transaction_destination_observer.v
+        rtl/transaction_source_observer.v
+        rtl/fault_defs.vh
+        rtl/generated/protection_register_map.vh
+        rtl/generated/stage2f_adc_source_profile.svh
+        rtl/current_compare_dual.v
+        rtl/fault_classifier.v
+        rtl/moving_avg_filter.v
+        rtl/protection_core_top.v
+        rtl/protection_fsm.v
+        rtl/protection_ip_top_async_adc_axi_lite.v
+        rtl/protection_ip_top_axi_lite.v
+        rtl/protection_ip_top_reg_controlled.v
+        rtl/protection_reg_bank.v
+        rtl/pwm_gate.v
+        rtl/pwm_gen.v
+        rtl/reset_release_sync.v
+        rtl/sensor_health_monitor.v
+        fpga/vivado/package_protection_ip_stage2_axi_lite.tcl
+        fpga/vivado/constraints/stage2d_async_adc_atomic_cdc.xdc
+        fpga/vivado/constraints/stage2e_transaction_observability_cdc.xdc
+        fpga/vivado/create_pynq_z2_project_stage1_boardpart.tcl
+        fpga/vivado/create_pynq_z2_stage2_bd.tcl
+        fpga/vivado/add_pynq_z2_stage2b_debug.tcl
+        fpga/vivado/add_pynq_z2_stage1d_controlled_stimulus.tcl
+        fpga/vivado/build/mutation/stage1d_controlled_stimulus.tcl
+        fpga/vivado/build/stage1d_artifact_build.tcl
+        fpga/vivado/build/controller/argument_parser.tcl
+        fpga/vivado/build/controller/configuration_loader.tcl
+        fpga/vivado/build/controller/delivery_bundle_loader.tcl
+        fpga/vivado/build/controller/controller_core.tcl
+        fpga/vivado/build/controller/decision_engine.tcl
+        fpga/vivado/build/controller/logger.tcl
+        fpga/vivado/build/controller/phase_runner.tcl
+        fpga/vivado/build/controller/state_manager.tcl
+        fpga/vivado/build/lib/source_check.tcl
+        fpga/vivado/build/lib/environment_check.tcl
+        fpga/vivado/build/lib/workspace_manager.tcl
+        fpga/vivado/build/lib/vivado_project.tcl
+        fpga/vivado/build/lib/bd_flow.tcl
+        fpga/vivado/build/tests/delivery_bundle_loader_tests.tcl
+        fpga/vivado/build/tests/stage2d_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2d_profile_convergence_tests.tcl
+        fpga/vivado/build/tests/stage2e_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2e_observability_cdc_constraint_tests.tcl
+        fpga/vivado/build/config/stage1d_build_config.dict
+    }
+    tcl_paths {
+        fpga/vivado/package_protection_ip_stage2_axi_lite.tcl
+        fpga/vivado/create_pynq_z2_project_stage1_boardpart.tcl
+        fpga/vivado/create_pynq_z2_stage2_bd.tcl
+        fpga/vivado/add_pynq_z2_stage2b_debug.tcl
+        fpga/vivado/add_pynq_z2_stage1d_controlled_stimulus.tcl
+        fpga/vivado/build/mutation/stage1d_controlled_stimulus.tcl
+        fpga/vivado/build/stage1d_artifact_build.tcl
+        fpga/vivado/build/controller/argument_parser.tcl
+        fpga/vivado/build/controller/configuration_loader.tcl
+        fpga/vivado/build/controller/delivery_bundle_loader.tcl
+        fpga/vivado/build/controller/controller_core.tcl
+        fpga/vivado/build/controller/decision_engine.tcl
+        fpga/vivado/build/controller/logger.tcl
+        fpga/vivado/build/controller/phase_runner.tcl
+        fpga/vivado/build/controller/state_manager.tcl
+        fpga/vivado/build/lib/source_check.tcl
+        fpga/vivado/build/lib/environment_check.tcl
+        fpga/vivado/build/lib/workspace_manager.tcl
+        fpga/vivado/build/lib/vivado_project.tcl
+        fpga/vivado/build/lib/bd_flow.tcl
+        fpga/vivado/build/tests/delivery_bundle_loader_tests.tcl
+        fpga/vivado/build/tests/stage2d_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2d_profile_convergence_tests.tcl
+        fpga/vivado/build/tests/stage2e_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2e_observability_cdc_constraint_tests.tcl
+    }
+    controller_source_paths {
+        fpga/vivado/build/stage1d_artifact_build.tcl
+        fpga/vivado/build/controller/argument_parser.tcl
+        fpga/vivado/build/controller/configuration_loader.tcl
+        fpga/vivado/build/controller/delivery_bundle_loader.tcl
+        fpga/vivado/build/controller/controller_core.tcl
+        fpga/vivado/build/controller/decision_engine.tcl
+        fpga/vivado/build/controller/logger.tcl
+        fpga/vivado/build/controller/phase_runner.tcl
+        fpga/vivado/build/controller/state_manager.tcl
+        fpga/vivado/build/lib/source_check.tcl
+        fpga/vivado/build/lib/environment_check.tcl
+        fpga/vivado/build/lib/workspace_manager.tcl
+        fpga/vivado/build/lib/vivado_project.tcl
+        fpga/vivado/build/lib/bd_flow.tcl
+        fpga/vivado/build/mutation/stage1d_controlled_stimulus.tcl
+    }
+    expected_controller_source_sha256 815f4d9bdc739b2f58d0e504bb5b851272fc5c3902edc5bd34fcadcace5a15db
+}
+environment {
+    evidence_schema_version v1
+    vivado_version {Vivado v2024.1}
+    sw_build 5076996
+    ip_build 5075265
+    part xc7z020clg400-1
+    board_part tul.com.tw:pynq-z2:part0:1.0
+    required_ip_patterns {
+        xilinx.com:ip:processing_system7:*
+        xilinx.com:ip:proc_sys_reset:*
+        xilinx.com:ip:smartconnect:*
+        xilinx.com:ip:xlconstant:*
+        xilinx.com:ip:system_ila:*
+        xilinx.com:ip:axi_gpio:2.0
+        xilinx.com:ip:xlslice:1.0
+    }
+    custom_protection_ip {
+        vlnv zsr112.local:protection:protection_ip_axi_lite:0.3
+        provenance_status PENDING_PHASE3_RECONSTRUCTION
+        source_paths {
+            rtl/adc_sample_cdc_bridge.v
+            rtl/adc_sample_code_normalizer.sv
+            rtl/async_fifo_gray.v
+            rtl/source_observability_cdc.v
+            rtl/transaction_destination_observer.v
+            rtl/transaction_source_observer.v
+            rtl/generated/protection_register_map.vh
+            rtl/generated/stage2f_adc_source_profile.svh
+            rtl/protection_ip_top_async_adc_axi_lite.v
+            rtl/protection_ip_top_axi_lite.v
+            rtl/protection_ip_top_reg_controlled.v
+            rtl/protection_reg_bank.v
+            rtl/reset_release_sync.v
+            fpga/vivado/package_protection_ip_stage2_axi_lite.tcl
+            fpga/vivado/constraints/stage2d_async_adc_atomic_cdc.xdc
+            fpga/vivado/constraints/stage2e_transaction_observability_cdc.xdc
+        }
+    }
+}
+workspace {
+    ownership_schema_version v1
+    stale_vivado_markers {
+        .Xil
+        *.xpr
+        *.runs
+        *.cache
+        *.gen
+        *.srcs
+        *.sim
+        ip_user_files
+    }
+}
+phase_scope {
+    input_validation 1
+    controller_identity 1
+    execution_identifier 1
+    state_manager 1
+    phase_runner 1
+    decision_engine 1
+    structured_logging 1
+    source_verification 1
+    environment_verification 1
+    workspace_creation 1
+    project_operations 0
+    design_operations 0
+    artifact_operations 0
+    manifest_publication 0
+}

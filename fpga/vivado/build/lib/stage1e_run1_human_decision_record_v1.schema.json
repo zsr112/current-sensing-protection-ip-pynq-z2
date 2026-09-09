@@ -1,0 +1,172 @@
+{
+  "$id": "stage1e-run1-human-decision-record-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "approved_commit",
+    "freeze_review_selection",
+    "execution_report_sha256",
+    "approved_inventory_count",
+    "validation_summary",
+    "protected_source_summary",
+    "named_review_authority",
+    "authority_role",
+    "decisions"
+  ],
+  "x-stage1e-canonical-order": [
+    "schema_version",
+    "approved_commit",
+    "freeze_review_selection",
+    "execution_report_sha256",
+    "approved_inventory_count",
+    "validation_summary",
+    "protected_source_summary",
+    "named_review_authority",
+    "authority_role",
+    "decisions"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "stage1e-run1-human-decision-record-v1"
+    },
+    "approved_commit": {
+      "type": "string",
+      "minLength": 40,
+      "maxLength": 40,
+      "x-stage1e-format": "token"
+    },
+    "freeze_review_selection": {
+      "type": "string",
+      "enum": [
+        "APPROVE_SOURCE_CANDIDATE_FOR_COMMIT",
+        "REQUEST_PRT04_AMENDMENT",
+        "TARGETED_ENGINEERING_CORRECTION"
+      ]
+    },
+    "execution_report_sha256": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "x-stage1e-format": "token"
+    },
+    "approved_inventory_count": {
+      "type": "integer",
+      "const": 19
+    },
+    "validation_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "suite_count",
+        "case_count",
+        "failure_count"
+      ],
+      "x-stage1e-canonical-order": [
+        "suite_count",
+        "case_count",
+        "failure_count"
+      ],
+      "properties": {
+        "suite_count": {
+          "type": "integer",
+          "const": 33
+        },
+        "case_count": {
+          "type": "integer",
+          "const": 634
+        },
+        "failure_count": {
+          "type": "integer",
+          "const": 0
+        }
+      }
+    },
+    "protected_source_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checked_count",
+        "mismatch_count"
+      ],
+      "x-stage1e-canonical-order": [
+        "checked_count",
+        "mismatch_count"
+      ],
+      "properties": {
+        "checked_count": {
+          "type": "integer",
+          "const": 106
+        },
+        "mismatch_count": {
+          "type": "integer",
+          "const": 0
+        }
+      }
+    },
+    "named_review_authority": {
+      "type": "string",
+      "minLength": 1,
+      "x-stage1e-format": "message"
+    },
+    "authority_role": {
+      "type": "string",
+      "minLength": 1,
+      "x-stage1e-format": "message"
+    },
+    "decisions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "stable_identifier",
+          "selection",
+          "exact_scope",
+          "evidence_reference",
+          "rationale"
+        ],
+        "x-stage1e-canonical-order": [
+          "stable_identifier",
+          "selection",
+          "exact_scope",
+          "evidence_reference",
+          "rationale"
+        ],
+        "properties": {
+          "stable_identifier": {
+            "type": "string",
+            "minLength": 1,
+            "x-stage1e-format": "token"
+          },
+          "selection": {
+            "type": "string",
+            "enum": [
+              "ACCEPT_WITH_EXACT_CONTRACT",
+              "REJECT_AND_FIX",
+              "DEFER_BLOCKING"
+            ]
+          },
+          "exact_scope": {
+            "type": "string",
+            "minLength": 1,
+            "x-stage1e-format": "message"
+          },
+          "evidence_reference": {
+            "type": "string",
+            "minLength": 1,
+            "x-stage1e-format": "message"
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "x-stage1e-format": "message"
+          }
+        }
+      }
+    }
+  }
+}

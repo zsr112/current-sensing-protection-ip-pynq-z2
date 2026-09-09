@@ -1,9 +1,0 @@
-{
-  "host_end_utc": "2026-09-08T19:32:58.295840+00:00",
-  "host_start_utc": "2026-09-08T19:32:58.268045+00:00",
-  "request": {
-    "action": "source_protocol/prepare",
-    "execution_id": "S1E-B2-BOARD-20260909-R4"
-  },
-  "response_sha256": "fa2f59abef2d34f6052a6298ab81b0d2605a3e9a3543b1a769acd184d968917c"
-}

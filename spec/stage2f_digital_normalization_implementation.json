@@ -1,0 +1,97 @@
+{
+  "schema_version": "stage2f-digital-normalization-implementation-v1",
+  "implementation_id": "STAGE2F_D_DIGITAL_ENCODING_NORMALIZATION",
+  "base_commit": "3399e4fdc28f9d4c66cf90cb5c1dc1e386eda6ae",
+  "module": "rtl/adc_sample_code_normalizer.sv",
+  "generated_profile": "rtl/generated/stage2f_adc_source_profile.svh",
+  "profile_generator": "tools/generate_stage2f_adc_profile.py",
+  "production_profile": "UNCONFIGURED",
+  "production_normalized_telemetry": "UNAVAILABLE",
+  "supported_encodings": [
+    "UNSIGNED_WITH_ZERO_CODE",
+    "TWOS_COMPLEMENT"
+  ],
+  "raw_protection_path_active_and_unchanged": true,
+  "compatibility": {
+    "data_width_policy": "RAW_GENERIC_NORMALIZATION_ONLY_AT_12",
+    "normalization_data_width": 12,
+    "tested_raw_data_widths": [
+      8,
+      12,
+      16
+    ],
+    "tested_sequence_widths": [
+      16,
+      24,
+      32
+    ],
+    "explicit_raw_width_binding": true,
+    "explicit_sequence_width_binding": true,
+    "unsupported_normalization_tied_low": true
+  },
+  "verification_authority": {
+    "configured_capability": "GENERATED_HEADER_DEFAULT_INSTANCE",
+    "direct_parameter_tests": "SUPPLEMENTAL_ONLY",
+    "python_reference_vectors_connected_to": [
+      "ICARUS",
+      "XSIM"
+    ],
+    "duplicate_json_keys": "REJECTED_AT_ALL_NESTING_LEVELS"
+  },
+  "normalized_width": 13,
+  "normalized_signedness": "SIGNED",
+  "normalized_unit": "SIGNED_CODE_COUNT",
+  "placement": {
+    "input_authority": "ATOMIC_RAW_CDC_DESTINATION_DELIVERY_EVENT",
+    "raw_valid_signal": "dst_sample_valid",
+    "raw_sequence_signal": "dst_sample_sequence",
+    "raw_channel_signals": [
+      "dst_sample_ch1",
+      "dst_sample_ch2"
+    ],
+    "reset_signal": "adc_dst_local_rst_n",
+    "public_ports_added": false,
+    "axi_offsets_added": false
+  },
+  "pipeline": {
+    "latency_aclk": 1,
+    "initiation_interval": 1,
+    "data_dependent_latency": false,
+    "backpressure_to_atomic_cdc": false,
+    "transaction_drop": false
+  },
+  "stage2g_authority": {
+    "sample_event_authority": "ATOMIC_RAW_CDC_DESTINATION_DELIVERY_EVENT",
+    "fault_input_authority": "RAW_PROTECTION_EVALUATION",
+    "normalized_telemetry_gates_fault_policy": false
+  },
+  "validation_profiles": [
+    "SIM_UNSIGNED_ZERO_MIDSCALE_POSITIVE",
+    "SIM_UNSIGNED_ZERO_MIDSCALE_CH2_REVERSED",
+    "SIM_UNSIGNED_ZERO_EDGE_0",
+    "SIM_UNSIGNED_ZERO_EDGE_4095",
+    "SIM_TWOS_COMPLEMENT_POSITIVE",
+    "SIM_TWOS_COMPLEMENT_REVERSED"
+  ],
+  "validation_profile_contract": {
+    "production_selection": false,
+    "physical_unit_status": "NOT_CONFIGURED",
+    "physical_accuracy_claim": false,
+    "board_calibration_claim": false
+  },
+  "scope_non_claims": [
+    "PHYSICAL_UNIT",
+    "ADC_SELECTION",
+    "AFE_SELECTION",
+    "BOARD_CALIBRATION",
+    "RUNTIME_SCALING",
+    "GENERIC_DIVIDER",
+    "STAGE2G_PROTECTION_DOMAIN"
+  ],
+  "status": {
+    "stage2f_contract_gap_closed": false,
+    "physical_scaling_status": "BLOCKED_EXTERNAL_HARDWARE_FACTS",
+    "remaining_contract_gaps": 2,
+    "stage2_complete": false
+  }
+}

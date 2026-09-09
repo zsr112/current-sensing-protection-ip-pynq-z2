@@ -1,0 +1,175 @@
+{
+  "$schema": "stage1e-schema-subset-v1",
+  "$id": "stage1e-runtime-failure-record-v1",
+  "title": "Stage 1E runtime failure record v1",
+  "$ref": "#/$defs/failure_record",
+  "$defs": {
+    "failure_record": {
+      "type": "object",
+      "required": [
+        "terminal_status",
+        "failure_category",
+        "failure_code",
+        "failure_component",
+        "failure_phase",
+        "first_failure_ordinal",
+        "authorization_effect",
+        "process_effect",
+        "evidence_state",
+        "retry_disposition",
+        "candidate_effect",
+        "message",
+        "causal_evidence_references"
+      ],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": [
+        "terminal_status",
+        "failure_category",
+        "failure_code",
+        "failure_component",
+        "failure_phase",
+        "first_failure_ordinal",
+        "authorization_effect",
+        "process_effect",
+        "evidence_state",
+        "retry_disposition",
+        "candidate_effect",
+        "message",
+        "causal_evidence_references"
+      ],
+      "properties": {
+        "terminal_status": {
+          "type": "string",
+          "enum": ["COMPLETED", "FAILED", "BLOCKED"]
+        },
+        "failure_category": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "ENTRY_POINT_CONTRACT",
+            "REQUEST_ENVELOPE",
+            "IDENTITY_BINDING",
+            "DEPENDENCY_CLOSURE",
+            "HOST_PREFLIGHT",
+            "LAUNCH",
+            "PROCESS_OBSERVATION",
+            "TIMEOUT",
+            "TOOL_CAPABILITY",
+            "WORKSPACE_STATE",
+            "SYNTHESIS_PREDECESSOR",
+            "AUTHORIZATION",
+            "CONFIGURATION_READBACK",
+            "FORBIDDEN_OPERATION",
+            "OPTIMIZATION",
+            "PLACEMENT",
+            "ROUTING",
+            "COLLECTION",
+            "PARSING",
+            "SERIALIZATION",
+            "EVIDENCE_INCOMPLETE",
+            "POLICY_REVIEW",
+            "FORBIDDEN_BOUNDARY",
+            "INTERNAL_RUNTIME"
+          ]
+        },
+        "failure_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "x-stage1e-format": "token"
+        },
+        "failure_component": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "x-stage1e-format": "token"
+        },
+        "failure_phase": {
+          "type": "string",
+          "enum": [
+            "INVOCATION",
+            "ENTRY_ASSEMBLY",
+            "REQUEST_VALIDATION",
+            "HOST_PREFLIGHT",
+            "PROCESS_LAUNCH",
+            "VIVADO_PREFLIGHT",
+            "AUTHORIZATION_CONSUMPTION",
+            "OPT_DESIGN",
+            "PLACE_DESIGN",
+            "ROUTE_DESIGN",
+            "REPORT_COLLECTION",
+            "PARSING",
+            "SERIALIZATION",
+            "REVIEW",
+            "TERMINATION",
+            "RESULT_PUBLICATION"
+          ]
+        },
+        "first_failure_ordinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "authorization_effect": {
+          "type": "string",
+          "enum": [
+            "NOT_TOUCHED",
+            "CONSUMED_ONCE",
+            "CONSUMPTION_FAILED",
+            "STATE_UNKNOWN"
+          ]
+        },
+        "process_effect": {
+          "type": "string",
+          "enum": [
+            "NOT_STARTED",
+            "STARTED_RUNNING",
+            "EXITED_OBSERVED",
+            "TERMINATED_BY_POLICY",
+            "OBSERVATION_LOST",
+            "STATE_UNKNOWN"
+          ]
+        },
+        "evidence_state": {
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "PARTIAL_PRESERVED",
+            "UNAVAILABLE_WITH_REASON",
+            "INTEGRITY_UNKNOWN"
+          ]
+        },
+        "retry_disposition": {
+          "type": "string",
+          "enum": [
+            "NO_AUTOMATIC_RETRY",
+            "REVIEW_BEFORE_NEW_LAUNCH",
+            "NEW_EXECUTION_REQUIRED",
+            "RETRY_PROHIBITED_PENDING_RUNTIME_FIX"
+          ]
+        },
+        "candidate_effect": {
+          "type": "string",
+          "const": "NOT_CREATED"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "x-stage1e-format": "message"
+        },
+        "causal_evidence_references": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "x-stage1e-format": "canonical-reference"
+          },
+          "uniqueItems": true,
+          "maxItems": 64
+        }
+      }
+    }
+  }
+}

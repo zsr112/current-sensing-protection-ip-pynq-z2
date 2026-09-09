@@ -1,0 +1,442 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://current-sensing-protection-ip.local/schema/stage2g-reset-wait-first-fault-policy-v2",
+  "title": "Stage 2G RESET_WAIT, first-fault, and transaction-boundary policy contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "contract_id",
+    "scope",
+    "authorities",
+    "sequence_width_contract_addendum",
+    "public_recovery_contract_addendum",
+    "fault_evaluation_transaction",
+    "policy_decision",
+    "episode_lifecycle",
+    "reset_wait",
+    "fault_model",
+    "bitmaps",
+    "clear_recovery",
+    "reset_policy",
+    "transaction_integrity",
+    "error_classification",
+    "safe_output",
+    "register_deferral",
+    "required_decisions",
+    "non_claims",
+    "open_owner_decisions"
+  ],
+  "properties": {
+    "$schema": {"const": "https://json-schema.org/draft/2020-12/schema"},
+    "schema_version": {"const": "stage2g-reset-wait-first-fault-policy-v2"},
+    "contract_id": {"const": "STAGE2G_RESET_WAIT_FIRST_FAULT_POLICY"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "audit_only", "implementation_started", "policy_gap_closed", "remaining_contract_gaps", "functional_rtl_changes_allowed", "public_interface_changes_allowed", "previous_audit_commit"],
+      "properties": {
+        "stage": {"const": "2G"},
+        "audit_only": {"const": true},
+        "implementation_started": {"const": false},
+        "policy_gap_closed": {"const": false},
+        "remaining_contract_gaps": {"const": 2},
+        "functional_rtl_changes_allowed": {"const": false},
+        "public_interface_changes_allowed": {"const": false},
+        "previous_audit_commit": {"const": "af0c604d9de9fa4a6b659940be2d41f9fbc170bd"}
+      }
+    },
+    "authorities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sample_event_authority", "fault_input_authority", "normalized_telemetry_gates_fault_policy", "normalized_range_flags_gate_fault_policy", "normalized_configuration_valid_gates_fault_policy", "raw_protection_threshold_domain", "existing_register_offsets", "new_axi_offsets_added", "external_interface_change_required"],
+      "properties": {
+        "sample_event_authority": {"const": "ATOMIC_RAW_CDC_DESTINATION_DELIVERY_EVENT"},
+        "fault_input_authority": {"const": "RAW_PROTECTION_EVALUATION"},
+        "normalized_telemetry_gates_fault_policy": {"const": false},
+        "normalized_range_flags_gate_fault_policy": {"const": false},
+        "normalized_configuration_valid_gates_fault_policy": {"const": false},
+        "raw_protection_threshold_domain": {"const": "UNSIGNED_RAW_CODE_COMPATIBILITY"},
+        "existing_register_offsets": {"const": "0x00..0x60_UNCHANGED"},
+        "new_axi_offsets_added": {"const": false},
+        "external_interface_change_required": {"const": false}
+      }
+    },
+    "sequence_width_contract_addendum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["addendum_id", "fault_eval_sequence_width", "supported_sequence_widths", "minimum_sequence_width", "maximum_sequence_width", "sequence_arithmetic", "binding", "classification_authority", "first_nonzero_delivery", "forward_gap", "duplicate", "reorder_stale", "next_matching_transaction_restores_eligibility"],
+      "properties": {
+        "addendum_id": {"const": "STAGE2G_SEQUENCE_WIDTH_CONTRACT_IMPLEMENTATION_ADDENDUM_V1"},
+        "fault_eval_sequence_width": {"const": "OBS_SEQUENCE_WIDTH"},
+        "supported_sequence_widths": {"const": "16_TO_32"},
+        "minimum_sequence_width": {"const": 16},
+        "maximum_sequence_width": {"const": 32},
+        "sequence_arithmetic": {"const": "MODULO_2_POW_SEQUENCE_WIDTH"},
+        "binding": {"const": "SEQUENCE_WIDTH_EQUALS_OBS_SEQUENCE_WIDTH"},
+        "classification_authority": {"const": "SHARED_STAGE2E_TRANSACTION_SEQUENCE_CLASSIFIER"},
+        "first_nonzero_delivery": {"const": "STALE_RETAIN_EXPECTED"},
+        "forward_gap": {"const": "DIRTY_RESYNC_DELIVERED_PLUS_ONE"},
+        "duplicate": {"const": "DIRTY_RETAIN_EXPECTED"},
+        "reorder_stale": {"const": "DIRTY_RETAIN_EXPECTED"},
+        "next_matching_transaction_restores_eligibility": {"const": true}
+      }
+    },
+    "public_recovery_contract_addendum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["addendum_id", "internal_episode_end", "public_recovery_complete", "clear_acceptance_equals_public_recovery_complete", "public_status_owner", "public_fault_latched_signal", "public_fault_code_signal", "post_clear_pending_signal", "clear_acceptance_public_behavior", "no_sample_post_clear_behavior", "nonclean_post_clear_behavior", "later_clean_healthy_behavior", "clean_fault_before_rearm_behavior", "reset_behavior", "new_recovery_status_bit_added", "software_recovery_api_changed", "software_recovery_predicate"],
+      "properties": {
+        "addendum_id": {"const": "STAGE2G_PUBLIC_RECOVERY_OBSERVABILITY_IMPLEMENTATION_ADDENDUM_V1"},
+        "internal_episode_end": {"const": "LEGAL_CLEAR_ACCEPTANCE"},
+        "public_recovery_complete": {"const": "LATER_CLEAN_HEALTHY_EVALUATION_ENTERING_ARMED"},
+        "clear_acceptance_equals_public_recovery_complete": {"const": false},
+        "public_status_owner": {"const": "EXISTING_STATUS_AND_FAULT_CODE_REGISTERS"},
+        "public_fault_latched_signal": {"const": "public_fault_latched_compat"},
+        "public_fault_code_signal": {"const": "public_fault_code_compat"},
+        "post_clear_pending_signal": {"const": "post_clear_recovery_pending"},
+        "clear_acceptance_public_behavior": {"const": "RETAIN_LATCH_AND_PRIOR_FIRST_CAUSE_SET_PENDING"},
+        "no_sample_post_clear_behavior": {"const": "RETAIN_PUBLIC_STATUS_AND_PENDING"},
+        "nonclean_post_clear_behavior": {"const": "RETAIN_PUBLIC_STATUS_AND_PENDING"},
+        "later_clean_healthy_behavior": {"const": "ENTER_ARMED_CLEAR_PUBLIC_STATUS_AND_PENDING"},
+        "clean_fault_before_rearm_behavior": {"const": "START_NEW_EPISODE_REPLACE_PUBLIC_FIRST_CAUSE"},
+        "reset_behavior": {"const": "CLEAR_INTERNAL_AND_PUBLIC_RECOVERY_STATE"},
+        "new_recovery_status_bit_added": {"const": false},
+        "software_recovery_api_changed": {"const": false},
+        "software_recovery_predicate": {"const": "recovery_is_verified(snapshot)"}
+      }
+    },
+    "fault_evaluation_transaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transaction_definition", "valid_signal", "sequence_signal", "bitmap_signal", "code_signal", "integrity_signal", "valid_authority", "sequence_width", "fault_present_definition", "healthy_evaluation_definition", "policy_eligible_definition", "zero_bitmap_is_valid_healthy_evaluation", "current_fault_valid_semantics", "current_fault_valid_is_evaluation_valid", "missing_current_signal", "fields_aligned", "sequence_alignment", "bitmap_alignment", "code_alignment", "integrity_alignment", "no_channel_or_cause_tearing", "pipeline", "nonclean_policy", "reset_flush_rule", "sequence_wrap_rule"],
+      "properties": {
+        "transaction_definition": {"type": "string", "minLength": 1},
+        "valid_signal": {"const": "fault_eval_valid"},
+        "sequence_signal": {"const": "fault_eval_sequence[SEQUENCE_WIDTH-1:0]"},
+        "bitmap_signal": {"const": "fault_eval_bitmap[5:0]"},
+        "code_signal": {"const": "fault_eval_code[7:0]"},
+        "integrity_signal": {"const": "fault_eval_integrity_clean"},
+        "valid_authority": {"const": "ONE_PER_ATOMIC_RAW_CDC_DESTINATION_DELIVERY"},
+        "sequence_width": {"const": "OBS_SEQUENCE_WIDTH"},
+        "fault_present_definition": {"const": "fault_eval_valid && fault_eval_bitmap != 0"},
+        "healthy_evaluation_definition": {"const": "fault_eval_valid && fault_eval_bitmap == 0"},
+        "policy_eligible_definition": {"const": "fault_eval_valid && fault_eval_integrity_clean"},
+        "zero_bitmap_is_valid_healthy_evaluation": {"const": true},
+        "current_fault_valid_semantics": {"const": "REGISTERED_NONZERO_FAULT_PRESENCE_FOR_ONE_EVALUATED_TRANSACTION"},
+        "current_fault_valid_is_evaluation_valid": {"const": false},
+        "missing_current_signal": {"const": "HEALTHY_OR_FAULTY_EVALUATION_COMPLETION_VALID"},
+        "fields_aligned": {"const": true},
+        "sequence_alignment": {"type": "string", "minLength": 1},
+        "bitmap_alignment": {"type": "string", "minLength": 1},
+        "code_alignment": {"type": "string", "minLength": 1},
+        "integrity_alignment": {"type": "string", "minLength": 1},
+        "no_channel_or_cause_tearing": {"const": true},
+        "pipeline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["clock", "delivery_edge_offset", "decision_health_edge_offset", "fault_eval_register_edge_offset", "policy_decision_edge_offset", "latency_class", "fixed_delivery_to_policy_cycles", "initiation_interval", "exactly_one_evaluation_per_delivery", "no_evaluation_without_delivery", "no_drop", "no_duplicate", "no_reorder"],
+          "properties": {
+            "clock": {"const": "ACLK"},
+            "delivery_edge_offset": {"const": 0},
+            "decision_health_edge_offset": {"const": 1},
+            "fault_eval_register_edge_offset": {"const": 2},
+            "policy_decision_edge_offset": {"const": 3},
+            "latency_class": {"const": "FIXED_3_ACLK_EDGES_DELIVERY_TO_POLICY_DECISION_II1"},
+            "fixed_delivery_to_policy_cycles": {"const": 3},
+            "initiation_interval": {"const": 1},
+            "exactly_one_evaluation_per_delivery": {"const": true},
+            "no_evaluation_without_delivery": {"const": true},
+            "no_drop": {"const": true},
+            "no_duplicate": {"const": true},
+            "no_reorder": {"const": true}
+          }
+        },
+        "nonclean_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["arms_reset_wait", "accepts_clear", "becomes_physical_fault_cause", "updates_first_cause", "updates_live_or_seen_bitmap", "next_clean_transaction_restores_eligibility"],
+          "properties": {
+            "arms_reset_wait": {"const": false},
+            "accepts_clear": {"const": false},
+            "becomes_physical_fault_cause": {"const": false},
+            "updates_first_cause": {"const": false},
+            "updates_live_or_seen_bitmap": {"const": false},
+            "next_clean_transaction_restores_eligibility": {"const": true}
+          }
+        },
+        "reset_flush_rule": {"const": "RESET_INVALIDATES_ALL_PIPELINE_VALID_BITS_AND_PENDING_EVALUATIONS_NO_PRE_RESET_RETIREMENT"},
+        "sequence_wrap_rule": {"const": "MODULO_2_POW_SEQUENCE_WIDTH_IDENTITY_WRAP_DOES_NOT_CHANGE_RETIREMENT_ORDER"}
+      }
+    },
+    "policy_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clock", "cycle", "definition", "priority_order", "fault_branch", "clear_branch", "healthy_progress_branch", "delivered_not_retired_rule"],
+      "properties": {
+        "clock": {"const": "ACLK"},
+        "cycle": {"const": "FAULT_EVALUATION_RETIREMENT"},
+        "definition": {"type": "string", "minLength": 1},
+        "priority_order": {"const": ["RESET", "FAULT", "CLEAR", "HEALTHY_PROGRESS"]},
+        "fault_branch": {"type": "string", "minLength": 1},
+        "clear_branch": {"type": "string", "minLength": 1},
+        "healthy_progress_branch": {"type": "string", "minLength": 1},
+        "delivered_not_retired_rule": {"type": "string", "minLength": 1}
+      }
+    },
+    "episode_lifecycle": {"$ref": "#/$defs/episode_lifecycle"},
+    "reset_wait": {"$ref": "#/$defs/reset_wait"},
+    "fault_model": {"$ref": "#/$defs/fault_model"},
+    "bitmaps": {"$ref": "#/$defs/bitmaps"},
+    "clear_recovery": {"$ref": "#/$defs/clear_recovery"},
+    "reset_policy": {"$ref": "#/$defs/reset_policy"},
+    "transaction_integrity": {"$ref": "#/$defs/transaction_integrity"},
+    "error_classification": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {"$ref": "#/$defs/error_row"}
+    },
+    "safe_output": {"$ref": "#/$defs/safe_output"},
+    "register_deferral": {"$ref": "#/$defs/register_deferral"},
+    "required_decisions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["RESET_WAIT_ENTRY", "RESET_WAIT_EXIT", "FIRST_ELIGIBLE_TRANSACTION", "HEALTHY_QUALIFICATION_COUNT", "FAULT_DURING_RESET_WAIT", "FAULT_ON_EXIT_TRANSACTION", "NO_SAMPLE_POLICY", "FAULT_EPISODE_START_END", "FIRST_CAUSE_CAPTURE", "SIMULTANEOUS_PRIORITY", "FIRST_LIVE_SEEN_BITMAPS", "PERSISTENT_FAULT_POLICY", "CLEAR_ACCEPTANCE", "FAULT_VS_CLEAR_PRIORITY", "RESET_VS_FAULT_PRIORITY", "RESET_VS_CLEAR_PRIORITY", "POST_CLEAR_DESTINATION_STATE", "POST_RECOVERY_RETRIGGER", "STAGE2E_ERROR_CLASSIFICATION", "SAFE_OUTPUT_RELEASE", "REGISTER_VISIBILITY_DEFERRAL", "FAULT_EVALUATION_TRANSACTION", "FAULT_EVALUATION_VALID_AUTHORITY", "FAULT_EVALUATION_SEQUENCE_ALIGNMENT", "FAULT_EVALUATION_LATENCY_CLASS", "CLEAR_REQUEST_BOUNDARY", "CLEAR_RESOLUTION_TRANSACTION", "CLEAR_PENDING_NO_SAMPLE", "REPEATED_CLEAR_PENDING", "CLEAR_RESOLUTION_VS_RESET_WAIT_EXIT", "POLICY_DECISION_CYCLE", "TRANSACTION_INTEGRITY_SOURCE", "SOURCE_DIAGNOSTIC_CDC_CLASSIFICATION", "STICKY_STATUS_POLICY_ROLE"],
+      "properties": {
+        "RESET_WAIT_ENTRY": {"$ref": "#/$defs/decision"},
+        "RESET_WAIT_EXIT": {"$ref": "#/$defs/decision"},
+        "FIRST_ELIGIBLE_TRANSACTION": {"$ref": "#/$defs/decision"},
+        "HEALTHY_QUALIFICATION_COUNT": {"$ref": "#/$defs/decision"},
+        "FAULT_DURING_RESET_WAIT": {"$ref": "#/$defs/decision"},
+        "FAULT_ON_EXIT_TRANSACTION": {"$ref": "#/$defs/decision"},
+        "NO_SAMPLE_POLICY": {"$ref": "#/$defs/decision"},
+        "FAULT_EPISODE_START_END": {"$ref": "#/$defs/decision"},
+        "FIRST_CAUSE_CAPTURE": {"$ref": "#/$defs/decision"},
+        "SIMULTANEOUS_PRIORITY": {"$ref": "#/$defs/decision"},
+        "FIRST_LIVE_SEEN_BITMAPS": {"$ref": "#/$defs/decision"},
+        "PERSISTENT_FAULT_POLICY": {"$ref": "#/$defs/decision"},
+        "CLEAR_ACCEPTANCE": {"$ref": "#/$defs/decision"},
+        "FAULT_VS_CLEAR_PRIORITY": {"$ref": "#/$defs/decision"},
+        "RESET_VS_FAULT_PRIORITY": {"$ref": "#/$defs/decision"},
+        "RESET_VS_CLEAR_PRIORITY": {"$ref": "#/$defs/decision"},
+        "POST_CLEAR_DESTINATION_STATE": {"$ref": "#/$defs/decision"},
+        "POST_RECOVERY_RETRIGGER": {"$ref": "#/$defs/decision"},
+        "STAGE2E_ERROR_CLASSIFICATION": {"$ref": "#/$defs/decision"},
+        "SAFE_OUTPUT_RELEASE": {"$ref": "#/$defs/decision"},
+        "REGISTER_VISIBILITY_DEFERRAL": {"$ref": "#/$defs/decision"},
+        "FAULT_EVALUATION_TRANSACTION": {"$ref": "#/$defs/decision"},
+        "FAULT_EVALUATION_VALID_AUTHORITY": {"$ref": "#/$defs/decision"},
+        "FAULT_EVALUATION_SEQUENCE_ALIGNMENT": {"$ref": "#/$defs/decision"},
+        "FAULT_EVALUATION_LATENCY_CLASS": {"$ref": "#/$defs/decision"},
+        "CLEAR_REQUEST_BOUNDARY": {"$ref": "#/$defs/decision"},
+        "CLEAR_RESOLUTION_TRANSACTION": {"$ref": "#/$defs/decision"},
+        "CLEAR_PENDING_NO_SAMPLE": {"$ref": "#/$defs/decision"},
+        "REPEATED_CLEAR_PENDING": {"$ref": "#/$defs/decision"},
+        "CLEAR_RESOLUTION_VS_RESET_WAIT_EXIT": {"$ref": "#/$defs/decision"},
+        "POLICY_DECISION_CYCLE": {"$ref": "#/$defs/decision"},
+        "TRANSACTION_INTEGRITY_SOURCE": {"$ref": "#/$defs/decision"},
+        "SOURCE_DIAGNOSTIC_CDC_CLASSIFICATION": {"$ref": "#/$defs/decision"},
+        "STICKY_STATUS_POLICY_ROLE": {"$ref": "#/$defs/decision"}
+      }
+    },
+    "non_claims": {"type": "array", "minItems": 7, "items": {"type": "string", "minLength": 1}},
+    "open_owner_decisions": {"type": "array", "const": []}
+  },
+  "$defs": {
+    "episode_lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conceptual_states", "fault_source_removed_but_latched", "fault_episode_start", "fault_episode_active", "fault_episode_end", "new_episode_eligibility"],
+      "properties": {
+        "conceptual_states": {"const": ["RESET", "RESET_WAIT", "ARMED", "FAULT_LATCHED"]},
+        "fault_source_removed_but_latched": {"type": "string", "minLength": 1},
+        "fault_episode_start": {"type": "string", "minLength": 1},
+        "fault_episode_active": {"type": "string", "minLength": 1},
+        "fault_episode_end": {"type": "string", "minLength": 1},
+        "new_episode_eligibility": {"type": "string", "minLength": 1}
+      }
+    },
+    "reset_wait": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry_condition", "exit_condition", "first_eligible_sample_definition", "arming_policy", "healthy_qualification_count", "healthy_sample_requirement", "fault_during_reset_wait", "fault_on_exit_transaction", "no_sample_after_reset", "reset_reassertion_behavior", "nonclean_evaluation_behavior"],
+      "properties": {
+        "entry_condition": {"const": "RESET_ASSERTION_OR_SUCCESSFUL_CLEAR"},
+        "exit_condition": {"const": "ONE_CLEAN_FAULT_EVAL_WITH_ZERO_BITMAP"},
+        "first_eligible_sample_definition": {"type": "string", "minLength": 1},
+        "arming_policy": {"const": "FIRST_ELIGIBLE_TRANSACTION_ARMS_IMMEDIATELY"},
+        "healthy_qualification_count": {"const": 1},
+        "healthy_sample_requirement": {"type": "string", "minLength": 1},
+        "fault_during_reset_wait": {"const": "IMMEDIATE_LATCH_AND_HOLD_SAFE"},
+        "fault_on_exit_transaction": {"const": "FAULT_PRIORITY_LATCH_NO_ARMING"},
+        "no_sample_after_reset": {"const": "REMAIN_RESET_WAIT_SAFE_INDEFINITELY"},
+        "reset_reassertion_behavior": {"type": "string", "minLength": 1},
+        "nonclean_evaluation_behavior": {"type": "string", "minLength": 1}
+      }
+    },
+    "fault_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fault_level", "fault_event", "fault_episode", "non_sample_async_sources", "first_cause_capture", "persistent_fault_retrigger", "later_fault_overwrites_first_cause", "causes", "simultaneous_priority"],
+      "properties": {
+        "fault_level": {"type": "string", "minLength": 1},
+        "fault_event": {"type": "string", "minLength": 1},
+        "fault_episode": {"type": "string", "minLength": 1},
+        "non_sample_async_sources": {"const": "NONE_IDENTIFIED_PROTECTION_INPUTS_ARE_RAW_SAMPLE_EVALUATIONS"},
+        "first_cause_capture": {"type": "string", "minLength": 1},
+        "persistent_fault_retrigger": {"const": false},
+        "later_fault_overwrites_first_cause": {"const": false},
+        "causes": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/cause"}},
+        "simultaneous_priority": {"const": ["OC_WITH_ANY_SENSOR", "OVERCURRENT", "SENSOR_SATURATION", "SENSOR_OPEN", "SENSOR_STUCK", "SENSOR_MISMATCH"]}
+      }
+    },
+    "cause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "bitmap_bit", "raw_signal", "current_code", "priority_rank"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "bitmap_bit": {"type": "integer", "minimum": 0, "maximum": 5},
+        "raw_signal": {"type": "string", "minLength": 1},
+        "current_code": {"type": "string", "pattern": "^0x[0-9A-F]{2}$"},
+        "priority_rank": {"type": "integer", "minimum": 1, "maximum": 6}
+      }
+    },
+    "bitmaps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "first_fault_code", "first_fault_bitmap", "live_fault_bitmap", "fault_seen_bitmap", "nonclean_evaluation_update", "public_visibility"],
+      "properties": {
+        "width": {"const": 6},
+        "first_fault_code": {"type": "string", "minLength": 1},
+        "first_fault_bitmap": {"type": "string", "minLength": 1},
+        "live_fault_bitmap": {"type": "string", "minLength": 1},
+        "fault_seen_bitmap": {"type": "string", "minLength": 1},
+        "nonclean_evaluation_update": {"const": "NO_BITMAP_OR_FIRST_CAUSE_UPDATE"},
+        "public_visibility": {"const": "DEFERRED_TO_STAGE2H"}
+      }
+    },
+    "clear_recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protocol", "request_source", "request_capture", "request_boundary", "resolution_transaction", "resolution_order_domain", "same_edge_evaluation_order", "delivery_before_request_retire_after_request", "acceptance_condition", "rejection_condition", "pending_after_accept", "pending_after_reject", "clear_pending_no_sample", "repeated_clear_while_pending", "continuous_ii1_progress", "sequence_wrap", "reset_while_pending", "clear_while_any_live_fault", "source_removal_without_clear", "fault_and_clear_same_cycle", "clear_and_reset_same_cycle", "clear_during_reset_wait", "clear_during_armed_without_latch", "clear_rejection_observability", "post_clear_destination_state", "resolution_transaction_reset_wait_role", "successful_clear_starts_new_episode", "post_recovery_fault_can_latch_again", "recovery_qualify_state"],
+      "properties": {
+        "protocol": {"const": "REQUEST_EVALUATION_FENCED"},
+        "request_source": {"type": "string", "minLength": 1},
+        "request_capture": {"type": "string", "minLength": 1},
+        "request_boundary": {"type": "string", "minLength": 1},
+        "resolution_transaction": {"const": "FIRST_FAULT_EVAL_VALID_ON_AN_ACLK_EDGE_STRICTLY_AFTER_REQUEST_CAPTURE"},
+        "resolution_order_domain": {"const": "FAULT_EVALUATION_RETIREMENT_ORDER"},
+        "same_edge_evaluation_order": {"const": "EVALUATION_RETIRING_ON_REQUEST_EDGE_IS_EARLIER_AND_DOES_NOT_RESOLVE_NEW_REQUEST"},
+        "delivery_before_request_retire_after_request": {"const": "RESOLVES_REQUEST_BECAUSE_RETIREMENT_IS_STRICTLY_AFTER_CAPTURE"},
+        "acceptance_condition": {"const": ["CLEAR_PENDING_IS_TRUE", "FAULT_EVAL_VALID_IS_TRUE", "FAULT_EVAL_BITMAP_IS_ZERO", "FAULT_EVAL_INTEGRITY_CLEAN_IS_TRUE", "RESET_IS_FALSE"]},
+        "rejection_condition": {"const": "CLEAR_PENDING_AND_FAULT_EVAL_VALID_AND_(NONZERO_BITMAP_OR_NONCLEAN_INTEGRITY)"},
+        "pending_after_accept": {"const": "CLEAR_PENDING_CLEARS"},
+        "pending_after_reject": {"const": "CLEAR_PENDING_CLEARS_NEW_REQUEST_REQUIRED"},
+        "clear_pending_no_sample": {"const": "REMAIN_FAULT_LATCHED_SAFE_INDEFINITELY"},
+        "repeated_clear_while_pending": {"const": "IDEMPOTENT_COALESCED_NO_DUPLICATE_EPISODE_END"},
+        "continuous_ii1_progress": {"const": "REQUEST_RESOLVES_ON_NEXT_RETIREMENT_EDGE_AFTER_CAPTURE"},
+        "sequence_wrap": {"const": "NO_SEQUENCE_COMPARISON_IN_FENCE_MODULO_WRAP_PRESERVES_RETIREMENT_ORDER"},
+        "reset_while_pending": {"const": "RESET_CLEARS_PENDING_AND_ALL_EPISODE_PIPELINE_STATE"},
+        "clear_while_any_live_fault": {"const": "REJECT"},
+        "source_removal_without_clear": {"const": "REMAIN_LATCHED"},
+        "fault_and_clear_same_cycle": {"const": "FAULT_PRIORITY"},
+        "clear_and_reset_same_cycle": {"const": "RESET_PRIORITY"},
+        "clear_during_reset_wait": {"const": "REJECT_NO_OP_REMAIN_SAFE"},
+        "clear_during_armed_without_latch": {"const": "REJECT_NO_OP"},
+        "clear_rejection_observability": {"type": "string", "minLength": 1},
+        "post_clear_destination_state": {"const": "RESET_WAIT"},
+        "resolution_transaction_reset_wait_role": {"const": "DOES_NOT_ARM_OR_RELEASE_SAFE_OUTPUT"},
+        "successful_clear_starts_new_episode": {"const": true},
+        "post_recovery_fault_can_latch_again": {"const": true},
+        "recovery_qualify_state": {"const": "NOT_USED"}
+      }
+    },
+    "reset_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["priority_order", "effect_on_first_cause", "effect_on_live_bitmap", "effect_on_seen_bitmap", "effect_on_clear_pending", "effect_on_episode_state", "effect_on_pending_sample_pipeline", "stale_sample_rule"],
+      "properties": {
+        "priority_order": {"const": ["RESET", "FAULT", "CLEAR", "HEALTHY_PROGRESS"]},
+        "effect_on_first_cause": {"type": "string", "minLength": 1},
+        "effect_on_live_bitmap": {"type": "string", "minLength": 1},
+        "effect_on_seen_bitmap": {"type": "string", "minLength": 1},
+        "effect_on_clear_pending": {"const": "CLEAR_TO_ZERO"},
+        "effect_on_episode_state": {"type": "string", "minLength": 1},
+        "effect_on_pending_sample_pipeline": {"const": "FLUSH_ALL_VALID_BITS_AND_DISCARD_PENDING_FAULT_EVALUATIONS"},
+        "stale_sample_rule": {"const": "NO_PRE_RESET_EVALUATION_MAY_RETIRE_POST_RESET"}
+      }
+    },
+    "transaction_integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fault_eval_integrity_clean_definition", "source_component", "source_offer_rule", "withdrawn_offer_rule", "destination_component", "destination_recovery", "alignment_identity", "global_diagnostic_inhibit", "software_clear_dependency"],
+      "properties": {
+        "fault_eval_integrity_clean_definition": {"type": "string", "minLength": 1},
+        "source_component": {"const": "SOURCE_STALL_OFFER_STABILITY_RESULT_CARRIED_IN_ATOMIC_FIFO_PAYLOAD"},
+        "source_offer_rule": {"type": "string", "minLength": 1},
+        "withdrawn_offer_rule": {"type": "string", "minLength": 1},
+        "destination_component": {"const": "DELIVERED_SEQUENCE_EQUALS_CURRENT_EXPECTED_SEQUENCE"},
+        "destination_recovery": {"type": "string", "minLength": 1},
+        "alignment_identity": {"const": "FAULT_EVAL_SEQUENCE"},
+        "global_diagnostic_inhibit": {"const": false},
+        "software_clear_dependency": {"const": false}
+      }
+    },
+    "error_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["condition", "authority", "temporal_classification", "protection_trip", "policy_role", "arming_effect", "clear_effect", "software_visibility", "safety_rationale", "current_behavior", "target_behavior"],
+      "properties": {
+        "condition": {"type": "string", "minLength": 1},
+        "authority": {"type": "string", "minLength": 1},
+        "temporal_classification": {"enum": ["TRANSACTION_CORRELATED_BLOCKER", "STATUS_ONLY"]},
+        "protection_trip": {"const": false},
+        "policy_role": {"type": "string", "minLength": 1},
+        "arming_effect": {"type": "string", "minLength": 1},
+        "clear_effect": {"type": "string", "minLength": 1},
+        "software_visibility": {"type": "string", "minLength": 1},
+        "safety_rationale": {"type": "string", "minLength": 1},
+        "current_behavior": {"type": "string", "minLength": 1},
+        "target_behavior": {"type": "string", "minLength": 1}
+      }
+    },
+    "safe_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["safe_actuation_trigger", "safe_actuation_latency_domain", "safe_state_hold_condition", "safe_state_release_condition", "clear_resolution_transaction_releases_safe_output", "normalized_telemetry_effect", "physical_latency_claim"],
+      "properties": {
+        "safe_actuation_trigger": {"const": "RESET_OR_ANY_CLEAN_NONZERO_FAULT_EVAL"},
+        "safe_actuation_latency_domain": {"const": "FIXED_REGISTERED_ACLK_POLICY_PATH"},
+        "safe_state_hold_condition": {"type": "string", "minLength": 1},
+        "safe_state_release_condition": {"type": "string", "minLength": 1},
+        "clear_resolution_transaction_releases_safe_output": {"const": false},
+        "normalized_telemetry_effect": {"const": "CANNOT_RELEASE_DELAY_OR_SUPPRESS_SAFE_ACTUATION"},
+        "physical_latency_claim": {"const": "NONE"}
+      }
+    },
+    "register_deferral": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["existing_offsets_preserved", "new_offsets_allocated", "conceptual_fields", "owner"],
+      "properties": {
+        "existing_offsets_preserved": {"const": true},
+        "new_offsets_allocated": {"const": false},
+        "conceptual_fields": {"const": ["FIRST_FAULT_CODE", "FIRST_FAULT_BITMAP", "LIVE_FAULT_BITMAP", "FAULT_SEEN_BITMAP", "CLEAR_PENDING", "CLEAR_REJECT_REASON", "CLEAR_RESOLUTION_SEQUENCE"]},
+        "owner": {"const": "STAGE2H_SINGLE_SOURCE_REGISTER_MAP_CONVERGENCE"}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "decision", "owner"],
+      "properties": {
+        "status": {"enum": ["APPROVED", "DEFERRED_TO_STAGE2H", "OWNER_DECISION_REQUIRED", "NOT_APPLICABLE"]},
+        "decision": {"type": "string", "minLength": 1},
+        "owner": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
