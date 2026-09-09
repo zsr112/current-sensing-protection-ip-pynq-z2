@@ -1,0 +1,54 @@
+schema_version stage1e-production-message-contract-v1
+contract_state PRODUCTION_CANDIDATE_REVIEW_REQUIRED
+qualification_state ACTUAL_VIVADO_REPORT_FORMATS_NOT_QUALIFIED
+severity_order {INFO WARNING CRITICAL_WARNING ERROR UNKNOWN}
+grouping_key {
+    identifier severity producer_phase text source_kind affected_context
+}
+unknown_identifier_action UNKNOWN_IDENTIFIER
+unknown_value_rule UNKNOWN_NEVER_ZERO
+conflict_rule PRESERVE_ALL_AND_BLOCK
+known_fixture_identifiers {
+    MESSAGE {MSG-100 MSG-200 CHECK-1}
+    DRC {DRC-1 DRC-2}
+    METHODOLOGY {METH-1 METH-2}
+    CDC {CDC-1 CDC-2}
+}
+message_fields {
+    identifier raw_identifier identifier_state severity native_severity
+    producer_phase phase_evidence count text source_kind source_location
+    affected_context source_references occurrence_references completeness
+}
+drc_fields {
+    identifier raw_identifier identifier_state severity native_severity
+    count affected_objects report_reference source_references completeness
+}
+methodology_fields {
+    identifier raw_identifier identifier_state severity count
+    affected_objects category source report_reference completeness
+}
+timing_fields {
+    check_type path_group metric raw_value normalized_value_state
+    normalized_value unit failing_endpoints path_count source_reference
+    completeness
+}
+clock_cdc_fields {
+    record_kind identifier classification severity source_clock
+    destination_clock source_object destination_object relationship
+    period_state period_ps waveform_ps master_clock count reset_observation
+    source_reference completeness
+}
+timing_exception_fields {
+    identifier command exception_type source from_expression to_expression
+    through_expression resolved_objects clock_pair coverage state
+    source_reference completeness
+}
+utilization_fields {
+    resource raw_resource used available utilization_milli_percent
+    canonical_unit scope source_reference completeness
+}
+authority_boundary {
+    finding_disposition NONE warning_acceptance NONE drc_acceptance NONE
+    methodology_acceptance NONE timing_acceptance NONE cdc_acceptance NONE
+    exception_acceptance NONE engineering_acceptance NONE
+}

@@ -1,0 +1,120 @@
+{
+  "$schema": "stage1e-schema-subset-v1",
+  "$id": "stage1e-runtime-host-process-ledger-v1",
+  "title": "Stage 1E append-only host process observation ledger v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ledger_state",
+    "request_identity",
+    "execution_id",
+    "attempt_id",
+    "creation_attempt_count",
+    "resume_count",
+    "execution_process_limit",
+    "root_process_id",
+    "events",
+    "job_events",
+    "observed_instance_count",
+    "terminal_snapshot_process_ids",
+    "terminal_tree_state",
+    "heartbeat_final_cursor",
+    "authority_boundary"
+  ],
+  "additionalProperties": false,
+  "x-stage1e-canonical-order": [
+    "schema_version",
+    "ledger_state",
+    "request_identity",
+    "execution_id",
+    "attempt_id",
+    "creation_attempt_count",
+    "resume_count",
+    "execution_process_limit",
+    "root_process_id",
+    "events",
+    "job_events",
+    "observed_instance_count",
+    "terminal_snapshot_process_ids",
+    "terminal_tree_state",
+    "heartbeat_final_cursor",
+    "authority_boundary"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "stage1e-runtime-host-process-ledger-v1"},
+    "ledger_state": {"type": "string", "const": "APPEND_ONLY_TERMINAL"},
+    "request_identity": {"$ref": "stage1e-runtime-host-common-v1#/$defs/sha256"},
+    "execution_id": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+    "attempt_id": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+    "creation_attempt_count": {"type": "integer", "minimum": 0, "maximum": 1},
+    "resume_count": {"type": "integer", "minimum": 0, "maximum": 1},
+    "execution_process_limit": {"type": "integer", "minimum": 1, "maximum": 32},
+    "root_process_id": {"$ref": "stage1e-runtime-host-common-v1#/$defs/pid_or_unavailable"},
+    "events": {"type": "array", "items": {"$ref": "#/$defs/process_event"}, "minItems": 1, "maxItems": 4096},
+    "job_events": {"type": "array", "items": {"$ref": "#/$defs/job_event"}, "maxItems": 8192},
+    "observed_instance_count": {"type": "integer", "minimum": 0, "maximum": 32},
+    "terminal_snapshot_process_ids": {"type": "array", "items": {"type": "integer", "minimum": 1, "maximum": 4294967295}, "uniqueItems": true, "maxItems": 32},
+    "terminal_tree_state": {"type": "string", "enum": ["TERMINAL", "OBSERVATION_LOST", "UNKNOWN"]},
+    "heartbeat_final_cursor": {"$ref": "#/$defs/heartbeat_cursor"},
+    "authority_boundary": {"$ref": "stage1e-runtime-host-common-v1#/$defs/authority_boundary"}
+  },
+  "$defs": {
+    "process_event": {
+      "type": "object",
+      "required": ["schema_version", "ordinal", "event_type", "elapsed_ms", "observation_time_utc", "instances", "message"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["schema_version", "ordinal", "event_type", "elapsed_ms", "observation_time_utc", "instances", "message"],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-runtime-host-process-event-v1"},
+        "ordinal": {"type": "integer", "minimum": 1, "maximum": 2147483647},
+        "event_type": {"type": "string", "enum": ["PREFLIGHT_OBSERVED", "LAUNCH_REQUESTED", "PROCESS_CREATED_SUSPENDED", "PROCESS_CREATION_FAILED", "JOB_ASSIGNED", "THREAD_RESUMED", "PROCESS_RUNNING", "HEARTBEAT_RECEIVED", "TOPOLOGY_CHANGED", "TOPOLOGY_CONFLICT", "EXIT_OBSERVED", "PROCESS_TREE_TERMINAL", "OBSERVATION_LOST", "TERMINAL_STATE_UNKNOWN"]},
+        "elapsed_ms": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "observation_time_utc": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+        "instances": {"type": "array", "items": {"$ref": "stage1e-runtime-host-process-instance-v1"}, "maxItems": 32},
+        "message": {"$ref": "stage1e-runtime-host-common-v1#/$defs/message"}
+      }
+    },
+    "job_event": {
+      "type": "object",
+      "required": ["schema_version", "sequence", "event_type", "native_message_type", "pid", "parent_pid", "creation_time_utc", "image_path", "observation_handle_state", "job_membership", "exit_state", "exit_code", "receipt_monotonic_ticks", "receipt_elapsed_ms", "availability_state", "conflicts"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["schema_version", "sequence", "event_type", "native_message_type", "pid", "parent_pid", "creation_time_utc", "image_path", "observation_handle_state", "job_membership", "exit_state", "exit_code", "receipt_monotonic_ticks", "receipt_elapsed_ms", "availability_state", "conflicts"],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-runtime-host-job-event-v1"},
+        "sequence": {"type": "integer", "minimum": 1, "maximum": 2147483647},
+        "event_type": {"type": "string", "enum": ["NEW_PROCESS", "EXIT_PROCESS", "ABNORMAL_EXIT_PROCESS", "ACTIVE_PROCESS_LIMIT", "ACTIVE_PROCESS_ZERO", "COMPLETION_PORT_FAILURE", "UNKNOWN_JOB_MESSAGE"]},
+        "native_message_type": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "pid": {"$ref": "stage1e-runtime-host-common-v1#/$defs/pid_or_unavailable"},
+        "parent_pid": {
+          "oneOf": [
+            {"type": "integer", "minimum": 0, "maximum": 4294967295},
+            {"type": "string", "const": "UNAVAILABLE"}
+          ]
+        },
+        "creation_time_utc": {"$ref": "stage1e-runtime-host-common-v1#/$defs/token"},
+        "image_path": {"$ref": "stage1e-runtime-host-common-v1#/$defs/path_or_none"},
+        "observation_handle_state": {"type": "string", "enum": ["RETAINED", "OPENED_FOR_OBSERVATION", "UNAVAILABLE", "NOT_APPLICABLE"]},
+        "job_membership": {"type": "string", "enum": ["IN_JOB", "NOT_IN_JOB", "UNKNOWN", "NOT_APPLICABLE"]},
+        "exit_state": {"type": "string", "enum": ["RUNNING", "EXITED", "UNAVAILABLE", "NOT_APPLICABLE"]},
+        "exit_code": {"$ref": "stage1e-runtime-host-common-v1#/$defs/integer_or_unavailable"},
+        "receipt_monotonic_ticks": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "receipt_elapsed_ms": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "availability_state": {"type": "string", "enum": ["COMPLETE", "UNAVAILABLE", "CONFLICT", "NOT_APPLICABLE"]},
+        "conflicts": {"type": "array", "items": {"$ref": "stage1e-runtime-host-common-v1#/$defs/message"}, "uniqueItems": true, "maxItems": 64}
+      }
+    },
+    "heartbeat_cursor": {
+      "type": "object",
+      "required": ["complete_offset", "observed_byte_count", "last_sequence", "trailing_partial", "terminal_read_state"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["complete_offset", "observed_byte_count", "last_sequence", "trailing_partial", "terminal_read_state"],
+      "properties": {
+        "complete_offset": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "observed_byte_count": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "last_sequence": {"type": "integer", "minimum": 0, "maximum": 9223372036854775807},
+        "trailing_partial": {"type": "boolean"},
+        "terminal_read_state": {"type": "string", "enum": ["NOT_PERFORMED", "MISSING", "UNCHANGED", "RECEIVED", "CONFLICT", "PARTIAL"]}
+      }
+    }
+  }
+}

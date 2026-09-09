@@ -1,0 +1,14 @@
+{
+  "schema_version": "stage2f-adc-source-profile-v1",
+  "profile_state": "CONFIGURED_DIGITAL",
+  "raw_width": 12,
+  "encoding": "UNSIGNED_WITH_ZERO_CODE",
+  "zero_code": 4095,
+  "channel_polarity": {
+    "channel_1": "INCREASING_CODE_IS_POSITIVE",
+    "channel_2": "INCREASING_CODE_IS_NEGATIVE"
+  },
+  "profile_identity": "SIM_UNSIGNED_ZERO_EDGE_4095",
+  "physical_unit_status": "NOT_CONFIGURED",
+  "production_selection": false
+}

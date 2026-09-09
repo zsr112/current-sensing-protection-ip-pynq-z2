@@ -1,0 +1,2 @@
+tb_moving_avg_filter PASS
+<EXTERNAL_SOURCE>\tb\tb_moving_avg_filter.sv:17: $finish called at 115000 (1ps)

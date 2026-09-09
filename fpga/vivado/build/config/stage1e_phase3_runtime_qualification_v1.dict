@@ -1,0 +1,551 @@
+schema_version stage1e-phase3-runtime-qualification-framework-v1
+framework_identity {
+    framework_id stage1e_phase3_runtime_qualification_v1
+    framework_status PREPARATION_ONLY
+    baseline_git_commit e833ef3a77ed485c2decd072c269a3b50944b6bd
+    reference_synthesis_execution_id STAGE1E-20260718-082352-e400107
+    reference_synthesis_result_identity 106a9e990a92852a996b8bfe01b64e6ecfdb12c3cfec6196aac296166622f508
+    target protection_system_wrapper
+    part xc7z020clg400-1
+    board_part tul.com.tw:pynq-z2:part0:1.0
+    vivado_version 2024.1
+    software_build 5076996
+    ip_build 5075265
+    implementation_run_name impl_1
+    hash_algorithm SHA256
+}
+authorization_boundary {
+    schema_version stage1e-phase3-runtime-qualification-boundary-v1
+    preparation_only 1
+    observation_contract_only 1
+    vivado_invocation_authorized 0
+    capability_probe_execution_authorized 0
+    workspace_creation_authorized 0
+    launcher_execution_authorized 0
+    implementation_execution_authorized 0
+    authorization_consumption_authorized 0
+    artifact_generation_authorized 0
+    artifact_publication_authorized 0
+    board_access_authorized 0
+    declaration_is_permission 0
+}
+qualification_contract {
+    schema_version stage1e-phase3-runtime-qualification-contract-v1
+    context_schema stage1e-phase3-runtime-qualification-context-v1
+    result_schema stage1e-phase3-runtime-qualification-result-v1
+    qualification_identity_schema qualification_identity_v1
+    qualification_evidence_schema stage1e-phase3-runtime-qualification-evidence-identity-v1
+    gate_order {Q0 Q1 Q2 Q3 Q4 Q5}
+    gates {
+        Q0 PLAN_AND_CONTRACT_REVIEW
+        Q1 SOURCE_FREEZE
+        Q2 VIVADO_CAPABILITY_QUALIFICATION
+        Q3 WORKSPACE_ACCEPTANCE
+        Q4 SYNTHESIS_PREDECESSOR_ACCEPTANCE
+        Q5 IMPLEMENTATION_AUTHORIZATION_PREPARATION
+    }
+    required_gate_status PASS
+    required_decision PASS
+    evidence_required_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        source_identity
+        plan_contract_identity
+        capability_identity
+        workspace_qualification_identity
+        workspace_identity
+        synthesis_result_identity
+        evidence_plan_identity
+        authorization_preparation_identity
+        gate_evidence
+        retry_guard_identity
+        decision
+    }
+    evidence_identity_fields {
+        schema_version
+        execution_id
+        source_identity
+        plan_contract_identity
+        capability_identity
+        workspace_qualification_identity
+        workspace_identity
+        synthesis_result_identity
+        evidence_plan_identity
+        authorization_preparation_identity
+        gate_evidence
+        retry_guard_identity
+        decision
+    }
+    missing_action BLOCK
+    stale_action BLOCK
+    mismatch_action BLOCK
+    unknown_action BLOCK
+}
+capability_probe_contract {
+    schema_version stage1e-vivado-implementation-capability-observation-v1
+    probe_mode OBSERVATION_ONLY
+    probe_order {
+        opt_design
+        place_design
+        route_design
+        implementation_reports
+        timing_reports
+        drc_reports
+        methodology_reports
+    }
+    probes {
+        opt_design {
+            discovery_commands {opt_design}
+            required_status PASS
+            mutation_allowed 0
+        }
+        place_design {
+            discovery_commands {place_design}
+            required_status PASS
+            mutation_allowed 0
+        }
+        route_design {
+            discovery_commands {route_design}
+            required_status PASS
+            mutation_allowed 0
+        }
+        implementation_reports {
+            discovery_commands {report_route_status report_utilization}
+            required_status PASS
+            mutation_allowed 0
+        }
+        timing_reports {
+            discovery_commands {
+                report_timing_summary
+                report_clock_interaction
+                report_exceptions
+            }
+            required_status PASS
+            mutation_allowed 0
+        }
+        drc_reports {
+            discovery_commands {report_drc}
+            required_status PASS
+            mutation_allowed 0
+        }
+        methodology_reports {
+            discovery_commands {report_methodology report_cdc}
+            required_status PASS
+            mutation_allowed 0
+        }
+    }
+    required_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        probe_mode
+        vivado_identity
+        part
+        board_part
+        license_capability
+        run_capability
+        probe_results
+        evidence_identity
+        decision
+    }
+    identity_fields {
+        schema_version
+        execution_id
+        probe_mode
+        vivado_identity
+        part
+        board_part
+        license_capability
+        run_capability
+        probe_results
+        evidence_identity
+        decision
+    }
+    vivado_identity_contract {
+        schema_version stage1e-vivado-identity-v1
+        required_fields {
+            schema_version
+            vivado_version
+            software_build
+            ip_build
+            executable_identity
+            evidence_identity
+        }
+    }
+    license_contract {
+        schema_version stage1e-implementation-license-capability-v1
+        required_fields {
+            schema_version
+            status
+            implementation_feature_available
+            evidence_identity
+        }
+        required_status PASS
+        required_feature_state 1
+    }
+    run_contract {
+        schema_version stage1e-implementation-run-capability-v1
+        required_fields {
+            schema_version
+            status
+            run_name
+            command_availability
+            mutation_performed
+            evidence_identity
+        }
+        required_commands {
+            get_runs
+            create_run
+            launch_runs
+            wait_on_run
+            open_run
+            reset_run
+            report_generation
+        }
+        required_status PASS
+        mutation_performed 0
+    }
+    missing_probe_action BLOCK
+    unavailable_command_action BLOCK
+    license_failure_action BLOCK
+    target_mismatch_action BLOCK
+    unknown_action BLOCK
+}
+workspace_launcher_contract {
+    schema_version stage1e-phase3-workspace-launcher-observation-v1
+    required_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        retry_number
+        workspace_identity
+        workspace_path
+        ownership_identity
+        repository_root
+        artifact_storage_root
+        launcher_cwd
+        xil_root
+        workspace_state
+        workspace_existed_before
+        prior_execution_state_present
+        current_execution_owner
+        path_budget
+        launcher_lifetime
+        child_process_observation
+        dispatch_monitoring
+        check_results
+        evidence_identity
+        decision
+    }
+    identity_fields {
+        schema_version
+        execution_id
+        retry_number
+        workspace_identity
+        workspace_path
+        ownership_identity
+        repository_root
+        artifact_storage_root
+        launcher_cwd
+        xil_root
+        workspace_state
+        workspace_existed_before
+        prior_execution_state_present
+        current_execution_owner
+        path_budget
+        launcher_lifetime
+        child_process_observation
+        dispatch_monitoring
+        check_results
+        evidence_identity
+        decision
+    }
+    check_order {
+        fresh_workspace
+        ownership
+        identity
+        containment
+        cwd
+        xil_location
+        path_budget
+        launcher_lifetime
+        child_process_observation
+        dispatch_monitoring
+    }
+    required_workspace_state FRESH_EMPTY_ACCEPTED
+    workspace_existed_before 0
+    prior_execution_state_present 0
+    current_execution_owner 1
+    path_budget_contract {
+        required_fields {
+            status
+            workspace_path_bytes
+            longest_reviewed_path_bytes
+            safety_margin_bytes
+            max_usable_bytes
+        }
+        required_status PASS
+        minimum_safety_margin_bytes 16
+        maximum_usable_bytes 259
+    }
+    launcher_lifetime_contract {
+        required_fields {
+            status
+            controller_budget_minutes
+            launcher_lifetime_minutes
+        }
+        required_status PASS
+        launcher_must_exceed_controller 1
+    }
+    observation_contract {
+        required_fields {status available evidence_identity}
+        required_status PASS
+        required_available 1
+    }
+    missing_action BLOCK
+    stale_action BLOCK
+    containment_failure_action BLOCK
+    reuse_action BLOCK
+    unknown_action BLOCK
+}
+implementation_evidence_contract {
+    schema_version implementation_evidence_identity_v1
+    required_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        workspace_identity
+        synthesis_result_identity
+        implementation_run_identity
+        authorization_consumption_identity
+        logs
+        reports
+        message_inventory
+        hashes
+        evidence_state
+        decision
+    }
+    identity_fields {
+        schema_version
+        execution_id
+        workspace_identity
+        synthesis_result_identity
+        implementation_run_identity
+        authorization_consumption_identity
+        logs
+        reports
+        message_inventory
+        hashes
+        evidence_state
+        decision
+    }
+    role_fields {
+        execution_id
+        producer_phase
+        path_identity
+        size
+        sha256
+    }
+    required_log_roles {
+        implementation_log
+        controller_trace
+        vivado_journal
+        native_run_log
+    }
+    required_report_roles {
+        implementation
+        timing_summary
+        utilization
+        drc
+        methodology
+        clock_interaction
+        constraint_coverage
+    }
+    message_inventory_schema stage1e-implementation-message-inventory-v1
+    message_inventory_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        error_count
+        critical_warning_count
+        warning_count
+        info_count
+        unknown_identifier_count
+        review_state
+    }
+    required_hash_roles {
+        logs_identity
+        reports_identity
+        message_inventory_identity
+        evidence_set_digest
+    }
+    required_evidence_state COMPLETE
+    required_decision QUALIFIED
+    entry_plan_contract {
+        schema_version stage1e-implementation-evidence-plan-identity-v1
+        required_fields {
+            schema_version
+            identity_sha256
+            execution_id
+            workspace_identity
+            evidence_root_identity
+            log_roles
+            report_roles
+            message_inventory_role
+            hash_roles
+            current_execution_only
+            prior_outputs_present
+            paths_contained
+            decision
+        }
+        identity_fields {
+            schema_version
+            execution_id
+            workspace_identity
+            evidence_root_identity
+            log_roles
+            report_roles
+            message_inventory_role
+            hash_roles
+            current_execution_only
+            prior_outputs_present
+            paths_contained
+            decision
+        }
+        required_decision PASS
+    }
+    runtime_identity_produced_at_entry 0
+    missing_role_action BLOCK
+    missing_hash_action BLOCK
+    execution_mismatch_action BLOCK
+    unknown_action BLOCK
+}
+authorization_runtime_contract {
+    schema_version stage1e-phase3-authorization-runtime-qualification-v1
+    qualification_schema qualification_identity_v1
+    authorization_schema stage1e-implementation-authorization-binding-v1
+    synthesis_schema stage1e-synthesis-result-identity-v1
+    required_status AUTHORIZED
+    required_capability IMPLEMENTATION
+    required_consume_state UNCONSUMED
+    retry_guard_schema stage1e-phase3-runtime-retry-guard-v1
+    retry_guard_required_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        retry_number
+        prior_execution_id
+        prior_authorization_identity
+        authorization_reuse_requested
+        workspace_reuse_requested
+        checkpoint_reuse_requested
+        generated_output_reuse_requested
+        decision
+    }
+    retry_guard_identity_fields {
+        schema_version
+        execution_id
+        retry_number
+        prior_execution_id
+        prior_authorization_identity
+        authorization_reuse_requested
+        workspace_reuse_requested
+        checkpoint_reuse_requested
+        generated_output_reuse_requested
+        decision
+    }
+    missing_identity_action BLOCK
+    stale_identity_action BLOCK
+    wrong_execution_action BLOCK
+    consumed_authorization_action BLOCK
+    retry_reuse_action BLOCK
+    unknown_action BLOCK
+}
+identity_chain {
+    schema_version stage1e-phase3-runtime-qualification-chain-v1
+    order {
+        plan_contract_identity
+        source_identity
+        vivado_capability_identity
+        workspace_qualification_identity
+        workspace_identity
+        synthesis_result_identity
+        evidence_plan_identity
+        qualification_evidence_identity
+        qualification_identity
+        implementation_authorization_identity
+    }
+    same_execution_required 1
+    exact_workspace_required 1
+    exact_synthesis_result_required 1
+    authorization_must_be_unconsumed 1
+    historical_synthesis_is_runtime_authority 0
+    qualification_is_implementation_authority 0
+    mismatch_action BLOCK
+}
+provenance_guard {
+    schema_version stage1e-phase3-runtime-provenance-guard-v1
+    algorithm SHA256
+    canonicalization REPOSITORY_RELATIVE_PATH_AND_FILE_SHA256
+    sources {
+        docs/design/stage1f_runtime_qualification_plan.md {
+            role QUALIFICATION_POLICY
+            sha256 458c8abb8447e837a6006ff429478250941a3f9cfc75e00f88b8e77ad7e64ef0
+        }
+        docs/design/stage1e_implementation_policy_v1.md {
+            role IMPLEMENTATION_POLICY
+            sha256 64ed95036832c5757417cbb1d27dd7a515b7589ccc36b27a7d1c325105144a3c
+        }
+        fpga/vivado/build/config/stage1e_phase3_implementation_framework_v1.dict {
+            role IMPLEMENTATION_FRAMEWORK
+            sha256 9cb7d4322f55fe818ed7eba4b3da40ba35977703443ffb29a8976228cd528085
+        }
+        fpga/vivado/build/controller/stage1e_phase3_implementation_controller.tcl {
+            role IMPLEMENTATION_CONTROLLER
+            sha256 bbc146e9e196517a7f32803b0e81cdb3789b98b85eea16d6064fc6bc79877e8c
+        }
+        fpga/vivado/build/config/stage1e_artifact_closure_framework_v1.dict {
+            role ARTIFACT_CLOSURE_FRAMEWORK
+            sha256 e6b9b47358b9be662efbd7943b135c9bee39d971ee98a1ac8b5aace79c6fd0af
+        }
+        fpga/vivado/build/lib/source_check.tcl {
+            role HASH_PROVIDER
+            sha256 40220677e65c584a226fbf0b3878bc476e1b86bf09817e887761f8c60e4383e3
+        }
+        fpga/vivado/build/lib/stage1e_artifact_closure_schema.tcl {
+            role IDENTITY_SCHEMA_VALIDATOR
+            sha256 f54177dc258d30015fadb8b2dc1c51231ede14140733fbc4881c888a36a128c8
+        }
+        fpga/vivado/build/lib/stage1e_phase3_runtime_qualification.tcl {
+            role RUNTIME_QUALIFICATION_VALIDATOR
+            sha256 0c39bfaa6f83493b9b657c9a3a72961c5f1ea9871d5e9d01e9a68d2d29866080
+        }
+        fpga/vivado/build/tests/stage1e_phase3_runtime_qualification_tests.tcl {
+            role VALIDATION_SUITE
+            sha256 69c2d5df80ab996ac4cfac283de24e4443fb074df6facc11b8a30be996cecbec
+        }
+    }
+    missing_action BLOCK
+    mismatch_action BLOCK
+}
+validation_contract {
+    schema_version stage1e-phase3-runtime-validation-contract-v1
+    required_suites {
+        MARKDOWN_STRUCTURE
+        TCL_SYNTAX
+        CAPABILITY_QUALIFICATION
+        WORKSPACE_LAUNCHER_QUALIFICATION
+        IMPLEMENTATION_EVIDENCE_SCHEMA
+        AUTHORIZATION_RUNTIME_QUALIFICATION
+        NEGATIVE_IDENTITY_TESTS
+        CONTROLLER_INTEGRATION
+        PROVENANCE_GUARD
+        REGRESSION
+    }
+    vivado_invocation_allowed 0
+    implementation_execution_allowed 0
+    artifact_generation_allowed 0
+    board_access_allowed 0
+    unknown_or_missing_identity_action BLOCK
+}

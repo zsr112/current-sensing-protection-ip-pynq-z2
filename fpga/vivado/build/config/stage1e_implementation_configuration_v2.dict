@@ -1,0 +1,107 @@
+schema_version stage1e-implementation-configuration-contract-v2
+configuration_state FOUNDATION_ONLY_NOT_FROZEN
+identity_contract {
+    identity_schema stage1e-implementation-configuration-identity-v2
+    actual_identity NOT_CREATED
+    runtime_backend_identity_binding REQUIRED_BEFORE_Q0
+    implementation_policy_identity_binding REQUIRED_BEFORE_Q0
+    missing_stale_or_mismatched_action BLOCK
+}
+tool_configuration {
+    vivado_version 2024.1
+    target protection_system_wrapper
+    top protection_system_wrapper
+    part xc7z020clg400-1
+    board_part tul.com.tw:pynq-z2:part0:1.0
+    run_name impl_1
+    strategy Vivado_Implementation_Defaults
+    opt_directive Default
+    place_directive Default
+    phys_opt_state DISABLED
+    route_directive Default
+    jobs 2
+    seed_policy TOOL_DEFAULT_RECORDED_BY_READBACK
+    incremental_policy DISABLED
+    imported_checkpoint_policy PROHIBITED
+}
+operation_order {
+    opt_design
+    place_design
+    route_design
+    implementation_reports
+}
+effective_step_graph {
+    opt_design {
+        configured_state ENABLED
+        authorized 1
+        sequence 1
+        directive Default
+        predecessor synthesis
+        invocation_policy REQUIRED
+    }
+    place_design {
+        configured_state ENABLED
+        authorized 1
+        sequence 2
+        directive Default
+        predecessor opt_design
+        invocation_policy REQUIRED
+    }
+    phys_opt_design {
+        configured_state DISABLED
+        authorized 0
+        sequence 0
+        directive NONE
+        predecessor place_design
+        invocation_policy PROHIBITED
+    }
+    route_design {
+        configured_state ENABLED
+        authorized 1
+        sequence 3
+        directive Default
+        predecessor place_design
+        invocation_policy REQUIRED
+    }
+    implementation_reports {
+        configured_state ENABLED
+        authorized 1
+        sequence 4
+        directive READ_ONLY
+        predecessor route_design
+        invocation_policy REQUIRED
+    }
+}
+readback_contract {
+    configured_graph_record_required 1
+    effective_graph_record_required 1
+    directive_readback_required 1
+    property_readback_required 1
+    invocation_ledger_required 1
+    mismatch_action BLOCK
+}
+report_contract {
+    required_roles {
+        TIMING_SUMMARY
+        UTILIZATION
+        DRC
+        METHODOLOGY
+        CLOCK_INTERACTION
+        CONSTRAINT_COVERAGE
+        MESSAGE_INVENTORY
+        TIMING_EXCEPTION_INVENTORY
+        EFFECTIVE_GRAPH_READBACK
+    }
+    report_ledger_required 1
+    failed_attempts_preserved 1
+    missing_report_action BLOCK
+    report_waiver_authority NONE
+}
+boundary {
+    production_runtime_dispatch_available 0
+    implementation_authorized 0
+    qualification_created 0
+    authorization_created 0
+    artifact_authority NONE
+    board_authority NONE
+}

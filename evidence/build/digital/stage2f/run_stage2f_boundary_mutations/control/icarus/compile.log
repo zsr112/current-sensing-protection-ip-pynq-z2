@@ -1,0 +1,51 @@
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module adc_sample_cdc_bridge declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\adc_sample_cdc_bridge.v:1
+       :   -- module adc_sample_code_normalizer declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\adc_sample_code_normalizer.sv:5
+       :   -- module async_fifo_gray declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\async_fifo_gray.v:1
+       :   -- module current_compare_dual declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\current_compare_dual.v:1
+       :   -- module destination_sequence_integrity_tracker declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\transaction_destination_observer.v:44
+       :   -- module fault_classifier declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\fault_classifier.v:3
+       :   -- module protection_axi_lite_register_transport declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_axi_lite.v:3
+       :   -- module protection_core_top declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_core_top.v:1
+       :   -- module protection_fsm declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_fsm.v:3
+       :   -- module protection_ip_top_async_adc_axi_lite declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_async_adc_axi_lite.v:1
+       :   -- module protection_ip_top_axi_lite declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_axi_lite.v:184
+       :   -- module protection_ip_top_reg_controlled declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:1
+       :   -- module protection_reg_bank declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_reg_bank.v:3
+       :   -- module pwm_gate declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\pwm_gate.v:1
+       :   -- module pwm_gen declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\pwm_gen.v:1
+       :   -- module reset_release_sync declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\reset_release_sync.v:1
+       :   -- module sensor_health_monitor declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\sensor_health_monitor.v:1
+       :   -- module source_observability_cdc declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\source_observability_cdc.v:1
+       :   -- module stage2e_transaction_sequence_classifier declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\transaction_destination_observer.v:5
+       :   -- module stage2g_adc_sample_cdc_bridge declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\adc_sample_cdc_bridge.v:162
+       :   -- module stage2g_fault_episode_controller declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_fsm.v:84
+       :   -- module stage2g_fault_evaluation_pipeline declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\fault_classifier.v:43
+       :   -- module stage2g_protection_core declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_core_top.v:136
+       :   -- module stage2g_protection_ip_axi_lite declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_axi_lite.v:338
+       :   -- module stage2g_protection_ip_reg_controlled declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:160
+       :   -- module stage2g_transaction_source_observer declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\transaction_source_observer.v:196
+       :   -- module transaction_destination_observer declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\transaction_destination_observer.v:104
+       :   -- module transaction_source_observer declared here: <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\transaction_source_observer.v:1
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 12 (i_ch1_mon) of module protection_reg_bank expects 12 bit(s), given 8.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the port.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 13 (i_ch2_mon) of module protection_reg_bank expects 12 bit(s), given 8.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the port.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 39 (th_oc_ch1) of module protection_reg_bank expects 12 bit(s), given 8.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the port.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 40 (th_oc_ch2) of module protection_reg_bank expects 12 bit(s), given 8.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the port.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 41 (th_diff) of module protection_reg_bank expects 12 bit(s), given 8.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the port.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 12 (i_ch1_mon) of module protection_reg_bank expects 12 bit(s), given 16.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Pruning 4 high bits of the expression.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 13 (i_ch2_mon) of module protection_reg_bank expects 12 bit(s), given 16.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Pruning 4 high bits of the expression.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 39 (th_oc_ch1) of module protection_reg_bank expects 12 bit(s), given 16.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the expression.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 40 (th_oc_ch2) of module protection_reg_bank expects 12 bit(s), given 16.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the expression.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270: warning: Port 41 (th_diff) of module protection_reg_bank expects 12 bit(s), given 16.
+<EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\rtl\protection_ip_top_reg_controlled.v:270:        : Padding 4 high bits of the expression.

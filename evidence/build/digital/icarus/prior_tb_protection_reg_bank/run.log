@@ -1,0 +1,3 @@
+REG_BANK contract: rd_data is combinational decode; rd_en does not gate readback
+tb_protection_reg_bank PASS
+<EXTERNAL_SOURCE>\tb\tb_protection_reg_bank.sv:210: $finish called at 1010000 (1ps)

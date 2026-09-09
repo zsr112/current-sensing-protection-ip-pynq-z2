@@ -1,0 +1,971 @@
+{
+  "fixture_schema_version": "stage2h-register-map-semantic-negative-mutations-v8",
+  "mutations": [
+    {
+      "id": "TWO_AUTHORITATIVE_REGISTER_MAP_FILES",
+      "operation": "set",
+      "path": "authorities.occurrences.1.actual_role",
+      "value": "AUTHORITATIVE",
+      "expected_error": "exactly one actual register-map authority"
+    },
+    {
+      "id": "DUPLICATE_OFFSET",
+      "operation": "set",
+      "path": "current_abi.registers.1.offset",
+      "value": "0x00",
+      "expected_error": "duplicate register offset"
+    },
+    {
+      "id": "OVERLAPPING_FIELDS",
+      "operation": "set",
+      "path": "current_abi.registers.0.fields.2.bits.lsb",
+      "value": 1,
+      "expected_error": "overlapping fields"
+    },
+    {
+      "id": "INVALID_RESET_VALUE",
+      "operation": "set",
+      "path": "current_abi.registers.5.fields.0.reset",
+      "value": 4096,
+      "expected_error": "field reset does not fit"
+    },
+    {
+      "id": "UNSUPPORTED_ACCESS_TYPE",
+      "operation": "set",
+      "path": "current_abi.registers.0.fields.0.access",
+      "value": "W0C",
+      "expected_error": "unsupported access type"
+    },
+    {
+      "id": "NON_DETERMINISTIC_GENERATION",
+      "operation": "set",
+      "path": "selected_single_source.deterministic_generation",
+      "value": "OPTIONAL",
+      "expected_error": "deterministic generation is mandatory"
+    },
+    {
+      "id": "GENERATED_FILE_HAND_EDIT",
+      "operation": "set",
+      "path": "selected_single_source.hand_edit_generated_artifacts",
+      "value": "ALLOWED",
+      "expected_error": "generated artifact hand edits are forbidden"
+    },
+    {
+      "id": "ARMED_TRUE_INITIAL_RESET_WAIT",
+      "operation": "replace",
+      "path": "selected_abi_1_1_registers.3.fields.0.read_semantics",
+      "old": "zero in initial RESET_WAIT",
+      "new": "one in initial RESET_WAIT",
+      "expected_error": "ARMED_READY initial RESET_WAIT must be zero"
+    },
+    {
+      "id": "ARMED_TRUE_POST_CLEAR_RESET_WAIT",
+      "operation": "replace",
+      "path": "selected_abi_1_1_registers.3.fields.0.read_semantics",
+      "old": "post-clear RESET_WAIT",
+      "new": "post-clear READY",
+      "expected_error": "ARMED_READY post-clear RESET_WAIT must be zero"
+    },
+    {
+      "id": "RECOVERY_REDEFINED_STARTUP_READY",
+      "operation": "set",
+      "path": "software_api_plan.12.semantics",
+      "value": "This predicate is startup readiness",
+      "expected_error": "recovery_is_verified must remain post-fault only"
+    },
+    {
+      "id": "NEW_REGISTER_INSIDE_FROZEN_RANGE",
+      "operation": "set",
+      "path": "allocation_alternatives.1.registers.0.offset",
+      "value": "0x60",
+      "expected_error": "proposed offset overlaps frozen 0x00..0x60"
+    },
+    {
+      "id": "INCOMPATIBLE_WITHOUT_ABI_MAJOR",
+      "operation": "set",
+      "path": "compatibility_rules.major_increment_rules.0",
+      "value": "moving an existing offset is minor-compatible",
+      "expected_error": "incompatible change requires ABI major"
+    },
+    {
+      "id": "CAPABILITY_WITHOUT_IMPLEMENTATION",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.3.fields.0.implementation_status",
+      "value": "NOT_APPLICABLE",
+      "expected_error": "advertised capability lacks proposed implementation"
+    },
+    {
+      "id": "IMPLEMENTED_FIELD_MISSING_SOFTWARE_API",
+      "operation": "set",
+      "path": "software_api_plan.0.decision",
+      "value": "DEFER",
+      "expected_error": "ARMED_READY is missing its software API"
+    },
+    {
+      "id": "INTERPRETER_DEFAULT_AST_DUMP_AUTHORITY",
+      "operation": "set",
+      "path": "ast_fingerprint_policy.interpreter_default_ast_dump_authority",
+      "value": true,
+      "expected_error": "interpreter-default ast.dump cannot be authority"
+    },
+    {
+      "id": "VARIABLE_RENAME_NOT_SIGNIFICANT",
+      "operation": "set",
+      "path": "ast_fingerprint_policy.local_variable_rename_policy",
+      "value": "IGNORED",
+      "expected_error": "local variable rename policy changed"
+    },
+    {
+      "id": "NORMALIZED_TELEMETRY_GATES_POLICY",
+      "operation": "set",
+      "path": "frozen_authorities.normalized_telemetry_gates_fault_policy",
+      "value": true,
+      "expected_error": "normalized telemetry cannot gate fault policy"
+    },
+    {
+      "id": "CONTRACT_GAP_COUNT_CHANGED",
+      "operation": "set",
+      "path": "current_state.remaining_contract_gaps",
+      "value": 0,
+      "expected_error": "remaining contract gaps must stay one"
+    },
+    {
+      "id": "BAD_NONZERO_MAGIC_TREATED_AS_LEGACY",
+      "operation": "set",
+      "path": "capability_version_policy.nonzero_bad_magic",
+      "value": "TREAT_AS_LEGACY",
+      "expected_error": "bad nonzero magic must be rejected as incompatible"
+    },
+    {
+      "id": "UNSUPPORTED_MAJOR_TREATED_AS_LEGACY",
+      "operation": "set",
+      "path": "capability_version_policy.unsupported_major",
+      "value": "TREAT_AS_LEGACY",
+      "expected_error": "unsupported ABI major must be rejected as incompatible"
+    },
+    {
+      "id": "UNKNOWN_NONZERO_MAGIC_ENABLES_FEATURES",
+      "operation": "set",
+      "path": "capability_version_policy.bad_magic_is_legacy",
+      "value": true,
+      "expected_error": "bad nonzero magic cannot be treated as legacy"
+    },
+    {
+      "id": "ALL_LEGACY_CAPABILITIES_FORCED_FALSE",
+      "operation": "set",
+      "path": "legacy_capability_discovery.all_capabilities_false_fallback",
+      "value": "REQUIRED",
+      "expected_error": "all legacy capabilities cannot be forced false"
+    },
+    {
+      "id": "STAGE2G_INFERRED_FROM_ZERO_VERSION",
+      "operation": "set",
+      "path": "legacy_capability_discovery.valid_stage2e_result.stage2g_policy",
+      "value": "PRESENT",
+      "expected_error": "Stage 2G cannot be inferred from a zero version word"
+    },
+    {
+      "id": "INTERNAL_NORMALIZED_TELEMETRY_ADVERTISED",
+      "operation": "set",
+      "path": "capability_dependency_matrix.capabilities.4.advertisement_value",
+      "value": 1,
+      "expected_error": "internal-only normalized telemetry cannot be advertised publicly"
+    },
+    {
+      "id": "BEHAVIOR_SOURCE_OWNERSHIP_ABSENT",
+      "operation": "set",
+      "path": "behavior_source_contract.register_map_source_owns_behavior_semantics",
+      "value": false,
+      "expected_error": "behavior semantics are absent from source ownership"
+    },
+    {
+      "id": "W1C_CLEAR_WINS_PRIORITY",
+      "operation": "set",
+      "path": "behavior_source_contract.behavior_vocabulary.4.event_priority",
+      "value": "CLEAR_WINS_OVER_EVENT",
+      "expected_error": "W1C event priority differs from spec"
+    },
+    {
+      "id": "W1P_TWO_ACLK_PULSE",
+      "operation": "set",
+      "path": "behavior_source_contract.behavior_vocabulary.5.pulse_width",
+      "value": "TWO_ACLK",
+      "expected_error": "W1P pulse width differs from spec"
+    },
+    {
+      "id": "CONSTANTS_FRESH_CONFORMANCE_MISSING",
+      "operation": "set",
+      "path": "generated_conformance_architecture.constants_only_freshness_is_sufficient",
+      "value": true,
+      "expected_error": "fresh generated constants cannot substitute for conformance"
+    },
+    {
+      "id": "MANUAL_EXPECTED_VALUE_ALLOWED",
+      "operation": "set",
+      "path": "generated_conformance_architecture.manual_expected_values",
+      "value": "ALLOWED",
+      "expected_error": "manual expected value is not derived from the spec"
+    },
+    {
+      "id": "HARDCODED_CONTRADICTION_COUNT",
+      "operation": "set",
+      "path": "current_abi.defect_count_policy",
+      "value": "HARDCODED_3",
+      "expected_error": "hard-coded contradiction count is forbidden"
+    },
+    {
+      "id": "BITMAP_LIFETIME_EQUALS_COMPATIBILITY_LATCH",
+      "operation": "set",
+      "path": "bitmap_lifetime_contract.first_live_seen_bitmap_lifetime",
+      "value": "PUBLIC_COMPATIBILITY_LATCH",
+      "expected_error": "bitmap lifetime cannot equal compatibility-latch lifetime"
+    },
+    {
+      "id": "LINUX_OR_WSL_REPLAY_POLICY_REMOVED",
+      "operation": "set",
+      "path": "tooling_replay_policy.required_platforms.1",
+      "value": "WINDOWS",
+      "expected_error": "Linux or WSL source-archive replay is required"
+    },
+    {
+      "id": "POLICY_SEQUENCE_ADVERTISED_AS_SNAPSHOT_TOKEN",
+      "operation": "set",
+      "path": "policy_snapshot_contract.policy_evaluation_sequence_is_snapshot_token",
+      "value": true,
+      "expected_error": "policy evaluation sequence cannot be advertised as a snapshot token"
+    },
+    {
+      "id": "READ_POLICY_SNAPSHOT_WITHOUT_COHERENCE_AUTHORITY",
+      "operation": "set",
+      "path": "policy_snapshot_contract.read_policy_snapshot_api",
+      "value": "ADD",
+      "expected_error": "read_policy_snapshot exists without a valid coherence authority"
+    },
+    {
+      "id": "DUPLICATE_SEQUENCE_PASSES_SNAPSHOT_COHERENCE",
+      "operation": "set",
+      "path": "policy_snapshot_contract.sequence_limitations.duplicate_identity_can_prove_coherence",
+      "value": true,
+      "expected_error": "duplicate sequence cannot prove snapshot coherence"
+    },
+    {
+      "id": "STALE_SEQUENCE_PASSES_SNAPSHOT_COHERENCE",
+      "operation": "set",
+      "path": "policy_snapshot_contract.sequence_limitations.stale_identity_can_prove_coherence",
+      "value": true,
+      "expected_error": "stale sequence cannot prove snapshot coherence"
+    },
+    {
+      "id": "CLEAR_PENDING_ASSUMED_TO_CHANGE_IDENTITY",
+      "operation": "set",
+      "path": "policy_snapshot_contract.sequence_limitations.clear_pending_can_change_without_identity_change",
+      "value": false,
+      "expected_error": "clear_pending can change without policy identity change"
+    },
+    {
+      "id": "RESET_ZERO_PASSES_SNAPSHOT_COHERENCE",
+      "operation": "set",
+      "path": "policy_snapshot_contract.sequence_limitations.reset_to_zero_can_prove_coherence",
+      "value": true,
+      "expected_error": "reset-to-zero cannot pass snapshot coherence"
+    },
+    {
+      "id": "SOURCE_RESTART_PASSES_SNAPSHOT_COHERENCE",
+      "operation": "set",
+      "path": "policy_snapshot_contract.sequence_limitations.source_restart_can_prove_coherence",
+      "value": true,
+      "expected_error": "source sequence restart cannot pass snapshot coherence"
+    },
+    {
+      "id": "CAPABILITY_ADVERTISES_SNAPSHOT_API",
+      "operation": "set",
+      "path": "capability_dependency_matrix.capabilities.6.required_api_gate_refs.0",
+      "value": "API_READ_POLICY_SNAPSHOT",
+      "expected_error": "capability advertises snapshot API without a formal API entry"
+    },
+    {
+      "id": "SOURCE_ARCHIVE_UNIT_TEST_REQUIRES_GIT_SCOPE",
+      "operation": "set",
+      "path": "tooling_replay_policy.archive_unit_test_git_scope_check",
+      "value": true,
+      "expected_error": "source-archive unit test cannot require Git scope"
+    },
+    {
+      "id": "WINDOWS_PATH_CONVERSION_USES_HOST_RESOLVE",
+      "operation": "set",
+      "path": "tooling_replay_policy.windows_to_wsl_path_conversion",
+      "value": "HOST_PATH_RESOLVE",
+      "expected_error": "Windows path conversion cannot depend on host Path.resolve"
+    },
+    {
+      "id": "BINDING_COVERAGE_BOOLEAN_ONLY",
+      "operation": "set",
+      "path": "behavior_binding_matrix.coverage_authority",
+      "value": "BOOLEAN_ASSERTIONS",
+      "expected_error": "behavior binding coverage cannot be represented only by booleans"
+    },
+    {
+      "id": "PUBLIC_FIELD_WITHOUT_BEHAVIOR_BINDING",
+      "operation": "set",
+      "path": "behavior_binding_matrix.bindings.0.field_or_global_policy",
+      "value": "missing_pwm_enable",
+      "expected_error": "public field without behavior binding"
+    },
+    {
+      "id": "DUPLICATE_FIELD_BEHAVIOR_BINDING",
+      "operation": "set",
+      "path": "behavior_binding_matrix.bindings.1.field_or_global_policy",
+      "value": "pwm_enable",
+      "expected_error": "duplicate field behavior binding"
+    },
+    {
+      "id": "BEHAVIOR_BINDING_WITHOUT_CONFORMANCE_FAMILY",
+      "operation": "set",
+      "path": "behavior_binding_matrix.bindings.0.generated_conformance_family",
+      "value": "",
+      "expected_error": "behavior binding without conformance family"
+    },
+    {
+      "id": "ENABLED_WO_WITHOUT_BEHAVIOR_ID",
+      "operation": "set",
+      "path": "access_taxonomy_enablement.enabled_access_types.0",
+      "value": "WO",
+      "expected_error": "WO/W1S/RC cannot be enabled for ABI 1.1 without behavior IDs"
+    },
+    {
+      "id": "PUBLIC_I_CH1_RESET_LIVE_INPUT",
+      "operation": "set",
+      "path": "current_abi.registers.3.fields.0.reset",
+      "value": "LIVE_INPUT",
+      "expected_error": "I_CH1/I_CH2 public reset remains LIVE_INPUT"
+    },
+    {
+      "id": "GENERIC_WRAPPER_OVERRIDES_PUBLIC_RESET",
+      "operation": "set",
+      "path": "public_current_monitor_contract.generic_wrapper_may_override_public_reset",
+      "value": true,
+      "expected_error": "generic wrapper reset cannot override production public reset"
+    },
+    {
+      "id": "REGISTER_MAP_VERSION_ALLOCATED_WITHOUT_FIELD_CONTRACT",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.0.fields",
+      "value": [],
+      "expected_error": "allocated register without field contract"
+    },
+    {
+      "id": "CAPABILITIES_0_ALLOCATED_WITHOUT_FIELD_CONTRACT",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.1.fields",
+      "value": [],
+      "expected_error": "allocated register without field contract"
+    },
+    {
+      "id": "CAPABILITIES_1_ALLOCATED_WITHOUT_FIELD_CONTRACT",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.2.fields",
+      "value": [],
+      "expected_error": "allocated register without field contract"
+    },
+    {
+      "id": "POLICY_STATUS_RESERVED_BITS_UNCOVERED",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.3.fields.5.bits.msb",
+      "value": 30,
+      "expected_error": "uncovered selected register bit"
+    },
+    {
+      "id": "DEFERRED_CLEAR_EVENT_COUNTED_AS_SELECTED_ABI",
+      "operation": "set",
+      "path": "deferred_register_candidates.0.counted_as_selected_abi_1_1",
+      "value": true,
+      "expected_error": "deferred candidate counted as selected ABI"
+    },
+    {
+      "id": "SELECTED_REGISTER_FIELD_LACKS_BEHAVIOR_BINDING",
+      "operation": "set",
+      "path": "behavior_binding_matrix.bindings.54.field_or_global_policy",
+      "value": "MISSING_MAGIC",
+      "expected_error": "selected field without behavior binding"
+    },
+    {
+      "id": "SELECTED_REGISTER_FIELD_LACKS_CONFORMANCE_FAMILY",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.0.fields.0.generated_conformance_family",
+      "value": "",
+      "expected_error": "selected register field lacks conformance family"
+    },
+    {
+      "id": "CAPABILITY_BIT_SET_WITHOUT_REQUIRED_REGISTER",
+      "operation": "set",
+      "path": "capability_dependency_matrix.capabilities.0.required_field_edges.1.target",
+      "value": "MISSING_POLICY_STATUS.ARMED_READY",
+      "expected_error": "capability has missing register dependencies"
+    },
+    {
+      "id": "FAULT_BITMAPS_WITH_LIVE_REGISTER_MISSING",
+      "operation": "set",
+      "path": "capability_dependency_matrix.capabilities.1.required_field_edges.3.target",
+      "value": "MISSING_LIVE_FAULT_BITMAP.BITMAP",
+      "expected_error": "capability has missing register dependencies"
+    },
+    {
+      "id": "FAULT_BITMAP_WIDTH_ZERO",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.2.fields.0.static_value",
+      "value": 0,
+      "expected_error": "FAULT_BITMAPS advertised with width outside 1..32"
+    },
+    {
+      "id": "FAULT_BITMAP_WIDTH_GREATER_THAN_32",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.2.fields.0.static_value",
+      "value": 33,
+      "expected_error": "FAULT_BITMAPS advertised with width outside 1..32"
+    },
+    {
+      "id": "IMPLEMENTED_SEQUENCE_WIDTH_OUTSIDE_16_TO_32",
+      "operation": "set",
+      "path": "register_value_expression_contract.parameters.0.configured_default",
+      "value": 15,
+      "expected_error": "sequence identity implemented width is outside 16..32"
+    },
+    {
+      "id": "MINIMUM_SEQUENCE_WIDTH_GREATER_THAN_IMPLEMENTED",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.2.fields.2.static_value",
+      "value": 33,
+      "expected_error": "minimum width greater than implemented width"
+    },
+    {
+      "id": "IMPLEMENTED_SEQUENCE_WIDTH_GREATER_THAN_MAXIMUM",
+      "operation": "set",
+      "path": "register_value_expression_contract.parameters.0.configured_default",
+      "value": 33,
+      "expected_error": "implemented width greater than maximum width"
+    },
+    {
+      "id": "NORMALIZED_TELEMETRY_RESERVED_BIT_SET",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.1.fields.4.static_value",
+      "value": 1,
+      "expected_error": "normalized telemetry reserved bit must remain zero"
+    },
+    {
+      "id": "RESERVED_CAPABILITY_BIT_NONZERO",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.1.fields.7.static_value",
+      "value": 1,
+      "expected_error": "reserved capability bits must remain zero"
+    },
+    {
+      "id": "HIGHER_MINOR_INCORRECTLY_ENABLES_UNKNOWN_FEATURE",
+      "operation": "set",
+      "path": "capability_metadata_constraints.unknown_capability_bits",
+      "value": "ENABLE",
+      "expected_error": "higher minor incorrectly enables unknown feature"
+    },
+    {
+      "id": "POLICY_STATUS_ARMED_READY_GATE_NONE",
+      "operation": "set",
+      "path": "capability_dependency_matrix.field_gates.15.gate.kind",
+      "value": "NONE",
+      "expected_error": "field capability edge mismatch"
+    },
+    {
+      "id": "IS_ARMED_GATED_BY_FAULT_BITMAPS",
+      "operation": "set",
+      "path": "capability_dependency_matrix.api_gates.0.gate.all_of",
+      "value": ["FAULT_BITMAPS"],
+      "expected_error": "API capability gate mismatch"
+    },
+    {
+      "id": "STARTUP_READY_GATED_BY_CLEAR_ONLY",
+      "operation": "set",
+      "path": "capability_dependency_matrix.api_gates.1.gate.all_of",
+      "value": ["CLEAR_LEVEL_STATUS"],
+      "expected_error": "API capability gate mismatch"
+    },
+    {
+      "id": "READ_POLICY_STATUS_LOSES_STAGE2G",
+      "operation": "set",
+      "path": "capability_dependency_matrix.api_gates.2.gate.all_of",
+      "value": ["CLEAR_LEVEL_STATUS"],
+      "expected_error": "API capability gate mismatch"
+    },
+    {
+      "id": "ARMED_READY_BINDING_MOVED_TO_BITMAP",
+      "operation": "set",
+      "path": "capability_dependency_matrix.capabilities.0.required_field_edges.1.rtl_binding_id",
+      "value": "RTL_FIRST_FAULT_BITMAP",
+      "expected_error": "binding conformance edge mismatch"
+    },
+    {
+      "id": "ARMED_READY_CONFORMANCE_ONLY_ON_UNRELATED_FIELD",
+      "operation": "set",
+      "path": "capability_dependency_matrix.capabilities.0.required_field_edges.0.conformance_family",
+      "value": "CF_EPISODE_BITMAP",
+      "expected_error": "binding conformance edge mismatch"
+    },
+    {
+      "id": "STAGE2G_SET_ARMED_READY_CLEAR",
+      "operation": "set",
+      "path": "capability_dependency_matrix.implication_graph.validation_vectors.0.values.ARMED_READY",
+      "value": false,
+      "expected_error": "capability implication violation"
+    },
+    {
+      "id": "STAGE2G_SET_CLEAR_LEVEL_STATUS_CLEAR",
+      "operation": "set",
+      "path": "capability_dependency_matrix.implication_graph.validation_vectors.0.values.CLEAR_LEVEL_STATUS",
+      "value": false,
+      "expected_error": "capability implication violation"
+    },
+    {
+      "id": "FAULT_BITMAPS_SET_STAGE2G_CLEAR",
+      "operation": "set",
+      "path": "capability_dependency_matrix.implication_graph.validation_vectors.1.values.STAGE2G_POLICY",
+      "value": false,
+      "expected_error": "capability implication violation"
+    },
+    {
+      "id": "POLICY_IDENTITY_SET_STAGE2G_CLEAR",
+      "operation": "set",
+      "path": "capability_dependency_matrix.implication_graph.validation_vectors.2.values.STAGE2G_POLICY",
+      "value": false,
+      "expected_error": "capability implication violation"
+    },
+    {
+      "id": "FREE_FORM_ARMED_STAGE2G_EXPRESSION",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.3.fields.0.capability_gate_ref",
+      "value": "ARMED_READY|STAGE2G_POLICY",
+      "expected_error": "free-form capability expression"
+    },
+    {
+      "id": "CAPABILITY_IMPLICATION_CYCLE",
+      "operation": "set",
+      "path": "capability_dependency_matrix.implication_graph.implications.0.requires",
+      "value": "FAULT_BITMAPS",
+      "expected_error": "capability implication graph is cyclic"
+    },
+    {
+      "id": "REGISTER_MAP_VERSION_MANUAL_REGISTER_RESET",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.0.reset",
+      "value": 0,
+      "expected_error": "manual register reset duplication is forbidden"
+    },
+    {
+      "id": "CAPABILITIES_0_MANUAL_REGISTER_RESET",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.1.reset",
+      "value": 0,
+      "expected_error": "manual register reset duplication is forbidden"
+    },
+    {
+      "id": "POLICY_STATUS_MANUAL_REGISTER_RESET",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.3.reset",
+      "value": 0,
+      "expected_error": "manual register reset duplication is forbidden"
+    },
+    {
+      "id": "CAPABILITIES_1_PROSE_RESET_EXPRESSION",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.2.fields.1.reset",
+      "value": "0x20_10_OBS_SEQUENCE_WIDTH_06",
+      "expected_error": "non-machine-evaluable register value"
+    },
+    {
+      "id": "CAPABILITIES_1_UNKNOWN_PARAMETER",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.2.fields.1.reset",
+      "value": {"kind": "parameter", "name": "UNKNOWN_SEQUENCE_WIDTH"},
+      "expected_error": "unknown parameter name"
+    },
+    {
+      "id": "CAPABILITIES_1_DEFAULT_NOT_WIDTH32",
+      "operation": "set",
+      "path": "selected_register_aggregate_contract.default_parameter_values.OBS_SEQUENCE_WIDTH",
+      "value": 24,
+      "expected_error": "parameter configured default differs"
+    },
+    {
+      "id": "FIELD_RESET_CHANGE_BREAKS_AGGREGATE",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.0.fields.0.reset",
+      "value": 0,
+      "expected_error": "register field reset mismatch"
+    },
+    {
+      "id": "AGGREGATE_EXPECTATION_CHANGE_WITHOUT_FIELD_CHANGE",
+      "operation": "set",
+      "path": "selected_register_aggregate_contract.register_expectations.0.default_reset_hex",
+      "value": "0x00000000",
+      "expected_error": "register field reset mismatch"
+    },
+    {
+      "id": "SELECTED_REGISTER_ACCESS_CONTRADICTS_FIELDS",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.0.register_access",
+      "value": "RW",
+      "expected_error": "register field access mismatch"
+    },
+    {
+      "id": "OBS_SEQUENCE_WIDTH_OUTSIDE_RANGE",
+      "operation": "set",
+      "path": "register_value_expression_contract.parameters.0.configured_default",
+      "value": 15,
+      "expected_error": "sequence identity implemented width is outside 16..32"
+    },
+    {
+      "id": "PARAMETER_EXPRESSION_OVERFLOW",
+      "operation": "set",
+      "path": "register_value_expression_contract.parameters.0.value_width_bits",
+      "value": 4,
+      "expected_error": "parameter-expression overflow"
+    },
+    {
+      "id": "FAULT_CODE_SENSOR_OPEN_VALUE_CHANGED",
+      "operation": "set",
+      "path": "fault_taxonomy.fault_codes.3.value",
+      "value": 19,
+      "expected_error": "fault code SENSOR_OPEN value changed"
+    },
+    {
+      "id": "FAULT_CODE_DUPLICATE_NUMERIC_VALUE",
+      "operation": "set",
+      "path": "fault_taxonomy.fault_codes.3.value",
+      "value": 2,
+      "expected_error": "fault-code duplicate numeric value"
+    },
+    {
+      "id": "FAULT_BITMAP_BIT_2_RENAMED",
+      "operation": "set",
+      "path": "fault_taxonomy.fault_causes.2.canonical_name",
+      "value": "SENSOR_DIFFERENTIAL",
+      "expected_error": "fault bitmap bit 2 renamed or reassigned"
+    },
+    {
+      "id": "FAULT_BITMAP_WIDTH_NOT_HIGHEST_PLUS_ONE",
+      "operation": "set",
+      "path": "fault_taxonomy.fault_bitmap_width",
+      "value": 7,
+      "expected_error": "FAULT_BITMAP_WIDTH differs from highest defined bit plus one"
+    },
+    {
+      "id": "FAULT_BITMAP_MASKS_OVERLAP",
+      "operation": "set",
+      "path": "fault_taxonomy.fault_bitmap_reserved_mask",
+      "value": "0xFFFFFFC4",
+      "expected_error": "fault bitmap valid and reserved masks overlap"
+    },
+    {
+      "id": "BITMAP_REGISTER_OMITS_RESERVED_UPPER_BITS",
+      "operation": "set",
+      "path": "selected_abi_1_1_registers.4.fields.6.bits.lsb",
+      "value": 7,
+      "expected_error": "bitmap register omits reserved upper bits"
+    },
+    {
+      "id": "COMPATIBILITY_PROJECTION_PRIORITY_CHANGED",
+      "operation": "set",
+      "path": "fault_taxonomy.compatibility_projection.priority.0.code",
+      "value": "OVERCURRENT",
+      "expected_error": "compatibility projection priority changed"
+    },
+    {
+      "id": "FAULT_LATCHED_STATE_SOURCE_CHANGED_TO_ARMED",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.1.state_ref",
+      "value": "SRC_STAGE2G_STATE.ST_ARMED",
+      "expected_error": "FAULT_LATCHED_STATE typed source differs"
+    },
+    {
+      "id": "RESET_WAIT_STATE_SOURCE_CHANGED_TO_ARMED",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.2.state_ref",
+      "value": "SRC_STAGE2G_STATE.ST_ARMED",
+      "expected_error": "RESET_WAIT_STATE typed source differs"
+    },
+    {
+      "id": "CLEAR_PENDING_SOURCE_CHANGED_TO_STATE_DECODE",
+      "operation": "set_many",
+      "values": {
+        "dynamic_value_source_contract.sources.3.kind": "STATE_EQUALS",
+        "dynamic_value_source_contract.sources.3.source_binding_ref": "SRC_STAGE2G_STATE",
+        "dynamic_value_source_contract.sources.3.state_ref": "SRC_STAGE2G_STATE.ST_ARMED",
+        "dynamic_value_source_contract.sources.3.transform_rule": "BOOLEAN_COMPARE"
+      },
+      "expected_error": "CLEAR_PENDING typed source differs"
+    },
+    {
+      "id": "POST_CLEAR_PENDING_SOURCE_CHANGED_TO_WRONG_SIGNAL",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.4.source_binding_ref",
+      "value": "SRC_CLEAR_PENDING",
+      "expected_error": "POST_CLEAR_RECOVERY_PENDING typed source differs"
+    },
+    {
+      "id": "POLICY_STATE_BITS_NOT_EXACTLY_ONE_HOT",
+      "operation": "set",
+      "path": "cross_field_invariants.policy_status_invariants.0.kind",
+      "value": "IMPLIES",
+      "expected_error": "policy state bits are not exactly one-hot"
+    },
+    {
+      "id": "CLEAR_PENDING_LEGAL_OUTSIDE_FAULT_LATCHED",
+      "operation": "set",
+      "path": "cross_field_invariants.policy_status_invariants.1.consequent_all",
+      "value": [],
+      "expected_error": "clear_pending is legal outside FAULT_LATCHED"
+    },
+    {
+      "id": "POST_CLEAR_PENDING_LEGAL_IN_ARMED",
+      "operation": "set",
+      "path": "cross_field_invariants.policy_status_invariants.2.consequent_all.0.field",
+      "value": "POLICY_STATUS.ARMED_READY",
+      "expected_error": "post-clear pending is legal in ARMED"
+    },
+    {
+      "id": "BITMAP_UPPER_BITS_CAN_BE_NONZERO",
+      "operation": "set",
+      "path": "cross_field_invariants.bitmap_invariants.0.mask",
+      "value": "0x0000003F",
+      "expected_error": "bitmap upper bits can be nonzero"
+    },
+    {
+      "id": "BITMAP_SOURCE_IS_UNMASKED",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.5.mask",
+      "value": null,
+      "expected_error": "bitmap source is unmasked"
+    },
+    {
+      "id": "FIRST_FAULT_BITMAP_CHANGES_DURING_EPISODE",
+      "operation": "set",
+      "path": "cross_field_invariants.bitmap_invariants.2.update_rule",
+      "value": "NEXT_EQUALS_PREVIOUS_OR_CLEAN_EVALUATION",
+      "expected_error": "FIRST_FAULT_BITMAP changes during an episode"
+    },
+    {
+      "id": "FAULT_SEEN_BITMAP_LOSES_CAUSE",
+      "operation": "set",
+      "path": "cross_field_invariants.bitmap_invariants.3.update_rule",
+      "value": "CAPTURE_ON_EPISODE_START_ONLY",
+      "expected_error": "FAULT_SEEN_BITMAP loses a previously seen cause"
+    },
+    {
+      "id": "FINITE_CONFORMANCE_TEMPLATE_VECTORS_REMOVED",
+      "operation": "set",
+      "path": "conformance_scenario_definitions.template_definitions.0.deterministic_vectors",
+      "value": [],
+      "expected_error": "finite conformance template differs"
+    },
+    {
+      "id": "UNKNOWN_DYNAMIC_SOURCE_KIND",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.0.kind",
+      "value": "OPAQUE",
+      "expected_error": "dynamic source kind is unknown"
+    },
+    {
+      "id": "UNKNOWN_DYNAMIC_SOURCE_BINDING",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.3.source_binding_ref",
+      "value": "SRC_UNKNOWN_SIGNAL",
+      "expected_error": "dynamic source binding is unknown"
+    },
+    {
+      "id": "UNKNOWN_DYNAMIC_SOURCE_STATE",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.0.state_ref",
+      "value": "SRC_STAGE2G_STATE.ST_UNKNOWN_STATE",
+      "expected_error": "dynamic source state is unknown"
+    },
+    {
+      "id": "UNKNOWN_DYNAMIC_SOURCE_TRANSFORM",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.3.transform_rule",
+      "value": "SIGN_EXTEND",
+      "expected_error": "dynamic source transform differs from kind"
+    },
+    {
+      "id": "UNKNOWN_DYNAMIC_SOURCE_PARAMETER",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.23.width_parameter",
+      "value": "UNKNOWN_WIDTH",
+      "expected_error": "dynamic source parameter is unknown"
+    },
+    {
+      "id": "POLICY_IDENTITY_DIRECT_WIRED_WITHOUT_HOLD",
+      "operation": "set",
+      "path": "policy_evaluation_identity_storage_contract.storage_kind",
+      "value": "ZERO_EXTEND_SIGNAL",
+      "expected_error": "policy identity direct-wired without hold"
+    },
+    {
+      "id": "POLICY_IDENTITY_LOSES_IDLE_VALUE",
+      "operation": "set",
+      "path": "policy_evaluation_identity_storage_contract.directed_vectors.2.expected_identity",
+      "value": 0,
+      "expected_error": "policy identity loses value on idle cycle"
+    },
+    {
+      "id": "POLICY_IDENTITY_NONCLEAN_NOT_CAPTURED",
+      "operation": "set",
+      "path": "policy_evaluation_identity_storage_contract.directed_vectors.3.expected_identity",
+      "value": 18,
+      "expected_error": "policy identity does not capture non-clean valid retirement"
+    },
+    {
+      "id": "POLICY_IDENTITY_CAPTURES_WHEN_INVALID",
+      "operation": "set",
+      "path": "policy_evaluation_identity_storage_contract.capture_when",
+      "value": "VALID_SIGNAL_EQUALS_0",
+      "expected_error": "policy identity captures when fault_eval_valid is zero"
+    },
+    {
+      "id": "RTL_SOURCE_MODULE_DOES_NOT_EXIST",
+      "operation": "set",
+      "path": "stage2h_rtl_source_bindings.bindings.0.module",
+      "value": "missing_stage2g_module",
+      "expected_error": "RTL source module does not exist"
+    },
+    {
+      "id": "RTL_SOURCE_SIGNAL_ABSENT_FROM_NAMED_MODULE",
+      "operation": "set",
+      "path": "stage2h_rtl_source_bindings.bindings.1.signal",
+      "value": "missing_signal",
+      "expected_error": "RTL source signal absent from named module"
+    },
+    {
+      "id": "RTL_STATE_SOURCE_NAMES_WRONG_SIGNAL",
+      "operation": "set",
+      "path": "stage2h_rtl_source_bindings.bindings.0.signal",
+      "value": "stage2g_state",
+      "expected_error": "RTL source signal absent from named module"
+    },
+    {
+      "id": "RTL_STATE_ENCODING_DIFFERS",
+      "operation": "set",
+      "path": "stage2h_rtl_source_bindings.bindings.0.state_encoding.ST_ARMED",
+      "value": "4'd3",
+      "expected_error": "RTL state encoding mismatch"
+    },
+    {
+      "id": "RTL_SOURCE_WIDTH_DIFFERS",
+      "operation": "set",
+      "path": "stage2h_rtl_source_bindings.bindings.4.width.bits",
+      "value": 7,
+      "expected_error": "RTL source width mismatch"
+    },
+    {
+      "id": "RTL_SOURCE_INVENTORY_ENTRY_UNCONSUMED",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.3.source_binding_ref",
+      "value": "SRC_POST_CLEAR_RECOVERY_PENDING",
+      "expected_error": "RTL source inventory entry is unconsumed"
+    },
+    {
+      "id": "CONFORMANCE_TRANSITION_NO_OP_NONSENSE",
+      "operation": "set",
+      "path": "conformance_scenario_definitions.template_definitions.3.deterministic_vectors.3",
+      "value": "NO_OP_NONSENSE",
+      "expected_error": "finite conformance template differs: RO_BITMAP"
+    },
+    {
+      "id": "POLICY_CONFORMANCE_EVENT_NO_TRANSITIONS",
+      "operation": "set",
+      "path": "conformance_scenario_definitions.template_definitions.4.deterministic_vectors",
+      "value": [],
+      "expected_error": "finite conformance template differs: RO_EVENT_CAPTURE"
+    },
+    {
+      "id": "TAXONOMY_CONFORMANCE_WRONG_PROJECTION",
+      "operation": "set",
+      "path": "conformance_scenario_definitions.project_contract_bindings.0.authority_ref",
+      "value": "unknown_fault_cause_forward_compatibility",
+      "expected_error": "fault projection template authority differs"
+    },
+    {
+      "id": "EPISODE_TEMPLATE_DOES_NOT_DISTINGUISH_FIRST_LIVE_SEEN",
+      "operation": "set",
+      "path": "conformance_scenario_definitions.template_definitions.3.authority_inputs",
+      "value": ["BITMAP_SOURCE_BINDINGS"],
+      "expected_error": "episode bitmap template does not distinguish first live seen"
+    },
+    {
+      "id": "CONFORMANCE_REFERENCE_UNRELATED_SOURCE",
+      "operation": "set",
+      "path": "dynamic_value_source_contract.sources.3.source_binding_ref",
+      "value": "SRC_POST_CLEAR_RECOVERY_PENDING",
+      "expected_error": "dynamic source binding unrelated to field"
+    },
+    {
+      "id": "OPAQUE_CONFORMANCE_TARGET_OR_VALUE",
+      "operation": "set",
+      "path": "conformance_scenario_definitions.template_definitions.0.opaque_target",
+      "value": "FREE_TEXT",
+      "expected_error": "opaque conformance target or value string"
+    },
+    {
+      "id": "UNKNOWN_CAUSE_BIT_WITHIN_ADVERTISED_WIDTH_DISCARDED",
+      "operation": "set",
+      "path": "unknown_fault_cause_forward_compatibility.directed_vectors.1.expected_unknown_mask",
+      "value": 0,
+      "expected_error": "unknown fault cause silently discarded"
+    },
+    {
+      "id": "UNKNOWN_CAUSE_BIT_ABOVE_ADVERTISED_WIDTH_ACCEPTED",
+      "operation": "set",
+      "path": "unknown_fault_cause_forward_compatibility.directed_vectors.2.expected_valid",
+      "value": true,
+      "expected_error": "bit above advertised width accepted as valid"
+    },
+    {
+      "id": "UNKNOWN_CAUSE_WIDTH7_BIT6_MISCLASSIFIED_AS_KNOWN",
+      "operation": "set",
+      "path": "unknown_fault_cause_forward_compatibility.directed_vectors.1.expected_known_flags",
+      "value": 65,
+      "expected_error": "known fault flags decode differs"
+    },
+    {
+      "id": "MASTER_LEGACY_C_OUTPUT_PATH_CHANGED",
+      "operation": "set",
+      "path": "selected_single_source.generated_artifacts.2.path",
+      "value": "sw/generated/break_legacy_c_include.h",
+      "expected_error": "legacy C output path changed"
+    },
+    {
+      "id": "TAXONOMY_CONSUMER_OUTSIDE_MASTER_SET",
+      "operation": "set",
+      "path": "fault_taxonomy.consumer_plan.generated_consumers.0.artifact",
+      "value": "totally/unrelated.txt",
+      "expected_error": "taxonomy consumer points outside master artifact set"
+    },
+    {
+      "id": "TAXONOMY_CONSUMERS_COLLAPSE_TO_DUPLICATE_PATH",
+      "operation": "set_many",
+      "path": "fault_taxonomy.consumer_plan.generated_consumers",
+      "values": {
+        "fault_taxonomy.consumer_plan.generated_consumers.0.artifact": "rtl/generated/protection_register_map.vh",
+        "fault_taxonomy.consumer_plan.generated_consumers.1.artifact": "rtl/generated/protection_register_map.vh",
+        "fault_taxonomy.consumer_plan.generated_consumers.2.artifact": "rtl/generated/protection_register_map.vh",
+        "fault_taxonomy.consumer_plan.generated_consumers.3.artifact": "rtl/generated/protection_register_map.vh",
+        "fault_taxonomy.consumer_plan.generated_consumers.4.artifact": "rtl/generated/protection_register_map.vh",
+        "fault_taxonomy.consumer_plan.generated_consumers.5.artifact": "rtl/generated/protection_register_map.vh",
+        "fault_taxonomy.consumer_plan.generated_consumers.6.artifact": "rtl/generated/protection_register_map.vh"
+      },
+      "expected_error": "taxonomy consumer artifact conflict"
+    },
+    {
+      "id": "LEGACY_RTL_FAULT_DEFS_COMPATIBILITY_PLAN_REMOVED",
+      "operation": "set",
+      "path": "generated_artifact_topology.legacy_rtl_fault_defs.compatibility_plan",
+      "value": "NONE",
+      "expected_error": "legacy RTL fault include path has no compatibility plan"
+    }
+  ]
+}

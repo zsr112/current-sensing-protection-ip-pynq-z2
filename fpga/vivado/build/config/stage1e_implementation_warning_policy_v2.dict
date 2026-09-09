@@ -1,0 +1,49 @@
+schema_version stage1e-implementation-warning-policy-v2
+policy_state FOUNDATION_REVIEW_REQUIRED
+identity_contract {
+    warning_policy_identity_schema stage1e-warning-policy-identity-v2
+    actual_identity NOT_CREATED
+    bind_to_implementation_policy_identity_v2 1
+    bind_to_runtime_backend_identity 1
+}
+disposition_interface {
+    required_fields {
+        identifier
+        count_limit
+        classification
+        rationale
+        review_authority
+        applicable_phase
+        evidence_identity
+    }
+    classifications {
+        ACCEPT_CANDIDATE
+        NEED_REVIEW
+        FIX_REQUIRED
+    }
+    accepted_dispositions {}
+    implicit_acceptance_allowed 0
+    unknown_identifier_action BLOCK
+    missing_count_action BLOCK
+    exceeded_count_action BLOCK
+    phase_mismatch_action BLOCK
+    missing_evidence_action BLOCK
+}
+severity_contract {
+    ERROR BLOCK
+    CRITICAL_WARNING BLOCK_UNLESS_SEPARATELY_REVIEWED
+    WARNING REQUIRE_EXPLICIT_DISPOSITION
+    INFO INVENTORY
+}
+finding_interfaces {
+    DRC EXPLICIT_DISPOSITION_REQUIRED
+    METHODOLOGY EXPLICIT_DISPOSITION_REQUIRED
+    TIMING_EXCEPTION INVENTORY_AND_REVIEW_REQUIRED
+    TIMING REQUIRE_POLICY_ACCEPTANCE
+}
+boundary {
+    current_warning_acceptance NONE
+    implementation_authorized 0
+    artifact_authority NONE
+    board_authority NONE
+}

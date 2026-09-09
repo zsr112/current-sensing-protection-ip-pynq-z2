@@ -1,0 +1,26 @@
+PROFILE_SCHEMA_VALID: PASS
+PROFILE_IDENTITY_VALID: PASS
+CONTROLLED_BUILD_SOURCE_CLOSURE=PASS
+CONTROLLED_BUILD_SOURCE_CLOSURE: PASS
+PROFILE_CAPABILITY_MODEL_VALID: PASS
+PROFILE_PHASE2_ENABLED: PASS
+PROFILE_SYNTHESIS_ENABLED: PASS
+PROFILE_SYNTHESIS_WARNING_POLICY_VALID: FAIL: TEST FAILURE: Warning review evidence is unavailable
+TEST FAILURE: Warning review evidence is unavailable
+    while executing
+"error "TEST FAILURE: $message""
+    (procedure "fail" line 2)
+    invoked from within
+"fail $message"
+    (procedure "assert_true" line 3)
+    invoked from within
+"assert_true [file isfile [file normalize [file join  $repository_root $review_evidence]]]  {Warning review evidence is unavailable}"
+    ("uplevel" body line 9)
+    invoked from within
+"uplevel 1 $body"
+PROFILE_IMPLEMENTATION_DISABLED: PASS
+PROFILE_ARTIFACT_DISABLED: PASS
+PROFILE_ADAPTER_INVENTORY_VALID: PASS
+PROFILE_AUTHORIZATION_REQUIRED: PASS
+PROFILE_NO_VIVADO_EXECUTION: PASS
+SUMMARY PASS=11 FAIL=1

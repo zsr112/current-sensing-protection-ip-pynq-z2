@@ -1,0 +1,4 @@
+FAULT_CLASSIFIER contract: OC_WITH_SENSOR > OC > SATURATION > OPEN > STUCK > MISMATCH > NO_FAULT
+FAULT_CLASSIFIER contract: ch1-only and ch2-only overcurrent are indistinguishable here and both enter as oc_any=1, oc_both=0
+tb_fault_classifier PASS
+<EXTERNAL_SOURCE>\tb\tb_fault_classifier.sv:109: $finish called at 296000 (1ps)

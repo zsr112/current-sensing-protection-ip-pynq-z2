@@ -1,0 +1,11 @@
+tb_pwm_gen=PASS
+tb_current_compare_dual=PASS
+tb_moving_avg_filter=PASS
+tb_sensor_health_monitor=PASS
+tb_fault_classifier=PASS
+tb_protection_fsm=PASS
+tb_protection_core_top=PASS
+tb_protection_reg_bank=PASS
+tb_protection_ip_top_reg_controlled=PASS
+tb_protection_ip_top_axi_lite=PASS
+SUMMARY: PASS=10 FAIL=0

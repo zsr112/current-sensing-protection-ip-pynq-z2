@@ -1,0 +1,220 @@
+{
+  "schema_version": "stage2f-scaling-parameter-authority-v2",
+  "audit_base_commit": "301bb72cafa3957392e9a64a5e6b2e97c4466886",
+  "recommended_architecture": "RAW_CODE_PROTECTION_WITH_PARALLEL_SIGNED_NORMALIZED_TELEMETRY",
+  "digital_foundation_transform": "ENCODING_THEN_NOMINAL_ZERO_REMOVAL_THEN_POLARITY",
+  "encoding_taxonomy": [
+    "UNSIGNED_WITH_ZERO_CODE",
+    "TWOS_COMPLEMENT"
+  ],
+  "recommended_normalized_representation": "SIGNED_13_BIT_CODE_COUNTS",
+  "recommended_threshold_domain": "UNSIGNED_RAW_CODE_COMPATIBILITY",
+  "current_production_normalized_telemetry": "UNAVAILABLE_UNCONFIGURED",
+  "calibration_arithmetic": "DEFERRED",
+  "generic_rational_divider": false,
+  "authority_types": [
+    "SYNTHESIS_TIME",
+    "SOURCE_PROFILE",
+    "IMPLEMENTATION_DERIVED",
+    "RUNTIME_SOFTWARE",
+    "NOT_SUPPORTED",
+    "DEFERRED"
+  ],
+  "pipeline_contract": {
+    "pipeline_latency": "IMPLEMENTATION_DERIVED_FIXED_CONSTANT",
+    "pipeline_initiation_interval": 1,
+    "no_data_dependent_latency": true,
+    "no_backpressure_to_atomic_cdc": true,
+    "no_transaction_drop": true,
+    "latency_capability_metadata_required": true,
+    "consumers_use_valid_and_sequence": true
+  },
+  "stage2g_contract": {
+    "sample_event_authority": "ATOMIC_RAW_CDC_DESTINATION_DELIVERY_EVENT",
+    "fault_input_authority": "RAW_PROTECTION_EVALUATION",
+    "normalized_telemetry_gates_fault_policy": false,
+    "normalized_range_flags_gate_fault_policy": false,
+    "normalized_configuration_valid_gates_fault_policy": false,
+    "normalized_domain_protection": "FUTURE_VERSIONED_SAFETY_CONTRACT_REQUIRED"
+  },
+  "arithmetic_scope": {
+    "runtime_offset_supported": false,
+    "offset_bounds": null,
+    "fixed_intermediate_width_claim": false,
+    "runtime_rational_gain_supported": false,
+    "generic_signed_divider_supported": false,
+    "board_calibration_arithmetic": "DEFERRED",
+    "source_specific_generated_constant_transform": "DEFERRED_UNTIL_APPROVED_PHYSICAL_PROFILE"
+  },
+  "register_contract": {
+    "existing_offsets_through_0x60": "UNCHANGED",
+    "new_register_offsets_finalized": false,
+    "conceptual_outputs": [
+      "SCALE_CAPABILITY",
+      "SCALE_PROFILE_STATUS",
+      "LATEST_NORMALIZED_CH1",
+      "LATEST_NORMALIZED_CH2",
+      "LATEST_NORMALIZED_SEQUENCE",
+      "LATEST_NORMALIZED_FLAGS"
+    ],
+    "access_type": "READ_ONLY",
+    "sticky_status_supported": false,
+    "sticky_clear_semantics": null,
+    "snapshot_consistency": "SEQUENCE_CHANNELS_FLAGS_SEQUENCE_RETRY_UNTIL_SEQUENCE_MATCHES",
+    "field_and_offset_freeze_owner": "STAGE2H_SINGLE_SOURCE_REGISTER_GENERATION"
+  },
+  "parameters": [
+    {
+      "parameter": "raw_width",
+      "authority": "SYNTHESIS_TIME",
+      "authority_artifact": "spec/stage2f_adc_fact_inventory.json",
+      "target_value": 12,
+      "status": "REPOSITORY_FACT",
+      "rationale": "The production register and interface contract is fixed at 12 raw bits."
+    },
+    {
+      "parameter": "source_profile_state",
+      "authority": "SOURCE_PROFILE",
+      "authority_artifact": "spec/stage2f_adc_source_profile_unconfigured.json",
+      "target_value": "UNCONFIGURED",
+      "status": "EXTERNAL_HARDWARE_UNKNOWN",
+      "rationale": "Absence of an approved source profile never selects a plausible default."
+    },
+    {
+      "parameter": "encoding",
+      "authority": "SOURCE_PROFILE",
+      "authority_artifact": "spec/stage2f_adc_source_profile.schema.json",
+      "target_value": "UNKNOWN",
+      "status": "EXTERNAL_HARDWARE_UNKNOWN",
+      "rationale": "A configured profile selects UNSIGNED_WITH_ZERO_CODE or TWOS_COMPLEMENT."
+    },
+    {
+      "parameter": "zero_code",
+      "authority": "SOURCE_PROFILE",
+      "authority_artifact": "spec/stage2f_adc_source_profile.schema.json",
+      "target_value": null,
+      "status": "EXTERNAL_HARDWARE_UNKNOWN",
+      "rationale": "The nominal zero is explicit for unsigned coding and zero for two's complement."
+    },
+    {
+      "parameter": "channel_polarity",
+      "authority": "SOURCE_PROFILE",
+      "authority_artifact": "spec/stage2f_adc_source_profile.schema.json",
+      "target_value": "UNKNOWN",
+      "status": "EXTERNAL_HARDWARE_UNKNOWN",
+      "rationale": "Each channel explicitly maps increasing code to positive or negative current direction."
+    },
+    {
+      "parameter": "normalized_width",
+      "authority": "SYNTHESIS_TIME",
+      "authority_artifact": "docs/architecture/stage2f_adc_encoding_scaling_target_contract.md",
+      "target_value": 13,
+      "status": "DESIGN_DECISION",
+      "rationale": "All supported 12-bit decode and polarity results fit exactly in a signed 13-bit code count."
+    },
+    {
+      "parameter": "normalized_unit",
+      "authority": "SYNTHESIS_TIME",
+      "authority_artifact": "docs/architecture/stage2f_adc_encoding_scaling_target_contract.md",
+      "target_value": "SIGNED_CODE_COUNT",
+      "status": "DESIGN_DECISION",
+      "rationale": "The digital foundation makes no physical-unit claim."
+    },
+    {
+      "parameter": "pipeline_latency",
+      "authority": "IMPLEMENTATION_DERIVED",
+      "authority_artifact": "FUTURE_SCALE_CAPABILITY_METADATA",
+      "target_value": "IMPLEMENTATION_DERIVED_FIXED_CONSTANT",
+      "status": "DESIGN_DECISION",
+      "rationale": "The exact constant follows arithmetic selection and timing work; consumers use valid and sequence."
+    },
+    {
+      "parameter": "pipeline_initiation_interval",
+      "authority": "SYNTHESIS_TIME",
+      "authority_artifact": "docs/architecture/stage2f_adc_encoding_scaling_target_contract.md",
+      "target_value": 1,
+      "status": "DESIGN_DECISION",
+      "rationale": "The no-ready input must accept every accepted atomic destination delivery without backpressure or drop."
+    },
+    {
+      "parameter": "configuration_identity",
+      "authority": "SOURCE_PROFILE",
+      "authority_artifact": "spec/stage2f_adc_source_profile_unconfigured.json",
+      "target_value": "UNCONFIGURED",
+      "status": "DESIGN_DECISION",
+      "rationale": "Telemetry identifies the exact validated digital source profile."
+    },
+    {
+      "parameter": "physical_unit_scale",
+      "authority": "NOT_SUPPORTED",
+      "authority_artifact": "spec/stage2f_closure_boundary.json",
+      "target_value": "NONE",
+      "status": "OUT_OF_SCOPE",
+      "rationale": "Code-to-current scaling remains blocked on approved hardware and calibration authorities."
+    },
+    {
+      "parameter": "board_calibration_arithmetic",
+      "authority": "DEFERRED",
+      "authority_artifact": "spec/stage2f_closure_boundary.json",
+      "target_value": "DEFERRED",
+      "status": "BOARD_CALIBRATION_REQUIRED",
+      "rationale": "Per-channel measured offset and gain arithmetic is not part of the initial digital foundation."
+    },
+    {
+      "parameter": "generic_rational_divider",
+      "authority": "NOT_SUPPORTED",
+      "authority_artifact": "docs/architecture/stage2f_adc_encoding_scaling_tradeoff.md",
+      "target_value": false,
+      "status": "OUT_OF_SCOPE",
+      "rationale": "No current requirement or authority justifies a generic signed divider."
+    },
+    {
+      "parameter": "overcurrent_thresholds",
+      "authority": "RUNTIME_SOFTWARE",
+      "authority_artifact": "EXISTING_TH_OC1_AND_TH_OC2_REGISTERS",
+      "target_value": "EXISTING_12_BIT_VALUES",
+      "status": "REPOSITORY_FACT",
+      "rationale": "Existing thresholds retain unsigned raw-code semantics."
+    },
+    {
+      "parameter": "difference_threshold",
+      "authority": "RUNTIME_SOFTWARE",
+      "authority_artifact": "EXISTING_TH_DIFF_REGISTER",
+      "target_value": "EXISTING_12_BIT_VALUE",
+      "status": "REPOSITORY_FACT",
+      "rationale": "The difference threshold retains unsigned raw-code-difference semantics."
+    },
+    {
+      "parameter": "normalized_protection_thresholds",
+      "authority": "NOT_SUPPORTED",
+      "authority_artifact": "NONE_IN_STAGE2F_COMPATIBILITY_ARCHITECTURE",
+      "target_value": "NONE",
+      "status": "OUT_OF_SCOPE",
+      "rationale": "A normalized protection domain requires a future versioned safety contract."
+    },
+    {
+      "parameter": "runtime_scaling_writes",
+      "authority": "NOT_SUPPORTED",
+      "authority_artifact": "NONE_IN_STAGE2F_DIGITAL_FOUNDATION",
+      "target_value": "NONE",
+      "status": "OUT_OF_SCOPE",
+      "rationale": "Static source meaning is not made AXI-writable for generality."
+    },
+    {
+      "parameter": "configuration_valid",
+      "authority": "SOURCE_PROFILE",
+      "authority_artifact": "spec/stage2f_adc_source_profile_unconfigured.json",
+      "target_value": false,
+      "status": "DESIGN_DECISION",
+      "rationale": "The current unconfigured profile cannot produce normalized telemetry."
+    },
+    {
+      "parameter": "production_normalized_telemetry",
+      "authority": "SOURCE_PROFILE",
+      "authority_artifact": "spec/stage2f_adc_source_profile_unconfigured.json",
+      "target_value": "UNAVAILABLE_UNCONFIGURED",
+      "status": "DESIGN_DECISION",
+      "rationale": "Raw protection remains active while normalized output is unavailable."
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "base_commit": "ef6a990b154edd03b0b144d7d7cd0e41303dc095",
+  "expected_changed_paths": [
+    "docs/architecture/stage2g_clear_fence_implementation.md",
+    "docs/architecture/stage2g_fault_evaluation_pipeline.md",
+    "docs/architecture/stage2g_functional_rtl_implementation.md",
+    "docs/architecture/stage2g_public_recovery_contract_addendum.md",
+    "docs/architecture/stage2g_reset_wait_first_fault_policy_source_map.md",
+    "docs/architecture/stage2g_sequence_width_contract_addendum.md",
+    "docs/verification/stage2g_functional_rtl_verification.md",
+    "docs/verification/stage2g_reset_wait_first_fault_verification_plan.md",
+    "fpga/vivado/build/tests/stage2d_source_closure_tests.tcl",
+    "fpga/vivado/build/tests/stage2g_source_closure_tests.tcl",
+    "rtl/adc_sample_cdc_bridge.v",
+    "rtl/fault_classifier.v",
+    "rtl/protection_core_top.v",
+    "rtl/protection_fsm.v",
+    "rtl/protection_ip_top_async_adc_axi_lite.v",
+    "rtl/protection_ip_top_axi_lite.v",
+    "rtl/protection_ip_top_reg_controlled.v",
+    "rtl/transaction_destination_observer.v",
+    "rtl/transaction_source_observer.v",
+    "sim/run_iverilog.sh",
+    "sim/stage2g/run_stage2g_functional_rtl.ps1",
+    "spec/stage2g_fixtures/positive_contract.json",
+    "spec/stage2g_implementation_base_fingerprints.json",
+    "spec/stage2g_reset_wait_first_fault_policy.json",
+    "spec/stage2g_reset_wait_first_fault_policy.schema.json",
+    "spec/stage2g_reset_wait_first_fault_policy_source_map.json",
+    "spec/stage2g_reset_wait_first_fault_policy_status.json",
+    "tb/stage2g/tb_stage2g_core_directed.sv",
+    "tb/stage2g/tb_stage2g_policy_matrix.sv",
+    "tb/stage2g/tb_stage2g_production_path.sv",
+    "tb/stage2g/tb_stage2g_reference_vectors.sv",
+    "tb/stage2g/tb_stage2g_sequence_integrity_matrix.sv",
+    "tools/build_stage2g_functional_review.py",
+    "tools/check_stage2g_implementation.py",
+    "tools/check_stage2g_recovery_snapshots.py",
+    "tools/replay_stage2g_source_archive.py",
+    "tools/run_stage2g_functional_rtl.py",
+    "tools/run_stage2g_mutations.py",
+    "tools/stage2g_reference_model.py",
+    "tools/stage2g_reset_wait_first_fault_policy_audit.py",
+    "tools/tests/test_stage2g_reset_wait_first_fault_policy_audit.py"
+  ],
+  "fingerprint_version": "stage2g-frozen-base-fingerprints-v1",
+  "software_recovery_predicate": {
+    "path": "sw/protection_ip_interface.py",
+    "function": "recovery_is_verified",
+    "ast_sha256": "9758193b2b840d1addd256e94bc24d4f28ccaa1882e74dc02edf63d41484a9dc"
+  },
+  "legacy_files": {
+    "rtl/adc_sample_cdc_bridge.v": {
+      "base_module_names": ["adc_sample_cdc_bridge"],
+      "interfaces": {"adc_sample_cdc_bridge": "a9a47766d62f330a60d1dc3a1e494d37d901a2502f82df00b3aeb81b603f8725"}
+    },
+    "rtl/fault_classifier.v": {
+      "base_module_names": ["fault_classifier"],
+      "interfaces": {"fault_classifier": "fdc50d2ac8d15e11d4bdb467b683955e5807166e7c80a9e9dcd4b7df9d05b457"}
+    },
+    "rtl/protection_core_top.v": {
+      "base_module_names": ["protection_core_top"],
+      "interfaces": {"protection_core_top": "695e4c38327c99d26388024f098b0a5371479640ba2dad09fa839347c339735d"}
+    },
+    "rtl/protection_fsm.v": {
+      "base_module_names": ["protection_fsm"],
+      "interfaces": {"protection_fsm": "1237d82c31db13c17810597d453359fab421e6c9717579fa0b89b54a5ff53b12"}
+    },
+    "rtl/protection_ip_top_async_adc_axi_lite.v": {
+      "base_module_names": ["protection_ip_top_async_adc_axi_lite"],
+      "interfaces": {"protection_ip_top_async_adc_axi_lite": "52e8b182c4cf3c4a7d99beaa654bfa95d9588f284a8b8926a9104019662d966d"}
+    },
+    "rtl/protection_ip_top_axi_lite.v": {
+      "base_module_names": ["protection_ip_top_axi_lite"],
+      "interfaces": {"protection_ip_top_axi_lite": "1a712788bac2f31ee844cc3ca80eb570001cad2e06f4e3cbbc5897cfc71abe62"}
+    },
+    "rtl/protection_ip_top_reg_controlled.v": {
+      "base_module_names": ["protection_ip_top_reg_controlled"],
+      "interfaces": {"protection_ip_top_reg_controlled": "0a061cf1d9d656d4fab297c342a183fe7472a1379efdede2ca7b16c88d96798c"}
+    },
+    "rtl/transaction_destination_observer.v": {
+      "base_module_names": ["transaction_destination_observer"],
+      "interfaces": {"transaction_destination_observer": "3581778318322f4d193e6a9a718ceaefbc2b306b00a02b31849a339fb97c3d8d"}
+    },
+    "rtl/transaction_source_observer.v": {
+      "base_module_names": ["transaction_source_observer"],
+      "interfaces": {"transaction_source_observer": "b94fe12049708449c3cf4c6c3dcb05d23b1281d2decdb8f0e054e82666c28342"}
+    }
+  },
+  "register_map": {
+    "offsets": {
+      "REG_CTRL": 0,
+      "REG_FAULT_CODE": 8,
+      "REG_I_CH1": 12,
+      "REG_I_CH2": 16,
+      "REG_OBS_AGGREGATE_ERROR_COUNT": 88,
+      "REG_OBS_BACKPRESSURE_CYCLE_COUNT": 56,
+      "REG_OBS_CAPABILITY": 40,
+      "REG_OBS_DESTINATION_DELIVERY_COUNT": 52,
+      "REG_OBS_DUPLICATE_DELIVERY_COUNT": 76,
+      "REG_OBS_FIFO_OVERFLOW_ATTEMPT_COUNT": 68,
+      "REG_OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT": 72,
+      "REG_OBS_LAST_DESTINATION_SEQUENCE": 96,
+      "REG_OBS_LAST_SOURCE_SEQUENCE": 92,
+      "REG_OBS_REORDER_OR_STALE_COUNT": 84,
+      "REG_OBS_SEQUENCE_GAP_COUNT": 80,
+      "REG_OBS_SOURCE_ACCEPT_COUNT": 48,
+      "REG_OBS_SOURCE_DROP_COUNT": 64,
+      "REG_OBS_SOURCE_PROTOCOL_VIOLATION_COUNT": 60,
+      "REG_OBS_STATUS_W1C": 44,
+      "REG_PWM_DUTY": 36,
+      "REG_PWM_PERIOD": 32,
+      "REG_STATUS": 4,
+      "REG_TH_DIFF": 28,
+      "REG_TH_OC1": 20,
+      "REG_TH_OC2": 24
+    },
+    "path": "rtl/protection_reg_bank.v"
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "schema_version": "stage2f-adc-fact-inventory-v1",
+  "audit_base_commit": "301bb72cafa3957392e9a64a5e6b2e97c4466886",
+  "audit_scope": "ARCHITECTURE_AND_CONTRACT_ONLY",
+  "classification_vocabulary": [
+    "REPOSITORY_FACT",
+    "DERIVED_INFERENCE",
+    "DESIGN_DECISION",
+    "EXTERNAL_HARDWARE_UNKNOWN",
+    "BOARD_CALIBRATION_REQUIRED",
+    "OUT_OF_SCOPE"
+  ],
+  "finding_vocabulary": [
+    "EXPLICIT_CONTRACT",
+    "IMPLEMENTATION_ASSUMPTION",
+    "TEST_ONLY_ASSUMPTION",
+    "DOCUMENTATION_ONLY_CLAIM",
+    "CONFLICT",
+    "UNKNOWN"
+  ],
+  "audit_state": {
+    "current_raw_sample_width": 12,
+    "current_raw_encoding": "UNKNOWN",
+    "current_rtl_interpretation": "UNSIGNED",
+    "current_threshold_domain": "UNSIGNED_RAW_CODE",
+    "th_diff_domain": "UNSIGNED_RAW_CODE_DIFFERENCE",
+    "raw_readback": "ZERO_EXTENDED_12_BIT",
+    "threshold_write_range_behavior": "SILENT_LOW_12_BIT_TRUNCATION",
+    "real_adc_device": "UNKNOWN",
+    "real_afe_gain": "UNKNOWN",
+    "real_sensor_sensitivity": "UNKNOWN",
+    "real_zero_current_code": "UNKNOWN",
+    "real_current_range": "UNKNOWN",
+    "board_calibration_data": "NOT_AVAILABLE",
+    "production_input_source": "SAFE_INERT_DIGITAL_PLACEHOLDER",
+    "current_production_profile": "UNCONFIGURED",
+    "current_production_normalized_telemetry": "UNAVAILABLE_UNCONFIGURED",
+    "raw_protection_active_behavior": "UNCHANGED",
+    "stage2f_implementation_started": false,
+    "stage2f_contract_gap_closed": false,
+    "remaining_contract_gaps": 2,
+    "stage2_complete": false
+  },
+  "facts": [
+    {
+      "id": "F-WIDTH-001",
+      "subject": "production sample width",
+      "value": 12,
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "PRODUCTION_RTL_AND_BUILD_CONFIGURATION",
+      "evidence": [
+        "rtl/protection_ip_top_async_adc_axi_lite.v:2",
+        "rtl/protection_reg_bank.v:18",
+        "fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict:296",
+        "fpga/vivado/build/config/stage1e_execution_contract_v1.json:38"
+      ],
+      "notes": "DATA_WIDTH is parameterized in wrappers, but the production value and register bank are 12 bits."
+    },
+    {
+      "id": "F-SIGNED-001",
+      "subject": "current RTL sample signedness",
+      "value": "UNSIGNED",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "IMPLEMENTATION_ASSUMPTION",
+      "authority_type": "FUNCTIONAL_RTL",
+      "evidence": [
+        "rtl/current_compare_dual.v:4",
+        "rtl/current_compare_dual.v:16",
+        "rtl/sensor_health_monitor.v:8",
+        "rtl/protection_reg_bank.v:18"
+      ],
+      "notes": "All declarations are unsigned packed vectors and comparisons use unsigned operators. This is behavior, not proof of an ADC coding format."
+    },
+    {
+      "id": "F-ENCODING-001",
+      "subject": "physical raw ADC encoding",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/current_input_interface.md:84",
+        "docs/architecture/stage2_sampling_contract_cdc_spec_20260803.md:27"
+      ],
+      "notes": "Unsigned RTL treatment does not establish straight binary, offset binary, or two's complement at a real ADC boundary."
+    },
+    {
+      "id": "F-THRESHOLD-001",
+      "subject": "TH_OC1 and TH_OC2 domain",
+      "value": "UNSIGNED_RAW_CODE",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "RTL_REGISTER_AND_COMPARATOR_CONTRACT",
+      "evidence": [
+        "rtl/protection_reg_bank.v:80",
+        "rtl/protection_reg_bank.v:94",
+        "rtl/current_compare_dual.v:17",
+        "docs/spec/current_input_interface.md:86"
+      ],
+      "notes": "Software writes 32 bits, storage truncates to bits 11:0, and the comparator applies strict unsigned greater-than."
+    },
+    {
+      "id": "F-THRESHOLD-002",
+      "subject": "TH_DIFF domain",
+      "value": "UNSIGNED_RAW_CODE_DIFFERENCE",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "RTL_REGISTER_AND_COMPARATOR_CONTRACT",
+      "evidence": [
+        "rtl/protection_reg_bank.v:82",
+        "rtl/protection_reg_bank.v:96",
+        "rtl/current_compare_dual.v:16",
+        "rtl/current_compare_dual.v:21"
+      ],
+      "notes": "The ordered subtraction is width-preserving and cannot underflow after the unsigned ordering test. It is not a physical-current difference."
+    },
+    {
+      "id": "F-READBACK-001",
+      "subject": "software-visible channel readback",
+      "value": "ZERO_EXTENDED_12_BIT_RAW_CODE",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "REGISTER_RTL",
+      "evidence": [
+        "rtl/protection_reg_bank.v:116",
+        "rtl/protection_reg_bank.v:117",
+        "docs/implementation/register_map.md:160"
+      ],
+      "notes": "I_CH1 and I_CH2 place the raw 12-bit buses in bits 11:0 and force bits 31:12 to zero."
+    },
+    {
+      "id": "F-SOFTWARE-001",
+      "subject": "Python channel conversion",
+      "value": "NONE",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "PYTHON_INTERFACE",
+      "evidence": [
+        "sw/protection_ip_interface.py:123",
+        "sw/protection_ip_interface.py:128"
+      ],
+      "notes": "read_status returns integer register values without signed decoding or unit conversion."
+    },
+    {
+      "id": "F-SOFTWARE-002",
+      "subject": "C channel conversion",
+      "value": "NONE",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "C_DEMO",
+      "evidence": [
+        "sw/ps_register_demo/protection_ip_regs.h:17",
+        "sw/ps_register_demo/main.c:100"
+      ],
+      "notes": "The C example reads uint32_t raw monitor words and applies no scaling."
+    },
+    {
+      "id": "F-TEST-001",
+      "subject": "canonical sample stimulus domain",
+      "value": "NONNEGATIVE_12_BIT_LITERALS_ONLY",
+      "classification": "DERIVED_INFERENCE",
+      "finding_classification": "TEST_ONLY_ASSUMPTION",
+      "authority_type": "CANONICAL_TESTBENCHES",
+      "evidence": [
+        "tb/tb_current_compare_dual.sv:1",
+        "tb/stage2b/tb_stage2b_unified_sample_acceptance.sv:16",
+        "tb/stage2d/tb_stage2d_async_adc_atomic_cdc.sv:1",
+        "tb/stage2e/tb_stage2e_transaction_error_observability.sv:1"
+      ],
+      "notes": "Tests thoroughly exercise 0..4095 raw behavior but do not exercise negative-current decoding. Passing them cannot establish signed ADC semantics."
+    },
+    {
+      "id": "F-HARDWARE-001",
+      "subject": "production input source",
+      "value": "SAFE_INERT_DIGITAL_PLACEHOLDER",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "PRODUCTION_EXECUTION_CONTRACT",
+      "evidence": [
+        "fpga/vivado/build/config/stage1e_execution_contract_v1.json:42",
+        "fpga/vivado/create_pynq_z2_stage2_bd.tcl:39",
+        "fpga/vivado/create_pynq_z2_stage2_bd.tcl:63"
+      ],
+      "notes": "adc_sample_valid is fixed low. Codes 1024/1024 or the internal AXI-GPIO bus do not represent accepted ADC transactions in production."
+    },
+    {
+      "id": "F-HARDWARE-002",
+      "subject": "real ADC device",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/afe_xadc_safety_plan.md:7",
+        "fpga/vivado/build/config/stage1e_execution_contract_v1.json:67"
+      ],
+      "notes": "XADC and named external ADC parts appear only as future candidates or procurement ideas, never as the selected production source."
+    },
+    {
+      "id": "F-HARDWARE-003",
+      "subject": "reference voltage and analog input range",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/afe_xadc_safety_plan.md:21",
+        "docs/spec/current_code_calibration_template.md:18"
+      ],
+      "notes": "The repository asks these questions and leaves template fields TBD. Generic PYNQ-Z2 statements are not custom ADC/AFE evidence."
+    },
+    {
+      "id": "F-HARDWARE-004",
+      "subject": "AFE gain and sensor sensitivity",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/current_code_calibration_template.md:15",
+        "docs/spec/current_input_interface.md:115"
+      ],
+      "notes": "No selected topology, sensor model, nominal gain, tolerance, or channel matching authority exists."
+    },
+    {
+      "id": "F-HARDWARE-005",
+      "subject": "real zero-current code and polarity",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/current_input_interface.md:84",
+        "docs/spec/current_code_calibration_template.md:16"
+      ],
+      "notes": "Neither a nominal zero-current code nor the sign of increasing code relative to current direction is selected."
+    },
+    {
+      "id": "F-HARDWARE-006",
+      "subject": "real full-scale current range",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/current_code_calibration_template.md:18",
+        "docs/spec/afe_xadc_safety_plan.md:21"
+      ],
+      "notes": "Digital code endpoints exist, but no supported mapping from either endpoint to amperes or any other physical current unit exists."
+    },
+    {
+      "id": "F-HARDWARE-007",
+      "subject": "channel matching",
+      "value": "UNKNOWN",
+      "classification": "BOARD_CALIBRATION_REQUIRED",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/current_code_calibration_template.md:24",
+        "docs/spec/current_input_interface.md:115"
+      ],
+      "notes": "There are no per-channel measured offset or gain coefficients and no evidence that the two channels are interchangeable."
+    },
+    {
+      "id": "F-RANGE-001",
+      "subject": "current digital endpoint policy",
+      "value": "RAW_ZERO_AND_ALL_ONES_ENDPOINT_TESTS",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "IMPLEMENTATION_ASSUMPTION",
+      "authority_type": "FUNCTIONAL_RTL",
+      "evidence": [
+        "rtl/sensor_health_monitor.v:25",
+        "rtl/protection_core_top.v:7"
+      ],
+      "notes": "The health monitor treats raw zero as open and raw 4095 as saturation at production defaults. These are digital policies, not evidence of physical ADC or sensor range."
+    },
+    {
+      "id": "F-TRUNCATION-001",
+      "subject": "threshold write range behavior",
+      "value": "SILENT_LOW_12_BIT_TRUNCATION",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "REGISTER_RTL",
+      "evidence": [
+        "rtl/protection_reg_bank.v:80",
+        "rtl/protection_reg_bank.v:82"
+      ],
+      "notes": "AXI write bits 31:12 do not participate in threshold storage and no out-of-range status is reported."
+    },
+    {
+      "id": "F-CAL-001",
+      "subject": "board calibration data",
+      "value": "NOT_AVAILABLE",
+      "classification": "BOARD_CALIBRATION_REQUIRED",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "CALIBRATION_TEMPLATE",
+      "evidence": [
+        "docs/spec/current_code_calibration_template.md:7",
+        "docs/spec/current_code_calibration_template.md:31"
+      ],
+      "notes": "The only calibration artifact is an empty template and explicitly says no code-to-amp calibration has been performed."
+    },
+    {
+      "id": "F-PINS-001",
+      "subject": "ADC connector and pin mapping",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "fpga/constraints/pynq_z2_preboard_draft.xdc:3",
+        "fpga/constraints/pynq_z2_preboard_draft.xdc:13"
+      ],
+      "notes": "The draft XDC contains no assignments and explicitly defers XADC pin selection."
+    },
+    {
+      "id": "F-SAMPLING-001",
+      "subject": "real ADC sample rate and anti-alias filter",
+      "value": "UNKNOWN",
+      "classification": "EXTERNAL_HARDWARE_UNKNOWN",
+      "finding_classification": "UNKNOWN",
+      "authority_type": "NONE",
+      "evidence": [
+        "docs/spec/current_code_calibration_template.md:21",
+        "docs/spec/afe_xadc_safety_plan.md:15"
+      ],
+      "notes": "The current profile aliases adc_src_clk to FCLK0, but that is a digital integration clock, not an actual conversion-rate or analog-bandwidth fact."
+    },
+    {
+      "id": "F-GAP-001",
+      "subject": "remaining Stage 2 contract gaps",
+      "value": 2,
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "FROZEN_STAGE2E_RESULT",
+      "evidence": [
+        "docs/verification/stage2e_transaction_error_observability_result.md:174"
+      ],
+      "notes": "The digital foundation does not redefine or close ADC_ENCODING_AND_PHYSICAL_SCALING; physical scaling remains blocked, and RESET_WAIT first-fault policy also remains open."
+    },
+    {
+      "id": "F-PROFILE-001",
+      "subject": "current production source profile",
+      "value": "UNCONFIGURED",
+      "classification": "REPOSITORY_FACT",
+      "finding_classification": "EXPLICIT_CONTRACT",
+      "authority_type": "STAGE2F_SOURCE_PROFILE",
+      "evidence": [
+        "spec/stage2f_adc_source_profile_unconfigured.json"
+      ],
+      "notes": "The safe-inert production source has no selected encoding, zero code, polarity, or physical unit; normalized telemetry is unavailable."
+    }
+  ]
+}

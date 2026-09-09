@@ -1,0 +1,211 @@
+STAGE1E_CONFIG_VALID: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_SOURCE_CONTEXT_VALID: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_ENVIRONMENT_CONTEXT_VALID: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_WORKSPACE_VALID: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    (procedure "ensure_controller_result" line 11)
+    invoked from within
+"ensure_controller_result"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_PHASE_ORDER_VALID: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    (procedure "ensure_controller_result" line 11)
+    invoked from within
+"ensure_controller_result"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_DEFAULT_NO_BUILD_EXECUTION: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    (procedure "ensure_controller_result" line 11)
+    invoked from within
+"ensure_controller_result"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1D_ISOLATION_VALID: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    (procedure "ensure_controller_result" line 11)
+    invoked from within
+"ensure_controller_result"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_BUILD_DISABLED_ENFORCEMENT: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_FUTURE_PHASE_BLOCKING: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_CAPABILITY_CONFIG_ALIGNMENT: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+NO_VIVADO_INVOCATION: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    (procedure "ensure_controller_result" line 11)
+    invoked from within
+"ensure_controller_result"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+NO_ARTIFACT_GENERATION: FAIL: Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+Acceptance policy reference file is unavailable: <EXTERNAL_SOURCE>/docs/design/stage1e_artifact_closure_acceptance.md
+    while executing
+"error "$label file is unavailable: $resolved""
+    (procedure "_resolve_repository_file" line 15)
+    invoked from within
+"_resolve_repository_file  $repository_root [dict get  $configuration acceptance_policy_reference path]  {Acceptance policy reference}"
+    (procedure "::stage1e::controller::load_configuration" line 33)
+    invoked from within
+"::stage1e::controller::load_configuration  $configuration_path $repository_root"
+    (procedure "load_configuration" line 7)
+    invoked from within
+"load_configuration"
+    (procedure "ensure_controller_result" line 11)
+    invoked from within
+"ensure_controller_result"
+    ("uplevel" body line 2)
+    invoked from within
+"uplevel 1 $body"
+STAGE1E_TEST_SUMMARY: PASS=0 FAIL=12

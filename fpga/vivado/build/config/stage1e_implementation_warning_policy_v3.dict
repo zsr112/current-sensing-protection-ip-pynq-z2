@@ -1,0 +1,114 @@
+schema_version stage1e-implementation-warning-policy-v3
+policy_state CANDIDATE_HUMAN_REVIEW_REQUIRED_NOT_AUTHORIZED
+identity_contract {
+    warning_policy_identity_schema stage1e-warning-policy-identity-v3
+    actual_identity_state COMMIT_REQUIRED_BEFORE_IDENTITY_FINALIZATION
+    runtime_backend_identity_schema stage1e-runtime-backend-identity-v2
+    implementation_policy_schema stage1e-implementation-policy-identity-v3
+    concrete_binding_state NOT_CREATED
+}
+route_enum {
+    ACCEPT_CANDIDATE
+    REJECT_CANDIDATE
+    FIX_REQUIRED
+    HUMAN_DECISION_REQUIRED
+    EVIDENCE_INSUFFICIENT
+}
+decision_enum {
+    ACCEPT_WITH_EXACT_CONTRACT
+    REJECT_AND_FIX
+    DEFER_BLOCKING
+}
+activation_contract {
+    separately_supplied_human_decision_record_required 1
+    named_review_authority_required 1
+    exact_scope_required 1
+    evidence_reference_required 1
+    rationale_required 1
+    candidate_route_is_accepted_disposition 0
+    implicit_acceptance_allowed 0
+}
+exact_candidate_dispositions {
+    {row_id RUN1_NATIVE_TIMING_38_436 exact_identifier {Timing 38-436} exact_phase NATIVE_IMPLEMENTATION severity WARNING min_count 1 max_count 1 affected_scope {RUN1 bus-skew constraint set; exact resolved object rows required before activation} vivado_tool_binding {Vivado 2024.1 build 5076996; target xc7z020clg400-1} configuration_binding {stage1e-implementation-configuration-v3; CONDITIONAL_BUS_SKEW report role} evidence_reference {warning review abaecd770c72995b4db604bfb400f5794304534271199c99106ea94e3378f996; Run1 native log} rationale {Candidate only: an all-MET complete bus-skew report may support a narrowly bounded disposition; positive slack alone is insufficient.} named_review_authority_state NOT_SUPPLIED decision_state UNRESOLVED_BLOCKING route ACCEPT_CANDIDATE}
+    {row_id RUN1_REPORT_TIMING_38_436 exact_identifier {Timing 38-436} exact_phase REPORT_CONTINUATION severity WARNING min_count 1 max_count 1 affected_scope {RUN1 report-continuation bus-skew constraint set; producer-session and resolved object rows required before activation} vivado_tool_binding {Vivado 2024.1 build 5076996; target xc7z020clg400-1} configuration_binding {stage1e-implementation-configuration-v3; CONDITIONAL_BUS_SKEW report role and REPORT_ATTEMPT_LEDGER} evidence_reference {timing identity e4176adba8bb1038334b5581900eabc73288827134007ee38fe14a3e4e2aa63a; Run1 report-continuation log} rationale {Candidate only: the continuation must be bound independently from the native phase and every bus-skew constraint must be MET.} named_review_authority_state NOT_SUPPLIED decision_state UNRESOLVED_BLOCKING route ACCEPT_CANDIDATE}
+}
+informational_inventory {
+    {exact_identifier CDC-3 exact_phase CDC_REPORT severity INFO observed_count 9 disposition_state INVENTORY_ONLY_NOT_ACCEPTED evidence_reference {methodology/CDC identity 71e45ea9b41ac7ce2d92dc9bfc3ee522ee9d48f0946d471286ffeb08cfd7a391}}
+    {exact_identifier CDC-9 exact_phase CDC_REPORT severity INFO observed_count 2 disposition_state INVENTORY_ONLY_NOT_ACCEPTED evidence_reference {methodology/CDC identity 71e45ea9b41ac7ce2d92dc9bfc3ee522ee9d48f0946d471286ffeb08cfd7a391}}
+}
+unresolved_human_decisions {
+    RUN1_NATIVE_TIMING_38_436
+    RUN1_NATIVE_VIVADO_TCL_4_921
+    RUN1_NATIVE_VIVADO_TCL_4_935
+    RUN1_NATIVE_VIVADO_TCL_4_919
+    RUN1_NATIVE_DEVICE_21_9320
+    RUN1_NATIVE_DEVICE_21_2174
+    RUN1_REPORT_TIMING_38_436
+    RUN1_REPORT_TIMING_38_164
+    RUN1_DRC_PDCN_1569
+    RUN1_DRC_RTSTAT_10
+    RUN1_METHODOLOGY_LUTAR_1
+    RUN1_METHODOLOGY_XDCB_5
+    RUN1_FALSE_PATH_INVENTORY
+    RUN1_MAX_DELAY_DATAPATH_ONLY_INVENTORY
+    RUN1_GENERATED_CLOCK_CLOCK_INTERACTION
+    RUN1_PHYS_OPT_DESIGN_BOUNDARY
+    RUN1_COLLECTOR_REPORT_RECOVERY_DEFECT_SET
+}
+rejected_or_unknown_findings {
+    {identifier {Vivado_Tcl 4-921} phase NATIVE_IMPLEMENTATION route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier {Vivado_Tcl 4-935} phase NATIVE_IMPLEMENTATION route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier {Vivado_Tcl 4-919} phase NATIVE_IMPLEMENTATION route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier {Device 21-9320} phase NATIVE_IMPLEMENTATION route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier {Device 21-2174} phase NATIVE_IMPLEMENTATION route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier {Timing 38-164} phase REPORT_CONTINUATION route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier PDCN-1569 phase DRC_REPORT route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier RTSTAT-10 phase DRC_REPORT route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier LUTAR-1 phase METHODOLOGY_REPORT route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier XDCB-5 phase METHODOLOGY_REPORT route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier FALSE_PATH_INVENTORY phase TIMING_EXCEPTION_REPORT route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier MAX_DELAY_DATAPATH_ONLY_INVENTORY phase CLOCK_INTERACTION_AND_TIMING_EXCEPTION_REPORT route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+    {identifier GENERATED_CLOCK_CLOCK_INTERACTION_INVENTORY phase CLOCK_INTERACTION_REPORT route EVIDENCE_INSUFFICIENT disposition REJECTED_BLOCKING}
+}
+fix_required_findings {
+    {identifier phys_opt_design phase POST_PLACE_AUTOMATIC_STEP route FIX_REQUIRED required_state DISABLED_PROHIBITED_ZERO_INVOCATION decision_state UNRESOLVED_BLOCKING}
+    {identifier COLLECTOR_REPORT_RECOVERY_DEFECT_SET phase POST_ROUTE_REPORT_COLLECTION_AND_RECOVERY route FIX_REQUIRED required_state CURRENT_RUNTIME_CORRECTIONS_RETAINED_AND_Q0_Q5_REVALIDATED decision_state UNRESOLVED_BLOCKING}
+}
+severity_contract {
+    ERROR BLOCK
+    CRITICAL_WARNING BLOCK_UNLESS_SEPARATELY_REVIEWED
+    WARNING REQUIRE_ACTIVE_EXACT_DISPOSITION
+    INFO INVENTORY_ONLY
+}
+finding_interfaces {
+    DRC EXPLICIT_EXACT_DISPOSITION_REQUIRED
+    METHODOLOGY EXPLICIT_EXACT_DISPOSITION_REQUIRED
+    TIMING_EXCEPTION INVENTORY_OBJECT_BINDING_AND_REVIEW_REQUIRED
+    TIMING REQUIRE_POLICY_ACCEPTANCE
+    CDC INVENTORY_AND_RELATIONSHIP_EVIDENCE_REQUIRED
+    FLOW_BOUNDARY FIX_REQUIRED
+    COLLECTION_DEFECT FIX_AND_REVALIDATION_REQUIRED
+}
+fail_closed_contract {
+    accepted_dispositions {}
+    unknown_disposition REJECTED
+    unresolved_disposition BLOCKING
+    missing_identifier BLOCKING
+    missing_phase BLOCKING
+    missing_count BLOCKING
+    count_outside_exact_range BLOCKING
+    affected_scope_mismatch BLOCKING
+    tool_binding_mismatch BLOCKING
+    configuration_binding_mismatch BLOCKING
+    missing_evidence BLOCKING
+    missing_rationale BLOCKING
+    missing_named_authority BLOCKING
+}
+boundary {
+    current_warning_acceptance NONE
+    implementation_authorized 0
+    qualification_authority NONE
+    artifact_authority NONE
+    publication_authority NONE
+    board_authority NONE
+}

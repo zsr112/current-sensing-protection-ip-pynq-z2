@@ -1,0 +1,22 @@
+{
+  "GUI_PROJECT_PATH": "<EXTERNAL_BUILD>/w/project/s1e_e608f8c11cc8.xpr",
+  "IMPL_RUN_AVAILABLE": true,
+  "PROJECT_SAFE_TO_OPEN": true,
+  "SYNTH_RUN_AVAILABLE": true,
+  "acceptance_state": "NOT_FORMALLY_ACCEPTED",
+  "execution_contract_identity": "a68b26f6ad8cd6ceb4eace1285876015b3e4f2f5e7303b5bd297df68d3b24d44",
+  "execution_id": "CSIP-SC-V2-SELECTED-001",
+  "failure_code": "NONE",
+  "finding_decision_identity": "NONE",
+  "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+  "process_exit_code": "0",
+  "process_state": "COMPLETED",
+  "reason": "Engineering evidence was collected without formal acceptance.",
+  "request_identity": "e608f8c11cc808efe67ee99d1b00c9e5e70d0a8cdfdc1656e8566f666ed2044d",
+  "run_kind": "ENGINEERING",
+  "schema_version": "stage1e-terminal-result-v1",
+  "source_state": "HASH_VERIFIED_EXPORT",
+  "terminal_result_identity": "d25376a7bb4782bedbcdacef9276fda8f3d02ecc6781333abb094e7c2a47fcca",
+  "terminal_status": "ENGINEERING_EVIDENCE_ONLY",
+  "vivado_result_state": "COMPLETED"
+}

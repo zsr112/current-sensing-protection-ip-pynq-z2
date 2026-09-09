@@ -1,0 +1,14 @@
+{
+  "schema_version": "stage2f-adc-source-profile-v1",
+  "profile_state": "CONFIGURED_DIGITAL",
+  "raw_width": 12,
+  "encoding": "TWOS_COMPLEMENT",
+  "zero_code": 0,
+  "channel_polarity": {
+    "channel_1": "INCREASING_CODE_IS_NEGATIVE",
+    "channel_2": "INCREASING_CODE_IS_NEGATIVE"
+  },
+  "profile_identity": "SIM_TWOS_COMPLEMENT_REVERSED",
+  "physical_unit_status": "NOT_CONFIGURED",
+  "production_selection": false
+}

@@ -1,0 +1,788 @@
+{
+  "format": "protection-register-map-compatibility-v2",
+  "generator_version": "1.1.0",
+  "register_map_schema_version": "1.1.0",
+  "canonical_spec_sha256": "36dcf0aa703dd63cf2b280b698b9b03b6ffd0ab93840af8c492cca63cdb7bef1",
+  "schema_sha256": "357af4e33ed112db7002e10e4c3da28b285f328bf9ca1ead5b99a0076029e473",
+  "frozen_a1_baseline": {
+    "path": "spec/stage2h_register_map_convergence.json",
+    "sha256": "a5731702d2d3ff1fe7420e3de43e83267809582639f98e4237e8728e47219041"
+  },
+  "generated_artifact_topology": {
+    "authority": "ONE_MASTER_LIST",
+    "paths": [
+      "rtl/generated/protection_register_map.vh",
+      "sw/generated/protection_register_map.py",
+      "sw/ps_register_demo/protection_ip_regs.h",
+      "fpga/vivado/generated/protection_register_map_ipxact.tcl",
+      "docs/implementation/register_map.md",
+      "tb/generated/protection_register_map.svh",
+      "spec/generated/protection_register_map_compatibility.json",
+      "spec/generated/protection_register_map_conformance.json"
+    ],
+    "path_count": 8,
+    "unowned_paths": [],
+    "duplicate_paths": []
+  },
+  "generated_output_sha256": {
+    "docs/implementation/register_map.md": "34b185acae5e2c9f6dfc8e3a11252f3af1a6ac6e8e308edc96e9416603622ead",
+    "fpga/vivado/generated/protection_register_map_ipxact.tcl": "78849bcddee82f698ac6acb7d7424dff6bc5ff719e8df87ee2f4ddae80d0669b",
+    "rtl/generated/protection_register_map.vh": "ebad567dbadb9f05186d9ec70377b3191df02db15ca64688b4a6d6e1803f407b",
+    "spec/generated/protection_register_map_compatibility.json": "RECORDED_BY_EVIDENCE_MANIFEST",
+    "spec/generated/protection_register_map_conformance.json": "5e99022be95e73ecc4915eac8b43801158a9842a251ed8e9e297f0c3ecf98c87",
+    "sw/generated/protection_register_map.py": "3ae20e1428aabc76e9ac2f0aef100a61da190e753935df9735f4b276c5a11023",
+    "sw/ps_register_demo/protection_ip_regs.h": "5acb9259d8ac5c7758efb532b582781881d33b5b0e99827ceff009b93719b4f2",
+    "tb/generated/protection_register_map.svh": "e7eeb094db1015cb48c1f522353ce47646ace6e495bd9cb9bbd141ffeaa4a90a"
+  },
+  "legacy_abi": {
+    "address_range": "0x00..0x60",
+    "external_behavior_changed": false,
+    "static_parity": "PASS",
+    "software_constant_parity": "PASS",
+    "fault_code_parity": "PASS",
+    "register_count": 25,
+    "field_count": 54,
+    "fault_code_count": 7,
+    "offset_changes": 0,
+    "width_changes": 0,
+    "field_encoding_changes": 0,
+    "access_semantic_changes": 0,
+    "reset_semantic_changes": 0,
+    "fault_code_changes": 0,
+    "fault_alias_changes": 0
+  },
+  "abi_1_1": {
+    "version": "1.1",
+    "additive": true,
+    "explicit_enable_parameter": "EXPLICIT_ABI_1_1",
+    "register_count": 8,
+    "field_count": 43,
+    "bit_coverage": 256,
+    "total_register_count": 33,
+    "total_field_count": 97,
+    "register_map_version_value": "0x524D0101",
+    "capabilities_0_value": "0x0000006F",
+    "capabilities_1_values": {
+      "16": "0x20101006",
+      "24": "0x20101806",
+      "32": "0x20102006"
+    },
+    "legacy_instance_discovery_value": "0x00000000",
+    "production_path_explicit": true
+  },
+  "current_abi_remediations": [
+    {
+      "id": "STATUS_FAULT_VALID_DESCRIPTION_STALE",
+      "register_field_or_behavior": "STATUS.fault_valid",
+      "current_rtl_truth": "Stage 2G drives it from the registered fault-evaluation transaction three ACLK edges after accepted atomic destination delivery, asserted only when evaluation-valid and the bitmap is nonzero",
+      "old_documentation_or_software_statement": "STATUS.fault_valid is a raw current-cycle classifier indication",
+      "classification": "DOCUMENTATION_VS_RTL_CONTRADICTION",
+      "a2_correction": "Returns the evaluation result three ACLK edges after the corresponding accepted atomic raw CDC destination delivery; it is not a continuously live classifier signal.",
+      "behavior_changed": false,
+      "verification": "generated field description and A1 parity test"
+    },
+    {
+      "id": "STATUS_FAULT_LATCHED_CLEAR_DESCRIPTION_STALE",
+      "register_field_or_behavior": "STATUS.fault_latched",
+      "current_rtl_truth": "Stage 2G retains the public compatibility latch and first code through post-clear RESET_WAIT and clears them only on a later clean healthy evaluation entering ARMED",
+      "old_documentation_or_software_statement": "STATUS.fault_latched clears when the FSM accepts a valid clear request after the live condition is absent",
+      "classification": "DOCUMENTATION_VS_RTL_CONTRADICTION",
+      "a2_correction": "Retains its prior value through post-clear RESET_WAIT and clears only on a later clean healthy evaluation entering ARMED.",
+      "behavior_changed": false,
+      "verification": "generated field description and Stage 2G production regression"
+    },
+    {
+      "id": "CURRENT_MONITOR_DESCRIPTION_STALE",
+      "register_field_or_behavior": "I_CH1.i_ch1_mon / I_CH2.i_ch2_mon",
+      "current_rtl_truth": "I_CH1 and I_CH2 expose the latest atomic destination-FIFO delivery registered in ACLK; separate software reads are not an atomic pair",
+      "old_documentation_or_software_statement": "I_CH1 and I_CH2 are live readbacks of the current input samples",
+      "classification": "DOCUMENTATION_VS_RTL_CONTRADICTION",
+      "a2_correction": "I_CH1 and I_CH2 are updated together from one destination-FIFO delivery, but separate software reads can straddle two deliveries.",
+      "behavior_changed": false,
+      "verification": "generated monitor contract and Stage 2G production regression"
+    },
+    {
+      "id": "LEGACY_WRITES_IGNORE_WSTRB_UNDOCUMENTED",
+      "register_field_or_behavior": "CTRL, TH_OC1, TH_OC2, TH_DIFF, PWM_PERIOD, PWM_DUTY",
+      "current_rtl_truth": "Existing CTRL RW/W1P, threshold RW, and PWM RW fields ignore WSTRB after an accepted write",
+      "old_documentation_or_software_statement": "CTRL, thresholds, and PWM accepted writes consuming low data bits without WSTRB qualification are not fully documented",
+      "classification": "UNDOCUMENTED_FROZEN_ABI_BEHAVIOR",
+      "a2_correction": "After an AXI write is accepted by any nonzero WSTRB, these legacy fields consume their WDATA bits without byte qualification.",
+      "behavior_changed": false,
+      "verification": "generated bus contract and legacy AXI simulation"
+    },
+    {
+      "id": "UNDEFINED_READ_ZERO_OKAY_UNDOCUMENTED",
+      "register_field_or_behavior": "undefined read",
+      "current_rtl_truth": "Undefined reads return zero with an OKAY response",
+      "old_documentation_or_software_statement": "Undefined-address read response is not fully documented",
+      "classification": "UNDOCUMENTED_FROZEN_ABI_BEHAVIOR",
+      "a2_correction": "Undefined reads return zero with an OKAY response.",
+      "behavior_changed": false,
+      "verification": "generated bus contract and legacy AXI simulation"
+    },
+    {
+      "id": "UNDEFINED_WRITE_NO_EFFECT_OKAY_UNDOCUMENTED",
+      "register_field_or_behavior": "undefined write",
+      "current_rtl_truth": "Undefined writes have no effect and return an OKAY response",
+      "old_documentation_or_software_statement": "Undefined-address write response is not fully documented",
+      "classification": "UNDOCUMENTED_FROZEN_ABI_BEHAVIOR",
+      "a2_correction": "Undefined writes have no effect and return an OKAY response.",
+      "behavior_changed": false,
+      "verification": "generated bus contract and legacy AXI simulation"
+    },
+    {
+      "id": "LOW_EIGHT_BIT_ADDRESS_ALIAS_UNDOCUMENTED",
+      "register_field_or_behavior": "address decode",
+      "current_rtl_truth": "Addresses presented through a wider outer segment alias when their low eight bits match",
+      "old_documentation_or_software_statement": "Only the low eight address bits participating in decode is not fully documented as public alias behavior",
+      "classification": "UNDOCUMENTED_FROZEN_ABI_BEHAVIOR",
+      "a2_correction": "Only address bits 7:0 participate in decode, so wider outer segments alias on matching low eight bits.",
+      "behavior_changed": false,
+      "verification": "generated bus contract and packaging metadata test"
+    },
+    {
+      "id": "CURRENT_MONITOR_SOFTWARE_READS_NONATOMIC_UNDOCUMENTED",
+      "register_field_or_behavior": "I_CH1 / I_CH2 software reads",
+      "current_rtl_truth": "The hardware destination-FIFO delivery is atomic, but two AXI reads can observe different deliveries",
+      "old_documentation_or_software_statement": "Separate I_CH1 and I_CH2 software reads are not documented as non-atomic",
+      "classification": "UNDOCUMENTED_FROZEN_ABI_BEHAVIOR",
+      "a2_correction": "I_CH1 and I_CH2 are updated together from one destination-FIFO delivery, but separate software reads can straddle two deliveries.",
+      "behavior_changed": false,
+      "verification": "generated monitor contract and software-interface documentation"
+    }
+  ],
+  "fault_codes": [
+    {
+      "name": "NONE",
+      "value": "0x00",
+      "public_names": {
+        "rtl": "FAULT_NONE",
+        "c": "PROTECTION_FAULT_NONE",
+        "python": "FAULT_NONE",
+        "systemverilog": "FAULT_CODE_NONE",
+        "ipxact": "NONE",
+        "documentation": "NONE"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "OVERCURRENT",
+      "value": "0x01",
+      "public_names": {
+        "rtl": "FAULT_OVERCURRENT",
+        "c": "PROTECTION_FAULT_OVERCURRENT",
+        "python": "FAULT_OVERCURRENT",
+        "systemverilog": "FAULT_CODE_OVERCURRENT",
+        "ipxact": "OVERCURRENT",
+        "documentation": "OVERCURRENT"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_MISMATCH",
+      "value": "0x02",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_MISMATCH",
+        "c": "PROTECTION_FAULT_SENSOR_MISMATCH",
+        "python": "FAULT_SENSOR_MISMATCH",
+        "systemverilog": "FAULT_CODE_SENSOR_MISMATCH",
+        "ipxact": "SENSOR_MISMATCH",
+        "documentation": "SENSOR_MISMATCH"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [
+          "PROTECTION_FAULT_MISMATCH"
+        ],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_OPEN",
+      "value": "0x03",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_OPEN",
+        "c": "PROTECTION_FAULT_SENSOR_OPEN",
+        "python": "FAULT_SENSOR_OPEN",
+        "systemverilog": "FAULT_CODE_SENSOR_OPEN",
+        "ipxact": "SENSOR_OPEN",
+        "documentation": "SENSOR_OPEN"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_SATURATION",
+      "value": "0x04",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_SATURATION",
+        "c": "PROTECTION_FAULT_SENSOR_SATURATION",
+        "python": "FAULT_SENSOR_SATURATION",
+        "systemverilog": "FAULT_CODE_SENSOR_SATURATION",
+        "ipxact": "SENSOR_SATURATION",
+        "documentation": "SENSOR_SATURATION"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [
+          "PROTECTION_FAULT_SENSOR_SAT"
+        ],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_STUCK",
+      "value": "0x05",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_STUCK",
+        "c": "PROTECTION_FAULT_SENSOR_STUCK",
+        "python": "FAULT_SENSOR_STUCK",
+        "systemverilog": "FAULT_CODE_SENSOR_STUCK",
+        "ipxact": "SENSOR_STUCK",
+        "documentation": "SENSOR_STUCK"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "OC_WITH_ANY_SENSOR",
+      "value": "0x06",
+      "public_names": {
+        "rtl": "FAULT_OC_WITH_ANY_SENSOR",
+        "c": "PROTECTION_FAULT_OC_WITH_ANY_SENSOR",
+        "python": "FAULT_OC_WITH_ANY_SENSOR",
+        "systemverilog": "FAULT_CODE_OC_WITH_ANY_SENSOR",
+        "ipxact": "OC_WITH_ANY_SENSOR",
+        "documentation": "OC_WITH_ANY_SENSOR"
+      },
+      "legacy_aliases": {
+        "rtl": [
+          "FAULT_OC_WITH_SENSOR"
+        ],
+        "c": [
+          "PROTECTION_FAULT_OC_WITH_SENSOR"
+        ],
+        "python": [],
+        "systemverilog": []
+      }
+    }
+  ],
+  "register_inventory": [
+    {
+      "name": "CTRL",
+      "offset": "0x00",
+      "width": 32,
+      "access": "RW/W1P",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_CTRL",
+        "c": "PROTECTION_REG_CTRL",
+        "python": "REG_CTRL",
+        "systemverilog": "REG_CTRL",
+        "ipxact": "CTRL",
+        "documentation": "CTRL"
+      }
+    },
+    {
+      "name": "STATUS",
+      "offset": "0x04",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_STATUS",
+        "c": "PROTECTION_REG_STATUS",
+        "python": "REG_STATUS",
+        "systemverilog": "REG_STATUS",
+        "ipxact": "STATUS",
+        "documentation": "STATUS"
+      }
+    },
+    {
+      "name": "FAULT_CODE",
+      "offset": "0x08",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_FAULT_CODE",
+        "c": "PROTECTION_REG_FAULT_CODE",
+        "python": "REG_FAULT_CODE",
+        "systemverilog": "REG_FAULT_CODE",
+        "ipxact": "FAULT_CODE",
+        "documentation": "FAULT_CODE"
+      }
+    },
+    {
+      "name": "I_CH1",
+      "offset": "0x0C",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_I_CH1",
+        "c": "PROTECTION_REG_I_CH1",
+        "python": "REG_I_CH1",
+        "systemverilog": "REG_I_CH1",
+        "ipxact": "I_CH1",
+        "documentation": "I_CH1"
+      }
+    },
+    {
+      "name": "I_CH2",
+      "offset": "0x10",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_I_CH2",
+        "c": "PROTECTION_REG_I_CH2",
+        "python": "REG_I_CH2",
+        "systemverilog": "REG_I_CH2",
+        "ipxact": "I_CH2",
+        "documentation": "I_CH2"
+      }
+    },
+    {
+      "name": "TH_OC1",
+      "offset": "0x14",
+      "width": 32,
+      "access": "RW",
+      "reset": "0x00000BB8",
+      "public_names": {
+        "rtl": "PROTECTION_REG_TH_OC1",
+        "c": "PROTECTION_REG_TH_OC1",
+        "python": "REG_TH_OC1",
+        "systemverilog": "REG_TH_OC1",
+        "ipxact": "TH_OC1",
+        "documentation": "TH_OC1"
+      }
+    },
+    {
+      "name": "TH_OC2",
+      "offset": "0x18",
+      "width": 32,
+      "access": "RW",
+      "reset": "0x00000BB8",
+      "public_names": {
+        "rtl": "PROTECTION_REG_TH_OC2",
+        "c": "PROTECTION_REG_TH_OC2",
+        "python": "REG_TH_OC2",
+        "systemverilog": "REG_TH_OC2",
+        "ipxact": "TH_OC2",
+        "documentation": "TH_OC2"
+      }
+    },
+    {
+      "name": "TH_DIFF",
+      "offset": "0x1C",
+      "width": 32,
+      "access": "RW",
+      "reset": "0x000000C8",
+      "public_names": {
+        "rtl": "PROTECTION_REG_TH_DIFF",
+        "c": "PROTECTION_REG_TH_DIFF",
+        "python": "REG_TH_DIFF",
+        "systemverilog": "REG_TH_DIFF",
+        "ipxact": "TH_DIFF",
+        "documentation": "TH_DIFF"
+      }
+    },
+    {
+      "name": "PWM_PERIOD",
+      "offset": "0x20",
+      "width": 32,
+      "access": "RW",
+      "reset": "0x000003E8",
+      "public_names": {
+        "rtl": "PROTECTION_REG_PWM_PERIOD",
+        "c": "PROTECTION_REG_PWM_PERIOD",
+        "python": "REG_PWM_PERIOD",
+        "systemverilog": "REG_PWM_PERIOD",
+        "ipxact": "PWM_PERIOD",
+        "documentation": "PWM_PERIOD"
+      }
+    },
+    {
+      "name": "PWM_DUTY",
+      "offset": "0x24",
+      "width": 32,
+      "access": "RW",
+      "reset": "0x000001F4",
+      "public_names": {
+        "rtl": "PROTECTION_REG_PWM_DUTY",
+        "c": "PROTECTION_REG_PWM_DUTY",
+        "python": "REG_PWM_DUTY",
+        "systemverilog": "REG_PWM_DUTY",
+        "ipxact": "PWM_DUTY",
+        "documentation": "PWM_DUTY"
+      }
+    },
+    {
+      "name": "OBS_CAPABILITY",
+      "offset": "0x28",
+      "width": 32,
+      "access": "RO",
+      "reset": "0xE2782001",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_CAPABILITY",
+        "c": "PROTECTION_REG_OBS_CAPABILITY",
+        "python": "REG_OBS_CAPABILITY",
+        "systemverilog": "REG_OBS_CAPABILITY",
+        "ipxact": "OBS_CAPABILITY",
+        "documentation": "OBS_CAPABILITY"
+      }
+    },
+    {
+      "name": "OBS_STATUS_W1C",
+      "offset": "0x2C",
+      "width": 32,
+      "access": "RO/W1C",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_STATUS_W1C",
+        "c": "PROTECTION_REG_OBS_STATUS_W1C",
+        "python": "REG_OBS_STATUS_W1C",
+        "systemverilog": "REG_OBS_STATUS_W1C",
+        "ipxact": "OBS_STATUS_W1C",
+        "documentation": "OBS_STATUS_W1C"
+      }
+    },
+    {
+      "name": "OBS_SOURCE_ACCEPT_COUNT",
+      "offset": "0x30",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_SOURCE_ACCEPT_COUNT",
+        "c": "PROTECTION_REG_OBS_SOURCE_ACCEPT_COUNT",
+        "python": "REG_OBS_SOURCE_ACCEPT_COUNT",
+        "systemverilog": "REG_OBS_SOURCE_ACCEPT_COUNT",
+        "ipxact": "OBS_SOURCE_ACCEPT_COUNT",
+        "documentation": "OBS_SOURCE_ACCEPT_COUNT"
+      }
+    },
+    {
+      "name": "OBS_DESTINATION_DELIVERY_COUNT",
+      "offset": "0x34",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_DESTINATION_DELIVERY_COUNT",
+        "c": "PROTECTION_REG_OBS_DESTINATION_DELIVERY_COUNT",
+        "python": "REG_OBS_DESTINATION_DELIVERY_COUNT",
+        "systemverilog": "REG_OBS_DESTINATION_DELIVERY_COUNT",
+        "ipxact": "OBS_DESTINATION_DELIVERY_COUNT",
+        "documentation": "OBS_DESTINATION_DELIVERY_COUNT"
+      }
+    },
+    {
+      "name": "OBS_BACKPRESSURE_CYCLE_COUNT",
+      "offset": "0x38",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_BACKPRESSURE_CYCLE_COUNT",
+        "c": "PROTECTION_REG_OBS_BACKPRESSURE_CYCLE_COUNT",
+        "python": "REG_OBS_BACKPRESSURE_CYCLE_COUNT",
+        "systemverilog": "REG_OBS_BACKPRESSURE_CYCLE_COUNT",
+        "ipxact": "OBS_BACKPRESSURE_CYCLE_COUNT",
+        "documentation": "OBS_BACKPRESSURE_CYCLE_COUNT"
+      }
+    },
+    {
+      "name": "OBS_SOURCE_PROTOCOL_VIOLATION_COUNT",
+      "offset": "0x3C",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_SOURCE_PROTOCOL_VIOLATION_COUNT",
+        "c": "PROTECTION_REG_OBS_SOURCE_PROTOCOL_VIOLATION_COUNT",
+        "python": "REG_OBS_SOURCE_PROTOCOL_VIOLATION_COUNT",
+        "systemverilog": "REG_OBS_SOURCE_PROTOCOL_VIOLATION_COUNT",
+        "ipxact": "OBS_SOURCE_PROTOCOL_VIOLATION_COUNT",
+        "documentation": "OBS_SOURCE_PROTOCOL_VIOLATION_COUNT"
+      }
+    },
+    {
+      "name": "OBS_SOURCE_DROP_COUNT",
+      "offset": "0x40",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_SOURCE_DROP_COUNT",
+        "c": "PROTECTION_REG_OBS_SOURCE_DROP_COUNT",
+        "python": "REG_OBS_SOURCE_DROP_COUNT",
+        "systemverilog": "REG_OBS_SOURCE_DROP_COUNT",
+        "ipxact": "OBS_SOURCE_DROP_COUNT",
+        "documentation": "OBS_SOURCE_DROP_COUNT"
+      }
+    },
+    {
+      "name": "OBS_FIFO_OVERFLOW_ATTEMPT_COUNT",
+      "offset": "0x44",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_FIFO_OVERFLOW_ATTEMPT_COUNT",
+        "c": "PROTECTION_REG_OBS_FIFO_OVERFLOW_ATTEMPT_COUNT",
+        "python": "REG_OBS_FIFO_OVERFLOW_ATTEMPT_COUNT",
+        "systemverilog": "REG_OBS_FIFO_OVERFLOW_ATTEMPT_COUNT",
+        "ipxact": "OBS_FIFO_OVERFLOW_ATTEMPT_COUNT",
+        "documentation": "OBS_FIFO_OVERFLOW_ATTEMPT_COUNT"
+      }
+    },
+    {
+      "name": "OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT",
+      "offset": "0x48",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT",
+        "c": "PROTECTION_REG_OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT",
+        "python": "REG_OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT",
+        "systemverilog": "REG_OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT",
+        "ipxact": "OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT",
+        "documentation": "OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT"
+      }
+    },
+    {
+      "name": "OBS_DUPLICATE_DELIVERY_COUNT",
+      "offset": "0x4C",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_DUPLICATE_DELIVERY_COUNT",
+        "c": "PROTECTION_REG_OBS_DUPLICATE_DELIVERY_COUNT",
+        "python": "REG_OBS_DUPLICATE_DELIVERY_COUNT",
+        "systemverilog": "REG_OBS_DUPLICATE_DELIVERY_COUNT",
+        "ipxact": "OBS_DUPLICATE_DELIVERY_COUNT",
+        "documentation": "OBS_DUPLICATE_DELIVERY_COUNT"
+      }
+    },
+    {
+      "name": "OBS_SEQUENCE_GAP_COUNT",
+      "offset": "0x50",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_SEQUENCE_GAP_COUNT",
+        "c": "PROTECTION_REG_OBS_SEQUENCE_GAP_COUNT",
+        "python": "REG_OBS_SEQUENCE_GAP_COUNT",
+        "systemverilog": "REG_OBS_SEQUENCE_GAP_COUNT",
+        "ipxact": "OBS_SEQUENCE_GAP_COUNT",
+        "documentation": "OBS_SEQUENCE_GAP_COUNT"
+      }
+    },
+    {
+      "name": "OBS_REORDER_OR_STALE_COUNT",
+      "offset": "0x54",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_REORDER_OR_STALE_COUNT",
+        "c": "PROTECTION_REG_OBS_REORDER_OR_STALE_COUNT",
+        "python": "REG_OBS_REORDER_OR_STALE_COUNT",
+        "systemverilog": "REG_OBS_REORDER_OR_STALE_COUNT",
+        "ipxact": "OBS_REORDER_OR_STALE_COUNT",
+        "documentation": "OBS_REORDER_OR_STALE_COUNT"
+      }
+    },
+    {
+      "name": "OBS_AGGREGATE_ERROR_COUNT",
+      "offset": "0x58",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_AGGREGATE_ERROR_COUNT",
+        "c": "PROTECTION_REG_OBS_AGGREGATE_ERROR_COUNT",
+        "python": "REG_OBS_AGGREGATE_ERROR_COUNT",
+        "systemverilog": "REG_OBS_AGGREGATE_ERROR_COUNT",
+        "ipxact": "OBS_AGGREGATE_ERROR_COUNT",
+        "documentation": "OBS_AGGREGATE_ERROR_COUNT"
+      }
+    },
+    {
+      "name": "OBS_LAST_SOURCE_SEQUENCE",
+      "offset": "0x5C",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_LAST_SOURCE_SEQUENCE",
+        "c": "PROTECTION_REG_OBS_LAST_SOURCE_SEQUENCE",
+        "python": "REG_OBS_LAST_SOURCE_SEQUENCE",
+        "systemverilog": "REG_OBS_LAST_SOURCE_SEQUENCE",
+        "ipxact": "OBS_LAST_SOURCE_SEQUENCE",
+        "documentation": "OBS_LAST_SOURCE_SEQUENCE"
+      }
+    },
+    {
+      "name": "OBS_LAST_DESTINATION_SEQUENCE",
+      "offset": "0x60",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_OBS_LAST_DESTINATION_SEQUENCE",
+        "c": "PROTECTION_REG_OBS_LAST_DESTINATION_SEQUENCE",
+        "python": "REG_OBS_LAST_DESTINATION_SEQUENCE",
+        "systemverilog": "REG_OBS_LAST_DESTINATION_SEQUENCE",
+        "ipxact": "OBS_LAST_DESTINATION_SEQUENCE",
+        "documentation": "OBS_LAST_DESTINATION_SEQUENCE"
+      }
+    },
+    {
+      "name": "REGISTER_MAP_VERSION",
+      "offset": "0x80",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x524D0101",
+      "public_names": {
+        "rtl": "PROTECTION_REG_REGISTER_MAP_VERSION",
+        "c": "PROTECTION_REG_REGISTER_MAP_VERSION",
+        "python": "REG_REGISTER_MAP_VERSION",
+        "systemverilog": "REG_REGISTER_MAP_VERSION",
+        "ipxact": "REGISTER_MAP_VERSION",
+        "documentation": "REGISTER_MAP_VERSION"
+      }
+    },
+    {
+      "name": "CAPABILITIES_0",
+      "offset": "0x84",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x0000006F",
+      "public_names": {
+        "rtl": "PROTECTION_REG_CAPABILITIES_0",
+        "c": "PROTECTION_REG_CAPABILITIES_0",
+        "python": "REG_CAPABILITIES_0",
+        "systemverilog": "REG_CAPABILITIES_0",
+        "ipxact": "CAPABILITIES_0",
+        "documentation": "CAPABILITIES_0"
+      }
+    },
+    {
+      "name": "CAPABILITIES_1",
+      "offset": "0x88",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x20102006",
+      "public_names": {
+        "rtl": "PROTECTION_REG_CAPABILITIES_1",
+        "c": "PROTECTION_REG_CAPABILITIES_1",
+        "python": "REG_CAPABILITIES_1",
+        "systemverilog": "REG_CAPABILITIES_1",
+        "ipxact": "CAPABILITIES_1",
+        "documentation": "CAPABILITIES_1"
+      }
+    },
+    {
+      "name": "POLICY_STATUS",
+      "offset": "0xA0",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000004",
+      "public_names": {
+        "rtl": "PROTECTION_REG_POLICY_STATUS",
+        "c": "PROTECTION_REG_POLICY_STATUS",
+        "python": "REG_POLICY_STATUS",
+        "systemverilog": "REG_POLICY_STATUS",
+        "ipxact": "POLICY_STATUS",
+        "documentation": "POLICY_STATUS"
+      }
+    },
+    {
+      "name": "FIRST_FAULT_BITMAP",
+      "offset": "0xA4",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_FIRST_FAULT_BITMAP",
+        "c": "PROTECTION_REG_FIRST_FAULT_BITMAP",
+        "python": "REG_FIRST_FAULT_BITMAP",
+        "systemverilog": "REG_FIRST_FAULT_BITMAP",
+        "ipxact": "FIRST_FAULT_BITMAP",
+        "documentation": "FIRST_FAULT_BITMAP"
+      }
+    },
+    {
+      "name": "LIVE_FAULT_BITMAP",
+      "offset": "0xA8",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_LIVE_FAULT_BITMAP",
+        "c": "PROTECTION_REG_LIVE_FAULT_BITMAP",
+        "python": "REG_LIVE_FAULT_BITMAP",
+        "systemverilog": "REG_LIVE_FAULT_BITMAP",
+        "ipxact": "LIVE_FAULT_BITMAP",
+        "documentation": "LIVE_FAULT_BITMAP"
+      }
+    },
+    {
+      "name": "FAULT_SEEN_BITMAP",
+      "offset": "0xAC",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_FAULT_SEEN_BITMAP",
+        "c": "PROTECTION_REG_FAULT_SEEN_BITMAP",
+        "python": "REG_FAULT_SEEN_BITMAP",
+        "systemverilog": "REG_FAULT_SEEN_BITMAP",
+        "ipxact": "FAULT_SEEN_BITMAP",
+        "documentation": "FAULT_SEEN_BITMAP"
+      }
+    },
+    {
+      "name": "POLICY_EVALUATION_SEQUENCE",
+      "offset": "0xB0",
+      "width": 32,
+      "access": "RO",
+      "reset": "0x00000000",
+      "public_names": {
+        "rtl": "PROTECTION_REG_POLICY_EVALUATION_SEQUENCE",
+        "c": "PROTECTION_REG_POLICY_EVALUATION_SEQUENCE",
+        "python": "REG_POLICY_EVALUATION_SEQUENCE",
+        "systemverilog": "REG_POLICY_EVALUATION_SEQUENCE",
+        "ipxact": "POLICY_EVALUATION_SEQUENCE",
+        "documentation": "POLICY_EVALUATION_SEQUENCE"
+      }
+    }
+  ]
+}

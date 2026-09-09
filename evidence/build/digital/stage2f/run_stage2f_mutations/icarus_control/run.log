@@ -1,0 +1,2 @@
+MUTATION_SURVIVED=NO_MISMATCH
+<EXTERNAL_SOURCE>\tb\stage2f\tb_stage2f_mutation.sv:151: $finish(1) called at 146000 (1ps)

@@ -1,0 +1,332 @@
+schema_version stage1e-phase3-implementation-framework-v1
+framework_identity {
+    framework_id stage1e_phase3_implementation_framework_v1
+    framework_status PREPARATION_ONLY
+    baseline_git_commit 69674404e8be1b649d283c44f3c0b54d35b3bb9d
+    reference_synthesis_execution_id STAGE1E-20260718-082352-e400107
+    reference_synthesis_result_identity 106a9e990a92852a996b8bfe01b64e6ecfdb12c3cfec6196aac296166622f508
+    target protection_system_wrapper
+    part xc7z020clg400-1
+    board_part tul.com.tw:pynq-z2:part0:1.0
+    vivado_version 2024.1
+    software_build 5076996
+    ip_build 5075265
+    hash_algorithm SHA256
+}
+authorization_boundary {
+    schema_version stage1e-phase3-authorization-boundary-v1
+    preparation_only 1
+    declaration_is_permission 0
+    implementation_execution_authorized 0
+    runtime_backend_present 0
+    artifact_candidate_authorized 0
+    artifact_collection_authorized 0
+    artifact_publication_authorized 0
+    bitstream_generation_authorized 0
+    xsa_generation_authorized 0
+    board_access_authorized 0
+    downstream_authority NONE
+}
+qualification_dependency {
+    schema_version stage1e-phase3-qualification-dependency-v1
+    required_qualification_schema qualification_identity_v1
+    gate_order {Q0 Q1 Q2 Q3 Q4 Q5}
+    required_gate_result PASS
+    required_decision PASS
+    required_binding_fields {
+        qualification_identity
+        execution_identity
+        workspace_identity
+        environment_identity
+        source_identity
+        synthesis_result_identity
+    }
+    missing_action BLOCK
+    stale_action BLOCK
+    mismatch_action BLOCK
+    unknown_action BLOCK
+}
+capability_contract {
+    schema_version stage1e-implementation-capability-v1
+    capability IMPLEMENTATION
+    contract_state DECLARED_NOT_GRANTED
+    allowed_operations {
+        opt_design {
+            order 1
+            producer_phase PHASE3_IMPLEMENTATION
+            required_predecessor SYNTHESIS_PREDECESSOR_VERIFIED
+        }
+        place_design {
+            order 2
+            producer_phase PHASE3_IMPLEMENTATION
+            required_predecessor OPT_DESIGN_COMPLETED
+        }
+        route_design {
+            order 3
+            producer_phase PHASE3_IMPLEMENTATION
+            required_predecessor PLACE_DESIGN_COMPLETED
+        }
+        implementation_reports {
+            order 4
+            producer_phase PHASE3_IMPLEMENTATION
+            required_predecessor ROUTE_DESIGN_COMPLETED
+            reports {
+                TIMING_SUMMARY
+                UTILIZATION
+                DRC
+                METHODOLOGY
+                CLOCK_INTERACTION
+                CONSTRAINT_COVERAGE
+                MESSAGE_INVENTORY
+            }
+        }
+    }
+    forbidden_operations {
+        phys_opt_design
+        power_opt_design
+        write_bitstream
+        write_hw_platform
+        write_xsa
+        export_hardware
+        artifact_candidate_preparation
+        artifact_collection
+        artifact_publication
+        open_hw_manager
+        connect_hw_server
+        program_hw_devices
+        board_access
+    }
+    authorization_requirements {
+        authorization_schema stage1e-implementation-authorization-binding-v1
+        required_status AUTHORIZED
+        required_capability IMPLEMENTATION
+        required_consume_state UNCONSUMED
+        required_binding_fields {
+            qualification_identity
+            execution_identity
+            workspace_identity
+            environment_identity
+            source_identity
+            synthesis_result_identity
+        }
+        implementation_policy_schema stage1e-implementation-policy-identity-v1
+        run_schema stage1e-implementation-run-identity-v1
+        wildcard_bindings_allowed 0
+        external_override_allowed 0
+    }
+    consumption_policy {
+        schema_version stage1e-implementation-capability-consumption-v1
+        initial_state UNCONSUMED
+        final_state CONSUMED_ONCE
+        consume_point IMMEDIATELY_BEFORE_FIRST_ADAPTER_OPERATION
+        consumer STAGE1E_PHASE3_CONTROLLER
+        atomic_transition_required 1
+        consumption_evidence_required 1
+        preparation_consumes_capability 0
+        reuse_allowed 0
+        retry_reuse_allowed 0
+        consumed_or_unknown_action BLOCK
+    }
+    fail_closed_rules {
+        missing_authorization BLOCK
+        stale_authorization BLOCK
+        mismatched_authorization BLOCK
+        unknown_authorization BLOCK
+        missing_qualification BLOCK
+        stale_qualification BLOCK
+        mismatched_qualification BLOCK
+        unknown_qualification BLOCK
+        missing_predecessor BLOCK
+        mismatched_predecessor BLOCK
+        out_of_order_operation BLOCK
+        unknown_operation BLOCK
+        forbidden_operation BLOCK
+        missing_evidence BLOCK
+        missing_hash BLOCK
+        capability_reuse BLOCK
+    }
+}
+controller_contract {
+    schema_version stage1e-phase3-implementation-controller-contract-v1
+    controller_source fpga/vivado/build/controller/stage1e_phase3_implementation_controller.tcl
+    controller_source_sha256 bbc146e9e196517a7f32803b0e81cdb3789b98b85eea16d6064fc6bc79877e8c
+    preparation_context_schema stage1e-phase3-implementation-preparation-context-v1
+    preparation_result_schema stage1e-phase3-implementation-preparation-result-v1
+    review_bundle_schema stage1e-implementation-review-bundle-v1
+    phase_order {
+        QUALIFICATION_CONSUMPTION
+        AUTHORIZATION_VALIDATION
+        SYNTHESIS_PREDECESSOR_VERIFICATION
+        OPT_DESIGN
+        PLACE_DESIGN
+        ROUTE_DESIGN
+        IMPLEMENTATION_REPORTS
+        EVIDENCE_CLOSURE
+        RESULT_IDENTITY_CANDIDATE
+    }
+    responsibilities {
+        CONSUME_QUALIFICATION_IDENTITY
+        VALIDATE_IMPLEMENTATION_AUTHORIZATION
+        ENFORCE_PHASE_ORDER
+        VERIFY_SYNTHESIS_PREDECESSOR
+        MANAGE_EVIDENCE_LIFECYCLE
+        PRODUCE_IMPLEMENTATION_RESULT_IDENTITY_CANDIDATE
+    }
+    evidence_lifecycle {
+        schema_version stage1e-phase3-evidence-lifecycle-v1
+        required_initial_state EMPTY_ACCEPTED
+        current_execution_only 1
+        preserve_on_failure 1
+        partial_evidence_is_acceptance 0
+        missing_or_stale_evidence_action BLOCK
+    }
+    runtime_dispatch_available 0
+    directly_authorizes_artifacts 0
+    directly_authorizes_board_access 0
+}
+adapter_contract {
+    schema_version stage1e-implementation-adapter-contract-v1
+    adapter_source fpga/vivado/build/adapters/stage1e_implementation.tcl
+    adapter_source_sha256 bd3a4c342ec5e39d63d3aac974b1a010d4be6132dfa5a847bb21a0a82ce6b565
+    request_schema stage1e-implementation-adapter-request-v1
+    result_schema stage1e-implementation-adapter-result-v1
+    operation_order {
+        opt_design
+        place_design
+        route_design
+        implementation_reports
+    }
+    required_return_fields {
+        schema_version
+        identity_sha256
+        status
+        execution_id
+        synthesis_result_identity
+        implementation_run_identity
+        authorization_consumption
+        operation_results
+        evidence
+        logs
+        hashes
+        acceptance_decision
+        artifact_authority
+        board_authority
+    }
+    terminal_statuses {COMPLETED FAILED BLOCKED}
+    required_hash_roles {
+        implementation_run
+        timing_report
+        utilization_report
+        drc_report
+        methodology_report
+        checkpoint
+        evidence_inventory
+        logs_inventory
+    }
+    acceptance_decision_owner CONTROLLER_AND_REVIEW_POLICY
+    adapter_acceptance_decision NOT_OWNED
+    runtime_backend_present 0
+    direct_vivado_invocation_allowed 0
+    direct_artifact_authorization_allowed 0
+    direct_board_authorization_allowed 0
+}
+identity_integration {
+    schema_version stage1e-phase3-identity-integration-v1
+    predecessor_schema stage1e-synthesis-result-identity-v1
+    successor_schema stage1e-implementation-result-identity-v1
+    same_execution_required 1
+    same_source_required 1
+    exact_synthesis_identity_required 1
+    required_predecessor_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        acceptance_state
+        source_identity_sha256
+        run_name
+        run_status
+        top_module
+        part
+        board_part
+    }
+    required_result_fields {
+        schema_version
+        identity_sha256
+        execution_id
+        source_identity
+        synthesis_result_identity
+        implementation_run_identity
+        implementation_policy_identity
+        timing_report_identity
+        utilization_report_identity
+        drc_identity
+        methodology_identity
+        checkpoint_identity
+        acceptance_state
+    }
+    required_result_acceptance_state CANDIDATE
+    historical_predecessor_substitution_allowed 0
+    previous_retry_checkpoint_allowed 0
+    reference_identity_is_runtime_predecessor 0
+    mismatch_action BLOCK
+}
+provenance_guard {
+    schema_version stage1e-phase3-provenance-guard-v1
+    algorithm SHA256
+    canonicalization REPOSITORY_RELATIVE_PATH_AND_FILE_SHA256
+    sources {
+        docs/design/stage1f_runtime_qualification_plan.md {
+            role QUALIFICATION_POLICY
+            sha256 458c8abb8447e837a6006ff429478250941a3f9cfc75e00f88b8e77ad7e64ef0
+        }
+        docs/design/stage1e_implementation_policy_v1.md {
+            role IMPLEMENTATION_POLICY
+            sha256 64ed95036832c5757417cbb1d27dd7a515b7589ccc36b27a7d1c325105144a3c
+        }
+        docs/design/stage1e_artifact_closure_acceptance.md {
+            role ARTIFACT_ACCEPTANCE_POLICY
+            sha256 e83f92881bd25f2df4bd93dc1c10f85891f7bb40af32b0c7d0a3be5dcdf282bc
+        }
+        fpga/vivado/build/config/stage1e_artifact_closure_framework_v1.dict {
+            role ARTIFACT_CLOSURE_FRAMEWORK
+            sha256 e6b9b47358b9be662efbd7943b135c9bee39d971ee98a1ac8b5aace79c6fd0af
+        }
+        fpga/vivado/build/lib/stage1e_artifact_closure_schema.tcl {
+            role IDENTITY_SCHEMA_VALIDATOR
+            sha256 f54177dc258d30015fadb8b2dc1c51231ede14140733fbc4881c888a36a128c8
+        }
+        fpga/vivado/build/controller/stage1e_phase3_implementation_controller.tcl {
+            role PHASE3_CONTROLLER
+            sha256 bbc146e9e196517a7f32803b0e81cdb3789b98b85eea16d6064fc6bc79877e8c
+        }
+        fpga/vivado/build/adapters/stage1e_implementation.tcl {
+            role IMPLEMENTATION_ADAPTER
+            sha256 bd3a4c342ec5e39d63d3aac974b1a010d4be6132dfa5a847bb21a0a82ce6b565
+        }
+        fpga/vivado/build/tests/stage1e_phase3_implementation_framework_tests.tcl {
+            role VALIDATION_SUITE
+            sha256 1ee28772054fc903005cd06d5b315dd42f64c9ad8916330842e7e6580b165083
+        }
+    }
+    missing_action BLOCK
+    mismatch_action BLOCK
+}
+validation_contract {
+    schema_version stage1e-phase3-validation-contract-v1
+    required_suites {
+        MARKDOWN_STRUCTURE
+        TCL_SYNTAX
+        CAPABILITY_SCHEMA
+        CONTROLLER_CONTRACT
+        ADAPTER_CONTRACT
+        IDENTITY_BINDING
+        FAIL_CLOSED_BEHAVIOR
+        PROVENANCE_GUARD
+        REGRESSION
+    }
+    unknown_or_missing_identity_action BLOCK
+    vivado_invocation_allowed 0
+    implementation_execution_allowed 0
+    artifact_generation_allowed 0
+    board_access_allowed 0
+}

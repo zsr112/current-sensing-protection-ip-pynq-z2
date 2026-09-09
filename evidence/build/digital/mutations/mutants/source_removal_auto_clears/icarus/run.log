@@ -1,0 +1,19 @@
+FAIL cycle=86 first_bitmap_immutable actual=00000000 expected=00000001
+FAIL cycle=86 first_code_immutable actual=00000000 expected=00000001
+FAIL cycle=86 seen_bitmap_or actual=00000000 expected=0000003f
+FAIL cycle=86 live_bitmap_latest actual=00000000 expected=0000003f
+FAIL cycle=94 clear_no_sample_pending actual=0 expected=1
+FAIL cycle=94 clear_no_sample_latched actual=00000000 expected=00000001
+FAIL cycle=94 clear_no_sample_safe actual=0 expected=1
+FAIL cycle=103 clear_nonclean_stays_latched actual=00000002 expected=00000001
+FAIL cycle=108 clear_healthy_reset_wait actual=00000000 expected=00000002
+FAIL cycle=108 clear_healthy_safe actual=0 expected=1
+FAIL cycle=108 clear_sequence actual=00000000 expected=00000202
+FAIL cycle=120 same_edge_request_pending actual=0 expected=1
+FAIL cycle=121 same_edge_clear_did_not_resolve_later
+FAIL cycle=121 same_edge_resolution_sequence actual=00000000 expected=00000401
+FAIL cycle=121 same_edge_clear_reset_wait actual=00000001 expected=00000002
+FAIL cycle=123 continuous_stream_later_healthy_arms actual=00000001 expected=00000000
+STAGE2G_POLICY_MATRIX=FAIL_16
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_policy_matrix.sv:489: 
+       Time: 1771000  Scope: tb_stage2g_policy_matrix

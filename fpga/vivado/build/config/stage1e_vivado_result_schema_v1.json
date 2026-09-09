@@ -1,0 +1,67 @@
+{
+  "$id": "stage1e-vivado-result-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "execution_id", "request_identity", "execution_contract_identity", "implementation_profile", "source_commit", "source_tree", "project_identity", "design_identity", "run_kind", "result_state", "failure_code", "reason", "route_completed", "SYNTH_RUN_AVAILABLE", "IMPL_RUN_AVAILABLE", "GUI_PROJECT_PATH", "PROJECT_SAFE_TO_OPEN", "forbidden_operation_count", "forbidden_operations", "runner_phase_journal", "collector_state", "artifact_inventory", "finding_decision_identity"],
+  "x-stage1e-canonical-order": ["schema_version", "execution_id", "request_identity", "execution_contract_identity", "implementation_profile", "source_commit", "source_tree", "project_identity", "design_identity", "run_kind", "result_state", "failure_code", "reason", "route_completed", "SYNTH_RUN_AVAILABLE", "IMPL_RUN_AVAILABLE", "GUI_PROJECT_PATH", "PROJECT_SAFE_TO_OPEN", "forbidden_operation_count", "forbidden_operations", "runner_phase_journal", "collector_state", "artifact_inventory", "finding_decision_identity"],
+  "definitions": {
+    "sha256": {"type": "string", "x-stage1e-format": "sha256"},
+    "git_identity": {"type": "string", "minLength": 40, "maxLength": 40},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "bytes", "sha256", "implementation_profile", "execution_id", "source_commit", "source_tree", "project_identity", "design_identity"],
+      "x-stage1e-canonical-order": ["role", "path", "bytes", "sha256", "implementation_profile", "execution_id", "source_commit", "source_tree", "project_identity", "design_identity"],
+      "properties": {
+        "role": {"type": "string", "x-stage1e-format": "token"},
+        "path": {"type": "string", "x-stage1e-format": "canonical-absolute-path"},
+        "bytes": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "stage1e-vivado-result-v1#/definitions/sha256"},
+        "implementation_profile": {"type": "string", "enum": ["SAFE_INERT", "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS"]},
+        "execution_id": {"type": "string", "x-stage1e-format": "token"},
+        "source_commit": {"$ref": "stage1e-vivado-result-v1#/definitions/git_identity"},
+        "source_tree": {"$ref": "stage1e-vivado-result-v1#/definitions/git_identity"},
+        "project_identity": {"type": "string", "x-stage1e-format": "token"},
+        "design_identity": {"type": "string", "x-stage1e-format": "token"}
+      }
+    },
+    "journal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "x-stage1e-canonical-order": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "x-stage1e-format": "canonical-absolute-path"},
+        "bytes": {"type": "integer", "minimum": 0},
+        "sha256": {"$ref": "stage1e-vivado-result-v1#/definitions/sha256"}
+      }
+    },
+    "token_array": {"type": "array", "items": {"type": "string", "x-stage1e-format": "token"}}
+  },
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["stage1e-vivado-result-v1"]},
+    "execution_id": {"type": "string", "x-stage1e-format": "token"},
+    "request_identity": {"$ref": "stage1e-vivado-result-v1#/definitions/sha256"},
+    "execution_contract_identity": {"$ref": "stage1e-vivado-result-v1#/definitions/sha256"},
+    "implementation_profile": {"type": "string", "enum": ["SAFE_INERT", "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS"]},
+    "source_commit": {"$ref": "stage1e-vivado-result-v1#/definitions/git_identity"},
+    "source_tree": {"$ref": "stage1e-vivado-result-v1#/definitions/git_identity"},
+    "project_identity": {"type": "string", "x-stage1e-format": "token"},
+    "design_identity": {"type": "string", "x-stage1e-format": "token"},
+    "run_kind": {"type": "string", "enum": ["ENGINEERING", "FORMAL"]},
+    "result_state": {"type": "string", "enum": ["COMPLETED", "BLOCKED"]},
+    "failure_code": {"type": "string", "x-stage1e-format": "token"},
+    "reason": {"type": "string", "x-stage1e-format": "message"},
+    "route_completed": {"type": "boolean"},
+    "SYNTH_RUN_AVAILABLE": {"type": "boolean"},
+    "IMPL_RUN_AVAILABLE": {"type": "boolean"},
+    "GUI_PROJECT_PATH": {"type": "string", "x-stage1e-format": "message"},
+    "PROJECT_SAFE_TO_OPEN": {"type": "boolean"},
+    "forbidden_operation_count": {"type": "integer", "minimum": 0},
+    "forbidden_operations": {"$ref": "stage1e-vivado-result-v1#/definitions/token_array"},
+    "runner_phase_journal": {"$ref": "stage1e-vivado-result-v1#/definitions/journal"},
+    "collector_state": {"type": "string", "x-stage1e-format": "token"},
+    "artifact_inventory": {"type": "array", "items": {"$ref": "stage1e-vivado-result-v1#/definitions/artifact"}},
+    "finding_decision_identity": {"type": "string", "x-stage1e-format": "message"}
+  }
+}

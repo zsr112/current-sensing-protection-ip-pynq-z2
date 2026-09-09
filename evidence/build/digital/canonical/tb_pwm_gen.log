@@ -1,0 +1,2 @@
+tb_pwm_gen PASS
+<EXTERNAL_SOURCE>\tb\tb_pwm_gen.sv:74: $finish called at 1126000 (1ps)

@@ -1,0 +1,208 @@
+schema_version stage1e-vivado-runtime-command-contract-v1
+contract_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+vivado_version 2024.1
+dispatch_mechanism STAGED_PROJECT_MODE_IMPL_1
+project_mode_run impl_1
+synthesis_run synth_1
+jobs 2
+wait_timeout_contract {
+    source_unit SECONDS vivado_unit MINUTES unit_seconds 60
+    projection EXACT_DIVISION_REQUIRED minimum_minutes 1
+    maximum_minutes 10080
+    argument_form {-timeout EXACT_TIMEOUT_MINUTES impl_1}
+    incompatible_action BLOCK_BEFORE_AUTHORIZATION_CONSUMPTION
+}
+current_run_contract {
+    TOOL_PREFLIGHT {
+        expected_state NONE_REQUIRED allowed_cardinality {0}
+        expected_run NONE unavailable_action BLOCK
+    }
+    PRE_CONSUME {
+        expected_state NONE_REQUIRED allowed_cardinality {0}
+        expected_run NONE unavailable_action BLOCK
+    }
+    POST_OPT {
+        expected_state IMPL_1_REQUIRED allowed_cardinality {1}
+        expected_run impl_1 unavailable_action BLOCK
+    }
+    POST_PLACE {
+        expected_state IMPL_1_REQUIRED allowed_cardinality {1}
+        expected_run impl_1 unavailable_action BLOCK
+    }
+    POST_ROUTE {
+        expected_state IMPL_1_REQUIRED allowed_cardinality {1}
+        expected_run impl_1 unavailable_action BLOCK
+    }
+    TERMINAL {
+        expected_state IMPL_1_REQUIRED allowed_cardinality {1}
+        expected_run impl_1 unavailable_action BLOCK
+    }
+}
+query_roles {
+    TOOL_VERSION_SHORT {
+        ordinal 1 command version literal_arguments {-short}
+        object_role NONE cardinality 1 owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    TOOL_SOFTWARE_BUILD {
+        ordinal 2 command version literal_arguments {-build}
+        object_role NONE cardinality 1 owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    TOOL_IP_BUILD {
+        ordinal 3 command version literal_arguments {-ipbuild}
+        object_role NONE cardinality 1 owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    LICENSE_IMPLEMENTATION {
+        ordinal 4 command get_license_info
+        literal_arguments {-feature Implementation}
+        object_role NONE cardinality 1 owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    CURRENT_PROJECT {
+        ordinal 5 command current_project literal_arguments {-quiet}
+        object_role CURRENT_PROJECT cardinality 1 owner OBSERVER
+        effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    CURRENT_RUN {
+        ordinal 6 command current_run literal_arguments {-quiet}
+        object_role CURRENT_RUN cardinality {0 1} owner OBSERVER
+        effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    CURRENT_DESIGN {
+        ordinal 7 command current_design literal_arguments {-quiet}
+        object_role CURRENT_DESIGN cardinality {0 1} owner OBSERVER
+        effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_RUN {
+        ordinal 8 command get_runs literal_arguments {-quiet impl_1}
+        object_role IMPL_RUN cardinality 1 owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    SYNTH_RUN {
+        ordinal 9 command get_runs literal_arguments {-quiet synth_1}
+        object_role SYNTH_RUN cardinality 1 owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    SOURCES_FILESET {
+        ordinal 10 command get_filesets literal_arguments {-quiet sources_1}
+        object_role SOURCES_FILESET cardinality 1 owner OBSERVER
+        effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    TARGET_PART {
+        ordinal 11 command get_parts
+        literal_arguments {-quiet xc7z020clg400-1}
+        object_role TARGET_PART cardinality 1 owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    TARGET_BOARD_PART {
+        ordinal 12 command get_board_parts
+        literal_arguments {-quiet tul.com.tw:pynq-z2:part0:1.0}
+        object_role TARGET_BOARD_PART cardinality 1 owner OBSERVER
+        effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PROPERTY_READ {
+        ordinal 13 command get_property
+        literal_arguments {EXACT_PROPERTY_MAP_NAME EXACT_SINGLE_OBJECT}
+        object_role PROPERTY_MAP_SELECTED cardinality 1 owner OBSERVER
+        effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    COMMAND_EXISTENCE {
+        ordinal 14 command info
+        literal_arguments {commands EXACT_CONTRACT_COMMAND_NAME}
+        object_role NONE cardinality {0 1} owner OBSERVER effect READ_ONLY
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+}
+control_roles {
+    OPT_LAUNCH {
+        ordinal 15 command launch_runs
+        literal_arguments {impl_1 -to_step opt_design -jobs 2}
+        logical_operation opt_design target_step opt_design owner RUNNER
+        effect PROJECT_MODE_SCHEDULE
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    OPT_WAIT {
+        ordinal 16 command wait_on_run
+        literal_arguments {-timeout EXACT_TIMEOUT_MINUTES impl_1}
+        logical_operation opt_design target_step opt_design owner RUNNER
+        effect BOUNDED_WAIT
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PLACE_LAUNCH {
+        ordinal 17 command launch_runs
+        literal_arguments {impl_1 -to_step place_design -jobs 2}
+        logical_operation place_design target_step place_design owner RUNNER
+        effect PROJECT_MODE_SCHEDULE
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PLACE_WAIT {
+        ordinal 18 command wait_on_run
+        literal_arguments {-timeout EXACT_TIMEOUT_MINUTES impl_1}
+        logical_operation place_design target_step place_design owner RUNNER
+        effect BOUNDED_WAIT
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTE_LAUNCH {
+        ordinal 19 command launch_runs
+        literal_arguments {impl_1 -to_step route_design -jobs 2}
+        logical_operation route_design target_step route_design owner RUNNER
+        effect PROJECT_MODE_SCHEDULE
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTE_WAIT {
+        ordinal 20 command wait_on_run
+        literal_arguments {-timeout EXACT_TIMEOUT_MINUTES impl_1}
+        logical_operation route_design target_step route_design owner RUNNER
+        effect BOUNDED_WAIT
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTED_OPEN {
+        ordinal 21 command open_run literal_arguments {impl_1}
+        logical_operation implementation_reports target_step route_design
+        owner RUNNER effect OPEN_SAME_ROUTED_RUN
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+}
+report_availability_roles {
+    TIMING_SUMMARY {ordinal 22 command report_timing_summary}
+    UTILIZATION {ordinal 23 command report_utilization}
+    DRC {ordinal 24 command report_drc}
+    METHODOLOGY {ordinal 25 command report_methodology}
+    CLOCK_INTERACTION {ordinal 26 command report_clock_interaction}
+    CONSTRAINT_COVERAGE {ordinal 27 command report_timing}
+    MESSAGE_SOURCE {ordinal 28 command report_route_status}
+    TIMING_EXCEPTION_SOURCE {ordinal 29 command report_exceptions}
+    CLOCKS {ordinal 30 command report_clocks}
+    CDC {ordinal 31 command report_cdc}
+}
+forbidden_commands {
+    opt_design place_design phys_opt_design route_design power_opt_design
+    create_run reset_run delete_runs eval uplevel source package load
+    write_bitstream write_hw_platform write_xsa export_hardware
+    write_checkpoint read_checkpoint open_checkpoint
+    open_hw_manager close_hw_manager connect_hw_server disconnect_hw_server
+    open_hw_target close_hw_target program_hw_devices refresh_hw_device
+    artifact_collection artifact_publication board_access
+}
+command_ownership {
+    query_owner VIVADO_CAPABILITY_OBSERVER
+    control_owner RUNNER
+    report_owner PRODUCTION_COLLECTOR_NOT_IMPLEMENTED
+    authorization_owner CONTROLLER
+    acceptance_owner NONE
+}
+qualification_boundary {
+    exact_command_forms_selected 1
+    alias_probe_policy PROHIBITED
+    alternate_command_policy PROHIBITED
+    fallback_policy PROHIBITED
+    actual_vivado_behavior VIVADO_2024_1_QUALIFICATION_REQUIRED
+}

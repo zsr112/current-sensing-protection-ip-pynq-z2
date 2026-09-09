@@ -1,0 +1,20 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed Sep  9 16:51:20 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/core_directed_snapshot/xsim_script.tcl
+# xsim {core_directed_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+STAGE2G_CORE_DIRECTED=PASS
+FAULT_EVALUATION_LATENCY_ACLK=3
+RESET_RACE_TESTS=PASS
+CLEAR_FENCE_DIRECTED=PASS
+$finish called at time : 536 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_core_directed.sv" Line 285
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:51:22 2026...

@@ -1,0 +1,7 @@
+FAIL cycle=120 same_edge_request_pending actual=0 expected=1
+FAIL cycle=121 same_edge_resolution_sequence actual=00000400 expected=00000401
+FAIL cycle=121 same_edge_clear_reset_wait actual=00000001 expected=00000002
+FAIL cycle=123 continuous_stream_later_healthy_arms actual=00000001 expected=00000000
+STAGE2G_POLICY_MATRIX=FAIL_4
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_policy_matrix.sv:489: 
+       Time: 1771000  Scope: tb_stage2g_policy_matrix

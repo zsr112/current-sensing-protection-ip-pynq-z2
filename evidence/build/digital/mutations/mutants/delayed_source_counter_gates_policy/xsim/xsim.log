@@ -1,0 +1,95 @@
+#-----------------------------------------------------------
+# xsim v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Wed Sep  9 16:55:21 2026
+# Process ID: 27032
+# Current directory: <EXTERNAL_BUILD>/digital/mutations/mutants/delayed_source_counter_gates_policy/xsim
+# Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\mutations\mutants\delayed_source_counter_gates_policy\xsim\xsim.log -mode tcl -source {xsim.dir/mutation_snapshot/xsim_script.tcl}
+# Log file: <EXTERNAL_BUILD>/digital/mutations/mutants/delayed_source_counter_gates_policy/xsim/xsim.log
+# Journal file: <EXTERNAL_BUILD>/digital/mutations/mutants/delayed_source_counter_gates_policy/xsim\xsim.jou
+# Running On        :illusion
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 9 7945HX with Radeon Graphics        
+# CPU Frequency     :2495 MHz
+# CPU Physical cores:16
+# CPU Logical cores :32
+# Host memory       :16844 MB
+# Swap memory       :13958 MB
+# Total Virtual     :30803 MB
+# Available Virtual :10607 MB
+#-----------------------------------------------------------
+source xsim.dir/mutation_snapshot/xsim_script.tcl
+# xsim {mutation_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+STAGE2G PRODUCTION FAILED: nonclean valid retirement identity was not captured
+STATE MISMATCH healthy clear enters RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: healthy clear enters RESET_WAIT
+ABI READ MISMATCH post-clear recovery policy address=0xa0 actual=0x0000000a expected=0x00000014
+STAGE2G PRODUCTION FAILED: post-clear recovery policy
+ABI READ MISMATCH post-clear first bitmap cleared address=0xa4 actual=0x00000003 expected=0x00000000
+STAGE2G PRODUCTION FAILED: post-clear first bitmap cleared
+ABI READ MISMATCH post-clear live bitmap cleared address=0xa8 actual=0x00000004 expected=0x00000000
+STAGE2G PRODUCTION FAILED: post-clear live bitmap cleared
+ABI READ MISMATCH post-clear seen bitmap cleared address=0xac actual=0x00000007 expected=0x00000000
+STAGE2G PRODUCTION FAILED: post-clear seen bitmap cleared
+STATE MISMATCH no-sample post-clear remains RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: no-sample post-clear remains RESET_WAIT
+STATE MISMATCH nonclean post-clear remains RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: nonclean post-clear remains RESET_WAIT
+ABI READ MISMATCH nonclean post-clear policy address=0xa0 actual=0x0000000a expected=0x00000014
+STAGE2G PRODUCTION FAILED: nonclean post-clear policy
+STAGE2G PRODUCTION FAILED: nonclean post-clear identity was not captured
+ABI READ MISMATCH nonclean post-clear first remains zero address=0xa4 actual=0x00000003 expected=0x00000000
+STAGE2G PRODUCTION FAILED: nonclean post-clear first remains zero
+ABI READ MISMATCH nonclean post-clear live remains zero address=0xa8 actual=0x00000004 expected=0x00000000
+STAGE2G PRODUCTION FAILED: nonclean post-clear live remains zero
+ABI READ MISMATCH nonclean post-clear seen remains zero address=0xac actual=0x00000007 expected=0x00000000
+STAGE2G PRODUCTION FAILED: nonclean post-clear seen remains zero
+STATE MISMATCH PWM re-enable remains RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: PWM re-enable remains RESET_WAIT
+STATE MISMATCH later healthy evaluation arms production actual=1 expected=0
+STAGE2G PRODUCTION FAILED: later healthy evaluation arms production
+ABI READ MISMATCH later healthy ARMED_READY address=0xa0 actual=0x0000000a expected=0x00000001
+STAGE2G PRODUCTION FAILED: later healthy ARMED_READY
+STAGE2G PRODUCTION FAILED: later healthy did not clear AXI compatibility status
+STAGE2G PRODUCTION FAILED: production PWM activity did not resume after ARMED
+STATE MISMATCH second clear enters RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: second clear enters RESET_WAIT
+ABI READ MISMATCH second post-clear is not ready address=0xa0 actual=0x0000000a expected=0x00000014
+STAGE2G PRODUCTION FAILED: second post-clear is not ready
+ABI READ MISMATCH replacement fault remains not ready address=0xa0 actual=0x0000000a expected=0x00000002
+STAGE2G PRODUCTION FAILED: replacement fault remains not ready
+ABI READ MISMATCH replacement fault first bitmap address=0xa4 actual=0x00000003 expected=0x00000004
+STAGE2G PRODUCTION FAILED: replacement fault first bitmap
+ABI READ MISMATCH replacement fault seen bitmap address=0xac actual=0x00000007 expected=0x00000004
+STAGE2G PRODUCTION FAILED: replacement fault seen bitmap
+STAGE2G PRODUCTION FAILED: new pre-arm fault did not replace public code
+STATE MISMATCH new-fault clear enters RESET_WAIT actual=1 expected=2
+STAGE2G PRODUCTION FAILED: new-fault clear enters RESET_WAIT
+STAGE2G PRODUCTION FAILED: pre-reset compatibility state was not retained
+STAGE2G_PRODUCTION_PATH=FAIL_26
+STAGE2G_PRODUCTION_PATH=PASS
+PRODUCTION_W1P_CLEAR=PASS
+FIFO_CARRIED_SOURCE_INTEGRITY=PASS
+SAFE_OUTPUT_PRODUCTION=PASS
+PRODUCTION_SAFE_HOLD=PASS
+PRODUCTION_SAFE_RELEASE_AFTER_LATER_HEALTHY=PASS
+STATUS_FAULT_LATCHED_DURING_POST_CLEAR_RESET_WAIT=1
+FAULT_CODE_DURING_POST_CLEAR_RESET_WAIT=RETAIN_PRIOR_FIRST_CAUSE
+LATER_HEALTHY_CLEARS_COMPATIBILITY_STATUS=PASS
+POST_CLEAR_FAULT_REPLACES_WITH_NEW_FIRST_CAUSE=PASS
+RESET_CLEARS_COMPATIBILITY_STATUS=PASS
+ABI_1_1_READINESS_MATRIX=PASS
+ABI_1_1_BITMAP_MATRIX=PASS
+ABI_1_1_POLICY_IDENTITY_MATRIX=PASS
+ABI_1_1_DISCOVERY_CAPABILITY_MATRIX=PASS
+ABI_1_1_ACCESS_MATRIX=PASS
+ABI_1_1_SEQUENCE_WIDTH=32
+PRODUCTION_UNSAFE_PULSE_COUNT=0
+$finish called at time : 17086 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_production_path.sv" Line 739
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:55:23 2026...

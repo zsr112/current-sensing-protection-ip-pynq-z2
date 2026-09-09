@@ -1,0 +1,3654 @@
+{
+  "format": "protection-register-map-conformance-v2",
+  "generator_version": "1.1.0",
+  "register_map_schema_version": "1.1.0",
+  "canonical_spec_sha256": "36dcf0aa703dd63cf2b280b698b9b03b6ffd0ab93840af8c492cca63cdb7bef1",
+  "abi": {
+    "name": "current-sensing-protection-ip",
+    "version": "1.1",
+    "data_width": 32,
+    "address_width": 8,
+    "byte_order": "little",
+    "legacy_address_range": {
+      "first": "0x00",
+      "last": "0x60"
+    }
+  },
+  "legacy_address_range": {
+    "first": "0x00",
+    "last": "0x60"
+  },
+  "abi_1_1": {
+    "explicit_enable_parameter": "EXPLICIT_ABI_1_1",
+    "selected_register_offsets": [
+      "0x80",
+      "0x84",
+      "0x88",
+      "0xA0",
+      "0xA4",
+      "0xA8",
+      "0xAC",
+      "0xB0"
+    ],
+    "register_count": 8,
+    "field_count": 43,
+    "bit_coverage": 256,
+    "rtl_sources": [
+      {
+        "id": "SRC_STAGE2G_STATE",
+        "file": "rtl/protection_fsm.v",
+        "module": "stage2g_fault_episode_controller",
+        "signal": "state",
+        "width": 4,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET",
+        "state_encodings": {
+          "ST_ARMED": 0,
+          "ST_FAULT_LATCHED": 1,
+          "ST_RESET_WAIT": 2
+        }
+      },
+      {
+        "id": "SRC_CLEAR_PENDING",
+        "file": "rtl/protection_fsm.v",
+        "module": "stage2g_fault_episode_controller",
+        "signal": "clear_pending",
+        "width": 1,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_POST_CLEAR_RECOVERY_PENDING",
+        "file": "rtl/protection_fsm.v",
+        "module": "stage2g_fault_episode_controller",
+        "signal": "post_clear_recovery_pending",
+        "width": 1,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_FIRST_FAULT_BITMAP",
+        "file": "rtl/protection_fsm.v",
+        "module": "stage2g_fault_episode_controller",
+        "signal": "first_fault_bitmap",
+        "width": 6,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_LIVE_FAULT_BITMAP",
+        "file": "rtl/protection_fsm.v",
+        "module": "stage2g_fault_episode_controller",
+        "signal": "live_fault_bitmap",
+        "width": 6,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_FAULT_SEEN_BITMAP",
+        "file": "rtl/protection_fsm.v",
+        "module": "stage2g_fault_episode_controller",
+        "signal": "fault_seen_bitmap",
+        "width": 6,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_FAULT_EVAL_VALID",
+        "file": "rtl/fault_classifier.v",
+        "module": "stage2g_fault_evaluation_pipeline",
+        "signal": "fault_eval_valid",
+        "width": 1,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_FAULT_EVAL_SEQUENCE",
+        "file": "rtl/fault_classifier.v",
+        "module": "stage2g_fault_evaluation_pipeline",
+        "signal": "fault_eval_sequence",
+        "width": "OBS_SEQUENCE_WIDTH",
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_FAULT_EVAL_BITMAP",
+        "file": "rtl/fault_classifier.v",
+        "module": "stage2g_fault_evaluation_pipeline",
+        "signal": "fault_eval_bitmap",
+        "width": 6,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      },
+      {
+        "id": "SRC_FAULT_EVAL_INTEGRITY_CLEAN",
+        "file": "rtl/fault_classifier.v",
+        "module": "stage2g_fault_evaluation_pipeline",
+        "signal": "fault_eval_integrity_clean",
+        "width": 1,
+        "clock_domain": "ACLK",
+        "reset_domain": "LOCAL_ACTIVE_LOW_RESET"
+      }
+    ],
+    "capabilities": [
+      {
+        "id": "ARMED_READY",
+        "bit": 0,
+        "field_ref": "CAPABILITIES_0.ARMED_READY",
+        "advertised": true,
+        "required_edges": [
+          {
+            "target": "CAPABILITIES_0.ARMED_READY",
+            "rtl_binding_id": "RTL_CAPABILITIES_0_ARMED_READY",
+            "conformance_family": "CF_CAPABILITIES_0_STATIC"
+          },
+          {
+            "target": "POLICY_STATUS.ARMED_READY",
+            "rtl_binding_id": "RTL_POLICY_STATUS_ARMED_READY",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          }
+        ],
+        "required_api_gates": [
+          "API_IS_ARMED",
+          "API_STARTUP_READY"
+        ],
+        "required_metadata_constraints": [
+          "STAGE2G_PUBLIC_CONTRACT_CONNECTED"
+        ]
+      },
+      {
+        "id": "FAULT_BITMAPS",
+        "bit": 1,
+        "field_ref": "CAPABILITIES_0.FAULT_BITMAPS",
+        "advertised": true,
+        "required_edges": [
+          {
+            "target": "CAPABILITIES_0.FAULT_BITMAPS",
+            "rtl_binding_id": "RTL_CAPABILITIES_0_FAULT_BITMAPS",
+            "conformance_family": "CF_CAPABILITIES_0_STATIC"
+          },
+          {
+            "target": "CAPABILITIES_1.FAULT_BITMAP_WIDTH",
+            "rtl_binding_id": "RTL_CAPABILITIES_1_FAULT_BITMAP_WIDTH",
+            "conformance_family": "CF_CAPABILITIES_1_METADATA"
+          },
+          {
+            "target": "FIRST_FAULT_BITMAP.CH1_OVERCURRENT",
+            "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_CH1_OVERCURRENT",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FIRST_FAULT_BITMAP.CH2_OVERCURRENT",
+            "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_CH2_OVERCURRENT",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FIRST_FAULT_BITMAP.SENSOR_MISMATCH_OR_DIFFERENTIAL",
+            "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FIRST_FAULT_BITMAP.SENSOR_OPEN",
+            "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_OPEN",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FIRST_FAULT_BITMAP.SENSOR_SATURATION",
+            "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_SATURATION",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FIRST_FAULT_BITMAP.SENSOR_STUCK",
+            "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_STUCK",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FIRST_FAULT_BITMAP.RESERVED",
+            "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_RESERVED",
+            "conformance_family": "CF_RSVD_ZERO_IGNORE"
+          },
+          {
+            "target": "LIVE_FAULT_BITMAP.CH1_OVERCURRENT",
+            "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_CH1_OVERCURRENT",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "LIVE_FAULT_BITMAP.CH2_OVERCURRENT",
+            "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_CH2_OVERCURRENT",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "LIVE_FAULT_BITMAP.SENSOR_MISMATCH_OR_DIFFERENTIAL",
+            "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "LIVE_FAULT_BITMAP.SENSOR_OPEN",
+            "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_OPEN",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "LIVE_FAULT_BITMAP.SENSOR_SATURATION",
+            "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_SATURATION",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "LIVE_FAULT_BITMAP.SENSOR_STUCK",
+            "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_STUCK",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "LIVE_FAULT_BITMAP.RESERVED",
+            "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_RESERVED",
+            "conformance_family": "CF_RSVD_ZERO_IGNORE"
+          },
+          {
+            "target": "FAULT_SEEN_BITMAP.CH1_OVERCURRENT",
+            "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_CH1_OVERCURRENT",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FAULT_SEEN_BITMAP.CH2_OVERCURRENT",
+            "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_CH2_OVERCURRENT",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FAULT_SEEN_BITMAP.SENSOR_MISMATCH_OR_DIFFERENTIAL",
+            "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FAULT_SEEN_BITMAP.SENSOR_OPEN",
+            "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_OPEN",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FAULT_SEEN_BITMAP.SENSOR_SATURATION",
+            "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_SATURATION",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FAULT_SEEN_BITMAP.SENSOR_STUCK",
+            "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_STUCK",
+            "conformance_family": "CF_EPISODE_BITMAP"
+          },
+          {
+            "target": "FAULT_SEEN_BITMAP.RESERVED",
+            "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_RESERVED",
+            "conformance_family": "CF_RSVD_ZERO_IGNORE"
+          }
+        ],
+        "required_api_gates": [
+          "API_READ_FIRST_FAULT_BITMAP",
+          "API_READ_LIVE_FAULT_BITMAP",
+          "API_READ_FAULT_SEEN_BITMAP"
+        ],
+        "required_metadata_constraints": [
+          "FAULT_BITMAP_WIDTH_RANGE_6_TO_32"
+        ]
+      },
+      {
+        "id": "CLEAR_LEVEL_STATUS",
+        "bit": 2,
+        "field_ref": "CAPABILITIES_0.CLEAR_LEVEL_STATUS",
+        "advertised": true,
+        "required_edges": [
+          {
+            "target": "CAPABILITIES_0.CLEAR_LEVEL_STATUS",
+            "rtl_binding_id": "RTL_CAPABILITIES_0_CLEAR_LEVEL_STATUS",
+            "conformance_family": "CF_CAPABILITIES_0_STATIC"
+          },
+          {
+            "target": "POLICY_STATUS.CLEAR_PENDING",
+            "rtl_binding_id": "RTL_POLICY_STATUS_CLEAR_PENDING",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          },
+          {
+            "target": "POLICY_STATUS.POST_CLEAR_RECOVERY_PENDING",
+            "rtl_binding_id": "RTL_POLICY_STATUS_POST_CLEAR_RECOVERY_PENDING",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          }
+        ],
+        "required_api_gates": [
+          "API_READ_POLICY_STATUS"
+        ],
+        "required_metadata_constraints": []
+      },
+      {
+        "id": "STAGE2G_POLICY",
+        "bit": 3,
+        "field_ref": "CAPABILITIES_0.STAGE2G_POLICY",
+        "advertised": true,
+        "required_edges": [
+          {
+            "target": "CAPABILITIES_0.STAGE2G_POLICY",
+            "rtl_binding_id": "RTL_CAPABILITIES_0_STAGE2G_POLICY",
+            "conformance_family": "CF_CAPABILITIES_0_STATIC"
+          },
+          {
+            "target": "POLICY_STATUS.ARMED_READY",
+            "rtl_binding_id": "RTL_POLICY_STATUS_ARMED_READY",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          },
+          {
+            "target": "POLICY_STATUS.FAULT_LATCHED_STATE",
+            "rtl_binding_id": "RTL_POLICY_STATUS_FAULT_LATCHED_STATE",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          },
+          {
+            "target": "POLICY_STATUS.RESET_WAIT_STATE",
+            "rtl_binding_id": "RTL_POLICY_STATUS_RESET_WAIT_STATE",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          },
+          {
+            "target": "POLICY_STATUS.CLEAR_PENDING",
+            "rtl_binding_id": "RTL_POLICY_STATUS_CLEAR_PENDING",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          },
+          {
+            "target": "POLICY_STATUS.POST_CLEAR_RECOVERY_PENDING",
+            "rtl_binding_id": "RTL_POLICY_STATUS_POST_CLEAR_RECOVERY_PENDING",
+            "conformance_family": "CF_POLICY_STATUS_LEVEL"
+          },
+          {
+            "target": "POLICY_STATUS.RESERVED",
+            "rtl_binding_id": "RTL_POLICY_STATUS_RESERVED",
+            "conformance_family": "CF_RSVD_ZERO_IGNORE"
+          }
+        ],
+        "required_api_gates": [
+          "API_READ_POLICY_STATUS"
+        ],
+        "required_metadata_constraints": [
+          "STAGE2G_PUBLIC_CONTRACT_CONNECTED"
+        ]
+      },
+      {
+        "id": "NORMALIZED_TELEMETRY",
+        "bit": 4,
+        "field_ref": "CAPABILITIES_0.NORMALIZED_TELEMETRY_RESERVED_ZERO",
+        "advertised": false,
+        "required_edges": [
+          {
+            "target": "CAPABILITIES_0.NORMALIZED_TELEMETRY_RESERVED_ZERO",
+            "rtl_binding_id": "RTL_CAPABILITIES_0_NORMALIZED_TELEMETRY_RESERVED_ZERO",
+            "conformance_family": "CF_RSVD_ZERO_IGNORE"
+          }
+        ],
+        "required_api_gates": [],
+        "required_metadata_constraints": [
+          "NORMALIZED_TELEMETRY_RESERVED_ZERO"
+        ]
+      },
+      {
+        "id": "STAGE2E_TRANSACTION_OBSERVABILITY",
+        "bit": 5,
+        "field_ref": "CAPABILITIES_0.STAGE2E_TRANSACTION_OBSERVABILITY",
+        "advertised": true,
+        "required_edges": [
+          {
+            "target": "CAPABILITIES_0.STAGE2E_TRANSACTION_OBSERVABILITY",
+            "rtl_binding_id": "RTL_CAPABILITIES_0_STAGE2E_TRANSACTION_OBSERVABILITY",
+            "conformance_family": "CF_CAPABILITIES_0_STATIC"
+          }
+        ],
+        "required_api_gates": [
+          "API_READ_OBSERVABILITY",
+          "API_CLEAR_OBSERVABILITY_STATUS"
+        ],
+        "required_metadata_constraints": [
+          "STAGE2E_OBS_CAPABILITY_EXACT_FROZEN"
+        ]
+      },
+      {
+        "id": "POLICY_EVALUATION_IDENTITY",
+        "bit": 6,
+        "field_ref": "CAPABILITIES_0.POLICY_EVALUATION_IDENTITY",
+        "advertised": true,
+        "required_edges": [
+          {
+            "target": "CAPABILITIES_0.POLICY_EVALUATION_IDENTITY",
+            "rtl_binding_id": "RTL_CAPABILITIES_0_POLICY_EVALUATION_IDENTITY",
+            "conformance_family": "CF_CAPABILITIES_0_STATIC"
+          },
+          {
+            "target": "CAPABILITIES_1.IMPLEMENTED_SEQUENCE_WIDTH",
+            "rtl_binding_id": "RTL_CAPABILITIES_1_IMPLEMENTED_SEQUENCE_WIDTH",
+            "conformance_family": "CF_CAPABILITIES_1_METADATA"
+          },
+          {
+            "target": "CAPABILITIES_1.MIN_SEQUENCE_WIDTH",
+            "rtl_binding_id": "RTL_CAPABILITIES_1_MIN_SEQUENCE_WIDTH",
+            "conformance_family": "CF_CAPABILITIES_1_METADATA"
+          },
+          {
+            "target": "CAPABILITIES_1.MAX_SEQUENCE_WIDTH",
+            "rtl_binding_id": "RTL_CAPABILITIES_1_MAX_SEQUENCE_WIDTH",
+            "conformance_family": "CF_CAPABILITIES_1_METADATA"
+          },
+          {
+            "target": "POLICY_EVALUATION_SEQUENCE.SEQUENCE",
+            "rtl_binding_id": "RTL_POLICY_EVALUATION_DIAGNOSTIC_IDENTITY",
+            "conformance_family": "CF_DIAGNOSTIC_LAST_RETIREMENT_IDENTITY"
+          }
+        ],
+        "required_api_gates": [
+          "API_READ_POLICY_EVALUATION_IDENTITY"
+        ],
+        "required_metadata_constraints": [
+          "IMPLEMENTED_SEQUENCE_WIDTH_RANGE_16_TO_32",
+          "POLICY_EVALUATION_IDENTITY_DIAGNOSTIC_ONLY"
+        ]
+      }
+    ],
+    "api_gates": [
+      {
+        "id": "API_IS_ARMED",
+        "features": [
+          "ARMED_READY",
+          "STAGE2G_POLICY"
+        ]
+      },
+      {
+        "id": "API_STARTUP_READY",
+        "features": [
+          "ARMED_READY",
+          "STAGE2G_POLICY"
+        ]
+      },
+      {
+        "id": "API_READ_POLICY_STATUS",
+        "features": [
+          "CLEAR_LEVEL_STATUS",
+          "STAGE2G_POLICY"
+        ]
+      },
+      {
+        "id": "API_READ_CAPABILITIES",
+        "features": []
+      },
+      {
+        "id": "API_READ_REGISTER_MAP_VERSION",
+        "features": []
+      },
+      {
+        "id": "API_READ_OBSERVABILITY",
+        "features": [
+          "STAGE2E_TRANSACTION_OBSERVABILITY"
+        ]
+      },
+      {
+        "id": "API_CLEAR_OBSERVABILITY_STATUS",
+        "features": [
+          "STAGE2E_TRANSACTION_OBSERVABILITY"
+        ]
+      },
+      {
+        "id": "API_READ_FIRST_FAULT_BITMAP",
+        "features": [
+          "FAULT_BITMAPS",
+          "STAGE2G_POLICY"
+        ]
+      },
+      {
+        "id": "API_READ_LIVE_FAULT_BITMAP",
+        "features": [
+          "FAULT_BITMAPS",
+          "STAGE2G_POLICY"
+        ]
+      },
+      {
+        "id": "API_READ_FAULT_SEEN_BITMAP",
+        "features": [
+          "FAULT_BITMAPS",
+          "STAGE2G_POLICY"
+        ]
+      },
+      {
+        "id": "API_READ_POLICY_EVALUATION_IDENTITY",
+        "features": [
+          "POLICY_EVALUATION_IDENTITY",
+          "STAGE2G_POLICY"
+        ]
+      }
+    ],
+    "metadata_constraints": [
+      "FAULT_BITMAP_WIDTH_RANGE_6_TO_32",
+      "IMPLEMENTED_SEQUENCE_WIDTH_RANGE_16_TO_32",
+      "MIN_SEQUENCE_WIDTH_EQUALS_16",
+      "MAX_SEQUENCE_WIDTH_EQUALS_32",
+      "MIN_LE_IMPLEMENTED_LE_MAX",
+      "NORMALIZED_TELEMETRY_RESERVED_ZERO",
+      "CAPABILITIES_0_RESERVED_BITS_ZERO",
+      "STAGE2E_OBS_CAPABILITY_EXACT_FROZEN",
+      "STAGE2G_PUBLIC_CONTRACT_CONNECTED",
+      "POLICY_EVALUATION_IDENTITY_DIAGNOSTIC_ONLY"
+    ],
+    "invariants": [
+      {
+        "id": "POLICY_STATE_EXACTLY_ONE",
+        "kind": "EXACTLY_ONE",
+        "targets": [
+          "POLICY_STATUS.ARMED_READY",
+          "POLICY_STATUS.FAULT_LATCHED_STATE",
+          "POLICY_STATUS.RESET_WAIT_STATE"
+        ],
+        "rule": "Exactly one public policy state bit is set at the Stage 2G policy boundary."
+      },
+      {
+        "id": "CLEAR_PENDING_IMPLIES_FAULT_LATCHED",
+        "kind": "IMPLIES",
+        "targets": [
+          "POLICY_STATUS.CLEAR_PENDING",
+          "POLICY_STATUS.FAULT_LATCHED_STATE"
+        ],
+        "rule": "CLEAR_PENDING implies FAULT_LATCHED_STATE."
+      },
+      {
+        "id": "POST_CLEAR_PENDING_IMPLIES_RESET_WAIT",
+        "kind": "IMPLIES",
+        "targets": [
+          "POLICY_STATUS.POST_CLEAR_RECOVERY_PENDING",
+          "POLICY_STATUS.RESET_WAIT_STATE"
+        ],
+        "rule": "POST_CLEAR_RECOVERY_PENDING implies RESET_WAIT_STATE and excludes CLEAR_PENDING."
+      },
+      {
+        "id": "ARMED_READY_EXCLUDES_PENDING_LEVELS",
+        "kind": "IMPLIES",
+        "targets": [
+          "POLICY_STATUS.ARMED_READY",
+          "POLICY_STATUS.CLEAR_PENDING",
+          "POLICY_STATUS.POST_CLEAR_RECOVERY_PENDING"
+        ],
+        "rule": "ARMED_READY excludes both pending levels."
+      },
+      {
+        "id": "BITMAP_UPPER_BITS_ZERO",
+        "kind": "MASK_ZERO",
+        "targets": [
+          "FIRST_FAULT_BITMAP",
+          "LIVE_FAULT_BITMAP",
+          "FAULT_SEEN_BITMAP"
+        ],
+        "rule": "Bits 31 through 6 are always zero."
+      },
+      {
+        "id": "BITMAPS_ZERO_OUTSIDE_ACTIVE_EPISODE",
+        "kind": "IMPLIES",
+        "targets": [
+          "FIRST_FAULT_BITMAP",
+          "LIVE_FAULT_BITMAP",
+          "FAULT_SEEN_BITMAP"
+        ],
+        "rule": "All bitmaps are zero outside FAULT_LATCHED_STATE."
+      },
+      {
+        "id": "FIRST_FAULT_IMMUTABLE_DURING_EPISODE",
+        "kind": "TEMPORAL",
+        "targets": [
+          "FIRST_FAULT_BITMAP"
+        ],
+        "rule": "Capture the complete first clean cause set once per active episode."
+      },
+      {
+        "id": "FAULT_SEEN_MONOTONIC_OR_DURING_EPISODE",
+        "kind": "TEMPORAL",
+        "targets": [
+          "FAULT_SEEN_BITMAP"
+        ],
+        "rule": "OR each clean eligible cause set during the active episode."
+      }
+    ],
+    "conformance_templates": [
+      {
+        "id": "RO_STATIC",
+        "vectors": [
+          "RESET_READ",
+          "STEADY_READ",
+          "WRITE_NO_EFFECT"
+        ]
+      },
+      {
+        "id": "RO_STATE_DECODE",
+        "vectors": [
+          "RESET_DECODE",
+          "EACH_PUBLIC_STATE",
+          "ONE_HOT_RELATIONS"
+        ]
+      },
+      {
+        "id": "RO_LEVEL",
+        "vectors": [
+          "RESET_LEVEL",
+          "ASSERTED_LEVEL",
+          "DEASSERTED_LEVEL"
+        ]
+      },
+      {
+        "id": "RO_BITMAP",
+        "vectors": [
+          "RESET_ZERO",
+          "CAUSE_BIT_SET",
+          "UPPER_BITS_ZERO",
+          "FIRST_LIVE_SEEN_TRANSITIONS"
+        ]
+      },
+      {
+        "id": "RO_EVENT_CAPTURE",
+        "vectors": [
+          "RESET_ZERO",
+          "CLEAN_VALID_CAPTURE",
+          "INVALID_IDLE_HOLD",
+          "NONCLEAN_VALID_CAPTURE"
+        ]
+      },
+      {
+        "id": "FAULT_PROJECTION",
+        "vectors": [
+          "EXHAUSTIVE_KNOWN_BITMAP_0_TO_3F"
+        ]
+      },
+      {
+        "id": "FAULT_FORWARD_COMPATIBILITY",
+        "vectors": [
+          "KNOWN_ONLY_WIDTH_6",
+          "UNKNOWN_BIT_6_WIDTH_7",
+          "ABOVE_WIDTH_BIT_REJECTED"
+        ]
+      }
+    ],
+    "conformance_routes": [
+      {
+        "family": "CF_REGISTER_MAP_VERSION_STATIC",
+        "templates": [
+          "RO_STATIC"
+        ]
+      },
+      {
+        "family": "CF_CAPABILITIES_0_STATIC",
+        "templates": [
+          "RO_STATIC"
+        ]
+      },
+      {
+        "family": "CF_CAPABILITIES_1_METADATA",
+        "templates": [
+          "RO_STATIC"
+        ]
+      },
+      {
+        "family": "CF_POLICY_STATUS_LEVEL",
+        "templates": [
+          "RO_STATE_DECODE",
+          "RO_LEVEL"
+        ]
+      },
+      {
+        "family": "CF_EPISODE_BITMAP",
+        "templates": [
+          "RO_BITMAP"
+        ]
+      },
+      {
+        "family": "CF_DIAGNOSTIC_LAST_RETIREMENT_IDENTITY",
+        "templates": [
+          "RO_EVENT_CAPTURE"
+        ]
+      },
+      {
+        "family": "CF_RSVD_ZERO_IGNORE",
+        "templates": [
+          "RO_STATIC"
+        ]
+      },
+      {
+        "family": "CF_FAULT_TAXONOMY_COMPATIBILITY_PROJECTION",
+        "templates": [
+          "FAULT_PROJECTION"
+        ]
+      },
+      {
+        "family": "CF_FAULT_FORWARD_COMPATIBILITY",
+        "templates": [
+          "FAULT_FORWARD_COMPATIBILITY"
+        ]
+      }
+    ],
+    "fault_projection": [
+      {
+        "code": "OC_WITH_ANY_SENSOR",
+        "kind": "OVERCURRENT_AND_SENSOR",
+        "causes": [
+          "CH1_OVERCURRENT",
+          "CH2_OVERCURRENT",
+          "SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "SENSOR_OPEN",
+          "SENSOR_SATURATION",
+          "SENSOR_STUCK"
+        ]
+      },
+      {
+        "code": "OVERCURRENT",
+        "kind": "ANY_OF",
+        "causes": [
+          "CH1_OVERCURRENT",
+          "CH2_OVERCURRENT"
+        ]
+      },
+      {
+        "code": "SENSOR_SATURATION",
+        "kind": "ANY_OF",
+        "causes": [
+          "SENSOR_SATURATION"
+        ]
+      },
+      {
+        "code": "SENSOR_OPEN",
+        "kind": "ANY_OF",
+        "causes": [
+          "SENSOR_OPEN"
+        ]
+      },
+      {
+        "code": "SENSOR_STUCK",
+        "kind": "ANY_OF",
+        "causes": [
+          "SENSOR_STUCK"
+        ]
+      },
+      {
+        "code": "SENSOR_MISMATCH",
+        "kind": "ANY_OF",
+        "causes": [
+          "SENSOR_MISMATCH_OR_DIFFERENTIAL"
+        ]
+      },
+      {
+        "code": "NONE",
+        "kind": "NONE_OF",
+        "causes": [
+          "CH1_OVERCURRENT",
+          "CH2_OVERCURRENT",
+          "SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "SENSOR_OPEN",
+          "SENSOR_SATURATION",
+          "SENSOR_STUCK"
+        ]
+      }
+    ],
+    "fault_forward_compatibility": {
+      "known_width": 6,
+      "minimum_advertised_width": 6,
+      "maximum_advertised_width": 32,
+      "preserve_unknown_within_width": true,
+      "reject_bits_above_width": true
+    },
+    "policy_identity": {
+      "data_source_ref": "SRC_FAULT_EVAL_SEQUENCE",
+      "valid_source_ref": "SRC_FAULT_EVAL_VALID",
+      "destination_width": 32,
+      "capture_clean": true,
+      "capture_nonclean": true,
+      "hold_when_invalid": true,
+      "reset": 0,
+      "transform": "ZERO_EXTEND",
+      "snapshot_token": false
+    }
+  },
+  "bus_behavior": {
+    "address_decode": {
+      "lsb": 0,
+      "msb": 7,
+      "outer_address_aliases": true
+    },
+    "accepted_write": {
+      "requires_any_wstrb": true,
+      "legacy_unstrobed_registers": [
+        "CTRL",
+        "TH_OC1",
+        "TH_OC2",
+        "TH_DIFF",
+        "PWM_PERIOD",
+        "PWM_DUTY"
+      ]
+    },
+    "undefined_read": {
+      "value": 0,
+      "response": "OKAY"
+    },
+    "undefined_write": {
+      "effect": "NONE",
+      "response": "OKAY"
+    },
+    "read_data": {
+      "combinational_decode": true,
+      "rd_en_gates_value": false
+    },
+    "current_monitor_pair": {
+      "hardware_delivery_atomic": true,
+      "software_reads_atomic": false,
+      "description": "I_CH1 and I_CH2 are updated together from one destination-FIFO delivery, but separate software reads can straddle two deliveries."
+    }
+  },
+  "fault_causes": [
+    {
+      "name": "CH1_OVERCURRENT",
+      "bit": 0,
+      "mask": "0x00000001",
+      "description": "Channel 1 exceeded its overcurrent threshold.",
+      "public_names": {
+        "rtl": "FAULT_CAUSE_CH1_OVERCURRENT",
+        "c": "PROTECTION_FAULT_CAUSE_CH1_OVERCURRENT",
+        "python": "FAULT_CAUSE_CH1_OVERCURRENT",
+        "systemverilog": "FAULT_CAUSE_CH1_OVERCURRENT",
+        "ipxact": "CH1_OVERCURRENT",
+        "documentation": "CH1_OVERCURRENT"
+      }
+    },
+    {
+      "name": "CH2_OVERCURRENT",
+      "bit": 1,
+      "mask": "0x00000002",
+      "description": "Channel 2 exceeded its overcurrent threshold.",
+      "public_names": {
+        "rtl": "FAULT_CAUSE_CH2_OVERCURRENT",
+        "c": "PROTECTION_FAULT_CAUSE_CH2_OVERCURRENT",
+        "python": "FAULT_CAUSE_CH2_OVERCURRENT",
+        "systemverilog": "FAULT_CAUSE_CH2_OVERCURRENT",
+        "ipxact": "CH2_OVERCURRENT",
+        "documentation": "CH2_OVERCURRENT"
+      }
+    },
+    {
+      "name": "SENSOR_MISMATCH_OR_DIFFERENTIAL",
+      "bit": 2,
+      "mask": "0x00000004",
+      "description": "The channel differential exceeded the sensor mismatch threshold.",
+      "public_names": {
+        "rtl": "FAULT_CAUSE_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+        "c": "PROTECTION_FAULT_CAUSE_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+        "python": "FAULT_CAUSE_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+        "systemverilog": "FAULT_CAUSE_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+        "ipxact": "SENSOR_MISMATCH_OR_DIFFERENTIAL",
+        "documentation": "SENSOR_MISMATCH_OR_DIFFERENTIAL"
+      }
+    },
+    {
+      "name": "SENSOR_OPEN",
+      "bit": 3,
+      "mask": "0x00000008",
+      "description": "At least one sensor-open detector asserted.",
+      "public_names": {
+        "rtl": "FAULT_CAUSE_SENSOR_OPEN",
+        "c": "PROTECTION_FAULT_CAUSE_SENSOR_OPEN",
+        "python": "FAULT_CAUSE_SENSOR_OPEN",
+        "systemverilog": "FAULT_CAUSE_SENSOR_OPEN",
+        "ipxact": "SENSOR_OPEN",
+        "documentation": "SENSOR_OPEN"
+      }
+    },
+    {
+      "name": "SENSOR_SATURATION",
+      "bit": 4,
+      "mask": "0x00000010",
+      "description": "At least one sensor-saturation detector asserted.",
+      "public_names": {
+        "rtl": "FAULT_CAUSE_SENSOR_SATURATION",
+        "c": "PROTECTION_FAULT_CAUSE_SENSOR_SATURATION",
+        "python": "FAULT_CAUSE_SENSOR_SATURATION",
+        "systemverilog": "FAULT_CAUSE_SENSOR_SATURATION",
+        "ipxact": "SENSOR_SATURATION",
+        "documentation": "SENSOR_SATURATION"
+      }
+    },
+    {
+      "name": "SENSOR_STUCK",
+      "bit": 5,
+      "mask": "0x00000020",
+      "description": "At least one sensor-stuck detector asserted.",
+      "public_names": {
+        "rtl": "FAULT_CAUSE_SENSOR_STUCK",
+        "c": "PROTECTION_FAULT_CAUSE_SENSOR_STUCK",
+        "python": "FAULT_CAUSE_SENSOR_STUCK",
+        "systemverilog": "FAULT_CAUSE_SENSOR_STUCK",
+        "ipxact": "SENSOR_STUCK",
+        "documentation": "SENSOR_STUCK"
+      }
+    }
+  ],
+  "fault_codes": [
+    {
+      "name": "NONE",
+      "value": "0x00",
+      "public_names": {
+        "rtl": "FAULT_NONE",
+        "c": "PROTECTION_FAULT_NONE",
+        "python": "FAULT_NONE",
+        "systemverilog": "FAULT_CODE_NONE",
+        "ipxact": "NONE",
+        "documentation": "NONE"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "OVERCURRENT",
+      "value": "0x01",
+      "public_names": {
+        "rtl": "FAULT_OVERCURRENT",
+        "c": "PROTECTION_FAULT_OVERCURRENT",
+        "python": "FAULT_OVERCURRENT",
+        "systemverilog": "FAULT_CODE_OVERCURRENT",
+        "ipxact": "OVERCURRENT",
+        "documentation": "OVERCURRENT"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_MISMATCH",
+      "value": "0x02",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_MISMATCH",
+        "c": "PROTECTION_FAULT_SENSOR_MISMATCH",
+        "python": "FAULT_SENSOR_MISMATCH",
+        "systemverilog": "FAULT_CODE_SENSOR_MISMATCH",
+        "ipxact": "SENSOR_MISMATCH",
+        "documentation": "SENSOR_MISMATCH"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [
+          "PROTECTION_FAULT_MISMATCH"
+        ],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_OPEN",
+      "value": "0x03",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_OPEN",
+        "c": "PROTECTION_FAULT_SENSOR_OPEN",
+        "python": "FAULT_SENSOR_OPEN",
+        "systemverilog": "FAULT_CODE_SENSOR_OPEN",
+        "ipxact": "SENSOR_OPEN",
+        "documentation": "SENSOR_OPEN"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_SATURATION",
+      "value": "0x04",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_SATURATION",
+        "c": "PROTECTION_FAULT_SENSOR_SATURATION",
+        "python": "FAULT_SENSOR_SATURATION",
+        "systemverilog": "FAULT_CODE_SENSOR_SATURATION",
+        "ipxact": "SENSOR_SATURATION",
+        "documentation": "SENSOR_SATURATION"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [
+          "PROTECTION_FAULT_SENSOR_SAT"
+        ],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "SENSOR_STUCK",
+      "value": "0x05",
+      "public_names": {
+        "rtl": "FAULT_SENSOR_STUCK",
+        "c": "PROTECTION_FAULT_SENSOR_STUCK",
+        "python": "FAULT_SENSOR_STUCK",
+        "systemverilog": "FAULT_CODE_SENSOR_STUCK",
+        "ipxact": "SENSOR_STUCK",
+        "documentation": "SENSOR_STUCK"
+      },
+      "legacy_aliases": {
+        "rtl": [],
+        "c": [],
+        "python": [],
+        "systemverilog": []
+      }
+    },
+    {
+      "name": "OC_WITH_ANY_SENSOR",
+      "value": "0x06",
+      "public_names": {
+        "rtl": "FAULT_OC_WITH_ANY_SENSOR",
+        "c": "PROTECTION_FAULT_OC_WITH_ANY_SENSOR",
+        "python": "FAULT_OC_WITH_ANY_SENSOR",
+        "systemverilog": "FAULT_CODE_OC_WITH_ANY_SENSOR",
+        "ipxact": "OC_WITH_ANY_SENSOR",
+        "documentation": "OC_WITH_ANY_SENSOR"
+      },
+      "legacy_aliases": {
+        "rtl": [
+          "FAULT_OC_WITH_SENSOR"
+        ],
+        "c": [
+          "PROTECTION_FAULT_OC_WITH_SENSOR"
+        ],
+        "python": [],
+        "systemverilog": []
+      }
+    }
+  ],
+  "registers": [
+    {
+      "name": "CTRL",
+      "offset": "0x00",
+      "width": 32,
+      "access": "RW/W1P",
+      "value_kind": "stored",
+      "reset": "0x00000000",
+      "write_strobe": "IGNORED_AFTER_ACCEPTED_WRITE",
+      "fields": [
+        {
+          "name": "pwm_enable",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "RW",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the stored enable bit.",
+          "write_behavior": "An accepted write stores WDATA[0] regardless of which nonzero WSTRB accepted the transaction.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "clear_fault_pulse",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "W1P",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Always reads zero.",
+          "write_behavior": "An accepted write of WDATA[1]=1 emits one ACLK pulse regardless of which nonzero WSTRB accepted the transaction.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 2,
+          "msb": 31,
+          "width": 30,
+          "mask": "0xFFFFFFFC",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "STATUS",
+      "offset": "0x04",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "fault_valid",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the evaluation result three ACLK edges after the corresponding accepted atomic raw CDC destination delivery; it is not a continuously live classifier signal.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "fault_latched",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Retains its prior value through post-clear RESET_WAIT and clears only on a later clean healthy evaluation entering ARMED.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 2,
+          "msb": 31,
+          "width": 30,
+          "mask": "0xFFFFFFFC",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "FAULT_CODE",
+      "offset": "0x08",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "fault_code_latched",
+          "lsb": 0,
+          "msb": 7,
+          "width": 8,
+          "mask": "0x000000FF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": "fault_codes",
+          "read_behavior": "Retains the prior first cause with fault_latched through post-clear RESET_WAIT.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 8,
+          "msb": 31,
+          "width": 24,
+          "mask": "0xFFFFFF00",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "I_CH1",
+      "offset": "0x0C",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "i_ch1_mon",
+          "lsb": 0,
+          "msb": 11,
+          "width": 12,
+          "mask": "0x00000FFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "A single register read is stable; a later I_CH2 read can observe a different delivery.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 12,
+          "msb": 31,
+          "width": 20,
+          "mask": "0xFFFFF000",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "I_CH2",
+      "offset": "0x10",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "i_ch2_mon",
+          "lsb": 0,
+          "msb": 11,
+          "width": 12,
+          "mask": "0x00000FFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "A single register read is stable; an earlier I_CH1 read can have observed a different delivery.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 12,
+          "msb": 31,
+          "width": 20,
+          "mask": "0xFFFFF000",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "TH_OC1",
+      "offset": "0x14",
+      "width": 32,
+      "access": "RW",
+      "value_kind": "stored",
+      "reset": "0x00000BB8",
+      "write_strobe": "IGNORED_AFTER_ACCEPTED_WRITE",
+      "fields": [
+        {
+          "name": "threshold_ch1",
+          "lsb": 0,
+          "msb": 11,
+          "width": 12,
+          "mask": "0x00000FFF",
+          "access": "RW",
+          "reset": "0x00000BB8",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the stored threshold.",
+          "write_behavior": "An accepted write stores WDATA[11:0] regardless of which nonzero WSTRB accepted the transaction.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 12,
+          "msb": 31,
+          "width": 20,
+          "mask": "0xFFFFF000",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "TH_OC2",
+      "offset": "0x18",
+      "width": 32,
+      "access": "RW",
+      "value_kind": "stored",
+      "reset": "0x00000BB8",
+      "write_strobe": "IGNORED_AFTER_ACCEPTED_WRITE",
+      "fields": [
+        {
+          "name": "threshold_ch2",
+          "lsb": 0,
+          "msb": 11,
+          "width": 12,
+          "mask": "0x00000FFF",
+          "access": "RW",
+          "reset": "0x00000BB8",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the stored threshold.",
+          "write_behavior": "An accepted write stores WDATA[11:0] regardless of which nonzero WSTRB accepted the transaction.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 12,
+          "msb": 31,
+          "width": 20,
+          "mask": "0xFFFFF000",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "TH_DIFF",
+      "offset": "0x1C",
+      "width": 32,
+      "access": "RW",
+      "value_kind": "stored",
+      "reset": "0x000000C8",
+      "write_strobe": "IGNORED_AFTER_ACCEPTED_WRITE",
+      "fields": [
+        {
+          "name": "diff_threshold",
+          "lsb": 0,
+          "msb": 11,
+          "width": 12,
+          "mask": "0x00000FFF",
+          "access": "RW",
+          "reset": "0x000000C8",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the stored threshold.",
+          "write_behavior": "An accepted write stores WDATA[11:0] regardless of which nonzero WSTRB accepted the transaction.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 12,
+          "msb": 31,
+          "width": 20,
+          "mask": "0xFFFFF000",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "PWM_PERIOD",
+      "offset": "0x20",
+      "width": 32,
+      "access": "RW",
+      "value_kind": "stored",
+      "reset": "0x000003E8",
+      "write_strobe": "IGNORED_AFTER_ACCEPTED_WRITE",
+      "fields": [
+        {
+          "name": "pwm_period",
+          "lsb": 0,
+          "msb": 15,
+          "width": 16,
+          "mask": "0x0000FFFF",
+          "access": "RW",
+          "reset": "0x000003E8",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the stored period.",
+          "write_behavior": "An accepted write stores WDATA[15:0] regardless of which nonzero WSTRB accepted the transaction.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 16,
+          "msb": 31,
+          "width": 16,
+          "mask": "0xFFFF0000",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "PWM_DUTY",
+      "offset": "0x24",
+      "width": 32,
+      "access": "RW",
+      "value_kind": "stored",
+      "reset": "0x000001F4",
+      "write_strobe": "IGNORED_AFTER_ACCEPTED_WRITE",
+      "fields": [
+        {
+          "name": "pwm_duty",
+          "lsb": 0,
+          "msb": 15,
+          "width": 16,
+          "mask": "0x0000FFFF",
+          "access": "RW",
+          "reset": "0x000001F4",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the stored duty.",
+          "write_behavior": "An accepted write stores WDATA[15:0] regardless of which nonzero WSTRB accepted the transaction.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 16,
+          "msb": 31,
+          "width": 16,
+          "mask": "0xFFFF0000",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_CAPABILITY",
+      "offset": "0x28",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "parameterized_static",
+      "reset": "0xE2782001",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "observability_version",
+          "lsb": 0,
+          "msb": 7,
+          "width": 8,
+          "mask": "0x000000FF",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "sequence_width",
+          "lsb": 8,
+          "msb": 13,
+          "width": 6,
+          "mask": "0x00003F00",
+          "access": "RO",
+          "reset": "0x00000020",
+          "parameter_ref": "OBS_SEQUENCE_WIDTH",
+          "enum_ref": null,
+          "read_behavior": "Returns OBS_SEQUENCE_WIDTH, supported from 16 through 32.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "counter_width",
+          "lsb": 14,
+          "msb": 19,
+          "width": 6,
+          "mask": "0x000FC000",
+          "access": "RO",
+          "reset": "0x00000020",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns 32.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "counters_reset_only",
+          "lsb": 20,
+          "msb": 20,
+          "width": 1,
+          "mask": "0x00100000",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "sticky_status_w1c",
+          "lsb": 21,
+          "msb": 21,
+          "width": 1,
+          "mask": "0x00200000",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "source_telemetry_eventually_consistent",
+          "lsb": 22,
+          "msb": 22,
+          "width": 1,
+          "mask": "0x00400000",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "atomic_multi_register_snapshot",
+          "lsb": 23,
+          "msb": 23,
+          "width": 1,
+          "mask": "0x00800000",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns zero because no atomic multi-register snapshot is provided.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "stage2e_magic",
+          "lsb": 24,
+          "msb": 31,
+          "width": 8,
+          "mask": "0xFF000000",
+          "access": "RO",
+          "reset": "0x000000E2",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns 0xE2.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_STATUS_W1C",
+      "offset": "0x2C",
+      "width": 32,
+      "access": "RO/W1C",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "BYTE_QUALIFIED",
+      "fields": [
+        {
+          "name": "BACKPRESSURE_SEEN",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "SOURCE_PROTOCOL_VIOLATION",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "SOURCE_DROP_SEEN",
+          "lsb": 2,
+          "msb": 2,
+          "width": 1,
+          "mask": "0x00000004",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "FIFO_OVERFLOW_ATTEMPT",
+          "lsb": 3,
+          "msb": 3,
+          "width": 1,
+          "mask": "0x00000008",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "FIFO_UNDERFLOW_ATTEMPT",
+          "lsb": 4,
+          "msb": 4,
+          "width": 1,
+          "mask": "0x00000010",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "DUPLICATE_DELIVERY",
+          "lsb": 5,
+          "msb": 5,
+          "width": 1,
+          "mask": "0x00000020",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "SEQUENCE_GAP",
+          "lsb": 6,
+          "msb": 6,
+          "width": 1,
+          "mask": "0x00000040",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "REORDER_OR_STALE",
+          "lsb": 7,
+          "msb": 7,
+          "width": 1,
+          "mask": "0x00000080",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[0] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "COUNTER_SATURATED",
+          "lsb": 8,
+          "msb": 8,
+          "width": 1,
+          "mask": "0x00000100",
+          "access": "W1C",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the sticky cause.",
+          "write_behavior": "Writing one with WSTRB[1] clears the cause; a concurrent new cause wins.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "ANY_ERROR",
+          "lsb": 9,
+          "msb": 9,
+          "width": 1,
+          "mask": "0x00000200",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Recomputed from post-clear cause values.",
+          "write_behavior": "Ignored; writing bit 9 alone has no effect.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        },
+        {
+          "name": "reserved",
+          "lsb": 10,
+          "msb": 31,
+          "width": 22,
+          "mask": "0xFFFFFC00",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_SOURCE_ACCEPT_COUNT",
+      "offset": "0x30",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_DESTINATION_DELIVERY_COUNT",
+      "offset": "0x34",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_BACKPRESSURE_CYCLE_COUNT",
+      "offset": "0x38",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_SOURCE_PROTOCOL_VIOLATION_COUNT",
+      "offset": "0x3C",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_SOURCE_DROP_COUNT",
+      "offset": "0x40",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_FIFO_OVERFLOW_ATTEMPT_COUNT",
+      "offset": "0x44",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_FIFO_UNDERFLOW_ATTEMPT_COUNT",
+      "offset": "0x48",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_DUPLICATE_DELIVERY_COUNT",
+      "offset": "0x4C",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_SEQUENCE_GAP_COUNT",
+      "offset": "0x50",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_REORDER_OR_STALE_COUNT",
+      "offset": "0x54",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_AGGREGATE_ERROR_COUNT",
+      "offset": "0x58",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "count",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns the reset-only saturating counter.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_LAST_SOURCE_SEQUENCE",
+      "offset": "0x5C",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "sequence",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": "OBS_SEQUENCE_WIDTH",
+          "enum_ref": null,
+          "read_behavior": "Returns an independently synchronized source-domain value and is not part of an atomic multi-register snapshot.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "OBS_LAST_DESTINATION_SEQUENCE",
+      "offset": "0x60",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "sequence",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": "OBS_SEQUENCE_WIDTH",
+          "enum_ref": null,
+          "read_behavior": "Returns the ACLK-domain destination value and is not part of an atomic multi-register snapshot.",
+          "write_behavior": "Ignored.",
+          "behavior_id": null,
+          "static_value": null,
+          "dynamic_source": null,
+          "rtl_binding_id": null,
+          "capability_gate_ref": null,
+          "conformance_family": null,
+          "conformance_templates": []
+        }
+      ]
+    },
+    {
+      "name": "REGISTER_MAP_VERSION",
+      "offset": "0x80",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "static",
+      "reset": "0x524D0101",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "ABI_MINOR",
+          "lsb": 0,
+          "msb": 7,
+          "width": 8,
+          "mask": "0x000000FF",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns ABI minor 1.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_REGISTER_MAP_VERSION_ABI_MINOR",
+          "capability_gate_ref": "FIELD_REGISTER_MAP_VERSION_ABI_MINOR",
+          "conformance_family": "CF_REGISTER_MAP_VERSION_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "ABI_MAJOR",
+          "lsb": 8,
+          "msb": 15,
+          "width": 8,
+          "mask": "0x0000FF00",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns ABI major 1.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_REGISTER_MAP_VERSION_ABI_MAJOR",
+          "capability_gate_ref": "FIELD_REGISTER_MAP_VERSION_ABI_MAJOR",
+          "conformance_family": "CF_REGISTER_MAP_VERSION_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "MAGIC",
+          "lsb": 16,
+          "msb": 31,
+          "width": 16,
+          "mask": "0xFFFF0000",
+          "access": "RO",
+          "reset": "0x0000524D",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns 0x524D when explicit ABI 1.1 is enabled.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": "0x524D",
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_REGISTER_MAP_VERSION_MAGIC",
+          "capability_gate_ref": "FIELD_REGISTER_MAP_VERSION_MAGIC",
+          "conformance_family": "CF_REGISTER_MAP_VERSION_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CAPABILITIES_0",
+      "offset": "0x84",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "static",
+      "reset": "0x0000006F",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "ARMED_READY",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one on the fully connected Stage 2G production path.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_ARMED_READY",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_ARMED_READY",
+          "conformance_family": "CF_CAPABILITIES_0_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "FAULT_BITMAPS",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one on the fully connected Stage 2G production path.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_FAULT_BITMAPS",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_FAULT_BITMAPS",
+          "conformance_family": "CF_CAPABILITIES_0_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "CLEAR_LEVEL_STATUS",
+          "lsb": 2,
+          "msb": 2,
+          "width": 1,
+          "mask": "0x00000004",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one on the fully connected Stage 2G production path.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_CLEAR_LEVEL_STATUS",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_CLEAR_LEVEL_STATUS",
+          "conformance_family": "CF_CAPABILITIES_0_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "STAGE2G_POLICY",
+          "lsb": 3,
+          "msb": 3,
+          "width": 1,
+          "mask": "0x00000008",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one on the fully connected Stage 2G production path.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_STAGE2G_POLICY",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_STAGE2G_POLICY",
+          "conformance_family": "CF_CAPABILITIES_0_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "NORMALIZED_TELEMETRY_RESERVED_ZERO",
+          "lsb": 4,
+          "msb": 4,
+          "width": 1,
+          "mask": "0x00000010",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RSVD_ZERO_IGNORE",
+          "static_value": 0,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_NORMALIZED_TELEMETRY_RESERVED_ZERO",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_NORMALIZED_TELEMETRY_RESERVED_ZERO",
+          "conformance_family": "CF_RSVD_ZERO_IGNORE",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "STAGE2E_TRANSACTION_OBSERVABILITY",
+          "lsb": 5,
+          "msb": 5,
+          "width": 1,
+          "mask": "0x00000020",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one on the fully connected production path.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_STAGE2E_TRANSACTION_OBSERVABILITY",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_STAGE2E_TRANSACTION_OBSERVABILITY",
+          "conformance_family": "CF_CAPABILITIES_0_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "POLICY_EVALUATION_IDENTITY",
+          "lsb": 6,
+          "msb": 6,
+          "width": 1,
+          "mask": "0x00000040",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns one on the fully connected Stage 2G production path.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 1,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_POLICY_EVALUATION_IDENTITY",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_POLICY_EVALUATION_IDENTITY",
+          "conformance_family": "CF_CAPABILITIES_0_STATIC",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "RESERVED_ZERO",
+          "lsb": 7,
+          "msb": 31,
+          "width": 25,
+          "mask": "0xFFFFFF80",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RSVD_ZERO_IGNORE",
+          "static_value": 0,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_0_RESERVED_ZERO",
+          "capability_gate_ref": "FIELD_CAPABILITIES_0_RESERVED_ZERO",
+          "conformance_family": "CF_RSVD_ZERO_IGNORE",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CAPABILITIES_1",
+      "offset": "0x88",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "parameterized_static",
+      "reset": "0x20102006",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "FAULT_BITMAP_WIDTH",
+          "lsb": 0,
+          "msb": 7,
+          "width": 8,
+          "mask": "0x000000FF",
+          "access": "RO",
+          "reset": "0x00000006",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns six for ABI 1.1 production hardware.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 6,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_1_FAULT_BITMAP_WIDTH",
+          "capability_gate_ref": "FIELD_CAPABILITIES_1_FAULT_BITMAP_WIDTH",
+          "conformance_family": "CF_CAPABILITIES_1_METADATA",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "IMPLEMENTED_SEQUENCE_WIDTH",
+          "lsb": 8,
+          "msb": 15,
+          "width": 8,
+          "mask": "0x0000FF00",
+          "access": "RO",
+          "reset": "0x00000020",
+          "parameter_ref": "OBS_SEQUENCE_WIDTH",
+          "enum_ref": null,
+          "read_behavior": "Returns OBS_SEQUENCE_WIDTH, constrained to 16 through 32.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": {
+            "parameter_ref": "OBS_SEQUENCE_WIDTH"
+          },
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_1_IMPLEMENTED_SEQUENCE_WIDTH",
+          "capability_gate_ref": "FIELD_CAPABILITIES_1_IMPLEMENTED_SEQUENCE_WIDTH",
+          "conformance_family": "CF_CAPABILITIES_1_METADATA",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "MIN_SEQUENCE_WIDTH",
+          "lsb": 16,
+          "msb": 23,
+          "width": 8,
+          "mask": "0x00FF0000",
+          "access": "RO",
+          "reset": "0x00000010",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns 16.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 16,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_1_MIN_SEQUENCE_WIDTH",
+          "capability_gate_ref": "FIELD_CAPABILITIES_1_MIN_SEQUENCE_WIDTH",
+          "conformance_family": "CF_CAPABILITIES_1_METADATA",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        },
+        {
+          "name": "MAX_SEQUENCE_WIDTH",
+          "lsb": 24,
+          "msb": 31,
+          "width": 8,
+          "mask": "0xFF000000",
+          "access": "RO",
+          "reset": "0x00000020",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns 32.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATIC",
+          "static_value": 32,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_CAPABILITIES_1_MAX_SEQUENCE_WIDTH",
+          "capability_gate_ref": "FIELD_CAPABILITIES_1_MAX_SEQUENCE_WIDTH",
+          "conformance_family": "CF_CAPABILITIES_1_METADATA",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "POLICY_STATUS",
+      "offset": "0xA0",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000004",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "ARMED_READY",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Decodes ST_ARMED.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATE_DECODE",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "STATE_EQUALS",
+            "source_ref": "SRC_STAGE2G_STATE",
+            "transform": "BOOLEAN_COMPARE",
+            "state_ref": "ST_ARMED"
+          },
+          "rtl_binding_id": "RTL_POLICY_STATUS_ARMED_READY",
+          "capability_gate_ref": "FIELD_POLICY_STATUS_ARMED_READY",
+          "conformance_family": "CF_POLICY_STATUS_LEVEL",
+          "conformance_templates": [
+            "RO_STATE_DECODE",
+            "RO_LEVEL"
+          ]
+        },
+        {
+          "name": "FAULT_LATCHED_STATE",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Decodes ST_FAULT_LATCHED.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATE_DECODE",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "STATE_EQUALS",
+            "source_ref": "SRC_STAGE2G_STATE",
+            "transform": "BOOLEAN_COMPARE",
+            "state_ref": "ST_FAULT_LATCHED"
+          },
+          "rtl_binding_id": "RTL_POLICY_STATUS_FAULT_LATCHED_STATE",
+          "capability_gate_ref": "FIELD_POLICY_STATUS_FAULT_LATCHED_STATE",
+          "conformance_family": "CF_POLICY_STATUS_LEVEL",
+          "conformance_templates": [
+            "RO_STATE_DECODE",
+            "RO_LEVEL"
+          ]
+        },
+        {
+          "name": "RESET_WAIT_STATE",
+          "lsb": 2,
+          "msb": 2,
+          "width": 1,
+          "mask": "0x00000004",
+          "access": "RO",
+          "reset": "0x00000001",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Decodes ST_RESET_WAIT.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_STATE_DECODE",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "STATE_EQUALS",
+            "source_ref": "SRC_STAGE2G_STATE",
+            "transform": "BOOLEAN_COMPARE",
+            "state_ref": "ST_RESET_WAIT"
+          },
+          "rtl_binding_id": "RTL_POLICY_STATUS_RESET_WAIT_STATE",
+          "capability_gate_ref": "FIELD_POLICY_STATUS_RESET_WAIT_STATE",
+          "conformance_family": "CF_POLICY_STATUS_LEVEL",
+          "conformance_templates": [
+            "RO_STATE_DECODE",
+            "RO_LEVEL"
+          ]
+        },
+        {
+          "name": "CLEAR_PENDING",
+          "lsb": 3,
+          "msb": 3,
+          "width": 1,
+          "mask": "0x00000008",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns clear_pending.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_LEVEL",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "SIGNAL",
+            "source_ref": "SRC_CLEAR_PENDING",
+            "transform": "IDENTITY"
+          },
+          "rtl_binding_id": "RTL_POLICY_STATUS_CLEAR_PENDING",
+          "capability_gate_ref": "FIELD_POLICY_STATUS_CLEAR_PENDING",
+          "conformance_family": "CF_POLICY_STATUS_LEVEL",
+          "conformance_templates": [
+            "RO_STATE_DECODE",
+            "RO_LEVEL"
+          ]
+        },
+        {
+          "name": "POST_CLEAR_RECOVERY_PENDING",
+          "lsb": 4,
+          "msb": 4,
+          "width": 1,
+          "mask": "0x00000010",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns post_clear_recovery_pending.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_LEVEL",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "SIGNAL",
+            "source_ref": "SRC_POST_CLEAR_RECOVERY_PENDING",
+            "transform": "IDENTITY"
+          },
+          "rtl_binding_id": "RTL_POLICY_STATUS_POST_CLEAR_RECOVERY_PENDING",
+          "capability_gate_ref": "FIELD_POLICY_STATUS_POST_CLEAR_RECOVERY_PENDING",
+          "conformance_family": "CF_POLICY_STATUS_LEVEL",
+          "conformance_templates": [
+            "RO_STATE_DECODE",
+            "RO_LEVEL"
+          ]
+        },
+        {
+          "name": "RESERVED",
+          "lsb": 5,
+          "msb": 31,
+          "width": 27,
+          "mask": "0xFFFFFFE0",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RSVD_ZERO_IGNORE",
+          "static_value": 0,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_POLICY_STATUS_RESERVED",
+          "capability_gate_ref": "FIELD_POLICY_STATUS_RESERVED",
+          "conformance_family": "CF_RSVD_ZERO_IGNORE",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FIRST_FAULT_BITMAP",
+      "offset": "0xA4",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "CH1_OVERCURRENT",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 0.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FIRST_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 0,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_CH1_OVERCURRENT",
+          "capability_gate_ref": "FIELD_FIRST_FAULT_BITMAP_CH1_OVERCURRENT",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "CH2_OVERCURRENT",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 1.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FIRST_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 1,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_CH2_OVERCURRENT",
+          "capability_gate_ref": "FIELD_FIRST_FAULT_BITMAP_CH2_OVERCURRENT",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "lsb": 2,
+          "msb": 2,
+          "width": 1,
+          "mask": "0x00000004",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 2.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FIRST_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 2,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "capability_gate_ref": "FIELD_FIRST_FAULT_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_OPEN",
+          "lsb": 3,
+          "msb": 3,
+          "width": 1,
+          "mask": "0x00000008",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 3.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FIRST_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 3,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_OPEN",
+          "capability_gate_ref": "FIELD_FIRST_FAULT_BITMAP_SENSOR_OPEN",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_SATURATION",
+          "lsb": 4,
+          "msb": 4,
+          "width": 1,
+          "mask": "0x00000010",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 4.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FIRST_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 4,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_SATURATION",
+          "capability_gate_ref": "FIELD_FIRST_FAULT_BITMAP_SENSOR_SATURATION",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_STUCK",
+          "lsb": 5,
+          "msb": 5,
+          "width": 1,
+          "mask": "0x00000020",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 5.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FIRST_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 5,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_SENSOR_STUCK",
+          "capability_gate_ref": "FIELD_FIRST_FAULT_BITMAP_SENSOR_STUCK",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "RESERVED",
+          "lsb": 6,
+          "msb": 31,
+          "width": 26,
+          "mask": "0xFFFFFFC0",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RSVD_ZERO_IGNORE",
+          "static_value": 0,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_FIRST_FAULT_BITMAP_RESERVED",
+          "capability_gate_ref": "FIELD_FIRST_FAULT_BITMAP_RESERVED",
+          "conformance_family": "CF_RSVD_ZERO_IGNORE",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LIVE_FAULT_BITMAP",
+      "offset": "0xA8",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "CH1_OVERCURRENT",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 0.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_LIVE_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 0,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_CH1_OVERCURRENT",
+          "capability_gate_ref": "FIELD_LIVE_FAULT_BITMAP_CH1_OVERCURRENT",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "CH2_OVERCURRENT",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 1.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_LIVE_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 1,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_CH2_OVERCURRENT",
+          "capability_gate_ref": "FIELD_LIVE_FAULT_BITMAP_CH2_OVERCURRENT",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "lsb": 2,
+          "msb": 2,
+          "width": 1,
+          "mask": "0x00000004",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 2.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_LIVE_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 2,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "capability_gate_ref": "FIELD_LIVE_FAULT_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_OPEN",
+          "lsb": 3,
+          "msb": 3,
+          "width": 1,
+          "mask": "0x00000008",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 3.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_LIVE_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 3,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_OPEN",
+          "capability_gate_ref": "FIELD_LIVE_FAULT_BITMAP_SENSOR_OPEN",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_SATURATION",
+          "lsb": 4,
+          "msb": 4,
+          "width": 1,
+          "mask": "0x00000010",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 4.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_LIVE_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 4,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_SATURATION",
+          "capability_gate_ref": "FIELD_LIVE_FAULT_BITMAP_SENSOR_SATURATION",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_STUCK",
+          "lsb": 5,
+          "msb": 5,
+          "width": 1,
+          "mask": "0x00000020",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 5.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_LIVE_FAULT_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 5,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_SENSOR_STUCK",
+          "capability_gate_ref": "FIELD_LIVE_FAULT_BITMAP_SENSOR_STUCK",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "RESERVED",
+          "lsb": 6,
+          "msb": 31,
+          "width": 26,
+          "mask": "0xFFFFFFC0",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RSVD_ZERO_IGNORE",
+          "static_value": 0,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_LIVE_FAULT_BITMAP_RESERVED",
+          "capability_gate_ref": "FIELD_LIVE_FAULT_BITMAP_RESERVED",
+          "conformance_family": "CF_RSVD_ZERO_IGNORE",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FAULT_SEEN_BITMAP",
+      "offset": "0xAC",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "CH1_OVERCURRENT",
+          "lsb": 0,
+          "msb": 0,
+          "width": 1,
+          "mask": "0x00000001",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 0.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FAULT_SEEN_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 0,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_CH1_OVERCURRENT",
+          "capability_gate_ref": "FIELD_FAULT_SEEN_BITMAP_CH1_OVERCURRENT",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "CH2_OVERCURRENT",
+          "lsb": 1,
+          "msb": 1,
+          "width": 1,
+          "mask": "0x00000002",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 1.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FAULT_SEEN_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 1,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_CH2_OVERCURRENT",
+          "capability_gate_ref": "FIELD_FAULT_SEEN_BITMAP_CH2_OVERCURRENT",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "lsb": 2,
+          "msb": 2,
+          "width": 1,
+          "mask": "0x00000004",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 2.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FAULT_SEEN_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 2,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "capability_gate_ref": "FIELD_FAULT_SEEN_BITMAP_SENSOR_MISMATCH_OR_DIFFERENTIAL",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_OPEN",
+          "lsb": 3,
+          "msb": 3,
+          "width": 1,
+          "mask": "0x00000008",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 3.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FAULT_SEEN_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 3,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_OPEN",
+          "capability_gate_ref": "FIELD_FAULT_SEEN_BITMAP_SENSOR_OPEN",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_SATURATION",
+          "lsb": 4,
+          "msb": 4,
+          "width": 1,
+          "mask": "0x00000010",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 4.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FAULT_SEEN_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 4,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_SATURATION",
+          "capability_gate_ref": "FIELD_FAULT_SEEN_BITMAP_SENSOR_SATURATION",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "SENSOR_STUCK",
+          "lsb": 5,
+          "msb": 5,
+          "width": 1,
+          "mask": "0x00000020",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Returns source bit 5.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_BITMAP",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "BITMAP_BIT",
+            "source_ref": "SRC_FAULT_SEEN_BITMAP",
+            "transform": "MASK_AND_SELECT",
+            "source_bit": 5,
+            "mask": "0x0000003F"
+          },
+          "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_SENSOR_STUCK",
+          "capability_gate_ref": "FIELD_FAULT_SEEN_BITMAP_SENSOR_STUCK",
+          "conformance_family": "CF_EPISODE_BITMAP",
+          "conformance_templates": [
+            "RO_BITMAP"
+          ]
+        },
+        {
+          "name": "RESERVED",
+          "lsb": 6,
+          "msb": 31,
+          "width": 26,
+          "mask": "0xFFFFFFC0",
+          "access": "RSVD",
+          "reset": "0x00000000",
+          "parameter_ref": null,
+          "enum_ref": null,
+          "read_behavior": "Reads zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RSVD_ZERO_IGNORE",
+          "static_value": 0,
+          "dynamic_source": null,
+          "rtl_binding_id": "RTL_FAULT_SEEN_BITMAP_RESERVED",
+          "capability_gate_ref": "FIELD_FAULT_SEEN_BITMAP_RESERVED",
+          "conformance_family": "CF_RSVD_ZERO_IGNORE",
+          "conformance_templates": [
+            "RO_STATIC"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "POLICY_EVALUATION_SEQUENCE",
+      "offset": "0xB0",
+      "width": 32,
+      "access": "RO",
+      "value_kind": "dynamic",
+      "reset": "0x00000000",
+      "write_strobe": "NOT_APPLICABLE",
+      "fields": [
+        {
+          "name": "SEQUENCE",
+          "lsb": 0,
+          "msb": 31,
+          "width": 32,
+          "mask": "0xFFFFFFFF",
+          "access": "RO",
+          "reset": "0x00000000",
+          "parameter_ref": "OBS_SEQUENCE_WIDTH",
+          "enum_ref": null,
+          "read_behavior": "Returns registered event-capture storage and holds its last value while fault_eval_valid is zero.",
+          "write_behavior": "Ignored.",
+          "behavior_id": "RO_EVENT_CAPTURE",
+          "static_value": null,
+          "dynamic_source": {
+            "kind": "EVENT_CAPTURE",
+            "source_ref": "SRC_FAULT_EVAL_SEQUENCE",
+            "transform": "ZERO_EXTEND",
+            "valid_source_ref": "SRC_FAULT_EVAL_VALID"
+          },
+          "rtl_binding_id": "RTL_POLICY_EVALUATION_DIAGNOSTIC_IDENTITY",
+          "capability_gate_ref": "FIELD_POLICY_EVALUATION_SEQUENCE_SEQUENCE",
+          "conformance_family": "CF_DIAGNOSTIC_LAST_RETIREMENT_IDENTITY",
+          "conformance_templates": [
+            "RO_EVENT_CAPTURE"
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "UNKNOWN_READ_ZERO_OKAY",
+      "address": "0x64",
+      "expected_data": "0x00000000",
+      "expected_response": "OKAY"
+    },
+    {
+      "id": "UNKNOWN_WRITE_NO_EFFECT_OKAY",
+      "addresses": [
+        "0x64..0x7C",
+        "0x8C..0x9C"
+      ],
+      "expected_effect": "NONE",
+      "expected_response": "OKAY"
+    },
+    {
+      "id": "LOW_EIGHT_BIT_ADDRESS_ALIAS",
+      "decode_bits": "7:0",
+      "expected_outer_alias": true
+    },
+    {
+      "id": "LEGACY_WRITES_IGNORE_WSTRB_AFTER_ACCEPTANCE",
+      "registers": [
+        "CTRL",
+        "TH_OC1",
+        "TH_OC2",
+        "TH_DIFF",
+        "PWM_PERIOD",
+        "PWM_DUTY"
+      ],
+      "accepted_write_requires_any_wstrb": true
+    },
+    {
+      "id": "OBS_STATUS_W1C_BYTE_QUALIFIED_EVENT_WINS",
+      "w1c_mask": "0x000001FF",
+      "event_priority": "NEW_CAUSE_WINS"
+    },
+    {
+      "id": "CURRENT_MONITOR_SOFTWARE_READS_NONATOMIC",
+      "hardware_delivery_atomic": true,
+      "software_pair_atomic": false
+    }
+  ],
+  "legacy_parity": {
+    "register_count": 25,
+    "field_count": 54,
+    "fault_code_count": 7,
+    "offset_changes": 0,
+    "width_changes": 0,
+    "field_encoding_changes": 0,
+    "access_semantic_changes": 0,
+    "reset_semantic_changes": 0,
+    "fault_code_changes": 0,
+    "fault_alias_changes": 0
+  },
+  "map_counts": {
+    "total_register_count": 33,
+    "legacy_register_count": 25,
+    "abi_1_1_added_register_count": 8,
+    "total_field_count": 97,
+    "legacy_field_count": 54,
+    "abi_1_1_added_field_count": 43
+  }
+}

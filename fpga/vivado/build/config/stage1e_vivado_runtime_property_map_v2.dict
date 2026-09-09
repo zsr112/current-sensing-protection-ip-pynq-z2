@@ -1,0 +1,157 @@
+# Stage 1E Vivado 2024.1 Project Mode property contract v2.
+#
+# This is an evidence-derived projection of actual run properties. Phase
+# completion is corroborated by a generated checkpoint and by the runner-owned
+# append-only phase journal; no caller-supplied string is treated as a native
+# Vivado event or operation ledger.
+
+schema_version stage1e-vivado-runtime-property-map-v2
+contract_state EXECUTION_MAINLINE_CORRECTED
+captured_evidence {
+    execution_id S1E-RUN2-HC-20260723T101957Z
+    tool Vivado
+    version 2024.1
+    build 5076996
+    inventory_path identity/impl_1_live_property_inventory_before_launch.txt
+    inventory_sha256 0b7a3a771bc284d73e01ecef94d0b49add9a4ba3e21285f13fce60e245f6f426
+    post_opt_path identity/implementation_post_opt_probe.txt
+    post_opt_sha256 61f452e6f39facc104fe9e788826859eb5e12518519bd775df9ff5142cba7ec6
+    post_place_path identity/implementation_post_place_probe.txt
+    post_place_sha256 1063be5a358ded462e907a228e80f4474dd95055aafbe076dea3e0e130f6d092
+    terminal_path identity/implementation_graph_terminal.txt
+    terminal_sha256 78ca79615c7efd5b42572e841523fb2ed58dbdeef89aa13481cf94cfc4f85489
+}
+
+real_property_projection {
+    NAME
+    PARENT
+    PART
+    NEEDS_REFRESH
+    INCREMENTAL_CHECKPOINT
+    AUTO_INCREMENTAL_CHECKPOINT
+    STATUS
+    PROGRESS
+    CURRENT_STEP
+    STEPS.OPT_DESIGN.IS_ENABLED
+    STEPS.OPT_DESIGN.ARGS.DIRECTIVE
+    {STEPS.OPT_DESIGN.ARGS.MORE OPTIONS}
+    STEPS.OPT_DESIGN.ARGS.VERBOSE
+    STEPS.OPT_DESIGN.REPORTS
+    STEPS.OPT_DESIGN.TCL.PRE
+    STEPS.OPT_DESIGN.TCL.POST
+    STEPS.PLACE_DESIGN.ARGS.DIRECTIVE
+    {STEPS.PLACE_DESIGN.ARGS.MORE OPTIONS}
+    STEPS.PLACE_DESIGN.REPORTS
+    STEPS.PLACE_DESIGN.TCL.PRE
+    STEPS.PLACE_DESIGN.TCL.POST
+    STEPS.PHYS_OPT_DESIGN.IS_ENABLED
+    STEPS.PHYS_OPT_DESIGN.ARGS.DIRECTIVE
+    {STEPS.PHYS_OPT_DESIGN.ARGS.MORE OPTIONS}
+    STEPS.PHYS_OPT_DESIGN.REPORTS
+    STEPS.PHYS_OPT_DESIGN.TCL.PRE
+    STEPS.PHYS_OPT_DESIGN.TCL.POST
+    STEPS.POST_ROUTE_PHYS_OPT_DESIGN.IS_ENABLED
+    STEPS.POST_ROUTE_PHYS_OPT_DESIGN.ARGS.DIRECTIVE
+    STEPS.POWER_OPT_DESIGN.IS_ENABLED
+    STEPS.POST_PLACE_POWER_OPT_DESIGN.IS_ENABLED
+    STEPS.ROUTE_DESIGN.ARGS.DIRECTIVE
+    {STEPS.ROUTE_DESIGN.ARGS.MORE OPTIONS}
+    STEPS.ROUTE_DESIGN.REPORTS
+    STEPS.ROUTE_DESIGN.TCL.PRE
+    STEPS.ROUTE_DESIGN.TCL.POST
+}
+
+synthetic_properties_prohibited {
+    STEPS.OPT_DESIGN.STATUS
+    STEPS.PLACE_DESIGN.STATUS
+    STEPS.PHYS_OPT_DESIGN.STATUS
+    STEPS.ROUTE_DESIGN.STATUS
+    STEPS.PLACE_DESIGN.IS_ENABLED
+    STEPS.ROUTE_DESIGN.IS_ENABLED
+    STEPS.OPT_DESIGN.ARGS.SEED
+}
+
+normalization {
+    status {
+        {synth_design Complete!} SYNTH_DESIGN_COMPLETE
+        {Not started} NOT_STARTED
+        {Not started place_design} NOT_STARTED_PLACE_DESIGN
+        {Not started route_design} NOT_STARTED_ROUTE_DESIGN
+        {route_design Complete!} ROUTE_DESIGN_COMPLETE
+        {route_design Complete, Failed Timing!} ROUTE_DESIGN_FAILED_TIMING
+    }
+    progress {
+        0% 0
+        50% 50
+        75% 75
+        100% 100
+    }
+    current_step {
+        {} NONE
+        place_design PLACE_DESIGN
+        route_design ROUTE_DESIGN
+    }
+}
+
+phase_completion_contract {
+    opt_design {
+        ordinal 1
+        expected_run_status NOT_STARTED_PLACE_DESIGN
+        expected_progress 50
+        expected_current_step PLACE_DESIGN
+        required_checkpoint protection_system_wrapper_opt.dcp
+    }
+    place_design {
+        ordinal 2
+        expected_run_status NOT_STARTED_ROUTE_DESIGN
+        expected_progress 75
+        expected_current_step ROUTE_DESIGN
+        required_checkpoint protection_system_wrapper_placed.dcp
+    }
+    route_design {
+        ordinal 3
+        expected_run_status ROUTE_DESIGN_COMPLETE
+        expected_progress 100
+        expected_current_step ROUTE_DESIGN
+        required_checkpoint protection_system_wrapper_routed.dcp
+    }
+}
+
+requested_implementation_graph {
+    enabled_operations {opt_design place_design route_design}
+    launch_targets {opt_design place_design route_design}
+    prohibited_operations {
+        phys_opt_design
+        power_opt_design
+        post_place_power_opt_design
+        post_route_phys_opt_design
+        incremental_implementation
+        checkpoint_import
+        fallback_execution
+        open_hw_manager
+        connect_hw_server
+        program_hw_devices
+    }
+    incremental_implementation AUTO_INCREMENTAL_CHECKPOINT_ZERO_AND_INCREMENTAL_CHECKPOINT_EMPTY
+}
+
+required_snapshot_fields {
+    phase
+    run_identity
+    run_status
+    progress
+    current_step
+    checkpoint
+    checkpoint_state
+    checkpoint_identity
+    forbidden_operations
+}
+
+runner_phase_journal_contract {
+    event_order {ATTEMPT COMPLETED FAILED}
+    required_columns {
+        ordinal utc_timestamp event phase execution_id run_identity
+        STATUS PROGRESS CURRENT_STEP output_identity detail
+    }
+    ownership RUNNER_APPEND_ONLY
+}

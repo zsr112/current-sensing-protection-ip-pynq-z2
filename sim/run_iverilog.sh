@@ -5,8 +5,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 RTL_DIR="$REPO_ROOT/rtl"
 TB_DIR="$REPO_ROOT/tb"
-BUILD_DIR="$SCRIPT_DIR/build"
-WAVE_DIR="$SCRIPT_DIR/waves"
+BUILD_ROOT="${CSIP_SIM_BUILD_ROOT:-$SCRIPT_DIR}"
+BUILD_DIR="$BUILD_ROOT/build"
+WAVE_DIR="$BUILD_ROOT/waves"
 
 mkdir -p "$BUILD_DIR" "$WAVE_DIR"
 
@@ -87,7 +88,7 @@ for tb in "${SELECTED[@]}"; do
 
   echo "[RUN] $tb"
   if iverilog -g2012 -I "$RTL_DIR" -I "$TB_DIR/generated" -o "$vvp_file" "${COMMON_RTL[@]}" "$TB_DIR/$tb.sv" >"$log_file" 2>&1; then
-    if (cd "$REPO_ROOT" && vvp "$vvp_file" >>"$log_file" 2>&1); then
+    if (cd "$REPO_ROOT" && vvp "$vvp_file" +CSIP_WAVE_DIR="$WAVE_DIR" >>"$log_file" 2>&1); then
       if grep -Eq "(ALL TESTS PASSED| PASS)" "$log_file"; then
         echo "[PASS] $tb"
         pass_count=$((pass_count + 1))

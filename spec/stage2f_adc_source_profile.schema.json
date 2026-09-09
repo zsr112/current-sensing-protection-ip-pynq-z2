@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://current-sensing-protection-ip.invalid/spec/stage2f_adc_source_profile.schema.json",
+  "title": "Stage 2F ADC source profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_state",
+    "raw_width",
+    "encoding",
+    "zero_code",
+    "channel_polarity",
+    "profile_identity",
+    "physical_unit_status",
+    "production_selection"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "stage2f-adc-source-profile-v1"
+    },
+    "profile_state": {
+      "enum": [
+        "UNCONFIGURED",
+        "CONFIGURED_DIGITAL"
+      ]
+    },
+    "raw_width": {
+      "const": 12
+    },
+    "encoding": {
+      "enum": [
+        "UNKNOWN",
+        "UNSIGNED_WITH_ZERO_CODE",
+        "TWOS_COMPLEMENT"
+      ]
+    },
+    "zero_code": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4095
+        }
+      ]
+    },
+    "channel_polarity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel_1",
+        "channel_2"
+      ],
+      "properties": {
+        "channel_1": {
+          "enum": [
+            "UNKNOWN",
+            "INCREASING_CODE_IS_POSITIVE",
+            "INCREASING_CODE_IS_NEGATIVE"
+          ]
+        },
+        "channel_2": {
+          "enum": [
+            "UNKNOWN",
+            "INCREASING_CODE_IS_POSITIVE",
+            "INCREASING_CODE_IS_NEGATIVE"
+          ]
+        }
+      }
+    },
+    "profile_identity": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Z0-9_]+$"
+    },
+    "physical_unit_status": {
+      "enum": [
+        "UNKNOWN",
+        "NOT_CONFIGURED"
+      ]
+    },
+    "production_selection": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "profile_state": {
+            "const": "UNCONFIGURED"
+          }
+        },
+        "required": [
+          "profile_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "encoding": {
+            "const": "UNKNOWN"
+          },
+          "zero_code": {
+            "type": "null"
+          },
+          "channel_polarity": {
+            "properties": {
+              "channel_1": {
+                "const": "UNKNOWN"
+              },
+              "channel_2": {
+                "const": "UNKNOWN"
+              }
+            }
+          },
+          "profile_identity": {
+            "const": "UNCONFIGURED"
+          },
+          "physical_unit_status": {
+            "const": "UNKNOWN"
+          },
+          "production_selection": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "encoding": {
+            "const": "TWOS_COMPLEMENT"
+          }
+        },
+        "required": [
+          "encoding"
+        ]
+      },
+      "then": {
+        "properties": {
+          "zero_code": {
+            "const": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "encoding": {
+            "const": "UNSIGNED_WITH_ZERO_CODE"
+          }
+        },
+        "required": [
+          "encoding"
+        ]
+      },
+      "then": {
+        "properties": {
+          "zero_code": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4095
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "profile_state": {
+            "const": "CONFIGURED_DIGITAL"
+          }
+        },
+        "required": [
+          "profile_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "encoding": {
+            "enum": [
+              "UNSIGNED_WITH_ZERO_CODE",
+              "TWOS_COMPLEMENT"
+            ]
+          },
+          "channel_polarity": {
+            "properties": {
+              "channel_1": {
+                "enum": [
+                  "INCREASING_CODE_IS_POSITIVE",
+                  "INCREASING_CODE_IS_NEGATIVE"
+                ]
+              },
+              "channel_2": {
+                "enum": [
+                  "INCREASING_CODE_IS_POSITIVE",
+                  "INCREASING_CODE_IS_NEGATIVE"
+                ]
+              }
+            }
+          },
+          "physical_unit_status": {
+            "const": "NOT_CONFIGURED"
+          },
+          "profile_identity": {
+            "not": {
+              "const": "UNCONFIGURED"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "production_selection": {
+            "const": true
+          }
+        },
+        "required": [
+          "production_selection"
+        ]
+      },
+      "then": {
+        "properties": {
+          "profile_state": {
+            "const": "CONFIGURED_DIGITAL"
+          },
+          "profile_identity": {
+            "not": {
+              "const": "UNCONFIGURED"
+            }
+          },
+          "encoding": {
+            "enum": [
+              "UNSIGNED_WITH_ZERO_CODE",
+              "TWOS_COMPLEMENT"
+            ]
+          },
+          "channel_polarity": {
+            "properties": {
+              "channel_1": {
+                "enum": [
+                  "INCREASING_CODE_IS_POSITIVE",
+                  "INCREASING_CODE_IS_NEGATIVE"
+                ]
+              },
+              "channel_2": {
+                "enum": [
+                  "INCREASING_CODE_IS_POSITIVE",
+                  "INCREASING_CODE_IS_NEGATIVE"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

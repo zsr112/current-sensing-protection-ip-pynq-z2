@@ -1,11 +1,3 @@
-# Local build and runtime outputs
-sim/build/
-sim/waves/
-vivado_work/
-ip_repo/
 __pycache__/
-*.py[cod]
-.pytest_cache/
+*.pyc
 .Xil/
-vivado*.jou
-vivado*.log

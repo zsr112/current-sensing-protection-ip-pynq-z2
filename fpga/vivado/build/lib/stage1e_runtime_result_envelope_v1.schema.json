@@ -1,0 +1,239 @@
+{
+  "$schema": "stage1e-schema-subset-v1",
+  "$id": "stage1e-production-runtime-result-envelope-v1",
+  "title": "Stage 1E production runtime result envelope v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "result_identity",
+    "result_state",
+    "request_identity",
+    "execution_id",
+    "attempt_id",
+    "runtime_backend_identity",
+    "terminal_status",
+    "first_failure",
+    "authorization_observation",
+    "assembly_result",
+    "host_result",
+    "vivado_capability_result",
+    "operation_ledger",
+    "report_ledger",
+    "parser_result",
+    "evidence_set",
+    "forbidden_boundary_result",
+    "evidence_completeness",
+    "acceptance_boundary",
+    "authority_boundary"
+  ],
+  "additionalProperties": false,
+  "x-stage1e-canonical-order": [
+    "schema_version",
+    "result_identity",
+    "result_state",
+    "request_identity",
+    "execution_id",
+    "attempt_id",
+    "runtime_backend_identity",
+    "terminal_status",
+    "first_failure",
+    "authorization_observation",
+    "assembly_result",
+    "host_result",
+    "vivado_capability_result",
+    "operation_ledger",
+    "report_ledger",
+    "parser_result",
+    "evidence_set",
+    "forbidden_boundary_result",
+    "evidence_completeness",
+    "acceptance_boundary",
+    "authority_boundary"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "stage1e-production-runtime-result-envelope-v1"},
+    "result_identity": {"type": "string", "x-stage1e-format": "sha256"},
+    "result_state": {"type": "string", "const": "SEALED"},
+    "request_identity": {"type": "string", "x-stage1e-format": "sha256"},
+    "execution_id": {"type": "string", "minLength": 1, "maxLength": 256, "x-stage1e-format": "token"},
+    "attempt_id": {"type": "string", "minLength": 1, "maxLength": 256, "x-stage1e-format": "token"},
+    "runtime_backend_identity": {"type": "string", "x-stage1e-format": "sha256"},
+    "terminal_status": {"type": "string", "enum": ["COMPLETED", "FAILED", "BLOCKED"]},
+    "first_failure": {"$ref": "#/$defs/failure_or_none"},
+    "authorization_observation": {"$ref": "#/$defs/authorization_observation"},
+    "assembly_result": {"$ref": "#/$defs/assembly_result"},
+    "host_result": {"$ref": "#/$defs/component_reference"},
+    "vivado_capability_result": {"$ref": "#/$defs/component_reference"},
+    "operation_ledger": {"type": "array", "items": {"$ref": "#/$defs/operation_observation"}, "maxItems": 128},
+    "report_ledger": {"type": "array", "items": {"$ref": "#/$defs/report_observation"}, "maxItems": 256},
+    "parser_result": {"$ref": "#/$defs/component_reference"},
+    "evidence_set": {"type": "array", "items": {"$ref": "#/$defs/evidence_reference"}, "maxItems": 256},
+    "forbidden_boundary_result": {"$ref": "#/$defs/forbidden_boundary_result"},
+    "evidence_completeness": {"type": "string", "enum": ["COMPLETE", "PARTIAL", "UNAVAILABLE"]},
+    "acceptance_boundary": {"$ref": "#/$defs/acceptance_boundary"},
+    "authority_boundary": {"$ref": "#/$defs/authority_boundary"}
+  },
+  "$defs": {
+    "sha256_or_none": {
+      "oneOf": [
+        {"type": "string", "const": "NONE"},
+        {"type": "string", "x-stage1e-format": "sha256"}
+      ]
+    },
+    "path_or_none": {
+      "oneOf": [
+        {"type": "string", "const": "NONE"},
+        {"type": "string", "x-stage1e-format": "canonical-absolute-path"}
+      ]
+    },
+    "token": {"type": "string", "minLength": 1, "maxLength": 256, "x-stage1e-format": "token"},
+    "failure_or_none": {
+      "oneOf": [
+        {"type": "string", "const": "NONE"},
+        {"$ref": "stage1e-runtime-failure-record-v1#/$defs/failure_record"}
+      ]
+    },
+    "authorization_observation": {
+      "type": "object",
+      "required": ["authorization_effect", "consumption_record_state", "consumption_record_path", "consumption_record_identity"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["authorization_effect", "consumption_record_state", "consumption_record_path", "consumption_record_identity"],
+      "properties": {
+        "authorization_effect": {"type": "string", "enum": ["NOT_TOUCHED", "CONSUMED_ONCE", "CONSUMPTION_FAILED", "STATE_UNKNOWN"]},
+        "consumption_record_state": {"type": "string", "enum": ["MISSING", "PRESENT", "NOT_REQUIRED"]},
+        "consumption_record_path": {"$ref": "#/$defs/path_or_none"},
+        "consumption_record_identity": {"$ref": "#/$defs/sha256_or_none"}
+      }
+    },
+    "load_record": {
+      "type": "object",
+      "required": ["component", "path", "interface_version", "load_state", "reason"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["component", "path", "interface_version", "load_state", "reason"],
+      "properties": {
+        "component": {"$ref": "#/$defs/token"},
+        "path": {"$ref": "#/$defs/path_or_none"},
+        "interface_version": {"$ref": "#/$defs/token"},
+        "load_state": {"type": "string", "enum": ["ATTEMPTED", "LOADED", "MISSING", "REJECTED"]},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 2048, "x-stage1e-format": "message"}
+      }
+    },
+    "assembly_result": {
+      "type": "object",
+      "required": ["schema_version", "status", "dependency_closure_state", "declared_component_set", "load_ledger", "missing_component", "secondary_failures"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["schema_version", "status", "dependency_closure_state", "declared_component_set", "load_ledger", "missing_component", "secondary_failures"],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-production-runtime-assembly-result-v1"},
+        "status": {"type": "string", "enum": ["COMPLETED", "FAILED", "BLOCKED"]},
+        "dependency_closure_state": {"type": "string", "enum": ["PARTIAL_FOUNDATION", "CLOSED"]},
+        "declared_component_set": {"type": "array", "items": {"$ref": "#/$defs/token"}, "minItems": 1, "uniqueItems": true, "maxItems": 128},
+        "load_ledger": {"type": "array", "items": {"$ref": "#/$defs/load_record"}, "maxItems": 256},
+        "missing_component": {"$ref": "#/$defs/token_or_none"},
+        "secondary_failures": {"type": "array", "items": {"$ref": "stage1e-runtime-failure-record-v1#/$defs/failure_record"}, "maxItems": 128}
+      }
+    },
+    "token_or_none": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "x-stage1e-format": "token"
+    },
+    "component_reference": {
+      "type": "object",
+      "required": ["schema_version", "status", "path", "component_identity", "producer", "execution_id", "workspace_identity", "missing_reason"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["schema_version", "status", "path", "component_identity", "producer", "execution_id", "workspace_identity", "missing_reason"],
+      "properties": {
+        "schema_version": {"$ref": "#/$defs/token"},
+        "status": {"type": "string", "enum": ["PRESENT", "MISSING", "NOT_REQUIRED"]},
+        "path": {"$ref": "#/$defs/path_or_none"},
+        "component_identity": {"$ref": "#/$defs/sha256_or_none"},
+        "producer": {"$ref": "#/$defs/token"},
+        "execution_id": {"$ref": "#/$defs/token"},
+        "workspace_identity": {"$ref": "#/$defs/sha256_or_none"},
+        "missing_reason": {"$ref": "#/$defs/token_or_none"}
+      }
+    },
+    "operation_observation": {
+      "type": "object",
+      "required": ["operation", "sequence", "status", "evidence_path", "message"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["operation", "sequence", "status", "evidence_path", "message"],
+      "properties": {
+        "operation": {"$ref": "#/$defs/token"},
+        "sequence": {"type": "integer", "minimum": 0, "maximum": 128},
+        "status": {"type": "string", "enum": ["NOT_STARTED", "COMPLETED", "FAILED", "BLOCKED"]},
+        "evidence_path": {"$ref": "#/$defs/path_or_none"},
+        "message": {"$ref": "#/$defs/token_or_none"}
+      }
+    },
+    "report_observation": {
+      "type": "object",
+      "required": ["role", "attempt", "status", "path", "message"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["role", "attempt", "status", "path", "message"],
+      "properties": {
+        "role": {"$ref": "#/$defs/token"},
+        "attempt": {"type": "integer", "minimum": 1, "maximum": 128},
+        "status": {"type": "string", "enum": ["NOT_STARTED", "COMPLETED", "FAILED", "MISSING", "BLOCKED"]},
+        "path": {"$ref": "#/$defs/path_or_none"},
+        "message": {"$ref": "#/$defs/token_or_none"}
+      }
+    },
+    "evidence_reference": {
+      "type": "object",
+      "required": ["role", "status", "path", "identity"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["role", "status", "path", "identity"],
+      "properties": {
+        "role": {"$ref": "#/$defs/token"},
+        "status": {"type": "string", "enum": ["PRESENT", "MISSING", "NOT_REQUIRED"]},
+        "path": {"$ref": "#/$defs/path_or_none"},
+        "identity": {"$ref": "#/$defs/sha256_or_none"}
+      }
+    },
+    "forbidden_boundary_result": {
+      "type": "object",
+      "required": ["status", "operation_authority", "output_authority", "artifact_authority", "hardware_manager_authority", "board_authority"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["status", "operation_authority", "output_authority", "artifact_authority", "hardware_manager_authority", "board_authority"],
+      "properties": {
+        "status": {"type": "string", "enum": ["CLEAR", "BLOCKED", "NOT_EVALUATED"]},
+        "operation_authority": {"type": "string", "const": "NONE"},
+        "output_authority": {"type": "string", "const": "NONE"},
+        "artifact_authority": {"type": "string", "const": "NONE"},
+        "hardware_manager_authority": {"type": "string", "const": "NONE"},
+        "board_authority": {"type": "string", "const": "NONE"}
+      }
+    },
+    "acceptance_boundary": {
+      "type": "object",
+      "required": ["acceptance_owner", "acceptance_decision", "implementation_result_identity", "warning_drc_methodology_timing_authority"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["acceptance_owner", "acceptance_decision", "implementation_result_identity", "warning_drc_methodology_timing_authority"],
+      "properties": {
+        "acceptance_owner": {"type": "string", "const": "CONTROLLER_POLICY_REVIEW"},
+        "acceptance_decision": {"type": "string", "const": "NOT_EVALUATED_BY_RUNTIME"},
+        "implementation_result_identity": {"type": "string", "const": "NOT_CREATED_BY_RUNTIME"},
+        "warning_drc_methodology_timing_authority": {"type": "string", "const": "NONE"}
+      }
+    },
+    "authority_boundary": {
+      "type": "object",
+      "required": ["qualification_decision", "authorization_issue", "engineering_acceptance", "bitstream_xsa_generation", "artifact_collection", "publication", "hardware_manager", "board_access"],
+      "additionalProperties": false,
+      "x-stage1e-canonical-order": ["qualification_decision", "authorization_issue", "engineering_acceptance", "bitstream_xsa_generation", "artifact_collection", "publication", "hardware_manager", "board_access"],
+      "properties": {
+        "qualification_decision": {"type": "string", "const": "NONE"},
+        "authorization_issue": {"type": "string", "const": "NONE"},
+        "engineering_acceptance": {"type": "string", "const": "CONTROLLER_POLICY_REVIEW_ONLY"},
+        "bitstream_xsa_generation": {"type": "string", "const": "NONE"},
+        "artifact_collection": {"type": "string", "const": "NONE"},
+        "publication": {"type": "string", "const": "NONE"},
+        "hardware_manager": {"type": "string", "const": "NONE"},
+        "board_access": {"type": "string", "const": "NONE"}
+      }
+    }
+  }
+}

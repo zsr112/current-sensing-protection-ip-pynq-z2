@@ -1,0 +1,1573 @@
+{
+  "$id": "stage1e-runtime-backend-identity-v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "identity_sha256",
+    "backend_id",
+    "backend_version",
+    "capability_state",
+    "review_state",
+    "source_identity",
+    "canonicalization_contract_identity",
+    "direct_runtime_manifest",
+    "subordinate_contracts",
+    "dependency_closure",
+    "interface_compatibility",
+    "allowed_operations",
+    "forbidden_operations",
+    "review_binding",
+    "qualification_requirement",
+    "authority_boundary"
+  ],
+  "x-stage1e-canonical-order": [
+    "schema_version",
+    "identity_sha256",
+    "backend_id",
+    "backend_version",
+    "capability_state",
+    "review_state",
+    "source_identity",
+    "canonicalization_contract_identity",
+    "direct_runtime_manifest",
+    "subordinate_contracts",
+    "dependency_closure",
+    "interface_compatibility",
+    "allowed_operations",
+    "forbidden_operations",
+    "review_binding",
+    "qualification_requirement",
+    "authority_boundary"
+  ],
+  "definitions": {
+    "sha256": {
+      "type": "string",
+      "x-stage1e-format": "sha256"
+    },
+    "token": {
+      "type": "string",
+      "minLength": 1,
+      "x-stage1e-format": "token"
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "x-stage1e-format": "message"
+    },
+    "q5_evidence_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "identity_sha256",
+        "execution_id",
+        "workspace_identity",
+        "source_identity",
+        "freshness_state"
+      ],
+      "x-stage1e-canonical-order": [
+        "role",
+        "identity_sha256",
+        "execution_id",
+        "workspace_identity",
+        "source_identity",
+        "freshness_state"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "Q2_VIVADO_CAPABILITY",
+            "Q3_WORKSPACE",
+            "HOST_LIVE_CLOSURE",
+            "VIVADO_LIVE_CLOSURE",
+            "POSTPROCESS_LIVE_CLOSURE",
+            "Q4_FRESH_SYNTHESIS",
+            "SOURCE_MANIFEST",
+            "CONSTRAINT_MANIFEST",
+            "REPORT",
+            "PARSER",
+            "NATIVE_INVOCATION_LEDGER",
+            "WARNING_POLICY_RESULT",
+            "OPERATION_GRAPH",
+            "NO_REPOSITORY_MUTATION"
+          ]
+        },
+        "identity_sha256": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        },
+        "execution_id": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"
+        },
+        "workspace_identity": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        },
+        "source_identity": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        },
+        "freshness_state": {
+          "type": "string",
+          "enum": [
+            "CURRENT_EXECUTION",
+            "STALE_OR_HISTORICAL"
+          ]
+        }
+      }
+    },
+    "atomic_q5_file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ordinal",
+        "leaf_name",
+        "byte_count",
+        "file_sha256"
+      ],
+      "x-stage1e-canonical-order": [
+        "ordinal",
+        "leaf_name",
+        "byte_count",
+        "file_sha256"
+      ],
+      "properties": {
+        "ordinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "leaf_name": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"
+        },
+        "byte_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "file_sha256": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        }
+      }
+    },
+    "human_qualification_authority_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "identity_sha256",
+        "authority_id",
+        "authorized_transition",
+        "approved_commit",
+        "approved_tree",
+        "source_identity",
+        "validation_evidence_identity",
+        "qualification_execution_id",
+        "workspace_identity",
+        "source_freeze_review_authority",
+        "q0_q5_qualification_authority",
+        "run2_authority",
+        "board_authority",
+        "authority_use_state",
+        "reuse_state",
+        "named_authority",
+        "authority_role"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version",
+        "identity_sha256",
+        "authority_id",
+        "authorized_transition",
+        "approved_commit",
+        "approved_tree",
+        "source_identity",
+        "validation_evidence_identity",
+        "qualification_execution_id",
+        "workspace_identity",
+        "source_freeze_review_authority",
+        "q0_q5_qualification_authority",
+        "run2_authority",
+        "board_authority",
+        "authority_use_state",
+        "reuse_state",
+        "named_authority",
+        "authority_role"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "const": "stage1e-human-qualification-authority-record-v1"
+        },
+        "identity_sha256": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        },
+        "authority_id": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"
+        },
+        "authorized_transition": {
+          "type": "string",
+          "enum": [
+            "ISSUE_SOURCE_FREEZE_REVIEW",
+            "ISSUE_RUNTIME_REVIEW_AND_QUALIFICATION"
+          ]
+        },
+        "approved_commit": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"
+        },
+        "approved_tree": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"
+        },
+        "source_identity": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        },
+        "validation_evidence_identity": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        },
+        "qualification_execution_id": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"
+        },
+        "workspace_identity": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"
+        },
+        "source_freeze_review_authority": {
+          "type": "string",
+          "enum": [
+            "SOURCE_FREEZE_REVIEW_AUTHORIZED",
+            "SOURCE_FREEZE_REVIEW_NOT_AUTHORIZED"
+          ]
+        },
+        "q0_q5_qualification_authority": {
+          "type": "string",
+          "enum": [
+            "Q0_Q5_QUALIFICATION_AUTHORIZED",
+            "Q0_Q5_QUALIFICATION_NOT_AUTHORIZED"
+          ]
+        },
+        "run2_authority": {
+          "type": "string",
+          "const": "RUN2_NOT_AUTHORIZED"
+        },
+        "board_authority": {
+          "type": "string",
+          "const": "BOARD_NOT_AUTHORIZED"
+        },
+        "authority_use_state": {
+          "type": "string",
+          "const": "SINGLE_TRANSITION_SINGLE_EXECUTION"
+        },
+        "reuse_state": {
+          "type": "string",
+          "const": "UNUSED"
+        },
+        "named_authority": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/message"
+        },
+        "authority_role": {
+          "$ref": "stage1e-runtime-backend-identity-v2#/definitions/message"
+        }
+      }
+    },
+    "source_freeze_review_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "identity_sha256",
+        "q1_state",
+        "source_freeze_review",
+        "approved_commit",
+        "approved_tree",
+        "qualification_execution_id",
+        "workspace_identity",
+        "source_candidate_identity",
+        "validation_evidence_identity",
+        "runtime_backend_candidate_identity",
+        "warning_policy_candidate_identity",
+        "implementation_policy_candidate_identity",
+        "implementation_configuration_candidate_identity",
+        "human_decision_record_sha256",
+        "human_authority_identity",
+        "preview_review_identity",
+        "prt04_base_report_sha256",
+        "finalizer_correction_report_sha256",
+        "prt05_authority_closure_report_sha256",
+        "source_inventory_count",
+        "protected_source_checked_count",
+        "protected_source_mismatch_count",
+        "review_decision",
+        "runtime_review",
+        "current_reviewed_effect",
+        "qualification",
+        "authorization",
+        "run2",
+        "source_freeze_authority",
+        "q0_q5_qualification_authority",
+        "run2_authority",
+        "board_authority"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version",
+        "identity_sha256",
+        "q1_state",
+        "source_freeze_review",
+        "approved_commit",
+        "approved_tree",
+        "qualification_execution_id",
+        "workspace_identity",
+        "source_candidate_identity",
+        "validation_evidence_identity",
+        "runtime_backend_candidate_identity",
+        "warning_policy_candidate_identity",
+        "implementation_policy_candidate_identity",
+        "implementation_configuration_candidate_identity",
+        "human_decision_record_sha256",
+        "human_authority_identity",
+        "preview_review_identity",
+        "prt04_base_report_sha256",
+        "finalizer_correction_report_sha256",
+        "prt05_authority_closure_report_sha256",
+        "source_inventory_count",
+        "protected_source_checked_count",
+        "protected_source_mismatch_count",
+        "review_decision",
+        "runtime_review",
+        "current_reviewed_effect",
+        "qualification",
+        "authorization",
+        "run2",
+        "source_freeze_authority",
+        "q0_q5_qualification_authority",
+        "run2_authority",
+        "board_authority"
+      ],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-source-freeze-review-record-v1"},
+        "identity_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "q1_state": {"type": "string", "const": "PASS"},
+        "source_freeze_review": {"type": "string", "const": "SOURCE_FREEZE_REVIEWED"},
+        "approved_commit": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "approved_tree": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "qualification_execution_id": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "workspace_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_candidate_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "validation_evidence_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_backend_candidate_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "warning_policy_candidate_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "implementation_policy_candidate_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "implementation_configuration_candidate_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "human_decision_record_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "human_authority_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "preview_review_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "prt04_base_report_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "finalizer_correction_report_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "prt05_authority_closure_report_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_inventory_count": {"type": "integer", "const": 19},
+        "protected_source_checked_count": {"type": "integer", "const": 106},
+        "protected_source_mismatch_count": {"type": "integer", "const": 0},
+        "review_decision": {"type": "string", "const": "APPROVED"},
+        "runtime_review": {"type": "string", "const": "REVIEW_REQUIRED"},
+        "current_reviewed_effect": {"type": "string", "const": "NOT_ISSUED"},
+        "qualification": {"type": "string", "const": "NOT_AVAILABLE"},
+        "authorization": {"type": "string", "const": "NONE"},
+        "run2": {"type": "string", "const": "NOT_STARTED"},
+        "source_freeze_authority": {"type": "string", "const": "CONSUMED_FOR_Q1_ONLY"},
+        "q0_q5_qualification_authority": {"type": "string", "const": "NOT_CONSUMED"},
+        "run2_authority": {"type": "string", "const": "NONE"},
+        "board_authority": {"type": "string", "const": "NONE"}
+      }
+    },
+    "q0_q5_live_closure_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "identity_sha256",
+        "approved_commit",
+        "approved_tree",
+        "source_identity",
+        "validation_evidence_identity",
+        "source_freeze_review_identity",
+        "qualification_execution_id",
+        "workspace_identity",
+        "q2_capability_state",
+        "q3_workspace_state",
+        "q4_fresh_synthesis_state",
+        "evidence_bindings",
+        "host_full_transitive_live_closure_state",
+        "vivado_pre_dispatch_ledger_state",
+        "postprocess_pre_dispatch_ledger_state",
+        "final_tool_bound_pre_dispatch_closure_state",
+        "historical_substitution_state",
+        "hidden_provider_state",
+        "unclassified_warning_count",
+        "phys_opt_policy_state",
+        "phys_opt_configuration_state",
+        "phys_opt_authorization_state",
+        "phys_opt_prohibited_state",
+        "phys_opt_runtime_readback",
+        "phys_opt_planned_graph_presence",
+        "phys_opt_native_invocation_count",
+        "implementation_command_invocation_count",
+        "no_repository_mutation_state",
+        "run2_authorization_input",
+        "qualification_authority_identity",
+        "prt05_authority_closure_report_sha256"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version",
+        "identity_sha256",
+        "approved_commit",
+        "approved_tree",
+        "source_identity",
+        "validation_evidence_identity",
+        "source_freeze_review_identity",
+        "qualification_execution_id",
+        "workspace_identity",
+        "q2_capability_state",
+        "q3_workspace_state",
+        "q4_fresh_synthesis_state",
+        "evidence_bindings",
+        "host_full_transitive_live_closure_state",
+        "vivado_pre_dispatch_ledger_state",
+        "postprocess_pre_dispatch_ledger_state",
+        "final_tool_bound_pre_dispatch_closure_state",
+        "historical_substitution_state",
+        "hidden_provider_state",
+        "unclassified_warning_count",
+        "phys_opt_policy_state",
+        "phys_opt_configuration_state",
+        "phys_opt_authorization_state",
+        "phys_opt_prohibited_state",
+        "phys_opt_runtime_readback",
+        "phys_opt_planned_graph_presence",
+        "phys_opt_native_invocation_count",
+        "implementation_command_invocation_count",
+        "no_repository_mutation_state",
+        "run2_authorization_input",
+        "qualification_authority_identity",
+        "prt05_authority_closure_report_sha256"
+      ],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-q0-q5-live-closure-evidence-v1"},
+        "identity_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "approved_commit": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "approved_tree": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "source_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "validation_evidence_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_freeze_review_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "qualification_execution_id": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "workspace_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "q2_capability_state": {"type": "string", "enum": ["PASS", "NOT_AVAILABLE"]},
+        "q3_workspace_state": {"type": "string", "enum": ["PASS", "NOT_AVAILABLE"]},
+        "q4_fresh_synthesis_state": {"type": "string", "enum": ["PASS", "NOT_AVAILABLE"]},
+        "evidence_bindings": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 14,
+          "uniqueItems": true,
+          "items": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/q5_evidence_binding"}
+        },
+        "host_full_transitive_live_closure_state": {"type": "string", "enum": ["HOST_FULL_TRANSITIVE_LIVE_CLOSURE_PROVEN", "HOST_FULL_TRANSITIVE_LIVE_CLOSURE_NOT_PROVEN"]},
+        "vivado_pre_dispatch_ledger_state": {"type": "string", "enum": ["VIVADO_PRE_DISPATCH_LEDGER_COMPLETE", "VIVADO_PRE_DISPATCH_LEDGER_NOT_AVAILABLE"]},
+        "postprocess_pre_dispatch_ledger_state": {"type": "string", "enum": ["POSTPROCESS_PRE_DISPATCH_LEDGER_COMPLETE", "POSTPROCESS_PRE_DISPATCH_LEDGER_NOT_AVAILABLE"]},
+        "final_tool_bound_pre_dispatch_closure_state": {"type": "string", "enum": ["FINAL_TOOL_BOUND_PRE_DISPATCH_CLOSURE_PROVEN", "FINAL_TOOL_BOUND_PRE_DISPATCH_CLOSURE_NOT_PROVEN"]},
+        "historical_substitution_state": {"type": "string", "enum": ["NONE", "HISTORICAL_DCP_OR_REPORT"]},
+        "hidden_provider_state": {"type": "string", "enum": ["NONE", "DETECTED"]},
+        "unclassified_warning_count": {"type": "integer", "minimum": 0},
+        "phys_opt_policy_state": {"type": "string", "enum": ["DISABLED", "ENABLED", "UNKNOWN"]},
+        "phys_opt_configuration_state": {"type": "string", "enum": ["DISABLED", "ENABLED", "UNKNOWN"]},
+        "phys_opt_authorization_state": {"type": "string", "enum": ["UNAUTHORIZED", "AUTHORIZED", "UNKNOWN"]},
+        "phys_opt_prohibited_state": {"type": "string", "enum": ["TRUE", "FALSE", "UNKNOWN"]},
+        "phys_opt_runtime_readback": {"type": "string", "enum": ["DISABLED", "ENABLED", "UNKNOWN"]},
+        "phys_opt_planned_graph_presence": {"type": "string", "enum": ["ABSENT", "PRESENT", "UNKNOWN"]},
+        "phys_opt_native_invocation_count": {"type": "integer", "minimum": 0},
+        "implementation_command_invocation_count": {"type": "integer", "minimum": 0},
+        "no_repository_mutation_state": {"type": "string", "enum": ["PROVEN", "MUTATED"]},
+        "run2_authorization_input": {"type": "string", "enum": ["NONE", "SUPPLIED"]},
+        "qualification_authority_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "prt05_authority_closure_report_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"}
+      }
+    },
+    "runtime_review_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "identity_sha256", "q5_state", "runtime_review",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "validation_evidence_identity",
+        "source_freeze_review_identity", "runtime_backend_candidate_identity",
+        "live_closure_evidence_identity", "qualification_authority_identity",
+        "named_review_authority", "review_decision",
+        "host_full_transitive_live_closure_state", "vivado_pre_dispatch_ledger_state",
+        "postprocess_pre_dispatch_ledger_state", "final_tool_bound_pre_dispatch_closure_state",
+        "phys_opt_policy_state", "phys_opt_configuration_state",
+        "phys_opt_authorization_state", "phys_opt_prohibited_state",
+        "phys_opt_runtime_readback", "phys_opt_planned_graph_presence",
+        "phys_opt_native_invocation_count", "no_repository_mutation_state",
+        "prt05_authority_closure_report_sha256", "authorization", "run2",
+        "implementation"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version", "identity_sha256", "q5_state", "runtime_review",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "validation_evidence_identity",
+        "source_freeze_review_identity", "runtime_backend_candidate_identity",
+        "live_closure_evidence_identity", "qualification_authority_identity",
+        "named_review_authority", "review_decision",
+        "host_full_transitive_live_closure_state", "vivado_pre_dispatch_ledger_state",
+        "postprocess_pre_dispatch_ledger_state", "final_tool_bound_pre_dispatch_closure_state",
+        "phys_opt_policy_state", "phys_opt_configuration_state",
+        "phys_opt_authorization_state", "phys_opt_prohibited_state",
+        "phys_opt_runtime_readback", "phys_opt_planned_graph_presence",
+        "phys_opt_native_invocation_count", "no_repository_mutation_state",
+        "prt05_authority_closure_report_sha256", "authorization", "run2",
+        "implementation"
+      ],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-runtime-review-record-v1"},
+        "identity_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "q5_state": {"type": "string", "const": "PASS"},
+        "runtime_review": {"type": "string", "const": "CURRENT_REVIEWED"},
+        "approved_commit": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "approved_tree": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "qualification_execution_id": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "workspace_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "validation_evidence_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_freeze_review_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_backend_candidate_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "live_closure_evidence_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "qualification_authority_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "named_review_authority": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/message"},
+        "review_decision": {"type": "string", "const": "APPROVED"},
+        "host_full_transitive_live_closure_state": {"type": "string", "const": "HOST_FULL_TRANSITIVE_LIVE_CLOSURE_PROVEN"},
+        "vivado_pre_dispatch_ledger_state": {"type": "string", "const": "VIVADO_PRE_DISPATCH_LEDGER_COMPLETE"},
+        "postprocess_pre_dispatch_ledger_state": {"type": "string", "const": "POSTPROCESS_PRE_DISPATCH_LEDGER_COMPLETE"},
+        "final_tool_bound_pre_dispatch_closure_state": {"type": "string", "const": "FINAL_TOOL_BOUND_PRE_DISPATCH_CLOSURE_PROVEN"},
+        "phys_opt_policy_state": {"type": "string", "const": "DISABLED"},
+        "phys_opt_configuration_state": {"type": "string", "const": "DISABLED"},
+        "phys_opt_authorization_state": {"type": "string", "const": "UNAUTHORIZED"},
+        "phys_opt_prohibited_state": {"type": "string", "const": "TRUE"},
+        "phys_opt_runtime_readback": {"type": "string", "const": "DISABLED"},
+        "phys_opt_planned_graph_presence": {"type": "string", "const": "ABSENT"},
+        "phys_opt_native_invocation_count": {"type": "integer", "const": 0},
+        "no_repository_mutation_state": {"type": "string", "const": "PROVEN"},
+        "prt05_authority_closure_report_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "authorization": {"type": "string", "const": "NONE"},
+        "run2": {"type": "string", "const": "NOT_STARTED"},
+        "implementation": {"type": "string", "const": "NOT_EXECUTED"}
+      }
+    },
+    "qualification_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "identity_sha256", "current_qualification_state",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "source_freeze_review_identity",
+        "runtime_review_identity", "runtime_backend_identity",
+        "live_closure_evidence_identity", "qualification_authority_identity",
+        "prt05_authority_closure_report_sha256", "qualification_decision",
+        "authorization", "run2"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version", "identity_sha256", "current_qualification_state",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "source_freeze_review_identity",
+        "runtime_review_identity", "runtime_backend_identity",
+        "live_closure_evidence_identity", "qualification_authority_identity",
+        "prt05_authority_closure_report_sha256", "qualification_decision",
+        "authorization", "run2"
+      ],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-qualification-identity-v1"},
+        "identity_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "current_qualification_state": {"type": "string", "const": "QUALIFIED_AVAILABLE"},
+        "approved_commit": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "approved_tree": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "qualification_execution_id": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "workspace_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_freeze_review_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_review_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_backend_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "live_closure_evidence_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "qualification_authority_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "prt05_authority_closure_report_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "qualification_decision": {"type": "string", "const": "PASS"},
+        "authorization": {"type": "string", "const": "NONE"},
+        "run2": {"type": "string", "const": "NOT_STARTED"}
+      }
+    },
+    "qualification_terminal_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "identity_sha256", "terminal_state",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "runtime_review_identity",
+        "runtime_backend_identity", "qualification_identity", "authorization",
+        "run2", "implementation", "artifact", "publication", "board"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version", "identity_sha256", "terminal_state",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "runtime_review_identity",
+        "runtime_backend_identity", "qualification_identity", "authorization",
+        "run2", "implementation", "artifact", "publication", "board"
+      ],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-qualification-terminal-record-v1"},
+        "identity_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "terminal_state": {"type": "string", "const": "QUALIFIED_NOT_AUTHORIZED"},
+        "approved_commit": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "approved_tree": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "qualification_execution_id": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "workspace_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_review_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_backend_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "qualification_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "authorization": {"type": "string", "const": "NONE"},
+        "run2": {"type": "string", "const": "NOT_STARTED"},
+        "implementation": {"type": "string", "const": "NOT_EXECUTED"},
+        "artifact": {"type": "string", "const": "NONE"},
+        "publication": {"type": "string", "const": "NONE"},
+        "board": {"type": "string", "const": "NONE"}
+      }
+    },
+    "atomic_q5_result_envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "identity_sha256", "q5_state", "terminal_state",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "runtime_review_identity",
+        "runtime_backend_identity", "qualification_identity",
+        "qualification_terminal_identity", "publication_state", "authorization",
+        "run2", "implementation", "artifact", "publication", "board", "files"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version", "identity_sha256", "q5_state", "terminal_state",
+        "approved_commit", "approved_tree", "qualification_execution_id",
+        "workspace_identity", "source_identity", "runtime_review_identity",
+        "runtime_backend_identity", "qualification_identity",
+        "qualification_terminal_identity", "publication_state", "authorization",
+        "run2", "implementation", "artifact", "publication", "board", "files"
+      ],
+      "properties": {
+        "schema_version": {"type": "string", "const": "stage1e-atomic-q5-result-envelope-v1"},
+        "identity_sha256": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "q5_state": {"type": "string", "const": "PASS"},
+        "terminal_state": {"type": "string", "const": "QUALIFIED_NOT_AUTHORIZED"},
+        "approved_commit": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "approved_tree": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "qualification_execution_id": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/token"},
+        "workspace_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "source_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_review_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "runtime_backend_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "qualification_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "qualification_terminal_identity": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/sha256"},
+        "publication_state": {"type": "string", "const": "ATOMIC_SET_SEALED"},
+        "authorization": {"type": "string", "const": "NONE"},
+        "run2": {"type": "string", "const": "NOT_STARTED"},
+        "implementation": {"type": "string", "const": "NOT_EXECUTED"},
+        "artifact": {"type": "string", "const": "NONE"},
+        "publication": {"type": "string", "const": "NONE"},
+        "board": {"type": "string", "const": "NONE"},
+        "files": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"$ref": "stage1e-runtime-backend-identity-v2#/definitions/atomic_q5_file"}
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "stage1e-runtime-backend-identity-v2"
+    },
+    "identity_sha256": {
+      "type": "string",
+      "x-stage1e-format": "sha256"
+    },
+    "backend_id": {
+      "type": "string",
+      "minLength": 1,
+      "x-stage1e-format": "token"
+    },
+    "backend_version": {
+      "type": "string",
+      "minLength": 1,
+      "x-stage1e-format": "token"
+    },
+    "capability_state": {
+      "type": "string",
+      "enum": [
+        "MOCK_ONLY",
+        "PRODUCTION_IMPLEMENTED"
+      ]
+    },
+    "review_state": {
+      "type": "string",
+      "enum": [
+        "REVIEW_REQUIRED",
+        "CURRENT_REVIEWED"
+      ]
+    },
+    "source_identity": {
+      "type": "string",
+      "x-stage1e-format": "sha256"
+    },
+    "canonicalization_contract_identity": {
+      "type": "string",
+      "x-stage1e-format": "sha256"
+    },
+    "direct_runtime_manifest": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ordinal",
+          "role",
+          "repository_relative_path",
+          "language",
+          "interface_version",
+          "size_bytes",
+          "file_sha256"
+        ],
+        "x-stage1e-canonical-order": [
+          "ordinal",
+          "role",
+          "repository_relative_path",
+          "language",
+          "interface_version",
+          "size_bytes",
+          "file_sha256"
+        ],
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ENTRY_POINT",
+              "LAUNCHER",
+              "RUNNER",
+              "COLLECTOR",
+              "PARSER",
+              "IDENTITY_SERIALIZER",
+              "HOST_OBSERVER",
+              "VIVADO_CAPABILITY_OBSERVER"
+            ]
+          },
+          "repository_relative_path": {
+            "type": "string",
+            "minLength": 1,
+            "x-stage1e-format": "canonical-reference"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "POWERSHELL",
+              "TCL"
+            ]
+          },
+          "interface_version": {
+            "type": "string",
+            "minLength": 1,
+            "x-stage1e-format": "token"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "file_sha256": {
+            "type": "string",
+            "x-stage1e-format": "sha256"
+          }
+        }
+      }
+    },
+    "subordinate_contracts": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ordinal",
+          "contract_role",
+          "contract_identity",
+          "interface_version",
+          "source_identity",
+          "owner",
+          "source_manifest",
+          "compatibility_state"
+        ],
+        "x-stage1e-canonical-order": [
+          "ordinal",
+          "contract_role",
+          "contract_identity",
+          "interface_version",
+          "source_identity",
+          "owner",
+          "source_manifest",
+          "compatibility_state"
+        ],
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "contract_role": {
+            "type": "string",
+            "enum": [
+              "RUNTIME_SCHEMA",
+              "HASH_PROVIDER",
+              "CONTROLLER",
+              "ADAPTER",
+              "FRAMEWORK",
+              "REQUEST",
+              "RESULT",
+              "REPORT",
+              "MESSAGE",
+              "HOST"
+            ]
+          },
+          "contract_identity": {
+            "type": "string",
+            "x-stage1e-format": "sha256"
+          },
+          "interface_version": {
+            "type": "string",
+            "minLength": 1,
+            "x-stage1e-format": "token"
+          },
+          "source_identity": {
+            "type": "string",
+            "x-stage1e-format": "sha256"
+          },
+          "owner": {
+            "type": "string",
+            "enum": [
+              "RUNTIME_SCHEMA",
+              "HASH_PROVIDER",
+              "CONTROLLER",
+              "ADAPTER",
+              "FRAMEWORK",
+              "REQUEST",
+              "RESULT",
+              "REPORT",
+              "MESSAGE",
+              "HOST"
+            ]
+          },
+          "source_manifest": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "ordinal",
+                "child_bindings",
+                "repository_relative_path",
+                "language",
+                "interface_version",
+                "size_bytes",
+                "file_sha256"
+              ],
+              "x-stage1e-canonical-order": [
+                "ordinal",
+                "child_bindings",
+                "repository_relative_path",
+                "language",
+                "interface_version",
+                "size_bytes",
+                "file_sha256"
+              ],
+              "properties": {
+                "ordinal": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "child_bindings": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-stage1e-format": "token"
+                  }
+                },
+                "repository_relative_path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-stage1e-format": "canonical-reference"
+                },
+                "language": {
+                  "type": "string",
+                  "enum": [
+                    "POWERSHELL",
+                    "TCL",
+                    "JSON",
+                    "TCL_DICT",
+                    "CSHARP"
+                  ]
+                },
+                "interface_version": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-stage1e-format": "token"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "file_sha256": {
+                  "type": "string",
+                  "x-stage1e-format": "sha256"
+                }
+              }
+            }
+          },
+          "compatibility_state": {
+            "type": "string",
+            "const": "COMPATIBLE"
+          }
+        }
+      }
+    },
+    "dependency_closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "root_roles",
+        "declared_source_count",
+        "repository_dependency_closure_state",
+        "prt02_e_binding",
+        "prt03_binding",
+        "host_full_transitive_live_closure_state",
+        "vivado_pre_dispatch_ledger_state",
+        "postprocess_pre_dispatch_ledger_state",
+        "final_tool_bound_pre_dispatch_closure_state",
+        "hidden_primary_source_state",
+        "historical_source_check_state",
+        "unknown_dependency_action"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version",
+        "root_roles",
+        "declared_source_count",
+        "repository_dependency_closure_state",
+        "prt02_e_binding",
+        "prt03_binding",
+        "host_full_transitive_live_closure_state",
+        "vivado_pre_dispatch_ledger_state",
+        "postprocess_pre_dispatch_ledger_state",
+        "final_tool_bound_pre_dispatch_closure_state",
+        "hidden_primary_source_state",
+        "historical_source_check_state",
+        "unknown_dependency_action"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "const": "stage1e-runtime-backend-dependency-closure-v2"
+        },
+        "root_roles": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "ENTRY_POINT",
+              "LAUNCHER",
+              "RUNNER",
+              "COLLECTOR",
+              "PARSER",
+              "IDENTITY_SERIALIZER",
+              "HOST_OBSERVER",
+              "VIVADO_CAPABILITY_OBSERVER"
+            ]
+          }
+        },
+        "declared_source_count": {
+          "type": "integer",
+          "minimum": 18
+        },
+        "repository_dependency_closure_state": {
+          "type": "string",
+          "const": "SOURCE_CANDIDATE_CLOSURE_COMPLETE"
+        },
+        "prt02_e_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "closure_state",
+            "declared_graph_path",
+            "provider_contract_path",
+            "source_identity"
+          ],
+          "x-stage1e-canonical-order": [
+            "schema_version",
+            "closure_state",
+            "declared_graph_path",
+            "provider_contract_path",
+            "source_identity"
+          ],
+          "properties": {
+            "schema_version": {
+              "type": "string",
+              "const": "stage1e-runtime-dependency-closure-interface-v1"
+            },
+            "closure_state": {
+              "type": "string",
+              "const": "DISCONNECTED_CANDIDATE_CLOSURE_VALIDATED"
+            },
+            "declared_graph_path": {
+              "type": "string",
+              "const": "fpga/vivado/build/config/stage1e_runtime_declared_graph_v1.dict"
+            },
+            "provider_contract_path": {
+              "type": "string",
+              "const": "fpga/vivado/build/config/stage1e_runtime_provider_contract_v1.dict"
+            },
+            "source_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            }
+          }
+        },
+        "prt03_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schema_version",
+            "readiness_state",
+            "direct_connected_state",
+            "activation_graph_path",
+            "selected_entry_point_path",
+            "source_identity"
+          ],
+          "x-stage1e-canonical-order": [
+            "schema_version",
+            "readiness_state",
+            "direct_connected_state",
+            "activation_graph_path",
+            "selected_entry_point_path",
+            "source_identity"
+          ],
+          "properties": {
+            "schema_version": {
+              "type": "string",
+              "const": "stage1e-prt03-activation-graph-v1"
+            },
+            "readiness_state": {
+              "type": "string",
+              "const": "CONNECTED_RUNTIME_ASSEMBLY_READINESS_FOUNDATION"
+            },
+            "direct_connected_state": {
+              "type": "string",
+              "const": "PRT03_DIRECT_CONNECTED_ASSEMBLY_VALIDATED"
+            },
+            "activation_graph_path": {
+              "type": "string",
+              "const": "fpga/vivado/build/config/stage1e_runtime_activation_graph_v1.dict"
+            },
+            "selected_entry_point_path": {
+              "type": "string",
+              "const": "fpga/vivado/build/runtime/entrypoint/v2/stage1e_production_runtime_entrypoint_v2.ps1"
+            },
+            "source_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            }
+          }
+        },
+        "host_full_transitive_live_closure_state": {
+          "type": "string",
+          "enum": [
+            "HOST_FULL_TRANSITIVE_LIVE_CLOSURE_NOT_PROVEN",
+            "HOST_FULL_TRANSITIVE_LIVE_CLOSURE_PROVEN"
+          ]
+        },
+        "vivado_pre_dispatch_ledger_state": {
+          "type": "string",
+          "enum": [
+            "VIVADO_PRE_DISPATCH_LEDGER_NOT_AVAILABLE",
+            "VIVADO_PRE_DISPATCH_LEDGER_COMPLETE"
+          ]
+        },
+        "postprocess_pre_dispatch_ledger_state": {
+          "type": "string",
+          "enum": [
+            "POSTPROCESS_PRE_DISPATCH_LEDGER_NOT_AVAILABLE",
+            "POSTPROCESS_PRE_DISPATCH_LEDGER_COMPLETE"
+          ]
+        },
+        "final_tool_bound_pre_dispatch_closure_state": {
+          "type": "string",
+          "enum": [
+            "FINAL_TOOL_BOUND_PRE_DISPATCH_CLOSURE_NOT_PROVEN",
+            "FINAL_TOOL_BOUND_PRE_DISPATCH_CLOSURE_PROVEN"
+          ]
+        },
+        "hidden_primary_source_state": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "historical_source_check_state": {
+          "type": "string",
+          "const": "HISTORICAL_NON_PRODUCTION_NOT_REACHABLE"
+        },
+        "unknown_dependency_action": {
+          "type": "string",
+          "const": "BLOCK"
+        }
+      }
+    },
+    "interface_compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "entry_point_interface_version",
+        "entry_point_implementation_version",
+        "launcher_interface_version",
+        "runner_interface_version",
+        "collector_interface_version",
+        "parser_interface_version",
+        "identity_serializer_interface_version",
+        "host_observer_interface_version",
+        "vivado_capability_observer_interface_version",
+        "runtime_schema_interface_version",
+        "controller_interface_version",
+        "adapter_interface_version",
+        "request_schema_version",
+        "result_schema_version",
+        "report_contract_version",
+        "message_contract_version",
+        "host_contract_version",
+        "dependency_closure_interface_version",
+        "activation_graph_interface_version",
+        "compatibility_state"
+      ],
+      "x-stage1e-canonical-order": [
+        "schema_version",
+        "entry_point_interface_version",
+        "entry_point_implementation_version",
+        "launcher_interface_version",
+        "runner_interface_version",
+        "collector_interface_version",
+        "parser_interface_version",
+        "identity_serializer_interface_version",
+        "host_observer_interface_version",
+        "vivado_capability_observer_interface_version",
+        "runtime_schema_interface_version",
+        "controller_interface_version",
+        "adapter_interface_version",
+        "request_schema_version",
+        "result_schema_version",
+        "report_contract_version",
+        "message_contract_version",
+        "host_contract_version",
+        "dependency_closure_interface_version",
+        "activation_graph_interface_version",
+        "compatibility_state"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "const": "stage1e-runtime-interface-compatibility-v2"
+        },
+        "entry_point_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-runtime-entry-point-contract-v1"
+        },
+        "entry_point_implementation_version": {
+          "type": "string",
+          "const": "stage1e-production-runtime-entrypoint-implementation-v2"
+        },
+        "launcher_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-runtime-launcher-interface-v1"
+        },
+        "runner_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-vivado-runner-interface-v1"
+        },
+        "collector_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-vivado-collector-interface-v1"
+        },
+        "parser_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-evidence-parser-interface-v1"
+        },
+        "identity_serializer_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-evidence-serializer-interface-v1"
+        },
+        "host_observer_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-host-observer-interface-v1"
+        },
+        "vivado_capability_observer_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-vivado-observer-interface-v1"
+        },
+        "runtime_schema_interface_version": {
+          "type": "string",
+          "const": "stage1e-runtime-backend-identity-schema-interface-v2"
+        },
+        "controller_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-runtime-assembly-controller-interface-v1"
+        },
+        "adapter_interface_version": {
+          "type": "string",
+          "const": "stage1e-production-runtime-assembly-adapter-interface-v1"
+        },
+        "request_schema_version": {
+          "type": "string",
+          "const": "stage1e-production-runtime-request-envelope-v1"
+        },
+        "result_schema_version": {
+          "type": "string",
+          "const": "stage1e-production-runtime-result-envelope-v1"
+        },
+        "report_contract_version": {
+          "type": "string",
+          "const": "stage1e-production-report-contract-v1"
+        },
+        "message_contract_version": {
+          "type": "string",
+          "const": "stage1e-production-message-contract-v1"
+        },
+        "host_contract_version": {
+          "type": "string",
+          "const": "stage1e-host-boundary-contract-interface-v1"
+        },
+        "dependency_closure_interface_version": {
+          "type": "string",
+          "const": "stage1e-runtime-dependency-closure-interface-v1"
+        },
+        "activation_graph_interface_version": {
+          "type": "string",
+          "const": "stage1e-prt03-activation-graph-interface-v1"
+        },
+        "compatibility_state": {
+          "type": "string",
+          "const": "EXACT_MATCH"
+        }
+      }
+    },
+    "allowed_operations": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "opt_design",
+          "place_design",
+          "route_design",
+          "implementation_reports"
+        ]
+      }
+    },
+    "forbidden_operations": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "phys_opt_design",
+          "power_opt_design",
+          "write_bitstream",
+          "write_hw_platform",
+          "write_xsa",
+          "export_hardware",
+          "artifact_collection",
+          "artifact_publication",
+          "open_hw_manager",
+          "connect_hw_server",
+          "program_hw_devices",
+          "board_access"
+        ]
+      }
+    },
+    "review_binding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scope",
+            "decision_state",
+            "validation_evidence_identity",
+            "dependency_closure_decision",
+            "direct_manifest_decision",
+            "subordinate_contract_decision",
+            "review_authority_state",
+            "review_record_state"
+          ],
+          "x-stage1e-canonical-order": [
+            "scope",
+            "decision_state",
+            "validation_evidence_identity",
+            "dependency_closure_decision",
+            "direct_manifest_decision",
+            "subordinate_contract_decision",
+            "review_authority_state",
+            "review_record_state"
+          ],
+          "properties": {
+            "scope": {
+              "type": "string",
+              "const": "PRODUCTION_RUNTIME"
+            },
+            "decision_state": {
+              "type": "string",
+              "const": "REVIEW_REQUIRED"
+            },
+            "validation_evidence_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            },
+            "dependency_closure_decision": {
+              "type": "string",
+              "const": "REVIEW_REQUIRED"
+            },
+            "direct_manifest_decision": {
+              "type": "string",
+              "const": "REVIEW_REQUIRED"
+            },
+            "subordinate_contract_decision": {
+              "type": "string",
+              "const": "REVIEW_REQUIRED"
+            },
+            "review_authority_state": {
+              "type": "string",
+              "const": "NOT_SUPPLIED"
+            },
+            "review_record_state": {
+              "type": "string",
+              "const": "NOT_CREATED"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "scope",
+            "decision_state",
+            "validation_evidence_identity",
+            "dependency_closure_decision",
+            "direct_manifest_decision",
+            "subordinate_contract_decision",
+            "named_review_authority",
+            "review_record_identity",
+            "source_freeze_review_identity",
+            "live_closure_evidence_identity",
+            "qualification_authority_identity"
+          ],
+          "x-stage1e-canonical-order": [
+            "scope",
+            "decision_state",
+            "validation_evidence_identity",
+            "dependency_closure_decision",
+            "direct_manifest_decision",
+            "subordinate_contract_decision",
+            "named_review_authority",
+            "review_record_identity",
+            "source_freeze_review_identity",
+            "live_closure_evidence_identity",
+            "qualification_authority_identity"
+          ],
+          "properties": {
+            "scope": {
+              "type": "string",
+              "const": "PRODUCTION_RUNTIME"
+            },
+            "decision_state": {
+              "type": "string",
+              "const": "APPROVED"
+            },
+            "validation_evidence_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            },
+            "dependency_closure_decision": {
+              "type": "string",
+              "const": "PASS"
+            },
+            "direct_manifest_decision": {
+              "type": "string",
+              "const": "PASS"
+            },
+            "subordinate_contract_decision": {
+              "type": "string",
+              "const": "PASS"
+            },
+            "named_review_authority": {
+              "type": "string",
+              "minLength": 1,
+              "x-stage1e-format": "message"
+            },
+            "review_record_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            },
+            "source_freeze_review_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            },
+            "live_closure_evidence_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            },
+            "qualification_authority_identity": {
+              "type": "string",
+              "x-stage1e-format": "sha256"
+            }
+          }
+        }
+      ]
+    },
+    "qualification_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "availability_owner",
+        "required_availability_value",
+        "current_qualification_state",
+        "backend_identity_binding_required",
+        "environment_observation_required",
+        "workspace_observation_required",
+        "implementation_authorization_separately_required"
+      ],
+      "x-stage1e-canonical-order": [
+        "availability_owner",
+        "required_availability_value",
+        "current_qualification_state",
+        "backend_identity_binding_required",
+        "environment_observation_required",
+        "workspace_observation_required",
+        "implementation_authorization_separately_required"
+      ],
+      "properties": {
+        "availability_owner": {
+          "type": "string",
+          "const": "QUALIFICATION_IDENTITY"
+        },
+        "required_availability_value": {
+          "type": "string",
+          "const": "QUALIFIED_AVAILABLE"
+        },
+        "current_qualification_state": {
+          "type": "string",
+          "enum": [
+            "NOT_AVAILABLE",
+            "QUALIFIED_AVAILABLE"
+          ]
+        },
+        "backend_identity_binding_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "environment_observation_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "workspace_observation_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "implementation_authorization_separately_required": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qualification_decision",
+        "authorization_issue",
+        "authorization_consumption_owner",
+        "runtime_dispatch_authority",
+        "engineering_acceptance_decision",
+        "artifact_authority",
+        "publication_authority",
+        "board_authority"
+      ],
+      "x-stage1e-canonical-order": [
+        "qualification_decision",
+        "authorization_issue",
+        "authorization_consumption_owner",
+        "runtime_dispatch_authority",
+        "engineering_acceptance_decision",
+        "artifact_authority",
+        "publication_authority",
+        "board_authority"
+      ],
+      "properties": {
+        "qualification_decision": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "authorization_issue": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "authorization_consumption_owner": {
+          "type": "string",
+          "const": "CONTROLLER"
+        },
+        "runtime_dispatch_authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "engineering_acceptance_decision": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "artifact_authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "publication_authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "board_authority": {
+          "type": "string",
+          "const": "NONE"
+        }
+      }
+    }
+  }
+}

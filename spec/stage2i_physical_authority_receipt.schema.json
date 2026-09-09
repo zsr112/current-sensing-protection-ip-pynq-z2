@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage2i-physical-authority-receipt-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authority_state",
+    "implementation_profile",
+    "source_commit",
+    "source_tree",
+    "execution_id",
+    "request_identity",
+    "artifact_manifest",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {"const": "stage2i-physical-authority-receipt-v1"},
+    "authority_state": {"const": "STAGE2I_B1_PHYSICAL_AUTHORITY_ACCEPTED"},
+    "implementation_profile": {"const": "SAFE_INERT"},
+    "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "source_tree": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "execution_id": {"type": "string", "pattern": "^[A-Za-z0-9._:+-]{1,160}$"},
+    "request_identity": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact_manifest": {"$ref": "#/$defs/file_identity"},
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bit", "hwh", "ltx", "xsa"],
+      "properties": {
+        "bit": {"$ref": "#/$defs/bit"},
+        "hwh": {"$ref": "#/$defs/hwh"},
+        "ltx": {"$ref": "#/$defs/ltx"},
+        "xsa": {"$ref": "#/$defs/xsa"}
+      }
+    }
+  },
+  "$defs": {
+    "file_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "bit": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact"},
+        {"properties": {"role": {"const": "BITSTREAM"}, "delivery_policy": {"const": "DEPLOY_REQUIRED"}}}
+      ]
+    },
+    "hwh": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact"},
+        {"properties": {"role": {"const": "HWH"}, "delivery_policy": {"const": "DEPLOY_REQUIRED"}}}
+      ]
+    },
+    "ltx": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact"},
+        {"properties": {"role": {"const": "LTX"}, "delivery_policy": {"const": "PROVENANCE_ONLY_REQUIRED"}}}
+      ]
+    },
+    "xsa": {
+      "allOf": [
+        {"$ref": "#/$defs/artifact"},
+        {"properties": {"role": {"const": "XSA"}, "delivery_policy": {"const": "PROVENANCE_ONLY_REQUIRED"}}}
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "path", "bytes", "sha256", "delivery_policy"],
+      "properties": {
+        "role": {"type": "string"},
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "delivery_policy": {"type": "string"}
+      }
+    }
+  }
+}

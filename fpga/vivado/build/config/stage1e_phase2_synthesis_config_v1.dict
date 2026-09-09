@@ -1,0 +1,605 @@
+schema_version stage1e-phase2-synthesis-config-v1
+profile_reference {
+    profile_id stage1e_reconstruction_profile_v1
+    path fpga/vivado/build/config/stage1e_reconstruction_profile_v1.dict
+    active_phase PHASE2_SYNTHESIS
+    hash_algorithm SHA256
+}
+capability_policy {
+    authorization_default DENY
+    explicit_per_capability_grant_required 1
+    profile_declaration_is_permission 0
+    enabled {
+        IP_PACKAGING
+        PROJECT_RECONSTRUCTION
+        BD_GENERATION
+        WRAPPER_GENERATION
+        SYNTHESIS
+    }
+    disabled {
+        IMPLEMENTATION
+        ARTIFACT_COLLECTION
+        ARTIFACT_PUBLICATION
+    }
+}
+phase_order {
+    input_ready
+    source_verification
+    environment_verification
+    workspace_creation
+    ip_packaging
+    project_creation
+    bd_creation
+    base_design
+    debug_design
+    mutation_bridge
+    bd_validation
+    bd_save
+    build_target
+    synthesis
+}
+source_verification {
+    required_paths {
+        rtl/adc_sample_cdc_bridge.v
+        rtl/adc_sample_code_normalizer.sv
+        rtl/async_fifo_gray.v
+        rtl/source_observability_cdc.v
+        rtl/transaction_destination_observer.v
+        rtl/transaction_source_observer.v
+        rtl/fault_defs.vh
+        rtl/generated/protection_register_map.vh
+        rtl/generated/stage2f_adc_source_profile.svh
+        rtl/current_compare_dual.v
+        rtl/fault_classifier.v
+        rtl/protection_core_top.v
+        rtl/protection_fsm.v
+        rtl/protection_ip_top_async_adc_axi_lite.v
+        rtl/protection_ip_top_axi_lite.v
+        rtl/protection_ip_top_reg_controlled.v
+        rtl/protection_reg_bank.v
+        rtl/pwm_gate.v
+        rtl/pwm_gen.v
+        rtl/reset_release_sync.v
+        rtl/sensor_health_monitor.v
+        fpga/constraints/pynq_z2_preboard_draft.xdc
+        fpga/vivado/constraints/stage2d_async_adc_atomic_cdc.xdc
+        fpga/vivado/constraints/stage2e_transaction_observability_cdc.xdc
+        fpga/vivado/package_protection_ip_stage2_axi_lite.tcl
+        fpga/vivado/create_pynq_z2_stage2_bd.tcl
+        fpga/vivado/add_pynq_z2_stage2b_debug.tcl
+        fpga/vivado/build/stage1e_artifact_build.tcl
+        fpga/vivado/build/stage1e_phase2_synthesis_build.tcl
+        fpga/vivado/build/controller/controller_core.tcl
+        fpga/vivado/build/controller/logger.tcl
+        fpga/vivado/build/controller/phase_runner.tcl
+        fpga/vivado/build/controller/stage1e_phase2_controller.tcl
+        fpga/vivado/build/lib/source_check.tcl
+        fpga/vivado/build/lib/environment_check.tcl
+        fpga/vivado/build/lib/workspace_manager.tcl
+        fpga/vivado/build/lib/vivado_project.tcl
+        fpga/vivado/build/lib/bd_flow.tcl
+        fpga/vivado/build/mutation/stage1d_controlled_stimulus.tcl
+        fpga/vivado/build/adapters/stage1e_ip_packaging.tcl
+        fpga/vivado/build/adapters/stage1e_base_design.tcl
+        fpga/vivado/build/adapters/stage1e_debug_design.tcl
+        fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl
+        fpga/vivado/build/adapters/stage1e_build_target.tcl
+        fpga/vivado/build/adapters/stage1e_synthesis.tcl
+        fpga/vivado/build/config/stage1d_build_config.dict
+        fpga/vivado/build/config/stage1e_build_config.dict
+        fpga/vivado/build/config/stage1e_reconstruction_profile_v1.dict
+        fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict
+        fpga/vivado/build/tests/stage1e_controller_skeleton_tests.tcl
+        fpga/vivado/build/tests/stage1e_reconstruction_profile_tests.tcl
+        fpga/vivado/build/tests/stage1e_phase2_controller_tests.tcl
+        fpga/vivado/build/tests/stage1e_ip_packaging_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_project_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_bd_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_base_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_debug_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_mutation_bridge_tests.tcl
+        fpga/vivado/build/tests/stage1e_build_target_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_synthesis_adapter_tests.tcl
+        fpga/vivado/build/tests/stage2d_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2d_profile_convergence_tests.tcl
+        fpga/vivado/build/tests/stage2e_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2e_observability_cdc_constraint_tests.tcl
+        docs/design/stage1e_artifact_closure_acceptance.md
+        docs/design/stage1e_reconstruction_profile_definition.md
+        docs/design/stage1e_synthesis_pipeline_contract.md
+        docs/design/stage1e_controlled_synthesis_execution_plan.md
+        docs/design/stage1e_phase2_constraint_policy.md
+        docs/status/stage1e_first_controlled_synthesis_execution_retry19.md
+    }
+    tcl_paths {
+        fpga/vivado/package_protection_ip_stage2_axi_lite.tcl
+        fpga/vivado/create_pynq_z2_stage2_bd.tcl
+        fpga/vivado/add_pynq_z2_stage2b_debug.tcl
+        fpga/vivado/build/stage1e_artifact_build.tcl
+        fpga/vivado/build/stage1e_phase2_synthesis_build.tcl
+        fpga/vivado/build/controller/controller_core.tcl
+        fpga/vivado/build/controller/logger.tcl
+        fpga/vivado/build/controller/phase_runner.tcl
+        fpga/vivado/build/controller/stage1e_phase2_controller.tcl
+        fpga/vivado/build/lib/source_check.tcl
+        fpga/vivado/build/lib/environment_check.tcl
+        fpga/vivado/build/lib/workspace_manager.tcl
+        fpga/vivado/build/lib/vivado_project.tcl
+        fpga/vivado/build/lib/bd_flow.tcl
+        fpga/vivado/build/mutation/stage1d_controlled_stimulus.tcl
+        fpga/vivado/build/adapters/stage1e_ip_packaging.tcl
+        fpga/vivado/build/adapters/stage1e_base_design.tcl
+        fpga/vivado/build/adapters/stage1e_debug_design.tcl
+        fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl
+        fpga/vivado/build/adapters/stage1e_build_target.tcl
+        fpga/vivado/build/adapters/stage1e_synthesis.tcl
+        fpga/vivado/build/tests/stage1e_controller_skeleton_tests.tcl
+        fpga/vivado/build/tests/stage1e_reconstruction_profile_tests.tcl
+        fpga/vivado/build/tests/stage1e_phase2_controller_tests.tcl
+        fpga/vivado/build/tests/stage1e_ip_packaging_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_project_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_bd_creation_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_base_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_debug_design_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_mutation_bridge_tests.tcl
+        fpga/vivado/build/tests/stage1e_build_target_adapter_tests.tcl
+        fpga/vivado/build/tests/stage1e_synthesis_adapter_tests.tcl
+        fpga/vivado/build/tests/stage2d_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2d_profile_convergence_tests.tcl
+        fpga/vivado/build/tests/stage2e_source_closure_tests.tcl
+        fpga/vivado/build/tests/stage2e_observability_cdc_constraint_tests.tcl
+    }
+    controller_source_paths {
+        fpga/vivado/build/stage1e_artifact_build.tcl
+        fpga/vivado/build/stage1e_phase2_synthesis_build.tcl
+        fpga/vivado/build/controller/controller_core.tcl
+        fpga/vivado/build/controller/logger.tcl
+        fpga/vivado/build/controller/phase_runner.tcl
+        fpga/vivado/build/controller/stage1e_phase2_controller.tcl
+        fpga/vivado/build/lib/source_check.tcl
+        fpga/vivado/build/lib/environment_check.tcl
+        fpga/vivado/build/lib/workspace_manager.tcl
+        fpga/vivado/build/lib/vivado_project.tcl
+        fpga/vivado/build/lib/bd_flow.tcl
+        fpga/vivado/build/mutation/stage1d_controlled_stimulus.tcl
+        fpga/vivado/build/adapters/stage1e_ip_packaging.tcl
+        fpga/vivado/build/adapters/stage1e_base_design.tcl
+        fpga/vivado/build/adapters/stage1e_debug_design.tcl
+        fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl
+        fpga/vivado/build/adapters/stage1e_build_target.tcl
+        fpga/vivado/build/adapters/stage1e_synthesis.tcl
+    }
+    expected_controller_source_sha256 c285e3bfc2d7d3a8350a204f6fd77fb8a565c3ea6a0c6e747516312c83bdbd2f
+}
+environment {
+    evidence_schema_version v1
+    vivado_version {Vivado v2024.1}
+    sw_build 5076996
+    ip_build 5075265
+    part xc7z020clg400-1
+    board_part tul.com.tw:pynq-z2:part0:1.0
+    required_ip_patterns {
+        xilinx.com:ip:processing_system7:5.5
+        xilinx.com:ip:proc_sys_reset:5.0
+        xilinx.com:ip:smartconnect:1.0
+        xilinx.com:ip:xlconstant:1.1
+        xilinx.com:ip:system_ila:1.1
+        xilinx.com:ip:axi_gpio:2.0
+        xilinx.com:ip:xlslice:1.0
+    }
+    custom_protection_ip {
+        vlnv zsr112.local:protection:protection_ip_axi_lite:0.3
+        provenance_status PENDING_PHASE3_RECONSTRUCTION
+        source_paths {
+            rtl/adc_sample_cdc_bridge.v
+            rtl/adc_sample_code_normalizer.sv
+            rtl/async_fifo_gray.v
+            rtl/source_observability_cdc.v
+            rtl/transaction_destination_observer.v
+            rtl/transaction_source_observer.v
+            rtl/fault_defs.vh
+            rtl/generated/protection_register_map.vh
+            rtl/generated/stage2f_adc_source_profile.svh
+            rtl/current_compare_dual.v
+            rtl/fault_classifier.v
+            rtl/protection_core_top.v
+            rtl/protection_fsm.v
+            rtl/protection_ip_top_async_adc_axi_lite.v
+            rtl/protection_ip_top_axi_lite.v
+            rtl/protection_ip_top_reg_controlled.v
+            rtl/protection_reg_bank.v
+            rtl/pwm_gate.v
+            rtl/pwm_gen.v
+            rtl/reset_release_sync.v
+            rtl/sensor_health_monitor.v
+        }
+    }
+}
+workspace {
+    ownership_schema_version v1
+    stale_vivado_markers {
+        .Xil
+        *.xpr
+        *.runs
+        *.cache
+        *.gen
+        *.srcs
+        *.sim
+        ip_user_files
+    }
+}
+reconstruction_policy {
+    packaging {
+        source_paths {
+            rtl/adc_sample_cdc_bridge.v
+            rtl/adc_sample_code_normalizer.sv
+            rtl/async_fifo_gray.v
+            rtl/source_observability_cdc.v
+            rtl/transaction_destination_observer.v
+            rtl/transaction_source_observer.v
+            rtl/fault_defs.vh
+            rtl/generated/protection_register_map.vh
+            rtl/generated/stage2f_adc_source_profile.svh
+            rtl/current_compare_dual.v
+            rtl/fault_classifier.v
+            rtl/protection_core_top.v
+            rtl/protection_fsm.v
+            rtl/protection_ip_top_async_adc_axi_lite.v
+            rtl/protection_ip_top_axi_lite.v
+            rtl/protection_ip_top_reg_controlled.v
+            rtl/protection_reg_bank.v
+            rtl/pwm_gate.v
+            rtl/pwm_gen.v
+            rtl/reset_release_sync.v
+            rtl/sensor_health_monitor.v
+        }
+        packaging_workspace_relative ip_packaging/project
+        ip_repo_relative ip_repo
+        vlnv_expectation {
+            vendor zsr112.local
+            library protection
+            name protection_ip_axi_lite
+            version 0.3
+        }
+        package_inventory {
+            schema_version stage1e-ip-package-inventory-v1
+            source_paths {
+                rtl/adc_sample_cdc_bridge.v
+                rtl/adc_sample_code_normalizer.sv
+                rtl/async_fifo_gray.v
+                rtl/source_observability_cdc.v
+                rtl/transaction_destination_observer.v
+                rtl/transaction_source_observer.v
+                rtl/fault_defs.vh
+                rtl/generated/protection_register_map.vh
+                rtl/generated/stage2f_adc_source_profile.svh
+                rtl/current_compare_dual.v
+                rtl/fault_classifier.v
+                rtl/protection_core_top.v
+                rtl/protection_fsm.v
+                rtl/protection_ip_top_async_adc_axi_lite.v
+                rtl/protection_ip_top_axi_lite.v
+                rtl/protection_ip_top_reg_controlled.v
+                rtl/protection_reg_bank.v
+                rtl/pwm_gate.v
+                rtl/pwm_gen.v
+                rtl/reset_release_sync.v
+                rtl/sensor_health_monitor.v
+            }
+            constraint_paths {
+                fpga/vivado/constraints/stage2d_async_adc_atomic_cdc.xdc
+                fpga/vivado/constraints/stage2e_transaction_observability_cdc.xdc
+            }
+            header_paths {
+                rtl/fault_defs.vh
+                rtl/generated/protection_register_map.vh
+                rtl/generated/stage2f_adc_source_profile.svh
+            }
+            project_name protection_ip_axi_lite_packaging_tmp
+            top_module protection_ip_top_async_adc_axi_lite
+            part xc7z020clg400-1
+            board_part tul.com.tw:pynq-z2:part0:1.0
+            target_language Verilog
+            component_metadata {
+                display_name {Current Protection AXI-Lite IP}
+                description {Current-sensing protection IP with AXI4-Lite register access.}
+                vendor_display_name zsr112.local
+                company_url https://zsr112.local
+                supported_families {zynq Production}
+                taxonomy {/UserIP}
+            }
+            user_parameters {
+                DATA_WIDTH 12
+                CNT_WIDTH 16
+                AXI_ADDR_WIDTH 8
+                AXI_DATA_WIDTH 32
+                HEALTH_CNT_WIDTH 8
+                ADC_FIFO_ADDR_WIDTH 3
+                OBS_SEQUENCE_WIDTH 32
+            }
+            axi_interface {
+                name S_AXI
+                clock_name ACLK
+                reset_name ARESETN
+                address_width 8
+                data_width 32
+                clock_frequency_hz 100000000
+                port_map {
+                    AWADDR S_AXI_AWADDR
+                    AWVALID S_AXI_AWVALID
+                    AWREADY S_AXI_AWREADY
+                    WDATA S_AXI_WDATA
+                    WSTRB S_AXI_WSTRB
+                    WVALID S_AXI_WVALID
+                    WREADY S_AXI_WREADY
+                    BRESP S_AXI_BRESP
+                    BVALID S_AXI_BVALID
+                    BREADY S_AXI_BREADY
+                    ARADDR S_AXI_ARADDR
+                    ARVALID S_AXI_ARVALID
+                    ARREADY S_AXI_ARREADY
+                    RDATA S_AXI_RDATA
+                    RRESP S_AXI_RRESP
+                    RVALID S_AXI_RVALID
+                    RREADY S_AXI_RREADY
+                }
+            }
+            address_block {
+                memory_map_name S_AXI
+                name reg0
+                base_address 0
+                range 4096
+                width 32
+                usage register
+            }
+        }
+    }
+    project {
+        project_name current_protection_ip_pynq_z2_stage1e
+        target_language Verilog
+        source_inventory {}
+        constraint_policy {
+            schema_version stage1e-constraint-policy-v1
+            mode NO_USER_XDC
+            files {}
+        }
+    }
+    bd {
+        bd_name protection_system
+        topology_policy {
+            schema_version stage1e-topology-policy-reference-v1
+            policy_id pynq_z2_stage1e_base_design_v1
+            source_reference docs/design/stage1e_phase2_constraint_policy.md
+        }
+    }
+    base_design {
+        profile_policy {
+            schema_version stage2d-stimulus-profile-policy-v1
+            profile SAFE_INERT
+            profile_class SAFE_INERT
+            production_authority 1
+            demo_test_only 0
+            valid_value 0
+            functional_adc_stimulus 0
+            valid_source_exists 1
+            ready_consumed 0
+            no_overwrite_when_ready_low 0
+            transaction_pulse_bounded 0
+        }
+        topology_policy {
+            schema_version stage1e-topology-policy-reference-v1
+            policy_id pynq_z2_stage1e_base_design_v1
+            source_reference fpga/vivado/create_pynq_z2_stage2_bd.tcl
+        }
+        expected_vlnv_map {
+            processing_system7 xilinx.com:ip:processing_system7:5.5
+            smartconnect xilinx.com:ip:smartconnect:1.0
+            protection zsr112.local:protection:protection_ip_axi_lite:0.3
+            reset xilinx.com:ip:proc_sys_reset:5.0
+            constant xilinx.com:ip:xlconstant:1.1
+        }
+        cell_policy {
+            schema_version stage1e-base-cell-policy-v1
+            creation_order {
+                processing_system7 reset smartconnect protection
+                sample_valid_const i_ch1_const i_ch2_const dcm_locked_const
+            }
+            instances {
+                processing_system7 {
+                    name processing_system7_0
+                    vlnv_role processing_system7
+                    properties {
+                        CONFIG.PCW_USE_M_AXI_GP0 1
+                        CONFIG.PCW_EN_CLK0_PORT 1
+                        CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ 100
+                    }
+                }
+                reset {name proc_sys_reset_0 vlnv_role reset properties {}}
+                smartconnect {
+                    name smartconnect_0
+                    vlnv_role smartconnect
+                    properties {CONFIG.NUM_MI 1 CONFIG.NUM_SI 1}
+                }
+                protection {
+                    name protection_ip_axi_lite_0
+                    vlnv_role protection
+                    properties {}
+                }
+                sample_valid_const {
+                    name sample_valid_const
+                    vlnv_role constant
+                    properties {CONFIG.CONST_WIDTH 1 CONFIG.CONST_VAL 0}
+                }
+                i_ch1_const {
+                    name i_ch1_const
+                    vlnv_role constant
+                    properties {CONFIG.CONST_WIDTH 12 CONFIG.CONST_VAL 1024}
+                }
+                i_ch2_const {
+                    name i_ch2_const
+                    vlnv_role constant
+                    properties {CONFIG.CONST_WIDTH 12 CONFIG.CONST_VAL 1024}
+                }
+                dcm_locked_const {
+                    name dcm_locked_const
+                    vlnv_role constant
+                    properties {CONFIG.CONST_WIDTH 1 CONFIG.CONST_VAL 1}
+                }
+            }
+            board_automation {
+                cell_role processing_system7
+                rule xilinx.com:bd_rule:processing_system7
+                config {make_external "FIXED_IO, DDR" apply_board_preset "1"}
+                expected_external_interfaces {DDR FIXED_IO}
+            }
+        }
+        interface_policy {
+            schema_version stage1e-base-interface-policy-v1
+            required_external_interfaces {DDR FIXED_IO}
+            interface_connections {
+                {source processing_system7_0/M_AXI_GP0 sink smartconnect_0/S00_AXI}
+                {source smartconnect_0/M00_AXI sink protection_ip_axi_lite_0/S_AXI}
+            }
+            stimulus_connections {
+                {source sample_valid_const/dout sink protection_ip_axi_lite_0/adc_sample_valid}
+                {source i_ch1_const/dout sink protection_ip_axi_lite_0/adc_sample_ch1}
+                {source i_ch2_const/dout sink protection_ip_axi_lite_0/adc_sample_ch2}
+            }
+        }
+        clock_policy {
+            schema_version stage1e-base-clock-policy-v1
+            frequency_hz 100000000
+            frequency_property CONFIG.FREQ_HZ
+            source processing_system7_0/FCLK_CLK0
+            sinks {
+                processing_system7_0/M_AXI_GP0_ACLK
+                smartconnect_0/aclk
+                proc_sys_reset_0/slowest_sync_clk
+                protection_ip_axi_lite_0/ACLK
+                protection_ip_axi_lite_0/adc_src_clk
+            }
+        }
+        reset_policy {
+            schema_version stage1e-base-reset-policy-v1
+            connections {
+                {source processing_system7_0/FCLK_RESET0_N sink proc_sys_reset_0/ext_reset_in}
+                {source dcm_locked_const/dout sink proc_sys_reset_0/dcm_locked}
+                {source proc_sys_reset_0/peripheral_aresetn sink smartconnect_0/aresetn}
+                {source proc_sys_reset_0/peripheral_aresetn sink protection_ip_axi_lite_0/ARESETN}
+            }
+            polarity_checks {
+                {path processing_system7_0/FCLK_RESET0_N property CONFIG.POLARITY expected ACTIVE_LOW}
+                {path proc_sys_reset_0/ext_reset_in property CONFIG.POLARITY expected ACTIVE_LOW}
+                {path proc_sys_reset_0/peripheral_aresetn property CONFIG.POLARITY expected ACTIVE_LOW}
+            }
+        }
+        address_policy {
+            schema_version stage1e-base-address-policy-v1
+            address_space processing_system7_0/Data
+            target_segment protection_ip_axi_lite_0/S_AXI/reg0
+            offset 0x43C00000
+            range 0x00001000
+        }
+    }
+    debug_design {
+        debug_policy {
+            schema_version stage1e-debug-policy-reference-v1
+            policy_id stage1e_stage2b_debug_v1
+            source_reference fpga/vivado/add_pynq_z2_stage2b_debug.tcl
+            sha256 e9f8efaa3278826a9d9d659d45146688afbecb71f8667f876b6482ea7019f185
+            enabled 1
+            clock_source processing_system7_0/FCLK_CLK0
+            reset_source proc_sys_reset_0/peripheral_aresetn
+            reset_polarity ACTIVE_LOW
+            ready_observation_clock_domain ACLK
+            adc_src_clock_domain FCLK_CLK0
+            destination_clock_domain FCLK_CLK0
+            clocks_identical_in_current_profile 1
+            acceptance_evidence_scope CURRENT_IDENTICAL_CLOCKS_ONLY
+            distinct_clock_debug_policy SOURCE_DOMAIN_ILA_OR_SYNCHRONIZED_OBSERVATION
+            direct_async_ready_observation_as_cdc_proof 0
+        }
+        system_ila_identity {
+            schema_version stage1e-system-ila-identity-v1
+            cell_name system_ila_stage2b_0
+            vlnv xilinx.com:ip:system_ila:1.1
+            properties {
+                CONFIG.C_MON_TYPE MIX
+                CONFIG.C_PROBE_WIDTH_PROPAGATION MANUAL
+                CONFIG.C_NUM_MONITOR_SLOTS 1
+                CONFIG.C_SLOT_0_INTF_TYPE xilinx.com:interface:aximm_rtl:1.0
+                CONFIG.C_SLOT_0_AXI_PROTOCOL AXI4LITE
+                CONFIG.C_NUM_OF_PROBES 12
+                CONFIG.C_DATA_DEPTH 4096
+            }
+        }
+        monitor_interface_policy {
+            schema_version stage1e-debug-monitor-interface-policy-v1
+            target protection_ip_axi_lite_0/S_AXI
+            monitor system_ila_stage2b_0/SLOT_0_AXI
+            expected_net_members {
+                protection_ip_axi_lite_0/S_AXI
+                smartconnect_0/M00_AXI
+            }
+        }
+        probe_schema {
+            schema_version stage1e-debug-probe-schema-v1
+            probes {
+                {index 0 source protection_ip_axi_lite_0/ARESETN probe system_ila_stage2b_0/probe0 width 1}
+                {index 1 source protection_ip_axi_lite_0/adc_sample_valid probe system_ila_stage2b_0/probe1 width 1}
+                {index 2 source protection_ip_axi_lite_0/adc_sample_ch1 probe system_ila_stage2b_0/probe2 width 12}
+                {index 3 source protection_ip_axi_lite_0/adc_sample_ch2 probe system_ila_stage2b_0/probe3 width 12}
+                {index 4 source protection_ip_axi_lite_0/pwm_raw probe system_ila_stage2b_0/probe4 width 1}
+                {index 5 source protection_ip_axi_lite_0/pwm_out probe system_ila_stage2b_0/probe5 width 1}
+                {index 6 source protection_ip_axi_lite_0/fault_valid probe system_ila_stage2b_0/probe6 width 1}
+                {index 7 source protection_ip_axi_lite_0/fault_latched probe system_ila_stage2b_0/probe7 width 1}
+                {index 8 source protection_ip_axi_lite_0/fault_code probe system_ila_stage2b_0/probe8 width 8}
+                {index 9 source protection_ip_axi_lite_0/fault_code_latched probe system_ila_stage2b_0/probe9 width 8}
+                {index 10 source protection_ip_axi_lite_0/fsm_state probe system_ila_stage2b_0/probe10 width 4}
+                {index 11 source protection_ip_axi_lite_0/adc_sample_ready probe system_ila_stage2b_0/probe11 width 1}
+            }
+        }
+        width_expectations {
+            schema_version stage1e-debug-width-expectations-v1
+            widths {1 1 12 12 1 1 1 1 8 8 4 1}
+        }
+    }
+    mutation {
+        mutation_configuration {
+            axi_gpio_vlnv xilinx.com:ip:axi_gpio:2.0
+            expected_protection_base 0x43C00000
+            expected_protection_range 0x00001000
+            gpio_name axi_gpio_stage1d_0
+            gpio_width 24
+            i_ch1_const_name i_ch1_const
+            i_ch2_const_name i_ch2_const
+            ila_name system_ila_stage2b_0
+            planned_gpio_base 0x41200000
+            planned_gpio_range 0x00010000
+            protection_name protection_ip_axi_lite_0
+            protection_vlnv zsr112.local:protection:protection_ip_axi_lite:0.3
+            ps_name processing_system7_0
+            reset_name proc_sys_reset_0
+            safe_gpio_default 0x00400400
+            sample_valid_const_name sample_valid_const
+            stimulus_profile SAFE_INERT_EXPLICIT
+            stimulus_profile_class SAFE_INERT
+            source_acceptance_claimed 0
+            fault_stimulus_claimed 0
+            slice_ch1_name xlslice_stage1d_ch1
+            slice_ch2_name xlslice_stage1d_ch2
+            smartconnect_name smartconnect_0
+            stage1d_source_baseline 2efeb7efaf5b97ca7850f61f1001224c00efd111
+            xlslice_vlnv xilinx.com:ip:xlslice:1.0
+        }
+    }
+    build_target {
+        wrapper_name protection_system_wrapper
+        output_product_policy {
+            schema_version stage1e-output-product-policy-v1
+            enabled 1
+            target all
+            products {}
+        }
+    }
+}

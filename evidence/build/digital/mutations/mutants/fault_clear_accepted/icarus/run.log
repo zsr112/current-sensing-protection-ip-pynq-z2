@@ -1,0 +1,8 @@
+FAIL cycle=98 clear_fault_stays_latched actual=00000002 expected=00000001
+FAIL cycle=103 clear_nonclean_stays_latched actual=00000002 expected=00000001
+FAIL cycle=108 clear_healthy_reset_wait actual=00000000 expected=00000002
+FAIL cycle=108 clear_healthy_safe actual=0 expected=1
+FAIL cycle=108 clear_sequence actual=00000200 expected=00000202
+STAGE2G_POLICY_MATRIX=FAIL_5
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_policy_matrix.sv:489: 
+       Time: 1771000  Scope: tb_stage2g_policy_matrix

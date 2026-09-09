@@ -1,0 +1,39 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/transaction_source_observer.v" into library work
+INFO: [VRFC 10-311] analyzing module transaction_source_observer
+INFO: [VRFC 10-311] analyzing module stage2g_transaction_source_observer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/transaction_destination_observer.v" into library work
+INFO: [VRFC 10-311] analyzing module stage2e_transaction_sequence_classifier
+INFO: [VRFC 10-311] analyzing module destination_sequence_integrity_tracker
+INFO: [VRFC 10-311] analyzing module transaction_destination_observer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_reg_bank.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_reg_bank
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2e/stage2e_transaction_observability_checker.sv" into library work
+INFO: [VRFC 10-311] analyzing module stage2e_transaction_observability_checker
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2e/tb_stage2e_mutation_connected.sv" into library work
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_source_wrapper
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_destination_wrapper
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_atomic_word
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_counter_cdc
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_event_cdc
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_saturating_counter
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_register_wrapper
+INFO: [VRFC 10-311] analyzing module stage2e_mutation_connected_fixture
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_control
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_backpressure_drop
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_withdrawal
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_payload_change
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_episode_recount
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_payload_identity
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_nonatomic_sequence
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_accept_sequence
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_delivery_accounting
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_gap
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_stale_reorder
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_binary_cdc
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_pulse_cdc
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_counter_wrap
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_w1c_race
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_any_error_backpressure
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_writable_counter
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_reset_nonzero
+INFO: [VRFC 10-311] analyzing module tb_stage2e_mutation_wrap_misclassified

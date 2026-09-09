@@ -600,7 +600,9 @@ module tb_protection_ip_top_reg_controlled;
   endtask
 
   initial begin
-    $dumpfile("sim/waves/tb_protection_ip_top_reg_controlled.vcd");
+    string wave_dir;
+    if (!$value$plusargs("CSIP_WAVE_DIR=%s", wave_dir)) wave_dir = "sim/waves";
+    $dumpfile({wave_dir, "/tb_protection_ip_top_reg_controlled.vcd"});
     $dumpvars(0, tb_protection_ip_top_reg_controlled);
 
     wait_cycles(3);

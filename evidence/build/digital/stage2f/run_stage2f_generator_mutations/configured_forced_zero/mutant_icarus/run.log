@@ -1,0 +1,2 @@
+FATAL: <EXTERNAL_SOURCE>\tb\stage2f\tb_stage2f_generated_profile_vectors.sv:73: generated validation profile is not configured
+       Time: 0  Scope: tb_stage2f_generated_profile_vectors

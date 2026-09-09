@@ -1,0 +1,4 @@
+STAGE2G PRODUCTION FAILED: later healthy did not clear AXI compatibility status
+STAGE2G_PRODUCTION_PATH=FAIL_1
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_production_path.sv:718: 
+       Time: 17086000  Scope: tb_stage2g_production_path

@@ -1,0 +1,582 @@
+schema_version stage1e-vivado-runtime-property-map-v1
+contract_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+vivado_version 2024.1
+snapshot_points {
+    TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+}
+object_selectors {
+    CURRENT_PROJECT {
+        query_role CURRENT_PROJECT expected_cardinality 1
+        unavailable_action BLOCK
+    }
+    SOURCES_FILESET {
+        query_role SOURCES_FILESET expected_cardinality 1
+        unavailable_action BLOCK
+    }
+    IMPL_RUN {
+        query_role IMPL_RUN expected_cardinality 1 unavailable_action BLOCK
+    }
+    SYNTH_RUN {
+        query_role SYNTH_RUN expected_cardinality 1 unavailable_action BLOCK
+    }
+}
+normalization_rules {
+    EXACT_STRING BOOLEAN INTEGER EMPTY_TO_NONE STATUS_TOKEN PATH_TOKEN
+}
+properties {
+    PROJECT_NAME {
+        ordinal 1 object_selector CURRENT_PROJECT property_name NAME
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source CONTRACT_LITERAL
+        expected_value current_protection_ip_pynq_z2_stage1e
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PROJECT_DIRECTORY {
+        ordinal 2 object_selector CURRENT_PROJECT property_name DIRECTORY
+        expected_type PATH normalization_rule PATH_TOKEN
+        expected_source SESSION_WORKSPACE expected_value SESSION_WORKSPACE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PROJECT_PART {
+        ordinal 3 object_selector CURRENT_PROJECT property_name PART
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_PART expected_value REQUEST_PART
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PROJECT_BOARD_PART {
+        ordinal 4 object_selector CURRENT_PROJECT property_name BOARD_PART
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_BOARD_PART expected_value REQUEST_BOARD_PART
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    FILESET_TOP {
+        ordinal 5 object_selector SOURCES_FILESET property_name TOP
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_TOP expected_value REQUEST_TOP
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_NAME {
+        ordinal 6 object_selector IMPL_RUN property_name NAME
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source CONTRACT_LITERAL expected_value impl_1
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_STRATEGY {
+        ordinal 7 object_selector IMPL_RUN property_name STRATEGY
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_STRATEGY expected_value REQUEST_STRATEGY
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_PARENT {
+        ordinal 8 object_selector IMPL_RUN property_name PARENT
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source CONTRACT_LITERAL expected_value synth_1
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_SRCSET {
+        ordinal 9 object_selector IMPL_RUN property_name SRCSET
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source CONTRACT_LITERAL expected_value sources_1
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_PART {
+        ordinal 10 object_selector IMPL_RUN property_name PART
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_PART expected_value REQUEST_PART
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_NEEDS_REFRESH {
+        ordinal 11 object_selector IMPL_RUN property_name NEEDS_REFRESH
+        expected_type BOOLEAN normalization_rule BOOLEAN
+        expected_source CONTRACT_LITERAL expected_value 0
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_INCREMENTAL_CHECKPOINT {
+        ordinal 12 object_selector IMPL_RUN property_name INCREMENTAL_CHECKPOINT
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_AUTO_INCREMENTAL {
+        ordinal 13 object_selector IMPL_RUN
+        property_name AUTO_INCREMENTAL_CHECKPOINT
+        expected_type BOOLEAN normalization_rule BOOLEAN
+        expected_source CONTRACT_LITERAL expected_value 0
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    SYNTH_NAME {
+        ordinal 14 object_selector SYNTH_RUN property_name NAME
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source CONTRACT_LITERAL expected_value synth_1
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    SYNTH_STATUS {
+        ordinal 15 object_selector SYNTH_RUN property_name STATUS
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source CONTRACT_LITERAL expected_value COMPLETE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    SYNTH_NEEDS_REFRESH {
+        ordinal 16 object_selector SYNTH_RUN property_name NEEDS_REFRESH
+        expected_type BOOLEAN normalization_rule BOOLEAN
+        expected_source CONTRACT_LITERAL expected_value 0
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    OPT_ENABLED {
+        ordinal 17 object_selector IMPL_RUN
+        property_name STEPS.OPT_DESIGN.IS_ENABLED
+        expected_type BOOLEAN normalization_rule BOOLEAN
+        expected_source CONTRACT_LITERAL expected_value 1
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    OPT_DIRECTIVE {
+        ordinal 18 object_selector IMPL_RUN
+        property_name STEPS.OPT_DESIGN.ARGS.DIRECTIVE
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_OPT_DIRECTIVE
+        expected_value REQUEST_OPT_DIRECTIVE expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    OPT_STATUS {
+        ordinal 19 object_selector IMPL_RUN
+        property_name STEPS.OPT_DESIGN.STATUS
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source PHASE_TABLE expected_value PHASE_TABLE
+        expected_by_snapshot {
+            TOOL_PREFLIGHT NOT_RUN PRE_CONSUME NOT_RUN POST_OPT COMPLETE
+            POST_PLACE COMPLETE POST_ROUTE COMPLETE TERMINAL COMPLETE
+        }
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    OPT_PRE_HOOK {
+        ordinal 20 object_selector IMPL_RUN property_name STEPS.OPT_DESIGN.TCL.PRE
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    OPT_POST_HOOK {
+        ordinal 21 object_selector IMPL_RUN
+        property_name STEPS.OPT_DESIGN.TCL.POST
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PLACE_ENABLED {
+        ordinal 22 object_selector IMPL_RUN
+        property_name STEPS.PLACE_DESIGN.IS_ENABLED
+        expected_type BOOLEAN normalization_rule BOOLEAN
+        expected_source CONTRACT_LITERAL expected_value 1
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PLACE_DIRECTIVE {
+        ordinal 23 object_selector IMPL_RUN
+        property_name STEPS.PLACE_DESIGN.ARGS.DIRECTIVE
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_PLACE_DIRECTIVE
+        expected_value REQUEST_PLACE_DIRECTIVE expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PLACE_STATUS {
+        ordinal 24 object_selector IMPL_RUN
+        property_name STEPS.PLACE_DESIGN.STATUS
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source PHASE_TABLE expected_value PHASE_TABLE
+        expected_by_snapshot {
+            TOOL_PREFLIGHT NOT_RUN PRE_CONSUME NOT_RUN POST_OPT NOT_RUN
+            POST_PLACE COMPLETE POST_ROUTE COMPLETE TERMINAL COMPLETE
+        }
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PLACE_PRE_HOOK {
+        ordinal 25 object_selector IMPL_RUN
+        property_name STEPS.PLACE_DESIGN.TCL.PRE
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PLACE_POST_HOOK {
+        ordinal 26 object_selector IMPL_RUN
+        property_name STEPS.PLACE_DESIGN.TCL.POST
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PHYS_OPT_ENABLED {
+        ordinal 27 object_selector IMPL_RUN
+        property_name STEPS.PHYS_OPT_DESIGN.IS_ENABLED
+        expected_type BOOLEAN normalization_rule BOOLEAN
+        expected_source CONTRACT_LITERAL expected_value 0
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PHYS_OPT_DIRECTIVE {
+        ordinal 28 object_selector IMPL_RUN
+        property_name STEPS.PHYS_OPT_DESIGN.ARGS.DIRECTIVE
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PHYS_OPT_STATUS {
+        ordinal 29 object_selector IMPL_RUN
+        property_name STEPS.PHYS_OPT_DESIGN.STATUS
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source CONTRACT_LITERAL expected_value NOT_RUN
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PHYS_OPT_PRE_HOOK {
+        ordinal 30 object_selector IMPL_RUN
+        property_name STEPS.PHYS_OPT_DESIGN.TCL.PRE
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    PHYS_OPT_POST_HOOK {
+        ordinal 31 object_selector IMPL_RUN
+        property_name STEPS.PHYS_OPT_DESIGN.TCL.POST
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTE_ENABLED {
+        ordinal 32 object_selector IMPL_RUN
+        property_name STEPS.ROUTE_DESIGN.IS_ENABLED
+        expected_type BOOLEAN normalization_rule BOOLEAN
+        expected_source CONTRACT_LITERAL expected_value 1
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTE_DIRECTIVE {
+        ordinal 33 object_selector IMPL_RUN
+        property_name STEPS.ROUTE_DESIGN.ARGS.DIRECTIVE
+        expected_type STRING normalization_rule EXACT_STRING
+        expected_source REQUEST_ROUTE_DIRECTIVE
+        expected_value REQUEST_ROUTE_DIRECTIVE expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTE_STATUS {
+        ordinal 34 object_selector IMPL_RUN
+        property_name STEPS.ROUTE_DESIGN.STATUS
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source PHASE_TABLE expected_value PHASE_TABLE
+        expected_by_snapshot {
+            TOOL_PREFLIGHT NOT_RUN PRE_CONSUME NOT_RUN POST_OPT NOT_RUN
+            POST_PLACE NOT_RUN POST_ROUTE COMPLETE TERMINAL COMPLETE
+        }
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTE_PRE_HOOK {
+        ordinal 35 object_selector IMPL_RUN
+        property_name STEPS.ROUTE_DESIGN.TCL.PRE
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    ROUTE_POST_HOOK {
+        ordinal 36 object_selector IMPL_RUN
+        property_name STEPS.ROUTE_DESIGN.TCL.POST
+        expected_type STRING normalization_rule EMPTY_TO_NONE
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_STATUS {
+        ordinal 37 object_selector IMPL_RUN property_name STATUS
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source PHASE_TABLE expected_value PHASE_TABLE
+        expected_by_snapshot {
+            TOOL_PREFLIGHT NOT_STARTED PRE_CONSUME NOT_STARTED
+            POST_OPT OPT_COMPLETE POST_PLACE PLACE_COMPLETE
+            POST_ROUTE ROUTE_COMPLETE TERMINAL ROUTE_COMPLETE
+        }
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_PROGRESS {
+        ordinal 38 object_selector IMPL_RUN property_name PROGRESS
+        expected_type INTEGER normalization_rule INTEGER
+        expected_source PHASE_TABLE expected_value PHASE_TABLE
+        expected_by_snapshot {
+            TOOL_PREFLIGHT 0 PRE_CONSUME 0 POST_OPT 33 POST_PLACE 66
+            POST_ROUTE 100 TERMINAL 100
+        }
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_CURRENT_STEP {
+        ordinal 39 object_selector IMPL_RUN property_name CURRENT_STEP
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source PHASE_TABLE expected_value PHASE_TABLE
+        expected_by_snapshot {
+            TOOL_PREFLIGHT NONE PRE_CONSUME NONE POST_OPT OPT_DESIGN
+            POST_PLACE PLACE_DESIGN POST_ROUTE ROUTE_DESIGN
+            TERMINAL ROUTE_DESIGN
+        }
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    IMPL_SEED {
+        ordinal 40 object_selector IMPL_RUN
+        property_name STEPS.OPT_DESIGN.ARGS.SEED
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source CONTRACT_LITERAL expected_value TOOL_DEFAULT
+        expected_by_snapshot {}
+        required_snapshot_points {TOOL_PREFLIGHT PRE_CONSUME TERMINAL}
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    DIRECT_DISPATCH_MARKER {
+        ordinal 41 object_selector CURRENT_PROJECT
+        property_name STAGE1E.DIRECT_IMPLEMENTATION_MARKER
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    EXTRA_OPERATION_MARKER {
+        ordinal 42 object_selector CURRENT_PROJECT
+        property_name STAGE1E.EXTRA_OPERATION_MARKER
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    DOWNSTREAM_COMMAND_MARKER {
+        ordinal 43 object_selector CURRENT_PROJECT
+        property_name STAGE1E.DOWNSTREAM_COMMAND_MARKER
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+    DOWNSTREAM_OUTPUT_MARKER {
+        ordinal 44 object_selector CURRENT_PROJECT
+        property_name STAGE1E.DOWNSTREAM_OUTPUT_MARKER
+        expected_type STRING normalization_rule STATUS_TOKEN
+        expected_source CONTRACT_LITERAL expected_value NONE
+        expected_by_snapshot {}
+        required_snapshot_points {
+            TOOL_PREFLIGHT PRE_CONSUME POST_OPT POST_PLACE POST_ROUTE TERMINAL
+        }
+        unavailable_action BLOCK
+        qualification_state VIVADO_2024_1_QUALIFICATION_REQUIRED
+    }
+}
+graph_bindings {
+    opt_design {
+        enabled OPT_ENABLED directive OPT_DIRECTIVE status OPT_STATUS
+        pre_hook OPT_PRE_HOOK post_hook OPT_POST_HOOK
+    }
+    place_design {
+        enabled PLACE_ENABLED directive PLACE_DIRECTIVE status PLACE_STATUS
+        pre_hook PLACE_PRE_HOOK post_hook PLACE_POST_HOOK
+    }
+    phys_opt_design {
+        enabled PHYS_OPT_ENABLED directive PHYS_OPT_DIRECTIVE
+        status PHYS_OPT_STATUS pre_hook PHYS_OPT_PRE_HOOK
+        post_hook PHYS_OPT_POST_HOOK
+    }
+    route_design {
+        enabled ROUTE_ENABLED directive ROUTE_DIRECTIVE status ROUTE_STATUS
+        pre_hook ROUTE_PRE_HOOK post_hook ROUTE_POST_HOOK
+    }
+}
+qualification_boundary {
+    alias_probe_policy PROHIBITED
+    unavailable_action BLOCK
+    unknown_action BLOCK
+    ambiguous_action BLOCK
+    conflicting_action BLOCK
+    actual_vivado_readback VIVADO_2024_1_QUALIFICATION_REQUIRED
+}

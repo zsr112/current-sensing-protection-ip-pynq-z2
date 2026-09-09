@@ -1,0 +1,58 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed Sep  9 16:53:26 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/mutation_snapshot/xsim_script.tcl
+# xsim {mutation_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+FAIL cycle=21 first_code_cycle_immutable actual=00000002 expected=00000001
+FAIL cycle=22 first_code_cycle_immutable actual=00000006 expected=00000002
+FAIL cycle=25 first_code_cycle_immutable actual=00000003 expected=00000006
+FAIL cycle=26 first_code_cycle_immutable actual=00000006 expected=00000003
+FAIL cycle=29 first_code_cycle_immutable actual=00000003 expected=00000006
+FAIL cycle=30 first_code_cycle_immutable actual=00000006 expected=00000003
+FAIL cycle=33 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=34 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=37 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=38 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=41 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=42 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=45 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=46 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=49 first_code_cycle_immutable actual=00000005 expected=00000006
+FAIL cycle=50 first_code_cycle_immutable actual=00000006 expected=00000005
+FAIL cycle=53 first_code_cycle_immutable actual=00000005 expected=00000006
+FAIL cycle=54 first_code_cycle_immutable actual=00000006 expected=00000005
+FAIL cycle=57 first_code_cycle_immutable actual=00000003 expected=00000006
+FAIL cycle=58 first_code_cycle_immutable actual=00000006 expected=00000003
+FAIL cycle=61 first_code_cycle_immutable actual=00000003 expected=00000006
+FAIL cycle=62 first_code_cycle_immutable actual=00000006 expected=00000003
+FAIL cycle=65 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=66 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=69 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=70 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=73 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=74 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=77 first_code_cycle_immutable actual=00000004 expected=00000006
+FAIL cycle=78 first_code_cycle_immutable actual=00000006 expected=00000004
+FAIL cycle=86 first_code_immutable actual=00000006 expected=00000001
+FAIL cycle=89 first_code_cycle_immutable actual=00000000 expected=00000006
+FAIL cycle=97 first_code_cycle_immutable actual=00000001 expected=00000000
+FAIL cycle=119 first_code_cycle_immutable actual=00000001 expected=00000005
+FAIL cycle=129 first_code_cycle_immutable actual=00000002 expected=00000001
+STAGE2G_POLICY_MATRIX=FAIL_35
+STAGE2G_POLICY_MATRIX=PASS
+BITMAP_COMBINATIONS=PASS_64_OF_64
+PRIORITY_CODE_MATRIX=PASS_64_OF_64
+II1_ALIGNMENT=PASS
+CLEAR_FENCE_MATRIX=PASS
+RESET_PIPELINE_FLUSH_MATRIX=PASS
+$finish called at time : 1771 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_policy_matrix.sv" Line 497
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:53:28 2026...

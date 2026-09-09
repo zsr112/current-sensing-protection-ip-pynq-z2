@@ -1,0 +1,58 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Wed Sep  9 16:59:02 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/stage2d_regression_snapshot/xsim_script.tcl
+# xsim {stage2d_regression_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+SC01=PASS
+SC02=PASS
+SC03=PASS
+SC04=PASS
+SC05=PASS
+SC06=PASS
+SC07=PASS
+SC08=PASS
+SC09=PASS
+SC10=PASS
+SC11=PASS
+SC12=PASS
+SC13=PASS
+SC14=PASS
+SC15=PASS
+SC16=PASS
+SC17=PASS
+SC18=PASS
+SC19=PASS
+SC20=PASS
+SC21=PASS
+SC22=PASS
+SC23=PASS
+SC24=PASS
+SC25=PASS
+SC26=PASS
+SC27=PASS
+SC28=PASS
+SC29=PASS
+SC30=PASS
+STAGE2D_POSITIVE_SCENARIOS=PASS_30_OF_30
+RANDOM_STRESS_TRANSACTIONS=1247
+SCOREBOARD_ACCEPTED=2141
+SCOREBOARD_DELIVERED=2102
+SCOREBOARD_RESET_DISCARDED=39
+SCOREBOARD_PENDING=0
+CDC_LATENCY_MIN_DST_CYCLES=4
+CDC_LATENCY_MAX_DST_CYCLES=4
+CDC_LATENCY_MIN_NS=50
+CDC_LATENCY_MAX_NS=64
+STAGE2B_DESTINATION_LATENCY_CYCLES=3
+ALL TESTS PASSED: tb_stage2d_async_adc_atomic_cdc
+$finish called at time : 45367 ns : File "<EXTERNAL_SOURCE>/tb/stage2d/tb_stage2d_async_adc_atomic_cdc.sv" Line 792
+exit 0
+INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:59:04 2026...

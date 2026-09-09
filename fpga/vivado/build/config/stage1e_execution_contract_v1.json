@@ -1,0 +1,127 @@
+{
+  "schema_version": "stage1e-execution-contract-v1",
+  "contract_state": "STAGE2I_B_DUAL_PROFILE_PHYSICAL_IMPLEMENTATION",
+  "allowed_run_kinds": ["ENGINEERING", "FORMAL"],
+  "available_run_kinds": ["ENGINEERING"],
+  "formal_preflight_status": "FORMAL_CURRENT_RUN_FINDING_COMPARATOR_NOT_IMPLEMENTED",
+  "allowed_build_targets": ["IMPLEMENTATION", "ARTIFACTS"],
+  "production_profile_default": "SAFE_INERT",
+  "board_test_profile_requires_explicit_selection": true,
+  "allowed_implementation_profiles": ["SAFE_INERT", "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS"],
+  "implementation_profiles": {
+    "SAFE_INERT": {
+      "production_authority": true,
+      "published_as_default": true,
+      "packaged_rtl_source_count": 21,
+      "packaged_xdc_source_count": 2,
+      "aclk_source": "processing_system7_0/FCLK_CLK0",
+      "adc_source_clock": "processing_system7_0/FCLK_CLK0",
+      "functional_adc_stimulus": false,
+      "adc_sample_valid_value": 0,
+      "test_profile_topology_leakage": 0
+    },
+    "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS": {
+      "production_authority": false,
+      "published_as_default": false,
+      "packaged_production_rtl_unchanged": true,
+      "b2_only_source": "fpga/vivado/test_profile/stage2i_b2_ready_aware_stimulus.v",
+      "b2_only_constraint": "fpga/vivado/constraints/stage2i_b2_ready_aware_stimulus_cdc.xdc",
+      "aclk_source": "processing_system7_0/FCLK_CLK0",
+      "aclk_frequency_mhz": 100,
+      "adc_source_clock": "processing_system7_0/FCLK_CLK1",
+      "adc_source_frequency_mhz": 125,
+      "command_cdc": "BUNDLED_DATA_REQUEST_ACK",
+      "maximum_burst_count": 127,
+      "backpressure_induction_method": "REAL_PRODUCTION_ASYNC_FIFO_FILL",
+      "source_domain_debug_core": "system_ila_stage2i_b2_source_0",
+      "destination_debug_core": "system_ila_stage2b_0",
+      "bit_required": true,
+      "hwh_required": true,
+      "ltx_required": true,
+      "xsa_required": true
+    }
+  },
+  "target": {
+    "board": "PYNQ-Z2",
+    "part": "xc7z020clg400-1",
+    "board_part": "tul.com.tw:pynq-z2:part0:1.0",
+    "vivado_version": "2024.1",
+    "vivado_build": "5076996"
+  },
+  "topology": {
+    "project_top": "protection_system_wrapper",
+    "block_design": "protection_system",
+    "cell_inventory": ["axi_gpio_stage1d_0", "dcm_locked_const", "proc_sys_reset_0", "processing_system7_0", "protection_ip_axi_lite_0", "sample_valid_const", "smartconnect_0", "system_ila_stage2b_0", "xlslice_stage1d_ch1", "xlslice_stage1d_ch2"],
+    "cell_vlnvs": {
+      "axi_gpio_stage1d_0": "xilinx.com:ip:axi_gpio:2.0",
+      "dcm_locked_const": "xilinx.com:ip:xlconstant:1.1",
+      "proc_sys_reset_0": "xilinx.com:ip:proc_sys_reset:5.0",
+      "processing_system7_0": "xilinx.com:ip:processing_system7:5.5",
+      "protection_ip_axi_lite_0": "zsr112.local:protection:protection_ip_axi_lite:0.3",
+      "sample_valid_const": "xilinx.com:ip:xlconstant:1.1",
+      "smartconnect_0": "xilinx.com:ip:smartconnect:1.0",
+      "system_ila_stage2b_0": "xilinx.com:ip:system_ila:1.1",
+      "xlslice_stage1d_ch1": "xilinx.com:ip:xlslice:1.0",
+      "xlslice_stage1d_ch2": "xilinx.com:ip:xlslice:1.0"
+    },
+    "smartconnect": {"NUM_SI": 1, "NUM_MI": 2, "M00_AXI": "protection_ip_axi_lite_0/S_AXI", "M01_AXI": "axi_gpio_stage1d_0/S_AXI"},
+    "addresses": [
+      {"role": "PROTECTION_AXI_LITE", "cell": "protection_ip_axi_lite_0", "offset": "0x43C00000", "range": "0x00001000"},
+      {"role": "TEST_STIMULUS_AXI_GPIO", "cell": "axi_gpio_stage1d_0", "offset": "0x41200000", "range": "0x00010000"}
+    ],
+    "axi_gpio": {"C_IS_DUAL": 0, "C_GPIO_WIDTH": 24, "C_ALL_OUTPUTS": 1, "C_INTERRUPT_PRESENT": 0, "C_DOUT_DEFAULT": "0x00400400"},
+    "slices": [
+      {"cell": "xlslice_stage1d_ch1", "DIN_WIDTH": 24, "DIN_FROM": 11, "DIN_TO": 0, "DOUT_WIDTH": 12, "sink": "protection_ip_axi_lite_0/adc_sample_ch1"},
+      {"cell": "xlslice_stage1d_ch2", "DIN_WIDTH": 24, "DIN_FROM": 23, "DIN_TO": 12, "DOUT_WIDTH": 12, "sink": "protection_ip_axi_lite_0/adc_sample_ch2"}
+    ],
+    "adc_source_clock": {"source": "processing_system7_0/FCLK_CLK0", "sink": "protection_ip_axi_lite_0/adc_src_clk", "current_clock_alias": "ACLK", "future_distinct_clock_supported": true},
+    "controlled_stimulus": {"profile": "SAFE_INERT_EXPLICIT", "profile_class": "SAFE_INERT", "production_authority": true, "demo_test_only": false, "valid_source": "sample_valid_const/dout", "valid_value": 0, "functional_adc_stimulus": false, "valid_source_exists": true, "ready_consumed": false, "no_overwrite_when_ready_low": false, "transaction_pulse_bounded": false, "valid_sink": "protection_ip_axi_lite_0/adc_sample_valid", "valid_probe": "system_ila_stage2b_0/probe1", "channel_1_source": "xlslice_stage1d_ch1/Dout", "channel_1_sink": "protection_ip_axi_lite_0/adc_sample_ch1", "channel_2_source": "xlslice_stage1d_ch2/Dout", "channel_2_sink": "protection_ip_axi_lite_0/adc_sample_ch2", "ready_source": "protection_ip_axi_lite_0/adc_sample_ready", "ready_probe": "system_ila_stage2b_0/probe11", "source_acceptance_claimed": false, "fault_stimulus_claimed": false},
+    "debug_ready_observation": {"ready_observation_clock_domain": "ACLK", "adc_src_clock_domain": "FCLK_CLK0", "destination_clock_domain": "FCLK_CLK0", "clocks_identical_in_current_profile": true, "acceptance_evidence_scope": "CURRENT_IDENTICAL_CLOCKS_ONLY", "distinct_clock_debug_policy": "SOURCE_DOMAIN_ILA_OR_SYNCHRONIZED_OBSERVATION", "direct_async_ready_observation_as_cdc_proof": false},
+    "cdc_constraint_authority": {"path": "fpga/vivado/constraints/stage2d_async_adc_atomic_cdc.xdc", "crossings": ["WRITE_POINTER_TO_READ_DOMAIN", "READ_POINTER_TO_WRITE_DOMAIN"], "max_delay": true, "bus_skew": true, "payload_false_path": false, "hardware_reports_deferred_to_authorized_gate": ["report_cdc", "report_timing", "implemented_bus_skew"]},
+    "observability_cdc_constraint_authority": {"path": "fpga/vivado/constraints/stage2e_transaction_observability_cdc.xdc", "method": "REGISTERED_GRAY_MONOTONIC_COUNTERS", "crossing_count": 7, "counter_width": 32, "sequence_width": 32, "max_delay": true, "bus_skew": true, "binary_multi_bit_synchronization": false, "short_pulse_synchronization": false, "eventually_consistent": true, "atomic_multi_register_snapshot": false, "hardware_reports_deferred_to_authorized_gate": ["report_cdc", "report_timing", "implemented_bus_skew"]},
+    "observability_register_contract": {"version": 1, "capability_offset": "0x28", "status_w1c_offset": "0x2C", "status_w1c_mask": "0x000001FF", "any_error_bit": 9, "any_error_access": "READ_ONLY_MAINTAINED_POST_CLEAR_AGGREGATE", "any_error_cause_bits": [1, 8], "backpressure_excluded_from_any_error": true, "counter_range": ["0x30", "0x58"], "last_sequence_range": ["0x5C", "0x60"], "counter_width": 32, "counters_saturating": true, "counters_reset_only": true, "sticky_w1c": true, "new_event_over_clear": true, "source_telemetry_eventually_consistent": true, "atomic_multi_register_snapshot": false, "external_irq": false},
+    "system_ila": {
+      "cell": "system_ila_stage2b_0",
+      "vlnv": "xilinx.com:ip:system_ila:1.1",
+      "configuration": {"C_MON_TYPE": "MIX", "C_PROBE_WIDTH_PROPAGATION": "MANUAL", "C_NUM_MONITOR_SLOTS": 1, "C_SLOT_0_INTF_TYPE": "xilinx.com:interface:aximm_rtl:1.0", "C_SLOT_0_AXI_PROTOCOL": "AXI4LITE", "C_NUM_OF_PROBES": 12, "C_DATA_DEPTH": 4096},
+      "monitor": {"source": "protection_ip_axi_lite_0/S_AXI", "sink": "system_ila_stage2b_0/SLOT_0_AXI"},
+      "probes": [
+        {"index": 0, "source": "protection_ip_axi_lite_0/ARESETN", "width": 1},
+        {"index": 1, "source": "protection_ip_axi_lite_0/adc_sample_valid", "width": 1},
+        {"index": 2, "source": "protection_ip_axi_lite_0/adc_sample_ch1", "width": 12},
+        {"index": 3, "source": "protection_ip_axi_lite_0/adc_sample_ch2", "width": 12},
+        {"index": 4, "source": "protection_ip_axi_lite_0/pwm_raw", "width": 1},
+        {"index": 5, "source": "protection_ip_axi_lite_0/pwm_out", "width": 1},
+        {"index": 6, "source": "protection_ip_axi_lite_0/fault_valid", "width": 1},
+        {"index": 7, "source": "protection_ip_axi_lite_0/fault_latched", "width": 1},
+        {"index": 8, "source": "protection_ip_axi_lite_0/fault_code", "width": 8},
+        {"index": 9, "source": "protection_ip_axi_lite_0/fault_code_latched", "width": 8},
+        {"index": 10, "source": "protection_ip_axi_lite_0/fsm_state", "width": 4},
+        {"index": 11, "source": "protection_ip_axi_lite_0/adc_sample_ready", "width": 1}
+      ]
+    },
+    "external_interfaces": ["DDR", "FIXED_IO"],
+    "custom_external_pl_ports": [],
+    "pwm_out_visibility": "SYSTEM_ILA_INTERNAL_ONLY"
+  },
+  "ordered_build_phases": ["SOURCE_PRECHECK", "PACKAGE_IP", "CREATE_PROJECT", "CREATE_BASE_BD", "ADD_DEBUG", "ADD_CONTROLLED_STIMULUS", "GENERATE_WRAPPER", "VALIDATE_FINAL_TOPOLOGY", "SYNTHESIS", "OPT_DESIGN", "PLACE_DESIGN", "ROUTE_DESIGN", "ARTIFACT_GENERATION", "REPORT_COLLECTION"],
+  "runtime_property_contract": {
+    "path": "fpga/vivado/build/config/stage1e_vivado_runtime_property_map_v2.dict",
+    "sha256": "24bd6a396eea7f96870fe9f643a24c98825585c9e1caf3387397735474b6156b",
+    "interface": "stage1e-vivado-runtime-common-interface-v2"
+  },
+  "phase_evidence": {"owner": "runner_phase_journal", "events": ["ATTEMPT", "COMPLETED", "FAILED"], "native_operation_ledger_claimed": false},
+  "process_invocation": {"allowed_extensions": [".exe", ".bat"], "direct_extension": ".exe", "command_interpreter_extension": ".bat", "stdout_stderr_redirected": true, "timeout_and_tree_supervision": true},
+  "forbidden_operations": ["phys_opt_design", "power_opt_design", "post_place_power_opt_design", "post_route_phys_opt_design", "incremental_implementation", "checkpoint_import", "fallback_execution", "open_hw_manager", "connect_hw_server", "program_hw_devices"],
+  "required_report_roles": ["TIMING_SUMMARY", "TIMING_PATH_GROUPS", "CLOCK_INTERACTION", "CLOCKS_GENERATED_CLOCKS", "CONSTRAINT_COVERAGE", "CHECK_TIMING", "TIMING_EXCEPTION_SOURCE", "CONDITIONAL_BUS_SKEW", "UTILIZATION", "DRC", "METHODOLOGY", "CDC", "MESSAGE_SOURCE"],
+  "artifact_roles": {"required_for_artifacts": ["BITSTREAM", "XSA", "HWH", "LTX", "ARTIFACT_MANIFEST"], "required_role_uniqueness": true, "hwh_design": "protection_system"},
+  "retained_project_contract": ["GUI_PROJECT_PATH", "SYNTH_RUN_AVAILABLE", "IMPL_RUN_AVAILABLE", "PROJECT_SAFE_TO_OPEN"],
+  "acceptance": {"engineering": "ENGINEERING_EVIDENCE_ONLY", "formal": "FORMAL_CURRENT_RUN_FINDING_COMPARATOR_NOT_IMPLEMENTED"},
+  "finding_decision_contract": {
+    "schema": "fpga/vivado/build/lib/stage1e_run2_finding_disposition_decision_v1.schema.json",
+    "contract": "fpga/vivado/build/lib/stage1e_finding_disposition_decision_contract_v1.tcl",
+    "decision": "fpga/vivado/build/config/stage1e_run2_finding_disposition_decision_v1.json",
+    "candidate": "fpga/vivado/build/config/stage1e_run2_finding_disposition_candidate_v1.json",
+    "current_authority": "NONE"
+  }
+}

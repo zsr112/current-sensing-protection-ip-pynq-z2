@@ -1,0 +1,138 @@
+schema_version stage1e-phase3-implementation-framework-v3
+framework_state CANDIDATE_HUMAN_REVIEW_REQUIRED_NOT_AUTHORIZED
+state_dimensions {
+    source_capability PRODUCTION_IMPLEMENTED
+    runtime_review REVIEW_REQUIRED
+    qualification NOT_AVAILABLE
+    authorization NONE
+}
+boundary {
+    implementation_execution_authorized 0
+    qualification_execution_authorized 0
+    authorization_creation_authorized 0
+    qualification_authority_path_available 1
+    production_runtime_dispatch_available 0
+    current_production_dispatch BLOCKED
+    artifact_authority NONE
+    publication_authority NONE
+    board_authority NONE
+}
+runtime_contract {
+    schema_version stage1e-runtime-backend-identity-v2
+    schema_interface stage1e-runtime-backend-identity-schema-interface-v2
+    runtime_root fpga/vivado/build/runtime
+    selected_entry_point fpga/vivado/build/runtime/entrypoint/v2/stage1e_production_runtime_entrypoint_v2.ps1
+    entry_point_implementation stage1e-production-runtime-entrypoint-implementation-v2
+    capability_state PRODUCTION_IMPLEMENTED
+    review_state REVIEW_REQUIRED
+    qualification_owner EXTERNAL_QUALIFICATION_IDENTITY
+    source_freeze_review_owner Q1
+    current_reviewed_owner Q5
+    qualification_identity_owner Q5
+    terminal_state_owner Q5
+    final_live_closure_required 1
+    evidence_and_finding_review_required 1
+    source_capability_enables_dispatch 0
+}
+direct_runtime_roles {
+    ENTRY_POINT
+    LAUNCHER
+    RUNNER
+    COLLECTOR
+    PARSER
+    IDENTITY_SERIALIZER
+    HOST_OBSERVER
+    VIVADO_CAPABILITY_OBSERVER
+}
+subordinate_contract_roles {
+    RUNTIME_SCHEMA
+    HASH_PROVIDER
+    CONTROLLER
+    ADAPTER
+    FRAMEWORK
+    REQUEST
+    RESULT
+    REPORT
+    MESSAGE
+    HOST
+}
+child_binding_contract {
+    framework_v3_contract_explicit 1
+    canonicalization_explicit 1
+    codec_explicit 1
+    atomic_publication_explicit 1
+    provider_registry_explicit 1
+    prt02_e_closure_explicit 1
+    prt03_activation_explicit 1
+    one_canonical_hash_provider_owner_required 1
+    source_check_state HISTORICAL_NON_PRODUCTION_NOT_REACHABLE
+}
+closure_bindings {
+    prt02_e_state DISCONNECTED_CANDIDATE_CLOSURE_VALIDATED
+    prt03_state CONNECTED_RUNTIME_ASSEMBLY_READINESS_FOUNDATION
+    host_live_state HOST_FULL_TRANSITIVE_LIVE_CLOSURE_NOT_PROVEN
+    vivado_ledger_state VIVADO_PRE_DISPATCH_LEDGER_NOT_AVAILABLE
+    postprocess_ledger_state POSTPROCESS_PRE_DISPATCH_LEDGER_NOT_AVAILABLE
+    final_tool_bound_state FINAL_TOOL_BOUND_PRE_DISPATCH_CLOSURE_NOT_PROVEN
+}
+identity_schemas {
+    runtime_backend_identity stage1e-runtime-backend-identity-v2
+    implementation_policy_identity stage1e-implementation-policy-identity-v3
+    implementation_configuration_identity stage1e-implementation-configuration-identity-v3
+    warning_policy_identity stage1e-warning-policy-identity-v3
+    source_identity COMMIT_REQUIRED_BEFORE_IDENTITY_FINALIZATION
+    source_freeze_review_record CREATED_ONLY_BY_EXPLICIT_Q1_AUTHORITY
+    runtime_review_record CREATED_ONLY_BY_EXPLICIT_Q5_AUTHORITY
+    qualification_identity CREATED_ONLY_BY_EXPLICIT_Q5_AUTHORITY
+    qualification_terminal_record CREATED_ONLY_BY_EXPLICIT_Q5_AUTHORITY
+    authorization_identity CREATED_ONLY_BY_SEPARATE_FUTURE_AUTHORITY
+}
+operation_contract {
+    allowed_operations {
+        opt_design
+        place_design
+        route_design
+        implementation_reports
+    }
+    forbidden_operations {
+        phys_opt_design
+        power_opt_design
+        write_bitstream
+        write_hw_platform
+        write_xsa
+        export_hardware
+        artifact_collection
+        artifact_publication
+        open_hw_manager
+        connect_hw_server
+        program_hw_devices
+        board_access
+    }
+    phys_opt_state DISABLED
+    phys_opt_authorized 0
+    phys_opt_sequence 0
+    phys_opt_directive NONE
+    phys_opt_invocation PROHIBITED
+    phys_opt_readback_required 1
+    phys_opt_zero_invocation_required 1
+    effective_graph_readback_required 1
+    configured_to_effective_mismatch_action BLOCK
+}
+finding_review_contract {
+    inventory_path fpga/vivado/build/config/stage1e_run1_finding_inventory_v1.json
+    warning_policy_path fpga/vivado/build/config/stage1e_implementation_warning_policy_v3.dict
+    accepted_dispositions {}
+    unknown_disposition REJECTED
+    unresolved_disposition BLOCKING
+    human_decision_record_required 1
+}
+validation_contract {
+    static_tests_required 1
+    schema_tests_required 1
+    negative_tests_required 1
+    mutation_tests_required 1
+    protected_source_hash_tests_required 1
+    complete_non_vivado_regression_required 1
+    final_tool_bound_validation_owner Q0_Q5
+    vivado_invocation_allowed 0
+}

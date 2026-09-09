@@ -1,0 +1,814 @@
+schema_version stage1e-evidence-record-contract-v1
+contract_state PRODUCTION_CANDIDATE_REVIEW_REQUIRED
+canonical_json_interface stage1e-runtime-canonical-json-interface-v1
+atomic_publication_interface stage1e-runtime-atomic-publication-interface-v1
+interface_versions {
+    common stage1e-evidence-pipeline-common-interface-v1
+    collector stage1e-production-vivado-collector-interface-v1
+    parser stage1e-production-evidence-parser-interface-v1
+    serializer stage1e-production-evidence-serializer-interface-v1
+    controller stage1e-production-evidence-controller-interface-v1
+    adapter stage1e-production-evidence-adapter-interface-v1
+}
+records {
+    evidence_authority_boundary {
+        owner CONTRACT
+        fields {
+            qualification_decision authorization_issue
+            authorization_consumption engineering_acceptance
+            implementation_result_candidate artifact publication
+            hardware_manager board_access
+        }
+        types {
+            qualification_decision string authorization_issue string
+            authorization_consumption string engineering_acceptance string
+            implementation_result_candidate string artifact string
+            publication string hardware_manager string board_access string
+        }
+    }
+    content_integrity_observation {
+        owner EVIDENCE_PRODUCER
+        fields {
+            schema_version subject_role request_identity execution_id
+            attempt_id workspace_identity producer_session_reference
+            integrity_state byte_count content_sha256
+        }
+        types {
+            schema_version string subject_role string request_identity string
+            execution_id string attempt_id string workspace_identity string
+            producer_session_reference string integrity_state string
+            byte_count integer content_sha256 string
+        }
+    }
+    sealed_evidence_reference {
+        owner EVIDENCE_SERIALIZER
+        fields {
+            schema_version reference_role record_type location_state
+            literal_path request_identity execution_id attempt_id
+            workspace_identity producer_session_reference integrity_state
+            content_sha256_observation publication_receipt_reference
+            availability_state authority_boundary
+        }
+        types {
+            schema_version string reference_role string record_type string
+            location_state string literal_path string request_identity string
+            execution_id string attempt_id string workspace_identity string
+            producer_session_reference string integrity_state string
+            content_sha256_observation record:content_integrity_observation
+            publication_receipt_reference string availability_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    collector_producer_session {
+        owner COLLECTOR
+        fields {
+            schema_version producer_session_reference request_identity
+            execution_id attempt_id workspace_identity session_id
+            host_process_reference vivado_process_reference
+            load_ledger_reference current_run current_design_state
+            collector_interface report_contract_version
+            first_collector_ordinal immutable_state
+        }
+        types {
+            schema_version string producer_session_reference string
+            request_identity string execution_id string attempt_id string
+            workspace_identity string session_id string
+            host_process_reference string vivado_process_reference string
+            load_ledger_reference string current_run string
+            current_design_state string collector_interface string
+            report_contract_version string first_collector_ordinal integer
+            immutable_state string
+        }
+    }
+    report_output_reservation {
+        owner COLLECTOR
+        fields {
+            schema_version reservation_reference role_ordinal report_role
+            role_attempt request_identity execution_id attempt_id
+            workspace_identity producer_session_reference requested_path
+            reservation_state authority_boundary
+        }
+        types {
+            schema_version string reservation_reference string
+            role_ordinal integer report_role string role_attempt integer
+            request_identity string execution_id string attempt_id string
+            workspace_identity string producer_session_reference string
+            requested_path string reservation_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    fixture_operation_ledger {
+        owner FIXTURE_PRODUCER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity producer_session_reference
+            source_handoff_reference entries entry_count ledger_state
+            fixture_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            producer_session_reference string source_handoff_reference string
+            entries record_list:ledger_projection_row entry_count integer
+            ledger_state string fixture_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    fixture_structural_evidence {
+        owner FIXTURE_PRODUCER
+        fields {
+            schema_version reference_role source_record_type
+            request_identity execution_id attempt_id workspace_identity
+            producer_session_reference source_reference fixture_state
+            request_provenance_state phys_opt_prohibition_state
+            forbidden_operation_state downstream_output_state
+            structural_state authority_boundary
+        }
+        types {
+            schema_version string reference_role string
+            source_record_type string request_identity string
+            execution_id string attempt_id string workspace_identity string
+            producer_session_reference string source_reference string
+            fixture_state string request_provenance_state string
+            phys_opt_prohibition_state string
+            forbidden_operation_state string downstream_output_state string
+            structural_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    raw_evidence_item {
+        owner EVIDENCE_PRODUCER
+        fields {
+            schema_version ordinal role requirement_state condition_state
+            acquisition_owner evidence_state parser_state
+            producer_session_reference request_identity execution_id
+            attempt_id workspace_identity requested_path observed_path
+            byte_state byte_count integrity_state
+            content_sha256_observation publication_receipt_reference
+            format_profile identity_state identity_reference
+            source_references failure_reference foreign_state
+        }
+        types {
+            schema_version string ordinal integer role string
+            requirement_state string condition_state string
+            acquisition_owner string evidence_state string
+            parser_state string producer_session_reference string
+            request_identity string execution_id string attempt_id string
+            workspace_identity string requested_path string
+            observed_path string byte_state string byte_count integer
+            integrity_state string
+            content_sha256_observation record:content_integrity_observation
+            publication_receipt_reference string format_profile string
+            identity_state string
+            identity_reference string source_references string_list
+            failure_reference string foreign_state string
+        }
+    }
+    raw_evidence_inventory {
+        owner COLLECTOR
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity producer_session_reference report_contract_version
+            items item_count inventory_state identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            producer_session_reference string report_contract_version string
+            items record_list:raw_evidence_item item_count integer
+            inventory_state string identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    collector_request {
+        owner EVIDENCE_ADAPTER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity session_id collector_interface
+            report_contract_version message_contract_version
+            parser_profiles_contract_version evidence_record_contract_version
+            c_handoff operation_ledger_reference current_design_state
+            report_root report_event_root report_ledger_path
+            collector_result_path role_output_paths conditional_decisions
+            command_availability attempt_deadline_state
+            reporting_deadline_state total_deadline_state execution_model_state
+            producer_session adopted_evidence authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string session_id string
+            collector_interface string report_contract_version string
+            message_contract_version string
+            parser_profiles_contract_version string
+            evidence_record_contract_version string c_handoff dictionary
+            operation_ledger_reference string current_design_state string
+            report_root string report_event_root string
+            report_ledger_path string collector_result_path string
+            role_output_paths dictionary conditional_decisions dictionary
+            command_availability dictionary attempt_deadline_state string
+            reporting_deadline_state string total_deadline_state string
+            execution_model_state string
+            producer_session record:collector_producer_session
+            adopted_evidence record_list:raw_evidence_item
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    report_attempt_open_event {
+        owner COLLECTOR
+        fields {
+            schema_version event_type event_reference event_ordinal
+            role_ordinal report_role role_attempt request_identity
+            execution_id attempt_id workspace_identity
+            producer_session_reference producer_phase current_design_state
+            exact_command_role exact_command_name exact_command_options
+            requested_path reservation_reference start_observation deadline_state
+            identity_state authority_boundary
+        }
+        types {
+            schema_version string event_type string event_reference string
+            event_ordinal integer role_ordinal integer report_role string
+            role_attempt integer request_identity string execution_id string
+            attempt_id string workspace_identity string
+            producer_session_reference string producer_phase string
+            current_design_state string exact_command_role string
+            exact_command_name string exact_command_options string_list
+            requested_path string reservation_reference string
+            start_observation string
+            deadline_state string identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    report_attempt_terminal_event {
+        owner COLLECTOR
+        fields {
+            schema_version event_type event_reference event_ordinal
+            open_event_reference role_ordinal report_role role_attempt
+            request_identity execution_id attempt_id workspace_identity
+            producer_session_reference reservation_reference attempt_status
+            observed_path byte_state byte_count integrity_state
+            content_sha256_observation publication_receipt_reference
+            command_result end_observation failure_reference
+            continuation_state identity_state authority_boundary
+        }
+        types {
+            schema_version string event_type string event_reference string
+            event_ordinal integer open_event_reference string
+            role_ordinal integer report_role string role_attempt integer
+            request_identity string execution_id string attempt_id string
+            workspace_identity string producer_session_reference string
+            reservation_reference string attempt_status string
+            observed_path string byte_state string byte_count integer
+            integrity_state string
+            content_sha256_observation record:content_integrity_observation
+            publication_receipt_reference string command_result string
+            end_observation string
+            failure_reference string continuation_state string
+            identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    report_interruption_event {
+        owner HOST_TERMINAL_INTEGRATOR
+        fields {
+            schema_version event_type event_reference event_ordinal
+            open_event_reference role_ordinal report_role role_attempt
+            request_identity execution_id attempt_id workspace_identity
+            producer_session_reference reservation_reference interruption_state
+            interruption_observation process_effect failure_reference
+            authority_boundary
+        }
+        types {
+            schema_version string event_type string event_reference string
+            event_ordinal integer open_event_reference string
+            role_ordinal integer report_role string role_attempt integer
+            request_identity string execution_id string attempt_id string
+            workspace_identity string producer_session_reference string
+            reservation_reference string interruption_state string
+            interruption_observation string
+            process_effect string failure_reference string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    report_attempt_logical_record {
+        owner EVIDENCE_SERIALIZER
+        fields {
+            schema_version role_ordinal report_role role_attempt
+            request_identity execution_id attempt_id workspace_identity
+            producer_session_reference reservation_reference
+            open_event_reference terminal_event_reference
+            interruption_event_reference attempt_status requested_path
+            observed_path failure_reference
+        }
+        types {
+            schema_version string role_ordinal integer report_role string
+            role_attempt integer request_identity string execution_id string
+            attempt_id string workspace_identity string
+            producer_session_reference string reservation_reference string
+            open_event_reference string
+            terminal_event_reference string interruption_event_reference string
+            attempt_status string requested_path string observed_path string
+            failure_reference string
+        }
+    }
+    report_ledger {
+        owner COLLECTOR
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity producer_session_reference
+            report_contract_version reservations reservation_count
+            open_events terminal_events
+            interruption_events logical_attempts event_count
+            preflight_state preflight_failure_reference immutable_state
+            retry_count terminal_state identity_state
+            authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            producer_session_reference string report_contract_version string
+            reservations record_list:report_output_reservation
+            reservation_count integer
+            open_events record_list:report_attempt_open_event
+            terminal_events record_list:report_attempt_terminal_event
+            interruption_events record_list:report_interruption_event
+            logical_attempts record_list:report_attempt_logical_record
+            event_count integer preflight_state string
+            preflight_failure_reference string immutable_state string
+            retry_count integer
+            terminal_state string identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    collector_result {
+        owner COLLECTOR
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity producer_session_reference terminal_status
+            entry_mode report_contract_version report_ledger_reference
+            raw_evidence_inventory role_coverage first_failure_reference
+            secondary_failure_references failure_category failure_code
+            failure_phase evidence_state identity_state candidate_effect
+            authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            producer_session_reference string terminal_status string
+            entry_mode string report_contract_version string
+            report_ledger_reference string
+            raw_evidence_inventory record:raw_evidence_inventory
+            role_coverage string_list first_failure_reference string
+            secondary_failure_references string_list failure_category string
+            failure_code string failure_phase string evidence_state string
+            identity_state string candidate_effect string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    parser_request {
+        owner EVIDENCE_ADAPTER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_interface parser_attempt_ordinal
+            report_contract_version message_contract_version
+            format_profiles_contract_version raw_evidence_inventory
+            parser_output_root parser_result_path inventory_paths
+            input_seal_state historical_source_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string parser_interface string
+            parser_attempt_ordinal integer report_contract_version string
+            message_contract_version string
+            format_profiles_contract_version string
+            raw_evidence_inventory record:raw_evidence_inventory
+            parser_output_root string parser_result_path string
+            inventory_paths dictionary input_seal_state string
+            historical_source_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    parser_attempt {
+        owner PARSER
+        fields {
+            schema_version parser_attempt_reference parser_attempt_ordinal
+            request_identity execution_id attempt_id workspace_identity
+            parser_interface start_observation terminal_observation
+            attempt_state source_references issue_references
+            immutable_state authority_boundary
+        }
+        types {
+            schema_version string parser_attempt_reference string
+            parser_attempt_ordinal integer request_identity string
+            execution_id string attempt_id string workspace_identity string
+            parser_interface string start_observation string
+            terminal_observation string attempt_state string
+            source_references string_list issue_references string_list
+            immutable_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    parser_result {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt parser_interface
+            terminal_state selected_profiles inventory_references
+            preserved_record_count first_failure_reference
+            secondary_failure_references identity_state candidate_effect
+            authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt record:parser_attempt parser_interface string
+            terminal_state string selected_profiles string_list
+            inventory_references string_list preserved_record_count integer
+            first_failure_reference string
+            secondary_failure_references string_list identity_state string
+            candidate_effect string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    message_record {
+        owner PARSER
+        fields {
+            identifier raw_identifier identifier_state severity
+            native_severity producer_phase phase_evidence count text
+            source_kind source_location affected_context source_references
+            occurrence_references completeness
+        }
+        types {
+            identifier string raw_identifier string identifier_state string
+            severity string native_severity string producer_phase string
+            phase_evidence string count integer text string source_kind string
+            source_location string affected_context string
+            source_references string_list occurrence_references string_list
+            completeness string
+        }
+    }
+    drc_record {
+        owner PARSER
+        fields {
+            identifier raw_identifier identifier_state severity
+            native_severity count affected_objects report_reference
+            source_references completeness
+        }
+        types {
+            identifier string raw_identifier string identifier_state string
+            severity string native_severity string count integer
+            affected_objects string_list report_reference string
+            source_references string_list completeness string
+        }
+    }
+    methodology_record {
+        owner PARSER
+        fields {
+            identifier raw_identifier identifier_state severity count
+            affected_objects category source report_reference completeness
+        }
+        types {
+            identifier string raw_identifier string identifier_state string
+            severity string count integer affected_objects string_list
+            category string source string report_reference string
+            completeness string
+        }
+    }
+    timing_record {
+        owner PARSER
+        fields {
+            check_type path_group metric raw_value normalized_value_state
+            normalized_value unit failing_endpoints path_count
+            source_reference completeness
+        }
+        types {
+            check_type string path_group string metric string raw_value string
+            normalized_value_state string normalized_value string unit string
+            failing_endpoints integer
+            path_count integer source_reference string completeness string
+        }
+    }
+    clock_cdc_record {
+        owner PARSER
+        fields {
+            record_kind identifier classification severity source_clock
+            destination_clock source_object destination_object relationship
+            period_state period_ps waveform_ps master_clock count reset_observation
+            source_reference completeness
+        }
+        types {
+            record_kind string identifier string classification string
+            severity string source_clock string destination_clock string
+            source_object string destination_object string relationship string
+            period_state string period_ps string waveform_ps string
+            master_clock string
+            count integer reset_observation string source_reference string
+            completeness string
+        }
+    }
+    timing_exception_record {
+        owner PARSER
+        fields {
+            identifier command exception_type source from_expression
+            to_expression through_expression resolved_objects clock_pair
+            coverage state source_reference completeness
+        }
+        types {
+            identifier string command string exception_type string source string
+            from_expression string to_expression string
+            through_expression string resolved_objects string_list
+            clock_pair string coverage string state string
+            source_reference string completeness string
+        }
+    }
+    utilization_record {
+        owner PARSER
+        fields {
+            resource raw_resource used available utilization_milli_percent
+            canonical_unit scope source_reference completeness
+        }
+        types {
+            resource string raw_resource string used integer available integer
+            utilization_milli_percent integer canonical_unit string
+            scope string source_reference string completeness string
+        }
+    }
+    message_inventory {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt_reference source_references
+            format_profiles parse_state records record_count issue_references
+            identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt_reference string source_references string_list
+            format_profiles string_list parse_state string
+            records record_list:message_record record_count integer
+            issue_references string_list identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    drc_inventory {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt_reference source_references
+            format_profiles parse_state records record_count issue_references
+            identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt_reference string source_references string_list
+            format_profiles string_list parse_state string
+            records record_list:drc_record record_count integer
+            issue_references string_list identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    methodology_inventory {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt_reference source_references
+            format_profiles parse_state records record_count issue_references
+            identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt_reference string source_references string_list
+            format_profiles string_list parse_state string
+            records record_list:methodology_record record_count integer
+            issue_references string_list identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    timing_inventory {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt_reference source_references
+            format_profiles parse_state records record_count issue_references
+            summary_detail_state identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt_reference string source_references string_list
+            format_profiles string_list parse_state string
+            records record_list:timing_record record_count integer
+            issue_references string_list summary_detail_state string
+            identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    clock_cdc_inventory {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt_reference source_references
+            format_profiles parse_state records record_count issue_references
+            identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt_reference string source_references string_list
+            format_profiles string_list parse_state string
+            records record_list:clock_cdc_record record_count integer
+            issue_references string_list identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    timing_exception_inventory {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt_reference source_references
+            format_profiles parse_state records record_count issue_references
+            identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt_reference string source_references string_list
+            format_profiles string_list parse_state string
+            records record_list:timing_exception_record record_count integer
+            issue_references string_list identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    utilization_inventory {
+        owner PARSER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity parser_attempt_reference source_references
+            format_profiles parse_state records record_count issue_references
+            identity_state authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            parser_attempt_reference string source_references string_list
+            format_profiles string_list parse_state string
+            records record_list:utilization_record record_count integer
+            issue_references string_list identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    ledger_projection_row {
+        owner EVIDENCE_SERIALIZER
+        fields {ordinal role status reference}
+        types {ordinal integer role string status string reference string}
+    }
+    ledger_projection_comparison {
+        owner EVIDENCE_SERIALIZER
+        fields {
+            schema_version ledger_role full_ledger_reference derived_full_rows
+            compact_rows comparison_state mismatch_details
+        }
+        types {
+            schema_version string ledger_role string
+            full_ledger_reference record:sealed_evidence_reference
+            derived_full_rows record_list:ledger_projection_row
+            compact_rows record_list:ledger_projection_row
+            comparison_state string mismatch_details string_list
+        }
+    }
+    evidence_set_item {
+        owner EVIDENCE_SERIALIZER
+        fields {
+            ordinal role requirement_state condition_state evidence_state
+            parser_state producer_reference producer_session_reference
+            request_identity execution_id attempt_id workspace_identity
+            identity_state identity_reference failure_reference
+            foreign_state completeness_effect
+        }
+        types {
+            ordinal integer role string requirement_state string
+            condition_state string evidence_state string parser_state string
+            producer_reference string producer_session_reference string
+            request_identity string execution_id string attempt_id string
+            workspace_identity string identity_state string
+            identity_reference string failure_reference string
+            foreign_state string completeness_effect string
+        }
+    }
+    evidence_set_inventory {
+        owner EVIDENCE_SERIALIZER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity producer_session_reference
+            report_contract_version required_roles conditional_roles
+            adopted_roles present_roles missing_roles failed_roles
+            interrupted_roles foreign_execution_roles
+            unsupported_format_roles conflict_roles full_ledger_references
+            projection_comparisons items item_count inventory_state
+            identity_state candidate_effect authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            producer_session_reference string report_contract_version string
+            required_roles string_list conditional_roles string_list
+            adopted_roles string_list present_roles string_list
+            missing_roles string_list failed_roles string_list
+            interrupted_roles string_list foreign_execution_roles string_list
+            unsupported_format_roles string_list conflict_roles string_list
+            full_ledger_references record_list:sealed_evidence_reference
+            projection_comparisons record_list:ledger_projection_comparison
+            items record_list:evidence_set_item item_count integer
+            inventory_state string identity_state string candidate_effect string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    evidence_completeness_result {
+        owner EVIDENCE_CONTROLLER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity evidence_set_reference completeness_state
+            blocking_roles issue_references structural_only
+            candidate_effect authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string
+            evidence_set_reference record:sealed_evidence_reference
+            completeness_state string
+            blocking_roles string_list issue_references string_list
+            structural_only string candidate_effect string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+    evidence_structural_review_result {
+        owner EVIDENCE_CONTROLLER
+        fields {
+            schema_version request_identity execution_id attempt_id
+            workspace_identity review_state terminal_status
+            failure_category failure_code failure_phase
+            request_provenance_state host_result_state
+            operation_ledger_state phys_opt_prohibition_state
+            collector_ledger_state parser_inventory_state
+            role_completeness_state projection_agreement_state
+            failure_order_state forbidden_scan_state authority_state
+            first_failure_reference secondary_failure_references
+            candidate_effect policy_review_state identity_state
+            authority_boundary
+        }
+        types {
+            schema_version string request_identity string execution_id string
+            attempt_id string workspace_identity string review_state string
+            terminal_status string failure_category string
+            failure_code string failure_phase string
+            request_provenance_state string host_result_state string
+            operation_ledger_state string phys_opt_prohibition_state string
+            collector_ledger_state string parser_inventory_state string
+            role_completeness_state string projection_agreement_state string
+            failure_order_state string forbidden_scan_state string
+            authority_state string first_failure_reference string
+            secondary_failure_references string_list candidate_effect string
+            policy_review_state string identity_state string
+            authority_boundary record:evidence_authority_boundary
+        }
+    }
+}
+enums {
+    collector_entry_modes {ROUTED_REPORTING FAILURE_EVIDENCE_ONLY}
+    report_attempt_states {
+        NOT_ATTEMPTED STARTED COLLECTED FAILED MISSING BLOCKED
+        UNAVAILABLE_FOR_STATE INTERRUPTED
+    }
+    parser_terminal_states {
+        COMPLETE PARTIAL UNSUPPORTED_FORMAT CONFLICT TRUNCATED_INPUT
+        UNKNOWN_IDENTIFIER UNKNOWN_NUMERIC
+    }
+    evidence_states {
+        PRESENT MISSING FAILED BLOCKED INTERRUPTED UNAVAILABLE_FOR_STATE
+        FOREIGN_EXECUTION UNSUPPORTED_FORMAT CONFLICT NOT_REQUIRED
+    }
+    identity_states {PENDING_IDENTITY_PROVIDER UNAVAILABLE_WITH_REASON}
+    condition_states {REQUIRED NOT_REQUIRED CONDITION_UNKNOWN NOT_APPLICABLE}
+    foreign_states {CURRENT FOREIGN HISTORICAL FIXTURE_ONLY}
+    byte_states {PRESENT ZERO_BYTE MISSING UNAVAILABLE}
+    integrity_states {VERIFIED_SHA256 UNAVAILABLE_WITH_REASON NOT_APPLICABLE}
+    reference_location_states {FILE EXPLICIT_DISCONNECTED STRUCTURAL_NON_FILE}
+    reference_availability_states {
+        PRESENT DISCONNECTED_EXPLICIT UNAVAILABLE_WITH_REASON
+    }
+    numeric_value_states {PRESENT UNKNOWN}
+    completeness_states {COMPLETE PARTIAL UNAVAILABLE}
+    projection_states {MATCH MISMATCH}
+    structural_review_states {
+        EVIDENCE_STRUCTURAL_REVIEW_COMPLETE EVIDENCE_INCOMPLETE
+        COLLECTOR_BLOCKED PARSER_BLOCKED
+    }
+}
+policy_stop {
+    terminal_status BLOCKED failure_category POLICY_REVIEW
+    failure_code PRODUCTION_POLICY_REVIEW_NOT_IMPLEMENTED
+    failure_phase REVIEW candidate_effect NOT_CREATED
+    review_state EVIDENCE_STRUCTURAL_REVIEW_COMPLETE
+}

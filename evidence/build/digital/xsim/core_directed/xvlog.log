@@ -1,0 +1,20 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/fault_defs.vh" into library work
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/current_compare_dual.v" into library work
+INFO: [VRFC 10-311] analyzing module current_compare_dual
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/sensor_health_monitor.v" into library work
+INFO: [VRFC 10-311] analyzing module sensor_health_monitor
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/fault_classifier.v" into library work
+INFO: [VRFC 10-311] analyzing module fault_classifier
+INFO: [VRFC 10-311] analyzing module stage2g_fault_evaluation_pipeline
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_fsm.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_fsm
+INFO: [VRFC 10-311] analyzing module stage2g_fault_episode_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/pwm_gen.v" into library work
+INFO: [VRFC 10-311] analyzing module pwm_gen
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/pwm_gate.v" into library work
+INFO: [VRFC 10-311] analyzing module pwm_gate
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/rtl/protection_core_top.v" into library work
+INFO: [VRFC 10-311] analyzing module protection_core_top
+INFO: [VRFC 10-311] analyzing module stage2g_protection_core
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_core_directed.sv" into library work
+INFO: [VRFC 10-311] analyzing module tb_stage2g_core_directed

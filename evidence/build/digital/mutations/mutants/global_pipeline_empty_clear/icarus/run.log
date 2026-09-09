@@ -1,0 +1,8 @@
+FAIL cycle=94 clear_no_sample_pending actual=0 expected=1
+FAIL cycle=108 clear_healthy_reset_wait actual=00000001 expected=00000002
+FAIL cycle=108 clear_sequence actual=00000000 expected=00000202
+FAIL cycle=112 post_clear_armed actual=00000001 expected=00000000
+FAIL cycle=116 post_recovery_first actual=00000001 expected=00000020
+STAGE2G_POLICY_MATRIX=FAIL_5
+FATAL: <EXTERNAL_SOURCE>\tb\stage2g\tb_stage2g_policy_matrix.sv:489: 
+       Time: 1771000  Scope: tb_stage2g_policy_matrix

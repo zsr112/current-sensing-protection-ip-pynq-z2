@@ -1149,7 +1149,9 @@ module tb_protection_ip_top_axi_lite;
   endtask
 
   initial begin
-    $dumpfile("sim/waves/tb_protection_ip_top_axi_lite.vcd");
+    string wave_dir;
+    if (!$value$plusargs("CSIP_WAVE_DIR=%s", wave_dir)) wave_dir = "sim/waves";
+    $dumpfile({wave_dir, "/tb_protection_ip_top_axi_lite.vcd"});
     $dumpvars(0, tb_protection_ip_top_axi_lite);
 
     wait_cycles(3);

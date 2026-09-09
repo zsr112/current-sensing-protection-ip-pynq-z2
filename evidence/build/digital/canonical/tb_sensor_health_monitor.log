@@ -1,0 +1,4 @@
+SENSOR_HEALTH contract: counters and flags update only on sample_valid
+SENSOR_HEALTH contract: flags compare the previous counter value, so assert/recover one valid sample after the counter boundary
+tb_sensor_health_monitor PASS
+<EXTERNAL_SOURCE>\tb\tb_sensor_health_monitor.sv:189: $finish called at 1162000 (1ps)
