@@ -1,0 +1,3 @@
+de73b0983e976e6daa500b929eb1cd0d48473d21ced45906406f27de6dcc8c50  stage2-self-contained-v2r3.zip
+379be92d2048a32e84b615870aacfe3e9e5460410a1953702073a8ba169de700  stage2-self-contained-v2r3.windows-post-seal.json
+a3b8a93993e9495f18930f2fc162955e5b21ea7681ce6358b29b7e31b4682cf6  stage2-self-contained-v2r3.macos-post-seal.json

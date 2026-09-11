@@ -1,4 +1,4 @@
-name: v2r3 portable delivery checks
+name: Portable source and delivery checks
 on:
   push:
     branches: [main]
@@ -28,26 +28,19 @@ jobs:
         run: brew install icarus-verilog
       - name: Windows Icarus
         if: runner.os == 'Windows'
-        id: msys2
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: UCRT64
-          update: true
-          install: mingw-w64-ucrt-x86_64-iverilog
-      - name: Add Windows Icarus to PATH
-        if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          '${{ steps.msys2.outputs.msys2-location }}\ucrt64\bin' | Add-Content $env:GITHUB_PATH
-      - name: Verify current sealed delivery and portable contract
+          choco install iverilog --yes --no-progress
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          'C:\iverilog\bin' | Add-Content $env:GITHUB_PATH
+      - name: Source and generated delivery contract
         env:
           PYTHONDONTWRITEBYTECODE: '1'
           PYTHONUTF8: '1'
-        run: python -B delivery/tools/ci/run_ci.py --output "${{ runner.temp }}/csip-ci"
-      - name: Keep execution evidence
+        run: python -B tools/ci/run_ci.py --output "${{ runner.temp }}/csip-ci"
+      - name: Keep all execution evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: v2r3-portable-${{ matrix.os }}
+          name: portable-${{ matrix.os }}
           path: ${{ runner.temp }}/csip-ci
-          include-hidden-files: true
