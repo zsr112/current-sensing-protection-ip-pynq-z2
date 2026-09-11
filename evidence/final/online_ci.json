@@ -1,0 +1,84 @@
+{
+  "platforms": {
+    "macos-latest": {
+      "artifact": {
+        "bytes": 3975120,
+        "sha256": "8f9dd59d5886d4be19bcf57635500976ced2963083e8e63d3ce0375df13881d2"
+      },
+      "artifact_id": 10168913425,
+      "ci_result": {
+        "bytes": 731,
+        "sha256": "29423014d7341149aba1b7200dea0a4415e42d185e372ba57a41b9e1d5837d54"
+      },
+      "portable_result": {
+        "bytes": 3183,
+        "sha256": "153152232fac295877f649222b9a58bb083b7ee3caae2475a11e0b661d0bc9ea"
+      },
+      "selected_manifest": {
+        "bytes": 83545,
+        "sha256": "f019ce4b54ca8e46e025671b9f849611af6fb3f5d51e5833f43252c5e2bdab9e"
+      },
+      "selected_origin": {
+        "commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+        "tree": "85a0c3bcc239a7e978e23da1a83b724dd64530ea"
+      },
+      "status": "PASS"
+    },
+    "ubuntu-latest": {
+      "artifact": {
+        "bytes": 4001552,
+        "sha256": "e9168ecd37822f58c7caf82967315afb95622ace95389d746d3a4e36d2373a23"
+      },
+      "artifact_id": 10168937156,
+      "ci_result": {
+        "bytes": 697,
+        "sha256": "865cff8ae5ae65b2ce0a19d491c93aff0ddd2962e73108e57d4a30e712e35ad0"
+      },
+      "portable_result": {
+        "bytes": 3080,
+        "sha256": "eb5593589c2892db010f678c61e232d856cc9021998f0b0b074ea60885ac851f"
+      },
+      "selected_manifest": {
+        "bytes": 83545,
+        "sha256": "f019ce4b54ca8e46e025671b9f849611af6fb3f5d51e5833f43252c5e2bdab9e"
+      },
+      "selected_origin": {
+        "commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+        "tree": "85a0c3bcc239a7e978e23da1a83b724dd64530ea"
+      },
+      "status": "PASS"
+    },
+    "windows-latest": {
+      "artifact": {
+        "bytes": 4039621,
+        "sha256": "25d72b385b0563717571fc37bc5865e31782481d26fcdc9b5b69c70093d34d32"
+      },
+      "artifact_id": 10168977858,
+      "ci_result": {
+        "bytes": 757,
+        "sha256": "213b05ef12f8558d7e2e5ab5396ad6518a444fd890081ff996a5a08f5523b66e"
+      },
+      "portable_result": {
+        "bytes": 3278,
+        "sha256": "442a0f2e28d6fb77f21d6c92d3c4c6581a6d7d13486229818bbe5a6e7a3644e6"
+      },
+      "selected_manifest": {
+        "bytes": 83549,
+        "sha256": "2ee55e7ae93df048fec3cb238f0b7360aa284b8a800ca268167b3e773181515a"
+      },
+      "selected_origin": {
+        "commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+        "tree": "85a0c3bcc239a7e978e23da1a83b724dd64530ea"
+      },
+      "status": "PASS"
+    }
+  },
+  "release_id": "stage2-self-contained-v2r3",
+  "run_url": "https://github.com/zsr112/current-sensing-protection-ip/actions/runs/34519139280",
+  "schema": "csip-online-ci-v1",
+  "status": "PASS",
+  "tested_commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+  "workflow": "Portable source and delivery checks",
+  "workflow_commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+  "workflow_file": ".github/workflows/portable.yml"
+}

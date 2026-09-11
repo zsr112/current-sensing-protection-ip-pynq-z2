@@ -3,10 +3,10 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 17:21:03 2026
-# Process ID: 20468
+# Start of session at: Thu Sep 10 11:16:30 2026
+# Process ID: 47788
 # Current directory: <EXTERNAL_BOARD>/normal_pwm
-# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\normal_pwm\vivado.log -journal <EXTERNAL_BOARD>\normal_pwm\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\normal_pwm source_accept destination_trigger_now CSIP-SC-V2-BOARD-002
+# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\normal_pwm\vivado.log -journal <EXTERNAL_BOARD>\normal_pwm\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\normal_pwm source_accept destination_trigger_now CSIP-V2R3-BOARD-001
 # Log file: <EXTERNAL_BOARD>/normal_pwm/vivado.log
 # Journal file: <EXTERNAL_BOARD>\normal_pwm\vivado.jou
 # Running On        :illusion
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10529 MB
+# Available Virtual :7405 MB
 #-----------------------------------------------------------
 source {<EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl} -notrace
 INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
@@ -44,7 +44,7 @@ INFO: [Labtools 27-2221] Launch Output:
 
 
 
-connect_hw_server: Time (s): cpu = 00:00:00 ; elapsed = 00:00:06 . Memory (MB): peak = 586.047 ; gain = 2.969
+connect_hw_server: Time (s): cpu = 00:00:00 ; elapsed = 00:00:06 . Memory (MB): peak = 586.910 ; gain = 2.988
 INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/1234-tulA
 INFO: [Labtools 27-2302] Device xc7z020 (JTAG device index = 1) is programmed with a design that has 2 ILA core(s).
 invalid command name "::labtools::platform::ids::get_probe_interface_dict"
@@ -89,7 +89,7 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=TRIGGER_COMPARE_VALUE
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-09 17:21:20
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-10 11:16:47
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
@@ -106,10 +106,10 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-09 17:21:20
-PAIR_ARMED=CSIP-SC-V2-BOARD-002
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-09 17:21:20
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-09 17:21:20
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-10 11:16:47
+PAIR_ARMED=CSIP-V2R3-BOARD-001
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-10 11:16:47
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-10 11:16:47
 PAIR_CAPTURE=PASS
 INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Xilinx/1234-tulA
-INFO: [Common 17-206] Exiting Vivado at Wed Sep  9 17:21:21 2026...
+INFO: [Common 17-206] Exiting Vivado at Thu Sep 10 11:16:49 2026...

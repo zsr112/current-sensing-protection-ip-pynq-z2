@@ -3,7 +3,7 @@
   **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
   **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
   **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-  **** Start of session at: Wed Sep  9 16:59:39 2026
+  **** Start of session at: Thu Sep 10 10:54:44 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -16,4 +16,4 @@ ANY_ERROR_MAINTAINED_POST_CLEAR_AGGREGATE=PASS
 ANY_ERROR_READ_ONLY_AGGREGATE=PASS
 $finish called at time : 176 ns : File "<EXTERNAL_SOURCE>/tb/stage2e/tb_stage2e_any_error_partial_clear.sv" Line 154
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:59:40 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:54:46 2026...

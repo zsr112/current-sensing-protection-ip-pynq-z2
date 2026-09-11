@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 16:55:55 2026
-# Process ID: 636
+# Start of session at: Thu Sep 10 10:51:02 2026
+# Process ID: 45388
 # Current directory: <EXTERNAL_BUILD>/digital/mutations/mutants/public_code_clears_on_clear_acceptance/xsim
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\mutations\mutants\public_code_clears_on_clear_acceptance\xsim\xsim.log -mode tcl -source {xsim.dir/mutation_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/mutations/mutants/public_code_clears_on_clear_acceptance/xsim/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10635 MB
+# Available Virtual :7851 MB
 #-----------------------------------------------------------
 source xsim.dir/mutation_snapshot/xsim_script.tcl
 # xsim {mutation_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -52,4 +52,4 @@ ABI_1_1_SEQUENCE_WIDTH=32
 PRODUCTION_UNSAFE_PULSE_COUNT=0
 $finish called at time : 17086 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_production_path.sv" Line 739
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:55:57 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:51:03 2026...

@@ -1,4 +1,4 @@
-VCD info: dumpfile <EXTERNAL_BUILD>/digital/icarus/stage2e_regression/waves/stage2e_transaction_error_observability.vcd opened for output.
+VCD info: dumpfile <EXTERNAL_PATH> opened for output.
 SC01=PASS safe-inert profile counters and status are zero
 SC02=PASS single accepted and delivered transaction
 SC03=PASS back-to-back normal transactions

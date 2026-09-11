@@ -117,6 +117,7 @@ ACTIVE_CONSUMER_PATHS = (
     "sw/stage2i_board_runtime.py",
     "tools/board_validation/stage1_board_functional_validation.py",
     "tools/board_validation/build_stage1_board_execution_package.py",
+    "tools/board_validation/stage2_board_session.py",
     "fpga/pynq/deployment/stage1g/stage2i_current_release.py",
     (
         "fpga/vivado/build/runtime/runner/"
@@ -202,6 +203,7 @@ ACTIVE_CONSUMER_BINDING_PATHS = (
     "sw/stage2i_board_runtime.py",
     "tools/board_validation/stage1_board_functional_validation.py",
     "tools/board_validation/build_stage1_board_execution_package.py",
+    "tools/board_validation/stage2_board_session.py",
     "fpga/pynq/deployment/stage1g/stage2i_current_release.py",
     "tools/build_current_release.py::read_only_example",
 )
@@ -1330,7 +1332,38 @@ def _render_read_only_example(root: Path) -> str:
     return source
 
 
+def validate_board_session_binding(text: str) -> None:
+    """Validate the finite session MMIO forms, including their effective values."""
+    tree = ast.parse(text)
+    names = {'RegisterOffset', 'CTRL_PWM_ENABLE', 'CTRL_CLEAR_FAULT'}
+    imports = [n for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)
+               and any(a.name in names for a in n.names)]
+    require(len(imports) == 2 and all(
+        n.module in ('sw.generated.protection_register_map', 'generated.protection_register_map')
+        and {a.name for a in n.names} == names and all(a.asname is None for a in n.names)
+        for n in imports), 'board session generated imports drift')
+    for node in ast.walk(tree):
+        require(not (isinstance(node, ast.Name) and isinstance(node.ctx, ast.Store) and node.id in names | {'int'}),
+                'board session generated binding shadowed')
+        require(not (isinstance(node, ast.arg) and node.arg in names | {'int'}),
+                'board session generated argument shadowed')
+        require(not (isinstance(node, ast.Attribute) and isinstance(node.ctx, ast.Store)
+                     and isinstance(node.value, ast.Name) and node.value.id in names),
+                'board session generated member overwritten')
+    expected = [
+        'self.backend.protection.write(int(RegisterOffset.CTRL), int(CTRL_PWM_ENABLE | CTRL_CLEAR_FAULT))',
+        'self.backend.protection.write(int(RegisterOffset.CTRL), 0)',
+    ]
+    calls = [n for n in ast.walk(tree) if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
+             and isinstance(n.func.value, ast.Attribute) and n.func.value.attr == 'protection']
+    require(sorted(ast.dump(n) for n in calls) == sorted(ast.dump(ast.parse(s, mode='eval').body) for s in expected),
+            'board session MMIO address or CTRL mask binding drift')
+    receivers = [n for n in ast.walk(tree) if isinstance(n, ast.Attribute) and n.attr == 'protection']
+    require(len(receivers) == len(calls), 'board session MMIO receiver alias bypass')
+
+
 def check_active_consumer_bindings(root: Path) -> int:
+    validate_board_session_binding(read_text(root, 'tools/board_validation/stage2_board_session.py'))
     validate_interface_binding(read_text(root, "sw/protection_ip_interface.py"))
     validate_preboard_binding(read_text(root, "sw/pynq_mmio_demo_preboard.py"))
     validate_stage2c9e_binding(
@@ -1406,7 +1439,7 @@ def _literal_dict_keys(root: Path, relative: str, variable: str) -> set[str]:
     return set()
 
 
-def validate_historical_exclusions(root: Path) -> None:
+def validate_historical_exclusions(root: Path, included=None) -> None:
     board_builder = "tools/board_validation/build_stage1_board_execution_package.py"
     packaged_sources = _literal_dict_keys(root, board_builder, "SOURCE_FILES")
     historical = set(HISTORICAL_CONSUMERS)
@@ -1427,11 +1460,41 @@ def validate_historical_exclusions(root: Path) -> None:
         f"historical snapshot added to active release package: {sorted(historical & release_sources)}",
     )
     for relative, expected in HISTORICAL_CONSUMERS.items():
+        if included is not None and relative not in included:
+            continue
         observed = hashlib.sha256((root / relative).read_bytes()).hexdigest()
         require(observed == expected, f"historical snapshot changed: {relative}")
 
 
-def check_consumer_inventory(root: Path, inventory: tuple[dict[str, Any], ...] = CONSUMER_INVENTORY) -> dict[str, int]:
+def consumer_scope(root: Path, scope: str):
+    from tools.source_export import verify, identity, select_files
+    if scope == 'auto':
+        if (root / 'SOURCE_MANIFEST.json').exists():
+            scope = 'selected-export' if verify(root).get('selection') is not None else 'engineering'
+        else:
+            scope = 'engineering'
+    if scope == 'engineering':
+        return None
+    manifest = verify(root)  # Never downgrade scope based only on a filename.
+    selection = manifest.get('selection')
+    require(isinstance(selection, dict) and selection.get('path') == 'config/self_contained_source.json',
+            'selected-export scope requires the committed selection identity')
+    path = root / selection['path']
+    require(identity(path) == selection['identity'], 'source selection identity differs')
+    policy = json.loads(path.read_text(encoding='utf-8'))
+    files = set(manifest['files'])
+    required = set(ACTIVE_CONSUMER_PATHS) | set(ORACLE_CONSUMERS) | set(policy['required'])
+    require(required <= files, f'required ABI/export inputs missing: {sorted(required - files)}')
+    selected = select_files(files | set(HISTORICAL_CONSUMERS), policy)
+    require(selected == files, f'selection scope differs: {sorted(selected ^ files)}')
+    return files
+
+
+def check_consumer_inventory(root: Path, inventory=None, scope='auto') -> dict[str, int]:
+    included = consumer_scope(root, scope)
+    inventory = CONSUMER_INVENTORY if inventory is None else inventory
+    if included is not None:
+        inventory = tuple(entry for entry in inventory if entry['path'] in included)
     require(
         set(entry["role"] for entry in inventory) <= set(CONSUMER_ROLES),
         "consumer inventory contains an unapproved role",
@@ -1450,7 +1513,7 @@ def check_consumer_inventory(root: Path, inventory: tuple[dict[str, Any], ...] =
             validate_independent_oracle(root, entry)
         else:
             read_text(root, entry["path"])
-    validate_historical_exclusions(root)
+    validate_historical_exclusions(root, included)
     binding_count = check_active_consumer_bindings(root)
     return {
         "total": len(inventory),
@@ -1458,6 +1521,7 @@ def check_consumer_inventory(root: Path, inventory: tuple[dict[str, Any], ...] =
         "oracles": sum(entry["role"] == "INDEPENDENT_FROZEN_ORACLE" for entry in inventory),
         "historical": sum(entry["role"] == "FROZEN_HISTORICAL_SNAPSHOT" for entry in inventory),
         "bindings": binding_count,
+        "historical_out_of_scope": sum(p not in included for p in HISTORICAL_CONSUMERS) if included is not None else 0,
     }
 
 
@@ -1733,7 +1797,8 @@ def check_authority_scope(root: Path, spec: dict[str, Any]) -> None:
         )
 
 
-def run(root: Path) -> None:
+def run(root: Path, scope='auto'):
+    consumer_scope(root, scope)
     outputs, spec = load_and_render(root)
     require(
         tuple(outputs) == generator.MASTER_ARTIFACTS,
@@ -1744,19 +1809,21 @@ def run(root: Path) -> None:
     check_reports(root)
     check_consumers(root)
     check_python_reexport(root)
-    check_consumer_inventory(root)
+    counts = check_consumer_inventory(root, scope=scope)
     check_abi_1_1_rtl_bindings(root)
     check_abi_1_1_software_contract(root)
     check_authority_scope(root, spec)
+    return counts
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument('--scope', choices=('auto', 'engineering', 'selected-export'), default='auto')
     args = parser.parse_args(argv)
     try:
-        run(args.root.resolve())
-    except (CheckError, generator.GenerationError, OSError, KeyError, TypeError) as exc:
+        counts = run(args.root.resolve(), args.scope)
+    except (CheckError, generator.GenerationError, OSError, KeyError, TypeError, ValueError) as exc:
         print(f"REGISTER_MAP_IMPLEMENTATION_CHECK=FAIL: {exc}", file=sys.stderr)
         return 1
 
@@ -1800,13 +1867,15 @@ def main(argv: list[str] | None = None) -> int:
     print("LIVE_PRODUCTION_PACKAGE_GENERATED_IPXACT=YES")
     print("LIVE_PRODUCTION_REGISTER_COUNT=33")
     print("STANDALONE_PACKAGER_CURRENT_AUTHORITY=NO")
-    counts = check_consumer_inventory(args.root.resolve())
     print(
         f"REGISTER_MAP_EXECUTABLE_CONSUMER_INVENTORY=PASS_{counts['total']}_OF_{counts['total']}"
     )
     print("ACTIVE_CONSUMERS_WITH_MANUAL_ABI_CONSTANTS=0")
     print(f"INDEPENDENT_FROZEN_ORACLES=PASS_{counts['oracles']}_OF_{counts['oracles']}")
-    print(f"HISTORICAL_SNAPSHOT_EXCLUSIONS=PASS_{counts['historical']}_OF_{counts['historical']}")
+    if counts['historical_out_of_scope']:
+        print(f"HISTORICAL_SNAPSHOT_EXCLUSIONS=OUT_OF_SCOPE_{counts['historical_out_of_scope']}: excluded by verified source selection")
+    else:
+        print(f"HISTORICAL_SNAPSHOT_EXCLUSIONS=PASS_{counts['historical']}_OF_{counts['historical']}")
     print("RECOVERY_SNAPSHOT_CHECKER_ROLE=INDEPENDENT_FROZEN_ORACLE")
     print("RECOVERY_SNAPSHOT_ORACLE_PARITY=PASS")
     print(

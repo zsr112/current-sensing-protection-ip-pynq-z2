@@ -1,0 +1,15 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "production_path_snapshot",
+    "-runall",
+    "--onerror",
+    "quit",
+    "--onfinish",
+    "quit",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\production_path\\xsim.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\production_path",
+  "exit_code": 0
+}

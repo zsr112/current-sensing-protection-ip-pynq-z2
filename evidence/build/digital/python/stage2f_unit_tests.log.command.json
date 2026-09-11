@@ -1,0 +1,12 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "-m",
+    "unittest",
+    "tools.tests.test_stage2f_profile_generator",
+    "tools.tests.test_stage2f_adc_contract_audit",
+    "-v"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

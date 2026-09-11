@@ -13,10 +13,13 @@ from pathlib import Path, PurePosixPath
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.runtime_config import resolve_directory
+from tools.path_safety import canonical, path_below_root
 from tools.source_export import identity, verify
 
 
 def prepare(root, output):
+    root = canonical(root, strict=True)
+    output = canonical(output)
     source = json.loads((root / 'SOURCE_MANIFEST.json').read_text())
     if source['schema'] != 'csip-source-export-v1':
         raise ValueError('Unsupported source manifest')
@@ -29,9 +32,7 @@ def prepare(root, output):
         name = PurePosixPath(relative)
         if name.is_absolute() or '..' in name.parts or ':' in relative or '\\' in relative:
             raise ValueError('Invalid source path')
-        path = root / relative
-        if any(p.is_symlink() or (hasattr(p, 'is_junction') and p.is_junction()) for p in (path, *path.parents)):
-            raise ValueError('Source links are not permitted')
+        path = path_below_root(root, relative)
         if identity(path) != expected:
             raise ValueError('Delivered source changed: ' + relative)
         target = isolated / relative
@@ -44,7 +45,7 @@ def prepare(root, output):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('phase', choices=('preflight', 'digital', 'vivado', 'all'))
+    parser.add_argument('phase', choices=('preflight', 'portable', 'digital', 'vivado', 'all'))
     parser.add_argument('--build-root', type=Path)
     parser.add_argument('--config', type=Path)
     parser.add_argument('--execution-id')

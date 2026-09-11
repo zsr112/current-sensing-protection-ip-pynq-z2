@@ -3,10 +3,10 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 17:22:30 2026
-# Process ID: 23388
+# Start of session at: Thu Sep 10 11:17:59 2026
+# Process ID: 48832
 # Current directory: <EXTERNAL_BOARD>/sample_source_removal
-# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\sample_source_removal\vivado.log -journal <EXTERNAL_BOARD>\sample_source_removal\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\sample_source_removal source_trigger_now destination_trigger_now CSIP-SC-V2-BOARD-002
+# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\sample_source_removal\vivado.log -journal <EXTERNAL_BOARD>\sample_source_removal\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\sample_source_removal source_trigger_now destination_trigger_now CSIP-V2R3-BOARD-001
 # Log file: <EXTERNAL_BOARD>/sample_source_removal/vivado.log
 # Journal file: <EXTERNAL_BOARD>\sample_source_removal\vivado.jou
 # Running On        :illusion
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10337 MB
+# Available Virtual :7040 MB
 #-----------------------------------------------------------
 source {<EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl} -notrace
 INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
@@ -75,7 +75,7 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-09 17:22:44
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-10 11:18:13
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
@@ -92,10 +92,10 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-09 17:22:44
-PAIR_ARMED=CSIP-SC-V2-BOARD-002
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-09 17:22:44
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-09 17:22:44
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-10 11:18:13
+PAIR_ARMED=CSIP-V2R3-BOARD-001
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-10 11:18:13
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-10 11:18:13
 PAIR_CAPTURE=PASS
 INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Xilinx/1234-tulA
-INFO: [Common 17-206] Exiting Vivado at Wed Sep  9 17:22:46 2026...
+INFO: [Common 17-206] Exiting Vivado at Thu Sep 10 11:18:15 2026...

@@ -1,7 +1,7 @@
 {
   "build_target": "ARTIFACTS",
   "execution_contract_identity": "a68b26f6ad8cd6ceb4eace1285876015b3e4f2f5e7303b5bd297df68d3b24d44",
-  "execution_id": "CSIP-SC-V2-SELECTED-001",
+  "execution_id": "CSIP-V2R3-BUILD-001",
   "finding_decision_identity": "NONE",
   "hardware": {
     "board_part": "tul.com.tw:pynq-z2:part0:1.0",
@@ -12,14 +12,14 @@
     "output_root": "<EXTERNAL_BUILD>/v",
     "workspace_root": "<EXTERNAL_BUILD>/w"
   },
-  "request_identity": "e608f8c11cc808efe67ee99d1b00c9e5e70d0a8cdfdc1656e8566f666ed2044d",
+  "request_identity": "00879719d79326a29815856effbe69a8907ae11891fc79618d173563a16c8755",
   "retain_project": true,
   "run_kind": "ENGINEERING",
   "schema_version": "stage1e-execution-request-v2",
   "source": {
-    "expected_commit": "1617ce673bccd24ebe319ddad1ea8c5f77b2b6e3",
-    "expected_tree": "3c95e61fa1752655a6eeb5c3e3a5db7b405c172e",
-    "export_manifest_sha256": "83d8b3c25681230806102fc8572ea68112e2cded808dd048d1d52370526c32f1",
+    "expected_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+    "expected_tree": "8d46707a9670c170dbc08655269bd8ff635bed12",
+    "export_manifest_sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6",
     "repository_root": "<EXTERNAL_SOURCE>"
   },
   "timeout_seconds": 14400,

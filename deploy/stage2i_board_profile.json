@@ -1,8 +1,8 @@
 {
   "artifact_manifest": {
-    "bytes": 5489,
+    "bytes": 5421,
     "package_path": "provenance/artifact-manifest.tsv",
-    "sha256": "5f08e57dce840a79bf85e820d00fe39bf912028c15f0a82d08fd37bf530520dc"
+    "sha256": "7f80a753fb30a22171ccc40496da12f15daa57f23a6e00cca50a56041d2bd763"
   },
   "artifacts": {
     "bit": {
@@ -10,14 +10,14 @@
       "delivery_policy": "PACKAGE_REQUIRED",
       "package_path": "artifacts/protection_system.bit",
       "role": "BITSTREAM",
-      "sha256": "41f43ee4c6764fc6efdbafcc0dcb01352df17dd0d22221039c2269680bc6a242"
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
     },
     "hwh": {
       "bytes": 690403,
       "delivery_policy": "PACKAGE_REQUIRED",
       "package_path": "artifacts/protection_system.hwh",
       "role": "HWH",
-      "sha256": "d5cdc1914165ef5e52587fba82819506ead618663211092e70b94a89ffd35969"
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
     },
     "ltx": {
       "bytes": 92913,
@@ -27,11 +27,11 @@
       "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
     },
     "xsa": {
-      "bytes": 857417,
+      "bytes": 857420,
       "delivery_policy": "PROVENANCE_ONLY_REQUIRED",
       "package_path": null,
       "role": "XSA",
-      "sha256": "0e342085cd38a0209598f725125dc2104c050f360b343f6b976c0c1e129c52e8"
+      "sha256": "5aba6dae3fb22bbe1c3a4c1cbc8380292ebebdf2452bb8054b22ada34deccbc5"
     }
   },
   "control": {
@@ -122,7 +122,7 @@
       }
     }
   },
-  "execution_id": "CSIP-SC-V2-SELECTED-001",
+  "execution_id": "CSIP-V2R3-BUILD-001",
   "expected_ip": {
     "axi_gpio_stage1d_0": {
       "addr_range": 65536,
@@ -141,6 +141,6 @@
     "schema_version": "1.1.0"
   },
   "schema_version": "stage2i-board-execution-profile-v1",
-  "source_commit": "1617ce673bccd24ebe319ddad1ea8c5f77b2b6e3",
-  "source_tree": "3c95e61fa1752655a6eeb5c3e3a5db7b405c172e"
+  "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+  "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
 }

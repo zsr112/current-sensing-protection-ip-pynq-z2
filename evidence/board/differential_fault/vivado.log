@@ -3,10 +3,10 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 17:21:56 2026
-# Process ID: 43076
+# Start of session at: Thu Sep 10 11:17:25 2026
+# Process ID: 48308
 # Current directory: <EXTERNAL_BOARD>/differential_fault
-# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\differential_fault\vivado.log -journal <EXTERNAL_BOARD>\differential_fault\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\differential_fault source_accept destination_fault_latched CSIP-SC-V2-BOARD-002
+# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\differential_fault\vivado.log -journal <EXTERNAL_BOARD>\differential_fault\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\differential_fault source_accept destination_fault_latched CSIP-V2R3-BOARD-001
 # Log file: <EXTERNAL_BOARD>/differential_fault/vivado.log
 # Journal file: <EXTERNAL_BOARD>\differential_fault\vivado.jou
 # Running On        :illusion
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10278 MB
+# Available Virtual :7103 MB
 #-----------------------------------------------------------
 source {<EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl} -notrace
 INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
@@ -79,7 +79,7 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=TRIGGER_COMPARE_VALUE
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-09 17:22:10
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-10 11:17:39
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
@@ -100,10 +100,10 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=TRIGGER_COMPARE_VALUE
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=TRIGGER_COMPARE_VALUE
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-09 17:22:10
-PAIR_ARMED=CSIP-SC-V2-BOARD-002
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-09 17:22:11
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-09 17:22:11
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-10 11:17:39
+PAIR_ARMED=CSIP-V2R3-BOARD-001
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-10 11:17:39
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-10 11:17:39
 PAIR_CAPTURE=PASS
 INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Xilinx/1234-tulA
-INFO: [Common 17-206] Exiting Vivado at Wed Sep  9 17:22:12 2026...
+INFO: [Common 17-206] Exiting Vivado at Thu Sep 10 11:17:40 2026...

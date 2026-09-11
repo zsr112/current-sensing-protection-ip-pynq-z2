@@ -1,0 +1,11 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/run_stage2f_width_sequence_boundary.py",
+    "--output",
+    "<EXTERNAL_BUILD>\\digital\\stage2f\\run_stage2f_width_sequence_boundary",
+    "--xsim"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

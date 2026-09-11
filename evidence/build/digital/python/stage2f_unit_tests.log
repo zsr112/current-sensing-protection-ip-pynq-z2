@@ -44,7 +44,7 @@ test_tracked_contract_passes (tools.tests.test_stage2f_adc_contract_audit.Stage2
 test_valid_configured_simulation_profile_passes_schema (tools.tests.test_stage2f_adc_contract_audit.Stage2fAdcContractAuditTests.test_valid_configured_simulation_profile_passes_schema) ... ok
 
 ----------------------------------------------------------------------
-Ran 44 tests in 2.535s
+Ran 44 tests in 2.626s
 
 OK
 PYTHON_REFERENCE_EXHAUSTIVE=PASS

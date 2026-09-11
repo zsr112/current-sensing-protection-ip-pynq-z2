@@ -1,0 +1,15 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "stage2e_mutation_delivery_accounting_snapshot",
+    "-runall",
+    "--onerror",
+    "quit",
+    "--onfinish",
+    "quit",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\stage2e_connected_mutations\\delivery_accounting.xsim.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\stage2e_connected_mutations",
+  "exit_code": 0
+}

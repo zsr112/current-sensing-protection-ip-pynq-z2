@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 16:51:56 2026
-# Process ID: 44876
+# Start of session at: Thu Sep 10 10:46:56 2026
+# Process ID: 10640
 # Current directory: <EXTERNAL_BUILD>/digital/xsim/b2_destination_width_16
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\xsim\b2_destination_width_16\xsim.log -mode tcl -source {xsim.dir/b2_destination_width_16_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/xsim/b2_destination_width_16/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10621 MB
+# Available Virtual :7875 MB
 #-----------------------------------------------------------
 source xsim.dir/b2_destination_width_16_snapshot/xsim_script.tcl
 # xsim {b2_destination_width_16_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -32,4 +32,4 @@ FAULT_EVALUATION_LATENCY_ACLK=3
 DESTINATION_DELIVERIES_WIDTH_16=25
 $finish called at time : 1256 ns : File "<EXTERNAL_SOURCE>/tb/stage2h/tb_stage2h_b2_destination_sequence.sv" Line 485
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:51:57 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:46:58 2026...

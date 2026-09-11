@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 16:58:12 2026
-# Process ID: 35748
+# Start of session at: Thu Sep 10 10:53:15 2026
+# Process ID: 46452
 # Current directory: <EXTERNAL_BUILD>/digital/xsim/stage2e_connected_mutations
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\xsim\stage2e_connected_mutations\counter_wrap.xsim.log -mode tcl -source {xsim.dir/stage2e_mutation_counter_wrap_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/xsim/stage2e_connected_mutations/counter_wrap.xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10556 MB
+# Available Virtual :7826 MB
 #-----------------------------------------------------------
 source xsim.dir/stage2e_mutation_counter_wrap_snapshot/xsim_script.tcl
 # xsim {stage2e_mutation_counter_wrap_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -31,4 +31,4 @@ MUTATION_EXPECTED_REJECTION=DIAGNOSTIC_COUNTER_WRAPPED_OR_SATURATION_HIDDEN
 STAGE2E CHECK FAILED: DIAGNOSTIC_COUNTER_WRAPPED_OR_SATURATION_HIDDEN
 $finish called at time : 46 ns : File "<EXTERNAL_SOURCE>/tb/stage2e/stage2e_transaction_observability_checker.sv" Line 8
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:58:14 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:53:16 2026...

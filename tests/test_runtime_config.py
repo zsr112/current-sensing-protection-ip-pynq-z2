@@ -15,7 +15,7 @@ class RuntimeConfigTests(unittest.TestCase):
             file = root / 'local.json'
             file.write_text(json.dumps({'build_root': './output', 'iverilog': 'configured'}))
             os.environ['CSIP_CONFIG'] = str(file)
-            self.assertEqual(root / 'output', config.resolve_directory(root, 'build_root'))
+            self.assertEqual((root / 'output').resolve(), config.resolve_directory(root, 'build_root'))
             os.environ['CSIP_IVERILOG'] = 'environment'
             self.assertEqual('environment', config.configured(root, 'iverilog'))
             self.assertEqual('command-line', config.configured(root, 'iverilog', 'command-line'))

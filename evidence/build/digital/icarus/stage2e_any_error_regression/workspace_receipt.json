@@ -1,0 +1,10 @@
+{
+  "caller_output": "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_any_error_regression",
+  "evidence_copied_to_requested_output": true,
+  "hdl_file_io_path": "ASCII_PRIVATE_TEMPORARY",
+  "label": "stage2e_any_error_regression",
+  "schema": "csip-ascii-simulation-workspace-v1",
+  "scratch_path": "<EXTERNAL_PATH>",
+  "status": "PASS",
+  "vector_sha256": null
+}

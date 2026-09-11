@@ -1,5 +1,11 @@
 # Current-Sensing Protection IP
 
+Current maintenance architecture, capability boundaries and G1 status:
+[Current architecture](docs/architecture/current_architecture.md).
+G1 is tool/CI/documentation maintenance; new physical build, board campaign and
+candidate verification are NOT_RUN. Existing v2r2 evidence keeps its original identity.
+
+
 Stage 2 engineering delivery for PYNQ-Z2. The repository contains the complete
 source inputs used for independent digital regression and Vivado reconstruction
 as ordinary files under `rtl`, `fpga`, `sw`, `tb`, `spec`, `sim` and `tools`.

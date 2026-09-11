@@ -1,0 +1,15 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "policy_matrix_snapshot",
+    "-runall",
+    "--onerror",
+    "quit",
+    "--onfinish",
+    "quit",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\policy_matrix\\xsim.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\policy_matrix",
+  "exit_code": 0
+}

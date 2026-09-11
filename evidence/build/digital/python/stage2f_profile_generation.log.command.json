@@ -1,0 +1,11 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/generate_stage2f_adc_profile.py",
+    "--profile",
+    "spec/stage2f_adc_source_profile_unconfigured.json",
+    "--check"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

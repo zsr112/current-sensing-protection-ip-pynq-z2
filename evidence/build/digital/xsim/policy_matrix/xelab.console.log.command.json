@@ -1,0 +1,14 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "work.tb_stage2g_policy_matrix",
+    "-s",
+    "policy_matrix_snapshot",
+    "--timescale",
+    "1ns/1ps",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\policy_matrix\\xelab.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\policy_matrix",
+  "exit_code": 0
+}

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from tools.board_validation import stage2_board_session_host as host
+from tools.path_safety import canonical, path_below_root, regular_files
 from tools.board_validation.stage2_board_session import ACTIONS, SCENARIOS, EXTRA_SCENARIOS, identity
 from sw import stage2i_board_runtime as runtime
 
@@ -43,14 +44,11 @@ def safe_file(root, relative):
     path = PurePosixPath(relative)
     require(not path.is_absolute() and ".." not in path.parts and ":" not in relative,
             f"Unsafe relative path: {relative}")
-    result = root / relative
-    require(not any(p.is_symlink() for p in (result, *result.parents)), "Symlink is not allowed")
-    require(result.resolve().is_relative_to(root.resolve()), "Path escapes release")
-    return result
+    return path_below_root(canonical(root, strict=True), relative)
 
 
 def verify_files(root, expected, excluded=()):
-    actual = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+    actual = set(regular_files(root))
     require(actual - set(excluded) == set(expected), "File inventory differs")
     for relative, record in expected.items():
         require(identity(safe_file(root, relative)) == record, f"File identity differs: {relative}")

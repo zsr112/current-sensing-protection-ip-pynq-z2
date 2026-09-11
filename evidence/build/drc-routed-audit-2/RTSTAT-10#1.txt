@@ -9,13 +9,13 @@ DESCRIPTION   string  true       108 net(s) have no routable loads. The problem 
                                  dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_capture[0],
                                  dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_drck[0],
                                  dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_runtest[0],
-                                 protection_system_i/smartconnect_0/inst/m00_nodes/m00_aw_node/inst/mi_handler_m_sc_areset_pipe,
-                                 protection_system_i/smartconnect_0/inst/m00_nodes/m00_b_node/inst/mi_handler_m_sc_areset_pipe,
-                                 protection_system_i/smartconnect_0/inst/m01_nodes/m01_aw_node/inst/mi_handler_m_sc_areset_pipe,
+                                 protection_system_i/smartconnect_0/inst/m00_nodes/m00_w_node/inst/mi_handler_m_sc_areset_pipe,
+                                 protection_system_i/smartconnect_0/inst/m01_nodes/m01_ar_node/inst/mi_handler_m_sc_areset_pipe,
                                  protection_system_i/smartconnect_0/inst/m01_nodes/m01_b_node/inst/mi_handler_m_sc_areset_pipe,
-                                 protection_system_i/smartconnect_0/inst/m01_nodes/m01_r_node/inst/mi_handler_m_sc_areset_pipe,
                                  protection_system_i/smartconnect_0/inst/s00_nodes/s00_ar_node/inst/mi_handler_m_sc_areset_pipe,
-                                 protection_system_i/smartconnect_0/inst/s00_nodes/s00_r_node/inst/mi_handler_m_sc_areset_pipe
+                                 protection_system_i/smartconnect_0/inst/s00_nodes/s00_aw_node/inst/mi_handler_m_sc_areset_pipe,
+                                 protection_system_i/smartconnect_0/inst/s00_nodes/s00_r_node/inst/mi_handler_m_sc_areset_pipe,
+                                 protection_system_i/smartconnect_0/inst/s00_nodes/s00_w_node/inst/mi_handler_m_sc_areset_pipe
                                   (the first 15 of 51 listed nets/buses).
 FULLNAME      string  true       No routable loads
 ID            int     true       1

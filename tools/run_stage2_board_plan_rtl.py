@@ -5,6 +5,7 @@ This is a protection-policy preflight, not a replacement for CDC or board eviden
 """
 from __future__ import annotations
 import argparse
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -12,7 +13,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.runtime_config import resolve_tool
+from tools.simulation_workspace import ascii_simulation_workspace
 from tools.board_validation.stage1_board_functional_validation import INDIVIDUAL_FAULT_CASES
+
+
+class SimulationFailure(RuntimeError):
+    def __init__(self, returncode):
+        self.returncode = returncode
 
 
 def vectors():
@@ -57,23 +64,31 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     output = args.output.resolve()
-    output.mkdir(parents=True, exist_ok=False)
-    path = output / "vectors.txt"
-    path.write_text("".join(" ".join(map(str, row)) + "\n" for row in vectors()), encoding="ascii")
-    image = output / "c2_plan.vvp"
-    sources = [ROOT / "rtl" / name for name in (
-        "current_compare_dual.v", "sensor_health_monitor.v", "fault_classifier.v", "protection_fsm.v",
-        "pwm_gen.v", "pwm_gate.v", "protection_core_top.v")]
-    for name, command in (
-        ("compile", [str(resolve_tool(ROOT, "iverilog")), "-g2012", "-I", str(ROOT / "rtl"), "-s", "tb_stage2_board_c2_plan", "-o", str(image),
-                     str(ROOT / "tb/stage2i/tb_stage2_board_c2_plan.sv"), *map(str, sources)]),
-        ("simulation", [str(resolve_tool(ROOT, "vvp")), str(image), f"+vectors={path.as_posix()}"]),
-    ):
-        result = subprocess.run(command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        (output / f"{name}.log").write_text(result.stdout, encoding="utf-8")
-        print(result.stdout, end="")
-        if result.returncode:
-            return result.returncode
+    try:
+        with ascii_simulation_workspace(ROOT, output, "stage2-board-c2-plan") as work:
+            path = work / "vectors.txt"
+            path.write_text("".join(" ".join(map(str, row)) + "\n" for row in vectors()), encoding="ascii")
+            image = work / "c2_plan.vvp"
+            sources = [ROOT / "rtl" / name for name in (
+                "current_compare_dual.v", "sensor_health_monitor.v", "fault_classifier.v", "protection_fsm.v",
+                "pwm_gen.v", "pwm_gate.v", "protection_core_top.v")]
+            for name, command in (
+                ("compile", [str(resolve_tool(ROOT, "iverilog")), "-g2012", "-I", str(ROOT / "rtl"), "-s", "tb_stage2_board_c2_plan", "-o", str(image),
+                             str(ROOT / "tb/stage2i/tb_stage2_board_c2_plan.sv"), *map(str, sources)]),
+                ("simulation", [str(resolve_tool(ROOT, "vvp")), str(image), "+vectors=vectors.txt"]),
+            ):
+                result = subprocess.run(command, cwd=work, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                (work / f'{name}.raw.log').write_bytes(result.stdout)
+                result.stdout = result.stdout.decode('utf-8', errors='replace')
+                (work / f"{name}.log").write_text(result.stdout, encoding="utf-8")
+                (work / f'{name}.command.json').write_text(json.dumps({'command': command, 'cwd': str(work), 'exit_code': result.returncode}, indent=2) + '\n', encoding='utf-8')
+                print(result.stdout, end="")
+                if result.returncode:
+                    raise SimulationFailure(result.returncode)
+                if name == 'simulation' and 'C2_PROTECTION_PLAN_RTL=PASS checks=20 samples=923' not in result.stdout:
+                    raise SimulationFailure(1)
+    except SimulationFailure as error:
+        return error.returncode
     return 0
 
 

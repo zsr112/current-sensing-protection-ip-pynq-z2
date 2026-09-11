@@ -7,7 +7,7 @@
         "size_bytes": 4045685
       },
       "rebuilt": {
-        "sha256": "41f43ee4c6764fc6efdbafcc0dcb01352df17dd0d22221039c2269680bc6a242",
+        "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0",
         "size_bytes": 4045685
       },
       "structure": {
@@ -25,8 +25,8 @@
           "header": {
             "a": "protection_system_wrapper;UserID=0XFFFFFFFF;Version=2024.1",
             "b": "7z020clg400",
-            "c": "2026/09/09",
-            "d": "17:17:20"
+            "c": "2026/09/10",
+            "d": "11:13:07"
           },
           "payload_bytes": 4045564,
           "payload_sha256": "7a2ab37075e3c4069dd123ac9e77de6bf7f0747f0d492ed2c7d2199af6c1b1d3"
@@ -40,7 +40,7 @@
         "size_bytes": 690403
       },
       "rebuilt": {
-        "sha256": "d5cdc1914165ef5e52587fba82819506ead618663211092e70b94a89ffd35969",
+        "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3",
         "size_bytes": 690403
       },
       "structure": {
@@ -50,7 +50,7 @@
         },
         "rebuilt": {
           "structure_sha256": "fbb3299fcaf47ef8589f646c5a609792950e79279ff0021735196ec1505d15fe",
-          "timestamp": "Wed Sep  9 17:05:39 2026"
+          "timestamp": "Thu Sep 10 11:01:22 2026"
         }
       }
     },
@@ -69,8 +69,8 @@
       "byte_equal_to_r4": null,
       "r4": null,
       "rebuilt": {
-        "sha256": "0e342085cd38a0209598f725125dc2104c050f360b343f6b976c0c1e129c52e8",
-        "size_bytes": 857417
+        "sha256": "5aba6dae3fb22bbe1c3a4c1cbc8380292ebebdf2452bb8054b22ada34deccbc5",
+        "size_bytes": 857420
       }
     }
   },
@@ -100,68 +100,68 @@
         "size_bytes": 1024
       },
       "drc-routed-audit-2/RTSTAT-10#1.txt": {
-        "sha256": "735d8495b382af0673863e7b5513162177d492539c6b0f39f521bbf72bb3ecdd",
+        "sha256": "55991da61b2cd877d3a50d09fae9608f218fd428e6a91227d3cae7af43b0d604",
         "size_bytes": 2574
       },
       "drc-routed-audit-2/drc.rpt": {
-        "sha256": "35f2621899ff85c46fe12baeead5b1650f3a50af22e47c7a09fbea17cac38407",
-        "size_bytes": 5243
+        "sha256": "1d3a3e1d044020802cdf51754346e2fce3c639e0240f0db384d04642a6cb5f5e",
+        "size_bytes": 5225
       },
       "drc-routed-audit-2/objects.tsv": {
-        "sha256": "0c0fd7a9f1c5d9216c76a659c100cfbb7ddd563f2c8c424fe601170855116b5e",
+        "sha256": "00bb2118bc29f0b7cadf6f6100d2590f9a678842838c614439cd8eb2b5bf980c",
         "size_bytes": 13810
       },
       "fifo-routed-audit/bus_skew.rpt": {
-        "sha256": "88d9e2cdb6e1b52917ae9d48a2773a7ca199df04bea107b1d761ede5fa6904fc",
-        "size_bytes": 304642
+        "sha256": "1ce66f2bfecbd7f16cd40ed25d0bad6e2903213030254bc930c4ab7282ac65fc",
+        "size_bytes": 304624
       },
       "fifo-routed-audit/cdc_unwaived.rpt": {
-        "sha256": "66b096df10e8af0676102517ffd4cd2ca9e424c28b3d408ac7dc31479324adec",
-        "size_bytes": 66412
+        "sha256": "0b9ddbf8b730c059097ca2287e30ba227e0db58b6e0e9c54715c9329b05ea2a2",
+        "size_bytes": 66394
       },
       "fifo-routed-audit/fifo_paths.tsv": {
         "sha256": "c71ec9121c2853ca0a7583c39f65879f4b21c04ec4e2cc4aaa7370b9e8cc898e",
         "size_bytes": 105190
       },
       "fifo-routed-audit/payload_word_0.rpt": {
-        "sha256": "88f0ab3424a40da6e732f8c988dbfe67821c1624cc7917b93aa8122c73828567",
-        "size_bytes": 205863
+        "sha256": "508e857c8b0301104fe8da098d73cec6ce7dd04196a8b8baba36739bca472114",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/payload_word_1.rpt": {
-        "sha256": "8c4f47d002b23ae5d450c5bf88dfbf9e2d68f117b1bcb95d34d2745bba997f30",
-        "size_bytes": 205863
+        "sha256": "cc793c09b6dd4e115b644b6671bb062b4bb46c949bd351b36bc91b3297514890",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/payload_word_2.rpt": {
-        "sha256": "bbdea9d4f04463505c552c971aba62ae677201da96c15f69dbf802ed23a50466",
-        "size_bytes": 205863
+        "sha256": "3093eb1be5afbae82946dfb8fac05b8c61c3887a3f0779a0b95173cae930cf59",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/payload_word_3.rpt": {
-        "sha256": "becec2311789a49ec6c2ad0df342a6cb8ebaf75cf99784a421a2327a014d1835",
-        "size_bytes": 205863
+        "sha256": "89eafe799ac0eaa72d71633f40df4781a03a11bbeeb2ea22bde0d9faab3581e0",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/payload_word_4.rpt": {
-        "sha256": "5e311d850ac446d89e28acbbc2afe7cd9c80983a05eac61653771b5fbc0ae13a",
-        "size_bytes": 205863
+        "sha256": "83ffa7df5bbe750d1a43558377ce16a9bfa097d8bf3c29b03002c71af302c450",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/payload_word_5.rpt": {
-        "sha256": "26209f477b8282e310cffacf18c2692a358961945430f2fa3a4a7e78c158e79f",
-        "size_bytes": 205863
+        "sha256": "37f4edc7e70b58674776bc449418447a904ac0d5479733c809a894fd58cca4e1",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/payload_word_6.rpt": {
-        "sha256": "4bdb62c5791356d96a484bbfc1444eb2e5e981efc90134354f9e42b8aee02e15",
-        "size_bytes": 205863
+        "sha256": "189f99943cedb3d7193845469af9dcdf28558e293e6650eee2dc07f539a30fe2",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/payload_word_7.rpt": {
-        "sha256": "2f691aa5e48999e9f913a66bddf47389f54de5b8616b846fec724860e623dd2c",
-        "size_bytes": 205863
+        "sha256": "2231f135905ce120f9256a84eda69066fffc8f9df745af6adad1695bda314375",
+        "size_bytes": 205809
       },
       "fifo-routed-audit/rd_gray.rpt": {
-        "sha256": "a230142a81491174ee2a7b5fc55f05fe5724a41a968a81a59c135542e7cbcdff",
-        "size_bytes": 13805
+        "sha256": "8bd7f0b564acf37e51f78ab77d5e5c6677ba07223ecedaf2ac663eac285dfd4c",
+        "size_bytes": 13751
       },
       "fifo-routed-audit/wr_gray.rpt": {
-        "sha256": "1cca8bc79eb73da02e86647d4fd1d28bd593615fce419b23e246396da6af7db2",
-        "size_bytes": 13805
+        "sha256": "79636d1a637ce8c94d016ef64cd58dee5b9b7f827d52b7c2444c2c108d3d1726",
+        "size_bytes": 13751
       }
     },
     "fifo_gray_paths": 8,
@@ -179,7 +179,7 @@
     "worst_gray_slack_ns": 6.519,
     "worst_payload_slack_ns": 4.467
   },
-  "execution_id": "CSIP-SC-V2-SELECTED-001",
+  "execution_id": "CSIP-V2R3-BUILD-001",
   "formal_acceptance": "NOT_FORMALLY_ACCEPTED",
   "new_findings": {
     "cdc": {
@@ -326,61 +326,61 @@
     "sha256": "70c9f9f4a20c058bc06c38407a658c369af7879ef322ad9d6b8bbbe3c08c7519"
   },
   "rebuild_receipt": {
-    "sha256": "60f5127be7fd1b0517215541c7f93eb63897f733d2a9215988c447a2902d2f83",
-    "size_bytes": 927131
+    "sha256": "bb1042e7a98e0b81b2976ac8660c3596530fea6bbfb733ac7f5d6de0170d6cf3",
+    "size_bytes": 973728
   },
   "reports": {
     "cdc.rpt": {
-      "sha256": "e9c81390e121981570f75a0f2e6cfc80a47adf9a4ba310ac4d9fa09937c718d5",
-      "size_bytes": 66395
+      "sha256": "53e1ad659f611a84d817cd85c153c8efbc03507f7b68defadceafed25adc3d09",
+      "size_bytes": 66377
     },
     "check_timing.rpt": {
-      "sha256": "02bfbefe973c704f3afcc5b3adff20d1d23e5eba062c12f46d7c7c1cb645235d",
-      "size_bytes": 3271
+      "sha256": "182b1fb275d13c4ef748542061e3da4640699d8e159e83dfc982e09bfc19a4a5",
+      "size_bytes": 3253
     },
     "clock_interaction.rpt": {
-      "sha256": "0fa2ca904bddeb92163ae87b425c20d5fd8c2f21e3d722eb9e2ad3d4fed13382",
-      "size_bytes": 4028
+      "sha256": "e1357d41e88dca7ccb2c94e388b919cdfe649a8eb400fc30bd9feae1458feedd",
+      "size_bytes": 4010
     },
     "clocks_generated_clocks.rpt": {
-      "sha256": "9d5d1ec0035bf87f7dfcfd3b1af22beec7e6520f2091d543f742130f2456fdab",
-      "size_bytes": 2266
+      "sha256": "68ab32f9d5753ac7d8c85e4dc0b265d6ee1060ea47c4d73898d7168d1a251609",
+      "size_bytes": 2248
     },
     "conditional_bus_skew.rpt": {
-      "sha256": "237fe85f5fb4233298fe66fc0e3d44371cd3098aa352a9040e40d7d25a39d3b6",
-      "size_bytes": 304646
+      "sha256": "0fafc32e6fbc198d8fde244a5055e3dd366e0c24882c2b03f4b72e7df376d305",
+      "size_bytes": 304628
     },
     "constraint_coverage.rpt": {
-      "sha256": "b1cc25b08f9222adcd73a73641e52630cb95783e479248e0313ab83efac36735",
-      "size_bytes": 24749
+      "sha256": "7112e3b924cc786536e304a5dcef4a3f68b2eff20a9b95a9ba7fe14a072f6baf",
+      "size_bytes": 24731
     },
     "drc.rpt": {
-      "sha256": "89a027745ecdf9d3de5dc9f1166246f7c6a49c9d5dd452b43678ea35db600cae",
-      "size_bytes": 5180
+      "sha256": "7897e5d64cc2e65c03919a019364f5b7dd500ed07fe377e33b3b1a6b4c84c606",
+      "size_bytes": 5162
     },
     "message_source.rpt": {
       "sha256": "dbf8da8dbfaf3b157f384727a05aa2db7af72a24877897b95279428a81e173c2",
       "size_bytes": 651
     },
     "methodology.rpt": {
-      "sha256": "fb56c1e1b2fc618456addd9e105033632737c4f0a3fe67a4e2628393e0fc8c99",
-      "size_bytes": 10401
+      "sha256": "0b0c09e7004c3c52f3336238c2c0df3ccba8fc222725b5d3123c897752b63046",
+      "size_bytes": 10311
     },
     "timing_exception_source.rpt": {
-      "sha256": "f6b571c2045a69b2704fd5e405d86ef5f3f75f0c2d23bbebf1484b6796e55cf1",
-      "size_bytes": 98911
+      "sha256": "56670c3af0459f638869f9c33fb960627063853b9eb95da3ba5fb45ad77799b8",
+      "size_bytes": 98893
     },
     "timing_path_groups.rpt": {
-      "sha256": "f536d5a558017780f4ce9f52333e3cd35896cb836a4d180cba815574fbc815bc",
-      "size_bytes": 2899301
+      "sha256": "66dab456b525c0d8291d97f0699fac80c2e082a87069b978e1734cd2b041003c",
+      "size_bytes": 2899279
     },
     "timing_summary.rpt": {
-      "sha256": "547cfeaa5f5d1053c9fc516b29f940cae23ece6e44cf12704d2ac42262aeba28",
-      "size_bytes": 113402
+      "sha256": "a54a08bb1bac0e016ca5cf11303feaf2da33b4c21d11bf36759d943fc89ac61b",
+      "size_bytes": 113384
     },
     "utilization.rpt": {
-      "sha256": "61276f5c52a65e930865e466e8d696f466a45058ede07f16a61fec0844779f65",
-      "size_bytes": 12680
+      "sha256": "8ebaeb635c639b8859214f2282e98dff34b044b8a643455d342aa5787c06bce6",
+      "size_bytes": 12662
     }
   },
   "review_tool": {
@@ -416,7 +416,7 @@
   },
   "schema": "csip-rebuild-engineering-review-v1",
   "source_manifest": {
-    "sha256": "83d8b3c25681230806102fc8572ea68112e2cded808dd048d1d52370526c32f1",
-    "size_bytes": 78847
+    "sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6",
+    "size_bytes": 81822
   }
 }

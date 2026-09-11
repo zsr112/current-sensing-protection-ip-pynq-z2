@@ -1,0 +1,15 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "cdc_event_authority_snapshot",
+    "-runall",
+    "--onerror",
+    "quit",
+    "--onfinish",
+    "quit",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\cdc_event_authority\\xsim.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\cdc_event_authority",
+  "exit_code": 0
+}

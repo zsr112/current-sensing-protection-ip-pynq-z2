@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
-| Date         : Wed Sep  9 17:19:52 2026
+| Date         : Thu Sep 10 11:14:54 2026
 | Host         : illusion running 64-bit major release  (build 9200)
 | Command      : report_drc -name csip_drc -file <EXTERNAL_BUILD>/drc-routed-audit-2/drc.rpt
 | Design       : protection_system_wrapper
@@ -59,13 +59,13 @@ dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/TMS,
 dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_capture[0],
 dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_drck[0],
 dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_switch/m_bscan_runtest[0],
-protection_system_i/smartconnect_0/inst/m00_nodes/m00_aw_node/inst/mi_handler_m_sc_areset_pipe,
-protection_system_i/smartconnect_0/inst/m00_nodes/m00_b_node/inst/mi_handler_m_sc_areset_pipe,
-protection_system_i/smartconnect_0/inst/m01_nodes/m01_aw_node/inst/mi_handler_m_sc_areset_pipe,
+protection_system_i/smartconnect_0/inst/m00_nodes/m00_w_node/inst/mi_handler_m_sc_areset_pipe,
+protection_system_i/smartconnect_0/inst/m01_nodes/m01_ar_node/inst/mi_handler_m_sc_areset_pipe,
 protection_system_i/smartconnect_0/inst/m01_nodes/m01_b_node/inst/mi_handler_m_sc_areset_pipe,
-protection_system_i/smartconnect_0/inst/m01_nodes/m01_r_node/inst/mi_handler_m_sc_areset_pipe,
 protection_system_i/smartconnect_0/inst/s00_nodes/s00_ar_node/inst/mi_handler_m_sc_areset_pipe,
-protection_system_i/smartconnect_0/inst/s00_nodes/s00_r_node/inst/mi_handler_m_sc_areset_pipe
+protection_system_i/smartconnect_0/inst/s00_nodes/s00_aw_node/inst/mi_handler_m_sc_areset_pipe,
+protection_system_i/smartconnect_0/inst/s00_nodes/s00_r_node/inst/mi_handler_m_sc_areset_pipe,
+protection_system_i/smartconnect_0/inst/s00_nodes/s00_w_node/inst/mi_handler_m_sc_areset_pipe
  (the first 15 of 51 listed nets/buses).
 Related violations: <none>
 

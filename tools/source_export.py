@@ -11,6 +11,11 @@ import subprocess
 import tarfile
 from pathlib import Path, PurePosixPath
 
+try:
+    from tools.path_safety import canonical, path_below_root, regular_files
+except ModuleNotFoundError:
+    from path_safety import canonical, path_below_root, regular_files  # type: ignore
+
 MANIFEST = "SOURCE_MANIFEST.json"
 
 
@@ -24,23 +29,19 @@ def write_json(path, value):
 
 
 def verify(root):
-    root = root.resolve(strict=True)
+    root = canonical(root, strict=True)
     manifest = json.loads((root / MANIFEST).read_text(encoding="utf-8"))
     if manifest.get("schema") != "csip-source-export-v1":
         raise ValueError("Invalid source manifest schema")
-    actual = set()
-    for path in root.rglob("*"):
-        if path.is_symlink() or (hasattr(path, "is_junction") and path.is_junction()):
-            raise ValueError("Links are not permitted in source exports")
-        if path.is_file() and path != root / MANIFEST:
-            actual.add(path.relative_to(root).as_posix())
+    files = regular_files(root)
+    actual = set(files) - {MANIFEST}
     if actual != set(manifest["files"]):
         raise ValueError(f"Source file inventory mismatch: missing={set(manifest['files']) - actual}, extra={actual - set(manifest['files'])}")
     for relative, expected in manifest["files"].items():
         path = PurePosixPath(relative)
         if path.is_absolute() or ".." in path.parts or "\\" in relative or ":" in relative:
             raise ValueError(f"Invalid manifest path: {relative}")
-        if identity(root / relative) != expected:
+        if identity(path_below_root(root, relative)) != expected:
             raise ValueError(f"Source file changed: {relative}")
     return manifest
 
@@ -62,7 +63,7 @@ def select_files(names, selection):
 
 
 def export(root, output, selection_path=None):
-    root, output = root.resolve(strict=True), output.resolve()
+    root, output = canonical(root, strict=True), canonical(output)
     if output.is_relative_to(root) or root.is_relative_to(output):
         raise ValueError("Export must be disjoint from the working repository")
     def git(*args):

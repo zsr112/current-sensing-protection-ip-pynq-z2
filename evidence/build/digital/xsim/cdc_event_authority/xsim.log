@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 16:51:48 2026
-# Process ID: 41288
+# Start of session at: Thu Sep 10 10:46:49 2026
+# Process ID: 44976
 # Current directory: <EXTERNAL_BUILD>/digital/xsim/cdc_event_authority
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\xsim\cdc_event_authority\xsim.log -mode tcl -source {xsim.dir/cdc_event_authority_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/xsim/cdc_event_authority/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10627 MB
+# Available Virtual :7865 MB
 #-----------------------------------------------------------
 source xsim.dir/cdc_event_authority_snapshot/xsim_script.tcl
 # xsim {cdc_event_authority_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -269,4 +269,4 @@ FAULT_EVAL_AVAILABLE_TOTAL=42
 POLICY_CONSUMPTION_TOTAL=42
 $finish called at time : 2426 ns : File "<EXTERNAL_SOURCE>/tb/stage2i/tb_stage2i_b_cdc_event_authority.sv" Line 643
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:51:50 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:46:51 2026...

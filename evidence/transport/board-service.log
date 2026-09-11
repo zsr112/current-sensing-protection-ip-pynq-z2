@@ -1,4 +1,5 @@
-BOARD_SESSION_READY execution_id=CSIP-SC-V2-BOARD-002 port=18765
+/tmp/csip-CSIP-V2R3-BOARD-001.zip: OK
+BOARD_SESSION_READY execution_id=CSIP-V2R3-BOARD-001 port=18765
 ACTION 0 load PASS
 ACTION 1 normal_pwm/prepare PASS
 ACTION 2 normal_pwm/execute PASS

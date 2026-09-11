@@ -1,0 +1,22 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "-g2012",
+    "-I",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-s",
+    "tb_stage2_board_c2_plan",
+    "-o",
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_SOURCE>\\tb\\stage2i\\tb_stage2_board_c2_plan.sv",
+    "<EXTERNAL_SOURCE>\\rtl\\current_compare_dual.v",
+    "<EXTERNAL_SOURCE>\\rtl\\sensor_health_monitor.v",
+    "<EXTERNAL_SOURCE>\\rtl\\fault_classifier.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_fsm.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gen.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gate.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_core_top.v"
+  ],
+  "cwd": "<EXTERNAL_PATH>",
+  "exit_code": 0
+}

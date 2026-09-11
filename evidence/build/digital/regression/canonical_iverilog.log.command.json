@@ -1,0 +1,10 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "sim/run_iverilog.py",
+    "--output",
+    "<EXTERNAL_BUILD>\\digital\\canonical"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

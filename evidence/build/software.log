@@ -17,6 +17,6 @@ test_successful_recovery_returns_true (test_protection_ip_interface.ProtectionIP
 test_zero_timeout_does_not_clear (test_protection_ip_interface.ProtectionIPInterfaceContractTests.test_zero_timeout_does_not_clear) ... ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 0.002s
+Ran 17 tests in 0.001s
 
 OK

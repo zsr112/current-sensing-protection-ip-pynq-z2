@@ -1,3 +1,4 @@
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -24,6 +25,31 @@ class DeliveryRebuildTests(unittest.TestCase):
                 prepare(root, Path(name) / 'changed build')
             with self.assertRaisesRegex(ValueError, 'disjoint'):
                 prepare(root, root / 'bad-output')
+
+    @unittest.skipUnless(hasattr(os, 'symlink'), 'symbolic link support')
+    def test_selected_root_alias_is_allowed_but_internal_link_is_rejected(self):
+        with tempfile.TemporaryDirectory() as name:
+            base = Path(name)
+            real = base / 'real delivery'
+            real.mkdir()
+            (real / 'rtl').mkdir()
+            (real / 'rtl/top.v').write_text('module top; endmodule\n')
+            write_json(real / 'SOURCE_MANIFEST.json', {
+                'schema': 'csip-source-export-v1', 'origin': {'commit': 'a' * 40, 'tree': 'b' * 40},
+                'files': {'rtl/top.v': identity(real / 'rtl/top.v')}})
+            alias = base / 'delivery alias'
+            try:
+                alias.symlink_to(real, target_is_directory=True)
+            except OSError as error:
+                self.skipTest('symbolic links unavailable: ' + str(error))
+            isolated = prepare(alias, base / 'valid output')
+            self.assertEqual('module top; endmodule\n', (isolated / 'rtl/top.v').read_text())
+            (real / 'rtl/link.v').symlink_to(real / 'rtl/top.v')
+            write_json(real / 'SOURCE_MANIFEST.json', {
+                'schema': 'csip-source-export-v1', 'origin': {'commit': 'a' * 40, 'tree': 'b' * 40},
+                'files': {'rtl/link.v': identity(real / 'rtl/link.v')}})
+            with self.assertRaisesRegex(ValueError, 'Link or reparse point'):
+                prepare(alias, base / 'rejected output')
 
 
 if __name__ == '__main__':

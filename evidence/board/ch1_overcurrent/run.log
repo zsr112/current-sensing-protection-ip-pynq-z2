@@ -4,7 +4,7 @@ WARNING: Default location for XILINX_HLS not found:
   **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
   **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
   **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-  **** Start of session at: Wed Sep  9 17:21:23 2026
+  **** Start of session at: Thu Sep 10 11:16:50 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -66,7 +66,7 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=TRIGGER_COMPARE_VALUE
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-09 17:21:36
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-10 11:17:04
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
@@ -87,10 +87,10 @@ STAGE2I_ILA_PROPERTY_SET_VERIFIED=TRIGGER_COMPARE_VALUE
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
 STAGE2I_ILA_PROPERTY_SET_VERIFIED=TRIGGER_COMPARE_VALUE
-INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-09 17:21:36
-PAIR_ARMED=CSIP-SC-V2-BOARD-002
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-09 17:21:37
-INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-09 17:21:37
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-10 11:17:04
+PAIR_ARMED=CSIP-V2R3-BOARD-001
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-10 11:17:04
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-10 11:17:04
 PAIR_CAPTURE=PASS
 INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Xilinx/1234-tulA
-INFO: [Common 17-206] Exiting Vivado at Wed Sep  9 17:21:38 2026...
+INFO: [Common 17-206] Exiting Vivado at Thu Sep 10 11:17:06 2026...

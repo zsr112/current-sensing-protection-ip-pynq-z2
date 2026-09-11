@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 16:51:33 2026
-# Process ID: 35048
+# Start of session at: Thu Sep 10 10:46:33 2026
+# Process ID: 44440
 # Current directory: <EXTERNAL_BUILD>/digital/xsim/reference_vectors
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\xsim\reference_vectors\xsim.log -mode tcl -source {xsim.dir/reference_vectors_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/xsim/reference_vectors/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10613 MB
+# Available Virtual :7864 MB
 #-----------------------------------------------------------
 source xsim.dir/reference_vectors_snapshot/xsim_script.tcl
 # xsim {reference_vectors_snapshot} -testplusarg VECTORS -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -31,4 +31,4 @@ RANDOM_EPISODES=PASS_1000
 STAGE2G_REFERENCE_VECTORS PASS
 $finish called at time : 263536 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_reference_vectors.sv" Line 284
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:51:35 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:46:35 2026...

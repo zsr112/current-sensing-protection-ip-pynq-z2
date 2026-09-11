@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import json
 import os
 import platform
 import re
@@ -15,8 +16,10 @@ from pathlib import Path
 
 try:
     from tools.runtime_config import optional_git_identity, resolve_tool, resolve_vivado_bin
+    from tools.simulation_workspace import ascii_simulation_workspace
 except ModuleNotFoundError:
     from runtime_config import optional_git_identity, resolve_tool, resolve_vivado_bin  # type: ignore
+    from simulation_workspace import ascii_simulation_workspace  # type: ignore
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -139,6 +142,9 @@ def run_logged(
         check=False,
     )
     log.write_text(result.stdout, encoding="utf-8", newline="\n")
+    log.with_suffix(log.suffix + '.command.json').write_text(json.dumps({
+        'command': list(map(str, command)), 'cwd': str(cwd), 'exit_code': result.returncode,
+    }, indent=2) + '\n', encoding='utf-8')
     return result.returncode, result.stdout
 
 
@@ -228,13 +234,16 @@ def iverilog_case(
     plusargs: list[str] | None = None,
     run_cwd: Path | None = None,
     strict_sequence_width: bool = False,
+    vector_file: Path | None = None,
 ) -> str:
-    work = output / "icarus" / name
-    work.mkdir(parents=True, exist_ok=True)
-    iverilog = resolve("iverilog")
-    vvp = resolve("vvp")
-    image = work / f"{name}.vvp"
-    compile_command = [
+    evidence = output / "icarus" / name
+    with ascii_simulation_workspace(ROOT, evidence, name) as work:
+        iverilog = resolve("iverilog")
+        vvp = resolve("vvp")
+        image = work / f"{name}.vvp"
+        if vector_file is not None:
+            shutil.copy2(vector_file, work / "vectors.txt")
+        compile_command = [
             iverilog,
             "-g2012",
             *(["-Wall"] if strict_sequence_width else []),
@@ -248,31 +257,31 @@ def iverilog_case(
             str(image),
             *[str(path) for path in sources],
         ]
-    code, text = run_logged(
-        compile_command,
-        work,
-        work / "compile.log",
-    )
-    require_marker(code, text, "", f"Icarus {name} compile")
-    if strict_sequence_width:
-        reject_sequence_width_warnings(text, f"Icarus {name} compile")
-    waves = work / 'waves'
-    waves.mkdir(exist_ok=True)
-    args = [vvp, str(image), '+CSIP_WAVE_DIR=' + waves.as_posix()] + (plusargs or [])
-    code, text = run_logged(args, run_cwd or work, work / "run.log")
-    require_marker(
-        code,
-        text,
-        marker,
-        f"Icarus {name}",
-        reject=(
-            "STAGE2G_POLICY_MATRIX=FAIL",
-            "STAGE2G_CORE_DIRECTED=FAIL",
-            "STAGE2G_PRODUCTION_PATH=FAIL",
-            "STAGE2G_SEQUENCE_MATRIX=FAIL",
-            "REFERENCE_MODEL_COMPARISON=FAIL",
-        ),
-    )
+        code, text = run_logged(
+            compile_command,
+            work,
+            work / "compile.log",
+        )
+        require_marker(code, text, "", f"Icarus {name} compile")
+        if strict_sequence_width:
+            reject_sequence_width_warnings(text, f"Icarus {name} compile")
+        waves = work / 'waves'
+        waves.mkdir(exist_ok=True)
+        args = [vvp, str(image), '+CSIP_WAVE_DIR=' + waves.as_posix()] + (plusargs or [])
+        code, text = run_logged(args, run_cwd or work, work / "run.log")
+        require_marker(
+            code,
+            text,
+            marker,
+            f"Icarus {name}",
+            reject=(
+                "STAGE2G_POLICY_MATRIX=FAIL",
+                "STAGE2G_CORE_DIRECTED=FAIL",
+                "STAGE2G_PRODUCTION_PATH=FAIL",
+                "STAGE2G_SEQUENCE_MATRIX=FAIL",
+                "REFERENCE_MODEL_COMPARISON=FAIL",
+            ),
+        )
     return text
 
 
@@ -996,8 +1005,11 @@ def run_current(
     include_mutations: bool,
     full: bool,
     require_clean: bool,
-    vivado_bin: Path,
+    vivado_bin: Path | None,
+    portable: bool = False,
 ) -> None:
+    if portable and (include_xsim or full):
+        raise RunnerError("Portable mode excludes vendor/full regression")
     if output.exists():
         raise RunnerError(f"output must not already exist: {output}")
     output.mkdir(parents=True)
@@ -1108,6 +1120,9 @@ def run_current(
         output, "core_directed", "tb_stage2g_core_directed", core_sources,
         "STAGE2G_CORE_DIRECTED=PASS"
     )
+    iverilog_case(output, "runtime_boundary", "tb_runtime_boundary",
+                  [*core_sources[:-1], TB / "tb_runtime_boundary.sv"],
+                  "RUNTIME_BOUNDARY_CHARACTERIZATION=PASS")
     iverilog_case(
         output, "policy_matrix", "tb_stage2g_policy_matrix", policy_sources,
         "STAGE2G_POLICY_MATRIX=PASS"
@@ -1118,7 +1133,8 @@ def run_current(
         "tb_stage2g_reference_vectors",
         reference_sources,
         "REFERENCE_MODEL_COMPARISON=PASS",
-        [f"+VECTORS={vectors}"],
+        ["+VECTORS=vectors.txt"],
+        vector_file=vectors,
     )
     production_text = iverilog_case(
         output,
@@ -1265,21 +1281,22 @@ def run_current(
     ):
         require_marker(0, recovery_text, marker, "software/RTL recovery equivalence")
 
-    closure_text = run_tcl(
-        output,
-        "stage2g_source_closure",
-        ROOT / "fpga/vivado/build/tests/stage2g_source_closure_tests.tcl",
-        vivado_bin,
-    )
-    for marker in (
-        "PRODUCTION_RTL_SOURCE_COUNT=21",
-        "PRODUCTION_XDC_SOURCE_COUNT=2",
-        "LIVE_PRODUCTION_PACKAGE_USES_GENERATED_IPXACT=YES",
-        "LIVE_PRODUCTION_REGISTER_COUNT=33",
-        "CURRENT_SOURCE_CLOSURE_TARGETS_B2_TOPOLOGY=YES",
-        "CURRENT_SOURCE_CLOSURE_NEGATIVE_FIXTURES=PASS_4_OF_4",
-    ):
-        require_marker(0, closure_text, marker, "current source closure")
+    if not portable:
+        closure_text = run_tcl(
+            output,
+            "stage2g_source_closure",
+            ROOT / "fpga/vivado/build/tests/stage2g_source_closure_tests.tcl",
+            vivado_bin,
+        )
+        for marker in (
+            "PRODUCTION_RTL_SOURCE_COUNT=21",
+            "PRODUCTION_XDC_SOURCE_COUNT=2",
+            "LIVE_PRODUCTION_PACKAGE_USES_GENERATED_IPXACT=YES",
+            "LIVE_PRODUCTION_REGISTER_COUNT=33",
+            "CURRENT_SOURCE_CLOSURE_TARGETS_B2_TOPOLOGY=YES",
+            "CURRENT_SOURCE_CLOSURE_NEGATIVE_FIXTURES=PASS_4_OF_4",
+        ):
+            require_marker(0, closure_text, marker, "current source closure")
 
     if include_mutations:
         mutation_output = output / "mutations"
@@ -1416,7 +1433,7 @@ def run_current(
         "LIVE_PRODUCTION_PACKAGE_USES_GENERATED_IPXACT=YES",
         "LIVE_PRODUCTION_REGISTER_COUNT=33",
         "CURRENT_SOURCE_CLOSURE_TARGETS_B2_TOPOLOGY=YES",
-        "CONTROLLED_BUILD_SOURCE_CLOSURE=PASS",
+        "CONTROLLED_BUILD_SOURCE_CLOSURE=" + ("NOT_RUN_PORTABLE" if portable else "PASS"),
         "STAGE2D_DEDICATED_IVERILOG="
         + ("PASS" if full else "NOT_REQUESTED"),
         "STAGE2D_DEDICATED_XSIM="
@@ -1501,6 +1518,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--xsim", action="store_true")
+    parser.add_argument("--portable", action="store_true")
     parser.add_argument("--no-mutations", action="store_true")
     parser.add_argument("--full-regression", action="store_true")
     parser.add_argument("--require-clean", action="store_true")
@@ -1525,8 +1543,8 @@ def main(argv: list[str] | None = None) -> int:
                 args.historical_replay_archive.resolve(strict=True),
             )
         else:
-            vivado_bin = resolve_vivado_bin(ROOT, args.vivado_bin)
-            if vivado_bin is None:
+            vivado_bin = None if args.portable else resolve_vivado_bin(ROOT, args.vivado_bin)
+            if vivado_bin is None and not args.portable:
                 raise RunnerError("Vivado is required for the current Stage 2G run; pass --vivado-bin or set CSIP_VIVADO_BIN")
             run_current(
                 args.output.resolve(),
@@ -1535,6 +1553,7 @@ def main(argv: list[str] | None = None) -> int:
                 full=args.full_regression,
                 require_clean=args.require_clean,
                 vivado_bin=vivado_bin,
+                portable=args.portable,
             )
     except (OSError, RunnerError, subprocess.CalledProcessError) as exc:
         print(f"STAGE2G_FUNCTIONAL_RTL_RUNNER=FAIL: {exc}", file=sys.stderr)

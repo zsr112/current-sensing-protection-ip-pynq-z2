@@ -1,0 +1,18 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "--sv",
+    "-i",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-i",
+    "<EXTERNAL_SOURCE>\\tb\\generated",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\policy_matrix\\xvlog.log",
+    "<EXTERNAL_SOURCE>\\rtl\\fault_defs.vh",
+    "<EXTERNAL_SOURCE>\\rtl\\fault_classifier.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_fsm.v",
+    "<EXTERNAL_SOURCE>\\tb\\stage2g\\tb_stage2g_policy_matrix.sv"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\policy_matrix",
+  "exit_code": 0
+}

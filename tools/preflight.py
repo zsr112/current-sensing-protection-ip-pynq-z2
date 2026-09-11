@@ -1,52 +1,30 @@
 #!/usr/bin/env python3
-"""Report configured toolchain availability without running a build."""
-
+"""Compatibility entry for target-aware exported-source preflight (no build)."""
 from __future__ import annotations
-
 import argparse
 import json
-import platform
+import os
+import sys
 from pathlib import Path
-
-try:
-    from tools.runtime_config import resolve_vivado_bin, resolve_tool
-except ModuleNotFoundError:
-    from runtime_config import resolve_vivado_bin, resolve_tool  # type: ignore
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from tools.target_preflight import inventory
 
 
-def main() -> int:
-    root = Path(__file__).resolve().parents[1]
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--vivado-bin")
-    parser.add_argument("--json", action="store_true")
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--target', choices=('portable', 'digital', 'vivado', 'all'), default='all')
+    parser.add_argument('--json', action='store_true', help='Retained for command compatibility; output is always structured JSON')
+    parser.add_argument('--config', type=Path)
+    for name in ('vivado-bin', 'board-repo', 'iverilog', 'vvp', 'pwsh', 'build-root'):
+        parser.add_argument('--' + name)
     args = parser.parse_args()
-    tools = {
-        "python": resolve_tool(root, "python", aliases=("python3", "py")),
-        "iverilog": resolve_tool(root, "iverilog", aliases=("iverilog.exe",)),
-        "vvp": resolve_tool(root, "vvp", aliases=("vvp.exe",)),
-        "bash": resolve_tool(root, "bash", aliases=("bash.exe",)),
-    }
-    vivado = resolve_vivado_bin(root, args.vivado_bin)
-    payload = {
-        "schema": "stage2-toolchain-preflight-v2",
-        "platform": platform.platform(),
-        "root": ".",
-        "tools": {name: (str(path) if path else None) for name, path in tools.items()},
-        "vivado_bin": str(vivado) if vivado else None,
-        "portable_status": "PASS" if all(tools[name] for name in ("python", "iverilog", "vvp")) else "BLOCKED",
-        "vivado_status": "PASS" if vivado else "NOT_CONFIGURED",
-        "path_policy": "NO_PERSONAL_DEFAULT_PATHS",
-    }
-    if args.json:
-        print(json.dumps(payload, ensure_ascii=True, indent=2, sort_keys=True))
-    else:
-        for name, value in payload["tools"].items():
-            print(f"{name.upper()}={'FOUND' if value else 'MISSING'}{('=' + value) if value else ''}")
-        print(f"VIVADO_BIN={'FOUND='+payload['vivado_bin'] if payload['vivado_bin'] else 'NOT_CONFIGURED'}")
-        print(f"PORTABLE_TOOLCHAIN={payload['portable_status']}")
-        print(f"VIVADO_TOOLCHAIN={payload['vivado_status']}")
-    return 0 if payload["portable_status"] == "PASS" else 2
+    if args.config:
+        os.environ['CSIP_CONFIG'] = str(args.config.resolve())
+    result = inventory(ROOT, args.target, vars(args))
+    print(json.dumps(result, indent=2))
+    return 0 if result['target_ready'] else 2
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(main())

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "work.tb_stage2g_reference_vectors",
+    "-s",
+    "reference_vectors_snapshot",
+    "--timescale",
+    "1ns/1ps",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\reference_vectors\\xelab.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\reference_vectors",
+  "exit_code": 0
+}

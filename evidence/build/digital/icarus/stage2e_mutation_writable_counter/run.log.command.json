@@ -1,0 +1,8 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_writable_counter\\writable_counter.vvp"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_writable_counter",
+  "exit_code": 1
+}

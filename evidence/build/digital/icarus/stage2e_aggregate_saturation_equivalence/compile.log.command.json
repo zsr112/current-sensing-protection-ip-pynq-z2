@@ -1,0 +1,18 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "-g2012",
+    "-I",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-I",
+    "<EXTERNAL_SOURCE>\\tb\\generated",
+    "-s",
+    "tb_stage2e_aggregate_saturation_equivalence",
+    "-o",
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_destination_observer.v",
+    "<EXTERNAL_SOURCE>\\tb\\stage2e\\tb_stage2e_aggregate_saturation_equivalence.sv"
+  ],
+  "cwd": "<EXTERNAL_PATH>",
+  "exit_code": 0
+}

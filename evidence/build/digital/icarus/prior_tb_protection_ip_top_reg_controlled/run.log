@@ -1,4 +1,4 @@
-VCD info: dumpfile <EXTERNAL_BUILD>/digital/icarus/prior_tb_protection_ip_top_reg_controlled/waves/tb_protection_ip_top_reg_controlled.vcd opened for output.
+VCD info: dumpfile <EXTERNAL_PATH> opened for output.
 [10D-E] persistent sensor-stuck invalid-clear stale-event suppression
 Q-SIM-01 updates the formal 10D-E task to the Stage 2B transaction contract
 Q-SIM-02/Q-SIM-03/Q-SIM-10 removed stuck, no-clear observation, then CTRL=0x2 recovery

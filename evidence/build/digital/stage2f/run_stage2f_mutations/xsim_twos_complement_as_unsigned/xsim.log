@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 17:02:34 2026
-# Process ID: 42472
+# Start of session at: Thu Sep 10 10:57:45 2026
+# Process ID: 42928
 # Current directory: <EXTERNAL_BUILD>/digital/stage2f/run_stage2f_mutations/xsim_twos_complement_as_unsigned
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_mutations\xsim_twos_complement_as_unsigned\xsim.log -mode tcl -source {xsim.dir/mutation_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/stage2f/run_stage2f_mutations/xsim_twos_complement_as_unsigned/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10543 MB
+# Available Virtual :7476 MB
 #-----------------------------------------------------------
 source xsim.dir/mutation_snapshot/xsim_script.tcl
 # xsim {mutation_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -28,4 +28,4 @@ run -all
 MUTATION_DETECTED=PASS failures=4
 $finish called at time : 146 ns
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 17:02:36 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:57:46 2026...

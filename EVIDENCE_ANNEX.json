@@ -1,11 +1,25 @@
 {
+  "acceptance": {
+    "bytes": 10958,
+    "sha256": "0af2ee6b920f31313260fb665414936531556542880dc0804ccedcce4293205f"
+  },
+  "accepted_limitations": [
+    "REAL_ADC_INPUT_CHAIN",
+    "ACTUAL_CALIBRATION",
+    "EXTERNAL_PIN_PWM",
+    "EXTERNAL_POWER_STAGE",
+    "PERSISTENT_BOOT",
+    "LONG_DURATION_SOAK",
+    "ANALOG_SYSTEM_VALIDATION"
+  ],
   "board_receipt": {
-    "bytes": 68112,
-    "sha256": "1e340a3f83cf15a8e7beb63ffc4e938a2fc11ae49dd1b01df17f057b67be3b6d"
+    "bytes": 67830,
+    "sha256": "2082bf9a861d77b64aa0218f999614f5129287d88be4ef91e849acf536f43cf1"
   },
   "board_verified": "PASS",
   "cdc_4": "Critical retained; bounded FIFO engineering review PASS",
-  "formal_acceptance": "NOT_FORMALLY_ACCEPTED",
+  "final_verified": "PASS",
+  "formal_acceptance": "PROJECT_OWNER_ACCEPTED",
   "historical": {
     "classification": "HISTORICAL_ACCEPTED",
     "r4_manifest": {
@@ -15,12 +29,13 @@
     "used_as_new_board_proof": false
   },
   "not_run": [
-    "real analog ADC",
-    "external-pin PWM",
-    "external power stage",
-    "persistent boot",
-    "soak test",
-    "formal project acceptance"
+    "REAL_ADC_INPUT_CHAIN",
+    "ACTUAL_CALIBRATION",
+    "EXTERNAL_PIN_PWM",
+    "EXTERNAL_POWER_STAGE",
+    "PERSISTENT_BOOT",
+    "LONG_DURATION_SOAK",
+    "ANALOG_SYSTEM_VALIDATION"
   ],
   "physical_findings": {
     "cdc": {
@@ -93,6 +108,6 @@
     }
   },
   "rebuilt": "PASS",
-  "release_id": "stage2-self-contained-v2r2",
+  "release_id": "stage2-self-contained-v2r3",
   "schema": "csip-evidence-annex-v2"
 }

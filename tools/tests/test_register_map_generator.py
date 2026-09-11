@@ -360,7 +360,6 @@ class RegisterMapConsumerProvenanceMutationTests(unittest.TestCase):
         for relative in (
             "tools/board_validation/build_stage1_board_execution_package.py",
             "tools/build_current_release.py",
-            *checker.HISTORICAL_CONSUMERS,
         ):
             target = temporary / relative
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -373,6 +372,8 @@ class RegisterMapConsumerProvenanceMutationTests(unittest.TestCase):
             1,
         )
         builder.write_text(text, encoding="utf-8", newline="\n")
+        # This mutation is rejected from the package mapping before historical
+        # bytes are read. It must also run in exports without those snapshots.
         with self.assertRaisesRegex(checker.CheckError, "historical snapshot added"):
             checker.validate_historical_exclusions(temporary)
 

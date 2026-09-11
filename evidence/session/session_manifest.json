@@ -1,17 +1,17 @@
 {
-  "execution_id": "CSIP-SC-V2-BOARD-002",
+  "execution_id": "CSIP-V2R3-BOARD-001",
   "files": {
     "OFFLINE_VALIDATION.json": {
-      "bytes": 2071,
-      "sha256": "bad8e23a7a88a5e95e6bd3d43895657c966f3c1b81fd56fc54d83f6d4f6e73d1"
+      "bytes": 2067,
+      "sha256": "0a7467f299aedd1ec60ce290027564fd3f095ffc2f3e4fc43374035385184ab8"
     },
     "artifacts/protection_system.bit": {
       "bytes": 4045685,
-      "sha256": "41f43ee4c6764fc6efdbafcc0dcb01352df17dd0d22221039c2269680bc6a242"
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
     },
     "artifacts/protection_system.hwh": {
       "bytes": 690403,
-      "sha256": "d5cdc1914165ef5e52587fba82819506ead618663211092e70b94a89ffd35969"
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
     },
     "artifacts/protection_system.ltx": {
       "bytes": 92913,
@@ -46,16 +46,16 @@
       "sha256": "423729150fb8251bfb6a7f95bbf189d2b800d605079ac1744043cf2cab04c3d4"
     },
     "provenance/artifact-manifest.tsv": {
-      "bytes": 6002,
-      "sha256": "54b1bf67dce081243916d027d533af6facb75056bc6aebea791399fccdf6a626"
+      "bytes": 5628,
+      "sha256": "9436d4c077a3b7967dd2d0ab1a08b6bb0488ee435856a7cb2cae23edd507b760"
     },
     "provenance/rebuilt_evidence.json": {
-      "bytes": 2362,
-      "sha256": "3558f0509a588d055d81900fc43782ddb6b741cd93dc30c606182291f8db47fa"
+      "bytes": 2357,
+      "sha256": "67cdde63a39acefe308eaab2b37c9b809a112cbc65a961a86a2b5d5023e42d17"
     },
     "provenance/source_inputs.json": {
-      "bytes": 76312,
-      "sha256": "b173b05eb9cbb893171699fa25dea43d9f14927e6f5548a509c817e5ae07628c"
+      "bytes": 79192,
+      "sha256": "0ccf401816eda3ac637b6f35f64c071274078538bea6c96ab90bffa59bc8ad2c"
     },
     "runtime/generated/protection_register_map.py": {
       "bytes": 43433,
@@ -98,15 +98,15 @@
       "sha256": "52c6f29c671e13d57fb483b2e4c8289834e9fc4fbb7967664cc71bef5a516833"
     },
     "stage2i_board_profile.json": {
-      "bytes": 3850,
-      "sha256": "63596433103187a6a13647ea39d964f730362dea6278d9c10e2d771cd27097c0"
+      "bytes": 3846,
+      "sha256": "89a7ea23b297488d004671e14e49f73d09d651e17a4e7ac9f9025565b0e919a3"
     }
   },
-  "physical_execution_id": "CSIP-SC-V2-SELECTED-001",
-  "physical_source_commit": "1617ce673bccd24ebe319ddad1ea8c5f77b2b6e3",
-  "physical_source_tree": "3c95e61fa1752655a6eeb5c3e3a5db7b405c172e",
+  "physical_execution_id": "CSIP-V2R3-BUILD-001",
+  "physical_source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+  "physical_source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12",
   "schema": "stage2-board-session-package-v1",
-  "tooling_commit": "1617ce673bccd24ebe319ddad1ea8c5f77b2b6e3",
+  "tooling_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
   "tooling_source_basis": "HASH_VERIFIED_EXPORT",
-  "tooling_tree": "3c95e61fa1752655a6eeb5c3e3a5db7b405c172e"
+  "tooling_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
 }

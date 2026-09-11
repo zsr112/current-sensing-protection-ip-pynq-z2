@@ -1,0 +1,15 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

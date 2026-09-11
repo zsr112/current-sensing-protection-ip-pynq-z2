@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 16:58:55 2026
-# Process ID: 30112
+# Start of session at: Thu Sep 10 10:53:58 2026
+# Process ID: 13932
 # Current directory: <EXTERNAL_BUILD>/digital/xsim/stage2c_regression
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\xsim\stage2c_regression\xsim.log -mode tcl -source {xsim.dir/stage2c_regression_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/xsim/stage2c_regression/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10613 MB
+# Available Virtual :7730 MB
 #-----------------------------------------------------------
 source xsim.dir/stage2c_regression_snapshot/xsim_script.tcl
 # xsim {stage2c_regression_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -71,4 +71,4 @@ STAGE2C_POSITIVE_SCENARIOS=PASS_27_OF_27
 STAGE2C_RESET_RELEASE_CDC_DUT=PASS
 $finish called at time : 2566 ns : File "<EXTERNAL_SOURCE>/tb/stage2c/tb_stage2c_reset_release_cdc.sv" Line 838
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:58:56 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:54:00 2026...

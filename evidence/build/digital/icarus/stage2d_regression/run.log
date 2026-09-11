@@ -1,4 +1,4 @@
-VCD info: dumpfile <EXTERNAL_BUILD>/digital/icarus/stage2d_regression/waves/stage2d_async_adc_atomic_cdc.vcd opened for output.
+VCD info: dumpfile <EXTERNAL_PATH> opened for output.
 SC01=PASS
 SC02=PASS
 SC03=PASS

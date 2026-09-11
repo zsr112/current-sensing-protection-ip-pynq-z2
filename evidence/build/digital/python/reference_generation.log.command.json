@@ -1,0 +1,12 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/stage2g_reference_model.py",
+    "--output",
+    "<EXTERNAL_BUILD>\\digital\\reference\\vectors.txt",
+    "--episodes",
+    "1000"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

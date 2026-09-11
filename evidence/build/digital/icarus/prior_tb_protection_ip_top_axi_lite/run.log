@@ -1,4 +1,4 @@
-VCD info: dumpfile <EXTERNAL_BUILD>/digital/icarus/prior_tb_protection_ip_top_axi_lite/waves/tb_protection_ip_top_axi_lite.vcd opened for output.
+VCD info: dumpfile <EXTERNAL_PATH> opened for output.
 AXI contract: nonzero WSTRB writes the addressed register as a full word; WSTRB=0 does not write
 AXI contract: unmapped addresses return OKAY; writes are ignored and reads return zero
 SCENARIO 7 PASS: AXI read/write near-overlap conservative arbitration

@@ -52,22 +52,24 @@ def run(output_root: Path, repo_root: Path) -> str:
             *(str(path) for path in sources),
         ],
         cwd=repo_root,
-        text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         check=False,
     )
+    compile_log.with_suffix('.raw.log').write_bytes(compile_result.stdout)
+    compile_result.stdout = compile_result.stdout.decode('utf-8', errors='replace')
     compile_log.write_text(compile_result.stdout, encoding="utf-8")
     if compile_result.returncode != 0:
         raise RuntimeError(f"producer compilation failed; see {compile_log}")
     simulation_result = subprocess.run(
         [resolve_tool("vvp"), str(image)],
         cwd=repo_root,
-        text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         check=False,
     )
+    simulation_log.with_suffix('.raw.log').write_bytes(simulation_result.stdout)
+    simulation_result.stdout = simulation_result.stdout.decode('utf-8', errors='replace')
     simulation_log.write_text(simulation_result.stdout, encoding="utf-8")
     if simulation_result.returncode != 0:
         raise RuntimeError(f"producer simulation failed; see {simulation_log}")

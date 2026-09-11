@@ -4,80 +4,48 @@ WARNING: Default location for XILINX_HLS not found:
   **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
   **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
   **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-  **** Start of session at: Wed Sep  9 17:18:23 2026
+  **** Start of session at: Thu Sep 10 11:14:32 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
-source {<EXTERNAL_SOURCE>\tools\board_validation\stage2_fifo_routed_audit.tcl}
-# if {[llength $argv] != 2} { error "Expected routed checkpoint and new output directory" }
-# lassign $argv checkpoint output
-# if {[file exists $output]} { error "Refusing to overwrite audit evidence" }
-# file mkdir $output
-# set audit [open [file join $output fifo_paths.tsv] {WRONLY CREAT EXCL}]
-# puts $audit "crossing\tstartpoint\tendpoint\trequirement_ns\tslack_ns"
-# set base protection_system_i/protection_ip_axi_lite_0/inst/u_adc_sample_cdc_bridge
-# proc check_paths {label sources destinations count limit} {
-#     global audit output
-#     set paths [get_timing_paths -from $sources -to $destinations -delay_type max \
-#         -max_paths $count -nworst 1]
-#     if {[llength $paths] != $count} {
-#         error "$label: timing path count [llength $paths] != $count"
-#     }
-#     report_timing -from $sources -to $destinations -delay_type max \
-#         -max_paths $count -nworst 1 -file [file join $output ${label}.rpt]
-#     set endpoints {}
-#     foreach path $paths {
-#         set requirement [get_property REQUIREMENT $path]
-#         set slack [get_property SLACK $path]
-#         set endpoint [get_property ENDPOINT_PIN $path]
-#         if {abs($requirement - $limit) > 0.001 || $slack < 0.0} {
-#             error "$label: unexpected requirement/slack $requirement/$slack"
-#         }
-#         lappend endpoints $endpoint
-#         puts $audit "$label\t[get_property STARTPOINT_PIN $path]\t$endpoint\t$requirement\t$slack"
-#     }
-#     if {[llength [lsort -unique $endpoints]] != $count} {
-#         error "$label: endpoint coverage is incomplete"
-#     }
-#     flush $audit
-# }
-Command: open_checkpoint {<EXTERNAL_BUILD>\w\project\s1e_e608f8c11cc8.runs\impl_1\protection_system_wrapper_routed.dcp}
+source {<EXTERNAL_SOURCE>\tools\board_validation\stage2_fifo_routed_audit.tcl} -notrace
+Command: open_checkpoint {<EXTERNAL_BUILD>\w\project\s1e_00879719d793.runs\impl_1\protection_system_wrapper_routed.dcp}
 
 Starting open_checkpoint Task
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.026 . Memory (MB): peak = 394.195 ; gain = 6.289
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 393.555 ; gain = 5.312
 INFO: [Device 21-403] Loading part xc7z020clg400-1
 INFO: [Device 21-9227] Part: xc7z020clg400-1 does not have CEAM library.
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.175 . Memory (MB): peak = 1073.410 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.180 . Memory (MB): peak = 1072.688 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 850 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2024.1
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.032 . Memory (MB): peak = 1211.074 ; gain = 2.590
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 1209.887 ; gain = 1.988
 INFO: [Timing 38-478] Restoring timing data from binary archive.
 INFO: [Timing 38-479] Binary timing data restore complete.
 INFO: [Project 1-856] Restoring constraints from binary archive.
 INFO: [Project 1-853] Binary constraint restore complete.
 INFO: [Designutils 20-5722] Start Reading Physical Databases.
 Reading placement.
-Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1831.508 ; gain = 0.000
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1830.430 ; gain = 0.000
 Reading placer database...
-Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 1831.508 ; gain = 0.000
-Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.390 . Memory (MB): peak = 1833.906 ; gain = 2.398
-Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1833.906 ; gain = 0.000
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1830.430 ; gain = 0.000
+Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.414 . Memory (MB): peak = 1832.051 ; gain = 1.621
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1832.051 ; gain = 0.000
 Reading routing.
-Read RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.087 . Memory (MB): peak = 1841.059 ; gain = 7.152
-Read Physdb Files: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.509 . Memory (MB): peak = 1841.059 ; gain = 9.551
+Read RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.101 . Memory (MB): peak = 1840.742 ; gain = 8.691
+Read Physdb Files: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.548 . Memory (MB): peak = 1840.742 ; gain = 10.312
 Restored from archive | CPU: 0.000000 secs | Memory: 0.000000 MB |
-Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.540 . Memory (MB): peak = 1841.059 ; gain = 9.590
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1841.059 ; gain = 0.000
+Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.586 . Memory (MB): peak = 1840.742 ; gain = 10.312
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1840.742 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 242 instances were transformed.
   CFGLUT5 => CFGLUT5 (SRL16E, SRLC32E): 236 instances
   RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 6 instances
 
 INFO: [Project 1-604] Checkpoint was created with Vivado v2024.1 (64-bit) build 5076996
-open_checkpoint: Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1845.711 ; gain = 1468.992
+open_checkpoint: Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1845.387 ; gain = 1468.902
 INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
 INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
 INFO: [Timing 38-78] ReportTimingParams: -from_pins  -to_pins  -max_paths 57 -nworst 1 -delay_type max -sort_by slack.
@@ -96,59 +64,4 @@ GRAY_PATHS_CHECKED=8
 ASYNC_REG_STAGES_CHECKED=16
 CONSTRAINT_CHANGES=0
 WAIVERS_CREATED=0
-# set outcome [catch {
-#     open_checkpoint $checkpoint
-#     set dest [get_cells -quiet -hier -regexp \
-#         {(^|.*/)u_adc_sample_cdc_bridge/destination_data_reg\[[0-9]+\]$}]
-#     if {[llength $dest] != 57} { error "Expected 57 FIFO destination bits" }
-#     set source_period [get_property PERIOD [get_clocks clk_fpga_1]]
-#     set dest_period [get_property PERIOD [get_clocks clk_fpga_0]]
-#     if {$source_period != 8.0 || $dest_period != 10.0} { error "Clock contract differs" }
-#     for {set address 0} {$address < 8} {incr address} {
-#         set expression [format {(^|.*/)u_adc_sample_cdc_bridge/u_fifo/mem_reg\[%d\]\[[0-9]+\]$} $address]
-#         set sources [get_cells -quiet -hier -regexp $expression]
-#         if {[llength $sources] != 57} { error "Expected 57 bits in FIFO word $address" }
-#         check_paths payload_word_$address $sources $dest 57 8.0
-#     }
-#     foreach direction {wr rd} {
-#         set sources {}
-#         set first_stage {}
-#         for {set bit 0} {$bit < 4} {incr bit} {
-#             set previous [get_cells [format {%s/u_fifo/%s_gray_reg[%d]} $base $direction $bit]]
-#             lappend sources $previous
-#             foreach stage {1 2} {
-#                 set cell [get_cells [format {%s/u_fifo/%s_gray_sync%d_reg[%d]} $base $direction $stage $bit]]
-#                 if {[llength $cell] != 1 || [get_property ASYNC_REG $cell] ni {1 TRUE true}} {
-#                     error "Missing ASYNC_REG on $direction bit $bit stage $stage"
-#                 }
-#                 if {$stage == 1} { lappend first_stage $cell }
-#                 set d [get_pins -of_objects $cell -filter {REF_PIN_NAME == D}]
-#                 set roots [get_cells -of_objects [all_fanin -flat -startpoints_only -to $d]]
-#                 set root_names [lsort -unique [get_property NAME $roots]]
-#                 if {[llength $root_names] != 1 ||
-#                     [lindex $root_names 0] ne [get_property NAME $previous]} {
-#                     error "Unexpected synchronizer fanin: $cell <- $roots, expected $previous"
-#                 }
-#                 set previous $cell
-#             }
-#         }
-#         check_paths ${direction}_gray $sources $first_stage 4 8.0
-#     }
-#     report_cdc -details -file [file join $output cdc_unwaived.rpt]
-#     report_bus_skew -file [file join $output bus_skew.rpt]
-#     puts "FIFO_ROUTED_AUDIT=PASS"
-#     puts "PAYLOAD_PATHS_CHECKED=456"
-#     puts "GRAY_PATHS_CHECKED=8"
-#     puts "ASYNC_REG_STAGES_CHECKED=16"
-#     puts "CONSTRAINT_CHANGES=0"
-#     puts "WAIVERS_CREATED=0"
-# } message options]
-# close $audit
-# catch {close_design}
-# if {$outcome} {
-#     puts stderr "FIFO_ROUTED_AUDIT=FAIL: $message"
-#     puts stderr [dict get $options -errorinfo]
-#     exit 1
-# }
-# exit 0
-INFO: [Common 17-206] Exiting Vivado at Wed Sep  9 17:18:45 2026...
+INFO: [Common 17-206] Exiting Vivado at Thu Sep 10 11:14:56 2026...

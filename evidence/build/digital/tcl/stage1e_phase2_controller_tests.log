@@ -7,19 +7,7 @@ PHASE2_LAUNCHER_XIL_ROOT_CONTAINED: PASS
 PHASE2_LAUNCHER_SHORT_PATH_GUARANTEE: PASS
 PHASE2_LAUNCHER_RUNNER_PATH_INDEPENDENT: PASS
 PHASE2_EXECUTION_DIRECTORIES_UNIQUE: PASS
-PHASE2_WORKSPACE_OWNERSHIP_EVIDENCE_VALID: FAIL: Controlled Stage 1E execution workspace exceeds the Windows Vivado path budget after the required safety margin. workspace_root_bytes=69 root: workspace_bytes=73 longest_reviewed_path_bytes=252 safety_margin_bytes=16 usable_bytes=259 path=<EXTERNAL_SOURCE>/.s1ept/builds/r14
-Controlled Stage 1E execution workspace exceeds the Windows Vivado path budget after the required safety margin. workspace_root_bytes=69 root: workspace_bytes=73 longest_reviewed_path_bytes=252 safety_margin_bytes=16 usable_bytes=259 path=<EXTERNAL_SOURCE>/.s1ept/builds/r14
-    while executing
-"error [join [list  {Controlled Stage 1E execution workspace exceeds the Windows}  {Vivado path budget after the required safety margin.}  "workspace_r..."
-    (procedure "_workspace_path_budget" line 26)
-    invoked from within
-"_workspace_path_budget $workspace_root $workspace_identifier"
-    (procedure "::stage1e::phase2_controller::_controlled_input_ready" line 11)
-    invoked from within
-"::stage1e::phase2_controller::_controlled_input_ready $context"
-    ("uplevel" body line 14)
-    invoked from within
-"uplevel 1 $body"
+PHASE2_WORKSPACE_OWNERSHIP_EVIDENCE_VALID: PASS
 PHASE2_SYNTHESIS_AUTHORIZATION_PATH: PASS
 PHASE2_SYNTHESIS_EVIDENCE_PATH_CONTRACT: PASS
 PHASE2_SYNTHESIS_EVIDENCE_TRAVERSAL_REJECT: PASS
@@ -39,4 +27,4 @@ TEST FAILURE: Phase 2 controller inventory hash: expected=<c285e3bfc2d7d3a8350a2
 "uplevel 1 $body"
 PHASE2_NO_IMPLEMENTATION: PASS
 PHASE2_NO_ARTIFACT: PASS
-SUMMARY PASS=15 FAIL=2
+SUMMARY PASS=16 FAIL=1

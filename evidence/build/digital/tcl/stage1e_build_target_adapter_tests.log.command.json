@@ -1,0 +1,8 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_SOURCE>\\fpga\\vivado\\build\\tests\\stage1e_build_target_adapter_tests.tcl"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

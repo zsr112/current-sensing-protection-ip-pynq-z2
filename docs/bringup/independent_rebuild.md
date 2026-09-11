@@ -8,7 +8,7 @@ to their new hashes. Formal project acceptance remains NOT_FORMALLY_ACCEPTED.
 
 - Python 3.10 or newer, including Tcl/Tk, for tools and fixture tests. The full
   historical source replay is optional and has its own Python 3.12 requirement.
-- Icarus Verilog 12.x (`iverilog` and `vvp`) from the Icarus project or MSYS2.
+- Icarus Verilog 12.x-14.x (`iverilog` and `vvp`); Windows was tested with 13.0 from the Icarus project or MSYS2.
 - Vivado 2024.1, build 5076996, with Zynq-7000 device support, from AMD.
   Use a license appropriate to the installed edition and device. Licenses and
   vendor tools are not redistributed. Mac can run Python and Icarus checks;
@@ -31,10 +31,18 @@ Select JSON with `--config` or `CSIP_CONFIG`; the optional repository default is
 against its containing directory. Malformed JSON and invalid explicit tools
 are errors. Keep machine-specific JSON outside the public delivery.
 
-Supported keys are `vivado_bin`, `iverilog`, `vvp`, `pwsh`, `board_repo`, and
-`build_root`. `CSIP_BUILD_ROOT` is required when `--build-root` is omitted; a build
-root must be fresh and outside the source tree. Keep the build root short enough
-for Vivado's checked generated-path budget. No previous cache is imported.
+Supported keys are `vivado_bin`, `iverilog`, `vvp`, `pwsh`, `board_repo`,
+`build_root`, and `sim_scratch_root`. `CSIP_BUILD_ROOT` is required when
+`--build-root` is omitted; a build root must be fresh and outside the source tree.
+Keep the build root short enough for Vivado's checked generated-path budget. No
+previous cache is imported.
+
+Icarus tests that use HDL file I/O run in a unique ASCII-only temporary workspace
+and copy their complete evidence to the requested output, so the repository and
+output may contain spaces or non-ASCII characters. The default system temporary
+directory is used when its canonical path is ASCII. Otherwise set
+`CSIP_SIM_SCRATCH_ROOT` or `sim_scratch_root` to an existing or creatable ASCII
+directory. A failed run is copied with a failed workspace receipt before cleanup.
 
 ## Export and Execute
 
@@ -82,3 +90,31 @@ probe and trigger settings, logs, and an analyzed receipt. See
 
 Real ADC, external-pin PWM, external power stage, persistent boot and soak
 remain NOT_RUN. A successful synthetic campaign does not expand this boundary.
+
+## G1 portable and target-aware checks
+
+From the engineering checkout run `python -B tools/check_register_map_implementation.py --scope engineering`.
+From a verified selected export use `--scope selected-export`; default auto mode
+verifies the manifest before selecting this scope. Frozen notebook/install
+snapshots excluded by committed selection are OUT_OF_SCOPE, while every current
+consumer and oracle remains required.
+
+`python -B tools/run_portable_regression.py --output <fresh-external-output>` runs
+Python and Icarus checks without vendor tools. `--rtl-only` omits Python suites
+already executed separately and records the executed collection.
+`rebuild.py portable` exposes the same suite for verified source exports;
+`rebuild_delivery.py portable` first makes an isolated exact source copy.
+
+`rebuild.py preflight --target portable|digital|vivado|all` defaults to `all`.
+Readiness lists tool paths/versions, missing/unsupported/configuration conditions
+and source integrity. License and board checks remain NOT_RUN. Exit codes are
+0 ready, 2 blocked, and 1 for executed regression failure. Full digital retains
+its Windows vendor Tcl/XSim requirements. On Windows check `$LASTEXITCODE`
+after every native command.
+
+Set `sim_scratch_root` in external toolchain JSON or `CSIP_SIM_SCRATCH_ROOT`
+to an ASCII directory outside source. Unique private scratch is copied to the
+caller's fresh output even on failure; a copy failure preserves scratch and
+prints its location. JSON paths resolve relative to the JSON file.
+See [current architecture](../architecture/current_architecture.md) for the
+production boundary and source/build/board/publication identity rules.

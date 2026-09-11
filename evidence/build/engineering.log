@@ -1,3 +1,7 @@
+test_engineering_history_bytes_remain_checked (test_abi_scope.AbiScopeTests.test_engineering_history_bytes_remain_checked) ... skipped 'Historical snapshots are explicitly outside the selected export'
+test_selected_scope_and_failure_boundaries (test_abi_scope.AbiScopeTests.test_selected_scope_and_failure_boundaries) ... ok
+test_session_effective_addresses_masks_and_aliases (test_abi_scope.AbiScopeTests.test_session_effective_addresses_masks_and_aliases) ... ok
+test_unclassified_session_is_rejected (test_abi_scope.AbiScopeTests.test_unclassified_session_is_rejected) ... ok
 test_active_worktree_source_inventory_is_current_and_complete (test_build_current_release.BuildCurrentReleaseTests.test_active_worktree_source_inventory_is_current_and_complete) ... ok
 test_atomic_build_failure_leaves_no_target_or_staging (test_build_current_release.BuildCurrentReleaseTests.test_atomic_build_failure_leaves_no_target_or_staging) ... ok
 test_atomic_build_publishes_once_and_removes_staging (test_build_current_release.BuildCurrentReleaseTests.test_atomic_build_publishes_once_and_removes_staging) ... ok
@@ -22,10 +26,26 @@ test_required_file_missing (test_check_external_data_authorities.ExternalAuthori
 test_sha256_mismatch (test_check_external_data_authorities.ExternalAuthorityCheckerTests.test_sha256_mismatch) ... ok
 test_actual_width_warnings_remain_errors (test_diagnostic_paths.DiagnosticPathTests.test_actual_width_warnings_remain_errors) ... ok
 test_source_path_is_not_a_width_diagnostic (test_diagnostic_paths.DiagnosticPathTests.test_source_path_is_not_a_width_diagnostic) ... ok
+test_all_xsim_calls_match_the_real_helper_signature (test_full_regression_dispatch.RegressionDispatchTests.test_all_xsim_calls_match_the_real_helper_signature) ... ok
+test_full_digital_cli_keeps_vendor_dispatch (test_full_regression_dispatch.RegressionDispatchTests.test_full_digital_cli_keeps_vendor_dispatch) ... ok
+test_portable_cli_preserves_portable_dispatch (test_full_regression_dispatch.RegressionDispatchTests.test_portable_cli_preserves_portable_dispatch) ... ok
+test_internal_directory_link_is_rejected_without_following_it (test_path_safety.PathSafetyTests.test_internal_directory_link_is_rejected_without_following_it) ... skipped "symbolic links unavailable: [WinError 1314] \xbfͻ\xa7\xb6\xcbû\xd3\xd0\xcb\xf9\xd0\xe8\xb5\xc4\xcc\xd8Ȩ\xa1\xa3: '<EXTERNAL_PATH>' -> '<EXTERNAL_PATH>'"
+test_link_replacement_is_rechecked_before_read (test_path_safety.PathSafetyTests.test_link_replacement_is_rechecked_before_read) ... ok
+test_manifest_traversal_and_noncanonical_paths_are_rejected (test_path_safety.PathSafetyTests.test_manifest_traversal_and_noncanonical_paths_are_rejected) ... ok
+test_windows_junction_to_outside_is_rejected (test_path_safety.PathSafetyTests.test_windows_junction_to_outside_is_rejected) ... ok
+test_isolation_copies_only_verified_build_inputs (test_rebuild_delivery.DeliveryRebuildTests.test_isolation_copies_only_verified_build_inputs) ... ok
+test_selected_root_alias_is_allowed_but_internal_link_is_rejected (test_rebuild_delivery.DeliveryRebuildTests.test_selected_root_alias_is_allowed_but_internal_link_is_rejected) ... skipped "symbolic links unavailable: [WinError 1314] \xbfͻ\xa7\xb6\xcbû\xd3\xd0\xcb\xf9\xd0\xe8\xb5\xc4\xcc\xd8Ȩ\xa1\xa3: '<EXTERNAL_PATH> delivery' -> '<EXTERNAL_PATH> alias'"
 test_config_relative_paths_and_precedence (test_runtime_config.RuntimeConfigTests.test_config_relative_paths_and_precedence) ... ok
 test_export_never_inherits_parent_repository_identity (test_runtime_config.RuntimeConfigTests.test_export_never_inherits_parent_repository_identity) ... ok
 test_invalid_explicit_tool_does_not_fall_back (test_runtime_config.RuntimeConfigTests.test_invalid_explicit_tool_does_not_fall_back) ... ok
 test_malformed_config_is_an_error (test_runtime_config.RuntimeConfigTests.test_malformed_config_is_an_error) ... ok
+test_concurrent_workspaces_do_not_share_files (test_simulation_workspace.SimulationWorkspaceTests.test_concurrent_workspaces_do_not_share_files) ... ok
+test_copy_failure_keeps_original_diagnostics (test_simulation_workspace.SimulationWorkspaceTests.test_copy_failure_keeps_original_diagnostics) ... ok
+test_failure_is_copied_and_marked_failed (test_simulation_workspace.SimulationWorkspaceTests.test_failure_is_copied_and_marked_failed) ... ok
+test_non_ascii_explicit_scratch_is_rejected (test_simulation_workspace.SimulationWorkspaceTests.test_non_ascii_explicit_scratch_is_rejected) ... ok
+test_real_vvp_failure_preserves_log_and_exit_code (test_simulation_workspace.SimulationWorkspaceTests.test_real_vvp_failure_preserves_log_and_exit_code) ... ok
+test_unavailable_scratch_and_output_overlap_fail (test_simulation_workspace.SimulationWorkspaceTests.test_unavailable_scratch_and_output_overlap_fail) ... ok
+test_unicode_requested_output_receives_ascii_workspace_evidence (test_simulation_workspace.SimulationWorkspaceTests.test_unicode_requested_output_receives_ascii_workspace_evidence) ... ok
 test_changed_and_extra_files_rejected (test_source_export.SourceExportTests.test_changed_and_extra_files_rejected) ... ok
 test_powershell_validates_and_rejects_tampering (test_source_export.SourceExportTests.test_powershell_validates_and_rejects_tampering) ... ok
 test_selection_rejects_missing_required_inputs (test_source_export.SourceExportTests.test_selection_rejects_missing_required_inputs) ... ok
@@ -70,6 +90,11 @@ test_wrong_artifact_size_is_rejected (test_stage2i_physical_authority.Stage2IPhy
 test_wrong_expected_tree_is_rejected (test_stage2i_physical_authority.Stage2IPhysicalAuthorityTests.test_wrong_expected_tree_is_rejected) ... ok
 test_wrong_ltx_policy_is_rejected (test_stage2i_physical_authority.Stage2IPhysicalAuthorityTests.test_wrong_ltx_policy_is_rejected) ... ok
 test_wrong_profile_is_rejected (test_stage2i_physical_authority.Stage2IPhysicalAuthorityTests.test_wrong_profile_is_rejected) ... ok
+test_bare_relative_directory_uses_config_parent (test_target_preflight.TargetPreflightTests.test_bare_relative_directory_uses_config_parent) ... ok
+test_failure_does_not_get_overwritten_by_later_passes (test_target_preflight.TargetPreflightTests.test_failure_does_not_get_overwritten_by_later_passes) ... ok
+test_full_digital_child_failure_propagates (test_target_preflight.TargetPreflightTests.test_full_digital_child_failure_propagates) ... ok
+test_portable_only_environment_and_vendor_block (test_target_preflight.TargetPreflightTests.test_portable_only_environment_and_vendor_block) ... ok
+test_wrong_version_invalid_configuration_and_source_are_retained (test_target_preflight.TargetPreflightTests.test_wrong_version_invalid_configuration_and_source_are_retained) ... ok
 test_extra_file_fails_manifest_coverage (test_verify_current_release.VerifyCurrentReleaseTests.test_extra_file_fails_manifest_coverage) ... ok
 test_ltx_copy_violates_provenance_only_policy (test_verify_current_release.VerifyCurrentReleaseTests.test_ltx_copy_violates_provenance_only_policy) ... ok
 test_manifest_path_traversal_fails (test_verify_current_release.VerifyCurrentReleaseTests.test_manifest_path_traversal_fails) ... ok
@@ -95,6 +120,7 @@ test_tcl_child_uses_native_powershell_modules_and_canonical_environment (test_wi
 test_vivado_path_fallback (test_windows_board_release.WindowsEvidenceTests.test_vivado_path_fallback) ... ok
 
 ----------------------------------------------------------------------
-Ran 95 tests in 7.362s
+Ran 120 tests in 18.882s
 
-OK
+OK (skipped=3)
+SIMULATION_SCRATCH_PRESERVED=<EXTERNAL_PATH>

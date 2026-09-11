@@ -29,7 +29,7 @@ def load_config(root: Path) -> dict[str, str]:
     for key, value in payload.items():
         if value:
             expanded = Path(value).expanduser()
-            if not expanded.is_absolute() and ("/" in value or "\\" in value):
+            if not expanded.is_absolute() and (key in ('build_root', 'board_repo', 'vivado_bin', 'sim_scratch_root') or "/" in value or "\\" in value):
                 value = str((path.parent / expanded).resolve())
             result[key] = value
     return result
@@ -111,6 +111,9 @@ def optional_git_identity(root: Path) -> dict[str, str] | None:
 def resolve_vivado_bin(root: Path, argument: str | Path | None = None) -> Path | None:
     directory = resolve_directory(root, "vivado_bin", argument)
     if directory is not None:
+        launcher = directory / ('vivado.bat' if os.name == 'nt' else 'vivado')
+        if not launcher.is_file():
+            raise ValueError(f'Configured vivado_bin has no Vivado executable: {directory}')
         return directory
     executable = resolve_tool(root, "vivado", aliases=("vivado.bat", "vivado.exe"))
     return executable.parent if executable is not None else None

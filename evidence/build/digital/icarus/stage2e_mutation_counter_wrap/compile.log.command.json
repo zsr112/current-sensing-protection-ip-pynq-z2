@@ -1,0 +1,19 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "-g2012",
+    "-I",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-s",
+    "tb_stage2e_mutation_counter_wrap",
+    "-o",
+    "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_counter_wrap\\counter_wrap.vvp",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_source_observer.v",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_destination_observer.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_reg_bank.v",
+    "<EXTERNAL_SOURCE>\\tb\\stage2e\\stage2e_transaction_observability_checker.sv",
+    "<EXTERNAL_SOURCE>\\tb\\stage2e\\tb_stage2e_mutation_connected.sv"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_counter_wrap",
+  "exit_code": 0
+}

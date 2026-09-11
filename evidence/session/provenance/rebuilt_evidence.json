@@ -1,7 +1,7 @@
 {
   "artifact_manifest": {
-    "bytes": 6002,
-    "sha256": "54b1bf67dce081243916d027d533af6facb75056bc6aebea791399fccdf6a626"
+    "bytes": 5628,
+    "sha256": "9436d4c077a3b7967dd2d0ab1a08b6bb0488ee435856a7cb2cae23edd507b760"
   },
   "artifacts": {
     "bit": {
@@ -9,14 +9,14 @@
       "delivery_policy": "PACKAGE_REQUIRED",
       "package_path": "artifacts/protection_system.bit",
       "role": "BITSTREAM",
-      "sha256": "41f43ee4c6764fc6efdbafcc0dcb01352df17dd0d22221039c2269680bc6a242"
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
     },
     "hwh": {
       "bytes": 690403,
       "delivery_policy": "PACKAGE_REQUIRED",
       "package_path": "artifacts/protection_system.hwh",
       "role": "HWH",
-      "sha256": "d5cdc1914165ef5e52587fba82819506ead618663211092e70b94a89ffd35969"
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
     },
     "ltx": {
       "bytes": 92913,
@@ -26,27 +26,27 @@
       "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
     },
     "xsa": {
-      "bytes": 857417,
+      "bytes": 857420,
       "delivery_policy": "PROVENANCE_ONLY_REQUIRED",
       "package_path": null,
       "role": "XSA",
-      "sha256": "0e342085cd38a0209598f725125dc2104c050f360b343f6b976c0c1e129c52e8"
+      "sha256": "5aba6dae3fb22bbe1c3a4c1cbc8380292ebebdf2452bb8054b22ada34deccbc5"
     }
   },
-  "board_execution_id": "CSIP-SC-V2-BOARD-002",
+  "board_execution_id": "CSIP-V2R3-BOARD-001",
   "board_verification": "NOT_RUN",
   "evidence_state": "REBUILT",
   "formal_acceptance": "NOT_FORMALLY_ACCEPTED",
-  "physical_execution_id": "CSIP-SC-V2-SELECTED-001",
-  "source_commit": "1617ce673bccd24ebe319ddad1ea8c5f77b2b6e3",
+  "physical_execution_id": "CSIP-V2R3-BUILD-001",
+  "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
   "source_inputs": {
-    "bytes": 76312,
-    "sha256": "b173b05eb9cbb893171699fa25dea43d9f14927e6f5548a509c817e5ae07628c"
+    "bytes": 79192,
+    "sha256": "0ccf401816eda3ac637b6f35f64c071274078538bea6c96ab90bffa59bc8ad2c"
   },
-  "source_tree": "3c95e61fa1752655a6eeb5c3e3a5db7b405c172e",
+  "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12",
   "terminal_result": {
-    "bytes": 976,
-    "sha256": "15691501b0f23597020d8d4fdc315f3bf995b97590582598a21b1dca1acc6db1"
+    "bytes": 954,
+    "sha256": "4f5735732a47d9c42cf79c08ed083164e25f5ce1ccf3f1dc53855d1aa9118282"
   },
   "tool_version": {
     "build": "5076996",
@@ -55,7 +55,7 @@
     "version": "2024.1"
   },
   "vivado_result": {
-    "bytes": 3701,
-    "sha256": "d9c98a8cfca0782c42bcba88037098f6758fb23b30bcbdb40cadd508d483e6a8"
+    "bytes": 3551,
+    "sha256": "3b0e49d00e3318d7e51ccffecdf94f6c5ff2efc62219ab2a7588b0396e975cec"
   }
 }

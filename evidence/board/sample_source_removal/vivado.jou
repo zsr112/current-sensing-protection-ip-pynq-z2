@@ -3,10 +3,10 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 17:22:30 2026
-# Process ID: 23388
+# Start of session at: Thu Sep 10 11:17:59 2026
+# Process ID: 48832
 # Current directory: <EXTERNAL_BOARD>/sample_source_removal
-# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\sample_source_removal\vivado.log -journal <EXTERNAL_BOARD>\sample_source_removal\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\sample_source_removal source_trigger_now destination_trigger_now CSIP-SC-V2-BOARD-002
+# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\sample_source_removal\vivado.log -journal <EXTERNAL_BOARD>\sample_source_removal\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\sample_source_removal source_trigger_now destination_trigger_now CSIP-V2R3-BOARD-001
 # Log file: <EXTERNAL_BOARD>/sample_source_removal/vivado.log
 # Journal file: <EXTERNAL_BOARD>\sample_source_removal\vivado.jou
 # Running On        :illusion
@@ -19,6 +19,6 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10337 MB
+# Available Virtual :7040 MB
 #-----------------------------------------------------------
 source {<EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl} -notrace

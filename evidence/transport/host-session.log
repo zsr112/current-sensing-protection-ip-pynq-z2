@@ -18,4 +18,4 @@ SCENARIO_START=source_protocol
 SCENARIO_PASS=source_protocol
 SCENARIO_START=legacy_c2
 SCENARIO_PASS=legacy_c2
-{"status": "PASS", "execution_id": "CSIP-SC-V2-BOARD-002", "failure": null}
+{"status": "PASS", "execution_id": "CSIP-V2R3-BOARD-001", "failure": null}

@@ -57,6 +57,14 @@ def version(executable, flag, *, vivado_banner=False):
 
 
 def run(args):
+    if args.config:
+        os.environ['CSIP_CONFIG'] = str(args.config.resolve())
+    from tools.target_preflight import inventory
+    target = args.target if args.phase == 'preflight' else args.phase
+    readiness = inventory(ROOT, target, vars(args))
+    if args.phase == 'preflight' or not readiness['target_ready']:
+        print(json.dumps(readiness))
+        return 0 if readiness['target_ready'] else 2
     source = verify(ROOT)
     tools, vivado, board_repo = tool_environment(args)
     if args.phase in ('digital', 'all') and any(tools[name] is None for name in ('iverilog', 'vvp')):
@@ -70,17 +78,12 @@ def run(args):
         if tools[name]:
             versions[name] = version(tools[name], '-V')
     executable = vivado / ('vivado.bat' if os.name == 'nt' else 'vivado') if vivado else None
-    if executable:
+    if executable and args.phase != 'portable':
         versions['vivado'] = version(executable, '-version', vivado_banner=True)
         if '2024.1' not in versions['vivado'] or '5076996' not in versions['vivado']:
             raise ValueError('This build contract requires Vivado 2024.1 build 5076996')
     if tools['pwsh']:
         versions['pwsh'] = version(tools['pwsh'], '--version')
-    if args.phase == 'preflight':
-        print(json.dumps({'status': 'PASS', 'source_files': len(source['files']), 'versions': versions,
-                          'board_files': 'EXPLICIT' if board_repo else 'VIVADO_INSTALLATION_LOOKUP',
-                          'license': 'NOT_RUN', 'board_verified': 'NOT_RUN'}))
-        return 0
     if not args.execution_id or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{2,127}', args.execution_id):
         raise ValueError('Supply a new portable --execution-id')
     build_root = resolve_directory(ROOT, 'build_root', args.build_root)
@@ -105,6 +108,8 @@ def run(args):
         write_json(build_root / 'rebuild_receipt.json', receipt)
         return result.returncode == 0
     try:
+        if args.phase == 'portable':
+            execute('portable', [sys.executable, '-B', 'tools/run_portable_regression.py', '--output', build_root / 'portable'])
         if args.phase in ('digital', 'all'):
             execute('digital', [sys.executable, '-B', 'tools/run_stage2g_functional_rtl.py', '--output', build_root / 'digital',
                                '--full-regression', '--xsim', '--vivado-bin', vivado])
@@ -152,7 +157,8 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('phase', choices=('preflight', 'digital', 'vivado', 'all'))
+    parser.add_argument('phase', choices=('preflight', 'portable', 'digital', 'vivado', 'all'))
+    parser.add_argument('--target', choices=('portable', 'digital', 'vivado', 'all'), default='all')
     parser.add_argument('--config', type=Path)
     parser.add_argument('--execution-id')
     parser.add_argument('--build-root', type=Path)

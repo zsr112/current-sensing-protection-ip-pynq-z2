@@ -1,0 +1,15 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "stage2e_axi_regression_snapshot",
+    "-runall",
+    "--onerror",
+    "quit",
+    "--onfinish",
+    "quit",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\stage2e_axi_regression\\xsim.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\stage2e_axi_regression",
+  "exit_code": 0
+}

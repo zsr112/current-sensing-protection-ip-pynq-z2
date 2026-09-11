@@ -1,0 +1,11 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/run_stage2g_mutations.py",
+    "--output",
+    "<EXTERNAL_BUILD>\\digital\\mutations",
+    "--xsim"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

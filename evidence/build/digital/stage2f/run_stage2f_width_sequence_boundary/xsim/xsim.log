@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 17:00:36 2026
-# Process ID: 12344
+# Start of session at: Thu Sep 10 10:55:43 2026
+# Process ID: 49040
 # Current directory: <EXTERNAL_BUILD>/digital/stage2f/run_stage2f_width_sequence_boundary/xsim
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_width_sequence_boundary\xsim\xsim.log -mode tcl -source {xsim.dir/width_sequence_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/stage2f/run_stage2f_width_sequence_boundary/xsim/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10397 MB
+# Available Virtual :7373 MB
 #-----------------------------------------------------------
 source xsim.dir/width_sequence_snapshot/xsim_script.tcl
 # xsim {width_sequence_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -35,4 +35,4 @@ OBS_SEQUENCE_WIDTH_32=PASS
 WIDTH_SEQUENCE_BOUNDARY=PASS
 $finish called at time : 120 ns : File "<EXTERNAL_SOURCE>/tb/stage2f/tb_stage2f_width_sequence_boundary.sv" Line 280
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 17:00:38 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:55:45 2026...

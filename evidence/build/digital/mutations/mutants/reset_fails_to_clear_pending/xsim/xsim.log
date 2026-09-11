@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Wed Sep  9 16:55:06 2026
-# Process ID: 44740
+# Start of session at: Thu Sep 10 10:50:12 2026
+# Process ID: 46084
 # Current directory: <EXTERNAL_BUILD>/digital/mutations/mutants/reset_fails_to_clear_pending/xsim
 # Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\mutations\mutants\reset_fails_to_clear_pending\xsim\xsim.log -mode tcl -source {xsim.dir/mutation_snapshot/xsim_script.tcl}
 # Log file: <EXTERNAL_BUILD>/digital/mutations/mutants/reset_fails_to_clear_pending/xsim/xsim.log
@@ -19,7 +19,7 @@
 # Host memory       :16844 MB
 # Swap memory       :13958 MB
 # Total Virtual     :30803 MB
-# Available Virtual :10556 MB
+# Available Virtual :7942 MB
 #-----------------------------------------------------------
 source xsim.dir/mutation_snapshot/xsim_script.tcl
 # xsim {mutation_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
@@ -35,4 +35,4 @@ CLEAR_FENCE_MATRIX=PASS
 RESET_PIPELINE_FLUSH_MATRIX=PASS
 $finish called at time : 1771 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_policy_matrix.sv" Line 497
 exit 0
-INFO: [Common 17-206] Exiting xsim at Wed Sep  9 16:55:08 2026...
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:50:13 2026...

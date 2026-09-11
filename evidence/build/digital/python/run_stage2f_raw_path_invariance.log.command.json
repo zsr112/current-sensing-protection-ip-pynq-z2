@@ -1,0 +1,13 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/run_stage2f_raw_path_invariance.py",
+    "--output",
+    "<EXTERNAL_BUILD>\\digital\\stage2f\\run_stage2f_raw_path_invariance",
+    "--xsim",
+    "--base-commit",
+    "cde94b6cee8bd4423e7cf0e03b35a9596a666dd4"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}
