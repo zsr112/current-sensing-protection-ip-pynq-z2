@@ -1,0 +1,309 @@
+{
+  "acceptance_basis": {
+    "artifacts": {
+      "bit": {
+        "bytes": 4045685,
+        "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
+      },
+      "hwh": {
+        "bytes": 690403,
+        "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
+      },
+      "ltx": {
+        "bytes": 92913,
+        "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+      }
+    },
+    "board": {
+      "evidence_path": "evidence/board/board_verification_receipt.json",
+      "execution_id": "CSIP-V2R3-BOARD-001",
+      "identity": {
+        "bytes": 67760,
+        "sha256": "d455a2407b1e9c191f84f8f4149d631e3d0eef5eff075ceae9e0abab76815d62"
+      },
+      "status": "PASS"
+    },
+    "build": {
+      "evidence_path": "evidence/build/rebuild_receipt.json",
+      "execution_id": "CSIP-V2R3-BUILD-001",
+      "identity": {
+        "bytes": 973720,
+        "sha256": "932bea177f03297a498c462a1bae11774a7190fadd80a2ef9f340280115db75e"
+      },
+      "status": "PASS"
+    },
+    "final": {
+      "evidence_path": "evidence/final/final_validation_receipt.json",
+      "execution_id": "CSIP-V2R3-FINAL-001",
+      "identity": {
+        "bytes": 1555,
+        "sha256": "073e6ffb4e718ce7546f264451454b32feabd45a37694a647e28434459e45e4e"
+      },
+      "status": "PASS"
+    },
+    "mac_payload": {
+      "evidence_path": "evidence/final/mac_validation.json",
+      "identity": {
+        "bytes": 1589,
+        "sha256": "988e05313bca21d584225a842a9f0425d38af05c3f81ee8ec91cb875cd2ded60"
+      },
+      "payload_manifest": {
+        "bytes": 383626,
+        "sha256": "fd923113a6d0f3c84ab0f565798689e5fddbc1d2a5ab94055d54d46d4282ac60"
+      },
+      "status": "PASS",
+      "validation_id": "CSIP-V2R3-MAC-R6-PAYLOAD-001"
+    },
+    "manifests": {
+      "artifact": {
+        "bytes": 5421,
+        "sha256": "7f80a753fb30a22171ccc40496da12f15daa57f23a6e00cca50a56041d2bd763"
+      },
+      "board_session": {
+        "bytes": 4490,
+        "sha256": "a840444008fbb5690872f8d126b741709425b83894f525d67b0a5bb8924f4f49"
+      },
+      "release_payload": {
+        "bytes": 383626,
+        "sha256": "fd923113a6d0f3c84ab0f565798689e5fddbc1d2a5ab94055d54d46d4282ac60"
+      },
+      "source": {
+        "bytes": 81822,
+        "sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6"
+      }
+    },
+    "online_ci": {
+      "evidence_path": "evidence/final/online_ci.json",
+      "identity": {
+        "bytes": 2890,
+        "sha256": "bf426b71bf73f2bba518715d467df8ff185d06e32f7c2982fe4f182042b6431e"
+      },
+      "platforms": {
+        "macos-latest": "PASS",
+        "ubuntu-latest": "PASS",
+        "windows-latest": "PASS"
+      },
+      "status": "PASS",
+      "tested_commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486"
+    },
+    "post_seal_gate": {
+      "archive_name": "stage2-self-contained-v2r3.zip",
+      "record_location": "OUTSIDE_ARCHIVE",
+      "record_schema": "csip-post-seal-archive-validation-v1",
+      "required_platforms": [
+        "MACOS",
+        "WINDOWS"
+      ],
+      "required_records": {
+        "MACOS": "stage2-self-contained-v2r3.macos-post-seal.json",
+        "WINDOWS": "stage2-self-contained-v2r3.windows-post-seal.json"
+      },
+      "status": "EXTERNAL_PASS_REQUIRED_BEFORE_PUBLICATION"
+    },
+    "publication": {
+      "origin": {
+        "branch": "release-preparation",
+        "commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+        "tree": "85a0c3bcc239a7e978e23da1a83b724dd64530ea"
+      },
+      "tools": {
+        "deploy/load.py": {
+          "identity": {
+            "bytes": 5420,
+            "sha256": "226d609cae2f42cfc83297bbc7d24a733adb32ee7b1b69079ea2003ac5381574"
+          },
+          "source_path": "tools/board_validation/load_deployment.py"
+        },
+        "deploy/release_acceptance.py": {
+          "identity": {
+            "bytes": 21581,
+            "sha256": "a66b23af6a2a70dfce47ee1c23a76a7b98745e8636022c4e1cb407e2da39cf40"
+          },
+          "source_path": "tools/release_acceptance.py"
+        },
+        "docs/delivery/v2r3_release_seal.md": {
+          "identity": {
+            "bytes": 3320,
+            "sha256": "2db837055f97f37141ff18975554fcfb9d6c626a24536cef7280b21b3d5cbcfc"
+          },
+          "source_path": "docs/delivery/v2r3_release_seal.md"
+        },
+        "publication/.github/workflows/portable.yml": {
+          "identity": {
+            "bytes": 1555,
+            "sha256": "1bf88e5a4012d99c8dbed11a6795e726e1dbd683866acfe7765c918625a2822c"
+          },
+          "source_path": ".github/workflows/portable.yml"
+        },
+        "publication/docs/architecture/current_architecture.md": {
+          "identity": {
+            "bytes": 4973,
+            "sha256": "be3d2ba1db3885e4b7499c656c744412c31ede05bc6e2dc0fb0b9dbc11b9f766"
+          },
+          "source_path": "docs/architecture/current_architecture.md"
+        },
+        "publication/docs/delivery/self_contained_readme.md": {
+          "identity": {
+            "bytes": 7005,
+            "sha256": "32450c30317f01c13240cceb1d878eb4728729b8291c030c4bdc2e545cd7ae63"
+          },
+          "source_path": "docs/delivery/self_contained_readme.md"
+        },
+        "publication/tests/test_publication_evidence.py": {
+          "identity": {
+            "bytes": 4670,
+            "sha256": "80a91f50ccbc1fbd8a27f592759a0638bf7dba74f3a88f8458bcf542680cad04"
+          },
+          "source_path": "tests/test_publication_evidence.py"
+        },
+        "publication/tests/test_release_acceptance.py": {
+          "identity": {
+            "bytes": 13778,
+            "sha256": "153c25cd64b90b8a5155d6cbf22616a09ddd484ac51eaa7772184fc1c3ddc018"
+          },
+          "source_path": "tests/test_release_acceptance.py"
+        },
+        "publication/tests/test_release_seal.py": {
+          "identity": {
+            "bytes": 5226,
+            "sha256": "94bf23fb60352c4d34cdb8117b350ddb93a6e3dcd75cb5a1b58255ceabdc35fa"
+          },
+          "source_path": "tests/test_release_seal.py"
+        },
+        "publication/tools/board_validation/load_deployment.py": {
+          "identity": {
+            "bytes": 5420,
+            "sha256": "226d609cae2f42cfc83297bbc7d24a733adb32ee7b1b69079ea2003ac5381574"
+          },
+          "source_path": "tools/board_validation/load_deployment.py"
+        },
+        "publication/tools/build_self_contained_release.py": {
+          "identity": {
+            "bytes": 19633,
+            "sha256": "6d099b7addfdc52fdb8be4ca138a526d1d3ac03e8393996e45f3b724e7af63c3"
+          },
+          "source_path": "tools/build_self_contained_release.py"
+        },
+        "publication/tools/self_contained_verify.py": {
+          "identity": {
+            "bytes": 15282,
+            "sha256": "68d7daf8373e95563ff9fe0dba67e10550c05820a0c5bc2d1b3486b6552b0129"
+          },
+          "source_path": "tools/self_contained_verify.py"
+        },
+        "release_acceptance.py": {
+          "identity": {
+            "bytes": 21581,
+            "sha256": "a66b23af6a2a70dfce47ee1c23a76a7b98745e8636022c4e1cb407e2da39cf40"
+          },
+          "source_path": "tools/release_acceptance.py"
+        },
+        "tests/test_rebuild_delivery.py": {
+          "identity": {
+            "bytes": 2813,
+            "sha256": "b0db5d46acee4c9caaac1c35f0b23cd6b4aa1ad0e7deebc9deb1466934e1b4bd"
+          },
+          "source_path": "tests/test_rebuild_delivery.py"
+        },
+        "tools/build_online_ci_evidence.py": {
+          "identity": {
+            "bytes": 4531,
+            "sha256": "06bee76ee667b7b2814bc765133b139def4f2ae866a593ba25c4780df804090b"
+          },
+          "source_path": "tools/build_online_ci_evidence.py"
+        },
+        "tools/build_release_final_evidence.py": {
+          "identity": {
+            "bytes": 2855,
+            "sha256": "5fd343201bbb002185f1aace578321b5d527b0d35db03449170d2223dee98c9f"
+          },
+          "source_path": "tools/build_release_final_evidence.py"
+        },
+        "tools/build_windows_validation.py": {
+          "identity": {
+            "bytes": 6295,
+            "sha256": "0e9df9f3f5d5bb0168e9f7a100842db240c5bccf1c2b45bef2b72de517935dba"
+          },
+          "source_path": "tools/build_windows_validation.py"
+        },
+        "tools/rebuild_delivery.py": {
+          "identity": {
+            "bytes": 2963,
+            "sha256": "835987b033f3410bcd8d80a922063bf083cd10b97fd4c41c454cf74fed9e42c3"
+          },
+          "source_path": "tools/rebuild_delivery.py"
+        },
+        "tools/release_acceptance.py": {
+          "identity": {
+            "bytes": 21581,
+            "sha256": "a66b23af6a2a70dfce47ee1c23a76a7b98745e8636022c4e1cb407e2da39cf40"
+          },
+          "source_path": "tools/release_acceptance.py"
+        },
+        "tools/validate_release_payload.py": {
+          "identity": {
+            "bytes": 4721,
+            "sha256": "bd5969c351a2d3b8bf024a38a5a211e1263cf98d8f4ff68a52d29a0ec672c2e5"
+          },
+          "source_path": "tools/validate_release_payload.py"
+        },
+        "tools/verify_post_seal_release.py": {
+          "identity": {
+            "bytes": 8267,
+            "sha256": "ed42b2c3e2c06fcb9dd36cd616c85dc312bc8867367d0cb727404adfb15535ca"
+          },
+          "source_path": "tools/verify_post_seal_release.py"
+        },
+        "verify.py": {
+          "identity": {
+            "bytes": 15282,
+            "sha256": "68d7daf8373e95563ff9fe0dba67e10550c05820a0c5bc2d1b3486b6552b0129"
+          },
+          "source_path": "tools/self_contained_verify.py"
+        }
+      }
+    },
+    "source": {
+      "manifest": {
+        "bytes": 81822,
+        "sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6"
+      },
+      "origin": {
+        "commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+        "tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+      }
+    },
+    "windows_final": {
+      "evidence_path": "evidence/final/windows_validation.json",
+      "identity": {
+        "bytes": 2015,
+        "sha256": "7359e197ecc1c82deffb2e0485cd80b8fd009370977bc7e84789ae4f13c30da6"
+      },
+      "status": "PASS",
+      "validation_id": "CSIP-V2R3-WINDOWS-R6-PRESEAL-001"
+    }
+  },
+  "accepted_capabilities": [
+    "DIGITAL_PROTECTION_SOURCE",
+    "PORTABLE_REGRESSION",
+    "VIVADO_2024_1_ROUTED_BUILD",
+    "SYNTHETIC_DIGITAL_PYNQ_Z2_BOARD_SCENARIOS",
+    "OFFLINE_VERIFIABLE_DELIVERY"
+  ],
+  "accepted_limitations": [
+    "REAL_ADC_INPUT_CHAIN",
+    "ACTUAL_CALIBRATION",
+    "EXTERNAL_PIN_PWM",
+    "EXTERNAL_POWER_STAGE",
+    "PERSISTENT_BOOT",
+    "LONG_DURATION_SOAK",
+    "ANALOG_SYSTEM_VALIDATION"
+  ],
+  "authority": "PROJECT_OWNER_INTERNAL_REVIEW",
+  "decision_id": "CSIP-V2R3-ACCEPT-001",
+  "decision_timestamp_utc": "2026-09-11T03:36:16+00:00",
+  "release_id": "stage2-self-contained-v2r3",
+  "schema": "csip-release-acceptance-v1",
+  "scope": "V2R3_DIGITAL_RELEASE",
+  "status": "PROJECT_OWNER_ACCEPTED"
+}

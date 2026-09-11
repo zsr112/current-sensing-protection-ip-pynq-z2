@@ -1,0 +1,8 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_SOURCE>\\fpga\\vivado\\build\\tests\\stage2e_ipxact_metadata_scope_tests.tcl"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

@@ -1,0 +1,86 @@
+{
+  "analysis": {
+    "captured_accepts": 1,
+    "destination_samples": 4096,
+    "pwm": {
+      "complete_periods": 1,
+      "high_cycles": 500,
+      "period_cycles": 1000
+    },
+    "source_samples": 4096
+  },
+  "board_action_index": 16,
+  "execution_id": "CSIP-V2R3-BOARD-001",
+  "files": {
+    "armed.txt": {
+      "bytes": 21,
+      "sha256": "96e909ce9cb8d193e987bab79d8b7b86df3a2df665ca2e816541e8eb2ef1abf1"
+    },
+    "capture_status.txt": {
+      "bytes": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    "collect.txt": {
+      "bytes": 21,
+      "sha256": "96e909ce9cb8d193e987bab79d8b7b86df3a2df665ca2e816541e8eb2ef1abf1"
+    },
+    "destination.csv": {
+      "bytes": 729565,
+      "sha256": "4339e5046e472f90ded4f7a23452e01d9d45c77d89b17ba1f413828afa23c5c0"
+    },
+    "destination.metadata.tsv": {
+      "bytes": 507,
+      "sha256": "d82962f86393152af7fdfc4f716508c7a58f2ca3b42ba5717aa3cbf102945362"
+    },
+    "destination.probes.tsv": {
+      "bytes": 562,
+      "sha256": "039445aa4a9b75405bd0db0c82858b2b098898cf9c66b74c9a81cd0f435a3089"
+    },
+    "destination.properties.txt": {
+      "bytes": 10219,
+      "sha256": "cb6a6b615478c14a29bb9c817d49e3e3a1b474f0be27148c4d61955574b0823a"
+    },
+    "destination.trigger.tsv": {
+      "bytes": 593,
+      "sha256": "81f69c54dd1faf506afa3a1d5cc1adc5a0856a6d6528405302e8de32cac5bc35"
+    },
+    "run.log": {
+      "bytes": 5162,
+      "sha256": "4cc5d07b697f8c5e699859fc6f7adaf0619e126b88225f5de9edf987fa658d01"
+    },
+    "source.csv": {
+      "bytes": 231924,
+      "sha256": "35fdd20ab587e66a93013938159110bbdc1c11b03e33be87ecfd1d45830b5563"
+    },
+    "source.metadata.tsv": {
+      "bytes": 508,
+      "sha256": "588b12441f77fc74ec8a47ae678d6435af6a25fa808eb674789eb11715f35d5d"
+    },
+    "source.probes.tsv": {
+      "bytes": 644,
+      "sha256": "f3c0bcca7129b72e86cab70fd7fc770cdd718c955e7dcc6a947ed1e9f0863cd1"
+    },
+    "source.properties.txt": {
+      "bytes": 5260,
+      "sha256": "e97fe643b4d6f7dee43fe5221c5930555deed6b7cb4e1bd57b3aa1f4f157c1f4"
+    },
+    "source.trigger.tsv": {
+      "bytes": 602,
+      "sha256": "dec8dd730a251e0bce653d4aff72fabde66453b990872788b7228d1972b44210"
+    },
+    "tool_exit.json": {
+      "bytes": 62,
+      "sha256": "712f8f3284ed53e924881a5f6529cde09f6a4cecc16929d6e85e961599d6f1e8"
+    },
+    "vivado.jou": {
+      "bytes": 1473,
+      "sha256": "eaacbb9e0e5956f2a1574ceb3d3a001a641681e04d3d2298dc771b9f9538cc0c"
+    },
+    "vivado.log": {
+      "bytes": 6006,
+      "sha256": "8a1367a990e85af79909370e8d5e52800297c1ac9b694ed9c88ae1c901ae5702"
+    }
+  },
+  "scenario": "recovered_pwm",
+  "status": "PASS"
+}

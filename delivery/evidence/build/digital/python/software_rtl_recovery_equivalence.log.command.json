@@ -1,0 +1,12 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/check_stage2g_recovery_snapshots.py",
+    "--icarus",
+    "<EXTERNAL_BUILD>\\digital\\icarus\\production_path\\recovery_snapshots.tsv",
+    "--xsim",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\production_path\\recovery_snapshots.tsv"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

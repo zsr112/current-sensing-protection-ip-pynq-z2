@@ -1,0 +1,52 @@
+name: Portable source and delivery checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Linux Icarus
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+      - name: macOS Icarus
+        if: runner.os == 'macOS'
+        run: brew install icarus-verilog
+      - name: Windows Icarus 13
+        if: runner.os == 'Windows'
+        id: msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: mingw-w64-ucrt-x86_64-iverilog
+      - name: Add Windows Icarus 13 to PATH
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          '${{ steps.msys2.outputs.msys2-location }}\ucrt64\bin' | Add-Content $env:GITHUB_PATH
+      - name: Source and generated delivery contract
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+          PYTHONUTF8: '1'
+        run: python -B tools/ci/run_ci.py --output "${{ runner.temp }}/csip-ci"
+      - name: Keep all execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portable-${{ matrix.os }}
+          path: ${{ runner.temp }}/csip-ci

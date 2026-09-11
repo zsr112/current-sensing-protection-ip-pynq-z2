@@ -1,9 +1,0 @@
-{
-  "host_end_utc": "2026-09-09T09:22:12.485882+00:00",
-  "host_start_utc": "2026-09-09T09:22:12.455881+00:00",
-  "request": {
-    "action": "live_clear_rejected/prepare",
-    "execution_id": "CSIP-SC-V2-BOARD-002"
-  },
-  "response_sha256": "1ef94501386ed2e2c05499e113930e9dc95d915176817e06b18de601103760b1"
-}

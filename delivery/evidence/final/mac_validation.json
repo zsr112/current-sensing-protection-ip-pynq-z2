@@ -1,0 +1,51 @@
+{
+  "artifact_identities": {
+    "bit": {
+      "bytes": 4045685,
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
+    },
+    "hwh": {
+      "bytes": 690403,
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
+    },
+    "ltx": {
+      "bytes": 92913,
+      "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+    }
+  },
+  "checks": {
+    "payload_manifest_exact": "PASS",
+    "portable_preflight": "PASS",
+    "portable_regression": "PASS",
+    "publication_tests": "PASS",
+    "safe_unique_members": "PASS",
+    "zip_integrity": "PASS"
+  },
+  "payload_manifest": {
+    "bytes": 383626,
+    "sha256": "fd923113a6d0f3c84ab0f565798689e5fddbc1d2a5ab94055d54d46d4282ac60"
+  },
+  "platform": "MACOS",
+  "preseal_archive": {
+    "bytes": 5034615,
+    "sha256": "14be19166b2da64fc8bfcc2ed82e10da7680dc7ab5f87a2c856dbcb5640481cd"
+  },
+  "publication_origin": {
+    "branch": "release-preparation",
+    "commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+    "tree": "85a0c3bcc239a7e978e23da1a83b724dd64530ea"
+  },
+  "release_id": "stage2-self-contained-v2r3",
+  "schema": "csip-mac-payload-validation-v1",
+  "source_manifest": {
+    "bytes": 81822,
+    "sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6"
+  },
+  "source_origin": {
+    "commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+    "tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+  },
+  "status": "PASS",
+  "validated_at_utc": "2026-09-11T03:16:45.319124+00:00",
+  "validation_id": "CSIP-V2R3-MAC-R6-PAYLOAD-001"
+}

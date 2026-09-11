@@ -1,0 +1,11 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/run_stage2f_generated_profile_rtl.py",
+    "--output",
+    "<EXTERNAL_BUILD>\\digital\\stage2f\\run_stage2f_generated_profile_rtl",
+    "--xsim"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

@@ -1,0 +1,20 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Thu Sep 10 10:53:26 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/stage2e_mutation_any_error_backpressure_snapshot/xsim_script.tcl
+# xsim {stage2e_mutation_any_error_backpressure_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+MUTATION_ID=15_ANY_ERROR_INCLUDES_LEGAL_BACKPRESSURE
+MUTATION_CHANGED_BEHAVIOR=ANY_ERROR_OUTPUT_ORS_BACKPRESSURE_STICKY
+MUTATION_EXPECTED_REJECTION=ANY_ERROR_INCLUDES_LEGAL_BACKPRESSURE
+STAGE2E CHECK FAILED: ANY_ERROR_INCLUDES_LEGAL_BACKPRESSURE
+$finish called at time : 36 ns : File "<EXTERNAL_SOURCE>/tb/stage2e/stage2e_transaction_observability_checker.sv" Line 8
+exit 0
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:53:27 2026...

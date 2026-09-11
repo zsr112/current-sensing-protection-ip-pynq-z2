@@ -1,0 +1,29 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "-g2012",
+    "-I",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-I",
+    "<EXTERNAL_SOURCE>\\tb\\generated",
+    "-s",
+    "tb_stage2d_async_adc_atomic_cdc",
+    "-o",
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_SOURCE>\\rtl\\reset_release_sync.v",
+    "<EXTERNAL_SOURCE>\\rtl\\async_fifo_gray.v",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_source_observer.v",
+    "<EXTERNAL_SOURCE>\\rtl\\adc_sample_cdc_bridge.v",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_destination_observer.v",
+    "<EXTERNAL_SOURCE>\\rtl\\current_compare_dual.v",
+    "<EXTERNAL_SOURCE>\\rtl\\sensor_health_monitor.v",
+    "<EXTERNAL_SOURCE>\\rtl\\fault_classifier.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_fsm.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gen.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gate.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_core_top.v",
+    "<EXTERNAL_SOURCE>\\tb\\stage2d\\tb_stage2d_async_adc_atomic_cdc.sv"
+  ],
+  "cwd": "<EXTERNAL_PATH>",
+  "exit_code": 0
+}

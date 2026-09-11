@@ -1,0 +1,29 @@
+ordinal	utc_timestamp	event	phase	execution_id	run_identity	STATUS	PROGRESS	CURRENT_STEP	output_identity	detail
+1	2026-09-10T03:00:25Z	ATTEMPT	SOURCE_PRECHECK	CSIP-V2R3-BUILD-001	PRECHECK	NOT_STARTED	0	NONE	NONE	Validate sealed contract and Vivado identity.
+2	2026-09-10T03:00:27Z	COMPLETED	SOURCE_PRECHECK	CSIP-V2R3-BUILD-001	PRECHECK	VALIDATED	0	NONE	a68b26f6ad8cd6ceb4eace1285876015b3e4f2f5e7303b5bd297df68d3b24d44	Vivado v2024.1 (64-bit)\nSW Build 5076996 on Wed May 22 18:37:14 MDT 2024\nIP Build 5075265 on Wed May 22 21:45:21 MDT 2024\nTool Version Limit: 2024.05\nCopyright 1986-2022 Xilinx, Inc. All Rights Reserved.\nCopyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.\nSharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024\n
+3	2026-09-10T03:00:27Z	ATTEMPT	PACKAGE_IP	CSIP-V2R3-BUILD-001	stage1e_ip_packaging	NOT_STARTED	0	NONE	NONE	Package exact protection IP.
+4	2026-09-10T03:00:34Z	COMPLETED	PACKAGE_IP	CSIP-V2R3-BUILD-001	stage1e_ip_packaging	COMPLETE	100	NONE	e8314d2338ee807e56548eb07549c442e58c6c4d64c7c9316fd660c2f36fd39f	<EXTERNAL_BUILD>/w/ip_repo/protection_ip_axi_lite/component.xml
+5	2026-09-10T03:00:34Z	ATTEMPT	CREATE_PROJECT	CSIP-V2R3-BUILD-001	s1e_00879719d793	NOT_STARTED	0	NONE	NONE	Create fresh PYNQ-Z2 project.
+6	2026-09-10T03:00:36Z	COMPLETED	CREATE_PROJECT	CSIP-V2R3-BUILD-001	s1e_00879719d793	CREATED	100	NONE	s1e_00879719d793	<EXTERNAL_BUILD>/w/project/s1e_00879719d793.xpr
+7	2026-09-10T03:00:36Z	ATTEMPT	CREATE_BASE_BD	CSIP-V2R3-BUILD-001	protection_system	NOT_STARTED	0	NONE	NONE	Create reviewed PS/reset/SmartConnect/protection base.
+8	2026-09-10T03:00:43Z	COMPLETED	CREATE_BASE_BD	CSIP-V2R3-BUILD-001	protection_system	VALIDATED	100	NONE	protection_system	<EXTERNAL_BUILD>/w/project/s1e_00879719d793.srcs/sources_1/bd/protection_system/protection_system.bd
+9	2026-09-10T03:00:43Z	ATTEMPT	ADD_DEBUG	CSIP-V2R3-BUILD-001	protection_system	NOT_STARTED	0	NONE	NONE	Add exact mixed System ILA.
+10	2026-09-10T03:00:51Z	COMPLETED	ADD_DEBUG	CSIP-V2R3-BUILD-001	protection_system	VALIDATED	100	NONE	system_ila_stage2b_0	Destination System ILA connected; source-domain System ILA is added with the B2 stimulus.
+11	2026-09-10T03:00:51Z	ATTEMPT	ADD_CONTROLLED_STIMULUS	CSIP-V2R3-BUILD-001	protection_system	NOT_STARTED	0	NONE	NONE	Add exact profile-specific AXI GPIO stimulus source.
+12	2026-09-10T03:01:01Z	COMPLETED	ADD_CONTROLLED_STIMULUS	CSIP-V2R3-BUILD-001	protection_system	VALIDATED	100	NONE	axi_gpio_stage1d_0	Dual-channel GPIO controls the bounded ready-aware producer; FCLK1 is 125 MHz and source-domain ILA observes valid, ready, payload, state, remaining, and acceptance.
+13	2026-09-10T03:01:01Z	ATTEMPT	GENERATE_WRAPPER	CSIP-V2R3-BUILD-001	protection_system_wrapper	NOT_STARTED	0	NONE	NONE	Generate exact BD output products and wrapper.
+14	2026-09-10T03:01:25Z	COMPLETED	GENERATE_WRAPPER	CSIP-V2R3-BUILD-001	protection_system_wrapper	GENERATED	100	NONE	82ff0a2e109fd5008349ff8c695032ba5a4bbd66ff10b7c1883e13ebf5d3d62e	<EXTERNAL_BUILD>/w/project/s1e_00879719d793.gen/sources_1/bd/protection_system/hdl/protection_system_wrapper.v
+15	2026-09-10T03:01:25Z	ATTEMPT	VALIDATE_FINAL_TOPOLOGY	CSIP-V2R3-BUILD-001	protection_system	READBACK	0	NONE	NONE	Read back the complete final BD before synthesis.
+16	2026-09-10T03:01:26Z	COMPLETED	VALIDATE_FINAL_TOPOLOGY	CSIP-V2R3-BUILD-001	protection_system	VALIDATED	100	NONE	b7a81838e4b8d80488988677ea5be53cf2e80e951aed74146b7f8bd3dc7b5a8f	Exact READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS topology read back.
+17	2026-09-10T03:01:26Z	ATTEMPT	SYNTHESIS	CSIP-V2R3-BUILD-001	synth_1	Not started	0	NONE	NONE	Launch and wait for synthesis.
+18	2026-09-10T03:08:35Z	COMPLETED	SYNTHESIS	CSIP-V2R3-BUILD-001	synth_1	synth_design Complete!	100%	synth_design	a77f928ec6fb24ca69abd7ecad4828f7c50caca77d9d3ee622d8f2f9ebadbe1c	<EXTERNAL_BUILD>/w/project/s1e_00879719d793.runs/synth_1/protection_system_wrapper.dcp
+19	2026-09-10T03:08:35Z	ATTEMPT	OPT_DESIGN	CSIP-V2R3-BUILD-001	impl_1	Not started	0%		NONE	Launch impl_1 through opt_design.
+20	2026-09-10T03:10:31Z	COMPLETED	OPT_DESIGN	CSIP-V2R3-BUILD-001	impl_1	Not started place_design	50%	place_design	d1ec3d4583b7f5ea7d1e40fca3205084f40fc2eba4ccd9d0bf5f6b7ea0dbcb6a	protection_system_wrapper_opt.dcp
+21	2026-09-10T03:10:31Z	ATTEMPT	PLACE_DESIGN	CSIP-V2R3-BUILD-001	impl_1	Not started place_design	50%	place_design	NONE	Launch impl_1 through place_design.
+22	2026-09-10T03:11:21Z	COMPLETED	PLACE_DESIGN	CSIP-V2R3-BUILD-001	impl_1	Not started route_design	75%	route_design	8a4ba7afc0058339fecdb8dbd3645633323ff206afeb2d6ddc3cca097c54ad19	protection_system_wrapper_placed.dcp
+23	2026-09-10T03:11:21Z	ATTEMPT	ROUTE_DESIGN	CSIP-V2R3-BUILD-001	impl_1	Not started route_design	75%	route_design	NONE	Launch impl_1 through route_design.
+24	2026-09-10T03:12:27Z	COMPLETED	ROUTE_DESIGN	CSIP-V2R3-BUILD-001	impl_1	route_design Complete!	100%	route_design	c38745be4c6c65b16ddc80e3913e16dcb9ffda7eec7a1719056f1d9413f2e82c	protection_system_wrapper_routed.dcp
+25	2026-09-10T03:12:27Z	ATTEMPT	ARTIFACT_GENERATION	CSIP-V2R3-BUILD-001	impl_1	route_design Complete!	100%	route_design	NONE	Generate requested deterministic artifact roles.
+26	2026-09-10T03:13:31Z	COMPLETED	ARTIFACT_GENERATION	CSIP-V2R3-BUILD-001	impl_1	write_bitstream Complete!	100%	write_bitstream	BITSTREAM,XSA,HWH,LTX	Requested artifacts generated.
+27	2026-09-10T03:13:31Z	ATTEMPT	REPORT_COLLECTION	CSIP-V2R3-BUILD-001	impl_1	write_bitstream Complete!	100%	write_bitstream	NONE	Collect closed report inventory and manifest.
+28	2026-09-10T03:13:43Z	COMPLETED	REPORT_COLLECTION	CSIP-V2R3-BUILD-001	impl_1	write_bitstream Complete!	100%	write_bitstream	ARTIFACT_MANIFEST	Reports and exact artifact manifest collected.

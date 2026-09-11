@@ -1,0 +1,8 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_counter_wrap\\counter_wrap.vvp"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_counter_wrap",
+  "exit_code": 1
+}

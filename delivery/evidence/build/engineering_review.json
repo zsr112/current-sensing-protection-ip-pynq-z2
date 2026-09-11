@@ -1,0 +1,422 @@
+{
+  "artifact_comparison": {
+    "bit": {
+      "byte_equal_to_r4": false,
+      "r4": {
+        "sha256": "2ef091e6550ba01d00cd677d9b9676fc38f3cdd4380d9925244fb705342ec518",
+        "size_bytes": 4045685
+      },
+      "rebuilt": {
+        "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0",
+        "size_bytes": 4045685
+      },
+      "structure": {
+        "r4": {
+          "header": {
+            "a": "protection_system_wrapper;UserID=0XFFFFFFFF;Version=2024.1",
+            "b": "7z020clg400",
+            "c": "2026/09/09",
+            "d": "01:53:29"
+          },
+          "payload_bytes": 4045564,
+          "payload_sha256": "7a2ab37075e3c4069dd123ac9e77de6bf7f0747f0d492ed2c7d2199af6c1b1d3"
+        },
+        "rebuilt": {
+          "header": {
+            "a": "protection_system_wrapper;UserID=0XFFFFFFFF;Version=2024.1",
+            "b": "7z020clg400",
+            "c": "2026/09/10",
+            "d": "11:13:07"
+          },
+          "payload_bytes": 4045564,
+          "payload_sha256": "7a2ab37075e3c4069dd123ac9e77de6bf7f0747f0d492ed2c7d2199af6c1b1d3"
+        }
+      }
+    },
+    "hwh": {
+      "byte_equal_to_r4": false,
+      "r4": {
+        "sha256": "0b011b48829ef1e29c917a83ecdbe1e96c012dd86fda4ac7cf4d5abcc4ee71fc",
+        "size_bytes": 690403
+      },
+      "rebuilt": {
+        "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3",
+        "size_bytes": 690403
+      },
+      "structure": {
+        "r4": {
+          "structure_sha256": "fbb3299fcaf47ef8589f646c5a609792950e79279ff0021735196ec1505d15fe",
+          "timestamp": "Wed Sep  9 01:41:22 2026"
+        },
+        "rebuilt": {
+          "structure_sha256": "fbb3299fcaf47ef8589f646c5a609792950e79279ff0021735196ec1505d15fe",
+          "timestamp": "Thu Sep 10 11:01:22 2026"
+        }
+      }
+    },
+    "ltx": {
+      "byte_equal_to_r4": true,
+      "r4": {
+        "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21",
+        "size_bytes": 92913
+      },
+      "rebuilt": {
+        "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21",
+        "size_bytes": 92913
+      }
+    },
+    "xsa": {
+      "byte_equal_to_r4": null,
+      "r4": null,
+      "rebuilt": {
+        "sha256": "5aba6dae3fb22bbe1c3a4c1cbc8380292ebebdf2452bb8054b22ada34deccbc5",
+        "size_bytes": 857420
+      }
+    }
+  },
+  "board_verified_new_artifacts": "NOT_RUN",
+  "cdc_connection_inventory_equal": true,
+  "checks": {
+    "cdc": "PASS",
+    "drc": "PASS",
+    "methodology": "PASS",
+    "timing": "PASS"
+  },
+  "comparison_basis": "Rule/severity/count and exact CDC endpoints, plus current full DRC object and FIFO routed audits. Warnings and CDC-4 Critical remain visible.",
+  "detailed_drc_methodology_review": {
+    "async_reg_stages": 16,
+    "disposition": "RETAIN_ORIGINAL_SEVERITIES",
+    "evidence": {
+      "drc-routed-audit-2/PDCN-1569#1.txt": {
+        "sha256": "6f6a8d2c73518d78c57235e7ef9d4c65b53697af2aa0a8d8fb2af33f0c23747d",
+        "size_bytes": 1073
+      },
+      "drc-routed-audit-2/PDCN-1569#2.txt": {
+        "sha256": "27cf99e7e4d9eb3cec5ef3006d7b0c1af9faf315452d1c1eebb92856edecb1d4",
+        "size_bytes": 1073
+      },
+      "drc-routed-audit-2/PDCN-1569#3.txt": {
+        "sha256": "87d529cec2b058ab0220265ae6727e490fe1e81dc0d170e7c6aaedae6df8dadd",
+        "size_bytes": 1024
+      },
+      "drc-routed-audit-2/RTSTAT-10#1.txt": {
+        "sha256": "55991da61b2cd877d3a50d09fae9608f218fd428e6a91227d3cae7af43b0d604",
+        "size_bytes": 2574
+      },
+      "drc-routed-audit-2/drc.rpt": {
+        "sha256": "1d3a3e1d044020802cdf51754346e2fce3c639e0240f0db384d04642a6cb5f5e",
+        "size_bytes": 5225
+      },
+      "drc-routed-audit-2/objects.tsv": {
+        "sha256": "00bb2118bc29f0b7cadf6f6100d2590f9a678842838c614439cd8eb2b5bf980c",
+        "size_bytes": 13810
+      },
+      "fifo-routed-audit/bus_skew.rpt": {
+        "sha256": "1ce66f2bfecbd7f16cd40ed25d0bad6e2903213030254bc930c4ab7282ac65fc",
+        "size_bytes": 304624
+      },
+      "fifo-routed-audit/cdc_unwaived.rpt": {
+        "sha256": "0b9ddbf8b730c059097ca2287e30ba227e0db58b6e0e9c54715c9329b05ea2a2",
+        "size_bytes": 66394
+      },
+      "fifo-routed-audit/fifo_paths.tsv": {
+        "sha256": "c71ec9121c2853ca0a7583c39f65879f4b21c04ec4e2cc4aaa7370b9e8cc898e",
+        "size_bytes": 105190
+      },
+      "fifo-routed-audit/payload_word_0.rpt": {
+        "sha256": "508e857c8b0301104fe8da098d73cec6ce7dd04196a8b8baba36739bca472114",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/payload_word_1.rpt": {
+        "sha256": "cc793c09b6dd4e115b644b6671bb062b4bb46c949bd351b36bc91b3297514890",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/payload_word_2.rpt": {
+        "sha256": "3093eb1be5afbae82946dfb8fac05b8c61c3887a3f0779a0b95173cae930cf59",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/payload_word_3.rpt": {
+        "sha256": "89eafe799ac0eaa72d71633f40df4781a03a11bbeeb2ea22bde0d9faab3581e0",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/payload_word_4.rpt": {
+        "sha256": "83ffa7df5bbe750d1a43558377ce16a9bfa097d8bf3c29b03002c71af302c450",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/payload_word_5.rpt": {
+        "sha256": "37f4edc7e70b58674776bc449418447a904ac0d5479733c809a894fd58cca4e1",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/payload_word_6.rpt": {
+        "sha256": "189f99943cedb3d7193845469af9dcdf28558e293e6650eee2dc07f539a30fe2",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/payload_word_7.rpt": {
+        "sha256": "2231f135905ce120f9256a84eda69066fffc8f9df745af6adad1695bda314375",
+        "size_bytes": 205809
+      },
+      "fifo-routed-audit/rd_gray.rpt": {
+        "sha256": "8bd7f0b564acf37e51f78ab77d5e5c6677ba07223ecedaf2ac663eac285dfd4c",
+        "size_bytes": 13751
+      },
+      "fifo-routed-audit/wr_gray.rpt": {
+        "sha256": "79636d1a637ce8c94d016ef64cd58dee5b9b7f827d52b7c2444c2c108d3d1726",
+        "size_bytes": 13751
+      }
+    },
+    "fifo_gray_paths": 8,
+    "fifo_payload_paths": 456,
+    "normalized_observation_only_nets": 62,
+    "rationale": {
+      "LUTAR-1": "Four asynchronous-reset LUT findings are inside AMD debug-hub FIFO reset logic. Debug reliability risk is retained; vendor IP is not edited.",
+      "PDCN-1569": "Three unused LUT input findings are confined to the AMD debug hub.",
+      "RTSTAT-10": "62 MARK_DEBUG normalized observational outputs have no consumers by design; 46 other nets belong to AMD debug/ILA/SmartConnect. Raw protection does not consume the normalized fork.",
+      "TIMING-9 / CDC-4": "FIFO payload crossing remains Critical. Current routed path bounds, Gray synchronization and regression substantiate the engineering contract; this is not analog metastability or MTBF proof.",
+      "XDCB-5": "Four inefficient object queries are in generated AMD ILA constraints; runtime efficiency warning retained."
+    },
+    "rtstat_no_load_nets": 108,
+    "status": "PASS",
+    "worst_gray_slack_ns": 6.519,
+    "worst_payload_slack_ns": 4.467
+  },
+  "execution_id": "CSIP-V2R3-BUILD-001",
+  "formal_acceptance": "NOT_FORMALLY_ACCEPTED",
+  "new_findings": {
+    "cdc": {
+      "CDC-15": {
+        "count": 65,
+        "severity": "Warning"
+      },
+      "CDC-3": {
+        "count": 54,
+        "severity": "Info"
+      },
+      "CDC-4": {
+        "count": 1,
+        "severity": "Critical"
+      },
+      "CDC-6": {
+        "count": 13,
+        "severity": "Warning"
+      },
+      "CDC-9": {
+        "count": 3,
+        "severity": "Info"
+      }
+    },
+    "constraint_checks": {
+      "constant_clock": 0,
+      "generated_clocks": 0,
+      "latch_loops": 0,
+      "loops": 0,
+      "multiple_clock": 0,
+      "no_clock": 0,
+      "no_input_delay": 0,
+      "no_output_delay": 0,
+      "partial_input_delay": 0,
+      "partial_output_delay": 0,
+      "pulse_width_clock": 0,
+      "unconstrained_internal_endpoints": 0
+    },
+    "drc": {
+      "PDCN-1569": {
+        "count": 3,
+        "severity": "Warning"
+      },
+      "RTSTAT-10": {
+        "count": 1,
+        "severity": "Warning"
+      }
+    },
+    "methodology": {
+      "LUTAR-1": {
+        "count": 4,
+        "severity": "Warning"
+      },
+      "TIMING-9": {
+        "count": 1,
+        "severity": "Warning"
+      },
+      "XDCB-5": {
+        "count": 4,
+        "severity": "Warning"
+      }
+    },
+    "timing": {
+      "hold_failing_endpoints": 0,
+      "pulse_width_failing_endpoints": 0,
+      "setup_failing_endpoints": 0,
+      "whs_ns": 0.02,
+      "wns_ns": 0.902,
+      "wpws_ns": 2.75
+    }
+  },
+  "r4_findings": {
+    "cdc": {
+      "CDC-15": {
+        "count": 65,
+        "severity": "Warning"
+      },
+      "CDC-3": {
+        "count": 54,
+        "severity": "Info"
+      },
+      "CDC-4": {
+        "count": 1,
+        "severity": "Critical"
+      },
+      "CDC-6": {
+        "count": 13,
+        "severity": "Warning"
+      },
+      "CDC-9": {
+        "count": 3,
+        "severity": "Info"
+      }
+    },
+    "constraint_checks": {
+      "constant_clock": 0,
+      "generated_clocks": 0,
+      "latch_loops": 0,
+      "loops": 0,
+      "multiple_clock": 0,
+      "no_clock": 0,
+      "no_input_delay": 0,
+      "no_output_delay": 0,
+      "partial_input_delay": 0,
+      "partial_output_delay": 0,
+      "pulse_width_clock": 0,
+      "unconstrained_internal_endpoints": 0
+    },
+    "drc": {
+      "PDCN-1569": {
+        "count": 3,
+        "severity": "Warning"
+      },
+      "RTSTAT-10": {
+        "count": 1,
+        "severity": "Warning"
+      }
+    },
+    "methodology": {
+      "LUTAR-1": {
+        "count": 4,
+        "severity": "Warning"
+      },
+      "TIMING-9": {
+        "count": 1,
+        "severity": "Warning"
+      },
+      "XDCB-5": {
+        "count": 4,
+        "severity": "Warning"
+      }
+    },
+    "timing": {
+      "hold_failing_endpoints": 0,
+      "pulse_width_failing_endpoints": 0,
+      "setup_failing_endpoints": 0,
+      "whs_ns": 0.02,
+      "wns_ns": 0.902,
+      "wpws_ns": 2.75
+    }
+  },
+  "r4_reference_manifest": {
+    "bytes": 339178,
+    "sha256": "70c9f9f4a20c058bc06c38407a658c369af7879ef322ad9d6b8bbbe3c08c7519"
+  },
+  "rebuild_receipt": {
+    "sha256": "bb1042e7a98e0b81b2976ac8660c3596530fea6bbfb733ac7f5d6de0170d6cf3",
+    "size_bytes": 973728
+  },
+  "reports": {
+    "cdc.rpt": {
+      "sha256": "53e1ad659f611a84d817cd85c153c8efbc03507f7b68defadceafed25adc3d09",
+      "size_bytes": 66377
+    },
+    "check_timing.rpt": {
+      "sha256": "182b1fb275d13c4ef748542061e3da4640699d8e159e83dfc982e09bfc19a4a5",
+      "size_bytes": 3253
+    },
+    "clock_interaction.rpt": {
+      "sha256": "e1357d41e88dca7ccb2c94e388b919cdfe649a8eb400fc30bd9feae1458feedd",
+      "size_bytes": 4010
+    },
+    "clocks_generated_clocks.rpt": {
+      "sha256": "68ab32f9d5753ac7d8c85e4dc0b265d6ee1060ea47c4d73898d7168d1a251609",
+      "size_bytes": 2248
+    },
+    "conditional_bus_skew.rpt": {
+      "sha256": "0fafc32e6fbc198d8fde244a5055e3dd366e0c24882c2b03f4b72e7df376d305",
+      "size_bytes": 304628
+    },
+    "constraint_coverage.rpt": {
+      "sha256": "7112e3b924cc786536e304a5dcef4a3f68b2eff20a9b95a9ba7fe14a072f6baf",
+      "size_bytes": 24731
+    },
+    "drc.rpt": {
+      "sha256": "7897e5d64cc2e65c03919a019364f5b7dd500ed07fe377e33b3b1a6b4c84c606",
+      "size_bytes": 5162
+    },
+    "message_source.rpt": {
+      "sha256": "dbf8da8dbfaf3b157f384727a05aa2db7af72a24877897b95279428a81e173c2",
+      "size_bytes": 651
+    },
+    "methodology.rpt": {
+      "sha256": "0b0c09e7004c3c52f3336238c2c0df3ccba8fc222725b5d3123c897752b63046",
+      "size_bytes": 10311
+    },
+    "timing_exception_source.rpt": {
+      "sha256": "56670c3af0459f638869f9c33fb960627063853b9eb95da3ba5fb45ad77799b8",
+      "size_bytes": 98893
+    },
+    "timing_path_groups.rpt": {
+      "sha256": "66dab456b525c0d8291d97f0699fac80c2e082a87069b978e1734cd2b041003c",
+      "size_bytes": 2899279
+    },
+    "timing_summary.rpt": {
+      "sha256": "a54a08bb1bac0e016ca5cf11303feaf2da33b4c21d11bf36759d943fc89ac61b",
+      "size_bytes": 113384
+    },
+    "utilization.rpt": {
+      "sha256": "8ebaeb635c639b8859214f2282e98dff34b044b8a643455d342aa5787c06bce6",
+      "size_bytes": 12662
+    }
+  },
+  "review_tool": {
+    "sha256": "5b1851dd2b103bfea943f4e596ccb05dc5be5298d168facbafbe91455fcbe4e1",
+    "size_bytes": 11171
+  },
+  "rtl_and_constraints_equal": {
+    "fpga/vivado/constraints/stage2d_async_adc_atomic_cdc.xdc": true,
+    "fpga/vivado/constraints/stage2e_transaction_observability_cdc.xdc": true,
+    "fpga/vivado/constraints/stage2i_b2_ready_aware_stimulus_cdc.xdc": true,
+    "rtl/adc_sample_cdc_bridge.v": true,
+    "rtl/adc_sample_code_normalizer.sv": true,
+    "rtl/async_fifo_gray.v": true,
+    "rtl/current_compare_dual.v": true,
+    "rtl/fault_classifier.v": true,
+    "rtl/fault_defs.vh": true,
+    "rtl/generated/protection_register_map.vh": true,
+    "rtl/generated/stage2f_adc_source_profile.svh": true,
+    "rtl/moving_avg_filter.v": true,
+    "rtl/protection_core_top.v": true,
+    "rtl/protection_fsm.v": true,
+    "rtl/protection_ip_top_async_adc_axi_lite.v": true,
+    "rtl/protection_ip_top_axi_lite.v": true,
+    "rtl/protection_ip_top_reg_controlled.v": true,
+    "rtl/protection_reg_bank.v": true,
+    "rtl/pwm_gate.v": true,
+    "rtl/pwm_gen.v": true,
+    "rtl/reset_release_sync.v": true,
+    "rtl/sensor_health_monitor.v": true,
+    "rtl/source_observability_cdc.v": true,
+    "rtl/transaction_destination_observer.v": true,
+    "rtl/transaction_source_observer.v": true
+  },
+  "schema": "csip-rebuild-engineering-review-v1",
+  "source_manifest": {
+    "sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6",
+    "size_bytes": 81822
+  }
+}

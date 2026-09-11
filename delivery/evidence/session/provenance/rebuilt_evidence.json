@@ -1,0 +1,61 @@
+{
+  "artifact_manifest": {
+    "bytes": 5628,
+    "sha256": "9436d4c077a3b7967dd2d0ab1a08b6bb0488ee435856a7cb2cae23edd507b760"
+  },
+  "artifacts": {
+    "bit": {
+      "bytes": 4045685,
+      "delivery_policy": "PACKAGE_REQUIRED",
+      "package_path": "artifacts/protection_system.bit",
+      "role": "BITSTREAM",
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
+    },
+    "hwh": {
+      "bytes": 690403,
+      "delivery_policy": "PACKAGE_REQUIRED",
+      "package_path": "artifacts/protection_system.hwh",
+      "role": "HWH",
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
+    },
+    "ltx": {
+      "bytes": 92913,
+      "delivery_policy": "PACKAGE_REQUIRED",
+      "package_path": "artifacts/protection_system.ltx",
+      "role": "LTX",
+      "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+    },
+    "xsa": {
+      "bytes": 857420,
+      "delivery_policy": "PROVENANCE_ONLY_REQUIRED",
+      "package_path": null,
+      "role": "XSA",
+      "sha256": "5aba6dae3fb22bbe1c3a4c1cbc8380292ebebdf2452bb8054b22ada34deccbc5"
+    }
+  },
+  "board_execution_id": "CSIP-V2R3-BOARD-001",
+  "board_verification": "NOT_RUN",
+  "evidence_state": "REBUILT",
+  "formal_acceptance": "NOT_FORMALLY_ACCEPTED",
+  "physical_execution_id": "CSIP-V2R3-BUILD-001",
+  "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+  "source_inputs": {
+    "bytes": 79192,
+    "sha256": "0ccf401816eda3ac637b6f35f64c071274078538bea6c96ab90bffa59bc8ad2c"
+  },
+  "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12",
+  "terminal_result": {
+    "bytes": 954,
+    "sha256": "4f5735732a47d9c42cf79c08ed083164e25f5ce1ccf3f1dc53855d1aa9118282"
+  },
+  "tool_version": {
+    "build": "5076996",
+    "query_exit_code": 1,
+    "stdout": "WARNING: Default location for XILINX_HLS not found: \nvivado v2024.1 (64-bit)\nTool Version Limit: 2024.05\nSW Build 5076996 on Wed May 22 18:37:14 MDT 2024\nIP Build 5075265 on Wed May 22 21:45:21 MDT 2024\nSharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024\nCopyright 1986-2022 Xilinx, Inc. All Rights Reserved.\nCopyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.",
+    "version": "2024.1"
+  },
+  "vivado_result": {
+    "bytes": 3551,
+    "sha256": "3b0e49d00e3318d7e51ccffecdf94f6c5ff2efc62219ab2a7588b0396e975cec"
+  }
+}

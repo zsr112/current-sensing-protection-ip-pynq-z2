@@ -1,0 +1,10 @@
+{
+  "caller_output": "<EXTERNAL_BUILD>\\board-plan",
+  "evidence_copied_to_requested_output": true,
+  "hdl_file_io_path": "ASCII_PRIVATE_TEMPORARY",
+  "label": "stage2-board-c2-plan",
+  "schema": "csip-ascii-simulation-workspace-v1",
+  "scratch_path": "<EXTERNAL_PATH>",
+  "status": "PASS",
+  "vector_sha256": "f847f6306c627c81d30d20bfb291e6a0af2de8c98e5d523cb82b065fb5b427a0"
+}

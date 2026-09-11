@@ -1,0 +1,29 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "--sv",
+    "-i",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-i",
+    "<EXTERNAL_SOURCE>\\tb\\generated",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\stage2c_regression\\xvlog.log",
+    "<EXTERNAL_SOURCE>\\rtl\\reset_release_sync.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gen.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gate.v",
+    "<EXTERNAL_SOURCE>\\rtl\\current_compare_dual.v",
+    "<EXTERNAL_SOURCE>\\rtl\\moving_avg_filter.v",
+    "<EXTERNAL_SOURCE>\\rtl\\sensor_health_monitor.v",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_destination_observer.v",
+    "<EXTERNAL_SOURCE>\\rtl\\fault_classifier.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_fsm.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_core_top.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_reg_bank.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_ip_top_reg_controlled.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_ip_top_axi_lite.v",
+    "<EXTERNAL_SOURCE>\\tb\\stage2c\\stage2c_reset_release_checker.sv",
+    "<EXTERNAL_SOURCE>\\tb\\stage2c\\tb_stage2c_reset_release_cdc.sv"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\stage2c_regression",
+  "exit_code": 0
+}

@@ -1,9 +1,0 @@
-{
-  "host_end_utc": "2026-09-09T09:23:03.319840+00:00",
-  "host_start_utc": "2026-09-09T09:23:03.247592+00:00",
-  "request": {
-    "action": "recovered_pwm/prepare",
-    "execution_id": "CSIP-SC-V2-BOARD-002"
-  },
-  "response_sha256": "54f8f7ae8c0f927fbef1e1117495d4eca0c523eb7aab280f68a44b82006c92bd"
-}

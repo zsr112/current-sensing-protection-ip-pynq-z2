@@ -1,0 +1,30 @@
+{
+  "build_target": "ARTIFACTS",
+  "execution_contract_identity": "a68b26f6ad8cd6ceb4eace1285876015b3e4f2f5e7303b5bd297df68d3b24d44",
+  "execution_id": "CSIP-V2R3-BUILD-001",
+  "finding_decision_identity": "NONE",
+  "hardware": {
+    "board_part": "tul.com.tw:pynq-z2:part0:1.0",
+    "part": "xc7z020clg400-1"
+  },
+  "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+  "paths": {
+    "output_root": "<EXTERNAL_BUILD>/v",
+    "workspace_root": "<EXTERNAL_BUILD>/w"
+  },
+  "retain_project": true,
+  "run_kind": "ENGINEERING",
+  "schema_version": "stage1e-execution-request-v2",
+  "source": {
+    "expected_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+    "expected_tree": "8d46707a9670c170dbc08655269bd8ff635bed12",
+    "export_manifest_sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6",
+    "repository_root": "<EXTERNAL_SOURCE>"
+  },
+  "timeout_seconds": 14400,
+  "vivado": {
+    "executable": "<EXTERNAL_PATH>",
+    "expected_build": "5076996",
+    "expected_version": "2024.1"
+  }
+}

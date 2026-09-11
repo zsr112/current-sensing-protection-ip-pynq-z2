@@ -1,0 +1,12 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "tools/stage2f_adc_contract_audit.py",
+    "--root",
+    ".",
+    "--no-git-check",
+    "--no-reference-check"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

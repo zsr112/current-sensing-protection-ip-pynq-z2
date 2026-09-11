@@ -1,0 +1,31 @@
+{
+  "acceptance": {
+    "bytes": 10958,
+    "sha256": "0af2ee6b920f31313260fb665414936531556542880dc0804ccedcce4293205f"
+  },
+  "archive": {
+    "bytes": 5130902,
+    "sha256": "de73b0983e976e6daa500b929eb1cd0d48473d21ced45906406f27de6dcc8c50"
+  },
+  "archive_name": "stage2-self-contained-v2r3.zip",
+  "checks": {
+    "archive_name": "PASS",
+    "archive_sha256": "PASS",
+    "extracted_self_verification": "PASS",
+    "release_identity": "PASS",
+    "safe_unique_members": "PASS",
+    "zip_crc": "PASS"
+  },
+  "extracted_bytes": 39796101,
+  "file_count": 2008,
+  "payload_manifest": {
+    "bytes": 383626,
+    "sha256": "fd923113a6d0f3c84ab0f565798689e5fddbc1d2a5ab94055d54d46d4282ac60"
+  },
+  "platform": "MACOS",
+  "release_id": "stage2-self-contained-v2r3",
+  "schema": "csip-post-seal-archive-validation-v1",
+  "status": "PASS",
+  "validated_at_utc": "2026-09-11T03:47:09.905278+00:00",
+  "validation_id": "CSIP-V2R3-MACOS-R6-POSTSEAL-001"
+}

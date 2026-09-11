@@ -1,0 +1,122 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Thu Sep 10 10:48:22 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/mutation_snapshot/xsim_script.tcl
+# xsim {mutation_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+FAIL cycle=8 evaluation_integrity actual=1 expected=0
+FAIL cycle=10 dirty_first_wait actual=00000001 expected=00000002
+FAIL cycle=12 evaluation_integrity actual=0 expected=1
+FAIL cycle=14 healthy_arms actual=00000001 expected=00000000
+FAIL cycle=14 healthy_releases actual=1 expected=0
+FAIL cycle=16 evaluation_integrity actual=0 expected=1
+FAIL cycle=17 evaluation_integrity actual=0 expected=1
+FAIL cycle=18 evaluation_integrity actual=0 expected=1
+FAIL cycle=19 evaluation_integrity actual=0 expected=1
+FAIL cycle=20 evaluation_integrity actual=0 expected=1
+FAIL cycle=21 evaluation_integrity actual=0 expected=1
+FAIL cycle=22 evaluation_integrity actual=0 expected=1
+FAIL cycle=23 evaluation_integrity actual=0 expected=1
+FAIL cycle=24 evaluation_integrity actual=0 expected=1
+FAIL cycle=25 evaluation_integrity actual=0 expected=1
+FAIL cycle=26 evaluation_integrity actual=0 expected=1
+FAIL cycle=27 evaluation_integrity actual=0 expected=1
+FAIL cycle=28 evaluation_integrity actual=0 expected=1
+FAIL cycle=29 evaluation_integrity actual=0 expected=1
+FAIL cycle=30 evaluation_integrity actual=0 expected=1
+FAIL cycle=31 evaluation_integrity actual=0 expected=1
+FAIL cycle=32 evaluation_integrity actual=0 expected=1
+FAIL cycle=33 evaluation_integrity actual=0 expected=1
+FAIL cycle=34 evaluation_integrity actual=0 expected=1
+FAIL cycle=35 evaluation_integrity actual=0 expected=1
+FAIL cycle=36 evaluation_integrity actual=0 expected=1
+FAIL cycle=37 evaluation_integrity actual=0 expected=1
+FAIL cycle=38 evaluation_integrity actual=0 expected=1
+FAIL cycle=39 evaluation_integrity actual=0 expected=1
+FAIL cycle=40 evaluation_integrity actual=0 expected=1
+FAIL cycle=41 evaluation_integrity actual=0 expected=1
+FAIL cycle=42 evaluation_integrity actual=0 expected=1
+FAIL cycle=43 evaluation_integrity actual=0 expected=1
+FAIL cycle=44 evaluation_integrity actual=0 expected=1
+FAIL cycle=45 evaluation_integrity actual=0 expected=1
+FAIL cycle=46 evaluation_integrity actual=0 expected=1
+FAIL cycle=47 evaluation_integrity actual=0 expected=1
+FAIL cycle=48 evaluation_integrity actual=0 expected=1
+FAIL cycle=49 evaluation_integrity actual=0 expected=1
+FAIL cycle=50 evaluation_integrity actual=0 expected=1
+FAIL cycle=51 evaluation_integrity actual=0 expected=1
+FAIL cycle=52 evaluation_integrity actual=0 expected=1
+FAIL cycle=53 evaluation_integrity actual=0 expected=1
+FAIL cycle=54 evaluation_integrity actual=0 expected=1
+FAIL cycle=55 evaluation_integrity actual=0 expected=1
+FAIL cycle=56 evaluation_integrity actual=0 expected=1
+FAIL cycle=57 evaluation_integrity actual=0 expected=1
+FAIL cycle=58 evaluation_integrity actual=0 expected=1
+FAIL cycle=59 evaluation_integrity actual=0 expected=1
+FAIL cycle=60 evaluation_integrity actual=0 expected=1
+FAIL cycle=61 evaluation_integrity actual=0 expected=1
+FAIL cycle=62 evaluation_integrity actual=0 expected=1
+FAIL cycle=63 evaluation_integrity actual=0 expected=1
+FAIL cycle=64 evaluation_integrity actual=0 expected=1
+FAIL cycle=65 evaluation_integrity actual=0 expected=1
+FAIL cycle=66 evaluation_integrity actual=0 expected=1
+FAIL cycle=67 evaluation_integrity actual=0 expected=1
+FAIL cycle=68 evaluation_integrity actual=0 expected=1
+FAIL cycle=69 evaluation_integrity actual=0 expected=1
+FAIL cycle=70 evaluation_integrity actual=0 expected=1
+FAIL cycle=71 evaluation_integrity actual=0 expected=1
+FAIL cycle=72 evaluation_integrity actual=0 expected=1
+FAIL cycle=73 evaluation_integrity actual=0 expected=1
+FAIL cycle=74 evaluation_integrity actual=0 expected=1
+FAIL cycle=75 evaluation_integrity actual=0 expected=1
+FAIL cycle=76 evaluation_integrity actual=0 expected=1
+FAIL cycle=77 evaluation_integrity actual=0 expected=1
+FAIL cycle=78 evaluation_integrity actual=0 expected=1
+FAIL cycle=79 evaluation_integrity actual=0 expected=1
+FAIL cycle=86 seen_bitmap_or actual=00000001 expected=0000003f
+FAIL cycle=86 live_bitmap_latest actual=00000001 expected=0000003f
+FAIL cycle=88 evaluation_integrity actual=0 expected=1
+FAIL cycle=90 historical_healthy_live actual=00000001 expected=00000000
+FAIL cycle=96 evaluation_integrity actual=0 expected=1
+FAIL cycle=101 evaluation_integrity actual=1 expected=0
+FAIL cycle=103 clear_nonclean_stays_latched actual=00000002 expected=00000001
+FAIL cycle=106 evaluation_integrity actual=0 expected=1
+FAIL cycle=108 clear_sequence actual=00000201 expected=00000202
+FAIL cycle=110 evaluation_integrity actual=0 expected=1
+FAIL cycle=112 post_clear_armed actual=00000002 expected=00000000
+FAIL cycle=114 evaluation_integrity actual=0 expected=1
+FAIL cycle=116 post_recovery_retrigger actual=00000002 expected=00000001
+FAIL cycle=116 post_recovery_first actual=00000000 expected=00000020
+FAIL cycle=118 evaluation_integrity actual=0 expected=1
+FAIL cycle=119 evaluation_integrity actual=0 expected=1
+FAIL cycle=120 same_edge_request_pending actual=0 expected=1
+FAIL cycle=120 same_edge_request_still_latched actual=00000002 expected=00000001
+FAIL cycle=120 evaluation_integrity actual=0 expected=1
+FAIL cycle=121 same_edge_resolution_sequence actual=00000201 expected=00000401
+FAIL cycle=121 evaluation_integrity actual=0 expected=1
+FAIL cycle=122 evaluation_integrity actual=0 expected=1
+FAIL cycle=123 continuous_stream_later_healthy_arms actual=00000002 expected=00000000
+FAIL cycle=125 evaluation_integrity actual=0 expected=1
+FAIL cycle=126 evaluation_integrity actual=0 expected=1
+FAIL cycle=127 evaluation_integrity actual=0 expected=1
+FAIL cycle=128 evaluation_integrity actual=0 expected=1
+FAIL cycle=158 evaluation_integrity actual=0 expected=1
+FAIL cycle=169 evaluation_integrity actual=0 expected=1
+FAIL cycle=173 evaluation_integrity actual=0 expected=1
+STAGE2G_POLICY_MATRIX=FAIL_99
+STAGE2G_POLICY_MATRIX=PASS
+BITMAP_COMBINATIONS=PASS_64_OF_64
+PRIORITY_CODE_MATRIX=PASS_64_OF_64
+II1_ALIGNMENT=PASS
+CLEAR_FENCE_MATRIX=PASS
+RESET_PIPELINE_FLUSH_MATRIX=PASS
+$finish called at time : 1771 ns : File "<EXTERNAL_SOURCE>/tb/stage2g/tb_stage2g_policy_matrix.sv" Line 497
+exit 0
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:48:23 2026...

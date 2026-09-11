@@ -1,0 +1,5 @@
+ARMED_NO_SAMPLE_10000_ACLK: state=ARMED pwm_high_cycles=5000 (no hardware sample timeout)
+DIRTY_OVERCURRENT_EVALUATION: state=ARMED fault_latched=0 (integrity rejection does not trip)
+CLEAN_OVERCURRENT_EVALUATION: state=FAULT_LATCHED pwm_out=0
+RUNTIME_BOUNDARY_CHARACTERIZATION=PASS
+<EXTERNAL_SOURCE>\tb\stage2g\tb_runtime_boundary.sv:48: $finish called at 100370000 (1ps)

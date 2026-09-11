@@ -1,0 +1,38 @@
+#-----------------------------------------------------------
+# xsim v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Sep 10 10:55:52 2026
+# Process ID: 48508
+# Current directory: <EXTERNAL_BUILD>/digital/stage2f/run_stage2f_boundary_mutations/control/xsim
+# Command line: xsim.exe -log <EXTERNAL_BUILD>\digital\stage2f\run_stage2f_boundary_mutations\control\xsim\xsim.log -mode tcl -source {xsim.dir/width_sequence_snapshot/xsim_script.tcl}
+# Log file: <EXTERNAL_BUILD>/digital/stage2f/run_stage2f_boundary_mutations/control/xsim/xsim.log
+# Journal file: <EXTERNAL_BUILD>/digital/stage2f/run_stage2f_boundary_mutations/control/xsim\xsim.jou
+# Running On        :illusion
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 9 7945HX with Radeon Graphics        
+# CPU Frequency     :2495 MHz
+# CPU Physical cores:16
+# CPU Logical cores :32
+# Host memory       :16844 MB
+# Swap memory       :13958 MB
+# Total Virtual     :30803 MB
+# Available Virtual :7475 MB
+#-----------------------------------------------------------
+source xsim.dir/width_sequence_snapshot/xsim_script.tcl
+# xsim {width_sequence_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+STAGE2F_BOUNDARY_PROFILE=SIM_UNSIGNED_ZERO_EDGE_0
+DATA_WIDTH_8_RAW_PATH=PASS
+DATA_WIDTH_12_NORMALIZATION=PASS
+DATA_WIDTH_16_RAW_PATH=PASS
+OBS_SEQUENCE_WIDTH_16=PASS
+OBS_SEQUENCE_WIDTH_24=PASS
+OBS_SEQUENCE_WIDTH_32=PASS
+WIDTH_SEQUENCE_BOUNDARY=PASS
+$finish called at time : 120 ns : File "<EXTERNAL_SOURCE>/tb/stage2f/tb_stage2f_width_sequence_boundary.sv" Line 280
+exit 0
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:55:54 2026...

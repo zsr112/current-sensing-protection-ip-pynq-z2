@@ -1,0 +1,113 @@
+{
+  "acceptance": {
+    "bytes": 10958,
+    "sha256": "0af2ee6b920f31313260fb665414936531556542880dc0804ccedcce4293205f"
+  },
+  "accepted_limitations": [
+    "REAL_ADC_INPUT_CHAIN",
+    "ACTUAL_CALIBRATION",
+    "EXTERNAL_PIN_PWM",
+    "EXTERNAL_POWER_STAGE",
+    "PERSISTENT_BOOT",
+    "LONG_DURATION_SOAK",
+    "ANALOG_SYSTEM_VALIDATION"
+  ],
+  "board_receipt": {
+    "bytes": 67830,
+    "sha256": "2082bf9a861d77b64aa0218f999614f5129287d88be4ef91e849acf536f43cf1"
+  },
+  "board_verified": "PASS",
+  "cdc_4": "Critical retained; bounded FIFO engineering review PASS",
+  "final_verified": "PASS",
+  "formal_acceptance": "PROJECT_OWNER_ACCEPTED",
+  "historical": {
+    "classification": "HISTORICAL_ACCEPTED",
+    "r4_manifest": {
+      "bytes": 339178,
+      "sha256": "70c9f9f4a20c058bc06c38407a658c369af7879ef322ad9d6b8bbbe3c08c7519"
+    },
+    "used_as_new_board_proof": false
+  },
+  "not_run": [
+    "REAL_ADC_INPUT_CHAIN",
+    "ACTUAL_CALIBRATION",
+    "EXTERNAL_PIN_PWM",
+    "EXTERNAL_POWER_STAGE",
+    "PERSISTENT_BOOT",
+    "LONG_DURATION_SOAK",
+    "ANALOG_SYSTEM_VALIDATION"
+  ],
+  "physical_findings": {
+    "cdc": {
+      "CDC-15": {
+        "count": 65,
+        "severity": "Warning"
+      },
+      "CDC-3": {
+        "count": 54,
+        "severity": "Info"
+      },
+      "CDC-4": {
+        "count": 1,
+        "severity": "Critical"
+      },
+      "CDC-6": {
+        "count": 13,
+        "severity": "Warning"
+      },
+      "CDC-9": {
+        "count": 3,
+        "severity": "Info"
+      }
+    },
+    "constraint_checks": {
+      "constant_clock": 0,
+      "generated_clocks": 0,
+      "latch_loops": 0,
+      "loops": 0,
+      "multiple_clock": 0,
+      "no_clock": 0,
+      "no_input_delay": 0,
+      "no_output_delay": 0,
+      "partial_input_delay": 0,
+      "partial_output_delay": 0,
+      "pulse_width_clock": 0,
+      "unconstrained_internal_endpoints": 0
+    },
+    "drc": {
+      "PDCN-1569": {
+        "count": 3,
+        "severity": "Warning"
+      },
+      "RTSTAT-10": {
+        "count": 1,
+        "severity": "Warning"
+      }
+    },
+    "methodology": {
+      "LUTAR-1": {
+        "count": 4,
+        "severity": "Warning"
+      },
+      "TIMING-9": {
+        "count": 1,
+        "severity": "Warning"
+      },
+      "XDCB-5": {
+        "count": 4,
+        "severity": "Warning"
+      }
+    },
+    "timing": {
+      "hold_failing_endpoints": 0,
+      "pulse_width_failing_endpoints": 0,
+      "setup_failing_endpoints": 0,
+      "whs_ns": 0.02,
+      "wns_ns": 0.902,
+      "wpws_ns": 2.75
+    }
+  },
+  "rebuilt": "PASS",
+  "release_id": "stage2-self-contained-v2r3",
+  "schema": "csip-evidence-annex-v2"
+}

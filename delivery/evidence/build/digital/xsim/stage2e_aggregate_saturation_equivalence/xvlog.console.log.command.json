@@ -1,0 +1,16 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "--sv",
+    "-i",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-i",
+    "<EXTERNAL_SOURCE>\\tb\\generated",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\stage2e_aggregate_saturation_equivalence\\xvlog.log",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_destination_observer.v",
+    "<EXTERNAL_SOURCE>\\tb\\stage2e\\tb_stage2e_aggregate_saturation_equivalence.sv"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\stage2e_aggregate_saturation_equivalence",
+  "exit_code": 0
+}

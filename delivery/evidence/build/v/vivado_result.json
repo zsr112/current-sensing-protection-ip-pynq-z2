@@ -1,0 +1,91 @@
+{
+  "GUI_PROJECT_PATH": "<EXTERNAL_BUILD>/w/project/s1e_00879719d793.xpr",
+  "IMPL_RUN_AVAILABLE": true,
+  "PROJECT_SAFE_TO_OPEN": true,
+  "SYNTH_RUN_AVAILABLE": true,
+  "artifact_inventory": [
+    {
+      "bytes": 4045685,
+      "design_identity": "protection_system",
+      "execution_id": "CSIP-V2R3-BUILD-001",
+      "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+      "path": "<EXTERNAL_BUILD>/v/artifacts/protection_system.bit",
+      "project_identity": "s1e_00879719d793",
+      "role": "BITSTREAM",
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0",
+      "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+      "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+    },
+    {
+      "bytes": 857420,
+      "design_identity": "protection_system",
+      "execution_id": "CSIP-V2R3-BUILD-001",
+      "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+      "path": "<EXTERNAL_BUILD>/v/artifacts/protection_system.xsa",
+      "project_identity": "s1e_00879719d793",
+      "role": "XSA",
+      "sha256": "5aba6dae3fb22bbe1c3a4c1cbc8380292ebebdf2452bb8054b22ada34deccbc5",
+      "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+      "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+    },
+    {
+      "bytes": 690403,
+      "design_identity": "protection_system",
+      "execution_id": "CSIP-V2R3-BUILD-001",
+      "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+      "path": "<EXTERNAL_BUILD>/v/artifacts/protection_system.hwh",
+      "project_identity": "s1e_00879719d793",
+      "role": "HWH",
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3",
+      "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+      "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+    },
+    {
+      "bytes": 92913,
+      "design_identity": "protection_system",
+      "execution_id": "CSIP-V2R3-BUILD-001",
+      "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+      "path": "<EXTERNAL_BUILD>/v/artifacts/protection_system.ltx",
+      "project_identity": "s1e_00879719d793",
+      "role": "LTX",
+      "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21",
+      "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+      "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+    },
+    {
+      "bytes": 5628,
+      "design_identity": "protection_system",
+      "execution_id": "CSIP-V2R3-BUILD-001",
+      "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+      "path": "<EXTERNAL_BUILD>/v/artifacts/artifact-manifest.tsv",
+      "project_identity": "s1e_00879719d793",
+      "role": "ARTIFACT_MANIFEST",
+      "sha256": "9436d4c077a3b7967dd2d0ab1a08b6bb0488ee435856a7cb2cae23edd507b760",
+      "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+      "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+    }
+  ],
+  "collector_state": "COLLECTED",
+  "design_identity": "protection_system",
+  "execution_contract_identity": "a68b26f6ad8cd6ceb4eace1285876015b3e4f2f5e7303b5bd297df68d3b24d44",
+  "execution_id": "CSIP-V2R3-BUILD-001",
+  "failure_code": "NONE",
+  "finding_decision_identity": "NONE",
+  "forbidden_operation_count": 0,
+  "forbidden_operations": [],
+  "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+  "project_identity": "s1e_00879719d793",
+  "reason": "Routed engineering implementation, reports, and requested artifacts completed.",
+  "request_identity": "00879719d79326a29815856effbe69a8907ae11891fc79618d173563a16c8755",
+  "result_state": "COMPLETED",
+  "route_completed": true,
+  "run_kind": "ENGINEERING",
+  "runner_phase_journal": {
+    "bytes": 5732,
+    "path": "<EXTERNAL_BUILD>/v/journal/runner-phase.tsv",
+    "sha256": "c89be48033648197a1351c55fb3f5b6b136af2175b43ea0ddaa1e10f26c975d8"
+  },
+  "schema_version": "stage1e-vivado-result-v1",
+  "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+  "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+}

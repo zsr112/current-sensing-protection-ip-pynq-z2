@@ -1,0 +1,38 @@
+{
+  "acceptance": {
+    "bytes": 10958,
+    "sha256": "0af2ee6b920f31313260fb665414936531556542880dc0804ccedcce4293205f"
+  },
+  "board_execution_id": "CSIP-V2R3-BOARD-001",
+  "board_tooling_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+  "evidence_states": [
+    "REBUILT",
+    "BOARD_VERIFIED",
+    "FINAL_VERIFIED",
+    "PROJECT_OWNER_ACCEPTED"
+  ],
+  "formal_acceptance": "PROJECT_OWNER_ACCEPTED",
+  "physical_execution_id": "CSIP-V2R3-BUILD-001",
+  "publication_origin": {
+    "branch": "release-preparation",
+    "commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+    "tree": "85a0c3bcc239a7e978e23da1a83b724dd64530ea"
+  },
+  "release_id": "stage2-self-contained-v2r3",
+  "schema": "csip-self-contained-release-v2",
+  "source_manifest": {
+    "bytes": 81822,
+    "sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6"
+  },
+  "source_origin": {
+    "commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+    "tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+  },
+  "tool_versions": {
+    "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)\n\nCopyright (c) 2000-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 13.0 (stable) (v13_0)\n\nCopyright (c) 1999-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Parser/Elaborator version 13.0 (stable) (v13_0)\n\nCopyright (c) 1998-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\n FLAGS DLL vvp.tgt\nvvp.tgt: Icarus Verilog VVP Code Generator 13.0 (stable) (v13_0)\n\nCopyright (c) 2001-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\nVERSION_PROBE_EXIT_CODE=0",
+    "pwsh": "PowerShell 7.6.5\nVERSION_PROBE_EXIT_CODE=0",
+    "python": "3.12.10",
+    "vivado": "vivado v2024.1 (64-bit)\nTool Version Limit: 2024.05\nSW Build 5076996 on Wed May 22 18:37:14 MDT 2024\nIP Build 5075265 on Wed May 22 21:45:21 MDT 2024\nSharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024\nCopyright 1986-2022 Xilinx, Inc. All Rights Reserved.\nCopyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.\nVERSION_PROBE_EXIT_CODE=1",
+    "vvp": "Icarus Verilog runtime version 13.0 (stable) (v13_0)\n\nCopyright (c) 2001-2026 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\nVERSION_PROBE_EXIT_CODE=0"
+  }
+}

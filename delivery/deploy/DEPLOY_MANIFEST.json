@@ -1,0 +1,50 @@
+{
+  "files": {
+    "ACCEPTANCE.json": {
+      "bytes": 10958,
+      "sha256": "0af2ee6b920f31313260fb665414936531556542880dc0804ccedcce4293205f"
+    },
+    "artifacts/protection_system.bit": {
+      "bytes": 4045685,
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
+    },
+    "artifacts/protection_system.hwh": {
+      "bytes": 690403,
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
+    },
+    "artifacts/protection_system.ltx": {
+      "bytes": 92913,
+      "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+    },
+    "load.py": {
+      "bytes": 5420,
+      "sha256": "226d609cae2f42cfc83297bbc7d24a733adb32ee7b1b69079ea2003ac5381574"
+    },
+    "provenance/artifact-manifest.tsv": {
+      "bytes": 5421,
+      "sha256": "7f80a753fb30a22171ccc40496da12f15daa57f23a6e00cca50a56041d2bd763"
+    },
+    "release_acceptance.py": {
+      "bytes": 21581,
+      "sha256": "a66b23af6a2a70dfce47ee1c23a76a7b98745e8636022c4e1cb407e2da39cf40"
+    },
+    "runtime/generated/protection_register_map.py": {
+      "bytes": 43433,
+      "sha256": "3ae20e1428aabc76e9ac2f0aef100a61da190e753935df9735f4b276c5a11023"
+    },
+    "runtime/protection_ip_interface.py": {
+      "bytes": 17947,
+      "sha256": "9bfb0a7d39ad67ab8f95eadc853c6da76e5ff76beba907647e209cb24e546ff9"
+    },
+    "runtime/stage2i_board_runtime.py": {
+      "bytes": 25087,
+      "sha256": "52c6f29c671e13d57fb483b2e4c8289834e9fc4fbb7967664cc71bef5a516833"
+    },
+    "stage2i_board_profile.json": {
+      "bytes": 3846,
+      "sha256": "f4c951054f17cb96e336d4f5c6029d529d064113d5042e6647392345eeed4990"
+    }
+  },
+  "release_id": "stage2-self-contained-v2r3",
+  "schema": "csip-deployment-v2"
+}

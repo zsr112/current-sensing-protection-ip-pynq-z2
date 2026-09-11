@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "captured_accepts": 1,
+    "destination_samples": 4096,
+    "source_samples": 4096
+  },
+  "board_action_index": 10,
+  "execution_id": "CSIP-V2R3-BOARD-001",
+  "files": {
+    "armed.txt": {
+      "bytes": 21,
+      "sha256": "96e909ce9cb8d193e987bab79d8b7b86df3a2df665ca2e816541e8eb2ef1abf1"
+    },
+    "capture_status.txt": {
+      "bytes": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    "collect.txt": {
+      "bytes": 21,
+      "sha256": "96e909ce9cb8d193e987bab79d8b7b86df3a2df665ca2e816541e8eb2ef1abf1"
+    },
+    "destination.csv": {
+      "bytes": 729565,
+      "sha256": "c44ca1ca06bfc06f1e2e5d0cb5ee6f60b4c8de5377c2d34333f067c3649f49e5"
+    },
+    "destination.metadata.tsv": {
+      "bytes": 513,
+      "sha256": "b32a9663e90a3814b326accb753379c08a5dbdfa34afb7c49c092024b0b2a861"
+    },
+    "destination.probes.tsv": {
+      "bytes": 562,
+      "sha256": "039445aa4a9b75405bd0db0c82858b2b098898cf9c66b74c9a81cd0f435a3089"
+    },
+    "destination.properties.txt": {
+      "bytes": 10219,
+      "sha256": "cb6a6b615478c14a29bb9c817d49e3e3a1b474f0be27148c4d61955574b0823a"
+    },
+    "destination.trigger.tsv": {
+      "bytes": 599,
+      "sha256": "dfef59075db8b7392dd4571c0137fffbf5f7120d1cb32ae9599be411a707bd6e"
+    },
+    "run.log": {
+      "bytes": 5162,
+      "sha256": "8b3b189aeaebfac69d7856629b59c8af85ef86784966cfce53735de3c99a975e"
+    },
+    "source.csv": {
+      "bytes": 231924,
+      "sha256": "560e05ff10f01d102d88d614ba5664c531196de6155278524664e11f66cddad0"
+    },
+    "source.metadata.tsv": {
+      "bytes": 508,
+      "sha256": "588b12441f77fc74ec8a47ae678d6435af6a25fa808eb674789eb11715f35d5d"
+    },
+    "source.probes.tsv": {
+      "bytes": 644,
+      "sha256": "f3c0bcca7129b72e86cab70fd7fc770cdd718c955e7dcc6a947ed1e9f0863cd1"
+    },
+    "source.properties.txt": {
+      "bytes": 5260,
+      "sha256": "e97fe643b4d6f7dee43fe5221c5930555deed6b7cb4e1bd57b3aa1f4f157c1f4"
+    },
+    "source.trigger.tsv": {
+      "bytes": 602,
+      "sha256": "dec8dd730a251e0bce653d4aff72fabde66453b990872788b7228d1972b44210"
+    },
+    "tool_exit.json": {
+      "bytes": 62,
+      "sha256": "712f8f3284ed53e924881a5f6529cde09f6a4cecc16929d6e85e961599d6f1e8"
+    },
+    "vivado.jou": {
+      "bytes": 1515,
+      "sha256": "38793597543a96122f16ac800890b89310c568f275bfe5eec6f22421901fb8ac"
+    },
+    "vivado.log": {
+      "bytes": 6048,
+      "sha256": "8bd3871b5fe4b30301cd1e4f8a0f330f76660ccf8df4752edf50b48734463447"
+    }
+  },
+  "scenario": "live_clear_rejected",
+  "status": "PASS"
+}

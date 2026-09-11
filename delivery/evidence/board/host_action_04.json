@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-10T03:17:04.885308+00:00",
+  "host_start_utc": "2026-09-10T03:17:04.836600+00:00",
+  "request": {
+    "action": "ch1_overcurrent/execute",
+    "execution_id": "CSIP-V2R3-BOARD-001"
+  },
+  "response_sha256": "89d3aa76fe1df0b67b8d56c2debe26facd85fc620b80bc94c72e950a3d955925"
+}

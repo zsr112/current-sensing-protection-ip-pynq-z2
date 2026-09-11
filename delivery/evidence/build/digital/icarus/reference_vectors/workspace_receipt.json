@@ -1,0 +1,10 @@
+{
+  "caller_output": "<EXTERNAL_BUILD>\\digital\\icarus\\reference_vectors",
+  "evidence_copied_to_requested_output": true,
+  "hdl_file_io_path": "ASCII_PRIVATE_TEMPORARY",
+  "label": "reference_vectors",
+  "schema": "csip-ascii-simulation-workspace-v1",
+  "scratch_path": "<EXTERNAL_PATH>",
+  "status": "PASS",
+  "vector_sha256": "6924dcf8b2ab76df86aa8d264324bd394a432dd689b3f16704ad58ed738f88dd"
+}

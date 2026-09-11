@@ -1,0 +1,164 @@
+{
+  "analysis": {
+    "board_result": {
+      "bytes": 237612,
+      "path": "<EXTERNAL_BOARD>\\legacy_c2_result.json",
+      "proof": {
+        "accepted_transactions": 1189,
+        "execution_id": "CSIP-V2R3-BOARD-001",
+        "scenario_count": 6,
+        "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+        "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12",
+        "status": "PASS"
+      },
+      "sha256": "62cd85b8430c7e5207e05aada034a602d1cd2c33c74fab8aebd3be9009e39cfa"
+    },
+    "c2_distinct_clock_transaction_continuity": "PASS",
+    "c2_one_acceptance_per_transaction": "PASS",
+    "c2_real_backpressure_observed": "YES",
+    "c2_stall_payload_stability": "PASS",
+    "captures": {
+      "destination_fault": {
+        "bytes": 729565,
+        "capture_mode": "destination_fault_latched",
+        "core_role": "destination",
+        "metadata_bytes": 515,
+        "metadata_path": "<EXTERNAL_BOARD>\\legacy_c2\\destination.metadata.tsv",
+        "metadata_sha256": "80cc15753e2127939fa115f12886070b2ab07ef0b0a2c78b00d7b21ccba2035f",
+        "path": "<EXTERNAL_BOARD>\\legacy_c2\\destination.csv",
+        "probe_radix": "BINARY",
+        "row_count": 4096,
+        "sha256": "b1c25ee14879428ea57c9e075cb3c607e0f66f3c56549d14d172dae746343d64"
+      },
+      "source_accept": {
+        "bytes": 231924,
+        "capture_mode": "source_accept",
+        "core_role": "source",
+        "metadata_bytes": 508,
+        "metadata_path": "<EXTERNAL_BOARD>\\legacy_c2\\source.metadata.tsv",
+        "metadata_sha256": "588b12441f77fc74ec8a47ae678d6435af6a25fa808eb674789eb11715f35d5d",
+        "path": "<EXTERNAL_BOARD>\\legacy_c2\\source.csv",
+        "probe_radix": "BINARY",
+        "row_count": 4096,
+        "sha256": "e2b390c817e0d84478b30445059db64a6055017b94722d77f2732d362c6e5065"
+      },
+      "source_stall": {
+        "bytes": 231924,
+        "capture_mode": "source_stall",
+        "core_role": "source",
+        "metadata_bytes": 507,
+        "metadata_path": "<EXTERNAL_BOARD>\\source_protocol\\source.metadata.tsv",
+        "metadata_sha256": "bee00d0c9a0869ec69bd9889db7eeb19cd4b6587a050905a2dfade5a70e2d684",
+        "path": "<EXTERNAL_BOARD>\\source_protocol\\source.csv",
+        "probe_radix": "BINARY",
+        "row_count": 4096,
+        "sha256": "62bb929be856f3cd0a9d11899df311731489a39a0bd60a1ebf4a104505638ca4"
+      }
+    },
+    "implementation_profile": "READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS",
+    "proofs": {
+      "destination_fault": {
+        "fault_codes": [
+          1
+        ],
+        "latched_sample_count": 2048,
+        "status": "PASS"
+      },
+      "source_accept": {
+        "accepted_sample_count": 127,
+        "first_payload": [
+          1500,
+          1501
+        ],
+        "status": "PASS"
+      },
+      "source_stall": {
+        "acceptance_while_stalled": 0,
+        "stable_payload": [
+          1500,
+          1501
+        ],
+        "stall_sample_count": 1,
+        "status": "PASS"
+      }
+    },
+    "result_class": "STAGE2I_C2_FULL_DIGITAL_PROTECTION_PATH_EVIDENCE_PASS",
+    "schema_version": "stage2i-board-functional-closeout-v1",
+    "status": "PASS",
+    "timestamp_utc": "2026-09-10T03:19:24.732825Z"
+  },
+  "board_action_index": 20,
+  "execution_id": "CSIP-V2R3-BOARD-001",
+  "files": {
+    "armed.txt": {
+      "bytes": 21,
+      "sha256": "96e909ce9cb8d193e987bab79d8b7b86df3a2df665ca2e816541e8eb2ef1abf1"
+    },
+    "capture_status.txt": {
+      "bytes": 6,
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c"
+    },
+    "collect.txt": {
+      "bytes": 21,
+      "sha256": "96e909ce9cb8d193e987bab79d8b7b86df3a2df665ca2e816541e8eb2ef1abf1"
+    },
+    "destination.csv": {
+      "bytes": 729565,
+      "sha256": "b1c25ee14879428ea57c9e075cb3c607e0f66f3c56549d14d172dae746343d64"
+    },
+    "destination.metadata.tsv": {
+      "bytes": 515,
+      "sha256": "80cc15753e2127939fa115f12886070b2ab07ef0b0a2c78b00d7b21ccba2035f"
+    },
+    "destination.probes.tsv": {
+      "bytes": 562,
+      "sha256": "039445aa4a9b75405bd0db0c82858b2b098898cf9c66b74c9a81cd0f435a3089"
+    },
+    "destination.properties.txt": {
+      "bytes": 10219,
+      "sha256": "cb6a6b615478c14a29bb9c817d49e3e3a1b474f0be27148c4d61955574b0823a"
+    },
+    "destination.trigger.tsv": {
+      "bytes": 601,
+      "sha256": "6275546b97abe35e44e481901746b3da9b399125d9fa0ec064a66b8fa05d937d"
+    },
+    "run.log": {
+      "bytes": 5162,
+      "sha256": "a72556afe00d719ee572cfbee643ea73d5725ec4b407808881d602a34238901b"
+    },
+    "source.csv": {
+      "bytes": 231924,
+      "sha256": "e2b390c817e0d84478b30445059db64a6055017b94722d77f2732d362c6e5065"
+    },
+    "source.metadata.tsv": {
+      "bytes": 508,
+      "sha256": "588b12441f77fc74ec8a47ae678d6435af6a25fa808eb674789eb11715f35d5d"
+    },
+    "source.probes.tsv": {
+      "bytes": 644,
+      "sha256": "f3c0bcca7129b72e86cab70fd7fc770cdd718c955e7dcc6a947ed1e9f0863cd1"
+    },
+    "source.properties.txt": {
+      "bytes": 5260,
+      "sha256": "e97fe643b4d6f7dee43fe5221c5930555deed6b7cb4e1bd57b3aa1f4f157c1f4"
+    },
+    "source.trigger.tsv": {
+      "bytes": 602,
+      "sha256": "dec8dd730a251e0bce653d4aff72fabde66453b990872788b7228d1972b44210"
+    },
+    "tool_exit.json": {
+      "bytes": 62,
+      "sha256": "712f8f3284ed53e924881a5f6529cde09f6a4cecc16929d6e85e961599d6f1e8"
+    },
+    "vivado.jou": {
+      "bytes": 1457,
+      "sha256": "bb6980c23185d27b4a11a0dbd3e143d805a00c2633361938a8f1ad784c43b060"
+    },
+    "vivado.log": {
+      "bytes": 5990,
+      "sha256": "3e29554a814d424152de3ca60794ff2d538529198a1fa1cc83c2ae790d0ad26d"
+    }
+  },
+  "scenario": "legacy_c2",
+  "status": "PASS"
+}

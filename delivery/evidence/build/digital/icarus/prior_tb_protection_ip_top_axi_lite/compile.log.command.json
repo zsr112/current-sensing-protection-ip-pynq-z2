@@ -1,0 +1,30 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "-g2012",
+    "-I",
+    "<EXTERNAL_SOURCE>\\rtl",
+    "-I",
+    "<EXTERNAL_SOURCE>\\tb\\generated",
+    "-s",
+    "tb_protection_ip_top_axi_lite",
+    "-o",
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_SOURCE>\\rtl\\reset_release_sync.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gen.v",
+    "<EXTERNAL_SOURCE>\\rtl\\pwm_gate.v",
+    "<EXTERNAL_SOURCE>\\rtl\\current_compare_dual.v",
+    "<EXTERNAL_SOURCE>\\rtl\\moving_avg_filter.v",
+    "<EXTERNAL_SOURCE>\\rtl\\sensor_health_monitor.v",
+    "<EXTERNAL_SOURCE>\\rtl\\transaction_destination_observer.v",
+    "<EXTERNAL_SOURCE>\\rtl\\fault_classifier.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_fsm.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_core_top.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_reg_bank.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_ip_top_reg_controlled.v",
+    "<EXTERNAL_SOURCE>\\rtl\\protection_ip_top_axi_lite.v",
+    "<EXTERNAL_SOURCE>\\tb\\tb_protection_ip_top_axi_lite.sv"
+  ],
+  "cwd": "<EXTERNAL_PATH>",
+  "exit_code": 0
+}

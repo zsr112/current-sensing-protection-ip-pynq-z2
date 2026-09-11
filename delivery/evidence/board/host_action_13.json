@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-10T03:18:15.481804+00:00",
+  "host_start_utc": "2026-09-10T03:18:15.456853+00:00",
+  "request": {
+    "action": "clear_recovery/prepare",
+    "execution_id": "CSIP-V2R3-BOARD-001"
+  },
+  "response_sha256": "293fca9ad40e8340c80c4760122452290c53efb701f571ad14b592637e72ce67"
+}

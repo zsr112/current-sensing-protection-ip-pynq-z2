@@ -1,0 +1,14 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "work.tb_stage2d_production_wrapper",
+    "-s",
+    "stage2d_production_regression_snapshot",
+    "--timescale",
+    "1ns/1ps",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\stage2d_production_regression\\xelab.log"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\stage2d_production_regression",
+  "exit_code": 0
+}

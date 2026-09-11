@@ -1,0 +1,2 @@
+C2_PROTECTION_PLAN_RTL=PASS checks=20 samples=923
+<EXTERNAL_SOURCE>\tb\stage2i\tb_stage2_board_c2_plan.sv:59: $finish called at 65290000 (1ps)

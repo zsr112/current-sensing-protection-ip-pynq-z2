@@ -1,0 +1,51 @@
+{
+  "artifact_identities": {
+    "bit": {
+      "bytes": 4045685,
+      "sha256": "9c8ab36935174f93b07e0add2bb0b9076eb0f17b5d902cc307d62ba0f0017fc0"
+    },
+    "hwh": {
+      "bytes": 690403,
+      "sha256": "3f23c35d37247f39307cced2d35993230a538bd2265685521259131a6e5f56f3"
+    },
+    "ltx": {
+      "bytes": 92913,
+      "sha256": "7f7c67eb6851ebaa2e9b67d1efd79a7591cb375ab855eae8450393dc4110dc21"
+    }
+  },
+  "evidence": {
+    "mac_payload": {
+      "bytes": 1589,
+      "sha256": "988e05313bca21d584225a842a9f0425d38af05c3f81ee8ec91cb875cd2ded60"
+    },
+    "online_ci": {
+      "bytes": 2890,
+      "sha256": "bf426b71bf73f2bba518715d467df8ff185d06e32f7c2982fe4f182042b6431e"
+    },
+    "windows_final": {
+      "bytes": 2015,
+      "sha256": "7359e197ecc1c82deffb2e0485cd80b8fd009370977bc7e84789ae4f13c30da6"
+    }
+  },
+  "execution_id": "CSIP-V2R3-FINAL-001",
+  "payload_manifest": {
+    "bytes": 383626,
+    "sha256": "fd923113a6d0f3c84ab0f565798689e5fddbc1d2a5ab94055d54d46d4282ac60"
+  },
+  "publication_origin": {
+    "branch": "release-preparation",
+    "commit": "a16851427f4a3c48f655d5a7b1a46ba5efb79486",
+    "tree": "85a0c3bcc239a7e978e23da1a83b724dd64530ea"
+  },
+  "release_id": "stage2-self-contained-v2r3",
+  "schema": "csip-final-validation-v2",
+  "source_manifest": {
+    "bytes": 81822,
+    "sha256": "a4fcad6f1a0152a6e40d975125154d242d0eeb7bd645a72eb931e1cd981b93c6"
+  },
+  "source_origin": {
+    "commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+    "tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+  },
+  "status": "PASS"
+}

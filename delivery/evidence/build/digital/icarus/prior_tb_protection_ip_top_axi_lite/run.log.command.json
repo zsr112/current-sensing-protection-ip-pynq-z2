@@ -1,0 +1,9 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_PATH>",
+    "+CSIP_WAVE_DIR=<EXTERNAL_PATH>"
+  ],
+  "cwd": "<EXTERNAL_SOURCE>",
+  "exit_code": 0
+}

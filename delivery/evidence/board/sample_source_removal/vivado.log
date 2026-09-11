@@ -1,0 +1,101 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Sep 10 11:17:59 2026
+# Process ID: 48832
+# Current directory: <EXTERNAL_BOARD>/sample_source_removal
+# Command line: vivado.exe -mode batch -notrace -source <EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl -log <EXTERNAL_BOARD>\sample_source_removal\vivado.log -journal <EXTERNAL_BOARD>\sample_source_removal\vivado.jou -tclargs <EXTERNAL_SESSION>\artifacts\protection_system.bit <EXTERNAL_SESSION>\artifacts\protection_system.ltx <EXTERNAL_BOARD>\sample_source_removal source_trigger_now destination_trigger_now CSIP-V2R3-BOARD-001
+# Log file: <EXTERNAL_BOARD>/sample_source_removal/vivado.log
+# Journal file: <EXTERNAL_BOARD>\sample_source_removal\vivado.jou
+# Running On        :illusion
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :AMD Ryzen 9 7945HX with Radeon Graphics        
+# CPU Frequency     :2495 MHz
+# CPU Physical cores:16
+# CPU Logical cores :32
+# Host memory       :16844 MB
+# Swap memory       :13958 MB
+# Total Virtual     :30803 MB
+# Available Virtual :7040 MB
+#-----------------------------------------------------------
+source {<EXTERNAL_SESSION>\host\stage2_board_capture_pair.tcl} -notrace
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:0
+INFO: [Labtools 27-3417] Launching cs_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+
+******** Xilinx cs_server v2024.1.0
+  ****** Build date   : Mar 09 2024-08:00:37
+    **** Build number : 2024.1.1709942437
+      ** Copyright 2017-2022 Xilinx, Inc. All Rights Reserved.
+      ** Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+
+
+
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/1234-tulA
+INFO: [Labtools 27-2302] Device xc7z020 (JTAG device index = 1) is programmed with a design that has 2 ILA core(s).
+invalid command name "::labtools::platform::ids::get_probe_interface_dict"
+invalid command name "::labtools::platform::ids::get_probe_interface_dict"
+invalid command name "::labtools::platform::ids::get_probe_interface_dict"
+invalid command name "::labtools::platform::ids::get_probe_interface_dict"
+STAGE2I_FPGA_DEVICE_OBJECT=xc7z020_1
+STAGE2I_IMPLEMENTATION_PROFILE=READY_AWARE_SYNTHETIC_DIGITAL_STIMULUS
+STAGE2I_BIT_BINDING_PATH=<EXTERNAL_SESSION>/artifacts/protection_system.bit
+STAGE2I_BIT_PROGRAM_FILE_READBACK=<EXTERNAL_SESSION>/artifacts/protection_system.bit
+STAGE2I_LTX_BINDING_PATH=<EXTERNAL_SESSION>/artifacts/protection_system.ltx
+STAGE2I_LTX_PROBES_FILE_READBACK=<EXTERNAL_SESSION>/artifacts/protection_system.ltx
+STAGE2I_LTX_FULL_PROBES_FILE_READBACK=<EXTERNAL_SESSION>/artifacts/protection_system.ltx
+STAGE2I_ILA_CORE_ROLE=destination
+STAGE2I_ILA_OBJECT=hw_ila_1
+STAGE2I_ILA_CELL_NAME=protection_system_i/system_ila_stage2b_0/inst/ila_lib
+STAGE2I_ILA_LOGICAL_PROBE_COUNT=8
+STAGE2I_ILA_CORE_ROLE=source
+STAGE2I_ILA_OBJECT=hw_ila_2
+STAGE2I_ILA_CELL_NAME=protection_system_i/system_ila_stage2i_b2_source_0/inst/ila_lib
+STAGE2I_ILA_LOGICAL_PROBE_COUNT=8
+STAGE2I_BIT_LTX_BINDING_PASS
+STAGE2I_ILA_IDENTITY_PASS
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2026-Sep-10 11:18:13
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_RADIX
+STAGE2I_ILA_PROPERTY_SET_VERIFIED=DISPLAY_AS_ENUM
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2026-Sep-10 11:18:13
+PAIR_ARMED=CSIP-V2R3-BOARD-001
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2026-Sep-10 11:18:13
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2026-Sep-10 11:18:13
+PAIR_CAPTURE=PASS
+INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Xilinx/1234-tulA
+INFO: [Common 17-206] Exiting Vivado at Thu Sep 10 11:18:15 2026...

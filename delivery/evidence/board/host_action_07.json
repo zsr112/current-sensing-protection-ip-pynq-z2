@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-10T03:17:23.638672+00:00",
+  "host_start_utc": "2026-09-10T03:17:23.546971+00:00",
+  "request": {
+    "action": "differential_fault/prepare",
+    "execution_id": "CSIP-V2R3-BOARD-001"
+  },
+  "response_sha256": "3713c8495cbc4504d88b5c84741355dedb1d50de69662d466ca695041f1db732"
+}

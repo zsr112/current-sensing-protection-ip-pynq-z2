@@ -1,0 +1,9 @@
+{
+  "host_end_utc": "2026-09-10T03:16:47.878926+00:00",
+  "host_start_utc": "2026-09-10T03:16:47.812716+00:00",
+  "request": {
+    "action": "normal_pwm/execute",
+    "execution_id": "CSIP-V2R3-BOARD-001"
+  },
+  "response_sha256": "48a8a4c0ad6f15b5f3b05d33dd0a621fb2a3ca6cab0743bb80b89d12f6facf49"
+}

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "reference_vectors_snapshot",
+    "-runall",
+    "--onerror",
+    "quit",
+    "--onfinish",
+    "quit",
+    "--log",
+    "<EXTERNAL_BUILD>\\digital\\xsim\\reference_vectors\\xsim.log",
+    "--testplusarg",
+    "VECTORS"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\xsim\\reference_vectors",
+  "exit_code": 0
+}

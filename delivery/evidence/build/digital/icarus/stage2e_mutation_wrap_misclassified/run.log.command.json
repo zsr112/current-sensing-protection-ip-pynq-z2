@@ -1,0 +1,8 @@
+{
+  "command": [
+    "<EXTERNAL_PATH>",
+    "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_wrap_misclassified\\wrap_misclassified.vvp"
+  ],
+  "cwd": "<EXTERNAL_BUILD>\\digital\\icarus\\stage2e_mutation_wrap_misclassified",
+  "exit_code": 1
+}

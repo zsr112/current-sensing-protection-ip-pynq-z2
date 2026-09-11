@@ -1,0 +1,1839 @@
+{
+  "files": {
+    ".github/workflows/portable.yml": {
+      "bytes": 1381,
+      "sha256": "132b2dab842f64584324dbadcb19d0fa196b9bc0f328164c800c42d6290645b1"
+    },
+    "config/self_contained_source.json": {
+      "bytes": 4947,
+      "sha256": "a2f17e2b5a48ccde17f5bf716052ad453fa0ffd02fd43227d04d66b47772509d"
+    },
+    "docs/architecture/current_architecture.md": {
+      "bytes": 4535,
+      "sha256": "3dca5f41c049c58ecc53b419508c9dea12ce6c5b92c1f246df7f54d41df3b578"
+    },
+    "docs/architecture/stage2_sampling_clock_reset_cdc_inventory_20260803.md": {
+      "bytes": 10440,
+      "sha256": "09b7702658c958ed246363d192251ca474fc2bb886d58ba5a7b296ff0abb4dd7"
+    },
+    "docs/architecture/stage2_sampling_contract_cdc_spec_20260803.md": {
+      "bytes": 15857,
+      "sha256": "6128e78bb96a1d6f9d7ff26faaba10b6f6a7872dc591a6eaf6c842fc4c459c1c"
+    },
+    "docs/architecture/stage2b_sample_acceptance_latency_contract_20260804.md": {
+      "bytes": 6156,
+      "sha256": "ddf317caee4dbe85e18c242c91487e8c199772a11b96ef919772705f73d48bcd"
+    },
+    "docs/architecture/stage2b_unified_sample_acceptance_design_20260804.md": {
+      "bytes": 13123,
+      "sha256": "b80f25a3b374eb2556be6f7f48980a098004d03b4176d7069c8c5ab65c2743d6"
+    },
+    "docs/architecture/stage2f_adc_encoding_scaling_audit.md": {
+      "bytes": 12034,
+      "sha256": "568c04bc9bb8736cab223d658c9fe9437f9a9604094f04fa568f4c102db07163"
+    },
+    "docs/architecture/stage2f_adc_encoding_scaling_target_contract.md": {
+      "bytes": 12060,
+      "sha256": "898f06a736a898c616731a991fdf5df660dc678801061b53efad646c92ea66c1"
+    },
+    "docs/architecture/stage2f_adc_encoding_scaling_tradeoff.md": {
+      "bytes": 10355,
+      "sha256": "96a1bd18b9e2601fcbd721d1567175f6be8e810b25cb438396776e504a2a8882"
+    },
+    "docs/architecture/stage2f_digital_normalization_implementation.md": {
+      "bytes": 4605,
+      "sha256": "2eec5eda8408a1573b46fdf7a13c6fec8565619167650291f47f5d9399c57a7a"
+    },
+    "docs/architecture/stage2f_digital_normalization_latency.md": {
+      "bytes": 2341,
+      "sha256": "e21cce66dc18d84cca7e160acd6ffbbcf95b1eb8e2e079c9720a322655527a36"
+    },
+    "docs/architecture/stage2g_clear_fence_implementation.md": {
+      "bytes": 2753,
+      "sha256": "bea1062fcc904670a4475a98701827155615d161a1474faf8936272ed1ccf961"
+    },
+    "docs/architecture/stage2g_fault_evaluation_pipeline.md": {
+      "bytes": 3818,
+      "sha256": "ec444b99126f9d4867fdeb8ff8be2c395a0867525c316b928fb6cbc9b2c2e8f4"
+    },
+    "docs/architecture/stage2g_functional_rtl_implementation.md": {
+      "bytes": 5717,
+      "sha256": "eb6fc400e0df235eb3d9aa0758b8bc746a62b8a51f69b55e8a7e71e7ad80563f"
+    },
+    "docs/architecture/stage2g_public_recovery_contract_addendum.md": {
+      "bytes": 2702,
+      "sha256": "8db46b410b12144b94a2950864b3873bc8a78ffda368eac385f6f02c59fca8dc"
+    },
+    "docs/architecture/stage2g_reset_wait_first_fault_policy_audit.md": {
+      "bytes": 14209,
+      "sha256": "ea5b010e0ff7a61a9aa6fc657a2e845103aa7bf9dcae7b62c3b52e8b9c1de8cb"
+    },
+    "docs/architecture/stage2g_reset_wait_first_fault_policy_review_contract.md": {
+      "bytes": 2457,
+      "sha256": "d258c61e716fc77e503e78668aaefb74aaac6f352166945c34135b129d15d907"
+    },
+    "docs/architecture/stage2g_reset_wait_first_fault_policy_source_map.md": {
+      "bytes": 5363,
+      "sha256": "239df3a39cf951d9266eab57f26f859d4835c6af78ba61fe0743129475c6c3d9"
+    },
+    "docs/architecture/stage2g_reset_wait_first_fault_policy_tradeoff.md": {
+      "bytes": 5865,
+      "sha256": "2f0e7747bc22cbd81d9167a783c80104409d89c0c668a0abb020eca8dd411d3f"
+    },
+    "docs/architecture/stage2g_sequence_width_contract_addendum.md": {
+      "bytes": 3071,
+      "sha256": "e728452235b2427f94e83e31d600bd97484d2bab14fc9e49ef16cdffde0cacd2"
+    },
+    "docs/architecture/stage2h_b_rtl_architecture_tradeoff.md": {
+      "bytes": 30107,
+      "sha256": "4c04acc314327c0de103ade1478dd78adbfa115763dabf676a21ee1a198ae9dd"
+    },
+    "docs/architecture/stage2h_c_build_verification_repository_tradeoff.md": {
+      "bytes": 24306,
+      "sha256": "ae892d4307b5941757604c35f89532c09806cc45c759c524f5213d8307c0de8b"
+    },
+    "docs/architecture/stage2h_single_source_register_map_tradeoff.md": {
+      "bytes": 57059,
+      "sha256": "cd5e6cd5730d17afb5c88597cdd18703a99d116cfe229987d978db52c1581e77"
+    },
+    "docs/architecture/stage3_public_reference_project_comparison.md": {
+      "bytes": 10243,
+      "sha256": "42ad05417d55735c86e1770fb0efe27e4be92a19c9d32fde6b6e2fb3f49e6c0f"
+    },
+    "docs/architecture/stage3_reference_analog_acquisition_profile.md": {
+      "bytes": 12522,
+      "sha256": "a85a9a05aa038e0d36025eec23326eed828447c60c0234480d136f6cdb677f83"
+    },
+    "docs/bringup/independent_rebuild.md": {
+      "bytes": 6730,
+      "sha256": "32a0df60bc01da543244c116ff23bac241b5b28daff31337eed73becb660df56"
+    },
+    "docs/bringup/stage2_block_design_tcl_note.md": {
+      "bytes": 7732,
+      "sha256": "ff336010954f79ee214cce16faedfe90836f5552d18d1d569de179c941d89367"
+    },
+    "docs/bringup/windows_board_session.md": {
+      "bytes": 4073,
+      "sha256": "fe580a5e840e0948a1761b7a5cda37594ba4ed456415dbc5b31fd11f2be68158"
+    },
+    "docs/delivery/self_contained_readme.md": {
+      "bytes": 4936,
+      "sha256": "9de52086640a238f3898f404294f8ff5d74b8525da033c65afec69b99921528c"
+    },
+    "docs/implementation/register_map.md": {
+      "bytes": 29740,
+      "sha256": "34b185acae5e2c9f6dfc8e3a11252f3af1a6ac6e8e308edc96e9416603622ead"
+    },
+    "docs/verification/stage2d_async_adc_atomic_cdc_result.md": {
+      "bytes": 8904,
+      "sha256": "7afb59702a4017a85b20613b3026b98b8a847ff04fe9624a113b738468f29d98"
+    },
+    "docs/verification/stage2d_premerge_profile_observability_convergence_result.md": {
+      "bytes": 2523,
+      "sha256": "50bf4f2bb8c69e40a5794061cec0709f34655e856a0c8b2059ce6d5eba4f04ce"
+    },
+    "docs/verification/stage2d_review_findings_hardening_result.md": {
+      "bytes": 3147,
+      "sha256": "1c7f531848223ba4c7df9ae163f774ba4d3780a4f7e92af0efcf353a6994d503"
+    },
+    "docs/verification/stage2f_adc_encoding_scaling_verification_plan.md": {
+      "bytes": 11239,
+      "sha256": "5c9e13439b19da4a09fb1841d2eb5bf100865e487af4e18b7f974d1152776733"
+    },
+    "docs/verification/stage2f_digital_normalization_verification.md": {
+      "bytes": 5808,
+      "sha256": "6035b6cffadf2ab15d9d094c301d90749f9899d004a6a4e7c755c2e2b37317a1"
+    },
+    "docs/verification/stage2g_functional_rtl_verification.md": {
+      "bytes": 5491,
+      "sha256": "870145e7b6d4879099e70f5e0216b299b8eebb619a458309f401bf3eacbd2442"
+    },
+    "docs/verification/stage2g_reset_wait_first_fault_verification_plan.md": {
+      "bytes": 6260,
+      "sha256": "e68d11e49b65a7a350115b3459650450a3ddba9874933ef45348612cb8c22d4a"
+    },
+    "fpga/pynq/deployment/stage1g/stage2i_current_release.py": {
+      "bytes": 17491,
+      "sha256": "68f9d958126638219a261d22ba5823afce6a7fc0c5bc9b8508db14ee55467e35"
+    },
+    "fpga/vivado/add_pynq_z2_stage1d_controlled_stimulus.tcl": {
+      "bytes": 11848,
+      "sha256": "e1053243753aeaa5f56a7ddbb2fe98d1e8cc24565b84f804362c10dd0e1de16b"
+    },
+    "fpga/vivado/add_pynq_z2_stage2b_debug.tcl": {
+      "bytes": 9958,
+      "sha256": "d6f4768a6caf0e8fd998efca34d23c10c29c4341c0f10cf1775bb56fa84fbd02"
+    },
+    "fpga/vivado/build/adapters/stage1e_base_design.tcl": {
+      "bytes": 55494,
+      "sha256": "2cd1bfce2420957c0efa6541473a0240c811118ddab39d630e187eed8cfee48a"
+    },
+    "fpga/vivado/build/adapters/stage1e_build_target.tcl": {
+      "bytes": 44948,
+      "sha256": "4fccecefead930455a585d1dcda830f1248237f8c444a6655319f47c8dc380cb"
+    },
+    "fpga/vivado/build/adapters/stage1e_debug_design.tcl": {
+      "bytes": 52481,
+      "sha256": "a59dbe068f43905f3cf8e072b4fbf77d01addb256b974e5e6ad321b113421511"
+    },
+    "fpga/vivado/build/adapters/stage1e_implementation.tcl": {
+      "bytes": 15924,
+      "sha256": "bd3a4c342ec5e39d63d3aac974b1a010d4be6132dfa5a847bb21a0a82ce6b565"
+    },
+    "fpga/vivado/build/adapters/stage1e_implementation_v2.tcl": {
+      "bytes": 3329,
+      "sha256": "d36f25d854202d9bdd90c867921694d9fda3277eb66ff8364546b6dba2d45f41"
+    },
+    "fpga/vivado/build/adapters/stage1e_ip_packaging.tcl": {
+      "bytes": 71358,
+      "sha256": "a123416eec6ed573fa36cb3916985ead2a8ee61d8eaf724dcdaa3fc742b60a0e"
+    },
+    "fpga/vivado/build/adapters/stage1e_mutation_bridge.tcl": {
+      "bytes": 42636,
+      "sha256": "74b66cc140793f3d6a725d73bdf7af3d9805cb6de8a10762d5f88c51677a550d"
+    },
+    "fpga/vivado/build/adapters/stage1e_production_evidence_adapter_v1.tcl": {
+      "bytes": 6544,
+      "sha256": "75bf8d6c580dfe374e7a4f99ea4daf3bc0a9c76c5ff5fb0dde22e70d0681a0c1"
+    },
+    "fpga/vivado/build/adapters/stage1e_production_runtime_assembly_adapter_v1.psm1": {
+      "bytes": 3669,
+      "sha256": "9b75a0e97d3fbb9c61efe1d1964b074ab7eecc418a63b854775269a449898420"
+    },
+    "fpga/vivado/build/adapters/stage1e_production_vivado_adapter_v1.tcl": {
+      "bytes": 10584,
+      "sha256": "ca45c900bc06108767ef1e2061762c6dae4778587f22ae7a31f20988d4a4563c"
+    },
+    "fpga/vivado/build/adapters/stage1e_synthesis.tcl": {
+      "bytes": 79868,
+      "sha256": "6705542733f202a338b194d5d18863880bfeea72a54a9122ab0ed4b4550e7042"
+    },
+    "fpga/vivado/build/config/stage1d_build_config.dict": {
+      "bytes": 8461,
+      "sha256": "0b5bf866f174270201b4ecc8e81b9de0e7fc7510b90fa622f5578600723fe9ac"
+    },
+    "fpga/vivado/build/config/stage1e_artifact_closure_framework_v1.dict": {
+      "bytes": 9944,
+      "sha256": "e6b9b47358b9be662efbd7943b135c9bee39d971ee98a1ac8b5aace79c6fd0af"
+    },
+    "fpga/vivado/build/config/stage1e_build_config.dict": {
+      "bytes": 6067,
+      "sha256": "14bdd1a4340fa4f096d4b3fe98feb7b3fb3d721abc86f3c439e2244265d43c1e"
+    },
+    "fpga/vivado/build/config/stage1e_evidence_record_contract_v1.dict": {
+      "bytes": 38667,
+      "sha256": "19db6608763e8ee23ec22e47b8cbbd2f0b3025aafbb565b720e089c91f4e8eee"
+    },
+    "fpga/vivado/build/config/stage1e_execution_contract_v1.json": {
+      "bytes": 10936,
+      "sha256": "a68b26f6ad8cd6ceb4eace1285876015b3e4f2f5e7303b5bd297df68d3b24d44"
+    },
+    "fpga/vivado/build/config/stage1e_execution_request_schema_v1.json": {
+      "bytes": 4617,
+      "sha256": "9b9e94037d5d32590bfe5513ecaf9aa5be1012787285ecd9e158779df635ee74"
+    },
+    "fpga/vivado/build/config/stage1e_execution_request_schema_v2.json": {
+      "bytes": 5353,
+      "sha256": "a11dbcddb38163a93a5e356afb2dd22e835e908f2b751065de5397cf25ac66cf"
+    },
+    "fpga/vivado/build/config/stage1e_implementation_configuration_v2.dict": {
+      "bytes": 2803,
+      "sha256": "5a9e51f59460782f38dade25639c03dfe6f37627a046abe5ffddb5ded5a16d19"
+    },
+    "fpga/vivado/build/config/stage1e_implementation_configuration_v3.dict": {
+      "bytes": 5833,
+      "sha256": "5f028ff4240a1cda940271e2213f5e4dae6b32e5ac7852ef2cbc0e65b6715aff"
+    },
+    "fpga/vivado/build/config/stage1e_implementation_warning_policy_v2.dict": {
+      "bytes": 1320,
+      "sha256": "4bf3ec3719115ff743032a5205fe7b4f32e341733faf0d691597115cff5de768"
+    },
+    "fpga/vivado/build/config/stage1e_implementation_warning_policy_v3.dict": {
+      "bytes": 6937,
+      "sha256": "f45dfb84598283e9094d48b80a76c812fc1c19af657c2f94c31bc6f5fbfadb67"
+    },
+    "fpga/vivado/build/config/stage1e_message_contract_v1.dict": {
+      "bytes": 2149,
+      "sha256": "49d32d0a75aefa5c54f6bbf96c2c4987c184d2c2fdff64c7e2b65b2b26be8420"
+    },
+    "fpga/vivado/build/config/stage1e_parser_format_profiles_v1.dict": {
+      "bytes": 5274,
+      "sha256": "9feec388465e9b8462512e1e2193628e2b6d83b8de06d72cf2f5c7734eb3ad56"
+    },
+    "fpga/vivado/build/config/stage1e_phase2_synthesis_config_v1.dict": {
+      "bytes": 25754,
+      "sha256": "206b34af5b78e5fce63cf4bc845ca034b967c17a9cda32f7d8d19da108c99863"
+    },
+    "fpga/vivado/build/config/stage1e_phase3_implementation_framework_v1.dict": {
+      "bytes": 11220,
+      "sha256": "9cb7d4322f55fe818ed7eba4b3da40ba35977703443ffb29a8976228cd528085"
+    },
+    "fpga/vivado/build/config/stage1e_phase3_implementation_framework_v2.dict": {
+      "bytes": 4899,
+      "sha256": "848e7ad17b00eb6306a9aac6f42123ae16d5c624cc9f58b5b107f81a699a90fa"
+    },
+    "fpga/vivado/build/config/stage1e_phase3_implementation_framework_v3.dict": {
+      "bytes": 4653,
+      "sha256": "3c4db9affbad82dd13545dce86ddf77067205717d177daf55405b797b809a1b1"
+    },
+    "fpga/vivado/build/config/stage1e_phase3_runtime_qualification_v1.dict": {
+      "bytes": 16241,
+      "sha256": "57bc6adadfa9937a7f660cb60354bb8114deedf17cdb190c88db90c1fad79d0c"
+    },
+    "fpga/vivado/build/config/stage1e_reconstruction_profile_v1.dict": {
+      "bytes": 27956,
+      "sha256": "5df3257b727eb4517563fc149224356672738696887d68de06d146bd7d56fc88"
+    },
+    "fpga/vivado/build/config/stage1e_report_contract_v1.dict": {
+      "bytes": 17992,
+      "sha256": "14d0ca813249d6841368d5fe5683422abc35536f3553e771e2fff2c858ed9844"
+    },
+    "fpga/vivado/build/config/stage1e_runtime_activation_contract_v1.dict": {
+      "bytes": 26563,
+      "sha256": "da28c07ab193f9d5e474fa482bac762f88852df550c9a13548762fd0c58c7225"
+    },
+    "fpga/vivado/build/config/stage1e_runtime_activation_graph_v1.dict": {
+      "bytes": 17081,
+      "sha256": "fcc8351e815d376147cf16df9082dae5618a4d0efe644cbad8855d082b556f94"
+    },
+    "fpga/vivado/build/config/stage1e_runtime_declared_graph_v1.dict": {
+      "bytes": 51754,
+      "sha256": "0b3904427a053ed92d288964b846de16d6aad96fdc97494de14b6435e5ae82cb"
+    },
+    "fpga/vivado/build/config/stage1e_runtime_dependency_contract_v1.dict": {
+      "bytes": 4499,
+      "sha256": "4f8cc7290fb1095394d3f8a65fc339af3e279a4111665ea868be4e5e64d64b81"
+    },
+    "fpga/vivado/build/config/stage1e_runtime_external_capability_contract_v1.dict": {
+      "bytes": 3327,
+      "sha256": "49afd001381b763f9001dd38c613e2d63d7f1b089ebc953cdf4258116cb8bb3a"
+    },
+    "fpga/vivado/build/config/stage1e_runtime_provider_contract_v1.dict": {
+      "bytes": 11620,
+      "sha256": "cb4407e9127722e2bd2fca8d357ae408f6843b5f4ed0a442dde4003cb227132e"
+    },
+    "fpga/vivado/build/config/stage1e_terminal_result_schema_v1.json": {
+      "bytes": 2557,
+      "sha256": "b6a1ffc42253bc11cf7c68ad7d63ed90ecd0c4426448f39cd1281a6a60ac9718"
+    },
+    "fpga/vivado/build/config/stage1e_vivado_result_schema_v1.json": {
+      "bytes": 4916,
+      "sha256": "7a04a0edee593eca6e2102a33634ad9c54941942caf3343d8fd0f6cf92974440"
+    },
+    "fpga/vivado/build/config/stage1e_vivado_runtime_command_contract_v1.dict": {
+      "bytes": 8531,
+      "sha256": "5016e8b2dee815c24967aca3cc532f622acd49076a8e63aaa81d3c8bed67f14e"
+    },
+    "fpga/vivado/build/config/stage1e_vivado_runtime_property_map_v1.dict": {
+      "bytes": 24200,
+      "sha256": "9652629965ef9bc4ac5e18dee596e13e7867f92eb7284518aa7d77bceccd2860"
+    },
+    "fpga/vivado/build/config/stage1e_vivado_runtime_property_map_v2.dict": {
+      "bytes": 4901,
+      "sha256": "24bd6a396eea7f96870fe9f643a24c98825585c9e1caf3387397735474b6156b"
+    },
+    "fpga/vivado/build/config/stage1e_vivado_runtime_record_contract_v1.dict": {
+      "bytes": 17212,
+      "sha256": "aca48d50f21ee150f06b2f617dac73e057518bc81d95ed8580e0d0407caa40f6"
+    },
+    "fpga/vivado/build/controller/argument_parser.tcl": {
+      "bytes": 2703,
+      "sha256": "7043b7fc3eb3d1a0748a20742f4fe0a327688f421dd0f7f64b5d76b8ca31e9e8"
+    },
+    "fpga/vivado/build/controller/configuration_loader.tcl": {
+      "bytes": 4792,
+      "sha256": "141c1fb39148b66ee7284aee930ec6a393cbcf674a7b10615c7f1461da918ede"
+    },
+    "fpga/vivado/build/controller/controller_core.tcl": {
+      "bytes": 211645,
+      "sha256": "8566d3f612283dc685d7afc1e04af1e4213bd055fe2597c0cf96ce5e99143d1f"
+    },
+    "fpga/vivado/build/controller/decision_engine.tcl": {
+      "bytes": 4049,
+      "sha256": "2afc039f00ac05e0954392797f0f16cb7b6ab0790e98aa4121ce45202c44d638"
+    },
+    "fpga/vivado/build/controller/delivery_bundle_generator.tcl": {
+      "bytes": 28047,
+      "sha256": "ea33030e25653f7947a7e69cf2678fb0ccb0df4a33a49c159df27ea39b6926e6"
+    },
+    "fpga/vivado/build/controller/delivery_bundle_loader.tcl": {
+      "bytes": 36607,
+      "sha256": "3cee1ada723914d0b5215230a3c5a1348e63f11f1cd97b2b26be9708a60f2fe0"
+    },
+    "fpga/vivado/build/controller/logger.tcl": {
+      "bytes": 2442,
+      "sha256": "34e3178fc1a51c058f56d3adcb5f4e0130a15b6a8296911844b9893a479901b4"
+    },
+    "fpga/vivado/build/controller/phase_runner.tcl": {
+      "bytes": 10724,
+      "sha256": "c9c79ed0e9c5d8cf63cf1a45214b57b7b9c3a6cacba8dd39900139cba66c4191"
+    },
+    "fpga/vivado/build/controller/stage1e_phase2_controller.tcl": {
+      "bytes": 54242,
+      "sha256": "ffa03591597a930bb573e511601c1bb782b568e0c309a1ad7317fea49579289e"
+    },
+    "fpga/vivado/build/controller/stage1e_phase3_implementation_controller.tcl": {
+      "bytes": 50337,
+      "sha256": "bbc146e9e196517a7f32803b0e81cdb3789b98b85eea16d6064fc6bc79877e8c"
+    },
+    "fpga/vivado/build/controller/stage1e_phase3_implementation_controller_v2.tcl": {
+      "bytes": 10994,
+      "sha256": "ce6ce86f994a33c4d6729e7b18cabcaf8a1d6ff055bee410df00716f7670635b"
+    },
+    "fpga/vivado/build/controller/stage1e_production_evidence_controller_v1.tcl": {
+      "bytes": 21260,
+      "sha256": "d12053758641ff07ea2dddaa51c3f1a5c97a7dd954ecddff8d74231b584992a7"
+    },
+    "fpga/vivado/build/controller/stage1e_production_runtime_assembly_controller_v1.psm1": {
+      "bytes": 11001,
+      "sha256": "5091921f1e3bcb25cb0c0439b5fbe370e2004aa7bc9b55516a51954f7a3eea4b"
+    },
+    "fpga/vivado/build/controller/stage1e_production_vivado_controller_v1.tcl": {
+      "bytes": 37096,
+      "sha256": "76d4fee21dad7b58b9598bec1bf786e35612e5d09b8bc7d1a678a058fc57b195"
+    },
+    "fpga/vivado/build/controller/state_manager.tcl": {
+      "bytes": 4963,
+      "sha256": "b43b5adbfcc8f83e2ccdf8def021b62f79dd17e1407c2ef3c149a9708b594139"
+    },
+    "fpga/vivado/build/dependency/stage1e_hash_bootstrap_v1.tcl": {
+      "bytes": 2091,
+      "sha256": "0f8dbaedc93be2ab1f8aff4e51249af73e789d599aee7bc9bfc51bcfe77021ec"
+    },
+    "fpga/vivado/build/dependency/stage1e_host_safe_load_trace_v1.ps1": {
+      "bytes": 27611,
+      "sha256": "3696ed9066e759e3846e83a2b67681f9d54af500b0cca448ca9e395e3f5a757a"
+    },
+    "fpga/vivado/build/dependency/stage1e_runtime_dependency_closure_v1.psm1": {
+      "bytes": 128839,
+      "sha256": "6a43e7eb2a6fad7b93cb73948ce101339c21b20df57cab712d3f64a1f86bd538"
+    },
+    "fpga/vivado/build/dependency/stage1e_tcl_dependency_discovery_v1.tcl": {
+      "bytes": 36152,
+      "sha256": "9cbfb2b1d12904353a73e0ee01f3a87df0908185b6e786580d28c8b02d2c9069"
+    },
+    "fpga/vivado/build/dependency/stage1e_tcl_safe_load_trace_v1.tcl": {
+      "bytes": 35322,
+      "sha256": "81a986e010ad095fc1d5b322722b6d2f437f0ef531e24703361af1aa045e314a"
+    },
+    "fpga/vivado/build/identity/stage1e_run2_freeze_finalizer_v1.ps1": {
+      "bytes": 73838,
+      "sha256": "a2f39bcc82b0760ed2a9b601c15728531c15c4582c614ac8a8b068890d6e030f"
+    },
+    "fpga/vivado/build/identity/stage1e_runtime_backend_identity_v2.psm1": {
+      "bytes": 96807,
+      "sha256": "c7f780448bb2dbe5b697954ed5677c2658f5420e17b4142ee17fddb61b863562"
+    },
+    "fpga/vivado/build/lib/bd_flow.tcl": {
+      "bytes": 45030,
+      "sha256": "15ab35f3f20e6aae167745d0508241bba00c0f45f56f823351257f2d905a1c16"
+    },
+    "fpga/vivado/build/lib/environment_check.tcl": {
+      "bytes": 11286,
+      "sha256": "ba1cd048a9a00c373cf1a324091dc0a29e4f232afe297a5da5e4d2119215b8bb"
+    },
+    "fpga/vivado/build/lib/source_check.tcl": {
+      "bytes": 17205,
+      "sha256": "40220677e65c584a226fbf0b3878bc476e1b86bf09817e887761f8c60e4383e3"
+    },
+    "fpga/vivado/build/lib/stage1e_artifact_closure_schema.tcl": {
+      "bytes": 27443,
+      "sha256": "f54177dc258d30015fadb8b2dc1c51231ede14140733fbc4881c888a36a128c8"
+    },
+    "fpga/vivado/build/lib/stage1e_evidence_pipeline_contract_v1.tcl": {
+      "bytes": 71504,
+      "sha256": "b9b3ad6e135fbb4923f32dd6e7a96a4174fb5ef18c650d942dfd843a79fe7085"
+    },
+    "fpga/vivado/build/lib/stage1e_finding_disposition_decision_contract_v1.tcl": {
+      "bytes": 12570,
+      "sha256": "917f32e368c4133c6e9a012f31fd9367fb72d580fe96f9ba695958d62b50e17b"
+    },
+    "fpga/vivado/build/lib/stage1e_host_boundary_contract_v1.psm1": {
+      "bytes": 40427,
+      "sha256": "4afbd2390a34e1554b7be9e595874f73954289791634b31603026a525b70ff1b"
+    },
+    "fpga/vivado/build/lib/stage1e_phase3_runtime_qualification.tcl": {
+      "bytes": 54030,
+      "sha256": "0c39bfaa6f83493b9b657c9a3a72961c5f1ea9871d5e9d01e9a68d2d29866080"
+    },
+    "fpga/vivado/build/lib/stage1e_run1_human_decision_record_v1.schema.json": {
+      "bytes": 4071,
+      "sha256": "300a8456a561edf111102c9bfa7e9fc659106b1a372a3c56ef71f093eb64c27b"
+    },
+    "fpga/vivado/build/lib/stage1e_run2_finding_disposition_decision_v1.schema.json": {
+      "bytes": 8676,
+      "sha256": "203eabe5439aa81e57daa0afafc4361683187c4e94a242d30ce42f5184285b3e"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_activation_contract_v1.psm1": {
+      "bytes": 24565,
+      "sha256": "81abfcf1c546b460d9fa3b241705df0265b6f11a3ba7c75f4d6e7f277f17a441"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_activation_graph_v1.psm1": {
+      "bytes": 31295,
+      "sha256": "541d788e88df61b73a5aabf153db11e9ef41c8d73421d457d02df47575ce0817"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_activation_stop_v1.psm1": {
+      "bytes": 12843,
+      "sha256": "da67fe0d524e3948562aef61d9a5a9a69bdc39b5c9456e3b113a8eac41ab5c25"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_atomic_publication_v1.psm1": {
+      "bytes": 7288,
+      "sha256": "d4dcc9cf3199dc436253b42af1e0d4564eccacd510a190f4e95c36a246d1071b"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_atomic_publication_v1.tcl": {
+      "bytes": 6073,
+      "sha256": "2fee1875f622f165741f7958b9d158d3cfd149aef1d75753ef46b5577f3437f1"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_backend_identity_v2.schema.json": {
+      "bytes": 59299,
+      "sha256": "9b082a44f750895f6aef8c3edc413c7d4a44a5c20a7b3de2181313ab22636505"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_canonical_json_v1.psm1": {
+      "bytes": 39745,
+      "sha256": "d98e7a4a0950850383a70bbd20390736a69303df10e1d5fbc77a29bdda3f95e0"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_canonical_json_v1.tcl": {
+      "bytes": 39318,
+      "sha256": "a189124b4fa68fc51c41f93d5c1b23de53414b9dcfe321584e5d736d0c9fbbd8"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_envelope_contract_v1.psm1": {
+      "bytes": 31326,
+      "sha256": "9bb0d885013ed47b5d3b3c0ec99e9fbaadd4fd9c3875edd0e3e8ef391b3ec54f"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_envelope_contract_v1.tcl": {
+      "bytes": 23737,
+      "sha256": "f1c96c4d8fc39df062ad36771fa0eb1917db0a672db7439f4ad251ca4e9b3b2e"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_failure_record_v1.schema.json": {
+      "bytes": 4671,
+      "sha256": "a40e8ee4e7f5f1536acab21b8b3406a6066f4a82b2ade33fb59b1895d38bcb81"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_common_v1.schema.json": {
+      "bytes": 3911,
+      "sha256": "888e1eee250c5067dfa66ec64b074ba9a16166f357f603d93c21e62bcd55f398"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_component_result_v1.schema.json": {
+      "bytes": 5178,
+      "sha256": "a5c9dd32a2d57535eca18e51ed0a54a990f93c851169d656fde151581a8343f6"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_heartbeat_event_v1.schema.json": {
+      "bytes": 1611,
+      "sha256": "0105d9b15f1d8919a876684e318592dbd5b50c804a4c20fbb9d74da4cce0584a"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_launcher_request_v1.schema.json": {
+      "bytes": 7775,
+      "sha256": "642c7482a738234e7391ce0b36589ab49f5ea36b81891493b736c5c93ee50126"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_preflight_observation_v1.schema.json": {
+      "bytes": 4665,
+      "sha256": "4e9d36a334cdd07a380c888915fb8b8dbfd4521c72890532302751bd653ccc55"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_process_instance_v1.schema.json": {
+      "bytes": 3263,
+      "sha256": "f4da815d863f0bb591d02387e3e7f878ff074454b184ca710504f798586ff7e6"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_process_ledger_v1.schema.json": {
+      "bytes": 7226,
+      "sha256": "6ce5c6b0f58d7855f9ad54d3c479b762e1fd35673d23cfd05dac501323f74bf2"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_requirements_v1.schema.json": {
+      "bytes": 4429,
+      "sha256": "1d28c9031fd9cccc87f2cd465a2855fa9f4dce70060c9c6fc418879429a245cb"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_host_timeout_termination_ledger_v1.schema.json": {
+      "bytes": 3359,
+      "sha256": "1ab27196110c174c54c1dd7b59ae4aadedc6c2e296310b89a461be8540a36c6f"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_request_envelope_v1.schema.json": {
+      "bytes": 23043,
+      "sha256": "b77da461c48f22ce058c0504afbcb1d7b8bcee4fc45c085d4e24200890114fe2"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_result_envelope_v1.schema.json": {
+      "bytes": 11820,
+      "sha256": "3ec445eff9e70e4b1bac93ea47c602ee1494506307a7bbd96782df9ddfaee409"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_schema.tcl": {
+      "bytes": 14086,
+      "sha256": "d8aace0793d0d75b7da97cbb6e129919b0407785084f93dc922fe668b89f9829"
+    },
+    "fpga/vivado/build/lib/stage1e_runtime_vivado_authorization_consumption_receipt_v1.schema.json": {
+      "bytes": 5574,
+      "sha256": "cc7c261b3e82dd6b570924528af42d97c3e528fc9fc4126a12641a1e61630668"
+    },
+    "fpga/vivado/build/lib/stage1e_vivado_runtime_contract_v1.tcl": {
+      "bytes": 78869,
+      "sha256": "7008cd807cf542d6b10d06677a05bb5208e56bb0329c723b2c73a5e5ec4c3290"
+    },
+    "fpga/vivado/build/lib/stage1e_vivado_runtime_contract_v2.tcl": {
+      "bytes": 8677,
+      "sha256": "a58d1a1ebef40b51f0c0e4de5f7eb57384001d35c732173fb90907d9d2a7f385"
+    },
+    "fpga/vivado/build/lib/stage1e_windows_process_control_v1.cs": {
+      "bytes": 93009,
+      "sha256": "c8f4a37e1bac26b619ab6ab0a44408bb7c43f498df7cb8f84f1bc1e7badfefc5"
+    },
+    "fpga/vivado/build/lib/stage1e_windows_process_control_v1.psm1": {
+      "bytes": 7602,
+      "sha256": "14fb58ed57be5655e240e4d9f5fa2158c998bb2d90bd51d97eb5506c35975dc3"
+    },
+    "fpga/vivado/build/lib/vivado_project.tcl": {
+      "bytes": 61608,
+      "sha256": "54b54292972d026bfe0c849290955fac432f4f3033045b40ff6ab3ac8122751c"
+    },
+    "fpga/vivado/build/lib/workspace_manager.tcl": {
+      "bytes": 16711,
+      "sha256": "4ece134be02e202a0670d6ebc7656ab27b3dabe0f497458c9f2d8794d9dd1e10"
+    },
+    "fpga/vivado/build/mutation/stage1d_controlled_stimulus.tcl": {
+      "bytes": 33519,
+      "sha256": "865aa704f3e605441697fa52f92869b76ca8286d02c90e66658d70215b93c175"
+    },
+    "fpga/vivado/build/runtime/README.md": {
+      "bytes": 26027,
+      "sha256": "fed98198cb8920e1150dcc7789965bb63a27c2b9169c383296834e4f48560824"
+    },
+    "fpga/vivado/build/runtime/assembly/stage1e_connected_host_assembly_v1.psm1": {
+      "bytes": 25023,
+      "sha256": "4dbc64595323258d23d3c4fc32243c86bb534aa36d6331ce13a2a4eaea93dd1e"
+    },
+    "fpga/vivado/build/runtime/assembly/stage1e_connected_tcl_assembly_projection_v1.tcl": {
+      "bytes": 5406,
+      "sha256": "960a64adad2ef88b1e2fe61d146246152b4c2ebd4a07ad4766172d21f439e37d"
+    },
+    "fpga/vivado/build/runtime/assembly/stage1e_runtime_assembly_ledger_v1.psm1": {
+      "bytes": 18140,
+      "sha256": "49d1478e264de9c4563886cc87ca46dba33814f2a7302320c31ee4751734a9a9"
+    },
+    "fpga/vivado/build/runtime/assembly/stage1e_runtime_assembly_ledger_v1.tcl": {
+      "bytes": 17973,
+      "sha256": "7e14634d746dca679e713eaebfe9d53d6074bba42e6b3e2c097f16774916c907"
+    },
+    "fpga/vivado/build/runtime/collector/stage1e_production_vivado_collector_v1.tcl": {
+      "bytes": 39884,
+      "sha256": "b04a949017f8e8873e1b3c5fc5f62b4f7cf33752cf583b5838e283be6455850d"
+    },
+    "fpga/vivado/build/runtime/collector/stage1e_production_vivado_collector_v2.tcl": {
+      "bytes": 13455,
+      "sha256": "c63fac94983c9026f5f44f8fbd999f68403f8824299344b47b6385d0bd0501be"
+    },
+    "fpga/vivado/build/runtime/collector/stage1e_runtime_collector.tcl": {
+      "bytes": 4315,
+      "sha256": "4817296097d563bdf68f36db1168355946f9fd13f68b6328808776a75610f5aa"
+    },
+    "fpga/vivado/build/runtime/entrypoint/stage1e_production_runtime_entrypoint_v1.ps1": {
+      "bytes": 20033,
+      "sha256": "9ed9053f55a90938330d42bc61a1573e1411fae1670b6b25d422c7fc56d11240"
+    },
+    "fpga/vivado/build/runtime/entrypoint/v2/stage1e_production_runtime_entrypoint_v2.ps1": {
+      "bytes": 22130,
+      "sha256": "3cbad00a1fdb4815e960516972444a14fbc1161ae4d06747c18aae2253d0b616"
+    },
+    "fpga/vivado/build/runtime/entrypoint/v3/stage1e_execution_host_v1.psm1": {
+      "bytes": 17162,
+      "sha256": "4a6fc84d2bca4cf7de555496c34e06d22decef78459a32e6ec90a0324b458409"
+    },
+    "fpga/vivado/build/runtime/entrypoint/v3/stage1e_execution_request_v1.psm1": {
+      "bytes": 22346,
+      "sha256": "c410d4d405992b468f68c9a5c9d66dca8de9742a4227267e40e39a321d6b6a74"
+    },
+    "fpga/vivado/build/runtime/entrypoint/v3/stage1e_production_runtime_entrypoint_v3.ps1": {
+      "bytes": 13864,
+      "sha256": "757d91d4b28aa5864b13aa4f8a51a510434badb3122941c608abc2326487f327"
+    },
+    "fpga/vivado/build/runtime/identity/stage1e_production_evidence_serializer_v1.tcl": {
+      "bytes": 24872,
+      "sha256": "6c19daa75af928c72a2bc61b906d30bc591bb66b04a6fac985485cb3206e6105"
+    },
+    "fpga/vivado/build/runtime/identity/stage1e_runtime_identity.tcl": {
+      "bytes": 3074,
+      "sha256": "f731086ba958043bdfcad521dfb4772568a77d77a4c756ed67924812a7c829a4"
+    },
+    "fpga/vivado/build/runtime/launcher/stage1e_production_runtime_launcher_v1.psm1": {
+      "bytes": 62941,
+      "sha256": "282d793ef46e2d6af8157641b635c355add34138947774a47185f196a15ca5fb"
+    },
+    "fpga/vivado/build/runtime/launcher/stage1e_runtime_launcher.psm1": {
+      "bytes": 4727,
+      "sha256": "b749436f10f3a87acf974b8685a3467f1d825f3e7d379c91e6219cc561f7df53"
+    },
+    "fpga/vivado/build/runtime/observer/host/stage1e_production_host_observer_v1.psm1": {
+      "bytes": 35106,
+      "sha256": "f87093076fc76b57eade4c22944fa6e2bd39836a2b224180c62577fd8ff245e2"
+    },
+    "fpga/vivado/build/runtime/observer/stage1e_runtime_observer.tcl": {
+      "bytes": 3089,
+      "sha256": "154a83bde9db82cfb02a7b0c662a265b0f929ebd9a586feff513870df51e0f96"
+    },
+    "fpga/vivado/build/runtime/observer/vivado/stage1e_production_vivado_observer_v1.tcl": {
+      "bytes": 33260,
+      "sha256": "c041638b1b1e6684ea98f2f3a8377efecbfc0c8a8f58b91857d6ed37fdc8a8f0"
+    },
+    "fpga/vivado/build/runtime/observer/vivado/stage1e_production_vivado_observer_v2.tcl": {
+      "bytes": 4485,
+      "sha256": "4a818ca01ae67a91fff83a097e6e391bc0c8d0e6a2555bb75d6c9a5540e97052"
+    },
+    "fpga/vivado/build/runtime/parser/stage1e_production_evidence_parser_v1.tcl": {
+      "bytes": 35570,
+      "sha256": "e7da7fa21979180c2d4f1598ba03909ac4917853bee765074335111e42dc2e0d"
+    },
+    "fpga/vivado/build/runtime/parser/stage1e_runtime_parser.tcl": {
+      "bytes": 3227,
+      "sha256": "cc1b65cf359c082aa786d88f7ea9b94051e7c8654e137cdda22da4ea3550af8e"
+    },
+    "fpga/vivado/build/runtime/runner/stage1e_production_vivado_runner_v1.tcl": {
+      "bytes": 29390,
+      "sha256": "3934306306c11ab2b75b9fe70376a4de6b54df1856553679323c466efcbdc554"
+    },
+    "fpga/vivado/build/runtime/runner/stage1e_production_vivado_runner_v2.tcl": {
+      "bytes": 102356,
+      "sha256": "24b0f0b42cd9c3c666489ae9943ca2eef8d8765b8688e90b49639a142eee1f13"
+    },
+    "fpga/vivado/build/runtime/runner/stage1e_production_vivado_session_v1.tcl": {
+      "bytes": 15036,
+      "sha256": "7b1acefc7b2c7d20f4cc5d08fed13bc8805e6393d4b2030366e4cdc9d7d05af2"
+    },
+    "fpga/vivado/build/runtime/runner/stage1e_runtime_runner.tcl": {
+      "bytes": 4633,
+      "sha256": "d9281ad88b52112c32f1ea3a4301b16515a41a060f1bd354bfa5c380bbf97ea5"
+    },
+    "fpga/vivado/build/stage1d_artifact_build.tcl": {
+      "bytes": 3028,
+      "sha256": "5243ca63642a125462a4dc5fa324efa1ae85d75a99480a929e5f5d0fecfe8200"
+    },
+    "fpga/vivado/build/stage1e_artifact_build.tcl": {
+      "bytes": 61801,
+      "sha256": "bbaf013fd78f8d96a2b89bb2faaa512844256c09ec8d062ef6df5eb1e4286b38"
+    },
+    "fpga/vivado/build/stage1e_phase2_synthesis_build.tcl": {
+      "bytes": 29908,
+      "sha256": "1eb799e5032380a06a4d997c573f760da7107e6cfb67b84d8cbd82ddcc30a793"
+    },
+    "fpga/vivado/build/tests/delivery_bundle_generator_tests.tcl": {
+      "bytes": 21543,
+      "sha256": "aa2c286de27fdd993f56c36fc8df24bbb2d909e3451796ab4c3981c9ab812b99"
+    },
+    "fpga/vivado/build/tests/delivery_bundle_instance_tests.tcl": {
+      "bytes": 22669,
+      "sha256": "e58ad7d131dddef03c15b7d299a7e9c9ea06ddd9b0bbd31703015e0a3e7bada1"
+    },
+    "fpga/vivado/build/tests/delivery_bundle_loader_tests.tcl": {
+      "bytes": 22221,
+      "sha256": "008736f466e5fc23f916505911fe9484bd4077de9a3b20d69d38737b5013abe4"
+    },
+    "fpga/vivado/build/tests/fixtures/stage1e_evidence_collector_command_model_v1.tcl": {
+      "bytes": 10948,
+      "sha256": "056474e7a6406aa4ba625ba17f7f0e6bd54666e438c9e8b540526561df0b9e3c"
+    },
+    "fpga/vivado/build/tests/fixtures/stage1e_host_mock_child_v1.cs": {
+      "bytes": 28379,
+      "sha256": "693d06cb74d8ccf0a442d6b708573cb76916a89fdbfc66b764037c5721659d2e"
+    },
+    "fpga/vivado/build/tests/fixtures/stage1e_vivado_command_model_v1.tcl": {
+      "bytes": 24131,
+      "sha256": "7c6018b993acd11a5a9347fb70689751271a26a6fa05efbbbed2c95239fc768e"
+    },
+    "fpga/vivado/build/tests/fixtures/stage1e_vivado_command_model_v2.tcl": {
+      "bytes": 5578,
+      "sha256": "85313716fc4ebef59c0128a395805c5b019c39cc1dc645c7f711cc26ad02ea0c"
+    },
+    "fpga/vivado/build/tests/stage1e_artifact_closure_framework_tests.tcl": {
+      "bytes": 20965,
+      "sha256": "d7b31bd7aa0b6f8a93313a8895f43f63c76cac60eca7e22c3cbbe3dc24a71189"
+    },
+    "fpga/vivado/build/tests/stage1e_base_design_adapter_tests.tcl": {
+      "bytes": 39552,
+      "sha256": "f527fc52c515272c1c76a0250f41d4b44e08fab73f29eb36d6300de046d4fbd8"
+    },
+    "fpga/vivado/build/tests/stage1e_bd_creation_adapter_tests.tcl": {
+      "bytes": 25648,
+      "sha256": "f8b32af9b5cda2e5914a09b7325021dc7eb81c78ca2078d6ab4afe388acf3eae"
+    },
+    "fpga/vivado/build/tests/stage1e_build_target_adapter_tests.tcl": {
+      "bytes": 22695,
+      "sha256": "ace0fafb0ce00a1fecfc7789c5b623ea6f6431128996f9445cc9f15f1c1c51c8"
+    },
+    "fpga/vivado/build/tests/stage1e_controller_skeleton_tests.tcl": {
+      "bytes": 37072,
+      "sha256": "9c915aeca7c775567c180f0cc5136fbbeeeeb4f8ee8edcf601cb812936cefd31"
+    },
+    "fpga/vivado/build/tests/stage1e_debug_design_adapter_tests.tcl": {
+      "bytes": 41065,
+      "sha256": "af493f38fefa2b257c716564c2259f1565f892945e6632705d82c760604bd1b9"
+    },
+    "fpga/vivado/build/tests/stage1e_execution_architecture_convergence_tests.tcl": {
+      "bytes": 64220,
+      "sha256": "a641cc01ed944b9d05cce7cb0f6c483ce6fdbc659991e788f71fa90e527ffba4"
+    },
+    "fpga/vivado/build/tests/stage1e_ip_packaging_adapter_tests.tcl": {
+      "bytes": 59408,
+      "sha256": "c947d0233243b7822f478378ab5d99b38b7d02bb552fd5ca670b78fa8eaf5d6f"
+    },
+    "fpga/vivado/build/tests/stage1e_mutation_bridge_tests.tcl": {
+      "bytes": 23740,
+      "sha256": "38b9021438abc033c4865638fef09b27c0375d4ee49a7ec470b25a8a66238ca2"
+    },
+    "fpga/vivado/build/tests/stage1e_phase2_controller_tests.tcl": {
+      "bytes": 47947,
+      "sha256": "82631e04a11a41290c463e9b6f226f610dc5cb4e0a9a11854be75bad033f99e9"
+    },
+    "fpga/vivado/build/tests/stage1e_phase3_implementation_framework_tests.tcl": {
+      "bytes": 30083,
+      "sha256": "1ee28772054fc903005cd06d5b315dd42f64c9ad8916330842e7e6580b165083"
+    },
+    "fpga/vivado/build/tests/stage1e_project_creation_adapter_tests.tcl": {
+      "bytes": 31308,
+      "sha256": "4afbc9cc19d0090c575a0c51e49b5e81d12de88f4a254bb097a4ae410b8229ea"
+    },
+    "fpga/vivado/build/tests/stage1e_reconstruction_profile_tests.tcl": {
+      "bytes": 32869,
+      "sha256": "361b9bee95dfd491a86611f824dca199a35382eb928abfcc7eea538311ba0f95"
+    },
+    "fpga/vivado/build/tests/stage1e_runtime_mock_tests.tcl": {
+      "bytes": 5464,
+      "sha256": "5b13139d9b8811c89bedc0ebdf72641c224afccd5891b49dc046894458a69721"
+    },
+    "fpga/vivado/build/tests/stage1e_runtime_negative_tests.tcl": {
+      "bytes": 2429,
+      "sha256": "2771cbda63ce3f7f7b6ddb9e41926a677afbfedfc7580cc77d26926701a5e941"
+    },
+    "fpga/vivado/build/tests/stage1e_runtime_provenance_tests.tcl": {
+      "bytes": 3157,
+      "sha256": "fa36ddcfafaaad36afaee807579e14260ede5eac627741d00a5fb365a891d0f5"
+    },
+    "fpga/vivado/build/tests/stage1e_runtime_schema_tests.tcl": {
+      "bytes": 6050,
+      "sha256": "a9250da39471d07b78f8016d4974b2ead57727be9dee06c624b84dcecdf06155"
+    },
+    "fpga/vivado/build/tests/stage1e_runtime_static_tests.tcl": {
+      "bytes": 31814,
+      "sha256": "96c9299b55df8266a3830a0c8b98fb804aac7d4b7569091fb95c26fd53327fb0"
+    },
+    "fpga/vivado/build/tests/stage1e_runtime_test_support.tcl": {
+      "bytes": 7937,
+      "sha256": "1f8b15c4c5dba98ac2b4f3912d352711572e4949c4b3899664cef8ecb3ccc2aa"
+    },
+    "fpga/vivado/build/tests/stage1e_synthesis_adapter_tests.tcl": {
+      "bytes": 66211,
+      "sha256": "f4bba1bfc4655d4a9a33046f85ef3cbdb8f6c4447c9323e6154cea642b155ecd"
+    },
+    "fpga/vivado/build/tests/stage2d_cdc_constraint_tests.tcl": {
+      "bytes": 8804,
+      "sha256": "488f0430ee9052d19028f2c7d80217a8acbb47bbbe7d197212eeb54243849fd7"
+    },
+    "fpga/vivado/build/tests/stage2d_profile_convergence_tests.tcl": {
+      "bytes": 13618,
+      "sha256": "0d6f3e0080d285d75bd1aa842b85eae88260d460351a757513f44ee520a6e61e"
+    },
+    "fpga/vivado/build/tests/stage2d_source_closure_tests.tcl": {
+      "bytes": 12027,
+      "sha256": "c2e249816ed75ca9dd4fff68d320490c1519adc290998bfd206ff36ab79be6bd"
+    },
+    "fpga/vivado/build/tests/stage2e_ipxact_metadata_scope_tests.tcl": {
+      "bytes": 13487,
+      "sha256": "819d62ec5e5cd8a5d92ee5159244bcb51a836fd86d69200cc5307da32774bfad"
+    },
+    "fpga/vivado/build/tests/stage2e_observability_cdc_constraint_tests.tcl": {
+      "bytes": 9929,
+      "sha256": "f582513c713a820d6fed448b565bcc27e8d04081addb012dbd13cc44009dcddc"
+    },
+    "fpga/vivado/build/tests/stage2e_source_closure_tests.tcl": {
+      "bytes": 13766,
+      "sha256": "d0863721a407190a77873e2d9025e99046ab92845d3b80a751fce0a3a2496f30"
+    },
+    "fpga/vivado/build/tests/stage2g_source_closure_tests.tcl": {
+      "bytes": 13876,
+      "sha256": "45f626b27c830e14237bc44d898d7a36c3f945befad6fdd2e28242938416ad07"
+    },
+    "fpga/vivado/build/tests/stage2i_b_dual_profile_tests.tcl": {
+      "bytes": 21556,
+      "sha256": "a1b879aa274b068760173b181cbe8fc48b73599c6d72ef92675834778147ab77"
+    },
+    "fpga/vivado/constraints/stage2d_async_adc_atomic_cdc.xdc": {
+      "bytes": 8022,
+      "sha256": "95df163a52fa246fcef598cc86262df6e798b87ce8a69908f11aa4eb4e894bf5"
+    },
+    "fpga/vivado/constraints/stage2e_transaction_observability_cdc.xdc": {
+      "bytes": 19945,
+      "sha256": "69f226233c677be6eea1cd7fc4a692bfada093525e6613e362f880d2e4d335e7"
+    },
+    "fpga/vivado/constraints/stage2i_b2_ready_aware_stimulus_cdc.xdc": {
+      "bytes": 15412,
+      "sha256": "aa086cb16d4d081257448b30ca93f3f16327264800af67a6686e50f632f3c3bc"
+    },
+    "fpga/vivado/create_pynq_z2_project_preboard.tcl": {
+      "bytes": 3215,
+      "sha256": "cff2381e2d84364e5136e2918584d93b1beffccf6c5d8a2212bb72dca87ec49b"
+    },
+    "fpga/vivado/create_pynq_z2_project_stage1_boardpart.tcl": {
+      "bytes": 5359,
+      "sha256": "b9af5f9f968f694ad071535bb1a3f23d6d31082674ec2eedc5826bf6793dde58"
+    },
+    "fpga/vivado/create_pynq_z2_stage2_bd.tcl": {
+      "bytes": 14554,
+      "sha256": "8c76e4ec70a5643432fa866686d40f41d9a9f46138729175569ca26907e413d6"
+    },
+    "fpga/vivado/generated/protection_register_map_ipxact.tcl": {
+      "bytes": 61980,
+      "sha256": "78849bcddee82f698ac6acb7d7424dff6bc5ff719e8df87ee2f4ddae80d0669b"
+    },
+    "fpga/vivado/package_protection_ip_stage2_axi_lite.tcl": {
+      "bytes": 15690,
+      "sha256": "19a239188e81feb957142f428353c4162346601f9ef3673d49617f3780dc0e76"
+    },
+    "fpga/vivado/test_profile/stage2i_b2_ready_aware_stimulus.v": {
+      "bytes": 9279,
+      "sha256": "2d1cc99114f0269eadfb4b35ea1dc204da449190524b82ebfec398908ea8b4f2"
+    },
+    "rtl/adc_sample_cdc_bridge.v": {
+      "bytes": 12812,
+      "sha256": "bb8f8e47c78523d22381de583b70844a581736efdd8539fd189ca9b2b7ce263f"
+    },
+    "rtl/adc_sample_code_normalizer.sv": {
+      "bytes": 6635,
+      "sha256": "5acc809d3334a093532fe650842056f7486a8889dd18ba57777f3d39ba4892cb"
+    },
+    "rtl/async_fifo_gray.v": {
+      "bytes": 5381,
+      "sha256": "1851d4e8f78e8ff31cec85d0db3f64dbe0aef7c53cb5d8c916a7c6e9b46d483f"
+    },
+    "rtl/current_compare_dual.v": {
+      "bytes": 740,
+      "sha256": "13a9a0afb99fd7ce16a942e77bb2980152d4fe1e96c6d4ef750d28fdd6928747"
+    },
+    "rtl/fault_classifier.v": {
+      "bytes": 4807,
+      "sha256": "0b4ee3936d1c7ca30b2ec96fe4d44196b908b903afb88d02cf8d7023fbcd8a7f"
+    },
+    "rtl/fault_defs.vh": {
+      "bytes": 241,
+      "sha256": "1812a3e1310872bb8744cb5918845c5e37354cf0dd51724e4000f4ef95736a79"
+    },
+    "rtl/generated/protection_register_map.vh": {
+      "bytes": 34630,
+      "sha256": "ebad567dbadb9f05186d9ec70377b3191df02db15ca64688b4a6d6e1803f407b"
+    },
+    "rtl/generated/stage2f_adc_source_profile.svh": {
+      "bytes": 1076,
+      "sha256": "c7492809bb7606131327c755bf703aab4530399af023711076b62558433c8813"
+    },
+    "rtl/moving_avg_filter.v": {
+      "bytes": 1632,
+      "sha256": "044b46d5d45575035b5cfce95ed04721ab744a4028c36fc1304e7d47d062f8f5"
+    },
+    "rtl/protection_core_top.v": {
+      "bytes": 14056,
+      "sha256": "a5be0f5975d8e8819568e9f5d9f4009dbfe1de40fd06518d4e2d7d2e7eb1fcb1"
+    },
+    "rtl/protection_fsm.v": {
+      "bytes": 10006,
+      "sha256": "92e814e306971e7382eb3299597bd35609f96dd1c2e3ed69ccfea560f293a9b4"
+    },
+    "rtl/protection_ip_top_async_adc_axi_lite.v": {
+      "bytes": 14675,
+      "sha256": "ed14d384ddd4df95b5e966f1330fb81a468c3bcc898877f09d6064261535a553"
+    },
+    "rtl/protection_ip_top_axi_lite.v": {
+      "bytes": 18495,
+      "sha256": "3d0d680bef323cebad936a823fce77539884681be5d555b4eefd17aa5046b83c"
+    },
+    "rtl/protection_ip_top_reg_controlled.v": {
+      "bytes": 14217,
+      "sha256": "1c6b1d5b797a766be93c56c6332927e1d873db27c82f5df65c57ee13f32257fa"
+    },
+    "rtl/protection_reg_bank.v": {
+      "bytes": 10334,
+      "sha256": "feb3a50036e9db39fdd60c5ce1fd21f06b55278aa65ad039719dee0869ad6078"
+    },
+    "rtl/pwm_gate.v": {
+      "bytes": 210,
+      "sha256": "565f969f5ac81300a9c5a4921bc4158b7a933489f54c54b6f28584bccdc80f68"
+    },
+    "rtl/pwm_gen.v": {
+      "bytes": 880,
+      "sha256": "bad0663d768342e75decb32b6f5b70b96f1c85234662b7a13dd8151586dd0ecc"
+    },
+    "rtl/reset_release_sync.v": {
+      "bytes": 561,
+      "sha256": "920b366e226a758df9fa9cb5db629246547d166c074e939e989a2b05e1a53a4b"
+    },
+    "rtl/sensor_health_monitor.v": {
+      "bytes": 3085,
+      "sha256": "97c86a96ac29996ddd90c0feafb882ba5f94565662d4218f7e244cc1154e19b6"
+    },
+    "rtl/source_observability_cdc.v": {
+      "bytes": 7170,
+      "sha256": "ea1553bbdff6da15194d9aa1d9ca44cfaeeeaf4e1895eedc8d74bfafcce6cc00"
+    },
+    "rtl/transaction_destination_observer.v": {
+      "bytes": 19753,
+      "sha256": "7f64e3bb05f690ccce109f9ac0737049929bcc56b993cea70af679b00e7b7761"
+    },
+    "rtl/transaction_source_observer.v": {
+      "bytes": 11783,
+      "sha256": "2e36166dd8f9e222bcaedde66a53e785e99f162762750e2b55ce00aa8f67a3c9"
+    },
+    "sim/run_iverilog.py": {
+      "bytes": 2635,
+      "sha256": "9dd5e7843e39333f04a0aa18c77200e18e9821852eb13202666c45f14e8aa080"
+    },
+    "sim/run_iverilog.sh": {
+      "bytes": 2918,
+      "sha256": "d185893f42f7e06b99caa573c05c1e55174e98773c598f6e407279310362234b"
+    },
+    "sim/stage2f/run_stage2f_digital_normalization.ps1": {
+      "bytes": 23357,
+      "sha256": "94a909db60d40edcc401e7cf41589c3b6271217459d6db15eae1beaba60a0a4d"
+    },
+    "sim/stage2g/run_stage2g_functional_rtl.ps1": {
+      "bytes": 1183,
+      "sha256": "a768cd4104dc7bc9d78cf342beb2325fd78acd6f1423a14ceb4c78c007d0a2e1"
+    },
+    "spec/generated/protection_register_map_compatibility.json": {
+      "bytes": 27482,
+      "sha256": "b12daaff3bb38ef74eb11676140837e99667a340b15c923bf942dc42a5c97a04"
+    },
+    "spec/generated/protection_register_map_conformance.json": {
+      "bytes": 113563,
+      "sha256": "5e99022be95e73ecc4915eac8b43801158a9842a251ed8e9e297f0c3ecf98c87"
+    },
+    "spec/register_map.json": {
+      "bytes": 109433,
+      "sha256": "f332da960169ff3ae261a26ff400a328370b26067fcb3b171e8f8bd80d6f0dfc"
+    },
+    "spec/register_map.schema.json": {
+      "bytes": 21588,
+      "sha256": "e3db874fe9f638c98054d288292dffd94378377f38456159b0deea25b56762a0"
+    },
+    "spec/stage2f_adc_data_path_inventory.json": {
+      "bytes": 16354,
+      "sha256": "470cfe9c3a81d4f5fc1eb6d1376f4e0a1e1ed749880f934238724f3d5953abd6"
+    },
+    "spec/stage2f_adc_fact_inventory.json": {
+      "bytes": 14344,
+      "sha256": "b8c6a92e092066bfbb8101111eb7a073ab6e2d8aa6d4ee7ea5424fb7909f2762"
+    },
+    "spec/stage2f_adc_source_profile.schema.json": {
+      "bytes": 5653,
+      "sha256": "5e8e05dccc2e92e4abdf3749b783de98911cc3a51b4b34f94b3824ff60bb28fd"
+    },
+    "spec/stage2f_adc_source_profile_unconfigured.json": {
+      "bytes": 348,
+      "sha256": "37679ddb631db075aa64136d28b8433eb8381da9c9399285acdca11148d45c6b"
+    },
+    "spec/stage2f_closure_boundary.json": {
+      "bytes": 5887,
+      "sha256": "235698d8dd7fee11413711cdf412a8bbbf1f0d8ebc714cfb8026a410c5576acd"
+    },
+    "spec/stage2f_digital_normalization_implementation.json": {
+      "bytes": 3022,
+      "sha256": "bda5e1e5ca62b7ac0b974e370da76d6ae48c6644c404d868b4f908c53aebed88"
+    },
+    "spec/stage2f_profiles/SIM_TWOS_COMPLEMENT_POSITIVE.json": {
+      "bytes": 422,
+      "sha256": "801b5b0c871886bb5b09aa084e7626ac37527c25975fc0837eb10065ea422f66"
+    },
+    "spec/stage2f_profiles/SIM_TWOS_COMPLEMENT_REVERSED.json": {
+      "bytes": 422,
+      "sha256": "1da6d86431ce31a4075687d30d33565189177c389c7208e11331ab4307817582"
+    },
+    "spec/stage2f_profiles/SIM_UNSIGNED_ZERO_EDGE_0.json": {
+      "bytes": 426,
+      "sha256": "65db2a78bbd695f21bbcef5734238225075a15a239734b9eb300f934d7dfccef"
+    },
+    "spec/stage2f_profiles/SIM_UNSIGNED_ZERO_EDGE_4095.json": {
+      "bytes": 432,
+      "sha256": "ecab7fe6b0ff74503ddf7cbcd715c26ab98e7d09a554303188dc33fdbdf68f1f"
+    },
+    "spec/stage2f_profiles/SIM_UNSIGNED_ZERO_MIDSCALE_CH2_REVERSED.json": {
+      "bytes": 444,
+      "sha256": "21ee27146b85b000cae83efd07b7b5ca85098f999f96d86d71d634ee16a90f30"
+    },
+    "spec/stage2f_profiles/SIM_UNSIGNED_ZERO_MIDSCALE_POSITIVE.json": {
+      "bytes": 440,
+      "sha256": "a21378692f633893dcf0e971d6d56a0ff9a5566e629668dcaac3cf7e690db45c"
+    },
+    "spec/stage2f_scaling_parameter_authority.json": {
+      "bytes": 9103,
+      "sha256": "278f6639577679878b4fb09578d27c3af201307e67b09cb70578782bcf5549e2"
+    },
+    "spec/stage2g_fixtures/cross_artifact_negative_mutations.json": {
+      "bytes": 5606,
+      "sha256": "d34b602491cab5e80658cd54d38f2f2253c6384dc04dd4d796976b71406e986f"
+    },
+    "spec/stage2g_fixtures/negative_mutations.json": {
+      "bytes": 5125,
+      "sha256": "5670c2931b9009c2fd6a6b16f6cc9c909bca83382845ed17372fa4e78af7e4a8"
+    },
+    "spec/stage2g_fixtures/positive_contract.json": {
+      "bytes": 27216,
+      "sha256": "5c5b8cc37546698ee05dbf54e8c1646267268edbc0a4fd71067ab2caa32136ba"
+    },
+    "spec/stage2g_fixtures/positive_fixture.json": {
+      "bytes": 224,
+      "sha256": "774cbfabd56c95768e73c7de4936880c6b7249f6b9117ad58bfed84b50dc3716"
+    },
+    "spec/stage2g_implementation_base_fingerprints.json": {
+      "bytes": 5535,
+      "sha256": "a4dfedec4cdcffe48ae7ce47d57393b050cca2211384583a30356c74dd608c1c"
+    },
+    "spec/stage2g_reset_wait_first_fault_current_behavior.json": {
+      "bytes": 14039,
+      "sha256": "870ee337c914aa116858646c7a6a16ad95f47aa5bd01e0f1dbcba627919bd6ab"
+    },
+    "spec/stage2g_reset_wait_first_fault_policy.json": {
+      "bytes": 27216,
+      "sha256": "5c5b8cc37546698ee05dbf54e8c1646267268edbc0a4fd71067ab2caa32136ba"
+    },
+    "spec/stage2g_reset_wait_first_fault_policy.schema.json": {
+      "bytes": 28630,
+      "sha256": "3ca5b5ea6559051d8c33c7a1a98ed347f41bbacb97c4398f0544111ccd08d039"
+    },
+    "spec/stage2g_reset_wait_first_fault_policy_source_map.json": {
+      "bytes": 28852,
+      "sha256": "fa6eb142032168ea37b6c61f7dd0eb9290d0b4e6b38015109265dadcb8b6652f"
+    },
+    "spec/stage2g_reset_wait_first_fault_policy_status.json": {
+      "bytes": 4463,
+      "sha256": "6b09a8d31d6cbccce3371d783cbeaca5dbeea143bedf048c6b7bbca50d77932f"
+    },
+    "spec/stage2h_b_rtl_architecture_contract.json": {
+      "bytes": 11741,
+      "sha256": "14a60eeaf1a0a201686d23c1fe8ca48fa01ac38b111e000f494c13897c725dc2"
+    },
+    "spec/stage2h_fixtures/ast_fingerprint_fixtures.json": {
+      "bytes": 2366,
+      "sha256": "c78c846c3db64a797278fe6f6c3a0fd5080683dedbc4d95a5d32af3c998a5644"
+    },
+    "spec/stage2h_fixtures/cross_artifact_negative_mutations.json": {
+      "bytes": 13080,
+      "sha256": "6c38a8ee20a14a338b9323082a534e650a332be1378280f649da6eb1c406ea93"
+    },
+    "spec/stage2h_fixtures/negative_mutations.json": {
+      "bytes": 37095,
+      "sha256": "6a20c6a0b1193b46ae0f4bd5cc8faa5f1f777fe924e944d3dec152fc9f631573"
+    },
+    "spec/stage2h_fixtures/positive_fixture.json": {
+      "bytes": 2151,
+      "sha256": "9c4c5b8701314f5b64d11de19a209066e2ed5907e7f1d663be2dd0d1b35b2663"
+    },
+    "spec/stage2h_register_map_convergence.json": {
+      "bytes": 267773,
+      "sha256": "a5731702d2d3ff1fe7420e3de43e83267809582639f98e4237e8728e47219041"
+    },
+    "spec/stage2h_register_map_convergence.schema.json": {
+      "bytes": 108545,
+      "sha256": "6acddb271afaaf3383c8d52fbed8022545abab66f135356b8a733eb5cef727e2"
+    },
+    "spec/stage2i_physical_authority_receipt.schema.json": {
+      "bytes": 2844,
+      "sha256": "cc76a12159af99149178803e7ef447781188e0f191ebebd6a9b0c2548d1ef33f"
+    },
+    "spec/stage3_reference_analog_profile.json": {
+      "bytes": 7148,
+      "sha256": "6769b38167fe2aaff9dffcdc085e1a407dd993c40320f23845f6f1e2d627c868"
+    },
+    "sw/generated/protection_register_map.py": {
+      "bytes": 43433,
+      "sha256": "3ae20e1428aabc76e9ac2f0aef100a61da190e753935df9735f4b276c5a11023"
+    },
+    "sw/protection_ip_interface.py": {
+      "bytes": 17947,
+      "sha256": "9bfb0a7d39ad67ab8f95eadc853c6da76e5ff76beba907647e209cb24e546ff9"
+    },
+    "sw/ps_register_demo/main.c": {
+      "bytes": 3460,
+      "sha256": "08c6782f773cdb7e72e7e7ed60d09dd36b7f44e162171dcf62d8f3a92f47e580"
+    },
+    "sw/ps_register_demo/protection_ip_regs.h": {
+      "bytes": 33353,
+      "sha256": "5acb9259d8ac5c7758efb532b582781881d33b5b0e99827ceff009b93719b4f2"
+    },
+    "sw/pynq_mmio_demo_preboard.py": {
+      "bytes": 1076,
+      "sha256": "7cf1bf9678f7bb00703102a2e809649a7e8ffa60d1b33f5ef08fb5d3a9e9a73e"
+    },
+    "sw/stage2c10b_a_controlled_prefunctional_probe_candidate.py": {
+      "bytes": 3687,
+      "sha256": "9a6a25e2469823fadbad5fab0f318063807b0bb990a4a70acf8a8c89133ce1d8"
+    },
+    "sw/stage2c9e_b_pynq_mmio_register_smoke.py": {
+      "bytes": 4266,
+      "sha256": "f4563109fc5e0cf87278ced3b6e84b9969a0dbd1dd67b2d0fd7df9b521705bee"
+    },
+    "sw/stage2c9f_b_controlled_expanded_mmio_idempotent_rw.py": {
+      "bytes": 4816,
+      "sha256": "2b39e770864eef72f9ec427a4f47d45fe19a1132175dd9c2add1797a08187662"
+    },
+    "sw/stage2c9g_b_read_only_semantic_status_observation.py": {
+      "bytes": 3986,
+      "sha256": "726b0fe7cd40cd04d4a8e5a9298a535fd761ca9317a521fa2149928e34ab0389"
+    },
+    "sw/stage2i_board_runtime.py": {
+      "bytes": 25087,
+      "sha256": "52c6f29c671e13d57fb483b2e4c8289834e9fc4fbb7967664cc71bef5a516833"
+    },
+    "sw/tests/test_protection_ip_interface.py": {
+      "bytes": 15386,
+      "sha256": "61eb34a879fa0f91cbfdaef9f29781b0622f967e6ad79c057f17b4acb270f8ae"
+    },
+    "tb/coverage/protection_functional_coverage_monitor.sv": {
+      "bytes": 47148,
+      "sha256": "9ec26072678f46514a7331a42cfae1b65b297497ecc714d6220943ba53e47a76"
+    },
+    "tb/coverage/protection_functional_coverage_pkg.sv": {
+      "bytes": 3443,
+      "sha256": "5c082ac0e844dc0cd252e4a7f6d4fdd1e1cda82672cd915ca50b6fc8f68d0ac6"
+    },
+    "tb/coverage/tb_coverage_checker_self_test.sv": {
+      "bytes": 1428,
+      "sha256": "dddafe36f20fa993ebabacf6deeef4457046682c99c28c3f3f1d6947005306d6"
+    },
+    "tb/coverage/tb_protection_functional_coverage.sv": {
+      "bytes": 32133,
+      "sha256": "f2b6e5d1ba96b7542c6a0aea4a678a219f4f93ade1161bc9a82cbede8d82cd62"
+    },
+    "tb/coverage/tb_sensor_health_mainline_width_smoke.sv": {
+      "bytes": 6032,
+      "sha256": "f174a2c5bfd170d73f7894c13291ad507d08bb14b7d586949a7afa64ca276e06"
+    },
+    "tb/coverage/tb_targeted_sensor_health_code_coverage.sv": {
+      "bytes": 5740,
+      "sha256": "2ff90eef71e2aa95e2e5c1cc3d97b0272cc2ab3bcaae8b524c70fee32529aa17"
+    },
+    "tb/fixtures/raw_path/3399e4fdc28f9d4c66cf90cb5c1dc1e386eda6ae.v": {
+      "bytes": 10881,
+      "sha256": "fb1a99de646ffc671ab7db60065d1b4da00bb397b0099e7fd7f051f034a1126f"
+    },
+    "tb/fixtures/raw_path/ORACLES.json": {
+      "bytes": 769,
+      "sha256": "a0ac44009c56df9df3aac4e2fe6ef516df19d16578f0c455698fe8a98b8742e8"
+    },
+    "tb/fixtures/raw_path/cde94b6cee8bd4423e7cf0e03b35a9596a666dd4.v": {
+      "bytes": 14639,
+      "sha256": "a544599cd74ea884c63dd5a2af04a0a0c11d80cda23190fd9cb92b403eabce69"
+    },
+    "tb/generated/protection_register_map.svh": {
+      "bytes": 24470,
+      "sha256": "e7eeb094db1015cb48c1f522353ce47646ace6e495bd9cb9bbd141ffeaa4a90a"
+    },
+    "tb/stage2/stage2_sampling_contract_checker.sv": {
+      "bytes": 9601,
+      "sha256": "21ae0ce31accde29a4cfb36bea648c1e461c6ab395d29c38b516fc53b902c7ac"
+    },
+    "tb/stage2/tb_stage2_sampling_contract.sv": {
+      "bytes": 18788,
+      "sha256": "4daaf46e42c9d80bcbabd140601c19b9e2e3ccce03395384ffb62b20f5dc3585"
+    },
+    "tb/stage2/tb_stage2_sampling_contract_checker_self_test.sv": {
+      "bytes": 4255,
+      "sha256": "628c83313f4821a6f61be0900cf7f06982b4b2c461624d7691b5fba07280cc8f"
+    },
+    "tb/stage2b/stage2b_sample_acceptance_checker.sv": {
+      "bytes": 14970,
+      "sha256": "4a15682b7256817771ac4e88c501ba1d71af67d0fdefd50ea608a1a106299fa5"
+    },
+    "tb/stage2b/tb_stage2b_checker_self_test.sv": {
+      "bytes": 4316,
+      "sha256": "4ff05c6f4de2f5e260be05f28e08bc45d0a70c5d5ef06bb6463e38119558d8a9"
+    },
+    "tb/stage2b/tb_stage2b_unified_sample_acceptance.sv": {
+      "bytes": 30558,
+      "sha256": "216aaf70407f579ec4d4d8c3f0403dded3f7cf72569baa306fdfa6fb3bdfbf59"
+    },
+    "tb/stage2c/stage2c_reset_release_checker.sv": {
+      "bytes": 7837,
+      "sha256": "36bb1960be314f4b85b8b48dc7b9a88a2c85730276f36e79165392f79b78dd42"
+    },
+    "tb/stage2c/tb_stage2c_checker_self_test.sv": {
+      "bytes": 5286,
+      "sha256": "dea2ffbc1aacb142f7351e44f2dc64046db7395342fa3e64557049377aa4b0b8"
+    },
+    "tb/stage2c/tb_stage2c_reset_release_cdc.sv": {
+      "bytes": 30640,
+      "sha256": "0b46b37e291c55c509e62d1ad58b7e033ac2d9bed42a4ecb857778427c91c4b5"
+    },
+    "tb/stage2d/stage2d_atomic_cdc_checker.sv": {
+      "bytes": 6095,
+      "sha256": "0d264caa2c0e2ee99114c503cb898140a329de2f1a4069abc63360541e95022d"
+    },
+    "tb/stage2d/tb_stage2d_async_adc_atomic_cdc.sv": {
+      "bytes": 28965,
+      "sha256": "b79bc7ff2178763642f1fc259a37a83e00d296ed51041b8742c5c6e3b161b850"
+    },
+    "tb/stage2d/tb_stage2d_checker_self_test.sv": {
+      "bytes": 4947,
+      "sha256": "5ad31bc6596a76ca632443fee8806c74d3ef1c904279821b74c76ba7d1e79051"
+    },
+    "tb/stage2d/tb_stage2d_parameter_guards.sv": {
+      "bytes": 1660,
+      "sha256": "af88396de4d1eeb0cd0cc740775fa3abd682c517835cdf5c861b890d5f1662d6"
+    },
+    "tb/stage2d/tb_stage2d_production_wrapper.sv": {
+      "bytes": 5632,
+      "sha256": "8363225f6962ce88f828c7a3d09b7506e22443702ccc2a09a7ab5fbc8524bef1"
+    },
+    "tb/stage2e/stage2e_transaction_observability_checker.sv": {
+      "bytes": 6403,
+      "sha256": "231f10d19d5ff9779ae72feb88f589b29caedcfafe9380b17e088211643b221f"
+    },
+    "tb/stage2e/tb_stage2e_aggregate_saturation_equivalence.sv": {
+      "bytes": 12759,
+      "sha256": "d64e28d6f70a9c11cb1b17f55e3a09bb8f2e2ea60cda31cf3b6b72b5e429cf0f"
+    },
+    "tb/stage2e/tb_stage2e_any_error_partial_clear.sv": {
+      "bytes": 4973,
+      "sha256": "1c5e13d5e62fcc5eea366568f55ced61c9db87fccec7d3ab6a3bf9a5b42c4b39"
+    },
+    "tb/stage2e/tb_stage2e_axi_register_contract.sv": {
+      "bytes": 7525,
+      "sha256": "13089d97bef8a72d38471d6f6566b16cdab34e3c8b6b7b00613949823863fac0"
+    },
+    "tb/stage2e/tb_stage2e_checker_self_test.sv": {
+      "bytes": 6597,
+      "sha256": "ca4121a39d100f6836fb77213b442bf5859f74098e7ed6d34777d74af351c396"
+    },
+    "tb/stage2e/tb_stage2e_mutation_connected.sv": {
+      "bytes": 38837,
+      "sha256": "a6b7caffa85edd1461df27db6a9bfb97f79eeb16c06f09c97eb86bda3e6d6fcd"
+    },
+    "tb/stage2e/tb_stage2e_parameter_guards.sv": {
+      "bytes": 2262,
+      "sha256": "2da1652a77909003e72661d34e6f277f901512b9a79fad68b958662f1f424c21"
+    },
+    "tb/stage2e/tb_stage2e_transaction_error_observability.sv": {
+      "bytes": 42174,
+      "sha256": "e9f71c9833e6b3d2ac2db771b0a924a88f11bd9ba2aa96b6e2158cd46fb7a9a6"
+    },
+    "tb/stage2f/tb_stage2f_digital_normalization.sv": {
+      "bytes": 20309,
+      "sha256": "396942277941bea3a380c85501e8658d07884534c57f881231ca7e0e29172783"
+    },
+    "tb/stage2f/tb_stage2f_generated_profile_vectors.sv": {
+      "bytes": 4845,
+      "sha256": "09c3fb1ea17fa2017cee093c59f6c03b4d6b0065ff97c854ed150c6098b96ff6"
+    },
+    "tb/stage2f/tb_stage2f_mutation.sv": {
+      "bytes": 6643,
+      "sha256": "b01bf90186ea71b7ade121cdcf5619ec97774679fb82d02bf426bc22c0c113fd"
+    },
+    "tb/stage2f/tb_stage2f_raw_gate_mutation.sv": {
+      "bytes": 2704,
+      "sha256": "28f13f185ed73f92073c3de6ca00b599c9945cbe4ee38fd6449eaa7bec65fceb"
+    },
+    "tb/stage2f/tb_stage2f_raw_path_invariance.sv": {
+      "bytes": 11491,
+      "sha256": "4c0590241d20522e30667b3117c1268379e10d34ebae6e9524de88914dddd271"
+    },
+    "tb/stage2f/tb_stage2f_width_sequence_boundary.sv": {
+      "bytes": 12319,
+      "sha256": "ad1599accd8b74b239a0ec71f1df3f862933b9cd47c59081d5a2941b338e1742"
+    },
+    "tb/stage2g/tb_runtime_boundary.sv": {
+      "bytes": 2175,
+      "sha256": "184dc071fdbc2aabe3ed664e131af3bd4bc2319cd673cf2fe4e6bc13f15b745c"
+    },
+    "tb/stage2g/tb_stage2g_core_directed.sv": {
+      "bytes": 10999,
+      "sha256": "2380743f9cfccf5437fb08708dea69c5a18a68e371d7570941273d2f79fa00d8"
+    },
+    "tb/stage2g/tb_stage2g_policy_matrix.sv": {
+      "bytes": 19221,
+      "sha256": "ad7561ca91359104ba92e8122c48c963d026644f157b03f19c437317c5d327e8"
+    },
+    "tb/stage2g/tb_stage2g_production_path.sv": {
+      "bytes": 30576,
+      "sha256": "f84b0ca9dd740cb1c19a9f68dd8a6f632232a5d27a63d53457eb2290feb913ea"
+    },
+    "tb/stage2g/tb_stage2g_reference_vectors.sv": {
+      "bytes": 11003,
+      "sha256": "bd2dd1906968f194c185f7f5bdeeff4555431bdbbae087ad6c0fd580b4b1856f"
+    },
+    "tb/stage2h/tb_stage2h_b2_axi_transport.sv": {
+      "bytes": 22192,
+      "sha256": "86d07c78a5ea76029a5ea00cc03aac6cb1355c5be0ca7259ffe8642bcec7a435"
+    },
+    "tb/stage2h/tb_stage2h_b2_destination_sequence.sv": {
+      "bytes": 19571,
+      "sha256": "cd5d4fa96d53b65ccf343ade5d58420c6eded5f1216b0c44b6c5578b433cb6ed"
+    },
+    "tb/stage2h/tb_stage2h_b2_source_protocol.sv": {
+      "bytes": 22011,
+      "sha256": "1fe0798c69376d190ab4ccd9b51fb81f0d692ea05a4b5041173eca2040cbb60c"
+    },
+    "tb/stage2i/tb_stage2_board_c2_plan.sv": {
+      "bytes": 2788,
+      "sha256": "605062fb638106e17b382eb22028b9d7ce0e1b7929cac642b52895886984adf0"
+    },
+    "tb/stage2i/tb_stage2i_b2_ready_aware_stimulus.sv": {
+      "bytes": 9302,
+      "sha256": "3b775a79b87298095cddba3d6b82eae0154a5db0ad1196230e1e837d6a7f459e"
+    },
+    "tb/stage2i/tb_stage2i_b_cdc_event_authority.sv": {
+      "bytes": 24530,
+      "sha256": "28175d0efe5ee5ae6448b3d050d467ff5f6e87490a61e49152daa9c124f4da35"
+    },
+    "tb/tb_current_compare_dual.sv": {
+      "bytes": 1938,
+      "sha256": "95b1a63232305198cd5d7a01932b050a87adb500015e62b6626a2062e3aa54b6"
+    },
+    "tb/tb_fault_classifier.sv": {
+      "bytes": 5060,
+      "sha256": "b56b74ebfccdaddd483339b0b1906d143e60e3320dfd3e72e009984875468e12"
+    },
+    "tb/tb_moving_avg_filter.sv": {
+      "bytes": 1061,
+      "sha256": "153d29d3c9997c3bc07b28910cb9b63ac0512b6389440bf0c9f3f6e8270e9e20"
+    },
+    "tb/tb_protection_core_top.sv": {
+      "bytes": 28277,
+      "sha256": "222a712748c641fbc3a14619823af88b13805106133b460a9fefec3115a0d06e"
+    },
+    "tb/tb_protection_fsm.sv": {
+      "bytes": 19201,
+      "sha256": "e7ec42111f8377bc4fc827f61d5c83e8f9fceaabf50e01bbd6f26f5ad765825c"
+    },
+    "tb/tb_protection_ip_top_axi_lite.sv": {
+      "bytes": 52424,
+      "sha256": "308b798e936182cb7dfb44b85adaaecd052df20f9645ee78cdf90cd5ba9358eb"
+    },
+    "tb/tb_protection_ip_top_reg_controlled.sv": {
+      "bytes": 26970,
+      "sha256": "db4e8cf1638db1acfef763ef0e0fa7aba144ba11f4b08a9e2cd87fcc1bb9020d"
+    },
+    "tb/tb_protection_reg_bank.sv": {
+      "bytes": 9186,
+      "sha256": "fc9f99649ecda0dbd7e4bc869dc85a311e2d6d2707b7fef267a359714adbf791"
+    },
+    "tb/tb_pwm_gen.sv": {
+      "bytes": 2076,
+      "sha256": "bd7ba37a20dff0f031ad0a83dd50f7f61224d8c805d17bd2f30acc792db41bf2"
+    },
+    "tb/tb_sensor_health_monitor.sv": {
+      "bytes": 7075,
+      "sha256": "29b0991d7842f12b9cd951d5da99eb02f2d1704fbf84c48ff48bb5dae8124835"
+    },
+    "tb/tb_stage1_board_fault_stimulus.sv": {
+      "bytes": 10773,
+      "sha256": "792b13074377bc7fe869b3010c47d888b3bddbb38b3191d987a1b6c1e5b12bec"
+    },
+    "tests/source_export_fixture.ps1": {
+      "bytes": 666,
+      "sha256": "25689acdbfe80eef587c76a10f891df409bcac6424ce4edb451d7aa18867cec9"
+    },
+    "tests/stage1_board_ila_attempt03_ltx_binding_fixture_tests.tcl": {
+      "bytes": 6351,
+      "sha256": "97e9ef0fac86685be2a11133da58131c2b12ad308facea5fc12d6843d1f04c4a"
+    },
+    "tests/stage1_board_ila_binding_fixture_tests.tcl": {
+      "bytes": 7983,
+      "sha256": "af2d3d5235213a27b6fadaa7981bf6a7330e628762fc38c77eae59f824be9c1a"
+    },
+    "tests/stage1_board_ila_capture_configuration_fixture_tests.tcl": {
+      "bytes": 9772,
+      "sha256": "a93fb11eee233a48447257e6e25bf401eac5628fd998ee4fbf7540ebcfb2057a"
+    },
+    "tests/stage2i_controlled_stimulus_mutation_fixture_tests.tcl": {
+      "bytes": 3936,
+      "sha256": "e59e289cde8c893d12d0f01bf4512bb25b96ec72843198ce3bed9621b1d1d00a"
+    },
+    "tests/stage2i_release_test_support.py": {
+      "bytes": 9712,
+      "sha256": "e4c1d8ec104b4c4dcc796fc3e8f9cd38f3aa07593f945277f2d30dee74fc741c"
+    },
+    "tests/test_abi_scope.py": {
+      "bytes": 4688,
+      "sha256": "21345f1c082e3bfb8ec91cf0d1443a241959e9e22c5fb7cf0b17940ba48a59f2"
+    },
+    "tests/test_build_current_release.py": {
+      "bytes": 9407,
+      "sha256": "c4afa3980d99dd17e4f9f07086a41a26fe8f31c6c75897d5d65ddefda4789f4c"
+    },
+    "tests/test_check_external_data_authorities.py": {
+      "bytes": 10463,
+      "sha256": "ac4ce859aeed6faf1dde9d1ef6509d0cb189e527b1ea9839e9357184414e24a7"
+    },
+    "tests/test_diagnostic_paths.py": {
+      "bytes": 751,
+      "sha256": "eb43abd417934b86a0d195f8fcde4fb263b53c863df636d13ef115dd135c5245"
+    },
+    "tests/test_full_regression_dispatch.py": {
+      "bytes": 1902,
+      "sha256": "4de9929701743abd13f845a0ff4d771e35f1e7405d6774f0a07450707d22dc36"
+    },
+    "tests/test_path_safety.py": {
+      "bytes": 3279,
+      "sha256": "1c33ddb10f76503ed90630f79be11b8555e50d501ac5d6056f7617e11a7cbd71"
+    },
+    "tests/test_rebuild_delivery.py": {
+      "bytes": 2813,
+      "sha256": "b0db5d46acee4c9caaac1c35f0b23cd6b4aa1ad0e7deebc9deb1466934e1b4bd"
+    },
+    "tests/test_runtime_config.py": {
+      "bytes": 1881,
+      "sha256": "7bddfd060f1a96e4e5cc95f8ca0ff2ae16a3add39752c853b10036ccf2cee200"
+    },
+    "tests/test_simulation_workspace.py": {
+      "bytes": 6237,
+      "sha256": "fae690730e347175ceae69fa352942c8a05ccea3373ef7bc391b8a752d7eaa4e"
+    },
+    "tests/test_source_export.py": {
+      "bytes": 2747,
+      "sha256": "2fedbc59408dcca40966330ed645cf374f21d13fae0bb0a8d93a0d17aed88686"
+    },
+    "tests/test_stage1_board_functional_validation.py": {
+      "bytes": 21619,
+      "sha256": "26267ea5a4b28bdce16037e4c79f71cb38b88389d8cc97e8658ef33f24dc3e9c"
+    },
+    "tests/test_stage2_board_session.py": {
+      "bytes": 6360,
+      "sha256": "5e96c7628181fcf88b7bd07091fd93ae54eb500151574d7f83ae8c1074936940"
+    },
+    "tests/test_stage2i_board_runtime.py": {
+      "bytes": 9030,
+      "sha256": "6207e4dcbeff0916b54eb91783d58da78137aab2836abe1be0df81e19ed9f454"
+    },
+    "tests/test_stage2i_physical_authority.py": {
+      "bytes": 4139,
+      "sha256": "70edbcd2edd63b92950f51501463b1de7827c5fc15ac2ab2ebbd1c0b56d8508c"
+    },
+    "tests/test_target_preflight.py": {
+      "bytes": 5353,
+      "sha256": "a883e0e6725e06ef2d2b2eb234c07d5f337bd540db4ad7e0435918d56c6422bb"
+    },
+    "tests/test_verify_current_release.py": {
+      "bytes": 6679,
+      "sha256": "14d7b5252855b0a87dca55e063aa1f90f59f442e3f3557f673efdd95e6b43343"
+    },
+    "tests/test_windows_board_release.py": {
+      "bytes": 6550,
+      "sha256": "ea47eafa6b5e1ec3dddf8036d329e5a7be862b11ef7319315de2413b22b8a9a1"
+    },
+    "tools/README.md": {
+      "bytes": 3644,
+      "sha256": "ed2abb17ce67ef8c71a6fa9b856c66edaed52913e04306052afdc96e61104ff4"
+    },
+    "tools/board_validation/__init__.py": {
+      "bytes": 76,
+      "sha256": "57c98898b9533d1aa13964ed4a319cdf182ed7cdbc6fe9249feaf424fa0e3f5e"
+    },
+    "tools/board_validation/build_stage1_board_execution_package.py": {
+      "bytes": 16946,
+      "sha256": "2cb3bdf544014b539c550f59eed020cd5abc0ded975df2a0e0d5a630b50d05ee"
+    },
+    "tools/board_validation/build_stage2_board_session.py": {
+      "bytes": 8296,
+      "sha256": "e06d047e058cc19efb8097d31b2672b69f8884a7800e24b2a76f04452fef6984"
+    },
+    "tools/board_validation/load_deployment.py": {
+      "bytes": 4812,
+      "sha256": "97766809d202f518d22a0fa039e1c746aba4430c750cb2cac3950ba8528de8ac"
+    },
+    "tools/board_validation/stage1_board_attempt01_non_claim_note.md": {
+      "bytes": 1272,
+      "sha256": "248020c5bc619e4217a28eeff491ab3bd41096c7b1a220220010bb3efab852b5"
+    },
+    "tools/board_validation/stage1_board_attempt02_non_claim_note.md": {
+      "bytes": 1357,
+      "sha256": "1a98e93e8604d7af12a206bea918f214776bc144464af93d897344b6461176bb"
+    },
+    "tools/board_validation/stage1_board_attempt03_non_claim_note.md": {
+      "bytes": 1128,
+      "sha256": "a6bdb50ae07ab960e83e08f8c1fe2d96d0fdb71798482add164ddadfec430fd9"
+    },
+    "tools/board_validation/stage1_board_evidence_analyzer.py": {
+      "bytes": 18428,
+      "sha256": "8947eac845aefbd33e426113cd40daa370b586d49bb27489a4637d25d89aca5f"
+    },
+    "tools/board_validation/stage1_board_execution_README.md": {
+      "bytes": 10610,
+      "sha256": "3785a1b18fe20ba54e449eaa36715e9cefab91a9068286fc29a91f92b209d464"
+    },
+    "tools/board_validation/stage1_board_functional_validation.py": {
+      "bytes": 24205,
+      "sha256": "b653074ae14acff8b287977d3b283137898a2538e3b9efcc05725146dc94c606"
+    },
+    "tools/board_validation/stage1_board_ila_binding_preflight.tcl": {
+      "bytes": 2163,
+      "sha256": "4ff1fcb7b95cebaabd312b30329f68113c138ebde9aa3ce77e60b5976de5f066"
+    },
+    "tools/board_validation/stage1_board_ila_capture.tcl": {
+      "bytes": 9614,
+      "sha256": "2adf416b1886571e25bb8eee587a8103a2a61c79e93eaacf6c62b140829e25db"
+    },
+    "tools/board_validation/stage1_board_ila_capture_configuration.tcl": {
+      "bytes": 12920,
+      "sha256": "59d38f872bf2afbdc4a4e6d911cd7decfd22474e208e9c9e8f16a5d9fca01cae"
+    },
+    "tools/board_validation/stage1_board_ila_capture_configuration_preflight.tcl": {
+      "bytes": 3838,
+      "sha256": "4a3f84c0e0a68c995ac8e32fc9c72c77022e370f5d672828bbeb4967c127a7a3"
+    },
+    "tools/board_validation/stage1_board_ila_common.tcl": {
+      "bytes": 13080,
+      "sha256": "216a305975a5427f6f688f80fe1642fead4d852b46cdbf5d2d0d6e482170a4bd"
+    },
+    "tools/board_validation/stage2_board_capture_pair.tcl": {
+      "bytes": 5629,
+      "sha256": "948ec7a9aea408b020ec042118f7c9393ad3aa7af35ad21bdaee6cfcc226bde1"
+    },
+    "tools/board_validation/stage2_board_jtag_probe.tcl": {
+      "bytes": 1097,
+      "sha256": "79d6d9536a9e0e4d221eef2203a4fdf8c1b20be02201042b5bd774d0579b67a0"
+    },
+    "tools/board_validation/stage2_board_session.py": {
+      "bytes": 15120,
+      "sha256": "52db193f08a66114f9029bef9648c1f78b55998f5041f50755ad71fa67f6e7f7"
+    },
+    "tools/board_validation/stage2_board_session_host.py": {
+      "bytes": 14875,
+      "sha256": "423729150fb8251bfb6a7f95bbf189d2b800d605079ac1744043cf2cab04c3d4"
+    },
+    "tools/board_validation/stage2_drc_routed_audit.tcl": {
+      "bytes": 1508,
+      "sha256": "493549850ee573ee839a5053b733f0ade6058862ead0dd2fbef6e361fdda7601"
+    },
+    "tools/board_validation/stage2_fifo_routed_audit.tcl": {
+      "bytes": 4277,
+      "sha256": "866ca4635582da9c199238c4be54ec8101eaf48a3f0b0f64cda125039ef2dd48"
+    },
+    "tools/board_validation/start_stage2_board_session.ps1": {
+      "bytes": 2463,
+      "sha256": "774c5c6fbc2189304ea1c0a23e6ca9cc7d8ab7f48d5c8ca27d091a00d4d2451e"
+    },
+    "tools/build_current_release.py": {
+      "bytes": 23674,
+      "sha256": "90807d1c6e3e5c69f32083e42f4346557a4c1db84fa56964613d167f5b8b5879"
+    },
+    "tools/build_self_contained_release.py": {
+      "bytes": 12576,
+      "sha256": "00e07a427dcffa20a3218dcaf0c8b136a4fb3fb0da226701238a440de33f68d9"
+    },
+    "tools/build_stage2f_audit_review.py": {
+      "bytes": 48026,
+      "sha256": "a44a60ce4334318cbb1ce9591efde4a838fe3ce6253b26a0887fc6e0cfdb577e"
+    },
+    "tools/build_stage2f_digital_review.py": {
+      "bytes": 41713,
+      "sha256": "7b7e5b6f29bf8512e61c423a9dc02f43300a0a91c2f707a0c89d67ef22f650f5"
+    },
+    "tools/build_stage2g_functional_review.py": {
+      "bytes": 40691,
+      "sha256": "abc1a586bd7af5878bfe1b385e2a42638888955a7dc83cec0a3b69339c3604cf"
+    },
+    "tools/build_windows_board_release.py": {
+      "bytes": 16220,
+      "sha256": "74109f0601343cadda41f2f4569a03d28cfc1d5ec672dc4814ec4ad7fdb9aedb"
+    },
+    "tools/check_external_data_authorities.py": {
+      "bytes": 11848,
+      "sha256": "eb7614dacad5758616b166391db5d0da4fff29ab8d1e2bf1a55111f7d3b5f7f0"
+    },
+    "tools/check_register_map_implementation.py": {
+      "bytes": 71223,
+      "sha256": "61d1331e015e0df2b15dcdf072f6502b43b1ad24e212076ca0ca1606e75db66b"
+    },
+    "tools/check_stage2f_implementation.py": {
+      "bytes": 21066,
+      "sha256": "5f89e44938c47f80f8959afabc56cd97f6fdd6ba20db3a4c7f8c2d09bab4f8bd"
+    },
+    "tools/check_stage2g_implementation.py": {
+      "bytes": 39171,
+      "sha256": "a0fdac9131c5c8386e707dd9ba21cca83dea648f20fbdeee11d043d24dd8fece"
+    },
+    "tools/check_stage2g_recovery_snapshots.py": {
+      "bytes": 5861,
+      "sha256": "0d774fbee0bfc5af12eab6190a0be01a8a1e5cc3811654ffcda4c7126e4a9319"
+    },
+    "tools/check_stage2h_b2_architecture.py": {
+      "bytes": 11008,
+      "sha256": "ca355b36bb06364eaa4433af73b6de922db80f40de30e4592fcf408da60bf3bc"
+    },
+    "tools/ci/run_ci.py": {
+      "bytes": 2371,
+      "sha256": "64d6a9edd1c4440b8ab53e5d98e8574aa5c64ca89b791399437c836ebf737d98"
+    },
+    "tools/create_rebuild_request.ps1": {
+      "bytes": 1004,
+      "sha256": "570e29918b4f7c3de3e4293301fccd610552fdf25212433649e90402835ba6ba"
+    },
+    "tools/generate_rebuilt_evidence.py": {
+      "bytes": 3062,
+      "sha256": "d43962b3e5478c28f42c68c569cca4cfcb36fc29f3e57b9b5db24957962f8b3e"
+    },
+    "tools/generate_register_map.py": {
+      "bytes": 114560,
+      "sha256": "85a6498a918899ae922fcb18f19366136b37d9f5ec4f01c6038ee5a8ba1db1c8"
+    },
+    "tools/generate_stage2f_adc_profile.py": {
+      "bytes": 7010,
+      "sha256": "3618701344301e422e894c7ef650b57dce5383d88afb35d83fc173c65aa339e6"
+    },
+    "tools/path_safety.py": {
+      "bytes": 2824,
+      "sha256": "31adb61ae791747128bef9fe8d042889b2ee64251f4bd116042478a4c8a2256b"
+    },
+    "tools/preflight.py": {
+      "bytes": 1123,
+      "sha256": "ec96c7164ee9f4d86f544dd3b118b637999496ddd13bf70f97ca8c698a798178"
+    },
+    "tools/rebuild.py": {
+      "bytes": 10400,
+      "sha256": "44f7c44080f9ed2c19b19b6b36c0a5bab4c7a539e7034aecefb3ef2bc399e7b8"
+    },
+    "tools/rebuild_delivery.py": {
+      "bytes": 2963,
+      "sha256": "835987b033f3410bcd8d80a922063bf083cd10b97fd4c41c454cf74fed9e42c3"
+    },
+    "tools/replay_register_map_source_archive.py": {
+      "bytes": 19890,
+      "sha256": "55471e0c6e1cb2e34f6d43220cf3b5c4f8a088bdb9491b7dc8bd867e369749c7"
+    },
+    "tools/replay_stage2g_source_archive.py": {
+      "bytes": 4845,
+      "sha256": "735771c19b5eeabe3267d06fff3b2934a400d2e01fde2257d88d7756819bb76b"
+    },
+    "tools/replay_stage2h_source_archive.py": {
+      "bytes": 11574,
+      "sha256": "ab007af9665431071ef72924a003db622437a0d6b5ad3804915654c17bcaa7c5"
+    },
+    "tools/review_rebuild.py": {
+      "bytes": 11171,
+      "sha256": "5b1851dd2b103bfea943f4e596ccb05dc5be5298d168facbafbe91455fcbe4e1"
+    },
+    "tools/run_portable_regression.py": {
+      "bytes": 3862,
+      "sha256": "5e1d352299fa53de2d3808ac037f2475cfb2bea5f973835a1328f3889919a5f2"
+    },
+    "tools/run_stage2_board_plan_rtl.py": {
+      "bytes": 3977,
+      "sha256": "135cdf7d692a952eec38a07ac3d2f4a34d44075d93356dca8d8c2ee4ce3f4cb2"
+    },
+    "tools/run_stage2f_boundary_mutations.py": {
+      "bytes": 4589,
+      "sha256": "a02b7349f2e54376df8a87c101fcbf2de0eccfc404ad0f4466a2669b1019cb93"
+    },
+    "tools/run_stage2f_generated_profile_rtl.py": {
+      "bytes": 15905,
+      "sha256": "ebee16fe828abbf3ff8a948e35789611a03b8390de84096fec41a6a75f8dbde9"
+    },
+    "tools/run_stage2f_generator_mutations.py": {
+      "bytes": 7331,
+      "sha256": "adec7aede28145d7ad05cb4a06d316d9624d141967e8070cb755d2400d93a531"
+    },
+    "tools/run_stage2f_mutations.py": {
+      "bytes": 13758,
+      "sha256": "067316e382b2dc0a81d722d325fa9523e4be37ca8f24271ab17374258b4b5f1a"
+    },
+    "tools/run_stage2f_raw_path_invariance.py": {
+      "bytes": 8218,
+      "sha256": "4bcf0138ddedff6aa1779c0bf8290b4a95b7d8f0d8aacff692bce22c647cc5ea"
+    },
+    "tools/run_stage2f_width_sequence_boundary.py": {
+      "bytes": 8644,
+      "sha256": "afd1441e331175bba101ab4f7568341c2370faaa9713e13bc2a09242688cdc55"
+    },
+    "tools/run_stage2g_functional_rtl.py": {
+      "bytes": 55928,
+      "sha256": "04561bcf6831bf0c9b1b9c4916662ba806f15a5c7d7f95876a66ccc18f72763d"
+    },
+    "tools/run_stage2g_mutations.py": {
+      "bytes": 41159,
+      "sha256": "c34ba51b71c49423ac642f4db0f7d1e5e139c4f83ceb69ddc71f1f6652d0fae3"
+    },
+    "tools/run_stage2h_a2_2_verification.py": {
+      "bytes": 11479,
+      "sha256": "a2921480f86758ba20d8f7dda28329feddb60a1883c550c6e771533ae24596dc"
+    },
+    "tools/run_stage2h_b2_mutations.py": {
+      "bytes": 14834,
+      "sha256": "05dd0f92c0e93bfdded24f225aca9172d34e262a6f3905e293a46d8fad419140"
+    },
+    "tools/run_stage2h_b2_rtl_architecture.py": {
+      "bytes": 8244,
+      "sha256": "79cd472d4976c01b37129ff8593a01508c6aa9509eec04fdecbf6ca807b074f0"
+    },
+    "tools/run_stage2i_b2_producer_tests.py": {
+      "bytes": 3597,
+      "sha256": "75c1fcd6695da10a61f0a8a09263e07da5891a819f00554a59ddc3ba31c609b3"
+    },
+    "tools/run_windows_final_verification.py": {
+      "bytes": 4024,
+      "sha256": "fe7e4a721fd4456849b9e5c57b8036d437fe6137ca5d6e8fd5aeb6d33a480db4"
+    },
+    "tools/runtime_config.py": {
+      "bytes": 4179,
+      "sha256": "6fc20aec0552bcf0eb5585df48c982bde0100bddcec622cee80016edda82e241"
+    },
+    "tools/self_contained_verify.py": {
+      "bytes": 10769,
+      "sha256": "d2177f22fc06f7e0165640300377ee71a3ebab241bc0ea7572c9c07023eb98ac"
+    },
+    "tools/simulation_workspace.py": {
+      "bytes": 2656,
+      "sha256": "30891a91e9607f3fb5b7673ad0161851397149fcc8bdef9a4bb1bfcbae0f5f44"
+    },
+    "tools/source_export.py": {
+      "bytes": 5510,
+      "sha256": "9eb847a5777de874e338f0a5eb0d1707a61bf2a3a611508c526984f67863d750"
+    },
+    "tools/stage2f_adc_contract_audit.py": {
+      "bytes": 65261,
+      "sha256": "d7ad89761cec8543c4b49fec6f15c6c93d396fb0e62567c53b36885c9472d87b"
+    },
+    "tools/stage2f_normalization_reference.py": {
+      "bytes": 10942,
+      "sha256": "a95f016e53b2c835dace96fdcd0c951d420456e7596f019fa9dd7e349e1962a4"
+    },
+    "tools/stage2g_reference_model.py": {
+      "bytes": 20028,
+      "sha256": "e706457ebda296f15d1cb4b8905ff6f05317f1f8ba5e0bf41ee68b0df796d6d0"
+    },
+    "tools/stage2g_reset_wait_first_fault_policy_audit.py": {
+      "bytes": 64917,
+      "sha256": "0ce069a82f1c959731ba14f964d8752e41f103ab19b88fbad77fcc91fbde7be7"
+    },
+    "tools/stage2h_register_map_convergence_audit.py": {
+      "bytes": 348071,
+      "sha256": "cbedbc494d9ce343a9d21f54068ed4c40480e20f378770438bc25e97fc4d7ae6"
+    },
+    "tools/stage2i_physical_authority.py": {
+      "bytes": 16508,
+      "sha256": "7094c9c040ad588d233ecbcd855d7be79d25a59e5f3da355ec5787accdde9328"
+    },
+    "tools/target_preflight.py": {
+      "bytes": 6808,
+      "sha256": "437d94dfe3295d1a69a007645a3aa872437878e1ccc8097aec979c4a891d9bec"
+    },
+    "tools/tests/test_register_map_generator.py": {
+      "bytes": 28307,
+      "sha256": "ecd0c7370bdde82f0cf036436818693d9baa326ca78ba5d767905c9389068a9d"
+    },
+    "tools/tests/test_stage2f_adc_contract_audit.py": {
+      "bytes": 16757,
+      "sha256": "cc03f03848443ca3dedc541761e9c96f395c680f67fd216a13e06ba04cff471c"
+    },
+    "tools/tests/test_stage2f_profile_generator.py": {
+      "bytes": 6574,
+      "sha256": "ac7229b00c1e5e96a871cdfba965fb5b5353979d95bd6ac135d23005d5871065"
+    },
+    "tools/tests/test_stage2g_reset_wait_first_fault_policy_audit.py": {
+      "bytes": 11779,
+      "sha256": "b406b532600843689b18a8bf3317d32063e175d75741f95d11462f0aece73d5f"
+    },
+    "tools/tests/test_stage2h_c2_convergence.py": {
+      "bytes": 4194,
+      "sha256": "9c366d815a8a0b3240dc1ad8b93863f04b57f2e7a8bb2ac265f4c455e5576958"
+    },
+    "tools/verify_current_release.py": {
+      "bytes": 27806,
+      "sha256": "095627242565dcf439a0a8f579501ba64f3666b64fc9f50e7702c2c91609e786"
+    },
+    "tools/verify_windows_board_release.py": {
+      "bytes": 16146,
+      "sha256": "1a5397ead6b8b554ef8a97b18d0b8418e6a38dda70ba1aed921783ab0dbee06a"
+    }
+  },
+  "hash_basis": "HASH_VERIFIED_EXPORT",
+  "source_commit": "fb81a9a004bdcb900e5b678d8a424403aeafb602",
+  "source_tree": "8d46707a9670c170dbc08655269bd8ff635bed12"
+}

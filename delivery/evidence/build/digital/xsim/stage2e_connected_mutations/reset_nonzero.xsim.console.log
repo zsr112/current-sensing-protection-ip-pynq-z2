@@ -1,0 +1,20 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Thu Sep 10 10:53:37 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/stage2e_mutation_reset_nonzero_snapshot/xsim_script.tcl
+# xsim {stage2e_mutation_reset_nonzero_snapshot} -autoloadwcfg -runall -onfinish quit -onerror quit
+Time resolution is 1 ps
+run -all
+MUTATION_ID=17_RESET_STATE_NONZERO
+MUTATION_CHANGED_BEHAVIOR=DELIVERY_COUNT_RESET_OBSERVATION_FORCED_NONZERO
+MUTATION_EXPECTED_REJECTION=OBSERVABILITY_RESET_STATE_NONZERO
+STAGE2E CHECK FAILED: OBSERVABILITY_RESET_STATE_NONZERO
+$finish called at time : 26 ns : File "<EXTERNAL_SOURCE>/tb/stage2e/stage2e_transaction_observability_checker.sv" Line 8
+exit 0
+INFO: [Common 17-206] Exiting xsim at Thu Sep 10 10:53:38 2026...

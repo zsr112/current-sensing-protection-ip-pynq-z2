@@ -1,0 +1,10 @@
+{
+  "caller_output": "<EXTERNAL_BUILD>\\digital\\icarus\\production_path",
+  "evidence_copied_to_requested_output": true,
+  "hdl_file_io_path": "ASCII_PRIVATE_TEMPORARY",
+  "label": "production_path",
+  "schema": "csip-ascii-simulation-workspace-v1",
+  "scratch_path": "<EXTERNAL_PATH>",
+  "status": "PASS",
+  "vector_sha256": null
+}
